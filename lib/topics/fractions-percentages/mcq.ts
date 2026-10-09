@@ -595,7 +595,7 @@ export const mcqPapers: Paper[] = [
         options: ["{{(x-8)/(x^2 - 4)}}", "{{(x-4)/(x-2)}}", "{{(x+4)/(x+2)}}", "{{(x+4)/(x-2)}}"],
         answerIndex: 2,
         explanation:
-          "Common denominator {{(x-2)(x+2)}}: numerator {{x(x+2) - 8 = x^2 + 2x - 8 = (x+4)(x-2)}}. Cancel {{(x-2)}}: {{(x+4)/(x+2)}}. {{(x-8)/(x^2 - 4)}} forgets to multiply x by {{(x+2)}}. {{(x-4)/(x-2)}} factorises {{x^2 + 2x - 8}} as {{(x-4)(x+2)}}. {{(x+4)/(x-2)}} treats {{x^2 - 4}} as {{(x-2)^2}}.",
+          "Common denominator {{(x-2)(x+2)}}: numerator {{x(x+2) - 8 = x^2 + 2x - 8 = (x+4)(x-2)}}. Cancel {{(x-2)}}: {{(x+4)/(x+2)}}. {{(x-8)/(x^2 - 4)}} forgets to multiply x by {{(x+2)}}. {{(x-4)/(x-2)}} factorises {{x^2 + 2x - 8}} as {{(x-4)(x+2)}}. {{(x+4)/(x-2)}} cancels the wrong bracket: it removes {{(x+2)}} from the denominator, but {{(x+2)}} is not a factor of the numerator {{(x+4)(x-2)}}.",
         difficulty: "challenge",
         guideRef: "algebraic-fractions",
         hints: ["Factorise {{x^2 - 4}} — it contains the other denominator.", "Rewrite {{x/(x-2)}} over {{(x-2)(x+2)}}.", "The new numerator factorises — and one factor cancels."],

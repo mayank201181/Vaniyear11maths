@@ -143,10 +143,13 @@ function triangleSvg(v: Array<[number, number]>, l1: [number, number, number, nu
     const c = clip(x0, y0, dx, dy, box);
     if (!c) continue;
     out.push(`<line x1="${X(c[0])}" y1="${Y(c[1])}" x2="${X(c[2])}" y2="${Y(c[3])}" stroke="#2563eb" stroke-width="2"/>`);
-    // Label near the end that is higher on the page.
-    const [lx, ly] = Y(c[1]) < Y(c[3]) ? [X(c[0]), Y(c[1])] : [X(c[2]), Y(c[3])];
-    const ax = Math.min(W - 24, Math.max(6, lx + (lx > W / 2 ? -26 : 6)));
-    const ay = Math.min(H - 6, Math.max(14, ly + 14));
+    // Label on the far side of the axis from the shared vertex, where the two lines are furthest apart.
+    const [vx, vy] = v[2];
+    const away = (c[0] - x0) * (vx - x0) + (c[1] - y0) * (vy - y0) < 0;
+    const [ex, ey] = away ? [c[0], c[1]] : [c[2], c[3]];
+    const lx = X(x0 + 0.7 * (ex - x0)), ly = Y(y0 + 0.7 * (ey - y0));
+    const ax = Math.min(W - 24, Math.max(6, lx + 7));
+    const ay = Math.min(H - 6, Math.max(14, ly + 4));
     out.push(`<text x="${r2(ax)}" y="${r2(ay)}" font-size="13" font-family="sans-serif" font-weight="bold" fill="#1d4ed8">${name}</text>`);
   }
   const label = `Sketch, not to scale: lines L1 and L2 cross each other and both cross the ${axis}-axis, enclosing a shaded triangle.`;
