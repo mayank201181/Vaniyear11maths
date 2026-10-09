@@ -223,7 +223,7 @@ export const morePapers: Paper[] = [
           "f(x) = {{1/(x^2 - 9)}}\n\nPriya says, \"The only value that must be excluded from the domain of f is x = 3.\"\n\nExplain why Priya is wrong, and state the values that must be excluded.",
         marks: 3,
         modelAnswer:
-          "The function is undefined when the denominator is zero: {{x^2 - 9 = 0}}. This gives {{x^2 = 9}}, so x = 3 **or** x = −3, because {{(-3)^2 = 9}} too. Priya has missed the negative square root. Both x = 3 and x = −3 must be excluded.",
+          "The function has no value when the denominator is zero: {{x^2 - 9 = 0}}. This gives {{x^2 = 9}}, so x = 3 **or** x = −3, because {{(-3)^2 = 9}} too. Priya has missed the negative square root. Both x = 3 and x = −3 must be excluded.",
         markScheme: [
           { point: "Sets the denominator equal to zero", keywords: ["denominator", "x^2 - 9 = 0", "divide by zero", "zero"] },
           { point: "Notes that (−3)² = 9 as well / a square has two roots", keywords: ["-3", "−3", "negative", "two", "both", "±3"] },
@@ -232,7 +232,7 @@ export const morePapers: Paper[] = [
         commonError: "Forgetting the negative root when solving {{x^2 = 9}}.",
         difficulty: "core",
         guideRef: "domain-range",
-        hints: ["When is f undefined?", "Solve {{x^2 - 9 = 0}}. How many solutions does it have?"],
+        hints: ["When does f fail to give an output?", "Solve {{x^2 - 9 = 0}}. How many solutions does it have?"],
         strategy: "Spot the error",
       },
       // ---------------------------------------------------------------- q12
@@ -677,7 +677,6 @@ export const morePapers: Paper[] = [
         traps: [
           { spec: { type: "expression", expr: "-3-sqrt(x+4)" }, feedback: "The domain of f is x ≥ −3, so outputs of {{f^(-1)}} must be ≥ −3. Take the + square root." },
           { spec: { type: "expression", expr: "3+sqrt(x+4)" }, feedback: "{{(y + 3)^2 = x + 4}} gives y + 3 = {{sqrt(x + 4)}}, so y = −3 + {{sqrt(x + 4)}}." },
-          { spec: { type: "expression", expr: "-3+sqrt(x-4)" }, feedback: "Check the completed square: {{x^2 + 6x + 5 = (x + 3)^2 - 4}}, so you *add* 4 when you rearrange." },
         ],
         solution: [
           "Complete the square: {{x^2 + 6x + 5 = (x + 3)^2 - 9 + 5 = (x + 3)^2 - 4}}.",

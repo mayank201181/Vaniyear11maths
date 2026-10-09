@@ -639,11 +639,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m3-q15",
-        question: "A boat sails 9 km from a harbour H on a bearing of 060°. It then turns and sails 12 km on a bearing of 150° to point F.\n\nWork out the bearing of F from H, correct to 1 decimal place.",
-        options: ["096.9°", "113.1°", "293.1°", "053.1°"],
+        question: "A boat sails 8 km from a harbour H on a bearing of 060°. It then turns and sails 15 km on a bearing of 150° to point F.\n\nWork out the bearing of F from H, correct to 1 decimal place.",
+        options: ["088.1°", "121.9°", "301.9°", "061.9°"],
         answerIndex: 1,
         explanation:
-          "The two legs differ by 150° − 60° = 90°, so the turn is a right angle and the triangle with sides 9 and 12 is right-angled (HF = 15 km). At H, the angle between the first leg and HF is {{tan^(-1)(12/9) = 53.13°}}. Bearing = 060° + 53.13° = 113.1°. 096.9° adds {{tan^(-1)(9/12)}} (opposite and adjacent swapped); 293.1° is the bearing of H from F; 053.1° forgets to add the initial 060°.",
+          "At the turning point the bearing back to H is 060° + 180° = 240°, and the new course is 150°, so the angle between the legs is 240° − 150° = 90°: the triangle with sides 8 and 15 is right-angled (HF = 17 km). At H, the angle between the first leg and HF is {{tan^(-1)(15/8) = 61.93…°}}. Bearing = 060° + 61.93…° = 121.9°. 088.1° adds {{tan^(-1)(8/15)}} (opposite and adjacent swapped); 301.9° is the bearing of H from F; 061.9° forgets to add the initial 060°.",
         difficulty: "challenge",
         guideRef: "bearings-elevation",
         hints: ["What is the angle between the two legs of the journey?", "The triangle is right-angled — find the angle at H.", "Add that angle to the first bearing, 060°."],
