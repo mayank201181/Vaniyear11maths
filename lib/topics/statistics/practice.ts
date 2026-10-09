@@ -6,7 +6,7 @@ import type { TopicPractice } from "../../types.ts";
 
 const QUIZ_CF = `<svg viewBox="0 0 420 295" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cumulative frequency graph for the times of 80 students. Horizontal axis: time t minutes from 0 to 50, gridlines every 2 minutes. Vertical axis: cumulative frequency 0 to 80, gridlines every 5. Points joined with straight lines: (0, 0), (10, 4), (20, 16), (30, 46), (40, 70), (50, 80)."><rect x="0" y="0" width="420" height="295" fill="#ffffff"/><g stroke="#e5e7eb" stroke-width="0.6"><line x1="73.6" y1="25" x2="73.6" y2="250"/><line x1="87.2" y1="25" x2="87.2" y2="250"/><line x1="100.8" y1="25" x2="100.8" y2="250"/><line x1="114.4" y1="25" x2="114.4" y2="250"/><line x1="128" y1="25" x2="128" y2="250"/><line x1="141.6" y1="25" x2="141.6" y2="250"/><line x1="155.2" y1="25" x2="155.2" y2="250"/><line x1="168.8" y1="25" x2="168.8" y2="250"/><line x1="182.4" y1="25" x2="182.4" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="209.6" y1="25" x2="209.6" y2="250"/><line x1="223.2" y1="25" x2="223.2" y2="250"/><line x1="236.8" y1="25" x2="236.8" y2="250"/><line x1="250.4" y1="25" x2="250.4" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="277.6" y1="25" x2="277.6" y2="250"/><line x1="291.2" y1="25" x2="291.2" y2="250"/><line x1="304.8" y1="25" x2="304.8" y2="250"/><line x1="318.4" y1="25" x2="318.4" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="345.6" y1="25" x2="345.6" y2="250"/><line x1="359.2" y1="25" x2="359.2" y2="250"/><line x1="372.8" y1="25" x2="372.8" y2="250"/><line x1="386.4" y1="25" x2="386.4" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="235.94" x2="400" y2="235.94"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="207.81" x2="400" y2="207.81"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="179.69" x2="400" y2="179.69"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="151.56" x2="400" y2="151.56"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="123.44" x2="400" y2="123.44"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="95.31" x2="400" y2="95.31"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="67.19" x2="400" y2="67.19"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="39.06" x2="400" y2="39.06"/><line x1="60" y1="25" x2="400" y2="25"/></g><g stroke="#cbd5e1" stroke-width="1"><line x1="128" y1="25" x2="128" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="25" x2="400" y2="25"/></g><polyline points="60,250 128,238.75 196,205 264,120.63 332,53.13 400,25" fill="none" stroke="#4338ca" stroke-width="2"/><g fill="#4338ca"><circle cx="60" cy="250" r="3"/><circle cx="128" cy="238.75" r="3"/><circle cx="196" cy="205" r="3"/><circle cx="264" cy="120.63" r="3"/><circle cx="332" cy="53.13" r="3"/><circle cx="400" cy="25" r="3"/></g><g stroke="#334155" stroke-width="1.5"><line x1="60" y1="20" x2="60" y2="250"/><line x1="60" y1="250" x2="405" y2="250"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="60" y="265">0</text><text x="128" y="265">10</text><text x="196" y="265">20</text><text x="264" y="265">30</text><text x="332" y="265">40</text><text x="400" y="265">50</text><text x="230" y="285" font-size="12">Time (t minutes)</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="54" y="254">0</text><text x="54" y="225.88">10</text><text x="54" y="197.75">20</text><text x="54" y="169.63">30</text><text x="54" y="141.5">40</text><text x="54" y="113.38">50</text><text x="54" y="85.25">60</text><text x="54" y="57.13">70</text><text x="54" y="29">80</text></g><text x="12" y="15" font-family="sans-serif" font-size="12" fill="#1f2937">Cumulative frequency</text></svg>`;
 
-const P1_CF = `<svg viewBox="0 0 420 295" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cumulative frequency graph for the journey times of 120 parents. Horizontal axis: time t minutes from 0 to 60, gridlines every 2 minutes. Vertical axis: cumulative frequency 0 to 120, gridlines every 5. Points joined with straight lines: (0, 0), (10, 8), (20, 30), (30, 70), (40, 90), (50, 114), (60, 120)."><rect x="0" y="0" width="420" height="295" fill="#ffffff"/><g stroke="#e5e7eb" stroke-width="0.6"><line x1="71.33" y1="25" x2="71.33" y2="250"/><line x1="82.67" y1="25" x2="82.67" y2="250"/><line x1="94" y1="25" x2="94" y2="250"/><line x1="105.33" y1="25" x2="105.33" y2="250"/><line x1="116.67" y1="25" x2="116.67" y2="250"/><line x1="128" y1="25" x2="128" y2="250"/><line x1="139.33" y1="25" x2="139.33" y2="250"/><line x1="150.67" y1="25" x2="150.67" y2="250"/><line x1="162" y1="25" x2="162" y2="250"/><line x1="173.33" y1="25" x2="173.33" y2="250"/><line x1="184.67" y1="25" x2="184.67" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="207.33" y1="25" x2="207.33" y2="250"/><line x1="218.67" y1="25" x2="218.67" y2="250"/><line x1="230" y1="25" x2="230" y2="250"/><line x1="241.33" y1="25" x2="241.33" y2="250"/><line x1="252.67" y1="25" x2="252.67" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="275.33" y1="25" x2="275.33" y2="250"/><line x1="286.67" y1="25" x2="286.67" y2="250"/><line x1="298" y1="25" x2="298" y2="250"/><line x1="309.33" y1="25" x2="309.33" y2="250"/><line x1="320.67" y1="25" x2="320.67" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="343.33" y1="25" x2="343.33" y2="250"/><line x1="354.67" y1="25" x2="354.67" y2="250"/><line x1="366" y1="25" x2="366" y2="250"/><line x1="377.33" y1="25" x2="377.33" y2="250"/><line x1="388.67" y1="25" x2="388.67" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="240.63" x2="400" y2="240.63"/><line x1="60" y1="231.25" x2="400" y2="231.25"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="212.5" x2="400" y2="212.5"/><line x1="60" y1="203.13" x2="400" y2="203.13"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="184.38" x2="400" y2="184.38"/><line x1="60" y1="175" x2="400" y2="175"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="156.25" x2="400" y2="156.25"/><line x1="60" y1="146.88" x2="400" y2="146.88"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="128.13" x2="400" y2="128.13"/><line x1="60" y1="118.75" x2="400" y2="118.75"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="100" x2="400" y2="100"/><line x1="60" y1="90.63" x2="400" y2="90.63"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="71.88" x2="400" y2="71.88"/><line x1="60" y1="62.5" x2="400" y2="62.5"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="43.75" x2="400" y2="43.75"/><line x1="60" y1="34.38" x2="400" y2="34.38"/><line x1="60" y1="25" x2="400" y2="25"/></g><g stroke="#cbd5e1" stroke-width="1"><line x1="116.67" y1="25" x2="116.67" y2="250"/><line x1="173.33" y1="25" x2="173.33" y2="250"/><line x1="230" y1="25" x2="230" y2="250"/><line x1="286.67" y1="25" x2="286.67" y2="250"/><line x1="343.33" y1="25" x2="343.33" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="212.5" x2="400" y2="212.5"/><line x1="60" y1="175" x2="400" y2="175"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="100" x2="400" y2="100"/><line x1="60" y1="62.5" x2="400" y2="62.5"/><line x1="60" y1="25" x2="400" y2="25"/></g><polyline points="60,250 116.67,235 173.33,193.75 230,118.75 286.67,81.25 343.33,36.25 400,25" fill="none" stroke="#4338ca" stroke-width="2"/><g fill="#4338ca"><circle cx="60" cy="250" r="3"/><circle cx="116.67" cy="235" r="3"/><circle cx="173.33" cy="193.75" r="3"/><circle cx="230" cy="118.75" r="3"/><circle cx="286.67" cy="81.25" r="3"/><circle cx="343.33" cy="36.25" r="3"/><circle cx="400" cy="25" r="3"/></g><g stroke="#334155" stroke-width="1.5"><line x1="60" y1="20" x2="60" y2="250"/><line x1="60" y1="250" x2="405" y2="250"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="60" y="265">0</text><text x="116.67" y="265">10</text><text x="173.33" y="265">20</text><text x="230" y="265">30</text><text x="286.67" y="265">40</text><text x="343.33" y="265">50</text><text x="400" y="265">60</text><text x="230" y="285" font-size="12">Journey time (t minutes)</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="54" y="254">0</text><text x="54" y="216.5">20</text><text x="54" y="179">40</text><text x="54" y="141.5">60</text><text x="54" y="104">80</text><text x="54" y="66.5">100</text><text x="54" y="29">120</text></g><text x="12" y="15" font-family="sans-serif" font-size="12" fill="#1f2937">Cumulative frequency</text></svg>`;
+const P1_CF = `<svg viewBox="0 0 420 295" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cumulative frequency graph for the time 120 students spent on social media one evening. Horizontal axis: time t minutes from 0 to 60, gridlines every 2 minutes. Vertical axis: cumulative frequency 0 to 120, gridlines every 5. Points joined with straight lines: (0, 0), (10, 6), (20, 18), (30, 48), (40, 90), (50, 110), (60, 120)."><rect x="0" y="0" width="420" height="295" fill="#ffffff"/><g stroke="#e5e7eb" stroke-width="0.6"><line x1="71.33" y1="25" x2="71.33" y2="250"/><line x1="82.67" y1="25" x2="82.67" y2="250"/><line x1="94" y1="25" x2="94" y2="250"/><line x1="105.33" y1="25" x2="105.33" y2="250"/><line x1="116.67" y1="25" x2="116.67" y2="250"/><line x1="128" y1="25" x2="128" y2="250"/><line x1="139.33" y1="25" x2="139.33" y2="250"/><line x1="150.67" y1="25" x2="150.67" y2="250"/><line x1="162" y1="25" x2="162" y2="250"/><line x1="173.33" y1="25" x2="173.33" y2="250"/><line x1="184.67" y1="25" x2="184.67" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="207.33" y1="25" x2="207.33" y2="250"/><line x1="218.67" y1="25" x2="218.67" y2="250"/><line x1="230" y1="25" x2="230" y2="250"/><line x1="241.33" y1="25" x2="241.33" y2="250"/><line x1="252.67" y1="25" x2="252.67" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="275.33" y1="25" x2="275.33" y2="250"/><line x1="286.67" y1="25" x2="286.67" y2="250"/><line x1="298" y1="25" x2="298" y2="250"/><line x1="309.33" y1="25" x2="309.33" y2="250"/><line x1="320.67" y1="25" x2="320.67" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="343.33" y1="25" x2="343.33" y2="250"/><line x1="354.67" y1="25" x2="354.67" y2="250"/><line x1="366" y1="25" x2="366" y2="250"/><line x1="377.33" y1="25" x2="377.33" y2="250"/><line x1="388.67" y1="25" x2="388.67" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="240.63" x2="400" y2="240.63"/><line x1="60" y1="231.25" x2="400" y2="231.25"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="212.5" x2="400" y2="212.5"/><line x1="60" y1="203.13" x2="400" y2="203.13"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="184.38" x2="400" y2="184.38"/><line x1="60" y1="175" x2="400" y2="175"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="156.25" x2="400" y2="156.25"/><line x1="60" y1="146.88" x2="400" y2="146.88"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="128.13" x2="400" y2="128.13"/><line x1="60" y1="118.75" x2="400" y2="118.75"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="100" x2="400" y2="100"/><line x1="60" y1="90.63" x2="400" y2="90.63"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="71.88" x2="400" y2="71.88"/><line x1="60" y1="62.5" x2="400" y2="62.5"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="43.75" x2="400" y2="43.75"/><line x1="60" y1="34.38" x2="400" y2="34.38"/><line x1="60" y1="25" x2="400" y2="25"/></g><g stroke="#cbd5e1" stroke-width="1"><line x1="116.67" y1="25" x2="116.67" y2="250"/><line x1="173.33" y1="25" x2="173.33" y2="250"/><line x1="230" y1="25" x2="230" y2="250"/><line x1="286.67" y1="25" x2="286.67" y2="250"/><line x1="343.33" y1="25" x2="343.33" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="212.5" x2="400" y2="212.5"/><line x1="60" y1="175" x2="400" y2="175"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="100" x2="400" y2="100"/><line x1="60" y1="62.5" x2="400" y2="62.5"/><line x1="60" y1="25" x2="400" y2="25"/></g><polyline points="60,250 116.67,238.75 173.33,216.25 230,160 286.67,81.25 343.33,43.75 400,25" fill="none" stroke="#4338ca" stroke-width="2"/><g fill="#4338ca"><circle cx="60" cy="250" r="3"/><circle cx="116.67" cy="238.75" r="3"/><circle cx="173.33" cy="216.25" r="3"/><circle cx="230" cy="160" r="3"/><circle cx="286.67" cy="81.25" r="3"/><circle cx="343.33" cy="43.75" r="3"/><circle cx="400" cy="25" r="3"/></g><g stroke="#334155" stroke-width="1.5"><line x1="60" y1="20" x2="60" y2="250"/><line x1="60" y1="250" x2="405" y2="250"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="60" y="265">0</text><text x="116.67" y="265">10</text><text x="173.33" y="265">20</text><text x="230" y="265">30</text><text x="286.67" y="265">40</text><text x="343.33" y="265">50</text><text x="400" y="265">60</text><text x="230" y="285" font-size="12">Time (t minutes)</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="54" y="254">0</text><text x="54" y="216.5">20</text><text x="54" y="179">40</text><text x="54" y="141.5">60</text><text x="54" y="104">80</text><text x="54" y="66.5">100</text><text x="54" y="29">120</text></g><text x="12" y="15" font-family="sans-serif" font-size="12" fill="#1f2937">Cumulative frequency</text></svg>`;
 
 const P2_CF = `<svg viewBox="0 0 420 295" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cumulative frequency graph for the lengths of 160 leaves. Horizontal axis: length l mm from 0 to 100, gridlines every 5 mm. Vertical axis: cumulative frequency 0 to 160, gridlines every 10. Points joined with straight lines: (0, 0), (20, 12), (40, 40), (60, 120), (80, 150), (100, 160)."><rect x="0" y="0" width="420" height="295" fill="#ffffff"/><g stroke="#e5e7eb" stroke-width="0.6"><line x1="77" y1="25" x2="77" y2="250"/><line x1="94" y1="25" x2="94" y2="250"/><line x1="111" y1="25" x2="111" y2="250"/><line x1="128" y1="25" x2="128" y2="250"/><line x1="145" y1="25" x2="145" y2="250"/><line x1="162" y1="25" x2="162" y2="250"/><line x1="179" y1="25" x2="179" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="213" y1="25" x2="213" y2="250"/><line x1="230" y1="25" x2="230" y2="250"/><line x1="247" y1="25" x2="247" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="281" y1="25" x2="281" y2="250"/><line x1="298" y1="25" x2="298" y2="250"/><line x1="315" y1="25" x2="315" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="349" y1="25" x2="349" y2="250"/><line x1="366" y1="25" x2="366" y2="250"/><line x1="383" y1="25" x2="383" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="235.94" x2="400" y2="235.94"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="207.81" x2="400" y2="207.81"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="179.69" x2="400" y2="179.69"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="151.56" x2="400" y2="151.56"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="123.44" x2="400" y2="123.44"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="95.31" x2="400" y2="95.31"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="67.19" x2="400" y2="67.19"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="39.06" x2="400" y2="39.06"/><line x1="60" y1="25" x2="400" y2="25"/></g><g stroke="#cbd5e1" stroke-width="1"><line x1="128" y1="25" x2="128" y2="250"/><line x1="196" y1="25" x2="196" y2="250"/><line x1="264" y1="25" x2="264" y2="250"/><line x1="332" y1="25" x2="332" y2="250"/><line x1="400" y1="25" x2="400" y2="250"/><line x1="60" y1="221.88" x2="400" y2="221.88"/><line x1="60" y1="193.75" x2="400" y2="193.75"/><line x1="60" y1="165.63" x2="400" y2="165.63"/><line x1="60" y1="137.5" x2="400" y2="137.5"/><line x1="60" y1="109.38" x2="400" y2="109.38"/><line x1="60" y1="81.25" x2="400" y2="81.25"/><line x1="60" y1="53.13" x2="400" y2="53.13"/><line x1="60" y1="25" x2="400" y2="25"/></g><polyline points="60,250 128,233.13 196,193.75 264,81.25 332,39.06 400,25" fill="none" stroke="#4338ca" stroke-width="2"/><g fill="#4338ca"><circle cx="60" cy="250" r="3"/><circle cx="128" cy="233.13" r="3"/><circle cx="196" cy="193.75" r="3"/><circle cx="264" cy="81.25" r="3"/><circle cx="332" cy="39.06" r="3"/><circle cx="400" cy="25" r="3"/></g><g stroke="#334155" stroke-width="1.5"><line x1="60" y1="20" x2="60" y2="250"/><line x1="60" y1="250" x2="405" y2="250"/></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="middle"><text x="60" y="265">0</text><text x="128" y="265">20</text><text x="196" y="265">40</text><text x="264" y="265">60</text><text x="332" y="265">80</text><text x="400" y="265">100</text><text x="230" y="285" font-size="12">Length (l mm)</text></g><g font-family="sans-serif" font-size="11" fill="#1f2937" text-anchor="end"><text x="54" y="254">0</text><text x="54" y="225.88">20</text><text x="54" y="197.75">40</text><text x="54" y="169.63">60</text><text x="54" y="141.5">80</text><text x="54" y="113.38">100</text><text x="54" y="85.25">120</text><text x="54" y="57.13">140</text><text x="54" y="29">160</text></g><text x="12" y="15" font-family="sans-serif" font-size="12" fill="#1f2937">Cumulative frequency</text></svg>`;
 
@@ -360,24 +360,33 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "statistics-p1-q06",
           question:
-            "A CCA group has 12 boys and 18 girls. The mean time the boys took to run 100 m was 15.5 seconds. The mean time for all 30 students was 16.1 seconds. Work out the mean time for the girls. Give your answer in seconds.",
-          answer: { type: "number", value: 16.5, display: "16.5 s" },
+            "In an athletics CCA, 60% of the students are boys. The boys' mean time to run 100 m is 15.5 seconds and the girls' mean time is 16.5 seconds. Work out the mean time for the whole group. Give your answer in seconds.",
+          answer: { type: "number", value: 15.9, display: "15.9 s" },
           solution: [
-            "Total for all 30: 30 × 16.1 = 483 s.",
-            "Total for the boys: 12 × 15.5 = 186 s.",
-            "Total for the girls: 483 − 186 = 297 s.",
-            "Mean for the girls: 297 ÷ 18 = 16.5 s.",
+            "You don't know the group size, so imagine 100 students: 60 boys and 40 girls (any size gives the same answer).",
+            "Boys' total: 60 × 15.5 = 930 s. Girls' total: 40 × 16.5 = 660 s.",
+            "Mean for the group: {{(930 + 660)/100 = 1590/100}} = 15.9 s.",
+          ],
+          solutions: [
+            {
+              label: "Weighted average",
+              steps: [
+                "Mean = 0.6 × 15.5 + 0.4 × 16.5 = 9.3 + 6.6 = 15.9 s.",
+                "Sense check: 15.9 is nearer the boys' 15.5 because there are more boys.",
+              ],
+            },
           ],
           traps: [
-            { spec: { type: "number", value: 16.7, tolerance: 0.001 }, feedback: "You treated the overall mean as the average of the two group means. The groups are different sizes — work with totals." },
+            { spec: { type: "number", value: 16 }, feedback: "16 is halfway between the two means — that is only right if there are equally many boys and girls. Here 60% are boys, so weight their mean more." },
+            { spec: { type: "number", value: 16.1, tolerance: 0.001 }, feedback: "You gave the girls' mean the 60% weight. It is the boys who make up 60%." },
           ],
-          commonError: "Assuming the overall mean is halfway between the two group means.",
+          commonError: "Averaging the two group means when the groups are different sizes.",
           difficulty: "core",
           guideRef: "averages-raw-data",
           hints: [
-            "Turn each mean into a total.",
-            "Girls' total = everyone's total − boys' total.",
-            "Divide the girls' total by 18.",
+            "Is it fair to just average 15.5 and 16.5? Which group is bigger?",
+            "Try an easy group size, such as 100 students. How many are boys and how many are girls?",
+            "Work out each total, add, and divide by the number of students.",
           ],
           strategy: "Use totals, not means",
         },
@@ -432,13 +441,13 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "statistics-p1-q09",
           question:
-            "The cumulative frequency graph shows the journey times, t minutes, of 120 parents driving to a school event.\n\nUse the graph to find an estimate for the interquartile range. Give your answer in minutes.",
+            "The cumulative frequency graph shows the time, t minutes, that 120 students spent on social media one evening.\n\nUse the graph to find an estimate for the interquartile range. Give your answer in minutes.",
           diagram: P1_CF,
-          answer: { type: "number", value: 20, tolerance: 1, display: "20 minutes (accept 19–21)" },
+          answer: { type: "number", value: 16, tolerance: 1, display: "16 minutes (accept 15–17)" },
           solution: [
-            "Q1 is at {{1/4}} × 120 = 30. Reading across from 30 and down gives Q1 ≈ 20 minutes.",
-            "Q3 is at {{3/4}} × 120 = 90. Reading across from 90 and down gives Q3 ≈ 40 minutes.",
-            "IQR ≈ 40 − 20 = 20 minutes.",
+            "Q1 is at {{1/4}} × 120 = 30. Reading across from 30 and down gives Q1 ≈ 24 minutes (30 is {{12/30}} of the way from 18 to 48, so 20 + 4).",
+            "Q3 is at {{3/4}} × 120 = 90. Reading across from 90 and down gives Q3 = 40 minutes.",
+            "IQR ≈ 40 − 24 = 16 minutes.",
           ],
           traps: [
             { spec: { type: "number", value: 60, tolerance: 0.5 }, feedback: "60 is the difference of the cumulative frequencies (90 − 30). Read those across to the graph and *down* to the time axis, then subtract the times." },
@@ -457,16 +466,16 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "statistics-p1-q10",
           question:
-            "Use the same cumulative frequency graph of the journey times of 120 parents.\n\nEstimate how many parents took **more than** 45 minutes.",
+            "Use the same cumulative frequency graph of the time 120 students spent on social media.\n\nEstimate how many students spent **more than** 45 minutes on social media.",
           diagram: P1_CF,
-          answer: { type: "number", value: 18, tolerance: 2, display: "18 parents (accept 16–20)" },
+          answer: { type: "number", value: 20, tolerance: 2, display: "20 students (accept 18–22)" },
           solution: [
-            "Go up from 45 minutes to the graph and across: the cumulative frequency is about 102.",
-            "So about 102 parents took 45 minutes or less.",
-            "More than 45 minutes: 120 − 102 = 18 parents.",
+            "Go up from 45 minutes to the graph and across: the cumulative frequency is about 100 (halfway between 90 and 110).",
+            "So about 100 students spent 45 minutes or less.",
+            "More than 45 minutes: 120 − 100 = 20 students.",
           ],
           traps: [
-            { spec: { type: "number", value: 102, tolerance: 1.5 }, feedback: "102 parents took 45 minutes *or less*. The question asks for *more than* 45 — subtract from 120." },
+            { spec: { type: "number", value: 100, tolerance: 1.5 }, feedback: "100 students spent 45 minutes *or less*. The question asks for *more than* 45 — subtract from 120." },
           ],
           commonError: "Giving the cumulative frequency read from the graph instead of subtracting from the total.",
           difficulty: "core",
@@ -509,37 +518,38 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "statistics-p1-q12",
           question:
-            "Use the same histogram of the ages of visitors to the exhibition.\n\nEstimate how many visitors were aged between 12 and 25 years.",
+            "Use the same histogram of the ages of visitors to the exhibition.\n\nEstimate how many visitors were aged between 14 and 35 years.",
           diagram: P1_HIST,
-          answer: { type: "number", value: 38 },
+          answer: { type: "number", value: 44 },
           solution: [
-            "Split the range 12 to 25 across the bars and assume values are spread evenly within each class.",
-            "12 to 15: part of the 10–15 bar, width 3, density 3 → 3 × 3 = 9.",
+            "Split the range 14 to 35 across the bars and assume values are spread evenly within each class.",
+            "14 to 15: part of the 10–15 bar, width 1, density 3 → 1 × 3 = 3.",
             "15 to 20: the whole bar → 5 × 4 = 20.",
-            "20 to 25: half of the 20–30 bar, width 5, density 1.8 → 5 × 1.8 = 9.",
-            "Estimate = 9 + 20 + 9 = 38 visitors.",
+            "20 to 30: the whole bar → 10 × 1.8 = 18.",
+            "30 to 35: part of the 30–50 bar, width 5, density 0.6 → 5 × 0.6 = 3.",
+            "Estimate = 3 + 20 + 18 + 3 = 44 visitors.",
           ],
           solutions: [
             {
               label: "Fractions of whole classes",
               steps: [
-                "10 < a ≤ 15 contains 15 visitors; 12 to 15 is {{3/5}} of the class → {{3/5}} × 15 = 9.",
-                "15 < a ≤ 20 contains 20 visitors.",
-                "20 < a ≤ 30 contains 18 visitors; 20 to 25 is {{1/2}} of the class → 9.",
-                "Total 9 + 20 + 9 = 38.",
+                "10 < a ≤ 15 contains 15 visitors; 14 to 15 is {{1/5}} of the class → {{1/5}} × 15 = 3.",
+                "15 < a ≤ 20 contains 20 visitors and 20 < a ≤ 30 contains 18.",
+                "30 < a ≤ 50 contains 12 visitors; 30 to 35 is {{1/4}} of the class → 3.",
+                "Total 3 + 20 + 18 + 3 = 44.",
               ],
             },
           ],
           traps: [
-            { spec: { type: "number", value: 53 }, feedback: "You included the whole of the 10–15 and 20–30 classes. Only part of each lies between 12 and 25 — use just that part of the bar's area." },
+            { spec: { type: "number", value: 65 }, feedback: "You included the whole of the 10–15 and 30–50 classes. Only part of each lies between 14 and 35 — use just that part of the bar's area." },
           ],
           commonError: "Counting whole classes when only part of the class is inside the interval.",
           difficulty: "challenge",
           guideRef: "histograms",
           hints: [
-            "Which bars does the interval from 12 to 25 cover — completely or partly?",
+            "Which bars does the interval from 14 to 35 cover — completely or partly?",
             "For a partial bar, use only the width inside the interval: area = density × that width.",
-            "From the 10–15 bar you need width 3; from the 20–30 bar you need width 5.",
+            "From the 10–15 bar you need width 1; from the 30–50 bar you need width 5.",
           ],
           strategy: "Split into parts",
         },
@@ -547,20 +557,20 @@ export const practice: TopicPractice = {
           kind: "written",
           id: "statistics-p1-q13",
           question:
-            "Aisha timed how long customers waited for their food at two hawker stalls.\n\n| | Median | Interquartile range |\n|---|---|---|\n| Stall A | 8 minutes | 6 minutes |\n| Stall B | 11 minutes | 3 minutes |\n\nCompare the waiting times at the two stalls.",
+            "Jun weighed samples of mangoes from two farms.\n\n| | Median | Interquartile range |\n|---|---|---|\n| Farm P | 320 g | 45 g |\n| Farm Q | 285 g | 20 g |\n\nCompare the masses of the mangoes from the two farms.",
           marks: 2,
           modelAnswer:
-            "On average, customers waited less time at Stall A, because its median (8 minutes) is lower than Stall B's (11 minutes). The waiting times at Stall B were more consistent, because its interquartile range (3 minutes) is smaller than Stall A's (6 minutes).",
+            "On average, the mangoes from Farm P were heavier, because its median (320 g) is higher than Farm Q's (285 g). The masses of the mangoes from Farm Q were more consistent, because its interquartile range (20 g) is smaller than Farm P's (45 g).",
           markScheme: [
-            { point: "Compares averages in context: Stall A's waiting times are shorter on average (median 8 < 11)", keywords: ["median", "average", "shorter", "less", "lower", "8", "11"] },
-            { point: "Compares spread in context: Stall B's waiting times are more consistent / less spread out (IQR 3 < 6)", keywords: ["iqr", "interquartile", "consistent", "spread", "varied", "3", "6"] },
+            { point: "Compares averages in context: Farm P's mangoes are heavier on average (median 320 > 285)", keywords: ["median", "average", "heavier", "more", "higher", "320", "285"] },
+            { point: "Compares spread in context: Farm Q's masses are more consistent / less spread out (IQR 20 < 45)", keywords: ["iqr", "interquartile", "consistent", "spread", "varied", "20", "45"] },
           ],
-          commonError: "Just quoting the numbers without saying what they mean for the waiting times, or saying the bigger IQR is 'better'.",
+          commonError: "Just quoting the numbers without saying what they mean for the mangoes, or saying the bigger IQR is 'better'.",
           difficulty: "core",
           guideRef: "quartiles-iqr",
           hints: [
             "Make one comparison about the average and one about the spread.",
-            "Each comparison should mention both stalls and say what it means for the customers.",
+            "Each comparison should mention both farms and say what it means for the mangoes.",
           ],
           strategy: "Average + spread, in context",
         },

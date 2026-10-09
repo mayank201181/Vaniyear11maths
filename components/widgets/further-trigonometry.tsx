@@ -70,7 +70,7 @@ function solveTriangle(mode: Mode, s: { a: number; b: number; c: number; A: numb
     return { tris: [], problem: `sin B = ${mk(sB, 3)} > 1 — impossible. Side a = ${fmt(a)} is too short to reach the base line (it needs at least b sin A = ${fmt(b * sinD(A), 2)}).` };
   }
   const B1 = Math.asin(Math.min(1, sB)) / RAD;
-  const cands = Math.abs(B1 - 90) < 1e-6 ? [90] : [B1, 180 - B1];
+  const cands = sB > 1 - 1e-9 ? [90] : [B1, 180 - B1];
   const tris: Tri[] = [];
   for (const BB of cands) {
     const C = 180 - A - BB;
@@ -113,7 +113,7 @@ function TriangleLab() {
   const minX = Math.min(...xs);
   const maxX = Math.max(...xs, 1);
   const maxY = Math.max(Cpt[1], 1);
-  const sc = Math.min(15, (W - 2 * pad) / (maxX - minX), (H - 2 * pad) / maxY);
+  const sc = Math.min(24, (W - 2 * pad) / (maxX - minX), (H - 2 * pad) / maxY);
   const ox = (W - sc * (maxX - minX)) / 2 - minX * sc;
   const oy = H - (H - sc * maxY) / 2;
   const X = (x: number) => ox + x * sc;
@@ -212,6 +212,19 @@ function TriangleLab() {
     </text>
   );
 
+  /** Point inside the angle at P (between rays to Q and R), dist px along the bisector. */
+  const inside = (P: [number, number], Q: [number, number], R: [number, number], deg: number): [number, number] => {
+    const u = (v: [number, number]): [number, number] => {
+      const l = Math.hypot(v[0], v[1]) || 1;
+      return [v[0] / l, v[1] / l];
+    };
+    const q = u([Q[0] - P[0], Q[1] - P[1]]);
+    const r = u([R[0] - P[0], R[1] - P[1]]);
+    const m = u([q[0] + r[0], q[1] + r[1]]);
+    const dist = deg < 30 ? 40 : deg < 60 ? 30 : 22;
+    return [P[0] + m[0] * dist, P[1] + m[1] * dist + 4];
+  };
+
   return (
     <WidgetFrame
       title="Triangle lab: sine rule, cosine rule, area"
@@ -269,16 +282,27 @@ function TriangleLab() {
                 <polygon points={pts} className={i === 0 ? "fill-brand-soft stroke-brand" : "stroke-accent"} fill={i === 0 ? undefined : "none"} strokeWidth={2} strokeDasharray={i === 0 ? undefined : "6 4"} />
                 {lbl(pB[0] + (i === 0 ? 8 : -8), pB[1] + 16, i === 0 ? "B" : "B₂", "fill-ink", 13, 800)}
                 {lbl((pB[0] + pC[0]) / 2 + (i === 0 ? 18 : -18), (pB[1] + pC[1]) / 2, `a=${fmt(t.a)}`, i === 0 ? "fill-brand" : "fill-accent", 11)}
-                {lbl(pB[0] + (i === 0 ? -22 : 22), pB[1] - 8, `${fmt(t.B)}°`, i === 0 ? "fill-ink-2" : "fill-accent", 11)}
+                {(() => {
+                  const q = inside(pB, pA, pC, t.B);
+                  return lbl(q[0], q[1], `${fmt(t.B)}°`, i === 0 ? "fill-ink-2" : "fill-accent", 11);
+                })()}
+                {i === 0 && mode !== "SSA"
+                  ? (() => {
+                      const q = inside(pC, pA, pB, t.C);
+                      return lbl(q[0], q[1], `${fmt(t.C)}°`, "fill-ink-2", 11);
+                    })()
+                  : null}
               </g>
             );
           })}
           {lbl(pA[0] - 8, pA[1] + 16, "A", "fill-ink", 13, 800)}
           {lbl(pC[0], pC[1] - 10, "C", "fill-ink", 13, 800)}
-          {lbl(pA[0] + 26, pA[1] - 7, `${fmt(angA)}°`, "fill-ink-2", 11)}
+          {(() => {
+            const q = inside(pA, [X(1), Y(0)], pC, angA);
+            return lbl(q[0], q[1], `${fmt(T ? T.A : angA)}°`, "fill-ink-2", 11);
+          })()}
           {lbl((pA[0] + pC[0]) / 2 - 22, (pA[1] + pC[1]) / 2, `b=${fmt(b)}`, "fill-brand", 11)}
           {T ? lbl((pA[0] + X(T.c)) / 2, pA[1] + 16, `c=${fmt(T.c)}`, "fill-brand", 11) : null}
-          {T && mode !== "SSA" ? lbl(pC[0], pC[1] + 22, `${fmt(T.C)}°`, "fill-ink-2", 11) : null}
         </svg>
 
         {T ? (

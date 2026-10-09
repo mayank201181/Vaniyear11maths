@@ -321,7 +321,8 @@ const sampleSpace: Drill = {
       const ev = r.pick(evs);
       const N = a * b;
       const both6 = a === 6 && b === 6;
-      const intro = both6 ? `${name} rolls two fair six-sided dice` : `${name} uses ${device(a)} and ${device(b)}`;
+      const pairDev = a === b ? (both6 ? "two fair six-sided dice" : `two fair ${a}-sided spinners, each numbered 1 to ${a}`) : `${device(a)} and ${device(b)}`;
+      const intro = both6 ? `${name} rolls two fair six-sided dice` : `${name} uses ${pairDev}`;
       const opText = op === "sum" ? "adds the two scores" : op === "product" ? "multiplies the two scores" : "finds the difference between the two scores (larger − smaller)";
       const pairs: Array<[number, number]> = [];
       for (let x = 1; x <= a; x++) for (let y = 1; y <= b; y++) pairs.push([x, y]);
@@ -342,14 +343,14 @@ const sampleSpace: Drill = {
         const cPairs = pairs.filter(([x, y]) => c.test(x, y));
         const both = cPairs.filter(([x, y]) => t.test(x, y));
         if (cPairs.length < 5 || cPairs.length > N - 3 || both.length < 1 || both.length >= cPairs.length) return null;
-        const intro3 = both6 ? `${name} rolls two fair six-sided dice.` : `${name} uses ${device(a)} and ${device(b)}, recording one score from each.`;
+        const intro3 = both6 ? `${name} rolls two fair six-sided dice.` : `${name} uses ${pairDev}, recording one score from each.`;
         return {
           prompt: `${intro3} Given that ${c.text}, work out the probability that ${t.text}. Give your answer as a fraction.`,
           answer: fAns(both.length, cPairs.length),
           solution: [
             `Draw the ${a} × ${b} sample space grid: ${N} equally likely outcomes.`,
             `"Given that ${c.text}" restricts you to the ${cPairs.length} outcomes where this happens.`,
-            `Of these, ${both.length} also have ${t.text}${both.length <= 8 ? `: ${both.map(([x, y]) => `(${x}, ${y})`).join(", ")}` : ""}.`,
+            `Of these, the outcomes where ${t.text}: ${both.length <= 8 ? `${both.map(([x, y]) => `(${x}, ${y})`).join(", ")} — ` : ""}${both.length} of them.`,
             `P = ${P(both.length, cPairs.length)}${simplify(both.length, cPairs.length)[1] !== cPairs.length ? ` = ${F(both.length, cPairs.length)}` : ""}`,
           ],
           hint: "\"Given that\" shrinks the sample space — count only the outcomes where the given event happens.",
@@ -457,22 +458,22 @@ const orAndRules: Drill = {
       if (ask === "both") {
         ans = clean(pp * qq);
         sol.push(`P = ${dec(p)} × ${dec(q)} = ${num(ans)}`);
-        traps = nTraps(ans, [[clean(pp + qq), "You added — for AND with independent events, multiply."]]);
+        traps = nTraps(ans, [[clean((p + q) / 100), "You added — for AND with independent events, multiply."]]);
       } else if (ask === "aNotB") {
         ans = clean(pp * (1 - qq));
-        sol.push(`P(not B) = 1 − ${dec(q)} = ${dec(100 - q)}`, `P = ${dec(p)} × ${dec(100 - q)} = ${num(ans)}`);
-        traps = nTraps(ans, [[clean(pp * qq), "That is the probability that both happen. You need the second one NOT to happen."], [clean(pp - qq), "Subtracting the probabilities does not give 'A and not B' — multiply P(A) by P(not B)."]]);
+        sol.push(`P(second event does not happen) = 1 − ${dec(q)} = ${dec(100 - q)}`, `P = ${dec(p)} × ${dec(100 - q)} = ${num(ans)}`);
+        traps = nTraps(ans, [[clean(pp * qq), "That is the probability that both happen. You need the second one NOT to happen."], [p > q ? clean((p - q) / 100) : null, "Subtracting the probabilities does not give 'A and not B' — multiply P(A) by P(not B)."]]);
       } else if (ask === "neither") {
         ans = clean((1 - pp) * (1 - qq));
         sol.push(`P(neither) = ${dec(100 - p)} × ${dec(100 - q)} = ${num(ans)}`);
-        traps = nTraps(ans, [[clean(1 - pp * qq), "That is 1 − P(both), which is P(not both) — not the same as 'neither'."], [clean(1 - pp - qq), "These events can both happen, so you cannot just subtract both from 1. Multiply the 'not' probabilities."]]);
+        traps = nTraps(ans, [[clean(1 - pp * qq), "That is 1 − P(both), which is P(not both) — not the same as 'neither'."], [p + q < 100 ? clean((100 - p - q) / 100) : null, "These events can both happen, so you cannot just subtract both from 1. Multiply the 'not' probabilities."]]);
       } else {
         ans = clean(pp * (1 - qq) + (1 - pp) * qq);
         sol.push(
           `Two ways: first only, or second only.`,
           `${dec(p)} × ${dec(100 - q)} + ${dec(100 - p)} × ${dec(q)} = ${num(clean(pp * (1 - qq)))} + ${num(clean((1 - pp) * qq))} = ${num(ans)}`,
         );
-        traps = nTraps(ans, [[clean(pp * (1 - qq)), "That is only one of the two ways — add the other way too."], [clean(pp + qq), "Adding P(A) and P(B) counts 'both' in as well, and these are not mutually exclusive."]]);
+        traps = nTraps(ans, [[clean(pp * (1 - qq)), "That is only one of the two ways — add the other way too."], [clean((p + q) / 100), "Adding P(A) and P(B) counts 'both' in as well, and these are not mutually exclusive."]]);
       }
       const target = ask === "both" ? ctx.both : ask === "aNotB" ? ctx.aNotB : ask === "neither" ? ctx.neither : ctx.one;
       return {
@@ -1048,14 +1049,14 @@ const binomialCoefficient: Drill = {
           solution: [
             `General term: ${n}Cr × ${sq ? "{{(x^2)^(" + n + "-r)}}" : "{{x^(" + n + "-r)}}"} × {{(${c}/x)^r}}`,
             sq ? `Power of x: 2(${n} − r) − r = 0, so r = ${k}.` : `Power of x: (${n} − r) − r = 0, so r = ${k}.`,
-            `Term = ${n}C${k} × {{(${c})^${k}}} = ${nCr(n, k)} × ${num(c ** k)} = ${num(coef)}`,
+            `Term = ${n}C${k} × {{(${c})^${k}}} = ${nCr(n, k)} × ${br2(c ** k)} = ${big(coef)}`,
           ],
           hint: "Write the general term and make the power of x equal to 0.",
           traps: nTraps(coef, [[coef < 0 ? -coef : null, "Check the sign: a negative number to an odd power is negative."], [c ** k, `You forgot the binomial coefficient ${n}C${k} = ${nCr(n, k)}.`]]),
         };
       }
       const n = tier === 1 ? r.int(3, 5) : r.int(4, tier === 2 ? 6 : 7);
-      const a = tier === 1 ? r.pick([1, 1, 2, 3]) : r.pick([1, 2, 3, -1, -2]);
+      const a = tier === 1 ? r.pick([1, 1, 2, 3]) : r.pick([1, 2, 3]);
       const b = tier === 1 ? r.pick([2, 3, 4]) : r.pick([2, 3, 4, 5, -2, -3, -4]);
       if (tier === 1 && a !== 1 && b > 3) return null;
       const k = r.int(2, n - 1);
@@ -1066,9 +1067,9 @@ const binomialCoefficient: Drill = {
         prompt: `Find the coefficient of {{x^${k}}} in the expansion of ${binom(a, b, n)}.`,
         answer: { type: "number", value: coef },
         solution: [
-          `The {{x^${k}}} term is ${n}C${k} × {{(${a})^${n - k}}} × {{(${b}x)^${k}}}${rowNote}.`,
-          `${n}C${k} = ${nCr(n, k)}, {{(${a})^${n - k}}} = ${num(a ** (n - k))}, {{(${b})^${k}}} = ${num(b ** k)}`,
-          `Coefficient = ${nCr(n, k)} × ${br2(a ** (n - k))} × ${br2(b ** k)} = ${num(coef)}`,
+          `The {{x^${k}}} term is ${n}C${k} × {{${pw(a, n - k)}}} × {{(${b}x)^${k}}}${rowNote}.`,
+          `${n}C${k} = ${nCr(n, k)}, {{${pw(a, n - k)}}} = ${num(a ** (n - k))}, {{${pw(b, k)}}} = ${num(b ** k)}`,
+          `Coefficient = ${nCr(n, k)} × ${br2(a ** (n - k))} × ${br2(b ** k)} = ${big(coef)}`,
         ],
         hint: `The {{x^${k}}} term uses ${n}C${k}, the first term to the power ${n - k} and the second term to the power ${k}.`,
         traps: nTraps(coef, [
@@ -1080,6 +1081,10 @@ const binomialCoefficient: Drill = {
     }, rng);
   },
 };
+
+function pw(a: number, e: number): string {
+  return a < 0 ? `(${a})^${e}` : `${a}^${e}`;
+}
 
 function br2(v: number): string {
   return v < 0 ? `(${num(v)})` : num(v);
