@@ -146,14 +146,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m1-q09",
-        question: "A cuboid measures 3 cm by 4 cm by 12 cm.\n\nWork out the length of the longest straight rod that fits inside it (the space diagonal).",
-        options: ["5 cm", "19 cm", "169 cm", "13 cm"],
+        question: "A cuboid measures 2 cm by 6 cm by 9 cm.\n\nWork out the length of the longest straight rod that fits inside it (the space diagonal).",
+        options: ["6.32 cm", "17 cm", "121 cm", "11 cm"],
         answerIndex: 3,
         explanation:
-          "Use Pythagoras twice (or once in 3D): {{d^2 = 3^2 + 4^2 + 12^2 = 9 + 16 + 144 = 169}}, so d = 13 cm. 5 cm is only the diagonal of the 3 by 4 face; 19 cm adds the edges; 169 cm forgets the square root.",
+          "Use Pythagoras twice (or once in 3D): {{d^2 = 2^2 + 6^2 + 9^2 = 4 + 36 + 81 = 121}}, so d = 11 cm. 6.32 cm ({{sqrt(40)}}) is only the diagonal of the 2 by 6 face; 17 cm adds the edges; 121 cm forgets the square root.",
         difficulty: "core",
         guideRef: "three-d",
-        hints: ["First find the diagonal of the 3 by 4 base.", "That base diagonal and the 12 cm edge make a new right-angled triangle.", "{{d = sqrt(3^2 + 4^2 + 12^2)}}."],
+        hints: ["First find the diagonal of the 2 by 6 base.", "That base diagonal and the 9 cm edge make a new right-angled triangle.", "{{d = sqrt(2^2 + 6^2 + 9^2)}}."],
         strategy: "Find the right triangle",
       },
       {
@@ -199,12 +199,12 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m1-q13",
-        question: "The diagram shows a cuboid ABCDEFGH with AB = 8 cm, BC = 6 cm and CG = 5 cm.\n\nWork out the angle θ between the diagonal AG and the base ABCD. Give your answer correct to 1 decimal place.",
+        question: "The diagram shows a cuboid ABCDEFGH with AB = 12 cm, BC = 9 cm and CG = 8 cm.\n\nWork out the angle θ between the diagonal AG and the base ABCD. Give your answer correct to 1 decimal place.",
         diagram: M1Q13,
-        options: ["32.0°", "26.6°", "39.8°", "30.0°"],
+        options: ["33.7°", "28.1°", "41.6°", "32.2°"],
         answerIndex: 1,
         explanation:
-          "The angle between AG and the base is the angle between AG and its **projection** AC on the base. {{AC = sqrt(8^2 + 6^2) = 10}} cm. Triangle ACG has a right angle at C, so {{tan θ = 5/10}} and θ = 26.6°. 32.0° uses AB = 8 as the adjacent and 39.8° uses BC = 6 — those triangles are not right-angled at the foot of G. 30.0° uses {{sin^(-1)(5/10)}}, but 10 is the adjacent, not the hypotenuse.",
+          "The angle between AG and the base is the angle between AG and its **projection** AC on the base. {{AC = sqrt(12^2 + 9^2) = sqrt(225) = 15}} cm. Triangle ACG has a right angle at C, so {{tan θ = 8/15}} and θ = 28.07…° = 28.1°. 33.7° uses AB = 12 as the adjacent and 41.6° uses BC = 9 — G is not above B or A, so those are not the right triangles. 32.2° uses {{sin^(-1)(8/15)}}, but 15 is the adjacent, not the hypotenuse.",
         difficulty: "challenge",
         guideRef: "three-d",
         hints: ["Where does G drop to on the base? Join that point to A.", "Find AC with Pythagoras on the base.", "In triangle ACG the right angle is at C — which ratio links CG and AC?"],
@@ -226,14 +226,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m1-q15",
-        question: "The sides of a right-angled triangle are x cm, (x + 7) cm and (x + 8) cm.\n\nWork out the value of x.",
-        options: ["5", "3", "{{sqrt(15)}}", "−3 or 5"],
+        question: "The sides of a right-angled triangle are x cm, (x + 14) cm and (x + 16) cm.\n\nWork out the value of x.",
+        options: ["10", "6", "{{2 sqrt(15)}}", "−6 or 10"],
         answerIndex: 0,
         explanation:
-          "The longest side, x + 8, is the hypotenuse: {{x^2 + (x+7)^2 = (x+8)^2}}. Expanding: {{2x^2 + 14x + 49 = x^2 + 16x + 64}}, so {{x^2 - 2x - 15 = 0}}, {{(x - 5)(x + 3) = 0}}. A length cannot be negative, so x = 5 (sides 5, 12, 13). '−3 or 5' forgets to reject the negative root; 3 comes from a sign slip giving {{x^2 + 2x - 15 = 0}}; {{sqrt(15)}} squares brackets as {{x^2 + 49}}, losing the middle terms.",
+          "The longest side, x + 16, is the hypotenuse: {{x^2 + (x+14)^2 = (x+16)^2}}. Expanding: {{2x^2 + 28x + 196 = x^2 + 32x + 256}}, so {{x^2 - 4x - 60 = 0}}, {{(x - 10)(x + 6) = 0}}. A length cannot be negative, so x = 10 (sides 10, 24, 26). '−6 or 10' forgets to reject the negative root; 6 comes from a sign slip giving {{x^2 + 4x - 60 = 0}}; {{2 sqrt(15)}} squares the brackets as {{x^2 + 196}} and {{x^2 + 256}}, losing the middle terms, so {{x^2 = 60}}.",
         difficulty: "challenge",
         guideRef: "pythagoras",
-        hints: ["Which expression must be the hypotenuse?", "Expand {{(x + 7)^2}} and {{(x + 8)^2}} fully — don't forget the middle terms.", "Solve the quadratic and check which root makes sense as a length."],
+        hints: ["Which expression must be the hypotenuse?", "Expand {{(x + 14)^2}} and {{(x + 16)^2}} fully — don't forget the middle terms.", "Solve the quadratic and check which root makes sense as a length."],
         strategy: "Introduce a variable",
       },
     ],
@@ -245,11 +245,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m2-q01",
-        question: "Work out the distance between the points (1, 2) and (7, 10).",
-        options: ["14 units", "10 units", "100 units", "14.4 units"],
+        question: "Work out the distance between the points (2, 1) and (7, 13).",
+        options: ["17 units", "13 units", "169 units", "16.6 units"],
         answerIndex: 1,
         explanation:
-          "Horizontal change 7 − 1 = 6, vertical change 10 − 2 = 8. These are the shorter sides of a right-angled triangle: {{d = sqrt(6^2 + 8^2) = sqrt(100) = 10}}. 14 adds 6 and 8; 100 forgets the square root; 14.4 adds the coordinates ({{sqrt(8^2 + 12^2)}}) instead of subtracting.",
+          "Horizontal change 7 − 2 = 5, vertical change 13 − 1 = 12. These are the shorter sides of a right-angled triangle: {{d = sqrt(5^2 + 12^2) = sqrt(169) = 13}}. 17 adds 5 and 12; 169 forgets the square root; 16.6 adds the coordinates ({{sqrt(9^2 + 14^2)}}) instead of subtracting.",
         difficulty: "warmup",
         guideRef: "pythagoras",
         hints: ["Sketch the two points and draw the right-angled triangle between them.", "The shorter sides are the differences in x and in y."],
@@ -313,14 +313,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m2-q06",
-        question: "An isosceles triangle has sides 13 cm, 13 cm and 10 cm.\n\nWork out its area.",
-        options: ["60 cm²", "120 cm²", "65 cm²", "130 cm²"],
+        question: "An isosceles triangle has sides 25 cm, 25 cm and 14 cm.\n\nWork out its area.",
+        options: ["168 cm²", "336 cm²", "175 cm²", "350 cm²"],
         answerIndex: 0,
         explanation:
-          "The height from the apex bisects the 10 cm base, giving right-angled triangles with hypotenuse 13 and base 5: {{h = sqrt(13^2 - 5^2) = sqrt(144) = 12}} cm. Area = {{1/2 * 10 * 12 = 60}} cm². 120 cm² forgets the half; 65 cm² uses the sloping side 13 as the height; 130 cm² does both.",
+          "The height from the apex bisects the 14 cm base, giving right-angled triangles with hypotenuse 25 and base 7: {{h = sqrt(25^2 - 7^2) = sqrt(576) = 24}} cm. Area = {{1/2 * 14 * 24 = 168}} cm². 336 cm² forgets the half; 175 cm² uses the sloping side 25 as the height; 350 cm² does both.",
         difficulty: "core",
         guideRef: "pythagoras",
-        hints: ["Is 13 cm the perpendicular height?", "Drop a perpendicular from the apex — it cuts the base in half.", "Height = {{sqrt(13^2 - 5^2)}}."],
+        hints: ["Is 25 cm the perpendicular height?", "Drop a perpendicular from the apex — it cuts the base in half.", "Height = {{sqrt(25^2 - 7^2)}}."],
         strategy: "Use symmetry",
       },
       {
@@ -406,14 +406,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m2-q13",
-        question: "From a point A on level ground, the angle of elevation of the top of a tower is 30°. From point B, 50 m closer to the tower, the angle of elevation is 45°.\n\nWork out the height of the tower, correct to 3 significant figures.",
-        options: ["50.0 m", "18.3 m", "68.3 m", "28.9 m"],
+        question: "Kenji stands at the top of a vertical cliff 80 m above sea level. Two boats are out at sea, in a straight line with the foot of the cliff and on the same side of it. The angles of depression of the boats from Kenji are 40° and 25°.\n\nWork out the distance between the two boats, correct to 3 significant figures.",
+        options: ["29.8 m", "267 m", "76.2 m", "299 m"],
         answerIndex: 2,
         explanation:
-          "Let the height be h. From B (45°) the distance to the foot is h. From A, {{tan 30° = h/(h + 50)}}, so {{h + 50 = h sqrt(3)}}, {{h = 50/(sqrt(3) - 1) = 25(sqrt(3) + 1) = 68.3}} m. 50.0 m assumes the two distances equal the height; 18.3 m is {{25(sqrt(3) - 1)}}, a sign slip when rationalising; 28.9 m is 50 tan 30°, treating 50 m as the whole distance from A.",
+          "Each angle of depression equals the angle of elevation at that boat (alternate angles). The 80 m cliff is opposite each angle, so the distances from the foot are {{80/(tan 25°) = 171.56…}} m (farther boat) and {{80/(tan 40°) = 95.34…}} m (nearer boat). Distance between them = 171.56… − 95.34… = 76.22… ≈ 76.2 m. 29.8 m uses 80 tan 40° − 80 tan 25°, putting the angles at the top of the cliff; 267 m adds the distances, as if the boats were on opposite sides; 299 m is {{80/(tan 15°)}} — you cannot subtract the angles first.",
         difficulty: "challenge",
         guideRef: "bearings-elevation",
-        hints: ["You can't solve either triangle on its own — introduce the height h.", "With 45°, the distance from B to the foot equals h.", "{{tan 30° = h/(h + 50)}} — solve for h."],
+        hints: ["Sketch the cliff and both lines of sight. Where does each angle of depression reappear?", "Alternate angles: the angle of elevation at each boat equals its angle of depression.", "Find each boat's distance from the foot with {{d = 80/(tan theta)}}, then subtract."],
         strategy: "Introduce a variable",
       },
       {

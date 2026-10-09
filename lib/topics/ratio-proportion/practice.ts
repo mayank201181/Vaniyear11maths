@@ -628,7 +628,7 @@ export const practice: TopicPractice = {
       id: "ratio-proportion-ch-q01",
       question: "(3x − y) : (x + 2y) = 4 : 5, where x and y are positive. Find the ratio x : y in its simplest form.",
       answer: { type: "ratio", parts: [13, 11], simplest: true, display: "13 : 11" },
-      traps: [{ spec: { type: "ratio", parts: [11, 13] }, feedback: "Close — but that's y : x. From 11x = 13y, x is the *smaller* multiplier's partner: x : y = 13 : 11." }],
+      traps: [{ spec: { type: "ratio", parts: [11, 13] }, feedback: "Close — but that's y : x. If 11x = 13y, x must be the bigger number (x = 13, y = 11 works)." }],
       solution: [
         "Write the ratio as an equation: {{(3x - y)/(x + 2y) = 4/5}}.",
         "Cross-multiply: 5(3x − y) = 4(x + 2y).",
