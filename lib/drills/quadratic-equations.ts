@@ -403,6 +403,9 @@ function formula3sf(rng: Rng, tier: Tier): DrillItem {
 // ===========================================================================
 const TRIPLES: Array<[number, number, number]> = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [20, 21, 29], [6, 8, 10], [9, 12, 15]];
 
+/** (x + p)² as markup, or x² when p = 0. */
+const sqr = (p: number): string => (p === 0 ? "x^2" : `(${lin(1, p)})^2`);
+
 function areaProblem(rng: Rng, tier: Tier): DrillItem {
   const useTri = tier === 3 && rng.bool(0.6);
   if (useTri) {
@@ -423,7 +426,7 @@ function areaProblem(rng: Rng, tier: Tier): DrillItem {
       const area = (L1 * L2) / 2;
       const e = B + X; // (x − X)(x + e)
       const steps = [
-        `Pythagoras: ${M(`(${lin(1, p)})^2 + (${lin(1, q)})^2 = (${lin(1, r)})^2`)}.`,
+        `Pythagoras: ${M(`${sqr(p)} + ${sqr(q)} = ${sqr(r)}`)}.`,
         `Expand and collect: ${M(`${quad(2, 2 * (p + q), p * p + q * q)} = ${quad(1, 2 * r, r * r)}`)}, so ${M(`${quad(1, B, C)} = 0`)}.`,
         `Factorise: ${M(`${fac(X)}${fac(-e)} = 0`)}, so x = ${X} or x = ${num(-e)}.`,
         `x = ${num(-e)} would make a side ${num(-e + Math.min(p, q, r))} ${unit} — impossible. So x = ${X}${askArea ? `, the shorter sides are ${L1} ${unit} and ${L2} ${unit}, and the area is {{1/2}} × ${L1} × ${L2} = ${num(area)} ${unit}²` : ""}.`,
@@ -448,7 +451,7 @@ function areaProblem(rng: Rng, tier: Tier): DrillItem {
     if (k === 1 && p === q) continue;
     const len = k * X + p, wid = X + q;
     if (len <= 0 || wid <= 0) continue;
-    if (len === wid) continue;
+    if (len <= wid) continue;
     // other root of kx² + (p + kq)x + (pq − A) = 0: sum of roots = −(p + kq)/k
     other = clean(-(p + k * q) / k - X);
     if (other === X) continue;
@@ -466,7 +469,7 @@ function areaProblem(rng: Rng, tier: Tier): DrillItem {
   const steps = [
     `Area = length × width: ${M(`(${lenS})(${widS}) = ${A}`)}.`,
     `Expand: ${M(`${quad(k, Bc, p * q)} = ${A}`)}, so ${M(`${quad(k, Bc, Cc)} = 0`)}.`,
-    `Factorise: ${M(`${fac(X)}(${lin(k, e)}) = 0`)}, so x = ${X} or x = ${rt(-e, k)}.`,
+    `Factorise: ${M(`${e % k === 0 && k > 1 ? `${k}${fac(X)}${fac(-e / k)}` : `${fac(X)}(${lin(k, e)})`} = 0`)}, so x = ${X} or x = ${rt(-e, k)}.`,
   ];
   const badDim = k * other + p <= 0 ? clean(k * other + p) : clean(other + q);
   steps.push(`x = ${rt(-e, k)} would give a ${k * other + p <= 0 ? "length" : "width"} of ${num(badDim)} ${unit} — impossible, so x = ${X}.`);
@@ -598,6 +601,8 @@ function linearQuadratic(rng: Rng, tier: Tier): DrillItem {
 // 8. Equations with algebraic fractions
 // ===========================================================================
 const den = (p: number): string => (p === 0 ? "x" : `(${lin(1, p)})`);
+/** Product of the two denominators, with a bare x written first. */
+const dprod = (p: number, q: number): string => (q === 0 ? `${den(q)}${den(p)}` : `${den(p)}${den(q)}`);
 function fracTerm(coef: number, p: number, first: boolean): string {
   const body = `${Math.abs(coef)}/${den(p)}`;
   if (first) return coef < 0 ? `-${body}` : body;
@@ -664,7 +669,7 @@ function algebraicFractions(rng: Rng, tier: Tier): DrillItem {
       prompt: `${rng.pick(["Solve", "Solve the equation", "Find the values of x that satisfy"])} ${M(eq)}.${half ? "\n\nGive any answer that is not a whole number as a fraction or exact decimal." : ""}`,
       answer: { type: "list", values: vals, display: orList(shows) },
       solution: [
-        `Multiply every term by ${M(`${den(p)}${den(q)}`)}: ${M(`${lhsExp} = ${c === 1 ? "" : c}${den(p)}${den(q)}`)}.`,
+        `Multiply every term by ${M(dprod(p, q))}: ${M(`${lhsExp} = ${c === 1 ? "" : c}${dprod(p, q)}`)}.`,
         `Expand: ${M(`${lin(a + b, a * q + b * p)} = ${quad(c, c * (p + q), c * p * q)}`)}.`,
         `Rearrange: ${M(`${quad(c, B, C)} = 0`)}, so ${M(`${factored} = 0`)}.`,
         `${orList(shows)}. Check: neither makes a denominator zero (${excl}), so both are valid.`,

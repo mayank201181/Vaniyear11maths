@@ -3,6 +3,7 @@
 Repo: `/home/user/Vaniyear11maths` (Next.js app). **Never** run `npm install`, `npm run build`,
 `next build`, `npm run dev` or any `git` command. Edit **only** the files your task names. Other
 agents are writing other files at the same time — that's expected; ignore their files.
+Scratch files: if you need any, keep them in your own folder `/tmp/claude-0/work/<topicId>-<task>/` (create it) — never in a shared folder.
 
 Always read first: `docs/CONTENT.md` (house rules, exam style, Year 11 answer formats),
 `lib/types.ts`, `lib/topics/_example.ts`, your topic's entry in `lib/topics/meta.ts` (fixed section
