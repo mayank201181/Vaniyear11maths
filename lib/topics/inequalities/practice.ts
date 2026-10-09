@@ -465,7 +465,7 @@ export const practice: TopicPractice = {
           modelAnswer:
             "(a) x might be negative (or zero). Dividing by a negative number reverses the inequality, and we can't divide by zero, so we don't know which way the sign should go. For example, x = −1 satisfies x < 4 but (−1)² = 1 is not less than 4(−1) = −4.\n\n(b) Rearrange: {{x^2 - 4x < 0}}, so x(x − 4) < 0. Critical values x = 0 and x = 4. The graph of y = x(x − 4) is ∪-shaped and below the x-axis between its roots, so 0 < x < 4.",
           markScheme: [
-            { point: "x could be negative or zero, so dividing by x might reverse the inequality / is undefined", keywords: ["negative", "zero", "reverse", "flip", "don't know the sign"] },
+            { point: "x could be negative or zero, so dividing by x might reverse the inequality (or be division by zero)", keywords: ["negative", "zero", "reverse", "flip", "don't know the sign"] },
             { point: "Rearranges to x² − 4x < 0 and factorises x(x − 4)", keywords: ["x^2 - 4x", "x(x - 4)", "x(x-4)", "rearrange"] },
             { point: "Critical values 0 and 4", keywords: ["0", "4", "critical"] },
             { point: "Correct solution 0 < x < 4", keywords: ["0 < x < 4", "0<x<4", "between 0 and 4"] },
@@ -844,7 +844,7 @@ export const practice: TopicPractice = {
             "Zara solves {{1/x < 2}} by multiplying both sides by x to get 1 < 2x, so {{x > 1/2}}.\n\n(a) Explain why her method has lost some solutions.\n(b) Find the complete solution of {{1/x < 2}}.",
           marks: 4,
           modelAnswer:
-            "(a) Multiplying by x is only safe if x is positive. If x is negative the inequality must be reversed. For example x = −1: {{1/(-1) = -1 < 2}} ✓, but −1 is not greater than {{1/2}} — so her answer misses it.\n\n(b) Case 1, x > 0: multiply by x (sign unchanged): 1 < 2x, so {{x > 1/2}}.\nCase 2, x < 0: multiply by x (reverse): 1 > 2x, so {{x < 1/2}} — which is true for every negative x.\n(x = 0 is impossible: {{1/0}} is undefined.)\n\nComplete solution: x < 0 or {{x > 1/2}}.",
+            "(a) Multiplying by x is only safe if x is positive. If x is negative the inequality must be reversed. For example x = −1: {{1/(-1) = -1 < 2}} ✓, but −1 is not greater than {{1/2}} — so her answer misses it.\n\n(b) Case 1, x > 0: multiply by x (sign unchanged): 1 < 2x, so {{x > 1/2}}.\nCase 2, x < 0: multiply by x (reverse): 1 > 2x, so {{x < 1/2}} — which is true for every negative x.\n(x = 0 is impossible: {{1/0}} has no value.)\n\nComplete solution: x < 0 or {{x > 1/2}}.",
           markScheme: [
             { point: "Multiplying by x is not safe because x could be negative (sign would reverse)", keywords: ["negative", "reverse", "flip", "sign of x"] },
             { point: "Shows a negative value such as x = −1 works in the original", keywords: ["-1", "negative", "works", "1/x is negative"] },

@@ -226,7 +226,7 @@ export const practice: TopicPractice = {
           question: "Use your calculator to work out {{(sqrt(17.4) + 2.3^2)/(4.1 - 1.75)}}. Give your answer correct to 3 significant figures.",
           answer: { type: "number", value: 4.03 },
           traps: [
-            { spec: { type: "number", value: 7.8, tolerance: 0.05 }, feedback: "It looks as if only the last term was divided by 4.1 − 1.75 — use brackets round the whole numerator, or the fraction button." },
+            { spec: { type: "number", value: 6.42, tolerance: 0.005 }, feedback: "Only {{2.3^2}} was divided by 2.35. Put brackets round the whole numerator (or use the fraction button)." },
           ],
           solution: ["Numerator: {{sqrt(17.4)}} = 4.1713… and {{2.3^2}} = 5.29, total 9.4613…", "Denominator: 4.1 − 1.75 = 2.35.", "9.4613… ÷ 2.35 = 4.0260… = 4.03 (3 s.f.)."],
           commonError: "Typing the calculation without brackets so only part of the numerator is divided.",
@@ -371,7 +371,7 @@ export const practice: TopicPractice = {
             "a = 8.6 and b = 3.2, each correct to 1 decimal place.\n\nWork out the upper bound of {{(a + b)/(a - b)}}. Give your answer correct to 3 significant figures.",
           answer: { type: "number", value: 2.23 },
           traps: [
-            { spec: { type: "number", value: 2.15, tolerance: 0.005 }, feedback: "You used upper bounds for both a and b in the top and lower bounds in the bottom inconsistently — a and b must each take ONE value. Try a = 8.55, b = 3.25." },
+            { spec: { type: "number", value: 2.15, tolerance: 0.005 }, feedback: "That's a = 8.65, b = 3.15 — making a big feels natural, but a is also in the denominator, where a smaller a − b helps more. Try a = 8.55, b = 3.25." },
             { spec: { type: "number", value: 2.19, tolerance: 0.005 }, feedback: "That's the value from the rounded numbers. Test each combination of bounds for a and b." },
           ],
           solution: [
@@ -468,8 +468,7 @@ export const practice: TopicPractice = {
           answer: { type: "number", value: 0.071, allowFraction: false },
           traps: [
             { spec: { type: "number", value: 0.07 }, feedback: "0.07 is only 1 significant figure. After the 7, the next significant figure is the 0 — then look at the 9 to decide." },
-            { spec: { type: "number", value: 0.0710 }, feedback: "Close — but 0.0710 would be written to show 3 s.f. Your value is right; check you typed it." },
-          ].slice(0, 1),
+          ],
           solution: ["First significant figure: 7. Second: 0.", "The next digit is 9, so round the 0 up to 1.", "0.07096 ≈ 0.071 (2 s.f.)."],
           difficulty: "warmup",
           guideRef: "rounding-estimation",
@@ -691,7 +690,7 @@ export const practice: TopicPractice = {
       question: "How many positive factors does 720 have (including 1 and 720)?",
       answer: { type: "number", value: 30 },
       traps: [
-        { spec: { type: "number", value: 40 }, feedback: "You multiplied the powers (4 × 2 × 1 = 8?) or added one only to some. Each prime power p^k gives k + 1 choices (0 to k): (4+1)(2+1)(1+1)." },
+        { spec: { type: "number", value: 15 }, feedback: "(4 + 1)(2 + 1) = 15 forgets the prime 5. It gives two choices too (use it or not): (4 + 1)(2 + 1)(1 + 1)." },
         { spec: { type: "number", value: 8 }, feedback: "4 × 2 × 1 multiplies the powers. But each power can be chosen from 0 up to k — that's k + 1 choices." },
       ],
       solution: [
