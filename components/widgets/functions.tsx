@@ -353,7 +353,7 @@ function InverseMirror() {
         "Move P along f. What happens to its coordinates when it reflects to P′?",
         "Find a straight line that is its own inverse. (Hint: try a = −1 with different values of b.)",
         "Choose ax² + b and switch the restriction off. Why can't the reflected curve be a function?",
-        "Set a = 2 and b = −3. Before looking, predict {{f^(-1)(5)}}, then check with P.",
+        "Choose ax + b with a = 2 and b = −1. Predict {{f^(-1)(5)}}, then move P to check.",
       ]}
       caption={
         <div className="space-y-2">

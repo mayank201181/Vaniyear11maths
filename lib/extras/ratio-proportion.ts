@@ -10,7 +10,7 @@ export const extras: TopicExtras = {
     "The kinetic energy of a moving car is proportional to the square of its speed. At 60 km/h a car carries 4 times the energy it has at 30 km/h, so (with the same brakes) it needs about 4 times the braking distance.",
     "Ice has a density of about 0.92 g/cm³ and sea water about 1.03 g/cm³. The ratio {{0.92/1.03 ~= 0.89}} is why roughly nine-tenths of an iceberg is hidden under the surface.",
     "Gold has a density of about 19.3 g/cm³. A one-litre juice carton filled with gold would have a mass of about 19.3 kg — more than most Year 11 school bags weigh even on a heavy day.",
-    "Kepler's third law says a planet's year T satisfies {{T^2 prop r^3}}, where r is its distance from the Sun. Jupiter is about 5.2 times as far out as Earth, so its year is about {{sqrt(5.2^3) ~= 11.9}} Earth years — exactly what astronomers observe.",
+    "Kepler's third law says a planet's year T satisfies T² ∝ r³, where r is its distance from the Sun. Jupiter is about 5.2 times as far out as Earth, so its year is about {{sqrt(5.2^3) ~= 11.9}} Earth years — exactly what astronomers observe.",
   ],
 
   activities: [
