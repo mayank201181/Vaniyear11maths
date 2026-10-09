@@ -247,7 +247,7 @@ export const paper: ExamPaper = {
         "Find P(same flavour): both mango, both lychee or both durian. Remember the second pick is from 11 sweets.",
         "P(different) = 1 − P(same).",
       ],
-      strategy: "Use the complement",
+      strategy: "Make it simpler",
     },
     {
       kind: "short",
@@ -542,7 +542,7 @@ export const paper: ExamPaper = {
       guideRef: "vector-geometry",
       difficulty: "core",
       question:
-        "OAB is a triangle. {{vec(OA)}} = **a** and {{vec(OB)}} = **b**.\n\nP is the point on AB such that AP : PB = 2 : 3.\n\nWhich expression is {{vec(OP)}} in terms of **a** and **b**?",
+        "OAB is a triangle. **OA** = **a** and **OB** = **b**.\n\nP is the point on AB such that AP : PB = 2 : 3.\n\nWhich expression is **OP** in terms of **a** and **b**?",
       diagram: VECTOR_AB,
       options: [
         "{{3/5}}**a** + {{2/5}}**b**",
@@ -552,7 +552,7 @@ export const paper: ExamPaper = {
       ],
       answerIndex: 0,
       explanation:
-        "{{vec(AB)}} = **b** − **a**. P is {{2/5}} of the way from A to B, so {{vec(OP)}} = **a** + {{2/5}}(**b** − **a**) = {{3/5}}**a** + {{2/5}}**b**. Check: P is closer to A, so it should have more **a** than **b**. {{2/5}}**a** + {{3/5}}**b** gets the ratio the wrong way round; {{1/3}}**a** + {{2/3}}**b** uses {{2/3}} of AB (reading 2 : 3 as a fraction); {{2/5}}(**b** − **a**) is only {{vec(AP)}} — it forgets to start at O.",
+        "**AB** = **b** − **a**. P is {{2/5}} of the way from A to B, so **OP** = **a** + {{2/5}}(**b** − **a**) = {{3/5}}**a** + {{2/5}}**b**. Check: P is closer to A, so it should have more **a** than **b**. {{2/5}}**a** + {{3/5}}**b** gets the ratio the wrong way round; {{1/3}}**a** + {{2/3}}**b** uses {{2/3}} of AB (reading 2 : 3 as a fraction); {{2/5}}(**b** − **a**) is only **AP** — it forgets to start at O.",
       hints: [
         "Go from O to A, then part of the way along AB.",
         "AP : PB = 2 : 3 means AP is {{2/5}} of AB.",
@@ -676,11 +676,11 @@ export const paper: ExamPaper = {
       guideRef: "vector-geometry",
       difficulty: "challenge",
       question:
-        "OAB is a triangle. {{vec(OA)}} = **a** and {{vec(OB)}} = **b**.\n\nM is the midpoint of OA. P is the point on AB such that AP : PB = 2 : 1. The line OB is extended to the point Q so that {{vec(OQ)}} = 2**b**.\n\nProve that M, P and Q lie on a straight line.",
+        "OAB is a triangle. **OA** = **a** and **OB** = **b**.\n\nM is the midpoint of OA. P is the point on AB such that AP : PB = 2 : 1. The line OB is extended to the point Q so that **OQ** = 2**b**.\n\nProve that M, P and Q lie on a straight line.",
       diagram: VECTOR_COLLINEAR,
       marks: 4,
       modelAnswer:
-        "{{vec(OM)}} = {{1/2}}**a**. {{vec(OP)}} = **a** + {{2/3}}(**b** − **a**) = {{1/3}}**a** + {{2/3}}**b**.\n\n{{vec(MP)}} = {{vec(OP)}} − {{vec(OM)}} = −{{1/6}}**a** + {{2/3}}**b** = {{1/6}}(4**b** − **a**).\n\n{{vec(MQ)}} = {{vec(OQ)}} − {{vec(OM)}} = 2**b** − {{1/2}}**a** = {{1/2}}(4**b** − **a**).\n\nSo {{vec(MQ)}} = 3{{vec(MP)}}: the vectors are parallel, and they share the point M, so M, P and Q lie on a straight line.",
+        "**OM** = {{1/2}}**a**. **OP** = **a** + {{2/3}}(**b** − **a**) = {{1/3}}**a** + {{2/3}}**b**.\n\n**MP** = **OP** − **OM** = −{{1/6}}**a** + {{2/3}}**b** = {{1/6}}(4**b** − **a**).\n\n**MQ** = **OQ** − **OM** = 2**b** − {{1/2}}**a** = {{1/2}}(4**b** − **a**).\n\nSo **MQ** = 3**MP**: the vectors are parallel, and they share the point M, so M, P and Q lie on a straight line.",
       markScheme: [
         { point: "Finds OP = (1/3)a + (2/3)b (or AP = (2/3)(b − a))", keywords: ["1/3a", "2/3b", "2/3(b-a)", "op"] },
         { point: "Finds MP = −(1/6)a + (2/3)b or equivalent", keywords: ["mp", "-1/6a", "1/6(4b-a)"] },
@@ -690,8 +690,8 @@ export const paper: ExamPaper = {
       commonError: "Showing the vectors are parallel but not stating that they share a common point — parallel alone does not prove the points are on one line.",
       hints: [
         "Collinear means two vectors along the line are multiples of each other *and* share a point.",
-        "Find {{vec(OP)}} first: go from O to A, then {{2/3}} of the way along AB.",
-        "Find {{vec(MP)}} and {{vec(MQ)}}. Can you take out the same bracket (4**b** − **a**)?",
+        "Find **OP** first: go from O to A, then {{2/3}} of the way along AB.",
+        "Find **MP** and **MQ**. Can you take out the same bracket (4**b** − **a**)?",
       ],
       strategy: "Look for an invariant",
     },
