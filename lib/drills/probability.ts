@@ -221,19 +221,19 @@ const expectedFrequency: Drill = {
       }
       if (kind === "given" || kind === "complement") {
         const ctx = r.pick([
-          { p: "a train on the North–South MRT line is late", n: "trains", q: "late", notQ: "not late" },
-          { p: "a sunflower seed germinates", n: "seeds are planted", q: "germinate", notQ: "do not germinate" },
-          { p: "a customer at a bubble tea shop orders less sugar", n: "customers visit the shop", q: "order less sugar", notQ: "do not order less sugar" },
-          { p: "a pupil in Year 11 chooses Further Maths", n: "pupils are in Year 11", q: "choose Further Maths", notQ: "do not choose Further Maths" },
+          { p: "a train on the North–South MRT line is late", pop: (n: string) => `${n} trains run on the line one week.`, q: "are late", notQ: "are not late", per: "trains" },
+          { p: "a sunflower seed germinates", pop: (n: string) => `A farmer plants ${n} seeds.`, q: "germinate", notQ: "do not germinate", per: "seeds" },
+          { p: "a customer at a bubble tea shop orders less sugar", pop: (n: string) => `${n} customers visit the shop on Saturday.`, q: "order less sugar", notQ: "do not order less sugar", per: "customers" },
+          { p: "a visitor to Sentosa goes on the cable car", pop: (n: string) => `${n} people visit Sentosa one morning.`, q: "go on the cable car", notQ: "do not go on the cable car", per: "visitors" },
         ]);
         const ph = tier === 1 ? 5 * r.int(1, 18) : r.int(3, 97);
         const n = tier === 1 ? 20 * r.int(3, 25) : r.pick([100, 200, 250, 300, 400, 500, 600, 800, 1200, 1500]);
         if ((ph * n) % 100 !== 0) return null;
         const comp = kind === "complement";
         const ans = comp ? ((100 - ph) * n) / 100 : (ph * n) / 100;
-        const verbN = ctx.n.split(" ")[0];
+        const verbN = ctx.per;
         return {
-          prompt: `The probability that ${ctx.p} is ${dec(ph)}. ${big(n)} ${ctx.n}. Work out an estimate for the number that ${comp ? ctx.notQ : ctx.q}.`,
+          prompt: `The probability that ${ctx.p} is ${dec(ph)}. ${ctx.pop(big(n))} Work out an estimate for the number of ${ctx.per} that ${comp ? ctx.notQ : ctx.q}.`,
           answer: { type: "number", value: ans },
           solution: comp
             ? [`P(${ctx.notQ}) = 1 − ${dec(ph)} = ${dec(100 - ph)}`, `Expected number = ${big(n)} × ${dec(100 - ph)} = ${big(ans)}`]
@@ -247,7 +247,7 @@ const expectedFrequency: Drill = {
         { act: "drops a drawing pin", out: "lands point up", noun: "drops" },
         { act: "spins a biased coin", out: "lands on heads", noun: "spins" },
         { act: "rolls a biased dice", out: "lands on a 6", noun: "rolls" },
-        { act: "takes a durian from a crate at random", out: "is ripe", noun: "durians" },
+        { act: "flips a plastic bottle", out: "lands upright", noun: "flips" },
       ]);
       const trials = r.pick([20, 25, 40, 50, 80, 100, 200]);
       const hits = r.int(Math.ceil(trials * 0.1), Math.floor(trials * 0.9));
@@ -258,7 +258,7 @@ const expectedFrequency: Drill = {
       if (kind === "reverse") {
         // Given relative frequency and expected number, find the number of trials.
         return {
-          prompt: `${name} ${ctx.act} ${trials} times and it ${ctx.out} ${hits} times. ${name} repeats the experiment many more times and expects it to ${ctx.out.replace(/^lands/, "land").replace(/^is /, "be ")} about ${big(est)} times. Using the relative frequency, estimate how many times the experiment is repeated.`,
+          prompt: `${name} ${ctx.act} ${trials} times and it ${ctx.out} ${hits} times. ${name} repeats the experiment many more times and expects it to ${ctx.out.replace(/^lands/, "land")} about ${big(est)} times. Using the relative frequency, estimate how many times the experiment is repeated.`,
           answer: { type: "number", value: newN },
           solution: [`Relative frequency = ${P(hits, trials)}${rn !== hits ? ` = ${F(rn, rd)}` : ""}`, `Number of trials × ${F(rn, rd)} = ${big(est)}`, `Number of trials = ${big(est)} ÷ ${F(rn, rd)} = ${big(newN)}`],
           hint: "Expected number = trials × relative frequency. Work backwards.",
@@ -602,7 +602,7 @@ const treeDraws: Drill = {
         if (ask === "same") {
           n = allA + allB;
           text = "all three are the same colour";
-          sol = [`P(all ${bag.c1}) = ${P(a, t)} × ${P(a - 1, t - 1)} × ${P(a - 2, t - 2)} = ${P(allA, D)}`, `P(all ${bag.c2}) = ${P(b, t)} × ${P(b - 1, t - 1)} × ${P(b - 2, t - 2)} = ${P(allB, D)}`, `Add: ${P(n, D)} ${eqF(n, D).replace(/^= /, "= ")}`.replace(`${P(n, D)} = ${P(n, D)}`, P(n, D))];
+          sol = [`P(all ${bag.c1}) = ${P(a, t)} × ${P(a - 1, t - 1)} × ${P(a - 2, t - 2)} = ${P(allA, D)}`, `P(all ${bag.c2}) = ${P(b, t)} × ${P(b - 1, t - 1)} × ${P(b - 2, t - 2)} = ${P(allB, D)}`, `Add: ${P(allA, D)} + ${P(allB, D)} ${eqF(n, D)}`];
           traps = fTraps(n, D, [[a ** 3 + b ** 3, t ** 3, "That would be with replacement — each pick changes what is left in the bag."], [allA, D, `That is only all ${bag.c1}. All ${bag.c2} is also 'the same colour'.`]]);
         } else if (ask === "two") {
           n = 3 * a * (a - 1) * b;
@@ -830,7 +830,7 @@ const sweetsEquation: Drill = {
           prompt: `There are n ${bag.item} in ${bag.where}. ${k} of them are ${bag.c1}. ${name} takes two ${bag.item} at random without replacement. The probability that both are ${bag.c1} is ${F(p, q)}. Work out the value of n.`,
           answer: { type: "number", value: N },
           solution: [
-            `P(both ${bag.c1}) = ${P(k, 1).replace(/[{}]/g, "") === String(k) ? `{{${k}/n}}` : ""} × {{${k - 1}/(n-1)}} = {{${k * (k - 1)}/(n(n-1))}}`,
+            `P(both ${bag.c1}) = {{${k}/n}} × {{${k - 1}/(n-1)}} = {{${k * (k - 1)}/(n(n-1))}}`,
             `So {{${k * (k - 1)}/(n(n-1))}} = ${F(p, q)}, giving n(n − 1) = ${k * (k - 1)} × ${F(q, p)} = ${M}`,
             `${quad(1, -1, -M, "n")} → (n − ${N})(n + ${N - 1}) = 0`,
             `n = ${N} (n cannot be negative)`,
@@ -990,14 +990,21 @@ const productRule: Drill = {
       }
       if (count < 4 || count === all) return null;
       const cText = c2 ? `${c1.t} and ${c2.t}` : c1.t;
-      const lastOk = set.filter((z) => c1.f(z) && (!c2 || c2.t.startsWith("greater") || c2.f(z)));
+      const lastOk = set.filter((z) => c1.f(z));
+      const byFirst = set
+        .map((x) => {
+          let k = 0;
+          for (const y of set) for (const z of set) if (x !== y && y !== z && x !== z && c1.f(100 * x + 10 * y + z) && (!c2 || c2.f(100 * x + 10 * y + z))) k++;
+          return [x, k] as const;
+        })
+        .filter(([, k]) => k > 0);
       return {
         prompt: `${name} makes 3-digit numbers using the digits ${set.join(", ")}. Each digit can be used at most once in a number. How many of the numbers are ${cText}?`,
         answer: { type: "number", value: count },
         solution: [
           "Fill the most restricted position first, then the others with the digits that are left.",
           c2 || c1.t.startsWith("greater")
-            ? `Split into cases by the restricted digits and multiply within each case. Total = ${count}.`
+            ? `Split into cases by the first digit: ${byFirst.map(([x, k]) => `first digit ${x}: ${k}`).join("; ")}. Total = ${byFirst.map(([, k]) => k).join(" + ")} = ${count}.`
             : `Last digit: ${lastOk.length} choice${lastOk.length === 1 ? "" : "s"} (${lastOk.join(", ")}). Then ${set.length - 1} choices for the first digit and ${set.length - 2} for the middle: ${lastOk.length} × ${set.length - 1} × ${set.length - 2} = ${count}`,
           `(For comparison, with no condition there are ${set.length} × ${set.length - 1} × ${set.length - 2} = ${all} numbers.)`,
         ],
@@ -1039,12 +1046,12 @@ const binomialCoefficient: Drill = {
           prompt: `Find the term independent of x (the constant term) in the expansion of ${base}.`,
           answer: { type: "number", value: coef },
           solution: [
-            `General term: {{${n}C r}} × ${sq ? "{{(x^2)^(" + n + "-r)}}" : "{{x^(" + n + "-r)}}"} × {{(${c}/x)^r}}`,
+            `General term: ${n}Cr × ${sq ? "{{(x^2)^(" + n + "-r)}}" : "{{x^(" + n + "-r)}}"} × {{(${c}/x)^r}}`,
             sq ? `Power of x: 2(${n} − r) − r = 0, so r = ${k}.` : `Power of x: (${n} − r) − r = 0, so r = ${k}.`,
-            `Term = {{${n}C${k}}} × {{(${c})^${k}}} = ${nCr(n, k)} × ${num(c ** k)} = ${num(coef)}`,
+            `Term = ${n}C${k} × {{(${c})^${k}}} = ${nCr(n, k)} × ${num(c ** k)} = ${num(coef)}`,
           ],
           hint: "Write the general term and make the power of x equal to 0.",
-          traps: nTraps(Math.abs(coef) === coef ? coef : coef, [[coef < 0 ? -coef : null, "Check the sign: a negative number to an odd power is negative."], [c ** k, `You forgot the binomial coefficient {{${n}C${k}}} = ${nCr(n, k)}.`]]),
+          traps: nTraps(coef, [[coef < 0 ? -coef : null, "Check the sign: a negative number to an odd power is negative."], [c ** k, `You forgot the binomial coefficient ${n}C${k} = ${nCr(n, k)}.`]]),
         };
       }
       const n = tier === 1 ? r.int(3, 5) : r.int(4, tier === 2 ? 6 : 7);
@@ -1059,13 +1066,13 @@ const binomialCoefficient: Drill = {
         prompt: `Find the coefficient of {{x^${k}}} in the expansion of ${binom(a, b, n)}.`,
         answer: { type: "number", value: coef },
         solution: [
-          `The {{x^${k}}} term is {{${n}C${k}}} × {{(${a})^${n - k}}} × {{(${b}x)^${k}}}${rowNote}.`,
-          `{{${n}C${k}}} = ${nCr(n, k)}, {{(${a})^${n - k}}} = ${num(a ** (n - k))}, {{(${b})^${k}}} = ${num(b ** k)}`,
+          `The {{x^${k}}} term is ${n}C${k} × {{(${a})^${n - k}}} × {{(${b}x)^${k}}}${rowNote}.`,
+          `${n}C${k} = ${nCr(n, k)}, {{(${a})^${n - k}}} = ${num(a ** (n - k))}, {{(${b})^${k}}} = ${num(b ** k)}`,
           `Coefficient = ${nCr(n, k)} × ${br2(a ** (n - k))} × ${br2(b ** k)} = ${num(coef)}`,
         ],
-        hint: `The {{x^${k}}} term uses {{${n}C${k}}}, the first term to the power ${n - k} and the second term to the power ${k}.`,
+        hint: `The {{x^${k}}} term uses ${n}C${k}, the first term to the power ${n - k} and the second term to the power ${k}.`,
         traps: nTraps(coef, [
-          [coef !== 0 ? a ** (n - k) * b ** k : null, `You missed the binomial coefficient {{${n}C${k}}} = ${nCr(n, k)} from Pascal's triangle.`],
+          [coef !== 0 ? a ** (n - k) * b ** k : null, `You missed the binomial coefficient ${n}C${k} = ${nCr(n, k)} from Pascal's triangle.`],
           [nCr(n, k) * a ** (n - k) * b, `Raise the whole term ${b}x to the power ${k}, not just x.`],
           [-coef, "Check the sign — a negative number to an even power is positive, to an odd power negative."],
         ]),
