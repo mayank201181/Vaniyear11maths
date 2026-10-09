@@ -96,6 +96,11 @@ function calc(x: number): string {
   return String(parseFloat(x.toPrecision(8))).replace("-", "−");
 }
 
+/** 4 s.f. for "about" values. */
+function sig4(x: number): string {
+  return grp(String(parseFloat(x.toPrecision(4))).replace("-", "−"));
+}
+
 /** Index-form maths: [2,3,7],[2,1,2] → "2^2 * 3 * 7^2". */
 function idx(ps: number[], es: number[]): string {
   const parts: string[] = [];
@@ -204,7 +209,8 @@ function given(m: Meas): string {
 
 /** "the nearest cm", "1 decimal place", "the nearest 5 m" … */
 function accText(u: number, unit: string): string {
-  if (u === 1000) return unit === "s" ? "the nearest second" : `the nearest ${unit}`;
+  const one: Record<string, string> = { m: "metre", g: "gram", s: "second", litres: "litre", km: "km", cm: "cm", kg: "kg", ml: "ml" };
+  if (u === 1000) return `the nearest ${one[unit] ?? unit}`;
   if (u === 100) return "1 decimal place";
   if (u === 10) return "2 decimal places";
   return `the nearest ${milli(u)} ${unit}`;
@@ -450,9 +456,9 @@ export const drills: Drill[] = [
     generate(rng, tier) {
       return attempt((r) => {
         let N: number, d: number, L: number;
-        let carry = false;
+        let carryK = 0; // > 0: a run of 9s, and rounding to carryK s.f. carries through them
         if (tier === 3 && r.bool(0.5)) {
-          // A run of 9s so the rounding carries: 39.97 → 40.0.
+          // e.g. 39.97 to 3 s.f. → 40.0.
           const m = r.int(1, 3);
           const tail = r.int(0, 2);
           let s = String(r.int(1, 8)) + "9".repeat(m) + String(r.int(5, 9));
@@ -460,13 +466,13 @@ export const drills: Drill[] = [
           if (s.endsWith("0")) return null;
           N = Number(s);
           L = s.length;
-          d = r.int(Math.max(0, L - 3), L + 2);
-          carry = true;
+          d = r.int(Math.max(0, L - 3), Math.min(8, L + 2));
+          carryK = 1 + m;
         } else {
           L = tier === 1 ? r.int(4, 5) : tier === 2 ? r.int(4, 6) : r.int(5, 7);
           N = r.int(P10(L - 1), P10(L) - 1);
           if (N % 10 === 0) return null;
-          d = tier === 1 ? r.int(0, Math.min(3, L - 1)) : r.int(0, L + 2);
+          d = tier === 1 ? r.int(0, Math.min(3, L - 1)) : r.int(0, Math.min(8, L + 2));
         }
         // Choose what to round to: p = number of digits of N to remove.
         type Kind = "sf" | "dp" | "nearest" | "whole";
@@ -474,25 +480,20 @@ export const drills: Drill[] = [
         if (d >= 2) kinds.push("dp", "dp");
         if (d === 0) kinds.push("nearest");
         if (d >= 1 && L - d >= 1) kinds.push("whole");
-        const kind: Kind = carry ? (r.bool(0.7) || d < 2 ? "sf" : "dp") : r.pick(kinds);
+        const kind: Kind = carryK ? (r.bool(0.6) ? "sf" : "dp") : r.pick(kinds);
         let p: number, k = 0, dp = 0;
         if (kind === "sf") {
-          k = carry ? L - (L - String(N).search(/9[5-9]/) - 1) : r.int(1, Math.min(tier === 1 ? 2 : 4, L - 1));
-          if (carry) {
-            const s = String(N);
-            const firstHigh = s.indexOf("9") + (s.match(/9+/)?.[0].length ?? 1); // index of the 5–9 digit after the 9s
-            k = firstHigh;
-          }
+          k = carryK || r.int(1, Math.min(tier === 1 ? 2 : 4, L - 1));
           p = L - k;
         } else if (kind === "dp") {
-          dp = r.int(1, Math.min(tier === 1 ? 2 : 3, d - 1));
-          if (carry) {
-            const s = String(N);
-            const firstHigh = s.indexOf("9") + (s.match(/9+/)?.[0].length ?? 1);
-            p = L - firstHigh;
+          if (carryK) {
+            p = L - carryK;
             dp = d - p;
             if (dp < 1) return null;
-          } else p = d - dp;
+          } else {
+            dp = r.int(1, Math.min(tier === 1 ? 2 : 3, d - 1));
+            p = d - dp;
+          }
         } else if (kind === "nearest") {
           p = r.int(1, Math.min(3, L - 2));
         } else p = d;
@@ -548,7 +549,9 @@ export const drills: Drill[] = [
               ? `Count ${k} significant figure${k > 1 ? "s" : ""} from the first non-zero digit of ${xStr}.`
               : kind === "dp"
                 ? `Keep ${dp} digit${dp > 1 ? "s" : ""} after the decimal point.`
-                : `Look at the ${kind === "whole" ? "units" : grp(String(P10(p))) + "s"} column.`,
+                : kind === "whole"
+                  ? "Keep the units digit."
+                  : `Keep the ${grp(String(P10(p)))}s digit; everything after it becomes 0.`,
             `The next digit is ${nextDigit}, so ${nextDigit >= 5 ? "round up" : "round down (keep the digit)"}.`,
             `${xStr} ≈ ${ansStr}${D > 0 && ansStr.endsWith("0") ? " (the final 0 shows the accuracy, so keep it)" : ""}.`,
           ],
@@ -597,7 +600,7 @@ export const drills: Drill[] = [
           return {
             prompt: `By rounding each number to 1 significant figure, find an estimate for {{(${a.s} * ${b.s})/${c.s}}}.`,
             answer: numAns(est, grp(String(est))),
-            solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}.`, `{{(${a.t} * ${b.t})/${c.t} = ${val(milli((a.T * b.T) / 1000))}/${c.t} = ${est}}}.`, `(The exact value is ${calc(exact)}, so the estimate is sensible.)`],
+            solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}.`, `{{(${a.t} * ${b.t})/${c.t} = ${micro(a.T * b.T)}/${c.t} = ${est}}}.`, `(The exact value is about ${sig4(exact)}, so the estimate is sensible.)`],
             hint: `Round every number to 1 significant figure first.${c.T < 1000 ? " Dividing by a number less than 1 makes the answer bigger." : ""}`,
             traps: numTraps(est, [[parseFloat(wrong.toPrecision(10)), "You multiplied by the bottom number instead of dividing by it."]]),
           };
@@ -615,7 +618,7 @@ export const drills: Drill[] = [
           return {
             prompt: `Work out an estimate for {{(${a.s} + ${b.s})/${c.s}}}, by rounding each number to 1 significant figure.`,
             answer: numAns(est, grp(String(est))),
-            solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}.`, `{{(${a.t} + ${b.t})/${c.t} = ${milli(S)}/${c.t} = ${est}}}.`, `(The exact value is ${calc(exact)}.)`],
+            solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}.`, `{{(${a.t} + ${b.t})/${c.t} = ${milli(S)}/${c.t} = ${est}}}.`, `(The exact value is about ${sig4(exact)}.)`],
             hint: "The fraction line acts as a bracket: add the top first, then divide.",
             traps: numTraps(est, [[parseFloat(wrong.toPrecision(10)), "The whole top line is divided — work out the numerator first."]]),
           };
@@ -636,7 +639,7 @@ export const drills: Drill[] = [
         return {
           prompt: `Use approximations to 1 significant figure to estimate the value of {{(${a.s} * ${b.s})/(${c.s} - ${dq.s})}}.`,
           answer: numAns(est, grp(String(est))),
-          solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}, ${dq.s} ≈ ${dq.t}.`, `Top: ${a.t} × ${b.t} = ${milli(num / 1000)}. Bottom: ${c.t} − ${dq.t} = ${milli(D)}.`, `Estimate = ${milli(num / 1000)} ÷ ${milli(D)} = ${est}. (Exact value: ${calc(exact)}.)`],
+          solution: [`Round each number to 1 s.f.: ${a.s} ≈ ${a.t}, ${b.s} ≈ ${b.t}, ${c.s} ≈ ${c.t}, ${dq.s} ≈ ${dq.t}.`, `Top: ${a.t} × ${b.t} = ${micro(num)}. Bottom: ${c.t} − ${dq.t} = ${milli(D)}.`, `Estimate = ${micro(num)} ÷ ${milli(D)} = ${est}. (Exact value: about ${sig4(exact)}.)`],
           hint: "Round everything to 1 s.f., then work out the top and the bottom separately.",
           traps: numTraps(est, [[parseFloat(wrong.toPrecision(10)), "The denominator is the whole of the bottom line — subtract first, then divide."]]),
         };
@@ -654,8 +657,8 @@ export const drills: Drill[] = [
     generate(rng, tier) {
       return attempt((r) => {
         const dp = tier === 1 ? 1 : r.int(1, 2);
-        const dec = (lo: number, hi: number) => {
-          const n = r.int(lo * P10(dp), hi * P10(dp));
+        const dec = (mn: number, mx: number) => {
+          const n = r.int(mn * P10(dp), mx * P10(dp));
           if (n % 10 === 0) return null;
           return { s: decStr(n, dp), x: n / P10(dp) };
         };
@@ -691,8 +694,8 @@ export const drills: Drill[] = [
           wrongs.push([top / Math.sqrt(c.x) + d.x, "Put brackets round the denominator: (√c + d)."], [(a.x * 3 - b.x) / bot, "{{a^3}} means a × a × a, not 3 × a."]);
         } else {
           if (a.x <= b.x / 2 + 1) return null;
-          const bb = b.x / 2;
-          const bs = trimDec(decStr(Math.round(bb * P10(dp + 1)), dp + 1));
+          const bs = trimDec(decStr(Math.round((b.x / 2) * P10(dp + 1)), dp + 1));
+          const bb = val(bs);
           expr = `(${a.s}^2 - ${bs}^2)/(${c.s} * sqrt(${d.s}))`;
           top = a.x * a.x - bb * bb;
           bot = c.x * Math.sqrt(d.x);
@@ -845,7 +848,7 @@ export const drills: Drill[] = [
           const u = unit === "cm" ? r.pick(tier === 1 ? [1000] : [1000, 100]) : r.pick([100, 10]);
           const a = unit === "cm" ? meas(r, u, 12, 95) : meas(r, u, 2, 30);
           const b = unit === "cm" ? meas(r, u, 12, 95) : meas(r, u, 2, 30);
-          if (a.v === b.v || a.v % 1000 === 0 && u < 1000 && r.bool(0.7)) return null;
+          if (a.v === b.v || (a.v % 1000 === 0 && u < 1000 && r.bool(0.7))) return null;
           const acc = accText(u, unit);
           if (mode === "perim") {
             const P = 2 * (pickB(a) + pickB(b));
@@ -1156,29 +1159,66 @@ export const drills: Drill[] = [
             traps: numTraps(ans, [[Math.pow(n, k), "That lets one person hold several roles. Each choice uses someone up."]]),
           };
         }
-        // digits: brute-force count of n-digit numbers with a property.
+        // digits: count n-digit numbers with a property; the product-rule working is
+        // checked against a brute-force count so the solution can never disagree.
         const nd = tier === 3 ? r.pick([3, 4]) : 3;
-        const conds = [
-          { t: "are even", f: (x: number) => x % 2 === 0 },
-          { t: "are odd and have all their digits different", f: (x: number) => x % 2 === 1 && new Set(String(x)).size === nd },
-          { t: "have all their digits different", f: (x: number) => new Set(String(x)).size === nd },
-          { t: "are multiples of 5 with all digits different", f: (x: number) => x % 5 === 0 && new Set(String(x)).size === nd },
-          { t: "contain no zero digit", f: (x: number) => !String(x).includes("0") },
-          { t: "are greater than " + (nd === 3 ? "500" : "5000") + " and even", f: (x: number) => x > (nd === 3 ? 500 : 5000) && x % 2 === 0 },
+        const mid = (n: number) => Array(Math.max(0, nd - 2)).fill(n);
+        const X = nd === 3 ? 500 : 5000;
+        const conds: Array<{ t: string; f: (x: number) => boolean; steps: string[]; calc: string; v: number }> = [
+          {
+            t: "are even",
+            f: (x) => x % 2 === 0,
+            steps: ["First digit: 9 choices (1–9). Last digit: 5 choices (0, 2, 4, 6, 8)." + (nd > 2 ? " Each middle digit: 10 choices." : "")],
+            calc: [9, ...mid(10), 5].join(" × "),
+            v: 9 * P10(nd - 2) * 5,
+          },
+          {
+            t: "are odd and have all their digits different",
+            f: (x) => x % 2 === 1 && new Set(String(x)).size === nd,
+            steps: ["Last digit first: 5 choices (1, 3, 5, 7, 9).", "First digit: not 0 and not the last digit, so 8 choices. Then the remaining positions use the digits left: " + (nd === 3 ? "8." : "8, then 7.")],
+            calc: nd === 3 ? "5 × 8 × 8" : "5 × 8 × 8 × 7",
+            v: nd === 3 ? 320 : 2240,
+          },
+          {
+            t: "have all their digits different",
+            f: (x) => new Set(String(x)).size === nd,
+            steps: ["First digit: 9 choices (not 0). Second: 9 (0 is now allowed, but not the first digit)." + (nd === 3 ? " Third: 8." : " Third: 8. Fourth: 7.")],
+            calc: nd === 3 ? "9 × 9 × 8" : "9 × 9 × 8 × 7",
+            v: nd === 3 ? 648 : 4536,
+          },
+          {
+            t: "are multiples of 5 with all digits different",
+            f: (x) => x % 5 === 0 && new Set(String(x)).size === nd,
+            steps: ["Split into cases by the last digit.", nd === 3 ? "Ending in 0: first digit 9 choices, middle 8 → 72. Ending in 5: first digit 8 choices (not 0 or 5), middle 8 → 64." : "Ending in 0: 9 × 8 × 7 = 504. Ending in 5: first digit 8 choices (not 0 or 5), then 8 × 7 → 448."],
+            calc: nd === 3 ? "72 + 64" : "504 + 448",
+            v: nd === 3 ? 136 : 952,
+          },
+          {
+            t: "contain no zero digit",
+            f: (x) => !String(x).includes("0"),
+            steps: ["Every digit has 9 choices (1–9)."],
+            calc: Array(nd).fill(9).join(" × "),
+            v: Math.pow(9, nd),
+          },
+          {
+            t: `are greater than ${X} and even`,
+            f: (x) => x > X && x % 2 === 0,
+            steps: [`Numbers from ${X} upwards: first digit 5–9 (5 choices), last digit even (5 choices)${nd > 2 ? ", each middle digit 10 choices" : ""}.`, `That includes ${X} itself, which is not greater than ${X}, so subtract 1.`],
+            calc: `${[5, ...mid(10), 5].join(" × ")} − 1`,
+            v: 5 * P10(nd - 2) * 5 - 1,
+          },
         ];
-        const c = r.pick(tier === 2 ? conds.slice(0, 5).filter((_, i) => i !== 1 && i !== 3) : conds);
+        const c = r.pick(tier === 2 ? [conds[0], conds[2], conds[4]] : conds);
         let ans = 0;
         for (let x = P10(nd - 1); x < P10(nd); x++) if (c.f(x)) ans++;
+        if (ans !== c.v) throw new Error(`counting drill: working ${c.v} disagrees with count ${ans} (${c.t})`);
         const allNd = 9 * P10(nd - 1);
+        const pr = r.int(0, 1);
         return {
-          prompt: `How many ${nd}-digit whole numbers ${c.t}? (A ${nd}-digit number cannot start with 0.)`,
+          prompt: pr === 0 ? `How many ${nd}-digit whole numbers ${c.t}? (A ${nd}-digit number cannot start with 0.)` : `Ethan lists every ${nd}-digit whole number that ${c.t.replace(/^are /, "is ").replace(/^have /, "has ").replace(/^contain /, "contains ")}. How many numbers are on his list?`,
           answer: numAns(ans, grp(String(ans))),
-          solution: [
-            "Fill the most restricted position first (the last digit for odd / even / multiple-of-5 conditions, and the first digit, which can't be 0).",
-            "Then multiply the number of choices for each remaining position, remembering which digits are already used.",
-            `Total: ${grp(String(ans))} (out of ${grp(String(allNd))} ${nd}-digit numbers).`,
-          ],
-          hint: "Which position has the strictest rule? Deal with it first, then count choices for the others.",
+          solution: [...c.steps, `Total: ${c.calc} = ${grp(String(ans))}.`],
+          hint: "Which position has the strictest rule? Deal with it first, then count the choices for the others.",
           traps: numTraps(ans, [[allNd, `That's every ${nd}-digit number — apply the condition.`]]),
         };
       }, rng);
