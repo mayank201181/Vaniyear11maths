@@ -3,7 +3,7 @@
 // Native MathML is rendered by all modern browsers (Chrome 109+, Safari,
 // Firefox) — no fonts or libraries needed.
 //
-//   {{3/4}}  {{2 1/3}}  {{x^2}}  {{10^(-3)}}  {{sqrt(49)}}  {{cbrt(27)}}
+//   {{3/4}}  {{2 1/3}}  {{x^2}}  {{10^(-3)}}  {{sqrt(49)}}  {{cbrt(27)}}  {{col(3, -2)}} column vector
 //   {{(2x+1)/3}}  {{a_1}}  {{3 * 4}}  {{x <= 5}}  {{pi r^2}}  {{"area"}}
 //
 // A run like 2x or 3ab is one term (so {{2x/3}} = two-x over three).
@@ -214,6 +214,24 @@ class P {
     }
     if (t.k === "word") {
       this.i++;
+      // Column vector: col(3, -2) → a stacked (3 over −2) in round brackets.
+      if (t.v === "col" && this.peek()?.k === "lp") {
+        this.i++;
+        const rows: T[][] = [[]];
+        let depth = 0;
+        while (this.i < this.t.length) {
+          const x = this.t[this.i++];
+          if (x.k === "lp") depth++;
+          if (x.k === "rp") {
+            if (depth === 0) break;
+            depth--;
+          }
+          if (depth === 0 && x.k === "op" && x.v === ",") rows.push([]);
+          else rows[rows.length - 1].push(x);
+        }
+        const cells = rows.map((r) => `<mtr><mtd>${new P(r).seq(false)}</mtd></mtr>`).join("");
+        return { ml: `<mrow><mo>(</mo><mtable>${cells}</mtable><mo>)</mo></mrow>` };
+      }
       if (t.v === "sqrt" || t.v === "cbrt") {
         this.skipSp();
         const arg = this.base();

@@ -354,7 +354,7 @@ export const morePapers: Paper[] = [
           "{{(2x - 1)^2 = 4x^2 - 4x + 1}}. How much is left over?",
           "So g(input) = input² + 2.",
         ],
-        strategy: "Work backwards",
+        strategy: "Introduce a variable",
       },
     ],
   },
@@ -372,7 +372,7 @@ export const morePapers: Paper[] = [
         question: "f is the function such that f(x) = {{(x^2 + 3)/(2x - 1)}}\n\nFind f(3). Give your answer as a decimal.",
         answer: { type: "number", value: 2.4, allowFraction: false },
         traps: [
-          { spec: { type: "number", value: 1.2 }, feedback: "{{3^2 = 9}}, not 6: the numerator is 9 + 3 = 12." },
+          { spec: { type: "number", value: 1.8 }, feedback: "{{3^2 = 9}}, not 6: the numerator is 9 + 3 = 12, not 6 + 3 = 9." },
           { spec: { type: "number", value: 2 }, feedback: "The denominator is 2 × 3 − 1 = 5, not 6." },
         ],
         solution: ["Numerator: {{3^2 + 3 = 12}}.", "Denominator: 2 × 3 − 1 = 5.", "f(3) = {{12/5}} = 2.4."],
@@ -388,14 +388,10 @@ export const morePapers: Paper[] = [
         id: "functions-p4-q02",
         question:
           "g is the function such that g(x) = {{1/sqrt(x + 3)}}\n\nWrite down the domain of g, using an inequality for x.",
-        answer: {
-          type: "text",
-          accept: ["x>-3", "-3<x", "x>−3", "−3<x"],
-          display: "x > −3",
-        },
+        answer: { type: "inequality", ineq: "x>-3", display: "x > −3" },
         traps: [
-          { spec: { type: "text", accept: ["x>=-3", "x≥-3", "-3<=x", "-3≤x", "x>=−3", "x≥−3"] }, feedback: "Nearly — but at x = −3 you'd have {{1/sqrt(0) = 1/0}}, which has no value. Use a strict inequality." },
-          { spec: { type: "text", accept: ["x>3", "x>=3", "x≥3"] }, feedback: "Solve x + 3 > 0 carefully: subtract 3 to get x > −3." },
+          { spec: { type: "inequality", ineq: "x>3" }, feedback: "Solve x + 3 > 0 carefully: subtract 3 to get x > −3." },
+          { spec: { type: "inequality", ineq: "x<-3" }, feedback: "Test x = −4: {{sqrt(-1)}} is not real. The allowed inputs are the ones **above** −3." },
         ],
         solution: [
           "You can't square-root a negative number, so x + 3 ≥ 0.",
@@ -405,7 +401,7 @@ export const morePapers: Paper[] = [
         commonError: "Writing x ≥ −3 — forgetting the root is in the denominator.",
         difficulty: "warmup",
         guideRef: "domain-range",
-        hints: ["Two things can go wrong here: a negative under the root, and dividing by zero.", "Solve x + 3 > 0. (Type > for 'greater than'.)"],
+        hints: ["Two things can go wrong here: a negative under the root, and dividing by zero.", "Solve x + 3 > 0. At x = −3 itself, what goes wrong?"],
         strategy: "Look for the forbidden operation",
       },
       // ---------------------------------------------------------------- q03
@@ -466,25 +462,25 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "functions-p4-q06",
         question:
-          "f(x) = {{(4x + 1)/(x - 3)}}, x ≠ 3\n\nExpress the inverse function {{f^(-1)}} in the form {{f^(-1)(x) = ...}}",
-        answer: { type: "expression", expr: "(3x+1)/(x-4)", display: "{{(3x + 1)/(x - 4)}}" },
+          "f(x) = {{(4x + 3)/(2x - 1)}}, x ≠ {{1/2}}\n\nExpress the inverse function {{f^(-1)}} in the form {{f^(-1)(x) = ...}}",
+        answer: { type: "expression", expr: "(x+3)/(2x-4)", display: "{{(x + 3)/(2x - 4)}}" },
         traps: [
-          { spec: { type: "expression", expr: "(x-3)/(4x+1)" }, feedback: "That is {{1/f(x)}}, the reciprocal. The inverse undoes f: swap x and y, then make y the subject." },
-          { spec: { type: "expression", expr: "(3x-1)/(x-4)" }, feedback: "Check the sign when you collect: xy − 3x = 4y + 1 → xy − 4y = 3x + 1, so the numerator is 3x + 1." },
+          { spec: { type: "expression", expr: "(2x-1)/(4x+3)" }, feedback: "That is {{1/f(x)}}, the reciprocal. The inverse undoes f: swap x and y, then make y the subject." },
+          { spec: { type: "expression", expr: "(x-3)/(2x-4)" }, feedback: "Check the signs when you collect: 2xy − x = 4y + 3 → 2xy − 4y = x + 3, so the numerator is x + 3." },
         ],
         solution: [
-          "Let x = {{(4y + 1)/(y - 3)}} (swap x and y).",
-          "x(y − 3) = 4y + 1 → xy − 3x = 4y + 1.",
-          "Collect the y terms: xy − 4y = 3x + 1 → y(x − 4) = 3x + 1.",
-          "{{f^(-1)(x) = (3x + 1)/(x - 4)}}. Check: f(0) = {{-1/3}} and {{f^(-1)(-1/3) = 0/(-13/3) = 0}}. ✓",
+          "Let x = {{(4y + 3)/(2y - 1)}} (swap x and y).",
+          "x(2y − 1) = 4y + 3 → 2xy − x = 4y + 3.",
+          "Collect the y terms: 2xy − 4y = x + 3 → y(2x − 4) = x + 3.",
+          "{{f^(-1)(x) = (x + 3)/(2x - 4)}}, x ≠ 2. Check: f(1) = {{7/1}} = 7 and {{f^(-1)(7) = 10/10 = 1}}. ✓",
         ],
         commonError: "Not factorising out y after collecting the y terms, so y is left on both sides.",
         difficulty: "core",
         guideRef: "inverse-functions",
         hints: [
-          "Swap x and y, then multiply both sides by (y − 3).",
+          "Swap x and y, then multiply both sides by (2y − 1).",
           "x appears in two places, so a flowchart won't work. Get all the y terms on one side.",
-          "Factorise y out: y(x − 4) = …",
+          "Factorise y out: y(2x − 4) = …",
         ],
         strategy: "Collect and factorise",
       },
@@ -493,11 +489,12 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "functions-p4-q07",
         question:
-          "f(x) = {{x^2 - 2x}} with domain −1 ≤ x ≤ 4.\n\nThe range of f is a ≤ f(x) ≤ b. Find a and b. Give a first, then b.",
-        answer: { type: "list", values: [-1, 8], ordered: true, display: "a = −1, b = 8" },
+          "f(x) = {{x^2 - 2x}} with domain −1 ≤ x ≤ 4.\n\nFind the range of f. Give your answer as an inequality, using y for the output.",
+        answer: { type: "inequality", ineq: "-1<=y<=8", display: "−1 ≤ f(x) ≤ 8" },
         traps: [
-          { spec: { type: "list", values: [3, 8], ordered: true }, feedback: "f(−1) = 3 and f(4) = 8 are the end values, but the curve dips lower in between. Find the turning point." },
-          { spec: { type: "list", values: [-1, 4], ordered: true }, feedback: "−1 ≤ x ≤ 4 is the domain (inputs). The range is the outputs." },
+          { spec: { type: "inequality", ineq: "3<=y<=8" }, feedback: "f(−1) = 3 and f(4) = 8 are the end values, but the curve dips lower in between. Find the turning point." },
+          { spec: { type: "inequality", ineq: "-1<=y<=4" }, feedback: "−1 ≤ x ≤ 4 is the domain (inputs). The range is the outputs." },
+          { spec: { type: "inequality", ineq: "-1<=x<=8" }, feedback: "Right numbers, but a range describes **outputs** — write it with y (or f(x)), not x." },
         ],
         solution: [
           "Complete the square: {{x^2 - 2x = (x - 1)^2 - 1}}. Minimum −1 at x = 1, which is inside the domain.",
@@ -536,7 +533,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 40 },
         traps: [
           { spec: { type: "number", value: 219.2 }, feedback: "219.2 is f(104): converting 104 °C to °F. {{f^(-1)}} goes the other way." },
-          { spec: { type: "number", value: 39.8 }, feedback: "Subtract 32 *before* dividing by 1.8: (104 − 32) ÷ 1.8." },
+          { spec: { type: "number", value: 25.78, tolerance: 0.05 }, feedback: "You divided by 1.8 first and then subtracted 32. Undo in reverse order — subtract 32 *before* dividing by 1.8: (104 − 32) ÷ 1.8." },
         ],
         solution: [
           "{{f^(-1)(x) = (x - 32)/1.8}} (undo ×1.8 then +32, in reverse order).",

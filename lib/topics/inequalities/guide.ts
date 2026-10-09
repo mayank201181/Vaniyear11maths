@@ -37,7 +37,7 @@ export const guide: TopicGuide = {
           answer: "{{x > -5}}",
           yourTurn: {
             question: "Your turn: solve {{11 - 2x >= 3}}. (Type ≤ as <= and ≥ as >=.)",
-            answer: { type: "text", accept: ["x<=4", "4>=x", "x≤4", "4≥x"], display: "{{x <= 4}}" },
+            answer: { type: "inequality", ineq: "x<=4", display: "{{x <= 4}}" },
             solution: "Subtract 11: {{-2x >= -8}}. Divide by −2 and reverse the sign: {{x <= 4}}. Check x = 0: {{11 >= 3}} ✓.",
           },
         },
@@ -181,11 +181,7 @@ export const guide: TopicGuide = {
           answer: "{{x < -2}} or {{x > 4}}, i.e. {x : x < −2} ∪ {x : x > 4}",
           yourTurn: {
             question: "Your turn: solve {{x^2 - 5x + 4 <= 0}}. (Type ≤ as <=, e.g. 2<=x<=7.)",
-            answer: {
-              type: "text",
-              accept: ["1<=x<=4", "1≤x≤4", "x>=1andx<=4", "x<=4andx>=1", "4>=x>=1", "x≥1andx≤4", "x≤4andx≥1"],
-              display: "{{1 <= x <= 4}}",
-            },
+            answer: { type: "inequality", ineq: "1<=x<=4", display: "{{1 <= x <= 4}}" },
             solution:
               "{{(x - 1)(x - 4) = 0}} gives critical values 1 and 4. The U-shaped curve is on or below the axis between them, and ≤ includes the ends: {{1 <= x <= 4}}.",
           },

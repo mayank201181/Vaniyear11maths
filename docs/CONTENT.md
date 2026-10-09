@@ -170,3 +170,7 @@ any file other than the one(s) your task names.
 - **Inequality answers**: use `{ type: "inequality", ineq: "-2<x<=5" }` (or `"x<-1 or x>4"`,
   `"x>=3"`). Answers are compared as solution sets, so "5 ≥ x > −2", "x > −2 and x ≤ 5" and either
   order of an "or" are accepted, and a wrong < / ≤ gets "close" feedback. Don't use `text` for inequalities.
+- **Column vectors**: write `{{col(3, -2)}}` — it renders as a stacked column vector in round
+  brackets (works inside expressions: `{{2 col(1, 4) - col(3, -2)}}`). Use bold for vector letters
+  (**a**) and `→AB` for the vector from A to B. Typed column-vector answers: ask for "x, y" and
+  key with `{ type: "list", values: [3, -2], ordered: true }`.
