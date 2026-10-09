@@ -378,7 +378,7 @@ export const practice: TopicPractice = {
           options: ["(A ∪ B) ∩ (A ∩ B)′", "(A ∩ B)′", "A ∪ B", "A′ ∩ B′"],
           answerIndex: 0,
           explanation:
-            "The shaded region is in A or B, but not in both: (A ∪ B) ∩ (A ∩ B)′. (A ∩ B)′ would also shade the region outside both circles. A ∪ B would shade the overlap too. A′ ∩ B′ is only the region outside both circles.",
+            "The shaded region is in A or B, but not in both: in A ∪ B and also outside the overlap, which is (A ∩ B)′ ∩ (A ∪ B). The set (A ∩ B)′ would also shade the region outside both circles. A ∪ B would shade the overlap too. A′ ∩ B′ is only the region outside both circles.",
           difficulty: "core",
           guideRef: "venn-diagrams",
           hints: [
@@ -653,7 +653,7 @@ export const practice: TopicPractice = {
           options: ["B ⊂ A", "A ∩ B = ∅", "A ⊂ B", "n(A ∪ B) = 9"],
           answerIndex: 2,
           explanation:
-            "Every member of A is in B, so A is a subset of B: A ⊂ B. 'B ⊂ A' is backwards (1 is in B but not A). A ∩ B = {2, 4, 6}, not the empty set. n(A ∪ B) = 6, not 3 + 6 = 9 — the shared members are only counted once.",
+            "Every member of A is in B, so A is a subset of B: A ⊂ B. 'B ⊂ A' is backwards, because 1 is in B but not in A. A ∩ B = {2, 4, 6}, not the empty set. The union has only 6 members, not 3 + 6 = 9, because shared members are counted once.",
           difficulty: "warmup",
           guideRef: "set-notation",
           hints: ["Is every member of A also in B?", "⊂ means 'is a subset of'."],

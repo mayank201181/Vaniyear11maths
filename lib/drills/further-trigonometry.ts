@@ -153,7 +153,7 @@ function segmentSvg(r: string, theta: number, major: boolean): string {
   out.push(`<text x="${B[0] + 12}" y="${B[1] + 14}" ${T13} font-weight="700">B</text>`);
   out.push(`<text x="${cx}" y="${cy + (theta < 70 ? 50 : 30)}" ${T12}>${theta}°</text>`);
   const mid = [(cx + A[0]) / 2, (cy + A[1]) / 2];
-  out.push(`<text x="${Math.round(mid[0] - 10)}" y="${Math.round(mid[1])}" ${T12} text-anchor="end">${r}</text>`);
+  out.push(`<text x="${Math.round(mid[0] - 10)}" y="${Math.round(mid[1])}" font-size="12" font-family="sans-serif" fill="#1f2937" text-anchor="end">${r}</text>`);
   const aria = `Circle with centre O and radius ${r}. Radii OA and OB make an angle of ${theta} degrees at O. The ${major ? "major" : "minor"} segment cut off by the chord AB is shaded.`;
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${aria}">${out.join("")}</svg>`;
 }

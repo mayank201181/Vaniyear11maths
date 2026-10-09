@@ -26,19 +26,19 @@ export const practice: TopicPractice = {
     {
       kind: "mcq",
       id: "linear-graphs-quiz-q02",
-      question: "A straight line has equation 3x + 2y = 12. Which gives its gradient and y-intercept?",
+      question: "A straight line has equation 4x + 3y = 12. Which gives its gradient and y-intercept?",
       options: [
-        "gradient {{-3/2}}, y-intercept 6",
-        "gradient 3, y-intercept 12",
-        "gradient {{-2/3}}, y-intercept 4",
-        "gradient {{3/2}}, y-intercept 6",
+        "gradient {{-4/3}}, y-intercept 4",
+        "gradient 4, y-intercept 12",
+        "gradient {{-3/4}}, y-intercept 3",
+        "gradient {{4/3}}, y-intercept 4",
       ],
       answerIndex: 0,
       explanation:
-        "Make y the subject: 2y = −3x + 12, so {{y = -3/2 x + 6}}. The gradient is {{-3/2}} and the line crosses the y-axis at 6. \"Gradient 3, intercept 12\" reads the numbers straight off without rearranging; {{-2/3}} with 4 divides by the wrong coefficient (that's the x-intercept, 4, mixed up with the y-intercept); {{3/2}} forgets that moving 3x across makes it negative.",
+        "Make y the subject: 3y = −4x + 12, so {{y = -4/3 x + 4}}. The gradient is {{-4/3}} and the line crosses the y-axis at 4. \"Gradient 4, intercept 12\" reads the numbers straight off without rearranging; {{-3/4}} with 3 divides by the wrong coefficient (3 is actually the x-intercept); {{4/3}} forgets that moving 4x across makes it negative.",
       difficulty: "warmup",
       guideRef: "y-mx-c",
-      hints: ["m and c can only be read off once the equation is in the form y = mx + c.", "Subtract 3x from both sides, then divide everything by 2."],
+      hints: ["m and c can only be read off once the equation is in the form y = mx + c.", "Subtract 4x from both sides, then divide everything by 3."],
       strategy: "Make it simpler",
     },
     {
@@ -92,7 +92,7 @@ export const practice: TopicPractice = {
       ],
       traps: [
         { spec: { type: "number", value: 14 }, feedback: "6 + 8 is the route along two sides of the triangle. The straight line is the hypotenuse: use Pythagoras." },
-        { spec: { type: "expression", expr: "sqrt(40)" }, feedback: "Careful with the double negative: 6 − (−2) = 8, not 4." },
+        { spec: { type: "expression", expr: "sqrt(52)" }, feedback: "Careful with the double negative: 6 − (−2) = 8, not 4." },
       ],
       commonError: "Writing 6 − (−2) as 4.",
       difficulty: "core",
@@ -136,20 +136,20 @@ export const practice: TopicPractice = {
     {
       kind: "short",
       id: "linear-graphs-quiz-q08",
-      question: "Find the coordinates of the point where the lines y = 2x − 1 and x + y = 8 intersect. Give your answer as (x, y).",
-      answer: { type: "list", values: [3, 5], ordered: true, display: "(3, 5)" },
+      question: "Find the coordinates of the point where the lines y = 2x + 3 and x + y = 9 intersect. Give your answer as (x, y).",
+      answer: { type: "list", values: [2, 7], ordered: true, display: "(2, 7)" },
       solution: [
-        "At the intersection both equations are true, so substitute y = 2x − 1 into x + y = 8.",
-        "x + 2x − 1 = 8, so 3x = 9 and x = 3.",
-        "y = 2(3) − 1 = 5. Check: 3 + 5 = 8. ✓",
+        "At the intersection both equations are true, so substitute y = 2x + 3 into x + y = 9.",
+        "x + 2x + 3 = 9, so 3x = 6 and x = 2.",
+        "y = 2(2) + 3 = 7. Check: 2 + 7 = 9. ✓",
       ],
       traps: [
-        { spec: { type: "list", values: [5, 3], ordered: true }, feedback: "Right numbers, wrong order — coordinates go (x, y)." },
+        { spec: { type: "list", values: [7, 2], ordered: true }, feedback: "Right numbers, wrong order — coordinates go (x, y)." },
       ],
       commonError: "Solving for x and forgetting to find y.",
       difficulty: "core",
       guideRef: "intersections",
-      hints: ["The intersection is the one point that lies on both lines — it solves both equations at once.", "Substitute y = 2x − 1 into the second equation."],
+      hints: ["The intersection is the one point that lies on both lines — it solves both equations at once.", "Substitute y = 2x + 3 into the second equation."],
       strategy: "Eliminate a variable",
     },
     {
@@ -290,11 +290,10 @@ export const practice: TopicPractice = {
           id: "linear-graphs-p1-q07",
           question:
             "The line L passes through (5, −2) and has gradient {{-3/4}}. Find an equation of L in the form ax + by + c = 0, where a, b and c are integers and a > 0.",
-          answer: {
-            type: "text",
-            accept: ["3x+4y-7=0", "4y+3x-7=0", "3x+4y=7", "4y+3x=7", "0=3x+4y-7", "7=3x+4y", "3x-7+4y=0"],
-            display: "3x + 4y − 7 = 0",
-          },
+          answer: { type: "equation", eq: "3x+4y-7=0", form: "general", display: "3x + 4y − 7 = 0" },
+          traps: [
+            { spec: { type: "equation", eq: "3x+4y-23=0" }, feedback: "Check the point: for (5, −2), y − y₁ is y − (−2) = y + 2, not y − 2." },
+          ],
           solution: [
             "{{y - (-2) = -3/4 (x - 5)}}, i.e. {{y + 2 = -3/4 (x - 5)}}.",
             "Multiply by 4 to clear the fraction: 4y + 8 = −3(x − 5) = −3x + 15.",
@@ -383,17 +382,17 @@ export const practice: TopicPractice = {
         {
           kind: "written",
           id: "linear-graphs-p1-q12",
-          question: "A is the point (1, 3), B is (4, 9) and C is (−2, −3). Show that A, B and C lie on the same straight line.",
+          question: "A is the point (−2, 7), B is (1, 1) and C is (4, −5). Show that A, B and C lie on the same straight line.",
           marks: 3,
           modelAnswer:
-            "Gradient AB = {{(9 - 3)/(4 - 1) = 6/3 = 2}}.\n\nGradient AC = {{(-3 - 3)/(-2 - 1) = (-6)/(-3) = 2}}.\n\nAB and AC have the same gradient and share the point A, so they are parts of the same line: A, B and C are collinear.",
+            "Gradient AB = {{(1 - 7)/(1 - (-2)) = (-6)/3 = -2}}.\n\nGradient AC = {{(-5 - 7)/(4 - (-2)) = (-12)/6 = -2}}.\n\nAB and AC have the same gradient and share the point A, so they are parts of the same line: A, B and C are collinear.",
           markScheme: [
-            { point: "Gradient of AB (or BC) = 2", keywords: ["ab", "6/3", "2"] },
-            { point: "Gradient of AC (or BC) = 2", keywords: ["ac", "bc", "-6/-3", "12/6", "2"] },
+            { point: "Gradient of AB (or BC) = −2", keywords: ["ab", "-6/3", "-2", "−2"] },
+            { point: "Gradient of AC (or BC) = −2", keywords: ["ac", "bc", "-12/6", "-6/3", "-2", "−2"] },
             { point: "States equal gradients AND a common point, so collinear", keywords: ["same gradient", "equal gradient", "common point", "share", "point a", "same line", "collinear"] },
           ],
           solutions: [
-            { label: "Find the line, then test the third point", steps: ["Line AB: gradient 2, y = 2x + 1.", "C: 2(−2) + 1 = −3 ✓, so C lies on line AB."] },
+            { label: "Find the line, then test the third point", steps: ["Line AB: gradient −2 through (1, 1), so y = −2x + 3.", "C: −2(4) + 3 = −5 ✓, so C lies on line AB."] },
           ],
           commonError: "Saying 'same gradient' without mentioning the shared point — parallel lines also have equal gradients.",
           difficulty: "core",
@@ -570,11 +569,10 @@ export const practice: TopicPractice = {
           id: "linear-graphs-p2-q06",
           question:
             "Find an equation of the line through (−3, 4) and (1, −2). Give your answer in the form ax + by + c = 0, where a, b and c are integers and a > 0.",
-          answer: {
-            type: "text",
-            accept: ["3x+2y+1=0", "2y+3x+1=0", "3x+2y=-1", "2y+3x=-1", "0=3x+2y+1", "-1=3x+2y", "3x+1+2y=0"],
-            display: "3x + 2y + 1 = 0",
-          },
+          answer: { type: "equation", eq: "3x+2y+1=0", form: "general", display: "3x + 2y + 1 = 0" },
+          traps: [
+            { spec: { type: "equation", eq: "2x+3y-6=0" }, feedback: "Your gradient is upside down — it is change in y ÷ change in x = {{-6/4 = -3/2}}." },
+          ],
           solution: [
             "Gradient = {{(-2 - 4)/(1 - (-3)) = -6/4 = -3/2}}.",
             "{{y - 4 = -3/2 (x + 3)}}. Multiply by 2: 2y − 8 = −3x − 9.",
@@ -653,11 +651,11 @@ export const practice: TopicPractice = {
           id: "linear-graphs-p2-q10",
           question:
             "The line L has equation y = 3x − 2. The point P(2, 4) lies on L. Find the equation of the normal to L at P. Give your answer in the form ax + by + c = 0, where a, b and c are integers and a > 0.",
-          answer: {
-            type: "text",
-            accept: ["x+3y-14=0", "3y+x-14=0", "x+3y=14", "3y+x=14", "0=x+3y-14", "14=x+3y", "x-14+3y=0"],
-            display: "x + 3y − 14 = 0",
-          },
+          answer: { type: "equation", eq: "x+3y-14=0", form: "general", display: "x + 3y − 14 = 0" },
+          traps: [
+            { spec: { type: "equation", eq: "3x-y-2=0" }, feedback: "That's L itself. The normal is *perpendicular* to L, so its gradient is {{-1/3}}." },
+            { spec: { type: "equation", eq: "x-3y+10=0" }, feedback: "Flip *and* change the sign: the negative reciprocal of 3 is {{-1/3}}, not {{1/3}}." },
+          ],
           solution: [
             "The normal at P is the line through P perpendicular to L.",
             "Gradient of L = 3, so gradient of the normal = {{-1/3}}.",
@@ -933,7 +931,7 @@ export const practice: TopicPractice = {
           ],
         },
       ],
-      traps: [{ spec: { type: "number", value: 13 }, feedback: "That's the vertical distance from P up to the line (at x = 7, y = 16). The shortest distance is perpendicular to the line, not vertical." }],
+      traps: [{ spec: { type: "number", value: 15 }, feedback: "That's the vertical distance from P up to the line (at x = 7, y = 16). The shortest distance is perpendicular to the line, not vertical." }],
       difficulty: "challenge",
       guideRef: "parallel-perpendicular",
       hints: [
@@ -1045,7 +1043,7 @@ export const practice: TopicPractice = {
         { label: "From P", steps: ["PB is 3 parts = 3 × (3, 1.5) = (9, 4.5).", "B = (2 + 9, 4 + 4.5) = (11, 8.5)."] },
       ],
       traps: [
-        { spec: { type: "list", values: [6.5, 6.25], ordered: true }, feedback: "You've moved 3 parts from A — B is 5 parts (2 + 3) from A." },
+        { spec: { type: "list", values: [5, 5.5], ordered: true }, feedback: "You treated P as {{2/3}} of the way along (AP : AB = 2 : 3). With AP : PB = 2 : 3, AB is 2 + 3 = 5 parts, so B is 5 parts from A." },
       ],
       difficulty: "challenge",
       guideRef: "dividing-a-line",
