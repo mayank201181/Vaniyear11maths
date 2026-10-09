@@ -35,8 +35,8 @@ const M3Q06 = `<svg viewBox="0 0 300 270" xmlns="http://www.w3.org/2000/svg" rol
 // Cylinder radius 4, height 10, with a hemisphere of radius 4 on top (scale 12 px/cm).
 const M3Q11 = `<svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A solid made of a cylinder of radius 4 cm and height 10 cm with a hemisphere of radius 4 cm fixed on top."><rect x="0" y="0" width="300" height="250" fill="#ffffff"/><path d="M 102 100 A 48 48 0 0 1 198 100 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><path d="M 102 100 L 102 220 A 48 10 0 0 0 198 220 L 198 100 Z" fill="#c7d2fe" fill-opacity="0.7" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><ellipse cx="150" cy="100" rx="48" ry="10" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 102 220 A 48 10 0 0 1 198 220" fill="none" stroke="#64748b" stroke-width="1.2" stroke-dasharray="4,3"/><line x1="150" y1="220" x2="198" y2="220" stroke="#b45309" stroke-width="1.8"/><text x="174" y="240" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#b45309">4 cm</text><line x1="220" y1="100" x2="220" y2="220" stroke="#334155" stroke-width="1.2"/><line x1="214" y1="100" x2="226" y2="100" stroke="#334155" stroke-width="1.2"/><line x1="214" y1="220" x2="226" y2="220" stroke="#334155" stroke-width="1.2"/><text x="230" y="164" font-size="12" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">10 cm</text></svg>`;
 
-// Bucket: frustum with base radius 10, top radius 15, height 20; completed cone (dashed) has apex 60 cm below the rim (scale 4 px/cm).
-const M3Q13 = `<svg viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A bucket in the shape of a frustum with top radius 15 cm, base radius 10 cm and height 20 cm. The sloping sides are extended with dashed lines to meet at a point 40 cm below the base, completing a cone of height 60 cm."><rect x="0" y="0" width="320" height="290" fill="#ffffff"/><polygon points="100,30 220,30 200,110 120,110" fill="#bbf7d0" fill-opacity="0.6" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><ellipse cx="160" cy="30" rx="60" ry="9" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/><ellipse cx="160" cy="110" rx="40" ry="6" fill="none" stroke="#1f2937" stroke-width="1.5"/><polyline points="120,110 160,270 200,110" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/><line x1="160" y1="30" x2="220" y2="30" stroke="#b45309" stroke-width="1.8"/><text x="190" y="24" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#b45309">15 cm</text><line x1="160" y1="110" x2="200" y2="110" stroke="#b45309" stroke-width="1.8"/><text x="180" y="128" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#b45309">10 cm</text><line x1="250" y1="30" x2="250" y2="110" stroke="#334155" stroke-width="1.2"/><line x1="250" y1="110" x2="250" y2="270" stroke="#334155" stroke-width="1.2"/><line x1="244" y1="30" x2="256" y2="30" stroke="#334155" stroke-width="1.2"/><line x1="244" y1="110" x2="256" y2="110" stroke="#334155" stroke-width="1.2"/><line x1="244" y1="270" x2="256" y2="270" stroke="#334155" stroke-width="1.2"/><line x1="160" y1="270" x2="250" y2="270" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,3"/><text x="260" y="74" font-size="12" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">20 cm</text><text x="260" y="194" font-size="12" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">40 cm</text></svg>`;
+// Bin: frustum with base radius 15, top radius 20, height 30; completed cone (dashed) has apex 120 cm below the rim (scale 2 px/cm).
+const M3Q13 = `<svg viewBox="0 0 320 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A bin in the shape of a frustum with top radius 20 cm, base radius 15 cm and height 30 cm. The sloping sides are extended with dashed lines to meet at a point 90 cm below the base, completing a cone of height 120 cm."><rect x="0" y="0" width="320" height="290" fill="#ffffff"/><polygon points="110,25 190,25 180,85 120,85" fill="#bbf7d0" fill-opacity="0.6" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><ellipse cx="150" cy="25" rx="40" ry="7" fill="#ffffff" stroke="#1f2937" stroke-width="1.5"/><ellipse cx="150" cy="85" rx="30" ry="5" fill="none" stroke="#1f2937" stroke-width="1.5"/><polyline points="120,85 150,265 180,85" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5,4"/><line x1="150" y1="25" x2="190" y2="25" stroke="#b45309" stroke-width="1.8"/><text x="170" y="15" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#b45309">20 cm</text><line x1="150" y1="85" x2="180" y2="85" stroke="#b45309" stroke-width="1.8"/><text x="186" y="101" font-size="12" font-family="sans-serif" text-anchor="start" fill="#b45309">15 cm</text><line x1="240" y1="25" x2="240" y2="85" stroke="#334155" stroke-width="1.2"/><line x1="240" y1="85" x2="240" y2="265" stroke="#334155" stroke-width="1.2"/><line x1="234" y1="25" x2="246" y2="25" stroke="#334155" stroke-width="1.2"/><line x1="234" y1="85" x2="246" y2="85" stroke="#334155" stroke-width="1.2"/><line x1="234" y1="265" x2="246" y2="265" stroke="#334155" stroke-width="1.2"/><line x1="150" y1="265" x2="240" y2="265" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2,3"/><text x="250" y="59" font-size="12" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">30 cm</text><text x="250" y="179" font-size="12" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">90 cm</text></svg>`;
 
 export const mcqPapers: Paper[] = [
   // ======================================================================
@@ -179,14 +179,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m1-q11",
-        question: "A solid cone has base radius 5 cm and perpendicular height 12 cm.\n\nWork out the curved surface area of the cone. Give your answer in terms of π.",
-        options: ["65π cm²", "60π cm²", "90π cm²", "100π cm²"],
+        question: "A solid cone has base radius 12 cm and perpendicular height 5 cm.\n\nWork out the curved surface area of the cone. Give your answer in terms of π.",
+        options: ["156π cm²", "60π cm²", "300π cm²", "240π cm²"],
         answerIndex: 0,
         explanation:
-          "Curved surface area {{= pi r l}} needs the **slant** height: {{l = sqrt(5^2 + 12^2) = 13}}. So {{pi * 5 * 13 = 65 pi}} cm². 60π uses the perpendicular height 12; 90π adds the base {{25 pi}} (that is the total surface area); 100π is the volume {{1/3 pi * 25 * 12}}.",
+          "Curved surface area {{= pi r l}} needs the **slant** height: {{l = sqrt(12^2 + 5^2) = 13}}. So {{pi * 12 * 13 = 156 pi}} cm². 60π uses the perpendicular height 5; 300π adds the base {{144 pi}} (that is the total surface area); 240π is the volume {{1/3 pi * 144 * 5}}.",
         difficulty: "core",
         guideRef: "cones-spheres-pyramids",
-        hints: ["Which length goes into {{pi r l}}?", "The radius, height and slant height form a right-angled triangle.", "{{l^2 = 5^2 + 12^2}}."],
+        hints: ["Which length goes into {{pi r l}}?", "The radius, height and slant height form a right-angled triangle.", "{{l^2 = 12^2 + 5^2}}."],
         strategy: "Find the hidden right-angled triangle",
       },
       {
@@ -223,7 +223,7 @@ export const mcqPapers: Paper[] = [
         options: ["1.44 cm", "1.08 cm", "4.32 cm", "0.36 cm"],
         answerIndex: 0,
         explanation:
-          "The water rises by the ball's volume: {{4/3 pi * 3^3 = 36 pi}} cm³. This forms a cylinder of radius 5: {{pi * 5^2 * h = 36 pi}}, so {{h = 36/25 = 1.44}} cm. 1.08 cm forgets the {{4/3}}; 4.32 cm uses the surface area {{4 pi r^2}}; 0.36 cm uses the diameter 10 as the jar's radius.",
+          "The water rises by the ball's volume: {{4/3 pi * 3^3 = 36 pi}} cm³. This forms a cylinder of radius 5: {{pi * 5^2 * h = 36 pi}}, so {{h = 36/25 = 1.44}} cm. 1.08 cm forgets the {{4/3}}; 4.32 cm uses {{4 pi r^3}}, forgetting to divide by 3; 0.36 cm uses the diameter 10 as the jar's radius.",
         difficulty: "challenge",
         guideRef: "frustums-composite",
         hints: ["What volume of water is pushed up?", "That volume sits as a thin cylinder on top of the old water.", "Set {{pi * 25 * h}} equal to the ball's volume."],
@@ -232,14 +232,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m1-q15",
-        question: "A sphere has volume 288π cm³.\n\nWork out the surface area of the sphere. Give your answer in terms of π.",
-        options: ["36π cm²", "144π cm²", "216π cm²", "24π cm²"],
+        question: "A sphere has volume {{500/3}}π cm³.\n\nWork out the surface area of the sphere. Give your answer in terms of π.",
+        options: ["25π cm²", "100π cm²", "125π cm²", "20π cm²"],
         answerIndex: 1,
         explanation:
-          "{{4/3 pi r^3 = 288 pi}} gives {{r^3 = 288 * 3/4 = 216}}, so r = 6. Surface area {{= 4 pi r^2 = 4 pi * 36 = 144 pi}} cm². 36π is {{pi r^2}}; 216π uses {{r^3}} instead of {{4 r^2}}; 24π multiplies 4 × 6 without squaring.",
+          "{{4/3 pi r^3 = 500/3 pi}} gives {{r^3 = 500/3 * 3/4 = 125}}, so r = 5. Surface area {{= 4 pi r^2 = 4 pi * 25 = 100 pi}} cm². 25π is {{pi r^2}}; 125π uses {{r^3}} instead of {{4 r^2}}; 20π multiplies 4 × 5 without squaring.",
         difficulty: "challenge",
         guideRef: "cones-spheres-pyramids",
-        hints: ["Work backwards: find r first.", "Divide by π, then multiply by {{3/4}}, then cube root.", "r = 6 — now use {{4 pi r^2}}."],
+        hints: ["Work backwards: find r first.", "Divide by π, then multiply by {{3/4}}, then cube root.", "r = 5 — now use {{4 pi r^2}}."],
         strategy: "Work backwards",
       },
     ],
@@ -279,11 +279,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m2-q03",
-        question: "A prism is 15 cm long. Its cross-section is a right-angled triangle with shorter sides 6 cm and 8 cm and hypotenuse 10 cm.\n\nWork out the volume of the prism.",
-        options: ["720 cm³", "600 cm³", "450 cm³", "360 cm³"],
+        question: "A prism is 20 cm long. Its cross-section is a right-angled triangle with shorter sides 5 cm and 12 cm and hypotenuse 13 cm.\n\nWork out the volume of the prism.",
+        options: ["1200 cm³", "650 cm³", "1560 cm³", "600 cm³"],
         answerIndex: 3,
         explanation:
-          "Cross-section {{= 1/2 * 6 * 8 = 24}} cm² (the two shorter sides are base and height, because they meet at the right angle). Volume = 24 × 15 = 360 cm³. 720 forgets the half; 600 and 450 use the hypotenuse as base or height — but the hypotenuse is not perpendicular to either other side.",
+          "Cross-section {{= 1/2 * 5 * 12 = 30}} cm² (the two shorter sides are base and height, because they meet at the right angle). Volume = 30 × 20 = 600 cm³. 1200 forgets the half; 650 and 1560 use the hypotenuse as base or height — but the hypotenuse is not perpendicular to either other side.",
         difficulty: "warmup",
         guideRef: "prisms-cylinders",
         hints: ["Volume = area of cross-section × length.", "Which two sides of the triangle are perpendicular?"],
@@ -345,11 +345,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m2-q08",
-        question: "A closed cylindrical tin has radius 4 cm and height 10 cm.\n\nWork out the total surface area of the tin. Give your answer in terms of π.",
-        options: ["96π cm²", "112π cm²", "80π cm²", "160π cm²"],
+        question: "A closed cylindrical tin has radius 5 cm and height 9 cm.\n\nWork out the total surface area of the tin. Give your answer in terms of π.",
+        options: ["115π cm²", "140π cm²", "90π cm²", "225π cm²"],
         answerIndex: 1,
         explanation:
-          "Curved surface {{= 2 pi r h = 80 pi}}; two circular ends {{= 2 * pi * 4^2 = 32 pi}}. Total = 112π cm². 96π counts only one end (an open tin); 80π is the curved surface only; 160π is the volume {{pi r^2 h}}.",
+          "Curved surface {{= 2 pi r h = 2 pi * 5 * 9 = 90 pi}}; two circular ends {{= 2 * pi * 5^2 = 50 pi}}. Total = 140π cm². 115π counts only one end (an open tin); 90π is the curved surface only; 225π is the volume {{pi r^2 h}}.",
         difficulty: "core",
         guideRef: "prisms-cylinders",
         hints: ["Unroll the curved surface: it is a rectangle.", "The rectangle is {{2 pi r}} by h. Then add the two circles."],
@@ -371,14 +371,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m2-q10",
-        question: "A pyramid has a square base of side 6 cm and a perpendicular height of 10 cm.\n\nWork out the volume of the pyramid.",
-        options: ["120 cm³", "360 cm³", "20 cm³", "180 cm³"],
+        question: "A pyramid has a square base of side 5 cm and a perpendicular height of 12 cm.\n\nWork out the volume of the pyramid.",
+        options: ["100 cm³", "300 cm³", "20 cm³", "150 cm³"],
         answerIndex: 0,
         explanation:
-          "{{V = 1/3 * base area * height = 1/3 * 36 * 10 = 120}} cm³. 360 forgets the {{1/3}} (that is the cuboid); 20 uses the side 6 instead of the base **area** 36; 180 uses {{1/2}} as if it were a triangle.",
+          "{{V = 1/3 * base area * height = 1/3 * 25 * 12 = 100}} cm³. 300 forgets the {{1/3}} (that is the cuboid); 20 uses the side 5 instead of the base **area** 25; 150 uses {{1/2}} as if it were a triangle.",
         difficulty: "core",
         guideRef: "cones-spheres-pyramids",
-        hints: ["Every pyramid is {{1/3}} of the prism with the same base and height.", "Base area first: 6 × 6."],
+        hints: ["Every pyramid is {{1/3}} of the prism with the same base and height.", "Base area first: 5 × 5."],
         strategy: "Use a formula you understand",
       },
       {
@@ -411,11 +411,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m2-q13",
-        question: "A solid metal cylinder of radius 6 cm and height 4 cm is melted down and recast into a single solid sphere.\n\nWork out the radius of the sphere. Give your answer correct to 3 significant figures.",
-        options: ["4.76 cm", "5.24 cm", "6.00 cm", "5.77 cm"],
+        question: "A solid metal cylinder of radius 5 cm and height 12 cm is melted down and recast into a single solid sphere.\n\nWork out the radius of the sphere. Give your answer correct to 3 significant figures.",
+        options: ["6.08 cm", "6.69 cm", "8.66 cm", "7.37 cm"],
         answerIndex: 0,
         explanation:
-          "Volume is unchanged: {{pi * 36 * 4 = 144 pi}}. So {{4/3 pi r^3 = 144 pi}}, giving {{r^3 = 144 * 3/4 = 108}} and {{r = cbrt(108) = 4.762...}} ≈ 4.76 cm. 5.24 forgets the {{4/3}} ({{cbrt(144)}}); 6.00 sets the surface area {{4 pi r^2}} equal to the volume; 5.77 multiplies by {{4/3}} instead of dividing ({{cbrt(192)}}).",
+          "Volume is unchanged: {{pi * 25 * 12 = 300 pi}}. So {{4/3 pi r^3 = 300 pi}}, giving {{r^3 = 300 * 3/4 = 225}} and {{r = cbrt(225) = 6.082...}} ≈ 6.08 cm. 6.69 forgets the {{4/3}} ({{cbrt(300)}}); 8.66 sets the surface area {{4 pi r^2}} equal to the volume ({{sqrt(75)}}); 7.37 multiplies by {{4/3}} instead of dividing ({{cbrt(400)}}).",
         difficulty: "challenge",
         guideRef: "frustums-composite",
         hints: ["What stays the same when metal is melted and recast?", "Write the sphere's volume equal to the cylinder's.", "Undo in reverse: ÷ π, × {{3/4}}, then cube root."],
@@ -459,14 +459,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m3-q01",
-        question: "A circle has area 50 cm².\n\nWork out the radius of the circle. Give your answer correct to 3 significant figures.",
-        options: ["7.96 cm", "15.9 cm", "2.25 cm", "3.99 cm"],
+        question: "A circle has area 80 cm².\n\nWork out the diameter of the circle. Give your answer correct to 3 significant figures.",
+        options: ["5.05 cm", "25.5 cm", "50.9 cm", "10.1 cm"],
         answerIndex: 3,
         explanation:
-          "{{pi r^2 = 50}} so {{r^2 = 50/pi = 15.91...}} and {{r = sqrt(15.91...) = 3.989...}} ≈ 3.99 cm. 15.9 forgets the square root; 7.96 divides by {{2 pi}} (the circumference formula); 2.25 square-roots 50 before dividing by π.",
+          "{{pi r^2 = 80}} so {{r^2 = 80/pi = 25.46...}} and {{r = sqrt(25.46...) = 5.046...}} cm. The diameter is {{2r = 10.09...}} ≈ 10.1 cm. 5.05 cm is the radius — the question asks for the diameter; 25.5 cm treats 80 as the circumference ({{pi d = 80}}); 50.9 cm forgets the square root and doubles {{r^2}}.",
         difficulty: "warmup",
         guideRef: "circles-arcs-sectors",
-        hints: ["Write {{pi r^2 = 50}}.", "Divide by π first, then square root."],
+        hints: ["Write {{pi r^2 = 80}}.", "Divide by π first, then square root — then double."],
         strategy: "Use the inverse",
       },
       {
@@ -565,24 +565,24 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m3-q09",
-        question: "A cone has base radius 5 cm and slant height 13 cm.\n\nWork out the volume of the cone. Give your answer in terms of π.",
-        options: ["{{325/3}}π cm³", "100π cm³", "300π cm³", "65π cm³"],
+        question: "A cone has base radius 9 cm and slant height 15 cm.\n\nWork out the volume of the cone. Give your answer in terms of π.",
+        options: ["405π cm³", "324π cm³", "972π cm³", "135π cm³"],
         answerIndex: 1,
         explanation:
-          "The volume needs the **perpendicular** height: {{h = sqrt(13^2 - 5^2) = 12}}. {{V = 1/3 pi * 25 * 12 = 100 pi}} cm³. {{325/3}}π uses the slant height 13; 300π forgets the {{1/3}}; 65π is the curved surface area {{pi r l}}.",
+          "The volume needs the **perpendicular** height: {{h = sqrt(15^2 - 9^2) = sqrt(144) = 12}}. {{V = 1/3 pi * 81 * 12 = 324 pi}} cm³. 405π uses the slant height 15; 972π forgets the {{1/3}}; 135π is the curved surface area {{pi r l}}.",
         difficulty: "core",
         guideRef: "cones-spheres-pyramids",
-        hints: ["Which height does the volume formula use?", "Radius, height and slant form a right-angled triangle — the slant is the hypotenuse.", "{{h^2 = 13^2 - 5^2}}."],
+        hints: ["Which height does the volume formula use?", "Radius, height and slant form a right-angled triangle — the slant is the hypotenuse.", "{{h^2 = 15^2 - 9^2}}."],
         strategy: "Find the hidden right-angled triangle",
       },
       {
         kind: "mcq",
         id: "mensuration-m3-q10",
-        question: "A solid cone has base radius 7 cm, perpendicular height 24 cm and slant height 25 cm.\n\nWork out the total surface area of the cone. Give your answer in terms of π.",
-        options: ["175π cm²", "217π cm²", "224π cm²", "392π cm²"],
+        question: "A solid cone has base radius 8 cm, perpendicular height 15 cm and slant height 17 cm.\n\nWork out the total surface area of the cone. Give your answer in terms of π.",
+        options: ["136π cm²", "184π cm²", "200π cm²", "320π cm²"],
         answerIndex: 2,
         explanation:
-          "Curved surface {{= pi r l = pi * 7 * 25 = 175 pi}}; base {{= pi * 7^2 = 49 pi}}. Total = 224π cm². 175π leaves out the base; 217π uses the perpendicular height in {{pi r l}}; 392π is the volume {{1/3 pi * 49 * 24}}.",
+          "Curved surface {{= pi r l = pi * 8 * 17 = 136 pi}}; base {{= pi * 8^2 = 64 pi}}. Total = 200π cm². 136π leaves out the base; 184π uses the perpendicular height in {{pi r l}}; 320π is the volume {{1/3 pi * 64 * 15}}.",
         difficulty: "core",
         guideRef: "cones-spheres-pyramids",
         hints: ["A solid cone has a curved surface and a flat base.", "{{pi r l}} uses the slant height."],
@@ -618,15 +618,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m3-q13",
-        question: "A bucket is a frustum with top radius 15 cm, base radius 10 cm and height 20 cm. It is part of a cone of height 60 cm whose tip, a cone of height 40 cm, has been removed, as shown.\n\nWork out how many litres the bucket holds when full. Give your answer correct to 3 significant figures.",
+        question: "A kitchen bin is a frustum with top radius 20 cm, base radius 15 cm and height 30 cm. It is part of a cone of height 120 cm whose tip, a cone of height 90 cm, has been removed, as shown.\n\nWork out how many litres the bin holds when full. Give your answer correct to 3 significant figures.",
         diagram: M3Q13,
-        options: ["14.1 litres", "29.8 litres", "99.5 litres", "9.95 litres"],
+        options: ["50.3 litres", "87.2 litres", "291 litres", "29.1 litres"],
         answerIndex: 3,
         explanation:
-          "Big cone {{= 1/3 pi * 15^2 * 60 = 4500 pi}}; small cone {{= 1/3 pi * 10^2 * 40 = 4000/3 pi}}. Frustum {{= 4500 pi - 4000/3 pi = 9500/3 pi = 9948.3...}} cm³ ≈ 9.95 litres (÷ 1000). 14.1 is the big cone only; 29.8 forgets the {{1/3}}; 99.5 divides by 100 instead of 1000.",
+          "Big cone {{= 1/3 pi * 20^2 * 120 = 16000 pi}}; small cone {{= 1/3 pi * 15^2 * 90 = 6750 pi}}. Frustum {{= 16000 pi - 6750 pi = 9250 pi = 29059.7...}} cm³ ≈ 29.1 litres (÷ 1000). 50.3 is the big cone only; 87.2 forgets the {{1/3}}; 291 divides by 100 instead of 1000.",
         difficulty: "challenge",
         guideRef: "frustums-composite",
-        hints: ["Frustum = big cone − small cone.", "Big cone: radius 15, height 60. Small cone: radius 10, height 40.", "Convert cm³ to litres at the end: ÷ 1000."],
+        hints: ["Frustum = big cone − small cone.", "Big cone: radius 20, height 120. Small cone: radius 15, height 90.", "Convert cm³ to litres at the end: ÷ 1000."],
         strategy: "Make it simpler: whole minus part",
       },
       {
@@ -645,11 +645,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "mensuration-m3-q15",
-        question: "A solid cone has base radius r and height h. A solid sphere also has radius r. The cone and the sphere have the same volume.\n\nFind h in terms of r.",
-        options: ["{{h = 4/3 r}}", "h = 4r", "{{h = r/4}}", "{{h = 4r^2}}"],
+        question: "A solid cone has base radius r and height h. A solid hemisphere also has radius r. The cone and the hemisphere have the same volume.\n\nFind h in terms of r.",
+        options: ["{{h = 2/3 r}}", "h = 2r", "{{h = r/2}}", "h = 4r"],
         answerIndex: 1,
         explanation:
-          "{{1/3 pi r^2 h = 4/3 pi r^3}}. Multiply by 3 and divide by {{pi r^2}}: {{h = 4r}}. {{4/3 r}} forgets the {{1/3}} in the cone's formula; {{r/4}} divides the wrong way round; {{4r^2}} divides by r instead of {{r^2}}.",
+          "{{1/3 pi r^2 h = 2/3 pi r^3}}. Multiply by 3 and divide by {{pi r^2}}: {{h = 2r}}. {{2/3 r}} forgets the {{1/3}} in the cone's formula; {{r/2}} divides the wrong way round; 4r uses a whole sphere {{4/3 pi r^3}} instead of a hemisphere.",
         difficulty: "challenge",
         guideRef: "cones-spheres-pyramids",
         hints: ["Write the two volumes equal to each other.", "Cancel π and as many r's as you can.", "Multiply both sides by 3 to clear the fractions."],

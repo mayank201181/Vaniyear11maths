@@ -31,8 +31,8 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "calculus-m1-q02",
         question: "Given {{y = x^5}}, find {{dy/dx}}.",
-        options: ["{{5x^4}}", "{{x^4}}", "{{5x^6}}", "{{x^6/6}}"],
-        answerIndex: 0,
+        options: ["{{x^4}}", "{{5x^4}}", "{{5x^6}}", "{{x^6/6}}"],
+        answerIndex: 1,
         explanation:
           "Bring the power down and reduce it by one: {{x^5 -> 5x^4}}. {{x^4}} forgets to multiply by the old power. {{5x^6}} increases the power instead of reducing it, and {{x^6/6}} is *integration* — the reverse process.",
         difficulty: "warmup",
@@ -213,7 +213,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m1-q13",
         question:
           "A particle moves in a straight line. Its displacement from O after t seconds is s metres, where {{s = t^3 - 6t^2 + 9t}}. Find the acceleration of the particle when it is **first** at rest.",
-        options: ["{{-6 m/s^2}}", "{{6 m/s^2}}", "{{0 m/s^2}}", "{{4 m/s^2}}"],
+        options: ["−6 m/s²", "6 m/s²", "0 m/s²", "4 m/s²"],
         answerIndex: 0,
         explanation:
           "{{v = (ds)/(dt) = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)}}, so it is at rest at t = 1 and t = 3. First at rest means t = 1. {{a = (dv)/(dt) = 6t - 12 = -6}}. 6 is the acceleration at t = 3 (the *second* time at rest). 0 assumes 'at rest' means zero acceleration — it means zero *velocity*. 4 is the displacement at t = 1.",
@@ -231,7 +231,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m1-q14",
         question:
           "Hana makes an open box from a square sheet of card of side 12 cm. She cuts a square of side x cm from each corner and folds up the sides, so the volume is {{V = x(12 - 2x)^2}} cm³. Find the maximum possible volume.",
-        options: ["{{108 cm^3}}", "{{256 cm^3}}", "{{0 cm^3}}", "{{128 cm^3}}"],
+        options: ["108 cm³", "256 cm³", "0 cm³", "128 cm³"],
         answerIndex: 3,
         explanation:
           "Expand: {{V = 144x - 48x^2 + 4x^3}}, so {{(dV)/(dx) = 144 - 96x + 12x^2 = 12(x - 2)(x - 6)}}. x = 6 gives V = 0 (no base left — the minimum), so x = 2 and {{V = 2 * 8^2 = 128}}. 0 comes from choosing the wrong root. 256 comes from modelling the base as {{(12 - x)}} — but a square is cut from *both* ends of each side. 108 is a guess at x = 3 without differentiating.",
@@ -441,7 +441,7 @@ export const mcqPapers: Paper[] = [
         options: ["−5", "5", "1", "−7"],
         answerIndex: 3,
         explanation:
-          "At x = 2: y = 8 − 10 + 1 = −1 and {{dy/dx = 4x - 5 = 3}}. Tangent: {{y + 1 = 3(x - 2)}}, so {{y = 3x - 7}} and c = −7. −5 uses {{y - 1}} instead of {{y + 1}} (sign slip with {{y_1 = -1}}). 5 uses {{x + 2}} as well. 1 is where the *curve* crosses the y-axis, not the tangent.",
+          "At x = 2: y = 8 − 10 + 1 = −1 and {{dy/dx = 4x - 5 = 3}}. Tangent: {{y + 1 = 3(x - 2)}}, so {{y = 3x - 7}} and c = −7. −5 uses {{y - 1}} instead of {{y + 1}} (sign slip with {{y_1 = -1}}). 5 uses {{(x + 2)}} instead of {{(x - 2)}}. 1 is where the *curve* crosses the y-axis, not the tangent.",
         difficulty: "core",
         guideRef: "tangents",
         hints: [
@@ -456,7 +456,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m2-q12",
         question:
           "A gardener has 40 m of fencing to make a rectangular vegetable plot against a long wall. The wall forms one side, so the fence makes the other three sides. The two sides perpendicular to the wall are each x m. Find the largest possible area of the plot.",
-        options: ["{{200 m^2}}", "{{100 m^2}}", "{{400 m^2}}", "{{20 m^2}}"],
+        options: ["200 m²", "100 m²", "400 m²", "20 m²"],
         answerIndex: 0,
         explanation:
           "The side parallel to the wall is {{40 - 2x}}, so {{A = x(40 - 2x) = 40x - 2x^2}}. {{(dA)/(dx) = 40 - 4x = 0}} gives x = 10, so the plot is 10 m by 20 m and A = 200 m². 100 m² is a 10 m square using fencing on all four sides — but the wall is free. 400 m² uses {{A = x(40 - x)}}, fencing only one side x. 20 is the *length* 40 − 2x, not the area.",
@@ -474,8 +474,8 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m2-q13",
         question:
           "A particle moves in a straight line from O. Its displacement after t seconds is s metres, where {{s = 2t^3 - 15t^2 + 36t}}. Find the total **distance** travelled in the first 3 seconds.",
-        options: ["29 m", "27 m", "28 m", "55 m"],
-        answerIndex: 0,
+        options: ["27 m", "29 m", "28 m", "55 m"],
+        answerIndex: 1,
         explanation:
           "{{v = 6t^2 - 30t + 36 = 6(t - 2)(t - 3)}}, so the particle changes direction at t = 2. s(0) = 0, s(2) = 16 − 60 + 72 = 28, s(3) = 54 − 135 + 108 = 27. It goes out 28 m, then back 1 m: distance = 28 + 1 = **29 m**. 27 m is the *displacement* at t = 3. 28 m ignores the return leg. 55 m adds s(2) and s(3) as if both were separate journeys.",
         difficulty: "challenge",
@@ -560,7 +560,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m3-q03",
         question:
           "A particle moves along a straight line. Its velocity after t seconds is v m/s, where {{v = 3t^2 + 2t}}. Find its acceleration when t = 4.",
-        options: ["{{56 m/s^2}}", "{{24 m/s^2}}", "{{26 m/s^2}}", "{{14 m/s^2}}"],
+        options: ["56 m/s²", "24 m/s²", "26 m/s²", "14 m/s²"],
         answerIndex: 2,
         explanation:
           "{{a = (dv)/(dt) = 6t + 2}}, so at t = 4, a = 26 m/s². 56 is the *velocity* at t = 4. 24 forgets the +2 from {{2t}}. 14 comes from {{3t + 2}} — lowering the power of {{3t^2}} without multiplying by 2.",
@@ -573,8 +573,8 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "calculus-m3-q04",
         question: "Which of these is **always** true at a turning point of a curve {{y = f(x)}}?",
-        options: ["{{dy/dx = 0}}", "y = 0", "{{(d^2y)/(dx^2) = 0}}", "x = 0"],
-        answerIndex: 0,
+        options: ["y = 0", "{{dy/dx = 0}}", "{{(d^2y)/(dx^2) = 0}}", "x = 0"],
+        answerIndex: 1,
         explanation:
           "A turning point is where the curve stops going up and starts going down (or vice versa), so the tangent is horizontal: {{dy/dx = 0}}. y = 0 is where the curve meets the x-axis. x = 0 is the y-axis. {{(d^2y)/(dx^2)}} is usually *non-zero* at a turning point — its sign tells you max or min.",
         difficulty: "warmup",
@@ -748,7 +748,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m3-q14",
         question:
           "A closed cylindrical tin has volume {{128pi}} cm³. Its surface area is {{A = 2pi r^2 + (256pi)/r}} cm², where r cm is the radius. Find the minimum surface area, in terms of π.",
-        options: ["{{160pi cm^2}}", "{{128pi cm^2}}", "{{64pi cm^2}}", "{{96pi cm^2}}"],
+        options: ["160π cm²", "128π cm²", "64π cm²", "96π cm²"],
         answerIndex: 3,
         explanation:
           "{{(dA)/(dr) = 4pi r - (256pi)/r^2 = 0}} gives {{r^3 = 64}}, r = 4. Then {{A = 2pi(16) + (256pi)/4 = 32pi + 64pi = 96pi}}. {{160pi}} comes from differentiating {{(256pi)/r}} as {{-(256pi)/r}} (giving r = 8). {{128pi}} is the volume, not the area. {{64pi}} is only the curved surface — it forgets the two circular ends.",
