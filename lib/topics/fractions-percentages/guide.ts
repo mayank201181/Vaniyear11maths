@@ -469,7 +469,6 @@ export const guide: TopicGuide = {
       "Reverse percentage: finding the percentage of the given (new) amount and adding or subtracting it.",
       "Using simple interest (n × r%) when the question says compound interest, or giving the interest earned when the question asks for the total value (or vice versa).",
       "Algebraic fractions: losing the bracket when subtracting the second numerator (−2(x + 2) written as −2x + 4), or cancelling terms instead of factors.",
-      "Premature rounding in multi-step money questions — keep the full calculator value until the final answer, then round to the accuracy asked for.",
     ],
     mnemonics: [
       {

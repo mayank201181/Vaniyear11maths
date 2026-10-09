@@ -25,7 +25,7 @@ Ids: zero-padded, in order, globally unique, always starting with the topic id.
   `keyPoints`, `whyItWorks`, `strategies`, `thinkDeeper`. H+ (`stretch`) sections: same treatment.
 - `learn`: 14–18 flashcards, `mustKnow` (one "Can I…?" line per school objective + any extra),
   6+ misconceptions, 6 examMistakes (real Edexcel examiner-report style slips), 2–3 mnemonics,
-  3 realWorld, 4 videos (YouTube *search* URLs, e.g. Corbettmaths, Maths Genie, Cognito,
+  4 realWorld, 4 videos (YouTube *search* URLs, e.g. Corbettmaths, Maths Genie, Cognito,
   ExamSolutions, 3Blue1Brown), `formulas` (every formula/identity for this topic; mark the ones
   on the Edexcel formula sheet with `note: "On the formula sheet"` and the ones to memorise with
   `note: "Learn this — not given"`).

@@ -244,7 +244,7 @@ export const practice: TopicPractice = {
             { point: "Subtracts to get 990x = 315", keywords: ["990x", "990", "315"] },
             { point: "Simplifies 315/990 to 7/22", keywords: ["315/990", "7/22"] },
           ],
-          commonError: "Using 100x − x, which does not line up the tails because the repeat does not start straight after the decimal point.",
+          commonError: "Using 10x − x: the tails .81818… and .31818… don't match, so the recurring part doesn't cancel. Choose multiples whose decimal parts are identical.",
           difficulty: "core",
           guideRef: "recurring-decimals",
           hints: ["Let x = 0.3181818… The '3' does not repeat — only the 18 does.", "Find two multiples of x whose decimal parts are both .181818…", "Try 10x and 1000x, then subtract."],

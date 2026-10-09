@@ -313,7 +313,7 @@ export const practice: TopicPractice = {
           answer: { type: "fraction", n: 27, d: 8, simplest: true },
           solution: [
             "Flip for the negative index: {{(81/16)^(3/4)}}.",
-            "Fourth root: {{root4(81)/root4(16)}}, i.e. {{3/2}} (since {{3^4 = 81}} and {{2^4 = 16}}).",
+            "Fourth root: {{(81/16)^(1/4) = 3/2}} (since {{3^4 = 81}} and {{2^4 = 16}}).",
             "Cube: {{(3/2)^3 = 27/8}}.",
           ],
           commonError: "Forgetting to flip, giving {{8/27}}.",
@@ -654,7 +654,7 @@ export const practice: TopicPractice = {
           question: "Show that {{(8^(2/3) * 16^(-1/4))^2 = 4}}. Show each step of your working clearly.",
           marks: 3,
           modelAnswer:
-            "{{8^(2/3) = (cbrt(8))^2 = 2^2 = 4}}.\n\n{{16^(-1/4) = 1/root4(16) = 1/2}}.\n\nSo the bracket is {{4 * 1/2 = 2}}, and {{2^2 = 4}}, as required.\n\n(Alternatively, as powers of 2: {{(2^2 * 2^(-1))^2 = (2^1)^2 = 4}}.)",
+            "{{8^(2/3) = (cbrt(8))^2 = 2^2 = 4}}.\n\n{{16^(-1/4) = 1/16^(1/4) = 1/2}}.\n\nSo the bracket is {{4 * 1/2 = 2}}, and {{2^2 = 4}}, as required.\n\n(Alternatively, as powers of 2: {{(2^2 * 2^(-1))^2 = (2^1)^2 = 4}}.)",
           markScheme: [
             { point: "8^(2/3) = 4 (cube root 2, squared)", keywords: ["8^(2/3) = 4", "cube root", "2^2", "= 4"] },
             { point: "16^(−1/4) = 1/2 (fourth root 2, reciprocal)", keywords: ["1/2", "0.5", "2^-1", "2^(-1)", "fourth root"] },
