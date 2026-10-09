@@ -262,7 +262,7 @@ export const practice: TopicPractice = {
             "CD = BC − BD = 13.3142 − 6.2503 = 7.0639... = 7.06 cm.",
           ],
           commonError: "Rounding BD and BC to 3 s.f. too early, or calculating 8 tan 52° (putting BD on top).",
-          traps: [{ spec: { type: "number", value: 4.69, tolerance: 0.01 }, feedback: "Check your rearrangement: {{tan 52° = 8/(BD)}} gives {{BD = 8/(tan 52°)}}, not {{8 tan 52°}}." }],
+          traps: [{ spec: { type: "number", value: 3.07, tolerance: 0.01 }, feedback: "Check your rearrangement for BD: {{tan 52° = 8/(BD)}} gives {{BD = 8/(tan 52°)}}, not {{8 tan 52°}}." }],
           difficulty: "core",
           guideRef: "sohcahtoa",
           hints: [
@@ -781,7 +781,7 @@ export const practice: TopicPractice = {
       ],
       solutions: [
         { label: "Difference of two squares", steps: ["{{(c - b)(c + b) = 225}}. List factor pairs, solve each pair of simultaneous equations.", "Gets *every* answer and proves there are no others."] },
-        { label: "Scale known triples (incomplete!)", steps: ["15 = 3 × 5 → (9, 12, 15)? No — there 15 is the hypotenuse. 15 = 5 × 3 → (15, 20, 25). 15 = 3 × 5 with (5, 12, 13)? That needs 5 → 15: (15, 36, 39). (8, 15, 17) is primitive.", "Scaling finds 17, 25, 39 but easily misses (15, 112, 113) — which is why the algebraic method is better."] },
+        { label: "Scale known triples (incomplete!)", steps: ["Scale (3, 4, 5) by 5 → (15, 20, 25). Scale (5, 12, 13) by 3 → (15, 36, 39). (8, 15, 17) is a primitive triple you may know. (Careful: in (9, 12, 15) the 15 is the hypotenuse, so it doesn't count.)", "Scaling finds 17, 25, 39 but easily misses (15, 112, 113) — which is why the algebraic method is better."] },
       ],
       commonError: "Stopping after spotting (15, 20, 25) and (8, 15, 17) and missing the large triple (15, 112, 113).",
       traps: [{ spec: { type: "list", values: [17, 25, 39], ordered: false }, feedback: "Close — there's one more. Have you used the factor pair 1 × 225?" }],
@@ -808,7 +808,7 @@ export const practice: TopicPractice = {
         "One isosceles triangle: {{1/2 * 10 * 6.8819 = 34.409...}} cm². Five of them: 172.05... = 172 cm².",
       ],
       commonError: "Using 72° (the whole angle at the centre) in the right-angled triangle instead of half of it.",
-      traps: [{ spec: { type: "number", value: 18.2, tolerance: 0.05 }, feedback: "You used 72° in the right-angled triangle. Halving the isosceles triangle also halves the angle at the centre: 36°." }],
+      traps: [{ spec: { type: "number", value: 40.6, tolerance: 0.05 }, feedback: "You used 72° in the right-angled triangle. Halving the isosceles triangle also halves the angle at the centre: 36°." }],
       difficulty: "challenge",
       guideRef: "sohcahtoa",
       hints: [
