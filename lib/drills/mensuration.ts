@@ -150,7 +150,7 @@ const plain = (v: number): Ex => ({ expr: num(clean(v)).replace("−", "-"), tex
 // ---------------------------------------------------------------------------
 
 const F = (n: number) => n.toFixed(1);
-const TXT = 'font-size="13" font-family="sans-serif" fill="#1f2937"';
+const TXT = 'font-size="13" font-family="sans-serif" fill="#1f2937" stroke="#ffffff" stroke-width="3" paint-order="stroke"';
 const STROKE = 'stroke="#1f2937" stroke-width="2"';
 const DASH = 'stroke="#334155" stroke-width="1.3" stroke-dasharray="5 4"';
 const FILL = "#c7d2fe";
@@ -284,11 +284,11 @@ function shadeSvg(kind: Shade, l1: string, l2 = "", ratio = 0.5): string {
     body = `<circle cx="${cx}" cy="${cy}" r="${R}" fill="${FILL}" ${STROKE}/><circle cx="${cx}" cy="${cy}" r="${F(r)}" fill="#ffffff" ${STROKE}/>`;
     body += `<line x1="${cx}" y1="${cy}" x2="${cx + R}" y2="${cy}" stroke="#334155" stroke-width="1.3"/><line x1="${cx}" y1="${cy}" x2="${cx}" y2="${F(cy - r)}" stroke="#334155" stroke-width="1.3"/>`;
     body += `<circle cx="${cx}" cy="${cy}" r="2.5" fill="#1f2937"/>`;
-    body += label(cx + R / 2 + 10, cy + 18, l1) + label(cx + 6, cy - r / 2 + 4, l2, "start");
+    body += label(cx + (R + r) / 2, cy + 18, l1) + label(cx + 6, cy - r / 2 + 4, l2, "start");
     aria = `Two circles with the same centre. Outer radius ${l1}, inner radius ${l2}. The ring between them is shaded.`;
   } else {
     // Window: rectangle with a semicircle on top; width l1, rectangle height l2; ratio = h / w.
-    const w = 150, h = Math.min(150, w * ratio), xa = 160 - w / 2, yb = 210;
+    const w = Math.min(160, 185 / (ratio + 0.5)), h = w * ratio, xa = 160 - w / 2, yb = 205;
     body = `<path d="M${xa},${yb} L${xa + w},${yb} L${xa + w},${yb - h} A${w / 2},${w / 2} 0 0 0 ${xa},${yb - h} Z" fill="${FILL}" ${STROKE}/>`;
     body += `<line x1="${xa}" y1="${F(yb - h)}" x2="${xa + w}" y2="${F(yb - h)}" ${DASH}/>`;
     body += label(160, yb + 20, l1) + label(xa - 8, yb - h / 2 + 5, l2, "end");
@@ -307,23 +307,23 @@ function coneSvg(r: number, h: number, lr: string, lh: string, ll: string): stri
   body += `<path d="M${F(cx - rx)},${by} A${F(rx)},${F(ry)} 0 0 1 ${F(cx + rx)},${by}" fill="none" ${DASH}/>`;
   if (lh) {
     body += `<line x1="${cx}" y1="${F(top)}" x2="${cx}" y2="${by}" ${DASH}/>` + rightMark(cx, by, 1, -1);
-    body += label(cx - 6, (top + by) / 2 + 5, lh, "end");
+    body += label(cx + 6, top + (by - top) * 0.55 + 5, lh, "start");
   }
   if (lr) {
     body += `<line x1="${cx}" y1="${by}" x2="${F(cx + rx)}" y2="${by}" ${DASH}/>`;
-    body += label(cx + rx / 2, by - 6, lr);
+    body += label(cx + rx / 2, by + ry + 16, lr);
   }
-  if (ll) body += label(cx + rx / 2 + 12, (top + by) / 2, ll, "start");
+  if (ll) body += label(cx + rx / 2 + 10, (top + by) / 2, ll, "start");
   body += `<circle cx="${cx}" cy="${by}" r="2.5" fill="#1f2937"/>`;
   const parts = [lr && `base radius ${lr}`, lh && `vertical height ${lh}`, ll && `slant height ${ll}`].filter(Boolean).join(", ");
-  return svg(320, 240, `Cone with ${parts}`, body);
+  return svg(320, 250, `Cone with ${parts}`, body);
 }
 
 /** Frustum from a cone of base radius R, cut at radius r; h = frustum height, h1 = removed cone height. */
 function frustumSvg(R: number, r: number, h: number, h1: number, labels: { R: string; r: string; h?: string; H?: string; h1?: string }): string {
   const H = h + h1;
-  const s = Math.min(200 / H, 120 / R);
-  const cx = 150, by = 225, apex = by - H * s, ty = by - h * s;
+  const s = Math.min(200 / H, 100 / R);
+  const cx = 185, by = 225, apex = by - H * s, ty = by - h * s;
   const rx = R * s, ry = Math.max(8, rx * 0.25), tx = r * s, tyr = Math.max(4, tx * 0.25);
   let body = `<path d="M${F(cx - rx)},${by} L${F(cx - tx)},${F(ty)} L${F(cx + tx)},${F(ty)} L${F(cx + rx)},${by}" fill="${FILL}" ${STROKE}/>`;
   body += `<path d="M${F(cx - rx)},${by} A${F(rx)},${F(ry)} 0 0 0 ${F(cx + rx)},${by}" fill="${FILL}" ${STROKE}/>`;
@@ -332,7 +332,7 @@ function frustumSvg(R: number, r: number, h: number, h1: number, labels: { R: st
   // Removed cone, dashed.
   body += `<path d="M${F(cx - tx)},${F(ty)} L${cx},${F(apex)} L${F(cx + tx)},${F(ty)}" fill="none" ${DASH}/>`;
   body += `<line x1="${cx}" y1="${by}" x2="${F(cx + rx)}" y2="${by}" ${DASH}/>` + label(cx + rx / 2, by - 6, labels.R);
-  body += `<line x1="${cx}" y1="${F(ty)}" x2="${F(cx + tx)}" y2="${F(ty)}" stroke="#334155" stroke-width="1.3"/>` + label(cx + tx / 2, ty - 6, labels.r);
+  body += `<line x1="${cx}" y1="${F(ty)}" x2="${F(cx + tx)}" y2="${F(ty)}" stroke="#334155" stroke-width="1.3"/>` + label(cx + tx / 2, ty - tyr - 5, labels.r);
   if (labels.h) {
     body += `<line x1="${F(cx - rx - 22)}" y1="${by}" x2="${F(cx - rx - 22)}" y2="${F(ty)}" stroke="#334155" stroke-width="1.2"/>`;
     body += `<line x1="${F(cx - rx - 28)}" y1="${F(ty)}" x2="${F(cx - rx - 16)}" y2="${F(ty)}" stroke="#334155" stroke-width="1.2"/><line x1="${F(cx - rx - 28)}" y1="${by}" x2="${F(cx - rx - 16)}" y2="${by}" stroke="#334155" stroke-width="1.2"/>`;
@@ -345,10 +345,10 @@ function frustumSvg(R: number, r: number, h: number, h1: number, labels: { R: st
   }
   if (labels.h1) {
     body += `<line x1="${cx}" y1="${F(apex)}" x2="${cx}" y2="${F(ty)}" ${DASH}/>`;
-    body += label(cx - 6, (apex + ty) / 2 + 5, labels.h1, "end");
+    body += label(cx + 5, (apex + ty) / 2 + 12, labels.h1, "start");
   }
   const parts = [`base radius ${labels.R}`, `top radius ${labels.r}`, labels.h && `frustum height ${labels.h}`, labels.H && `original cone height ${labels.H}`, labels.h1 && `removed cone height ${labels.h1}`].filter(Boolean).join(", ");
-  return svg(340, 250, `Frustum of a cone, shaded, with the removed top cone shown dashed: ${parts}`, body);
+  return svg(370, 255, `Frustum of a cone, shaded, with the removed top cone shown dashed: ${parts}`, body);
 }
 
 // ---------------------------------------------------------------------------
