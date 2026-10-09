@@ -85,3 +85,7 @@ weighting roughly like a real paper: lots of algebra, geometry & number). ≈ 22
 write fresh ones. Look at `/tmp/claude-0/ref/Year8Mathsnew/lib/exam/exam-c1.ts` for the shape.
 Validate: `node scripts/validate-exam.ts <paperId>` and `node scripts/typecheck-file.mjs lib/exam/<paperId>.ts`.
 Then re-solve every question yourself a second time (fresh-eyes, per docs/AUDIT.md) and fix errors.
+Audit extras: every "simplify fully" algebra answer must have `form: "simplified"` (the checker
+then rejects uncancelled fractions); every "factorise" answer `form: "factorised"`; when a fully
+factorised answer could be confused with a partial one (e.g. x⁴ − 81), make the question checkable
+(ask for the factors as a list or use an MCQ). Fix unit typos (area in m², volume in m³).

@@ -151,7 +151,7 @@ export const morePapers: Paper[] = [
               "Sign slip on the second fraction: −3(x − 2) = −3x **+ 6**, not −3x − 6. The minus in front of a fraction applies to its whole numerator.",
           },
           {
-            spec: { type: "number", value: 0.4 },
+            spec: { type: "number", value: -1.6 },
             feedback: "You cleared the fractions but left the right-hand side as 2. Every term gets multiplied by 12, so the right-hand side becomes 24.",
           },
         ],
@@ -185,7 +185,7 @@ export const morePapers: Paper[] = [
             feedback: "x = 32 is the value of x, not an angle. Substitute it into each expression and pick the largest.",
           },
           {
-            spec: { type: "number", value: 50 },
+            spec: { type: "number", value: 54 },
             feedback:
               "It looks like you used 180° as the angle sum — that's a triangle. The interior angles of a quadrilateral add up to 360°.",
           },
@@ -543,7 +543,7 @@ export const morePapers: Paper[] = [
             feedback: "Check the first bracket: 4 × (−2x) = −8x, so the left side is 12 − 8x, not 12 + 8x.",
           },
           {
-            spec: { type: "number", value: 1.1 },
+            spec: { type: "number", value: 2 },
             feedback: "The −5 is outside the bracket, so it is not multiplied by 2. The right side is 2x + 2 − 5 = 2x − 3.",
           },
         ],
@@ -661,8 +661,8 @@ export const morePapers: Paper[] = [
               "Sign slip: −4(2x + 5) = −8x **− 20**. The minus in front of the second fraction applies to its whole numerator.",
           },
           {
-            spec: { type: "fraction", n: 28, d: 13 },
-            feedback: "You multiplied the left-hand side by 12 but only part of the right. Both 1 and −x must be multiplied by 12: 12 − 12x.",
+            spec: { type: "number", value: 19 },
+            feedback: "You multiplied the 1 on the right by 12 but not the −x. Every term gets multiplied by 12, so the right-hand side is 12 − 12x.",
           },
         ],
         solution: [
@@ -719,10 +719,6 @@ export const morePapers: Paper[] = [
             spec: { type: "number", value: 3.63 },
             feedback:
               "You've lost the factor of 2. To undo multiplying by {{1/2}}, multiply by 2: {{a = (2(s - ut))/t^2}}.",
-          },
-          {
-            spec: { type: "number", value: 0.0566 },
-            feedback: "The {{t^2}} goes on the bottom: a = 2(s − ut) ÷ {{t^2}}, not × {{t^2}} ÷ something else. Recheck your rearrangement.",
           },
         ],
         solution: [
