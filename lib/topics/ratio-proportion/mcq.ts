@@ -91,14 +91,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "ratio-proportion-m1-q07",
-        question: "A map has scale 1 : 25 000. Two MRT stations are 6.4 cm apart on the map. What is the real distance between them?",
-        options: ["16 km", "0.16 km", "1.6 km", "160 km"],
+        question: "A map has scale 1 : 50 000. Two MRT stations are 3.7 cm apart on the map. What is the real distance between them?",
+        options: ["18.5 km", "0.185 km", "1.85 km", "185 km"],
         answerIndex: 2,
         explanation:
-          "Real distance = 6.4 × 25 000 = 160 000 cm. Divide by 100 for metres (1600 m) and by 1000 for km: 1.6 km. 16 km and 0.16 km come from slipping a power of ten in the conversion (there are 100 000 cm in a km). 160 km divides 160 000 by 1000 only, treating centimetres as metres.",
+          "Real distance = 3.7 × 50 000 = 185 000 cm. Divide by 100 for metres (1850 m) and by 1000 for km: 1.85 km. 18.5 km and 0.185 km come from slipping a power of ten in the conversion (there are 100 000 cm in a km). 185 km divides 185 000 by 1000 only, treating centimetres as metres.",
         difficulty: "core",
         guideRef: "ratio-problems",
-        hints: ["1 cm on the map is 25 000 cm in real life.", "How many centimetres are there in 1 km? (100 cm in a metre, 1000 m in a km.)"],
+        hints: ["1 cm on the map is 50 000 cm in real life.", "How many centimetres are there in 1 km? (100 cm in a metre, 1000 m in a km.)"],
         strategy: "Check the units",
       },
       {
@@ -143,14 +143,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "ratio-proportion-m1-q11",
-        question: "6 volunteers take 15 days to paint the corridors at a community centre. How many days would 9 volunteers take, working at the same rate?",
-        options: ["22.5", "12", "10", "18"],
+        question: "8 volunteers take 12 days to pack food hampers at a community centre. Two volunteers drop out. How many days would the remaining 6 volunteers take, working at the same rate?",
+        options: ["9", "14", "16", "10"],
         answerIndex: 2,
         explanation:
-          "The total job is 6 × 15 = 90 volunteer-days, so 9 volunteers need {{90/9}} = 10 days. 22.5 uses direct proportion — more people should take *less* time. 12 subtracts 3 days because 3 more people joined, and 18 adds them; both are additive thinking.",
+          "The total job is 8 × 12 = 96 volunteer-days, so 6 volunteers need {{96/6}} = 16 days. 9 uses direct proportion ({{12 * 6/8}}) — fewer people should take *more* time, not less. 14 adds 2 days because 2 people left, and 10 subtracts them; both are additive thinking.",
         difficulty: "core",
         guideRef: "inverse-proportion",
-        hints: ["Should more volunteers take more time or less?", "Work out the total amount of work in volunteer-days.", "6 × 15 = 90 volunteer-days. Share that between 9 people."],
+        hints: ["Should fewer volunteers take more time or less?", "Work out the total amount of work in volunteer-days.", "8 × 12 = 96 volunteer-days. Share that between 6 people."],
         strategy: "Find the invariant",
       },
       {
@@ -170,14 +170,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "ratio-proportion-m1-q13",
-        question: "a : b = 2 : 3 and b : c = 4 : 5. Also c − a = 28. Work out the value of b.",
-        options: ["48", "12", "60", "28"],
+        question: "a : b = 4 : 5 and b : c = 3 : 2. Also b − c = 35. Work out the value of a.",
+        options: ["84", "12", "105", "420"],
         answerIndex: 0,
         explanation:
-          "Make b the same in both ratios: 2 : 3 = 8 : 12 and 4 : 5 = 12 : 15, so a : b : c = 8 : 12 : 15. c − a is 7 parts = 28, so 1 part = 4 and b = 12 × 4 = 48. 28 comes from joining the ratios as 2 : 3 : 5 without matching b. 12 is the number of parts for b, not its value. 60 is c.",
+          "Make b the same in both ratios: 4 : 5 = 12 : 15 and 3 : 2 = 15 : 10, so a : b : c = 12 : 15 : 10. b − c is 5 parts = 35, so 1 part = 7 and a = 12 × 7 = 84. 12 is the number of parts for a, not its value. 105 is b. 420 = 12 × 35 treats the difference of 35 as one part.",
         difficulty: "challenge",
         guideRef: "ratio-basics",
-        hints: ["b appears in both ratios but with different numbers of parts. What is the LCM of 3 and 4?", "Rewrite both ratios so b is 12 parts, then write a : b : c.", "c − a is how many parts? Use it to find one part."],
+        hints: ["b appears in both ratios but with different numbers of parts. What is the LCM of 5 and 3?", "Rewrite both ratios so b is 15 parts, then write a : b : c.", "b − c is how many parts? Use it to find one part."],
         strategy: "Match the common part",
       },
       {
