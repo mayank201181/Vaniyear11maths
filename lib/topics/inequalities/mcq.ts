@@ -703,7 +703,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 1,
         explanation:
-          "{{x^2 + x - 12 = (x + 4)(x - 3)}}: critical values −4 and 3, and ≥ 0 means outside them. Two separate pieces join with **union** ∪ (\"or\"). Intersection ∩ (\"and\") of those two sets is empty — no number is both ≤ −4 and ≥ 3. {x : −4 ≤ x ≤ 3} is the ≤ 0 solution; the last option has the roots' signs swapped.",
+          "{{x^2 + x - 12 = (x + 4)(x - 3)}}: critical values −4 and 3, and ≥ 0 means outside them. Two separate pieces join with **union** ∪ (\"or\"). Intersection ∩ (\"and\") of those two sets is empty — no number is both ≤ −4 and ≥ 3. {x : −4 ≤ x ≤ 3} is the ≤ 0 solution; {x : x ≤ −3} ∪ {x : x ≥ 4} has the roots' signs swapped.",
         difficulty: "core",
         guideRef: "quadratic-inequalities",
         hints: [
