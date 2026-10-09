@@ -204,7 +204,7 @@ export const practice: TopicPractice = {
       ],
       traps: [
         { spec: { type: "number", value: 19 }, feedback: "Check: pattern 19 uses 4 × 19 + 2 = 78 tiles. Find the nth term first, then solve 4n + 2 = 82." },
-        { spec: { type: "number", value: 20.5 }, feedback: "That's (82 / 4), which ignores the starting tiles. Use the nth term 4n + 2." },
+        { spec: { type: "number", value: 20.5 }, feedback: "That's 82 ÷ 4, which ignores the 2 extra tiles. Use the nth term 4n + 2." },
       ],
       commonError: "Dividing 82 by 4 without accounting for the constant term.",
       difficulty: "core",
@@ -253,7 +253,6 @@ export const practice: TopicPractice = {
           ],
           traps: [
             { spec: { type: "number", value: 353 }, feedback: "Your nth term doesn't give 3 when n = 1. The constant is the zero term: 3 − 7 = −4, so 7n − 4." },
-            { spec: { type: "number", value: 353.5 }, feedback: "Find the nth term first: 7n − 4." },
           ],
           commonError: "Using 7n + 3 (the first term) instead of 7n − 4 (the zero term).",
           difficulty: "warmup",
@@ -332,7 +331,7 @@ export const practice: TopicPractice = {
           ],
           traps: [
             { spec: { type: "number", value: -43 }, feedback: "Check the steps: the 20th term is a + **19**d (or 12 steps after the 8th term)." },
-            { spec: { type: "number", value: 80 }, feedback: "The sequence is falling (11 down to −4), so d is negative: d = −3." },
+            { spec: { type: "number", value: 62 }, feedback: "The sequence is falling (11 down to −4), so d is negative: d = −3." },
           ],
           commonError: "Getting d = +3 by subtracting the wrong way round.",
           difficulty: "core",
@@ -764,9 +763,6 @@ export const practice: TopicPractice = {
             "Number of terms: 42 − 15 + 1 = 28.",
             "{{S = 28/2 (105 + 294) = 14 * 399 = 5586}}.",
           ],
-          traps: [
-            { spec: { type: "number", value: 5187 }, feedback: "Count the terms carefully: from 7 × 15 to 7 × 42 there are 42 − 15 + **1** = 28 terms." },
-          ],
           commonError: "Counting 27 terms (42 − 15) instead of 28.",
           difficulty: "core",
           guideRef: "arithmetic-series",
@@ -969,7 +965,7 @@ export const practice: TopicPractice = {
         },
       ],
       traps: [
-        { spec: { type: "expression", expr: "6n-1" }, feedback: "Careful expanding {{3(n - 1)^2}}: it is {{3n^2 - 6n + 3}}. Check your answer with {{u_1 = S_1 = 2}}." },
+        { spec: { type: "expression", expr: "6n-2" }, feedback: "Careful expanding {{3(n - 1)^2}}: it is {{3n^2 - 6n + 3}}, not {{3n^2 - 6n + 1}}. Check your answer with {{u_1 = S_1 = 2}}." },
       ],
       commonError: "Writing {{S_(n - 1)}} as {{3n^2 - n - 1}} instead of substituting n − 1 everywhere.",
       difficulty: "challenge",
@@ -999,7 +995,7 @@ export const practice: TopicPractice = {
           steps: [
             "6, 24, 58 are terms 2 apart: differences 18, 34, second difference 16.",
             "Going 2 steps at a time multiplies the second difference by 4, so the ordinary second difference is 4 → a = 2.",
-            "Then 4th term: the ordinary sequence is 6, 13, 24, 39, 58 (first differences 7, 11, 15, 19). Answer 39.",
+            "So the ordinary first differences go up by 4: call them e, e + 4, e + 8, e + 12. Then e + (e + 4) = 18 gives e = 7.", "The sequence is 6, 13, 24, 39, 58 (check: 24 + 15 + 19 = 58 ✓), so the 4th term is 39.",
           ],
         },
       ],
@@ -1178,8 +1174,8 @@ export const practice: TopicPractice = {
         },
       ],
       traps: [
-        { spec: { type: "number", value: 1260 }, feedback: "Half the second difference: the {{n^2}} coefficient is {{3/2}}, not 3." },
-        { spec: { type: "number", value: 60 }, feedback: "The pattern isn't linear — the differences 6, 9, 12 keep growing." },
+        { spec: { type: "number", value: 1260 }, feedback: "That's 3 × 20 × 21 — you've forgotten to halve. The nth term is {{(3n(n + 1))/2}}." },
+        { spec: { type: "number", value: 117 }, feedback: "6n − 3 only fits the first two patterns. The pattern isn't linear — the differences 6, 9, 12 keep growing." },
       ],
       commonError: "Treating the sequence as linear because the first few differences look regular.",
       difficulty: "challenge",

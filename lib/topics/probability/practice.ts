@@ -475,7 +475,7 @@ export const practice: TopicPractice = {
             { point: "P(black, black) = 2/8 × 1/7 = 2/56", keywords: ["2/56", "2/8", "1/7", "1/28"] },
             { point: "Adds to 32/56 and simplifies to 4/7", keywords: ["32/56", "4/7", "add", "+"] },
           ],
-          commonError: "Using 8 as the denominator for the second bead.
+          commonError: "Using 8 as the denominator for the second bead.",
           difficulty: "core",
           guideRef: "tree-diagrams",
           hints: [
@@ -571,7 +571,7 @@ export const practice: TopicPractice = {
             { spec: { type: "expression", expr: "3+4x+6x^2+4x^3+x^4" }, feedback: "The powers of 3 go down as the powers of x go up: {{3^4}}, {{3^3}}, {{3^2}}, … Multiply each coefficient by its power of 3." },
             { spec: { type: "expression", expr: "81+x^4" }, feedback: "{{(3 + x)^4}} is not {{3^4 + x^4}} — the middle terms matter. Use Pascal's triangle." },
           ],
-          commonError: "Forgetting the powers of 3 on the middle terms.
+          commonError: "Forgetting the powers of 3 on the middle terms.",
           difficulty: "core",
           guideRef: "binomial-expansion",
           hints: [
@@ -824,7 +824,7 @@ export const practice: TopicPractice = {
             { point: "P(WW) = 3/9 × 2/8 = 6/72", keywords: ["6/72", "3/9", "2/8", "1/12"] },
             { point: "Adds to 36/72 = 1/2", keywords: ["36/72", "1/2", "add", "+"] },
           ],
-          commonError: "Using 9 as the denominator for the second sock.
+          commonError: "Using 9 as the denominator for the second sock.",
           difficulty: "core",
           guideRef: "tree-diagrams",
           hints: [
@@ -946,7 +946,7 @@ export const practice: TopicPractice = {
             { spec: { type: "number", value: 18 }, feedback: "Square the 3 as well: {{(-3/x)^2 = 9/x^2}}, not {{3/x^2}}." },
             { spec: { type: "number", value: 6 }, feedback: "6 is the Pascal's triangle number. Don't forget {{(-3)^2 = 9}} from {{(-3/x)^2}}." },
           ],
-          commonError: "Forgetting to square the 3, or getting the sign wrong.
+          commonError: "Forgetting to square the 3, or getting the sign wrong.",
           difficulty: "challenge",
           guideRef: "binomial-expansion",
           hints: [

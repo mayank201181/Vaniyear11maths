@@ -19,30 +19,29 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p3-q01",
         question:
-          "Here is part of a table of values for {{y = 2x^2 - 3x - 1}}.\n\n| x | −2 | −1 | 0 | 1 | 1.5 |\n|---|---|---|---|---|---|\n| y |  | 4 | −1 |  |  |\n\nWork out the value of y when x = −2 and the value of y when x = 1.5. Give the value for x = −2 first.",
-        answer: { type: "list", values: [13, -1], ordered: true, display: "13 and −1" },
+          "Here is part of a table of values for the cubic {{y = x^3 - 2x + 1}}.\n\n| x | −2 | −1 | 0 | 1 | 1.5 |\n|---|---|---|---|---|---|\n| y |  | 2 | 1 | 0 |  |\n\nWork out the value of y when x = −2 and the value of y when x = 1.5. Give the value for x = −2 first.",
+        answer: { type: "list", values: [-3, 1.375], ordered: true, display: "−3 and 1.375" },
         traps: [
           {
-            spec: { type: "list", values: [-3, -1], ordered: true },
-            feedback:
-              "You squared only the 2, giving −4. When x = −2, {{x^2 = (-2)^2 = 4}} — squaring a negative gives a positive. So {{2(4) - 3(-2) - 1 = 8 + 6 - 1 = 13}}.",
+            spec: { type: "list", values: [13, 1.375], ordered: true },
+            feedback: "The cube of a negative number is negative: {{(-2)^3 = -8}}, not +8. So y = −8 + 4 + 1 = −3.",
           },
           {
-            spec: { type: "list", values: [1, -1], ordered: true },
-            feedback: "Sign slip in the middle term: −3 × (−2) = **+6**, not −6. So y = 8 + 6 − 1 = 13.",
+            spec: { type: "list", values: [-11, 1.375], ordered: true },
+            feedback: "Sign slip in the middle term: −2 × (−2) = **+4**, not −4. So y = −8 + 4 + 1 = −3.",
           },
         ],
         solution: [
-          "x = −2: {{2(-2)^2 - 3(-2) - 1 = 2(4) + 6 - 1 = 13}}.",
-          "x = 1.5: {{2(1.5)^2 - 3(1.5) - 1 = 2(2.25) - 4.5 - 1 = 4.5 - 4.5 - 1 = -1}}.",
-          "Check with the table: the y-values 13, 4, −1, … fall then rise, as a ∪-shaped quadratic should.",
+          "x = −2: {{(-2)^3 - 2(-2) + 1 = -8 + 4 + 1 = -3}}.",
+          "x = 1.5: {{1.5^3 - 2(1.5) + 1 = 3.375 - 3 + 1 = 1.375}}.",
+          "A cubic table has no symmetry to check against, so substitute each value twice. The y-values −3, 2, 1, 0, 1.375 rise, fall, then rise again — the S-shape of a positive cubic.",
         ],
-        commonError: "Typing −2² into a calculator without brackets, which gives −4 instead of 4.",
+        commonError: "Typing −2³ or (−2)³ carelessly and getting +8: an odd power of a negative number stays negative.",
         difficulty: "warmup",
-        guideRef: "plotting-quadratics",
+        guideRef: "recognising-graphs",
         hints: [
-          "Substitute carefully, putting negative numbers in brackets: {{2(-2)^2 - 3(-2) - 1}}.",
-          "{{(-2)^2 = 4}} and −3 × (−2) = +6.",
+          "Substitute carefully, putting negative numbers in brackets: {{(-2)^3 - 2(-2) + 1}}.",
+          "{{(-2)^3 = -8}} and −2 × (−2) = +4.",
         ],
         strategy: "Check by substituting",
       },
@@ -96,32 +95,29 @@ export const morePapers: Paper[] = [
       {
         kind: "short",
         id: "graphs-of-functions-p3-q04",
-        question:
-          "The point P(2, 5) lies on the curve y = f(x).\n\nWrite down the coordinates of the image of P on the curve y = f(x + 3). Give your answer as (x, y).",
-        answer: { type: "list", values: [-1, 5], ordered: true, display: "(−1, 5)" },
+        question: "The point P(2, 6) lies on the curve y = f(x).\n\nWrite down the coordinates of the image of P on the curve {{y = 1/2 f(x)}}. Give your answer as (x, y).",
+        answer: { type: "list", values: [2, 3], ordered: true, display: "(2, 3)" },
         traps: [
           {
-            spec: { type: "list", values: [5, 5], ordered: true },
-            feedback:
-              "Wrong direction. f(x + 3) moves the graph 3 units to the **left**: the new curve reaches the height f(2) = 5 when x + 3 = 2, i.e. x = −1.",
+            spec: { type: "list", values: [1, 6], ordered: true },
+            feedback: "The {{1/2}} is *outside* the bracket, so it acts on y, not x. Halve the y-coordinate: 6 → 3.",
           },
           {
-            spec: { type: "list", values: [2, 8], ordered: true },
-            feedback: "That would be y = f(x) + 3 (a move up). The +3 is *inside* the bracket, so it acts on x — a horizontal move.",
+            spec: { type: "list", values: [2, 12], ordered: true },
+            feedback: "Multiplying by {{1/2}} halves the y-values — doubling would be y = 2f(x).",
           },
         ],
         solution: [
-          "y = f(x + 3) is y = f(x) translated by 3 units in the negative x-direction (to the left).",
-          "y-coordinates are unchanged; subtract 3 from the x-coordinate.",
-          "P(2, 5) → (2 − 3, 5) = (−1, 5).",
-          "Check: on y = f(x + 3) at x = −1, y = f(−1 + 3) = f(2) = 5. ✓",
+          "{{y = 1/2 f(x)}} is a stretch parallel to the y-axis with scale factor {{1/2}}: every y-coordinate is halved and x stays the same.",
+          "P(2, 6) → (2, {{1/2}} × 6) = (2, 3).",
+          "Check: at x = 2, {{1/2 f(2) = 1/2 * 6 = 3}}. ✓",
         ],
-        commonError: "Moving the point 3 to the right because of the '+' sign.",
+        commonError: "Changing the x-coordinate for a number outside the bracket.",
         difficulty: "warmup",
         guideRef: "graph-transformations",
         hints: [
-          "A change *inside* the bracket affects the x-coordinates. Does it go the way the sign suggests?",
-          "Which x-value makes x + 3 equal to 2?",
+          "Is the {{1/2}} inside or outside the bracket? So does it change x or y?",
+          "At x = 2, what is {{1/2}} × f(2)?",
         ],
         strategy: "Check by substituting",
       },
@@ -167,30 +163,29 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p3-q06",
         question:
-          "Arjun has drawn the graph of {{y = x^2 - 3x}}.\n\nHe wants to solve the equation {{x^2 - 5x + 2 = 0}} by drawing a straight line on the same axes.\n\nFind the equation of the straight line he should draw. Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "2x-2", display: "y = 2x − 2" },
+          "Arjun has drawn the graph of {{y = x^2 - 3x}}.\n\nHe wants to solve the equation {{x^2 + x - 4 = 0}} by drawing a straight line on the same axes.\n\nFind the equation of the straight line he should draw. Give your answer in the form y = mx + c.",
+        answer: { type: "equation", eq: "y=-4x+4", display: "y = −4x + 4" },
         traps: [
           {
-            spec: { type: "expression", expr: "-2x+2" },
-            feedback:
-              "Sign slip. You need {{x^2 - 3x}} on the left, so *add* 2x and *subtract* 2 from both sides of {{x^2 - 5x + 2 = 0}}: {{x^2 - 3x = 2x - 2}}.",
+            spec: { type: "equation", eq: "y=4x-4" },
+            feedback: "Sign slip. You need {{x^2 - 3x}} on the left, so *subtract* 4x and *add* 4 on both sides of {{x^2 + x - 4 = 0}}: {{x^2 - 3x = -4x + 4}}.",
           },
           {
-            spec: { type: "expression", expr: "5x-2" },
-            feedback: "That rearranges {{x^2 = 5x - 2}}, which needs the graph of {{y = x^2}}. Arjun's curve is {{y = x^2 - 3x}}, so the left side must be {{x^2 - 3x}}.",
+            spec: { type: "equation", eq: "y=-x+4" },
+            feedback: "That rearranges {{x^2 = -x + 4}}, which needs the graph of {{y = x^2}}. Arjun's curve is {{y = x^2 - 3x}}, so the left side must be {{x^2 - 3x}}.",
           },
         ],
         solution: [
           "Rearrange the equation so one side is exactly the curve, {{x^2 - 3x}}.",
-          "{{x^2 - 5x + 2 = 0}} ⟹ {{x^2 - 3x = 2x - 2}} (add 2x and subtract 2 on both sides).",
-          "So draw y = 2x − 2; the x-coordinates where it crosses the curve are the solutions.",
+          "{{x^2 + x - 4 = 0}} ⟹ {{x^2 - 3x = -4x + 4}} (subtract 4x and add 4 on both sides).",
+          "So draw y = −4x + 4; the x-coordinates where it crosses the curve are the solutions.",
         ],
         solutions: [
           {
             label: "Subtract the equations",
             steps: [
-              "Line = curve − (equation): {{(x^2 - 3x) - (x^2 - 5x + 2) = 2x - 2}}.",
-              "So y = 2x − 2.",
+              "Line = curve − (equation): {{(x^2 - 3x) - (x^2 + x - 4) = -4x + 4}}.",
+              "So y = −4x + 4.",
             ],
           },
         ],
@@ -199,8 +194,8 @@ export const morePapers: Paper[] = [
         guideRef: "graphical-solutions",
         hints: [
           "You want an equation of the form {{x^2 - 3x = (something)}}.",
-          "Starting from {{x^2 - 5x + 2 = 0}}, what do you add to both sides to turn −5x into −3x?",
-          "Add 2x and subtract 2 on both sides.",
+          "Starting from {{x^2 + x - 4 = 0}}, what do you do to both sides to turn +x into −3x?",
+          "Subtract 4x and add 4 on both sides.",
         ],
         strategy: "Work backwards",
       },
@@ -252,22 +247,23 @@ export const morePapers: Paper[] = [
       {
         kind: "written",
         id: "graphs-of-functions-p3-q08",
-        question: "Zara says: \"The graph of {{y = 2/x}} must cross the y-axis somewhere, because every graph does.\"\n\nExplain why the graph of {{y = 2/x}} never meets the y-axis **or** the x-axis.",
+        question:
+          "Zara says: \"The graph of {{y = 2^x}} must cross the x-axis somewhere to the left of the y-axis, because the values keep getting smaller.\"\n\nExplain why Zara is wrong. State the equation of the asymptote of {{y = 2^x}} and the point where every graph {{y = a^x}} (a > 0) crosses the y-axis.",
         marks: 3,
         modelAnswer:
-          "On the y-axis x = 0, but {{2/0}} has no value (you cannot divide by zero), so there is no point on the curve with x = 0 — it never meets the y-axis. On the x-axis y = 0, but {{2/x = 0}} would need 2 = 0 × x = 0, which is impossible, so y is never 0 and the curve never meets the x-axis. The axes are asymptotes: as x gets close to 0, y becomes very large, and as x gets large, y gets close to 0, but neither ever reaches 0. So Zara is wrong.",
+          "For negative x, {{2^x}} is a fraction: {{2^(-1) = 1/2}}, {{2^(-2) = 1/4}}, {{2^(-10) = 1/1024}}, and so on. Each value is half the one before, so it gets closer and closer to 0 — but halving a positive number always leaves a positive number, so {{2^x}} is never 0 (or negative). The graph never reaches the x-axis: the x-axis, y = 0, is an asymptote, so Zara is wrong. Every graph {{y = a^x}} crosses the y-axis at (0, 1), because {{a^0 = 1}} for any a > 0.",
         markScheme: [
-          { point: "x = 0 gives division by zero (no value), so no y-intercept", keywords: ["x = 0", "x=0", "divide by zero", "dividing by 0", "undefined", "cannot divide", "no value"] },
-          { point: "y = 0 would need 2 = 0, impossible (a fraction with non-zero numerator is never 0), so no x-intercept", keywords: ["2 = 0", "2=0", "never 0", "never zero", "numerator", "impossible"] },
-          { point: "Axes are asymptotes: curve gets closer and closer but never touches", keywords: ["asymptote", "asymptotes", "closer", "approaches", "never touches", "tends"] },
+          { point: "For negative x, 2^x = 1/2^n is a positive fraction (e.g. 2^(−1) = 1/2), so it is always positive / never 0", keywords: ["positive", "never 0", "never zero", "1/2", "fraction", "halving", "always above"] },
+          { point: "So it approaches but never reaches the x-axis: the asymptote is y = 0", keywords: ["asymptote", "y = 0", "y=0", "never reaches", "never touches", "closer"] },
+          { point: "Every y = a^x passes through (0, 1) because a^0 = 1", keywords: ["(0, 1)", "(0,1)", "a^0 = 1", "a^0=1", "2^0 = 1", "y = 1"] },
         ],
-        commonError: "Only dealing with one axis, or saying 'it just doesn't' without a reason from the equation.",
+        commonError: "Saying 'it gets very small so it must reach 0' — small positive numbers are still positive.",
         difficulty: "core",
         guideRef: "recognising-graphs",
         hints: [
-          "Every point on the y-axis has x = 0. What happens if you put x = 0 into {{2/x}}?",
-          "Every point on the x-axis has y = 0. Can {{2/x}} ever equal 0?",
-          "What is the special name for a line a curve approaches but never reaches?",
+          "Work out {{2^(-1)}}, {{2^(-2)}} and {{2^(-3)}}. What sort of numbers are they?",
+          "Can halving a positive number ever give 0 or a negative number?",
+          "What is {{a^0}} for any positive a?",
         ],
         strategy: "Consider extremes",
       },
@@ -319,7 +315,7 @@ export const morePapers: Paper[] = [
         id: "graphs-of-functions-p3-q10",
         question:
           "The graph of {{y = x^2 - 2x - 3}} is drawn below.\n\nUse the graph to solve the equation {{x^2 - 2x - 8 = 0}}. Give both solutions.",
-        diagram: `<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph of y = x squared minus 2x minus 3 drawn for x from -3 to 5 on a 1-unit grid; it crosses the x-axis at -1 and 3 and has its lowest point at (1, -4)"><rect x="0" y="0" width="400" height="320" fill="#ffffff"/><path d="M40 20V295M80 20V295M120 20V295M160 20V295M200 20V295M240 20V295M280 20V295M320 20V295M360 20V295M40 295H360M40 279.7H360M40 264.4H360M40 249.2H360M40 233.9H360M40 218.6H360M40 203.3H360M40 188.1H360M40 172.8H360M40 157.5H360M40 142.2H360M40 126.9H360M40 111.7H360M40 96.4H360M40 81.1H360M40 65.8H360M40 50.6H360M40 35.3H360M40 20H360" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="40" y1="218.6" x2="366" y2="218.6" stroke="#334155" stroke-width="1.5"/><line x1="160" y1="295" x2="160" y2="14" stroke="#334155" stroke-width="1.5"/><text x="368" y="222.6" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="165" y="14" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="40" y="232.6">−3</text><text x="80" y="232.6">−2</text><text x="120" y="232.6">−1</text><text x="200" y="232.6">1</text><text x="240" y="232.6">2</text><text x="280" y="232.6">3</text><text x="320" y="232.6">4</text><text x="360" y="232.6">5</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="156" y="283.7">−4</text><text x="156" y="253.2">−2</text><text x="156" y="192.1">2</text><text x="156" y="161.5">4</text><text x="156" y="130.9">6</text><text x="156" y="100.4">8</text><text x="156" y="69.8">10</text><text x="156" y="39.3">12</text></g><path d="M40 35.3 L44 47.3 L48 59.1 L52 70.6 L56 81.7 L60 92.6 L64 103.1 L68 113.3 L72 123.3 L76 132.9 L80 142.2 L84 151.2 L88 159.9 L92 168.3 L96 176.4 L100 184.2 L104 191.7 L108 198.9 L112 205.8 L116 212.3 L120 218.6 L124 224.6 L128 230.2 L132 235.6 L136 240.6 L140 245.3 L144 249.8 L148 253.9 L152 257.7 L156 261.2 L160 264.4 L164 267.3 L168 269.9 L172 272.2 L176 274.2 L180 275.9 L184 277.3 L188 278.3 L192 279.1 L196 279.6 L200 279.7 L204 279.6 L208 279.1 L212 278.3 L216 277.3 L220 275.9 L224 274.2 L228 272.2 L232 269.9 L236 267.3 L240 264.4 L244 261.2 L248 257.7 L252 253.9 L256 249.8 L260 245.3 L264 240.6 L268 235.6 L272 230.2 L276 224.6 L280 218.6 L284 212.3 L288 205.8 L292 198.9 L296 191.7 L300 184.2 L304 176.4 L308 168.3 L312 159.9 L316 151.2 L320 142.2 L324 132.9 L328 123.3 L332 113.3 L336 103.1 L340 92.6 L344 81.7 L348 70.6 L352 59.1 L356 47.3 L360 35.3" stroke="#1d4ed8" stroke-width="2" fill="none"/><text x="332" y="75" font-size="12" font-family="sans-serif" fill="#1d4ed8" text-anchor="end">y = x² − 2x − 3</text></svg>`,
+        diagram: `<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph of y = x squared minus 2x minus 3 drawn for x from -3 to 5 on a 1-unit grid; it crosses the x-axis at -1 and 3 and has its lowest point at (1, -4)"><rect x="0" y="0" width="400" height="320" fill="#ffffff"/><path d="M40 20V295M80 20V295M120 20V295M160 20V295M200 20V295M240 20V295M280 20V295M320 20V295M360 20V295M40 295H360M40 279.7H360M40 264.4H360M40 249.2H360M40 233.9H360M40 218.6H360M40 203.3H360M40 188.1H360M40 172.8H360M40 157.5H360M40 142.2H360M40 126.9H360M40 111.7H360M40 96.4H360M40 81.1H360M40 65.8H360M40 50.6H360M40 35.3H360M40 20H360" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="40" y1="218.6" x2="366" y2="218.6" stroke="#334155" stroke-width="1.5"/><line x1="160" y1="295" x2="160" y2="14" stroke="#334155" stroke-width="1.5"/><text x="368" y="222.6" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="165" y="14" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="40" y="232.6">−3</text><text x="80" y="232.6">−2</text><text x="117" y="232.6" text-anchor="end">−1</text><text x="200" y="232.6">1</text><text x="240" y="232.6">2</text><text x="280" y="232.6">3</text><text x="320" y="232.6">4</text><text x="360" y="232.6">5</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="156" y="283.7">−4</text><text x="156" y="253.2">−2</text><text x="156" y="192.1">2</text><text x="156" y="161.5">4</text><text x="156" y="130.9">6</text><text x="156" y="100.4">8</text><text x="156" y="69.8">10</text><text x="156" y="39.3">12</text></g><path d="M40 35.3 L44 47.3 L48 59.1 L52 70.6 L56 81.7 L60 92.6 L64 103.1 L68 113.3 L72 123.3 L76 132.9 L80 142.2 L84 151.2 L88 159.9 L92 168.3 L96 176.4 L100 184.2 L104 191.7 L108 198.9 L112 205.8 L116 212.3 L120 218.6 L124 224.6 L128 230.2 L132 235.6 L136 240.6 L140 245.3 L144 249.8 L148 253.9 L152 257.7 L156 261.2 L160 264.4 L164 267.3 L168 269.9 L172 272.2 L176 274.2 L180 275.9 L184 277.3 L188 278.3 L192 279.1 L196 279.6 L200 279.7 L204 279.6 L208 279.1 L212 278.3 L216 277.3 L220 275.9 L224 274.2 L228 272.2 L232 269.9 L236 267.3 L240 264.4 L244 261.2 L248 257.7 L252 253.9 L256 249.8 L260 245.3 L264 240.6 L268 235.6 L272 230.2 L276 224.6 L280 218.6 L284 212.3 L288 205.8 L292 198.9 L296 191.7 L300 184.2 L304 176.4 L308 168.3 L312 159.9 L316 151.2 L320 142.2 L324 132.9 L328 123.3 L332 113.3 L336 103.1 L340 92.6 L344 81.7 L348 70.6 L352 59.1 L356 47.3 L360 35.3" stroke="#1d4ed8" stroke-width="2" fill="none"/><text x="332" y="75" font-size="12" font-family="sans-serif" fill="#1d4ed8" text-anchor="end">y = x² − 2x − 3</text></svg>`,
         answer: { type: "list", values: [-2, 4], ordered: false, display: "x = −2 or x = 4" },
         traps: [
           {
@@ -349,26 +345,26 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p3-q11",
         question:
-          "A ball rolls down a ramp. The graph shows its distance d metres from the top after t seconds.\n\nA tangent has been drawn to the curve at t = 3. It passes through the points (1.5, 0) and (4, 15).\n\nUse the tangent to estimate the speed of the ball at t = 3. Give your answer in m/s.",
-        diagram: `<svg viewBox="0 0 380 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distance-time curve d = t squared for t from 0 to 5 seconds, with a straight tangent line touching it at t = 3 and passing through the points (1.5, 0) and (4, 15)"><rect x="0" y="0" width="380" height="280" fill="#ffffff"/><path d="M45 25V245M74.5 25V245M104 25V245M133.5 25V245M163 25V245M192.5 25V245M222 25V245M251.5 25V245M281 25V245M310.5 25V245M340 25V245M45 245H340M45 223H340M45 201H340M45 179H340M45 157H340M45 135H340M45 113H340M45 91H340M45 69H340M45 47H340M45 25H340" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="45" y1="245" x2="346" y2="245" stroke="#334155" stroke-width="1.5"/><line x1="45" y1="245" x2="45" y2="19" stroke="#334155" stroke-width="1.5"/><text x="348" y="249" font-size="13" font-family="sans-serif" fill="#1f2937">t (s)</text><text x="50" y="19" font-size="13" font-family="sans-serif" fill="#1f2937">d (m)</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="104" y="259">1</text><text x="163" y="259">2</text><text x="222" y="259">3</text><text x="281" y="259">4</text><text x="340" y="259">5</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="41" y="205">5</text><text x="41" y="161">10</text><text x="41" y="117">15</text><text x="41" y="73">20</text><text x="41" y="29">25</text></g><text x="39.1" y="259.1" font-size="11" font-family="sans-serif" fill="#1f2937" text-anchor="end">O</text><path d="M45 245 L48.7 245 L52.4 244.9 L56.1 244.7 L59.8 244.4 L63.4 244.1 L67.1 243.8 L70.8 243.3 L74.5 242.8 L78.2 242.2 L81.9 241.6 L85.6 240.8 L89.2 240.1 L92.9 239.2 L96.6 238.3 L100.3 237.3 L104 236.2 L107.7 235.1 L111.4 233.9 L115.1 232.6 L118.8 231.2 L122.4 229.8 L126.1 228.4 L129.8 226.8 L133.5 225.2 L137.2 223.5 L140.9 221.8 L144.6 219.9 L148.2 218.1 L151.9 216.1 L155.6 214.1 L159.3 212 L163 209.8 L166.7 207.6 L170.4 205.3 L174.1 202.9 L177.8 200.4 L181.4 197.9 L185.1 195.4 L188.8 192.7 L192.5 190 L196.2 187.2 L199.9 184.4 L203.6 181.4 L207.2 178.4 L210.9 175.4 L214.6 172.3 L218.3 169.1 L222 165.8 L225.7 162.5 L229.4 159.1 L233.1 155.6 L236.8 152.1 L240.4 148.4 L244.1 144.8 L247.8 141 L251.5 137.2 L255.2 133.3 L258.9 129.4 L262.6 125.3 L266.2 121.2 L269.9 117.1 L273.6 112.9 L277.3 108.6 L281 104.2 L284.7 99.8 L288.4 95.3 L292.1 90.7 L295.8 86 L299.4 81.3 L303.1 76.6 L306.8 71.7 L310.5 66.8 L314.2 61.8 L317.9 56.8 L321.6 51.6 L325.2 46.5 L328.9 41.2 L332.6 35.9 L336.3 30.5 L340 25" stroke="#1d4ed8" stroke-width="2" fill="none"/><path d="M133.5 245 L340 60.2" stroke="#b91c1c" stroke-width="1.5" fill="none"/><circle cx="222" cy="165.8" r="3" fill="#1f2937"/><circle cx="133.5" cy="245" r="3" fill="#b91c1c"/><circle cx="281" cy="113" r="3" fill="#b91c1c"/><text x="286.9" y="120" font-size="11" font-family="sans-serif" fill="#b91c1c" text-anchor="start">(4, 15)</text><text x="139.4" y="236.2" font-size="11" font-family="sans-serif" fill="#b91c1c" text-anchor="start">(1.5, 0)</text></svg>`,
-        answer: { type: "number", value: 6, display: "6 m/s" },
+          "A ball rolls down a ramp. The graph shows its distance d metres from the top after t seconds.\n\nA tangent has been drawn to the curve at P, where t = 2. It passes through the points (1, 0) and (4, 12).\n\nUse the tangent to estimate the speed of the ball at t = 2. Give your answer in m/s.",
+        diagram: `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distance–time curve d = t squared for t from 0 to 5 seconds. A tangent is drawn at the point (2, 4); it passes through (1, 0) and (4, 12)."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><line x1="44" y1="30" x2="44" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="82" y1="30" x2="82" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="120" y1="30" x2="120" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="158" y1="30" x2="158" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="196" y1="30" x2="196" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="234" y1="30" x2="234" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="272" y1="30" x2="272" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="310" y1="30" x2="310" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="348" y1="30" x2="348" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="386" y1="30" x2="386" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="424" y1="30" x2="424" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="260" x2="424" y2="260" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="237" x2="424" y2="237" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="214" x2="424" y2="214" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="191" x2="424" y2="191" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="168" x2="424" y2="168" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="145" x2="424" y2="145" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="122" x2="424" y2="122" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="99" x2="424" y2="99" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="76" x2="424" y2="76" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="53" x2="424" y2="53" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="30" x2="424" y2="30" stroke="#cbd5e1" stroke-width="0.8"/><line x1="44" y1="260" x2="424" y2="260" stroke="#1f2937" stroke-width="1.4"/><line x1="44" y1="30" x2="44" y2="260" stroke="#1f2937" stroke-width="1.4"/><polyline points="44,260 46.4,260 48.8,260 51.1,259.9 53.5,259.9 55.9,259.8 58.3,259.7 60.6,259.6 63,259.4 65.4,259.3 67.8,259.1 70.1,258.9 72.5,258.7 74.9,258.5 77.3,258.2 79.6,258 82,257.7 84.4,257.4 86.8,257.1 89.1,256.8 91.5,256.4 93.9,256 96.3,255.7 98.6,255.2 101,254.8 103.4,254.4 105.8,253.9 108.1,253.5 110.5,253 112.9,252.4 115.3,251.9 117.6,251.4 120,250.8 122.4,250.2 124.8,249.6 127.1,249 129.5,248.4 131.9,247.7 134.3,247 136.6,246.3 139,245.6 141.4,244.9 143.8,244.2 146.1,243.4 148.5,242.6 150.9,241.8 153.3,241 155.6,240.2 158,239.3 160.4,238.4 162.8,237.5 165.1,236.6 167.5,235.7 169.9,234.8 172.3,233.8 174.6,232.8 177,231.8 179.4,230.8 181.8,229.8 184.1,228.7 186.5,227.7 188.9,226.6 191.3,225.5 193.6,224.3 196,223.2 198.4,222 200.8,220.9 203.1,219.7 205.5,218.5 207.9,217.2 210.3,216 212.6,214.7 215,213.4 217.4,212.1 219.8,210.8 222.1,209.5 224.5,208.1 226.9,206.7 229.3,205.3 231.6,203.9 234,202.5 236.4,201.1 238.7,199.6 241.1,198.1 243.5,196.6 245.9,195.1 248.3,193.6 250.6,192 253,190.4 255.4,188.8 257.8,187.2 260.1,185.6 262.5,184 264.9,182.3 267.3,180.6 269.6,178.9 272,177.2 274.4,175.5 276.8,173.7 279.1,171.9 281.5,170.2 283.9,168.4 286.3,166.5 288.6,164.7 291,162.8 293.4,160.9 295.8,159.1 298.1,157.1 300.5,155.2 302.9,153.3 305.3,151.3 307.6,149.3 310,147.3 312.4,145.3 314.8,143.2 317.1,141.2 319.5,139.1 321.9,137 324.3,134.9 326.6,132.8 329,130.6 331.4,128.5 333.8,126.3 336.1,124.1 338.5,121.9 340.9,119.6 343.3,117.4 345.6,115.1 348,112.8 350.4,110.5 352.8,108.2 355.1,105.8 357.5,103.5 359.9,101.1 362.3,98.7 364.6,96.3 367,93.8 369.4,91.4 371.8,88.9 374.1,86.4 376.5,83.9 378.9,81.4 381.3,78.8 383.6,76.3 386,73.7 388.4,71.1 390.8,68.5 393.1,65.9 395.5,63.2 397.9,60.5 400.3,57.9 402.6,55.1 405,52.4 407.4,49.7 409.8,46.9 412.1,44.2 414.5,41.4 416.9,38.5 419.3,35.7 421.6,32.9 424,30" fill="none" stroke="#2563eb" stroke-width="2.4"/><polyline points="120,260 121.9,259.1 123.8,258.2 125.7,257.2 127.6,256.3 129.5,255.4 131.4,254.5 133.3,253.6 135.2,252.6 137.1,251.7 139,250.8 140.9,249.9 142.8,249 144.7,248 146.6,247.1 148.5,246.2 150.4,245.3 152.3,244.4 154.2,243.4 156.1,242.5 158,241.6 159.9,240.7 161.8,239.8 163.7,238.8 165.6,237.9 167.5,237 169.4,236.1 171.3,235.2 173.2,234.2 175.1,233.3 177,232.4 178.9,231.5 180.8,230.6 182.7,229.6 184.6,228.7 186.5,227.8 188.4,226.9 190.3,226 192.2,225 194.1,224.1 196,223.2 197.9,222.3 199.8,221.4 201.7,220.4 203.6,219.5 205.5,218.6 207.4,217.7 209.3,216.8 211.2,215.8 213.1,214.9 215,214 216.9,213.1 218.8,212.2 220.7,211.2 222.6,210.3 224.5,209.4 226.4,208.5 228.3,207.6 230.2,206.6 232.1,205.7 234,204.8 235.9,203.9 237.8,203 239.7,202 241.6,201.1 243.5,200.2 245.4,199.3 247.3,198.4 249.2,197.4 251.1,196.5 253,195.6 254.9,194.7 256.8,193.8 258.7,192.8 260.6,191.9 262.5,191 264.4,190.1 266.3,189.2 268.2,188.2 270.1,187.3 272,186.4 273.9,185.5 275.8,184.6 277.7,183.6 279.6,182.7 281.5,181.8 283.4,180.9 285.3,180 287.2,179 289.1,178.1 291,177.2 292.9,176.3 294.8,175.4 296.7,174.4 298.6,173.5 300.5,172.6 302.4,171.7 304.3,170.8 306.2,169.8 308.1,168.9 310,168 311.9,167.1 313.8,166.2 315.7,165.2 317.6,164.3 319.5,163.4 321.4,162.5 323.3,161.6 325.2,160.6 327.1,159.7 329,158.8 330.9,157.9 332.8,157 334.7,156 336.6,155.1 338.5,154.2 340.4,153.3 342.3,152.4 344.2,151.4 346.1,150.5 348,149.6 349.9,148.7 351.8,147.8 353.7,146.8 355.6,145.9 357.5,145 359.4,144.1 361.3,143.2 363.2,142.2 365.1,141.3 367,140.4 368.9,139.5 370.8,138.6 372.7,137.6 374.6,136.7 376.5,135.8 378.4,134.9 380.3,134 382.2,133 384.1,132.1 386,131.2 387.9,130.3 389.8,129.4 391.7,128.4 393.6,127.5 395.5,126.6 397.4,125.7 399.3,124.8 401.2,123.8 403.1,122.9 405,122 406.9,121.1 408.8,120.2 410.7,119.2 412.6,118.3 414.5,117.4 416.4,116.5 418.3,115.6 420.2,114.6 422.1,113.7 424,112.8" fill="none" stroke="#b91c1c" stroke-width="2"/><text x="120" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">1</text><text x="196" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">2</text><text x="272" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">3</text><text x="348" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">4</text><text x="424" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">5</text><text x="39" y="218" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">5</text><text x="39" y="172" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">10</text><text x="39" y="126" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">15</text><text x="39" y="80" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">20</text><text x="39" y="34" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">25</text><text x="424" y="254" font-size="12" font-family="sans-serif" text-anchor="end" fill="#1f2937">t (s)</text><text x="44" y="274" font-size="11" font-family="sans-serif" text-anchor="middle" fill="#334155">0</text><text x="50" y="40" font-size="12" font-family="sans-serif" fill="#1f2937">d (m)</text><circle cx="196" cy="223.2" r="3.5" fill="#1f2937"/><circle cx="120" cy="260" r="3.5" fill="#b91c1c"/><circle cx="348" cy="149.6" r="3.5" fill="#b91c1c"/><text x="112" y="274" font-size="12" font-family="sans-serif" text-anchor="end" fill="#b91c1c" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">(1, 0)</text><text x="356" y="163.6" font-size="12" font-family="sans-serif" fill="#b91c1c" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">(4, 12)</text><text x="190" y="217.2" font-size="12" font-family="sans-serif" text-anchor="end" fill="#1f2937" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" paint-order="stroke">P</text></svg>`,
+        answer: { type: "number", value: 4, display: "4 m/s" },
         traps: [
           {
-            spec: { type: "number", value: 3 },
+            spec: { type: "number", value: 2 },
             feedback:
-              "9 ÷ 3 = 3 is the *average* speed over the first 3 seconds (gradient of the chord from the origin). The speed *at* t = 3 is the gradient of the tangent.",
+              "4 ÷ 2 = 2 is the *average* speed over the first 2 seconds (gradient of the chord from the origin to P). The speed *at* t = 2 is the gradient of the tangent.",
           },
           {
-            spec: { type: "number", value: 3.75 },
-            feedback: "15 ÷ 4 uses only one point of the tangent with the origin, but the tangent doesn't pass through the origin. Use both points on the tangent.",
+            spec: { type: "number", value: 3 },
+            feedback: "12 ÷ 4 uses only one point of the tangent with the origin, but the tangent doesn't pass through the origin. Use both points on the tangent.",
           },
         ],
         solution: [
           "On a distance–time graph, speed = gradient. At an instant on a curve, that is the gradient of the tangent.",
-          "Gradient = {{(15 - 0)/(4 - 1.5) = 15/2.5 = 6}}.",
-          "Speed at t = 3 ≈ 6 m/s.",
+          "Gradient = {{(12 - 0)/(4 - 1) = 12/3 = 4}}.",
+          "Speed at t = 2 ≈ 4 m/s.",
         ],
-        commonError: "Dividing the distance at t = 3 by 3, which gives the average speed, not the instantaneous speed.",
+        commonError: "Dividing the distance at t = 2 by 2, which gives the average speed, not the instantaneous speed.",
         difficulty: "core",
         guideRef: "real-life-graphs",
         hints: [
@@ -407,41 +403,41 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p3-q13",
         question:
-          "The curve {{y = k a^x}}, where k and a are positive constants, passes through the points (1, 12) and (3, 108).\n\nFind the value of k and the value of a. Give k first.",
-        answer: { type: "list", values: [4, 3], ordered: true, display: "k = 4, a = 3" },
+          "The curve {{y = k a^x}}, where k and a are positive constants, passes through the points (1, 10) and (3, 250).\n\nFind the value of k and the value of a. Give k first.",
+        answer: { type: "list", values: [2, 5], ordered: true, display: "k = 2, a = 5" },
         traps: [
           {
-            spec: { type: "list", values: [1.333333, 9], ordered: true, tolerance: 0.01 },
+            spec: { type: "list", values: [0.4, 25], ordered: true, tolerance: 0.01 },
             feedback:
-              "108 ÷ 12 = 9 is {{a^2}}, not a: going from x = 1 to x = 3 multiplies by a **twice**. So a = 3, then k = 12 ÷ 3 = 4.",
+              "250 ÷ 10 = 25 is {{a^2}}, not a: going from x = 1 to x = 3 multiplies by a **twice**. So a = 5, then k = 10 ÷ 5 = 2.",
           },
           {
-            spec: { type: "list", values: [3, 4], ordered: true },
+            spec: { type: "list", values: [5, 2], ordered: true },
             feedback: "Right values, wrong order — the question asks for k first.",
           },
         ],
         solution: [
-          "(1, 12): {{k a = 12}}.  (3, 108): {{k a^3 = 108}}.",
-          "Divide: {{(k a^3)/(k a) = a^2 = 108/12 = 9}}, so a = 3 (a > 0).",
-          "Then k = 12 ÷ 3 = 4.",
-          "Check: {{4 * 3^3 = 4 * 27 = 108}} ✓.",
+          "(1, 10): {{k a = 10}}.  (3, 250): {{k a^3 = 250}}.",
+          "Divide: {{(k a^3)/(k a) = a^2 = 250/10 = 25}}, so a = 5 (a > 0).",
+          "Then k = 10 ÷ 5 = 2.",
+          "Check: {{2 * 5^3 = 2 * 125 = 250}} ✓.",
         ],
         solutions: [
           {
             label: "Think multiplicatively",
             steps: [
-              "Each step of +1 in x multiplies y by a. From x = 1 to x = 3 is two steps: 12 × a × a = 108, so {{a^2 = 9}}, a = 3.",
-              "Step back from x = 1 to x = 0: 12 ÷ 3 = 4, and y at x = 0 is k. So k = 4.",
+              "Each step of +1 in x multiplies y by a. From x = 1 to x = 3 is two steps: 10 × a × a = 250, so {{a^2 = 25}}, a = 5.",
+              "Step back from x = 1 to x = 0: 10 ÷ 5 = 2, and y at x = 0 is k. So k = 2.",
             ],
           },
         ],
-        commonError: "Taking 108 ÷ 12 = 9 as the value of a.",
+        commonError: "Taking 250 ÷ 10 = 25 as the value of a.",
         difficulty: "challenge",
         guideRef: "exponential-functions",
         hints: [
           "Substitute each point to get two equations in k and a.",
           "Divide one equation by the other — what cancels?",
-          "{{a^2 = 9}}. Now use {{k a = 12}}.",
+          "{{a^2 = 25}}. Now use {{k a = 10}}.",
         ],
         strategy: "Introduce a variable",
       },
@@ -533,31 +529,30 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p4-q01",
         question:
-          "Here is a table of values for {{y = 3 + 2x - x^2}}.\n\n| x | −2 | −1 | 0 | 1 | 2 | 3 | 4 |\n|---|---|---|---|---|---|---|---|\n| y |  | 0 | 3 |  | 3 | 0 |  |\n\nComplete the table: work out y when x = −2, x = 1 and x = 4. Give the three values in that order.",
-        answer: { type: "list", values: [-5, 4, -5], ordered: true, display: "−5, 4, −5" },
+          "Here is a table of values for {{y = 4 + 3x - x^2}}.\n\n| x | −2 | −1 | 0 | 1 | 2 | 3 | 4 |\n|---|---|---|---|---|---|---|---|\n| y |  | 0 | 4 |  | 6 | 4 |  |\n\nComplete the table: work out y when x = −2, x = 1 and x = 4. Give the three values in that order.",
+        answer: { type: "list", values: [-6, 6, 0], ordered: true, display: "−6, 6, 0" },
         traps: [
           {
-            spec: { type: "list", values: [3, 4, 27], ordered: true },
-            feedback:
-              "{{-x^2}} means −(x²), and x² is never negative. At x = −2: {{-x^2 = -(4) = -4}}, so y = 3 − 4 − 4 = −5. At x = 4: y = 3 + 8 − 16 = −5.",
+            spec: { type: "list", values: [2, 8, 32], ordered: true },
+            feedback: "{{-x^2}} means −(x²), and x² is never negative. At x = −2: {{-x^2 = -(4) = -4}}, so y = 4 − 6 − 4 = −6.",
           },
           {
-            spec: { type: "list", values: [-5, 4, 27], ordered: true },
-            feedback: "At x = 4, {{-x^2 = -16}}, so y = 3 + 8 − 16 = −5. The table should be symmetrical about x = 1.",
+            spec: { type: "list", values: [-6, 6, 32], ordered: true },
+            feedback: "At x = 4, {{-x^2 = -16}}, so y = 4 + 12 − 16 = 0. Use symmetry to check: y = 0 at x = −1, so y = 0 at x = 4 as well.",
           },
         ],
         solution: [
-          "x = −2: {{3 + 2(-2) - (-2)^2 = 3 - 4 - 4 = -5}}.",
-          "x = 1: {{3 + 2 - 1 = 4}}.",
-          "x = 4: {{3 + 8 - 16 = -5}}.",
-          "Check: the completed row −5, 0, 3, 4, 3, 0, −5 is symmetrical about x = 1, the line of symmetry of this ∩-shaped curve. ✓",
+          "x = −2: {{4 + 3(-2) - (-2)^2 = 4 - 6 - 4 = -6}}.",
+          "x = 1: {{4 + 3 - 1 = 6}}.",
+          "x = 4: {{4 + 12 - 16 = 0}}.",
+          "Check: the completed row −6, 0, 4, 6, 6, 4, 0 is symmetrical about x = 1.5, the line of symmetry of this ∩-shaped curve (y = 6 at both x = 1 and x = 2). ✓",
         ],
         commonError: "Treating −x² as (−x)², which makes it positive.",
         difficulty: "warmup",
         guideRef: "plotting-quadratics",
         hints: [
           "{{-x^2}} means 'square x, then make it negative'.",
-          "Use symmetry to check: the values either side of the maximum should match.",
+          "Use symmetry to check: here the equal values come in pairs either side of x = 1.5.",
         ],
         strategy: "Use symmetry",
       },
@@ -567,7 +562,7 @@ export const morePapers: Paper[] = [
         id: "graphs-of-functions-p4-q02",
         question:
           "Wei Ling cycled from her home to East Coast Park, stayed there for a while, then cycled home. The distance–time graph shows her journey.\n\nWork out her average speed on the journey home. Give your answer in km/h.",
-        diagram: `<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distance-time graph: distance from home rises from 0 at 09:00 to 12 km at 09:40, stays at 12 km until 10:00, then falls back to 0 at 10:30. Each small square across is 10 minutes"><rect x="0" y="0" width="400" height="260" fill="#ffffff"/><path d="M45 25V220M81.1 25V220M117.2 25V220M153.3 25V220M189.4 25V220M225.6 25V220M261.7 25V220M297.8 25V220M333.9 25V220M370 25V220M45 220H370M45 192.1H370M45 164.3H370M45 136.4H370M45 108.6H370M45 80.7H370M45 52.9H370M45 25H370" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="45" y1="220" x2="376" y2="220" stroke="#334155" stroke-width="1.5"/><line x1="45" y1="220" x2="45" y2="19" stroke="#334155" stroke-width="1.5"/><text x="378" y="224" font-size="13" font-family="sans-serif" fill="#1f2937">Time</text><text x="50" y="19" font-size="13" font-family="sans-serif" fill="#1f2937">Distance from home (km)</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="45" y="234">09:00</text><text x="153.3" y="234">09:30</text><text x="261.7" y="234">10:00</text><text x="370" y="234">10:30</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="41" y="196.1">2</text><text x="41" y="168.3">4</text><text x="41" y="140.4">6</text><text x="41" y="112.6">8</text><text x="41" y="84.7">10</text><text x="41" y="56.9">12</text><text x="41" y="29">14</text></g><path d="M45 220 L189.4 52.9 L261.7 52.9 L370 220" stroke="#1d4ed8" stroke-width="2" fill="none"/></svg>`,
+        diagram: `<svg viewBox="0 0 400 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Distance-time graph: distance from home rises from 0 at 09:00 to 12 km at 09:40, stays at 12 km until 10:00, then falls back to 0 at 10:30. Each small square across is 10 minutes"><rect x="0" y="0" width="400" height="260" fill="#ffffff"/><path d="M45 25V220M81.1 25V220M117.2 25V220M153.3 25V220M189.4 25V220M225.6 25V220M261.7 25V220M297.8 25V220M333.9 25V220M370 25V220M45 220H370M45 192.1H370M45 164.3H370M45 136.4H370M45 108.6H370M45 80.7H370M45 52.9H370M45 25H370" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="45" y1="220" x2="376" y2="220" stroke="#334155" stroke-width="1.5"/><line x1="45" y1="220" x2="45" y2="19" stroke="#334155" stroke-width="1.5"/><text x="207.5" y="252" font-size="13" font-family="sans-serif" fill="#1f2937" text-anchor="middle">Time</text><text x="50" y="19" font-size="13" font-family="sans-serif" fill="#1f2937">Distance from home (km)</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="45" y="234">09:00</text><text x="153.3" y="234">09:30</text><text x="261.7" y="234">10:00</text><text x="370" y="234">10:30</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="41" y="196.1">2</text><text x="41" y="168.3">4</text><text x="41" y="140.4">6</text><text x="41" y="112.6">8</text><text x="41" y="84.7">10</text><text x="41" y="56.9">12</text><text x="41" y="29">14</text></g><path d="M45 220 L189.4 52.9 L261.7 52.9 L370 220" stroke="#1d4ed8" stroke-width="2" fill="none"/></svg>`,
         answer: { type: "number", value: 24, display: "24 km/h" },
         traps: [
           {
@@ -596,11 +591,11 @@ export const morePapers: Paper[] = [
         kind: "mcq",
         id: "graphs-of-functions-p4-q03",
         question: "Here is a sketch of a curve. It crosses the x-axis at −2, 0 and 2.\n\nWhich could be the equation of the curve?",
-        diagram: `<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch of a curve that rises from the bottom left, crosses the x-axis at -2, turns at a maximum, passes through the origin, turns at a minimum, crosses the x-axis at 2 and rises to the top right"><rect x="0" y="0" width="300" height="240" fill="#ffffff"/><line x1="20" y1="120" x2="286" y2="120" stroke="#334155" stroke-width="1.5"/><line x1="150" y1="220" x2="150" y2="14" stroke="#334155" stroke-width="1.5"/><text x="288" y="124" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="155" y="14" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="68.8" y="134">−2</text><text x="231.2" y="134">2</text></g><text x="145.9" y="135" font-size="11" font-family="sans-serif" fill="#1f2937" text-anchor="end">O</text><path d="M44.4 239.6 L47 222.5 L49.7 206.5 L52.3 191.5 L54.9 177.5 L57.6 164.6 L60.2 152.6 L62.9 141.5 L65.5 131.3 L68.1 122 L70.8 113.6 L73.4 106 L76.1 99.1 L78.7 93.1 L81.3 87.8 L84 83.2 L86.6 79.3 L89.3 76 L91.9 73.4 L94.5 71.4 L97.2 70 L99.8 69.1 L102.5 68.7 L105.1 68.8 L107.8 69.4 L110.4 70.4 L113 71.9 L115.7 73.7 L118.3 75.9 L121 78.4 L123.6 81.2 L126.2 84.3 L128.9 87.7 L131.5 91.2 L134.2 95 L136.8 98.9 L139.4 103 L142.1 107.1 L144.7 111.4 L147.4 115.7 L150 120 L152.6 124.3 L155.3 128.6 L157.9 132.9 L160.6 137 L163.2 141.1 L165.8 145 L168.5 148.8 L171.1 152.3 L173.8 155.7 L176.4 158.8 L179 161.6 L181.7 164.1 L184.3 166.3 L187 168.1 L189.6 169.6 L192.2 170.6 L194.9 171.2 L197.5 171.3 L200.2 170.9 L202.8 170.1 L205.5 168.6 L208.1 166.6 L210.7 164 L213.4 160.7 L216 156.8 L218.7 152.2 L221.3 146.9 L223.9 140.9 L226.6 134 L229.2 126.4 L231.9 118 L234.5 108.7 L237.1 98.5 L239.8 87.4 L242.4 75.4 L245.1 62.5 L247.7 48.5 L250.3 33.5 L253 17.5 L255.6 0.4" stroke="#1d4ed8" stroke-width="2" fill="none"/></svg>`,
-        options: ["{{y = 4x - x^3}}", "{{y = x^2 - 4}}", "{{y = x^3 - 4x}}", "{{y = 4/x}}"],
+        diagram: `<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch of a curve that falls from the top left, crosses the x-axis at −2, turns at a minimum, passes through the origin, turns at a maximum, crosses the x-axis at 2 and falls to the bottom right"><rect x="0" y="0" width="300" height="240" fill="#ffffff"/><line x1="20" y1="120" x2="286" y2="120" stroke="#334155" stroke-width="1.5"/><line x1="150" y1="220" x2="150" y2="14" stroke="#334155" stroke-width="1.5"/><text x="288" y="124" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="155" y="14" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="65.8" y="134" text-anchor="end">−2</text><text x="228.2" y="134" text-anchor="end">2</text></g><text x="154" y="135" font-size="11" font-family="sans-serif" fill="#1f2937">O</text><path d="M44.4 239.6 L47 222.5 L49.7 206.5 L52.3 191.5 L54.9 177.5 L57.6 164.6 L60.2 152.6 L62.9 141.5 L65.5 131.3 L68.1 122 L70.8 113.6 L73.4 106 L76.1 99.1 L78.7 93.1 L81.3 87.8 L84 83.2 L86.6 79.3 L89.3 76 L91.9 73.4 L94.5 71.4 L97.2 70 L99.8 69.1 L102.5 68.7 L105.1 68.8 L107.8 69.4 L110.4 70.4 L113 71.9 L115.7 73.7 L118.3 75.9 L121 78.4 L123.6 81.2 L126.2 84.3 L128.9 87.7 L131.5 91.2 L134.2 95 L136.8 98.9 L139.4 103 L142.1 107.1 L144.7 111.4 L147.4 115.7 L150 120 L152.6 124.3 L155.3 128.6 L157.9 132.9 L160.6 137 L163.2 141.1 L165.8 145 L168.5 148.8 L171.1 152.3 L173.8 155.7 L176.4 158.8 L179 161.6 L181.7 164.1 L184.3 166.3 L187 168.1 L189.6 169.6 L192.2 170.6 L194.9 171.2 L197.5 171.3 L200.2 170.9 L202.8 170.1 L205.5 168.6 L208.1 166.6 L210.7 164 L213.4 160.7 L216 156.8 L218.7 152.2 L221.3 146.9 L223.9 140.9 L226.6 134 L229.2 126.4 L231.9 118 L234.5 108.7 L237.1 98.5 L239.8 87.4 L242.4 75.4 L245.1 62.5 L247.7 48.5 L250.3 33.5 L253 17.5 L255.6 0.4" stroke="#1d4ed8" stroke-width="2" fill="none" transform="matrix(-1 0 0 1 300 0)"/></svg>`,
+        options: ["{{y = x^3 - 4x}}", "{{y = x^2 - 4}}", "{{y = 4x - x^3}}", "{{y = 4/x}}"],
         answerIndex: 2,
         explanation:
-          "The curve has two turning points and goes from bottom-left to top-right, so it is a cubic with a **positive** {{x^3}} term. {{x^3 - 4x = x(x - 2)(x + 2)}} is zero at −2, 0 and 2. {{y = 4x - x^3}} has the same roots but a negative {{x^3}} term, so it would go from top-left to bottom-right. {{y = x^2 - 4}} is a ∪-shaped parabola with only two roots, and {{y = 4/x}} never touches the axes.",
+          "The curve has two turning points and goes from top-left to bottom-right, so it is a cubic with a **negative** {{x^3}} term. {{4x - x^3 = x(2 - x)(2 + x)}} is zero at −2, 0 and 2, and for large positive x the {{-x^3}} wins, so y is large and negative ✓. {{y = x^3 - 4x}} has the same roots but a positive {{x^3}} term, so it would go from bottom-left to top-right. {{y = x^2 - 4}} is a ∪-shaped parabola with only two roots, and {{y = 4/x}} never touches the axes.",
         difficulty: "warmup",
         guideRef: "recognising-graphs",
         hints: [
@@ -642,41 +637,41 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p4-q05",
         question:
-          "Write {{2x^2 - 12x + 23}} in the form {{a(x - b)^2 + c}}, where a, b and c are integers.\n\nGive the values of a, b and c in that order.",
-        answer: { type: "list", values: [2, 3, 5], ordered: true, display: "a = 2, b = 3, c = 5, so {{2(x - 3)^2 + 5}}" },
+          "Write {{3x^2 + 12x + 5}} in the form {{a(x + b)^2 + c}}, where a, b and c are integers.\n\nGive the values of a, b and c in that order.",
+        answer: { type: "list", values: [3, 2, -7], ordered: true, display: "a = 3, b = 2, c = −7, so {{3(x + 2)^2 - 7}}" },
         traps: [
           {
-            spec: { type: "list", values: [2, 3, 14], ordered: true },
+            spec: { type: "list", values: [3, 2, 1], ordered: true },
             feedback:
-              "Inside the bracket you subtract 9, but that −9 is multiplied by the 2 outside: {{2[(x - 3)^2 - 9] + 23 = 2(x - 3)^2 - 18 + 23}}. So c = 5.",
+              "Inside the bracket you subtract 4, but that −4 is multiplied by the 3 outside: {{3[(x + 2)^2 - 4] + 5 = 3(x + 2)^2 - 12 + 5}}. So c = −7.",
           },
           {
-            spec: { type: "list", values: [2, -3, 5], ordered: true },
-            feedback: "In the form {{a(x - b)^2}}, the bracket is (x − 3), so b = **3** (the form already has the minus sign).",
+            spec: { type: "list", values: [3, -2, -7], ordered: true },
+            feedback: "In the form {{a(x + b)^2}}, the bracket is (x + 2), so b = **2** (the form already has the plus sign).",
           },
         ],
         solution: [
-          "Take out the factor 2 from the x terms: {{2(x^2 - 6x) + 23}}.",
-          "Complete the square inside: {{x^2 - 6x = (x - 3)^2 - 9}}.",
-          "{{2[(x - 3)^2 - 9] + 23 = 2(x - 3)^2 - 18 + 23 = 2(x - 3)^2 + 5}}.",
-          "a = 2, b = 3, c = 5. Check at x = 0: 2(9) + 5 = 23 ✓.",
+          "Take out the factor 3 from the x terms: {{3(x^2 + 4x) + 5}}.",
+          "Complete the square inside: {{x^2 + 4x = (x + 2)^2 - 4}}.",
+          "{{3[(x + 2)^2 - 4] + 5 = 3(x + 2)^2 - 12 + 5 = 3(x + 2)^2 - 7}}.",
+          "a = 3, b = 2, c = −7. Check at x = 0: 3(4) − 7 = 5 ✓.",
         ],
         solutions: [
           {
             label: "Compare coefficients",
             steps: [
-              "{{a(x - b)^2 + c = a x^2 - 2ab x + (a b^2 + c)}}.",
-              "{{x^2}}: a = 2. x: −2(2)b = −12, so b = 3. Constant: 2(9) + c = 23, so c = 5.",
+              "{{a(x + b)^2 + c = a x^2 + 2ab x + (a b^2 + c)}}.",
+              "{{x^2}}: a = 3. x: 2(3)b = 12, so b = 2. Constant: 3(4) + c = 5, so c = −7.",
             ],
           },
         ],
-        commonError: "Forgetting to multiply the −9 by the factor 2 outside the bracket.",
+        commonError: "Forgetting to multiply the −4 by the factor 3 outside the bracket.",
         difficulty: "core",
         guideRef: "sketching-quadratics",
         hints: [
-          "Factor 2 out of the first two terms only.",
-          "Complete the square on {{x^2 - 6x}}.",
-          "Multiply out the outer bracket carefully: the −9 becomes −18.",
+          "Factor 3 out of the first two terms only.",
+          "Complete the square on {{x^2 + 4x}}.",
+          "Multiply out the outer bracket carefully: the −4 becomes −12.",
         ],
         strategy: "Make it simpler",
       },
@@ -687,15 +682,15 @@ export const morePapers: Paper[] = [
         question:
           "The graph of {{y = x^3 - 3x}} is drawn for −2.5 ≤ x ≤ 2.5.\n\nBy drawing a suitable straight line on the grid, the equation {{x^3 - 4x + 1 = 0}} can be solved.\n\nFind the equation of the straight line. Give your answer in the form y = mx + c.",
         diagram: `<svg viewBox="0 0 380 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph of y = x cubed minus 3x for x from -2.5 to 2.5, with a maximum at (-1, 2) and a minimum at (1, -2)"><rect x="0" y="0" width="380" height="320" fill="#ffffff"/><path d="M40 20V295M70 20V295M100 20V295M130 20V295M160 20V295M190 20V295M220 20V295M250 20V295M280 20V295M310 20V295M340 20V295M40 295H340M40 277.8H340M40 260.6H340M40 243.4H340M40 226.2H340M40 209.1H340M40 191.9H340M40 174.7H340M40 157.5H340M40 140.3H340M40 123.1H340M40 105.9H340M40 88.8H340M40 71.6H340M40 54.4H340M40 37.2H340M40 20H340" stroke="#e2e8f0" stroke-width="1" fill="none"/><line x1="40" y1="157.5" x2="346" y2="157.5" stroke="#334155" stroke-width="1.5"/><line x1="190" y1="295" x2="190" y2="14" stroke="#334155" stroke-width="1.5"/><text x="348" y="161.5" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="195" y="14" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="70" y="171.5">−2</text><text x="130" y="171.5">−1</text><text x="250" y="171.5">1</text><text x="310" y="171.5">2</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="186" y="299">−8</text><text x="186" y="264.6">−6</text><text x="186" y="230.2">−4</text><text x="186" y="195.9">−2</text><text x="186" y="127.1">2</text><text x="186" y="92.8">4</text><text x="186" y="58.4">6</text><text x="186" y="24">8</text></g><path d="M40 297.1 L43.8 280.7 L47.5 265.3 L51.2 250.8 L55 237.3 L58.8 224.6 L62.5 212.9 L66.2 201.9 L70 191.9 L73.8 182.6 L77.5 174.1 L81.2 166.4 L85 159.4 L88.8 153.1 L92.5 147.5 L96.2 142.5 L100 138.2 L103.8 134.4 L107.5 131.3 L111.2 128.7 L115 126.6 L118.8 125.1 L122.5 124 L126.2 123.3 L130 123.1 L133.8 123.3 L137.5 123.9 L141.2 124.8 L145 126.1 L148.8 127.6 L152.5 129.5 L156.2 131.6 L160 133.9 L163.8 136.4 L167.5 139.1 L171.2 141.9 L175 144.9 L178.8 147.9 L182.5 151.1 L186.2 154.3 L190 157.5 L193.8 160.7 L197.5 163.9 L201.2 167.1 L205 170.1 L208.8 173.1 L212.5 175.9 L216.2 178.6 L220 181.1 L223.8 183.4 L227.5 185.5 L231.2 187.4 L235 188.9 L238.8 190.2 L242.5 191.1 L246.2 191.7 L250 191.9 L253.8 191.7 L257.5 191 L261.2 189.9 L265 188.4 L268.8 186.3 L272.5 183.7 L276.2 180.6 L280 176.8 L283.8 172.5 L287.5 167.5 L291.2 161.9 L295 155.6 L298.8 148.6 L302.5 140.9 L306.2 132.4 L310 123.1 L313.8 113.1 L317.5 102.1 L321.2 90.4 L325 77.7 L328.8 64.2 L332.5 49.7 L336.2 34.3 L340 17.9" stroke="#1d4ed8" stroke-width="2" fill="none"/><text x="319" y="44.1" font-size="12" font-family="sans-serif" fill="#1d4ed8" text-anchor="end">y = x³ − 3x</text></svg>`,
-        answer: { type: "expression", expr: "x-1", display: "y = x − 1" },
+        answer: { type: "equation", eq: "y=x-1", display: "y = x − 1" },
         traps: [
           {
-            spec: { type: "expression", expr: "1-x" },
+            spec: { type: "equation", eq: "y=1-x" },
             feedback:
               "Sign slip. From {{x^3 - 4x + 1 = 0}}, add x and subtract 1 on both sides: {{x^3 - 3x = x - 1}}.",
           },
           {
-            spec: { type: "expression", expr: "4x-1" },
+            spec: { type: "equation", eq: "y=4x-1" },
             feedback: "That rearranges to {{x^3 = 4x - 1}}, which needs the graph of {{y = x^3}}. The drawn curve is {{y = x^3 - 3x}}, so keep {{x^3 - 3x}} on the left.",
           },
         ],
@@ -896,30 +891,30 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p4-q12",
         question:
-          "Ravi's family buys a car for $48 000. Its value, $V, t years after it is bought is modelled by {{V = 48000 * 0.85^t}}.\n\nWork out the number of whole years after which the value of the car first falls below $20 000.",
-        answer: { type: "number", value: 6, display: "6 years" },
+          "Ravi's family buys a car for $48 000. Its value, $V, t years after it is bought is modelled by {{V = 48000 * 0.82^t}}.\n\nWork out the number of whole years after which the value of the car first falls below $20 000.",
+        answer: { type: "number", value: 5, display: "5 years" },
         traps: [
           {
-            spec: { type: "number", value: 5 },
-            feedback: "After 5 years, V = 48 000 × 0.85⁵ ≈ $21 298, which is still **above** $20 000. Try t = 6.",
+            spec: { type: "number", value: 4 },
+            feedback: "After 4 years, V = 48 000 × 0.82⁴ ≈ $21 702, which is still **above** $20 000. Try t = 5.",
           },
           {
-            spec: { type: "number", value: 5.39, tolerance: 0.05 },
-            feedback: "That's when V equals $20 000 exactly, but the question asks for whole years — after 5 years it hasn't yet dropped below, after 6 it has.",
+            spec: { type: "number", value: 4.41, tolerance: 0.05 },
+            feedback: "That's when V equals $20 000 exactly, but the question asks for whole years — after 4 years it hasn't yet dropped below, after 5 it has.",
           },
         ],
         solution: [
-          "Each year the value is multiplied by 0.85 (a 15% decrease).",
-          "t = 5: 48 000 × {{0.85^5}} ≈ 48 000 × 0.4437 ≈ $21 298 (still above $20 000).",
-          "t = 6: 48 000 × {{0.85^6}} ≈ 48 000 × 0.3771 ≈ $18 103 (below $20 000).",
-          "So the value first falls below $20 000 after 6 years.",
+          "Each year the value is multiplied by 0.82 (an 18% decrease).",
+          "t = 4: 48 000 × {{0.82^4}} ≈ 48 000 × 0.4521 ≈ $21 702 (still above $20 000).",
+          "t = 5: 48 000 × {{0.82^5}} ≈ 48 000 × 0.3707 ≈ $17 796 (below $20 000).",
+          "So the value first falls below $20 000 after 5 years.",
         ],
-        commonError: "Stopping at the last year *above* $20 000, or using 48 000 × (1 − 0.15t), which is linear decay.",
+        commonError: "Stopping at the last year *above* $20 000, or using 48 000 × (1 − 0.18t), which is linear decay.",
         difficulty: "core",
         guideRef: "exponential-functions",
         hints: [
-          "Each year, multiply the value by 0.85. Try a sensible value of t first.",
-          "Work out V for t = 5 and t = 6 and compare with $20 000.",
+          "Each year, multiply the value by 0.82. Try a sensible value of t first.",
+          "Work out V for t = 4 and t = 5 and compare with $20 000.",
         ],
         strategy: "Try small cases",
       },
@@ -986,37 +981,37 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p4-q15",
         question:
-          "Siti is growing bacteria in a school laboratory. The number of bacteria, N, after t hours is modelled by {{N = k a^t}}.\n\nAfter 2 hours there are 1800 bacteria. After 5 hours there are 6075 bacteria.\n\nUse the model to work out the number of bacteria after 8 hours. Give your answer correct to 3 significant figures.",
-        answer: { type: "number", value: 20500, tolerance: 5, display: "20 500 (3 s.f.)" },
+          "Siti is growing bacteria in a school laboratory. The number of bacteria, N, after t hours is modelled by {{N = k a^t}}.\n\nAfter 1 hour there are 1500 bacteria. After 4 hours there are 2592 bacteria.\n\nUse the model to work out the number of bacteria after 7 hours. Give your answer correct to 3 significant figures.",
+        answer: { type: "number", value: 4480, tolerance: 5, display: "4480 (3 s.f.)" },
         traps: [
           {
-            spec: { type: "number", value: 7500, tolerance: 5 },
-            feedback: "That's linear growth (adding 475 per hour). The model multiplies by the same factor a each hour: find a from {{a^3 = 6075/1800}}.",
+            spec: { type: "number", value: 3684, tolerance: 5 },
+            feedback: "That's linear growth (adding 364 per hour). The model multiplies by the same factor a each hour: find a from {{a^3 = 2592/1500}}.",
           },
         ],
         solution: [
-          "{{k a^2 = 1800}} and {{k a^5 = 6075}}.",
-          "Divide: {{a^3 = 6075/1800 = 3.375}}, so {{a = cbrt(3.375) = 1.5}}.",
-          "{{k = 1800/1.5^2 = 1800/2.25 = 800}}.",
-          "t = 8: {{N = 800 * 1.5^8 = 800 * 25.6289... = 20503.1...}}.",
-          "N ≈ 20 500 (3 s.f.).",
+          "{{k a = 1500}} and {{k a^4 = 2592}}.",
+          "Divide: {{a^3 = 2592/1500 = 1.728}}, so {{a = cbrt(1.728) = 1.2}}.",
+          "{{k = 1500/1.2 = 1250}}.",
+          "t = 7: {{N = 1250 * 1.2^7 = 1250 * 3.5831808 = 4478.976}}.",
+          "N ≈ 4480 (3 s.f.).",
         ],
         solutions: [
           {
             label: "Skip k entirely",
             steps: [
-              "From t = 5 to t = 8 is another 3 hours, so N is multiplied by {{a^3 = 3.375}} again.",
-              "6075 × 3.375 = 20 503.125 ≈ 20 500. Much quicker!",
+              "From t = 4 to t = 7 is another 3 hours, so N is multiplied by {{a^3 = 1.728}} again.",
+              "2592 × 1.728 = 4478.976 ≈ 4480. Much quicker!",
             ],
           },
         ],
-        commonError: "Using a² instead of a³ because the times are 2 and 5, or treating the growth as linear.",
+        commonError: "Using a² instead of a³ because the times are 1 and 4, or treating the growth as linear.",
         difficulty: "challenge",
         guideRef: "exponential-functions",
         hints: [
           "Write two equations using the two data points.",
           "Divide them to eliminate k. How many hours apart are the readings?",
-          "Notice that 8 − 5 = 5 − 2. Is there a shortcut?",
+          "Notice that 7 − 4 = 4 − 1. Is there a shortcut?",
         ],
         strategy: "Look for an invariant",
       },
