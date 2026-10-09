@@ -93,7 +93,7 @@ function DecimalMachine() {
   const periodCut = L > 30;
   const plainDecimal = terminates
     ? `${whole}${p ? "." + preText : ""}`
-    : `${whole}.${preText}${period.join("").repeat(L < 6 ? Math.ceil(12 / L) : 1).slice(0, Math.max(L, 12))}…`;
+    : `${whole}.${preText}${period.join("").repeat(Math.ceil(12 / L) + 1).slice(0, Math.max(L, 12))}…`;
 
   // Algebra proof only when the numbers stay readable.
   const showProof = !terminates && p + L <= 6;
@@ -110,7 +110,9 @@ function DecimalMachine() {
   }.`;
 
   let caption: ReactNode;
-  if (terminates) {
+  if (sd === 1) {
+    caption = <>This fraction simplifies to the whole number {sn}, so there is nothing after the decimal point.</>;
+  } else if (terminates) {
     caption = (
       <>
         In simplest form the denominator is <M>{`${sd} = ${factorMarkup(sd)}`}</M>, which has <strong>only 2s and 5s</strong>. So you can scale it up to a power of
@@ -125,7 +127,7 @@ function DecimalMachine() {
         ends. There are only {sd - 1} possible non-zero remainders, so one must <strong>repeat</strong>, and from then on the digits repeat too: a cycle of{" "}
         <strong>{L}</strong> digit{L === 1 ? "" : "s"} (always at most {sd - 1}).
         {p > 0 ? (
-          <> The {twos || fives ? `factor${twos && fives ? "s" : ""} of ${[twos ? "2" : "", fives ? "5" : ""].filter(Boolean).join(" and ")}` : ""} in {sd} cause{twos && fives ? "" : "s"} the {p} non-recurring digit{p === 1 ? "" : "s"} before the cycle starts.</>
+          <> The extra factors of 2 or 5 in {sd} delay the start of the cycle by {p} digit{p === 1 ? "" : "s"} — that is why it has non-recurring digits first.</>
         ) : null}
       </>
     );
@@ -224,8 +226,7 @@ function DecimalMachine() {
               <li>Let x = {plainDecimal}</li>
               {p > 0 ? (
                 <li>
-                  {smallK}x = {whole}
-                  {preText}.{period.join("").repeat(3)}…
+                  {smallK}x = {B}.{period.join("").repeat(3)}…
                 </li>
               ) : null}
               <li>

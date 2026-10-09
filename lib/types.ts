@@ -105,8 +105,10 @@ export type AnswerSpec =
        * factorised: answer must be a product (e.g. 3(x+2)), not expanded.
        * expanded:   answer must have no brackets.
        * simplified: answer must have no more terms than `expr`.
+       * surd:       exact surd form — no decimals, every √n simplified (no square factor),
+       *             no surd left in a denominator (rationalised).
        */
-      form?: "any" | "factorised" | "expanded" | "simplified";
+      form?: "any" | "factorised" | "expanded" | "simplified" | "surd";
       display?: string;
     }
   /** Free text matched against accepted alternatives (case/space-insensitive). */

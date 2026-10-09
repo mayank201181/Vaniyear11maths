@@ -156,3 +156,7 @@ any file other than the one(s) your task names.
 - **Algebraic fractions "simplify fully"**: key the fully simplified expression with
   `form: "simplified"` — the checker then marks an equivalent but uncancelled fraction (more +/−
   terms than the key) as "close: simplify fully". Without `form`, any equivalent expression is accepted.
+- **Exact surd answers**: use `form: "surd"` on `expression` answers (e.g. `{ type: "expression",
+  expr: "6sqrt(2)", form: "surd" }`). The checker then marks a decimal, an unsimplified surd (√72)
+  or a surd left in a denominator (5/√3) as "close" with targeted feedback. Write roots as
+  `sqrt(…)`, higher roots as powers `^(1/4)` (there is no root4).

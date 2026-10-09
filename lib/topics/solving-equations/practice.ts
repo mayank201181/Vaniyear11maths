@@ -243,16 +243,17 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "solving-equations-p1-q03",
-          question: "Make u the subject of {{v^2 = u^2 + 2as}}, where u > 0.",
-          answer: { type: "expression", expr: "sqrt(v^2-2a*s)", display: "{{u = sqrt(v^2 - 2as)}}" },
-          solution: ["Subtract 2as from both sides: {{u^2 = v^2 - 2as}}.", "Square root (u > 0): {{u = sqrt(v^2 - 2as)}}."],
+          question: "The kinetic energy of a moving object is {{E = 1/2 m v^2}}. Make v the subject of the formula. (v > 0)",
+          answer: { type: "expression", expr: "sqrt(2E/m)", display: "{{v = sqrt((2E)/m)}}" },
+          solution: ["Multiply both sides by 2: {{2E = m v^2}}.", "Divide by m: {{v^2 = (2E)/m}}.", "Square root (v > 0): {{v = sqrt((2E)/m)}}."],
           traps: [
-            { spec: { type: "expression", expr: "v-sqrt(2a*s)" }, feedback: "You can't square-root term by term: {{sqrt(v^2 - 2as)}} is not v − {{sqrt(2as)}}. Keep the whole of {{v^2 - 2as}} under one root." },
+            { spec: { type: "expression", expr: "sqrt(E/(2m))" }, feedback: "To undo × {{1/2}} you multiply by 2 — so the 2 goes on top: {{v^2 = (2E)/m}}." },
+            { spec: { type: "expression", expr: "2E/m" }, feedback: "That's {{v^2}}. One more step: square root it." },
           ],
-          commonError: "Square-rooting each term separately.",
+          commonError: "Dividing by 2 instead of multiplying to undo the {{1/2}}.",
           difficulty: "warmup",
           guideRef: "rearranging-once",
-          hints: ["Get {{u^2}} on its own first.", "Then square root the **whole** of the other side."],
+          hints: ["Get {{v^2}} on its own first: undo the {{1/2}} and the m.", "Then square root the **whole** of the other side."],
           strategy: "Use the inverse",
         },
         {
@@ -280,7 +281,7 @@ export const practice: TopicPractice = {
           traps: [
             { spec: { type: "fraction", n: 85, d: 7 }, feedback: "Sign slip: −2(x − 2) = −2x **+ 4**. Bracket the numerators before you expand." },
           ],
-          commonError: "Using 24 (4 × 6) is fine but messier; the real killer is −2(x − 2) = −2x − 4.",
+          commonError: "Expanding −2(x − 2) as −2x − 4 instead of −2x + 4.",
           difficulty: "core",
           guideRef: "linear-equations",
           hints: [
@@ -872,7 +873,7 @@ export const practice: TopicPractice = {
       guideRef: "linear-equations",
       hints: [
         "You could multiply by 60 — but look for something slicker first. Notice the pattern in the numerators and denominators.",
-        "x − 1 and 5 add to x + 4… try instead: what does {{(x - 1)/5 - 1}} simplify to?",
+        "Try simplifying {{(x - 1)/5 - 1}}. Then {{(x - 2)/4 - 1}}. Anything in common?",
         "Split the 3 into 1 + 1 + 1 and give one to each fraction.",
         "Every fraction becomes (x − 6) over something.",
       ],

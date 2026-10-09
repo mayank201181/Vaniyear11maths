@@ -13,6 +13,7 @@ import type { AnswerSpec } from "./types.ts";
 import {
   countTerms,
   countSumOps,
+  surdFormIssue,
   evalExpr,
   exprEquivalent,
   exprVars,
@@ -353,6 +354,13 @@ function checkExpression(spec: Extract<AnswerSpec, { type: "expression" }>, inpu
   }
   if (form === "expanded" && hasGroup(got)) {
     return { status: "close", feedback: "That's equivalent — now multiply out the brackets." };
+  }
+  if (form === "surd") {
+    if (/\d\.\d/.test(input)) return { status: "close", feedback: "Right value — but give the exact answer in surd form, not a decimal." };
+    const issue = surdFormIssue(got);
+    if (issue === "unsimplified") return { status: "close", feedback: "Equivalent — but simplify the surd: take the square factors outside the root (e.g. √72 = 6√2)." };
+    if (issue === "denominator") return { status: "close", feedback: "Equivalent — but rationalise the denominator so there's no surd on the bottom." };
+    if (countSumOps(got) > countSumOps(expected)) return { status: "close", feedback: "Equivalent — now collect like surds / simplify fully." };
   }
   if (form === "simplified") {
     if (hasLooseGroup(got) && !hasGroup(expected)) {

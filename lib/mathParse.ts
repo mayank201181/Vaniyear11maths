@@ -553,3 +553,40 @@ export function exprEquivalent(a: Expr, b: Expr): boolean {
   }
   return valid >= 4;
 }
+
+/** Problems with an exact surd answer: an unsimplified √n, or a surd left in a denominator. */
+export function surdFormIssue(e: Expr): "unsimplified" | "denominator" | null {
+  const hasSqrt = (x: Expr): boolean => {
+    switch (x.t) {
+      case "num": case "var": return false;
+      case "fn": return x.name === "sqrt" || hasSqrt(x.a);
+      case "neg": case "group": return hasSqrt(x.a);
+      default: return hasSqrt(x.a) || hasSqrt(x.b);
+    }
+  };
+  let issue: "unsimplified" | "denominator" | null = null;
+  const walk = (x: Expr): void => {
+    if (issue) return;
+    switch (x.t) {
+      case "num": case "var": return;
+      case "fn": {
+        if (x.name === "sqrt") {
+          let arg = x.a;
+          while (arg.t === "group") arg = arg.a;
+          if (arg.t === "num" && Number.isInteger(arg.v) && arg.v > 3) {
+            for (let k = 2; k * k <= arg.v; k++) if (arg.v % (k * k) === 0) { issue = "unsimplified"; return; }
+          }
+        }
+        walk(x.a);
+        return;
+      }
+      case "neg": case "group": walk(x.a); return;
+      case "div":
+        if (hasSqrt(x.b)) { issue = "denominator"; return; }
+        walk(x.a); walk(x.b); return;
+      default: walk(x.a); walk(x.b);
+    }
+  };
+  walk(e);
+  return issue;
+}

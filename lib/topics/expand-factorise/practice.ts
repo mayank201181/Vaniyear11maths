@@ -197,18 +197,6 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "expand-factorise-p1-q01",
-          question: "Expand 4x(3x − 5).",
-          answer: { type: "expression", expr: "12x^2-20x", form: "expanded", display: "{{12x^2 - 20x}}" },
-          solution: ["4x × 3x = {{12x^2}}.", "4x × (−5) = −20x.", "{{12x^2 - 20x}}"],
-          commonError: "Writing 4x × 3x as 12x instead of {{12x^2}}.",
-          traps: [{ spec: { type: "expression", expr: "12x^2-5" }, feedback: "The 4x outside multiplies *every* term inside: 4x × (−5) = −20x." }],
-          difficulty: "warmup",
-          guideRef: "expanding-brackets",
-          hints: ["Multiply 4x by each term inside the bracket.", "x × x = {{x^2}}."],
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p1-q02",
           question: "Expand and simplify 3(2x + 1) − 2(x − 4).",
           answer: { type: "expression", expr: "4x+11", form: "simplified", display: "4x + 11" },
           solution: ["3(2x + 1) = 6x + 3.", "−2(x − 4) = −2x + 8 (negative × negative is positive).", "6x + 3 − 2x + 8 = 4x + 11."],
@@ -221,7 +209,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q03",
+          id: "expand-factorise-p1-q02",
           question: "Factorise fully {{6x^2 y - 15x y^2}}.",
           answer: { type: "expression", expr: "3xy(2x-5y)", form: "factorised", display: "3xy(2x − 5y)" },
           solution: ["HCF of 6 and 15 is 3.", "Both terms contain at least one x and one y, so the HCF is 3xy.", "{{6x^2 y ÷ 3xy = 2x}} and {{15x y^2 ÷ 3xy = 5y}}.", "3xy(2x − 5y)"],
@@ -233,7 +221,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q04",
+          id: "expand-factorise-p1-q03",
           question: "Factorise {{x^2 + 2x - 24}}.",
           answer: { type: "expression", expr: "(x+6)(x-4)", form: "factorised", display: "(x + 6)(x − 4)" },
           solution: ["Two numbers that multiply to −24 and add to +2: +6 and −4.", "(x + 6)(x − 4)", "Check: {{x^2 - 4x + 6x - 24 = x^2 + 2x - 24}}. ✓"],
@@ -246,7 +234,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q05",
+          id: "expand-factorise-p1-q04",
           question: "Work out the value of {{5a - 3b^2}} when a = −2 and b = −3.",
           answer: { type: "number", value: -37 },
           solution: ["5a = 5 × (−2) = −10.", "{{b^2 = (-3)^2 = 9}}, so {{3b^2 = 27}}.", "−10 − 27 = −37."],
@@ -262,7 +250,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q06",
+          id: "expand-factorise-p1-q05",
           question: "Expand and simplify (x + 2)(x − 3)(2x + 1).",
           answer: { type: "expression", expr: "2x^3-x^2-13x-6", form: "expanded", display: "{{2x^3 - x^2 - 13x - 6}}" },
           solution: [
@@ -280,20 +268,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q07",
-          question: "Expand and simplify {{(3x - 2y)^2}}.",
-          answer: { type: "expression", expr: "9x^2-12xy+4y^2", form: "expanded", display: "{{9x^2 - 12xy + 4y^2}}" },
-          solution: ["(3x − 2y)(3x − 2y).", "{{9x^2 - 6xy - 6xy + 4y^2}}", "{{9x^2 - 12xy + 4y^2}}"],
-          commonError: "Squaring each term: {{9x^2 - 4y^2}} or {{9x^2 + 4y^2}}.",
-          traps: [{ spec: { type: "expression", expr: "9x^2+4y^2" }, feedback: "A squared bracket has a middle term: 2 × (3x) × (−2y) = −12xy." }],
-          difficulty: "core",
-          guideRef: "expanding-brackets",
-          hints: ["Write the bracket out twice.", "The two middle products are each −6xy."],
-          strategy: "Write it out in full",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p1-q08",
+          id: "expand-factorise-p1-q06",
           question: "Factorise {{6x^2 - 7x - 3}}.",
           answer: { type: "expression", expr: "(3x+1)(2x-3)", form: "factorised", display: "(3x + 1)(2x − 3)" },
           solution: [
@@ -311,20 +286,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q09",
-          question: "Factorise {{25 - 16y^2}}.",
-          answer: { type: "expression", expr: "(5-4y)(5+4y)", form: "factorised", display: "(5 − 4y)(5 + 4y)" },
-          solution: ["{{25 = 5^2}} and {{16y^2 = (4y)^2}}.", "Difference of two squares: (5 − 4y)(5 + 4y)."],
-          commonError: "Writing (5 − 16y)(5 + 16y) — you need the square root of {{16y^2}}, which is 4y.",
-          traps: [{ spec: { type: "expression", expr: "(5-4y)^2" }, feedback: "{{(5-4y)^2}} has a middle term −40y. For a difference of two squares the brackets have opposite signs." }],
-          difficulty: "core",
-          guideRef: "factorising-quadratics",
-          hints: ["Are both terms perfect squares?", "{{a^2 - b^2 = (a - b)(a + b)}}: what are a and b here?"],
-          strategy: "Spot the structure",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p1-q10",
+          id: "expand-factorise-p1-q07",
           question: "Write {{2x^2 + 12x + 7}} in the form {{a(x + b)^2 + c}}. Give a, b and c in that order.",
           answer: { type: "list", values: [2, 3, -11], ordered: true, display: "a = 2, b = 3, c = −11" },
           solution: [
@@ -345,27 +307,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q11",
-          question: "By completing the square, find the minimum value of {{x^2 - 10x + 31}} and the value of x at which it occurs. Give the minimum value first.",
-          answer: { type: "list", values: [6, 5], ordered: true, display: "minimum 6, when x = 5" },
-          solution: [
-            "{{x^2 - 10x + 31 = (x-5)^2 - 25 + 31 = (x-5)^2 + 6}}.",
-            "{{(x-5)^2 >= 0}}, and it equals 0 only when x = 5.",
-            "So the minimum value is 6, when x = 5.",
-          ],
-          commonError: "Reading the x-value as −5 from (x − 5).",
-          traps: [
-            { spec: { type: "list", values: [6, -5], ordered: true }, feedback: "{{(x-5)^2 = 0}} when x = **+5**. The sign in the bracket is the opposite of the x-value." },
-            { spec: { type: "list", values: [5, 6], ordered: true }, feedback: "Right numbers, wrong order: the minimum *value* (6) first, then x." },
-          ],
-          difficulty: "core",
-          guideRef: "completing-the-square",
-          hints: ["Write the expression as {{(x - p)^2 + q}}.", "What is the smallest value a square can take?", "{{(x-5)^2 + 6}}: the square is 0 when x = 5."],
-          strategy: "Consider extremes",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p1-q12",
+          id: "expand-factorise-p1-q08",
           question: "{{v^2 = u^2 + 2as}}. A car slows down with u = 12, a = −2.5 and s = 20. Work out the positive value of v. Give your answer correct to 3 significant figures.",
           answer: { type: "number", value: 6.63, tolerance: 0.005 },
           solution: ["{{v^2 = 12^2 + 2(-2.5)(20)}}", "{{= 144 - 100 = 44}}", "{{v = sqrt(44) = 6.6332...}}", "v = 6.63 (3 s.f.)"],
@@ -381,7 +323,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q13",
+          id: "expand-factorise-p1-q09",
           question: "{{T = (2a + b)/(a - b)}}. Work out the value of T when a = {{3/4}} and b = −{{1/2}}. Give your answer as a fraction in its simplest form.",
           answer: { type: "fraction", n: 4, d: 5, simplest: true, allowDecimal: true },
           solution: [
@@ -398,7 +340,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q14",
+          id: "expand-factorise-p1-q10",
           question: "{{f(x) = x^2 - 4x}}. Find and simplify f(a + 1).",
           answer: { type: "expression", expr: "a^2-2a-3", form: "expanded", display: "{{a^2 - 2a - 3}}" },
           solution: [
@@ -417,21 +359,8 @@ export const practice: TopicPractice = {
           strategy: "Substitute a bracket",
         },
         {
-          kind: "short",
-          id: "expand-factorise-p1-q15",
-          question: "{{h(x) = x^2 + 3}}. Find all the values of x for which h(x) = 39.",
-          answer: { type: "list", values: [6, -6], ordered: false, display: "x = 6 or x = −6" },
-          solution: ["{{x^2 + 3 = 39}}", "{{x^2 = 36}}", "x = 6 or x = −6."],
-          commonError: "Giving only the positive square root.",
-          traps: [{ spec: { type: "list", values: [6] }, feedback: "{{(-6)^2 = 36}} as well. There are two values." }],
-          difficulty: "core",
-          guideRef: "function-notation-basics",
-          hints: ["Set {{x^2 + 3 = 39}}.", "{{x^2 = 36}} — how many numbers square to 36?"],
-          strategy: "Use the inverse",
-        },
-        {
           kind: "written",
-          id: "expand-factorise-p1-q16",
+          id: "expand-factorise-p1-q11",
           question: "n is an integer. Prove that {{(n+3)^2 - (n-3)^2}} is always a multiple of 12.",
           marks: 3,
           modelAnswer:
@@ -452,7 +381,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "written",
-          id: "expand-factorise-p1-q17",
+          id: "expand-factorise-p1-q12",
           question: "Priya says that {{2x^2 - 5x - 3 = (2x - 1)(x + 3)}}.\n\nShow that Priya is wrong, explain her mistake and give the correct factorisation.",
           marks: 3,
           modelAnswer:
@@ -470,7 +399,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "written",
-          id: "expand-factorise-p1-q18",
+          id: "expand-factorise-p1-q13",
           question: "Show that {{x^2 - 6x + 11}} is positive for all values of x.",
           marks: 3,
           modelAnswer:
@@ -488,7 +417,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q19",
+          id: "expand-factorise-p1-q14",
           question: "{{x^4 - 13x^2 + 36}} can be written as (x − a)(x + a)(x − b)(x + b), where a and b are positive integers and a < b. Find a and b. Give a first.",
           answer: { type: "list", values: [2, 3], ordered: true, display: "a = 2, b = 3" },
           solution: [
@@ -507,7 +436,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p1-q20",
+          id: "expand-factorise-p1-q15",
           question: "{{x^2 + kx + 20}} can be factorised as (x + m)(x + n), where k, m and n are all integers. How many different values of k are possible?",
           answer: { type: "number", value: 6 },
           solution: [
@@ -588,18 +517,6 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "expand-factorise-p2-q05",
-          question: "Factorise fully {{5x^2 - 20x}}.",
-          answer: { type: "expression", expr: "5x(x-4)", form: "factorised", display: "5x(x − 4)" },
-          solution: ["HCF of {{5x^2}} and 20x is 5x.", "5x(x − 4)"],
-          commonError: "Taking out only 5 or only x — 'fully' means the HCF.",
-          difficulty: "warmup",
-          guideRef: "factorising-quadratics",
-          hints: ["What is the HCF of 5 and 20? Do both terms contain x?"],
-          strategy: "Check by expanding",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p2-q06",
           question: "Expand and simplify {{(2x + 3)(x - 4) - (x - 5)^2}}.",
           answer: { type: "expression", expr: "x^2+5x-37", form: "simplified", display: "{{x^2 + 5x - 37}}" },
           solution: [
@@ -620,24 +537,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q07",
-          question: "Expand and simplify {{(x - 2)^3}}.",
-          answer: { type: "expression", expr: "x^3-6x^2+12x-8", form: "expanded", display: "{{x^3 - 6x^2 + 12x - 8}}" },
-          solution: [
-            "{{(x-2)^2 = x^2 - 4x + 4}}.",
-            "{{(x^2 - 4x + 4)(x - 2) = x^3 - 2x^2 - 4x^2 + 8x + 4x - 8}}.",
-            "{{= x^3 - 6x^2 + 12x - 8}}.",
-          ],
-          commonError: "Cubing each term: {{x^3 - 8}}.",
-          traps: [{ spec: { type: "expression", expr: "x^3-8" }, feedback: "Cubing a bracket isn't cubing each term. Write (x − 2)(x − 2)(x − 2) and expand two at a time." }],
-          difficulty: "core",
-          guideRef: "expanding-brackets",
-          hints: ["Write it as three brackets.", "Expand {{(x-2)^2}} first, then multiply by (x − 2).", "You should get six products before collecting."],
-          strategy: "Make it simpler",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p2-q08",
+          id: "expand-factorise-p2-q06",
           question: "Factorise {{10x^2 + 11x - 6}}.",
           answer: { type: "expression", expr: "(5x-2)(2x+3)", form: "factorised", display: "(5x − 2)(2x + 3)" },
           solution: [
@@ -655,7 +555,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q09",
+          id: "expand-factorise-p2-q07",
           question: "{{3x^2 - 12x - 36}} can be factorised fully as a(x + b)(x + c), where a, b and c are integers and b > c. Find a, b and c. Give them in that order.",
           answer: { type: "list", values: [3, 2, -6], ordered: true, display: "a = 3, b = 2, c = −6" },
           solution: [
@@ -672,7 +572,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q10",
+          id: "expand-factorise-p2-q08",
           question: "Write {{x^2 - 5x + 2}} in the form {{(x + p)^2 + q}}. Give p and q, p first. (Fractions or decimals are fine.)",
           answer: { type: "list", values: [-2.5, -4.25], ordered: true, display: "p = −{{5/2}}, q = −{{17/4}}" },
           solution: [
@@ -692,36 +592,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q11",
-          question: "By completing the square, find the coordinates of the turning point of {{y = x^2 + 6x + 1}}. Give your answer as (x, y).",
-          answer: { type: "list", values: [-3, -8], ordered: true, display: "(−3, −8)" },
-          solution: ["{{x^2 + 6x + 1 = (x+3)^2 - 9 + 1 = (x+3)^2 - 8}}.", "The square is 0 when x = −3, giving y = −8.", "Turning point (−3, −8)."],
-          commonError: "Reading the x-coordinate as +3 from (x + 3).",
-          traps: [{ spec: { type: "list", values: [3, -8], ordered: true }, feedback: "{{(x+3)^2 = 0}} when x = −3, not +3." }],
-          difficulty: "core",
-          guideRef: "completing-the-square",
-          hints: ["Write y in the form {{(x + p)^2 + q}}.", "When is the bracket squared equal to 0?"],
-          strategy: "Consider extremes",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p2-q12",
-          question: "{{s = ut + 1/2 a t^2}}. Work out s when u = 3.5, t = 4 and a = −1.5.",
-          answer: { type: "number", value: 2 },
-          solution: ["ut = 3.5 × 4 = 14.", "{{1/2 a t^2 = 1/2 * (-1.5) * 16 = -12}}.", "s = 14 − 12 = 2."],
-          commonError: "Squaring {{1/2 a t}} instead of just t, or losing the negative sign on a.",
-          traps: [
-            { spec: { type: "number", value: 26 }, feedback: "a is negative, so {{1/2 a t^2 = -12}}. 14 + (−12) = 2." },
-            { spec: { type: "number", value: 23 }, feedback: "Only t is squared: {{t^2 = 16}}, then multiply by {{1/2}} and −1.5." },
-          ],
-          difficulty: "core",
-          guideRef: "substitution-formulae",
-          hints: ["Work out ut and {{1/2 a t^2}} separately.", "{{t^2 = 16}}. Then {{1/2 * (-1.5) * 16}}."],
-          strategy: "Split into parts",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p2-q13",
+          id: "expand-factorise-p2-q09",
           question: "For a lens, {{1/f = 1/u + 1/v}}. Work out f when u = {{2/3}} and v = −{{1/4}}. Give your answer as a fraction.",
           answer: { type: "fraction", n: -2, d: 5, allowDecimal: true, display: "−{{2/5}}" },
           solution: [
@@ -742,20 +613,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q14",
-          question: "{{f(x) = x^2 + 2x}}. Solve f(x) = 15.",
-          answer: { type: "list", values: [3, -5], ordered: false, display: "x = 3 or x = −5" },
-          solution: ["{{x^2 + 2x = 15}}", "{{x^2 + 2x - 15 = 0}}", "(x + 5)(x − 3) = 0", "x = −5 or x = 3."],
-          commonError: "Trying to factorise before rearranging to = 0.",
-          traps: [{ spec: { type: "list", values: [-3, 5] }, feedback: "(x + 5)(x − 3) = 0 gives x = −5 or x = 3: each solution has the opposite sign to the number in its bracket." }],
-          difficulty: "core",
-          guideRef: "function-notation-basics",
-          hints: ["Write f(x) = 15 as an equation in x.", "Rearrange to {{x^2 + 2x - 15 = 0}} and factorise."],
-          strategy: "Rearrange to = 0",
-        },
-        {
-          kind: "short",
-          id: "expand-factorise-p2-q15",
+          id: "expand-factorise-p2-q10",
           question: "f(x) = 3x − 7. Find and simplify f(2a) − f(a).",
           answer: { type: "expression", expr: "3a", form: "simplified", display: "3a" },
           solution: ["f(2a) = 3(2a) − 7 = 6a − 7.", "f(a) = 3a − 7.", "(6a − 7) − (3a − 7) = 6a − 7 − 3a + 7 = 3a."],
@@ -771,7 +629,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "written",
-          id: "expand-factorise-p2-q16",
+          id: "expand-factorise-p2-q11",
           question: "Show that {{(x + 1)(x - 2)(2x + 5) = 2x^3 + 3x^2 - 9x - 10}}.",
           marks: 3,
           modelAnswer:
@@ -789,7 +647,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "written",
-          id: "expand-factorise-p2-q17",
+          id: "expand-factorise-p2-q12",
           question: "Marcus works out the value of {{4 - 2x^2}} when x = −3. He writes:\n\n    4 − 2x² = 4 − (−6)² = 4 − 36 = −32\n\nExplain his mistake and work out the correct value.",
           marks: 3,
           modelAnswer:
@@ -807,7 +665,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "written",
-          id: "expand-factorise-p2-q18",
+          id: "expand-factorise-p2-q13",
           question: "Prove that the product of any two consecutive odd numbers is always one less than a multiple of 4.",
           marks: 3,
           modelAnswer:
@@ -828,7 +686,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q19",
+          id: "expand-factorise-p2-q14",
           question: "The expression {{2x^2 - 8x + c}} has a minimum value of 3. Find the value of c.",
           answer: { type: "number", value: 11 },
           solution: [
@@ -849,7 +707,7 @@ export const practice: TopicPractice = {
         },
         {
           kind: "short",
-          id: "expand-factorise-p2-q20",
+          id: "expand-factorise-p2-q15",
           question: "Factorise fully {{(2x + 1)^2 - (x - 3)^2}}.",
           answer: { type: "expression", expr: "(x+4)(3x-2)", form: "factorised", display: "(x + 4)(3x − 2)" },
           solution: [
