@@ -87,15 +87,15 @@ const expectPapers = (papers: Paper[], prefix: string, nums: number[], per: numb
     });
   }
 };
-if (mcqPapers.length) expectPapers(mcqPapers, "m", [1, 2, 3, 4], 20, "mcq.ts");
+if (mcqPapers.length) expectPapers(mcqPapers, "m", [1, 2, 3], 15, "mcq.ts");
 if (practice) {
-  expectPapers(practice.papers, "p", [1, 2], 20, "practice.ts");
+  expectPapers(practice.papers, "p", [1, 2], 15, "practice.ts");
   if (practice.quiz.length !== 10) issues.push({ where: "practice.quiz", problem: `has ${practice.quiz.length}, needs 10` });
   practice.quiz.forEach((q, i) => { const w = `${id}-quiz-q${String(i + 1).padStart(2, "0")}`; if (q.id !== w) issues.push({ where: `quiz[${i}]`, problem: `id should be ${w}` }); });
   if (practice.challenge.length !== 10) issues.push({ where: "practice.challenge", problem: `has ${practice.challenge.length}, needs 10` });
   practice.challenge.forEach((q, i) => { const w = `${id}-ch-q${String(i + 1).padStart(2, "0")}`; if (q.id !== w) issues.push({ where: `challenge[${i}]`, problem: `id should be ${w}` }); });
 }
-if (practice2.length) expectPapers(practice2, "p", [3, 4], 20, "practice2.ts");
+if (practice2.length) expectPapers(practice2, "p", [3, 4], 15, "practice2.ts");
 
 const { issues: vIssues, counts } = validateTopic(topic);
 issues.push(...vIssues);

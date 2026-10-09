@@ -153,3 +153,6 @@ any file other than the one(s) your task names.
   coordinates of the point with positive x" → `list` ordered) so the answer is checkable.
 - **Graphs and diagrams**: for cumulative frequency, histograms, box-like data, graph reading —
   draw the SVG accurately from the data so the learner can actually read values off it.
+- **Algebraic fractions "simplify fully"**: key the fully simplified expression with
+  `form: "simplified"` — the checker then marks an equivalent but uncancelled fraction (more +/−
+  terms than the key) as "close: simplify fully". Without `form`, any equivalent expression is accepted.

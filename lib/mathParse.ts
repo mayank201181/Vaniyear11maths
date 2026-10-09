@@ -354,6 +354,16 @@ export function countTerms(e: Expr): number {
   return 1;
 }
 
+/** Number of + / − operations anywhere in the expression (inside brackets, numerators and denominators too). */
+export function countSumOps(e: Expr): number {
+  switch (e.t) {
+    case "num": case "var": return 0;
+    case "neg": case "group": case "fn": return countSumOps(e.a);
+    case "add": case "sub": return 1 + countSumOps(e.a) + countSumOps(e.b);
+    default: return countSumOps(e.a) + countSumOps(e.b);
+  }
+}
+
 export function hasGroup(e: Expr): boolean {
   switch (e.t) {
     case "group": return true;

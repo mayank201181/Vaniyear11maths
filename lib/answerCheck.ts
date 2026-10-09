@@ -12,6 +12,7 @@
 import type { AnswerSpec } from "./types.ts";
 import {
   countTerms,
+  countSumOps,
   evalExpr,
   exprEquivalent,
   exprVars,
@@ -359,6 +360,9 @@ function checkExpression(spec: Extract<AnswerSpec, { type: "expression" }>, inpu
     }
     if (countTerms(got) > countTerms(expected)) {
       return { status: "close", feedback: "That's equivalent — but collect the like terms to simplify fully." };
+    }
+    if (countSumOps(got) > countSumOps(expected)) {
+      return { status: "close", feedback: "That's equivalent — but not fully simplified. Factorise and cancel any common factors (or collect like terms)." };
     }
   }
   if ((form === "simplified" || form === "expanded") && hasUncombinedTerm(got) && !hasUncombinedTerm(expected)) {
