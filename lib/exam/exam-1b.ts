@@ -673,7 +673,7 @@ export const paper: ExamPaper = {
       guideRef: "turning-points",
       difficulty: "challenge",
       question:
-        "A company makes closed cylindrical tins (with a lid and a base) from thin metal. Each tin has radius r cm and height h cm, and must hold exactly 250π cm³.\n\n(a) Show that the total surface area, A cm², of a tin is {{A = 2 pi r^2 + (500 pi)/r}}.\n\n(b) Use calculus to find the minimum possible surface area of a tin. Give your answer in terms of π.",
+        "A company makes closed cylindrical tins (with a lid and a base) from thin metal. Each tin has radius r cm and height h cm, and must hold exactly 250π cm³.\n\nThe total surface area, A cm², of a tin is given by {{A = 2 pi r^2 + (500 pi)/r}}.\n\nUse calculus to find the minimum possible surface area of a tin. Give your answer in terms of π.",
       answer: { type: "expression", expr: "150pi", display: "150π cm²" },
       traps: [
         { spec: { type: "number", value: 5 }, feedback: "r = 5 cm is the radius that gives the minimum. The question asks for the minimum *surface area* — substitute r = 5 back into A." },
@@ -681,15 +681,15 @@ export const paper: ExamPaper = {
         { spec: { type: "expression", expr: "125pi" }, feedback: "You seem to have used only one circular end. A closed tin has a lid *and* a base: {{2 pi r^2}}." },
       ],
       solution: [
-        "(a) Volume: {{pi r^2 h = 250 pi}}, so {{h = 250/r^2}}.",
+        "Where the formula comes from: {{pi r^2 h = 250 pi}}, so {{h = 250/r^2}}.",
         "Surface area = two circles + curved surface: {{A = 2 pi r^2 + 2 pi r h = 2 pi r^2 + 2 pi r * 250/r^2 = 2 pi r^2 + (500 pi)/r}}.",
-        "(b) {{(dA)/(dr) = 4 pi r - 500 pi r^(-2)}}. Set = 0: {{4 pi r = (500 pi)/r^2}}, so {{r^3 = 125}} and r = 5.",
+        "{{(dA)/(dr) = 4 pi r - 500 pi r^(-2)}}. Set = 0: {{4 pi r = (500 pi)/r^2}}, so {{r^3 = 125}} and r = 5.",
         "{{(d^2A)/(dr^2) = 4 pi + (1000 pi)/r^3}} > 0, so r = 5 gives a minimum.",
         "A = 2π(25) + {{(500 pi)/5}} = 50π + 100π = **150π cm²** (with h = 10 cm).",
       ],
       commonError: "Forgetting one of the circular ends, or stopping at r = 5 without finding the area.",
       hints: [
-        "Use the volume to write h in terms of r, then substitute into A = 2πr² + 2πrh.",
+        "The formula for A is given — you only need to differentiate it.",
         "Write {{(500 pi)/r}} as {{500 pi r^(-1)}} before differentiating.",
         "Set {{(dA)/(dr) = 0}}, solve for r, check it is a minimum, then find A.",
       ],

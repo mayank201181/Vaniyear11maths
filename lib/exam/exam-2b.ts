@@ -6,17 +6,19 @@ import type { ExamPaper } from "../types.ts";
 
 const CCA_VENN = `<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram. The universal set is the 50 students in a CCA. Circle C is Choir and circle B is Badminton. Choir only 14, both 6, Badminton only 19, neither 11." font-family="sans-serif"><rect x="0" y="0" width="420" height="260" fill="#ffffff"/><rect x="20" y="20" width="380" height="220" fill="#ffffff" stroke="#1f2937" stroke-width="2"/><circle cx="165" cy="130" r="80" fill="#c7d2fe" fill-opacity="0.6" stroke="#1f2937" stroke-width="2"/><circle cx="255" cy="130" r="80" fill="#fde68a" fill-opacity="0.6" stroke="#1f2937" stroke-width="2"/><g font-size="15" fill="#1f2937" text-anchor="middle"><text x="125" y="135">14</text><text x="210" y="135">6</text><text x="295" y="135">19</text><text x="370" y="225">11</text></g><g font-size="14" fill="#1f2937" font-weight="bold"><text x="32" y="40">ξ</text><text x="100" y="58">C</text><text x="312" y="58">B</text></g></svg>`;
 
-const JOURNEY_HIST = `<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Histogram of journey times in minutes. Frequency density axis from 0 to 5 with gridlines every 0.2. Bars: 0 to 10 minutes height 1.2; 10 to 15 height 3.6; 15 to 20 height 4.4; 20 to 30 height 2.0; 30 to 50 height 0.6." font-family="sans-serif"><rect x="0" y="0" width="480" height="320" fill="#ffffff"/><g stroke="#e2e8f0" stroke-width="1"><line x1="60" y1="262" x2="460" y2="262"/><line x1="60" y1="254" x2="460" y2="254"/><line x1="60" y1="246" x2="460" y2="246"/><line x1="60" y1="238" x2="460" y2="238"/><line x1="60" y1="230" x2="460" y2="230" stroke="#cbd5e1"/><line x1="60" y1="222" x2="460" y2="222"/><line x1="60" y1="214" x2="460" y2="214"/><line x1="60" y1="206" x2="460" y2="206"/><line x1="60" y1="198" x2="460" y2="198"/><line x1="60" y1="190" x2="460" y2="190" stroke="#cbd5e1"/><line x1="60" y1="182" x2="460" y2="182"/><line x1="60" y1="174" x2="460" y2="174"/><line x1="60" y1="166" x2="460" y2="166"/><line x1="60" y1="158" x2="460" y2="158"/><line x1="60" y1="150" x2="460" y2="150" stroke="#cbd5e1"/><line x1="60" y1="142" x2="460" y2="142"/><line x1="60" y1="134" x2="460" y2="134"/><line x1="60" y1="126" x2="460" y2="126"/><line x1="60" y1="118" x2="460" y2="118"/><line x1="60" y1="110" x2="460" y2="110" stroke="#cbd5e1"/><line x1="60" y1="102" x2="460" y2="102"/><line x1="60" y1="94" x2="460" y2="94"/><line x1="60" y1="86" x2="460" y2="86"/><line x1="60" y1="78" x2="460" y2="78"/><line x1="60" y1="70" x2="460" y2="70" stroke="#cbd5e1"/><line x1="100" y1="70" x2="100" y2="270"/><line x1="140" y1="70" x2="140" y2="270"/><line x1="180" y1="70" x2="180" y2="270"/><line x1="220" y1="70" x2="220" y2="270"/><line x1="260" y1="70" x2="260" y2="270"/><line x1="300" y1="70" x2="300" y2="270"/><line x1="340" y1="70" x2="340" y2="270"/><line x1="380" y1="70" x2="380" y2="270"/><line x1="420" y1="70" x2="420" y2="270"/><line x1="460" y1="70" x2="460" y2="270"/></g><g fill="#c7d2fe" stroke="#1f2937" stroke-width="1.5"><rect x="60" y="222" width="80" height="48"/><rect x="140" y="126" width="40" height="144"/><rect x="180" y="94" width="40" height="176"/><rect x="220" y="190" width="80" height="80"/><rect x="300" y="246" width="160" height="24"/></g><line x1="60" y1="270" x2="468" y2="270" stroke="#1f2937" stroke-width="1.5"/><line x1="60" y1="270" x2="60" y2="62" stroke="#1f2937" stroke-width="1.5"/><g font-size="12" fill="#1f2937" text-anchor="middle"><text x="60" y="288">0</text><text x="140" y="288">10</text><text x="220" y="288">20</text><text x="300" y="288">30</text><text x="380" y="288">40</text><text x="460" y="288">50</text></g><g font-size="12" fill="#1f2937" text-anchor="end"><text x="54" y="274">0</text><text x="54" y="234">1</text><text x="54" y="194">2</text><text x="54" y="154">3</text><text x="54" y="114">4</text><text x="54" y="74">5</text></g><text x="260" y="310" font-size="13" fill="#1f2937" text-anchor="middle">Journey time, t (minutes)</text><text x="18" y="170" font-size="13" fill="#1f2937" text-anchor="middle" transform="rotate(-90 18 170)">Frequency density</text></svg>`;
+const REVISION_HIST = `<svg viewBox="0 0 460 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Histogram of revision times t minutes from 0 to 60, drawn on a grid of small squares. The frequency density axis has no numbers. Bar heights in small squares (each small square is 0.2 of the density scale): 0 to 20 minutes, 4 squares; 20 to 30, 13 squares; 30 to 35, 24 squares; 35 to 40, 18 squares; 40 to 60, 5 squares." font-family="sans-serif"><rect x="0" y="0" width="460" height="320" fill="#ffffff"/><g stroke-width="1"><line x1="60" y1="262" x2="420" y2="262" stroke="#e2e8f0"/><line x1="60" y1="254" x2="420" y2="254" stroke="#e2e8f0"/><line x1="60" y1="246" x2="420" y2="246" stroke="#e2e8f0"/><line x1="60" y1="238" x2="420" y2="238" stroke="#e2e8f0"/><line x1="60" y1="230" x2="420" y2="230" stroke="#cbd5e1"/><line x1="60" y1="222" x2="420" y2="222" stroke="#e2e8f0"/><line x1="60" y1="214" x2="420" y2="214" stroke="#e2e8f0"/><line x1="60" y1="206" x2="420" y2="206" stroke="#e2e8f0"/><line x1="60" y1="198" x2="420" y2="198" stroke="#e2e8f0"/><line x1="60" y1="190" x2="420" y2="190" stroke="#cbd5e1"/><line x1="60" y1="182" x2="420" y2="182" stroke="#e2e8f0"/><line x1="60" y1="174" x2="420" y2="174" stroke="#e2e8f0"/><line x1="60" y1="166" x2="420" y2="166" stroke="#e2e8f0"/><line x1="60" y1="158" x2="420" y2="158" stroke="#e2e8f0"/><line x1="60" y1="150" x2="420" y2="150" stroke="#cbd5e1"/><line x1="60" y1="142" x2="420" y2="142" stroke="#e2e8f0"/><line x1="60" y1="134" x2="420" y2="134" stroke="#e2e8f0"/><line x1="60" y1="126" x2="420" y2="126" stroke="#e2e8f0"/><line x1="60" y1="118" x2="420" y2="118" stroke="#e2e8f0"/><line x1="60" y1="110" x2="420" y2="110" stroke="#cbd5e1"/><line x1="60" y1="102" x2="420" y2="102" stroke="#e2e8f0"/><line x1="60" y1="94" x2="420" y2="94" stroke="#e2e8f0"/><line x1="60" y1="86" x2="420" y2="86" stroke="#e2e8f0"/><line x1="60" y1="78" x2="420" y2="78" stroke="#e2e8f0"/><line x1="60" y1="70" x2="420" y2="70" stroke="#cbd5e1"/><line x1="90" y1="70" x2="90" y2="270" stroke="#e2e8f0"/><line x1="120" y1="70" x2="120" y2="270" stroke="#cbd5e1"/><line x1="150" y1="70" x2="150" y2="270" stroke="#e2e8f0"/><line x1="180" y1="70" x2="180" y2="270" stroke="#cbd5e1"/><line x1="210" y1="70" x2="210" y2="270" stroke="#e2e8f0"/><line x1="240" y1="70" x2="240" y2="270" stroke="#cbd5e1"/><line x1="270" y1="70" x2="270" y2="270" stroke="#e2e8f0"/><line x1="300" y1="70" x2="300" y2="270" stroke="#cbd5e1"/><line x1="330" y1="70" x2="330" y2="270" stroke="#e2e8f0"/><line x1="360" y1="70" x2="360" y2="270" stroke="#cbd5e1"/><line x1="390" y1="70" x2="390" y2="270" stroke="#e2e8f0"/><line x1="420" y1="70" x2="420" y2="270" stroke="#cbd5e1"/></g><g fill="#c7d2fe" stroke="#1f2937" stroke-width="1.5"><rect x="60" y="238" width="120" height="32"/><rect x="180" y="166" width="60" height="104"/><rect x="240" y="78" width="30" height="192"/><rect x="270" y="126" width="30" height="144"/><rect x="300" y="230" width="120" height="40"/></g><line x1="60" y1="270" x2="428" y2="270" stroke="#1f2937" stroke-width="1.5"/><line x1="60" y1="270" x2="60" y2="62" stroke="#1f2937" stroke-width="1.5"/><g font-size="12" fill="#1f2937" text-anchor="middle"><text x="60" y="288">0</text><text x="120" y="288">10</text><text x="180" y="288">20</text><text x="240" y="288">30</text><text x="300" y="288">40</text><text x="360" y="288">50</text><text x="420" y="288">60</text></g><text x="240" y="310" font-size="13" fill="#1f2937" text-anchor="middle">Revision time, t (minutes)</text><text x="30" y="170" font-size="13" fill="#1f2937" text-anchor="middle" transform="rotate(-90 30 170)">Frequency density</text></svg>`;
 
-const POT_FRUSTUM = `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A plant pot in the shape of a frustum of a cone. The top circle has radius 12 cm, the bottom circle has radius 8 cm and the vertical height is 15 cm." font-family="sans-serif"><rect x="0" y="0" width="400" height="240" fill="#ffffff"/><path d="M80 60 L120 180 A80 15 0 0 0 280 180 L320 60 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><ellipse cx="200" cy="60" rx="120" ry="22" fill="#bbf7d0" stroke="#1f2937" stroke-width="2"/><path d="M120 180 A80 15 0 0 1 280 180" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4"/><g stroke="#334155" stroke-width="1.2"><line x1="200" y1="60" x2="320" y2="60"/><line x1="200" y1="180" x2="280" y2="180"/><line x1="200" y1="60" x2="200" y2="180" stroke-dasharray="5 4"/></g><path d="M200 172 L208 172 L208 180" fill="none" stroke="#334155" stroke-width="1"/><g font-size="13" fill="#1f2937"><text x="260" y="54" text-anchor="middle">12 cm</text><text x="240" y="174" text-anchor="middle">8 cm</text><text x="192" y="125" text-anchor="end">15 cm</text><text x="392" y="232" text-anchor="end" font-size="11">Not to scale</text></g></svg>`;
+const POT_FRUSTUM = `<svg viewBox="0 0 400 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A plant pot in the shape of a frustum of a cone. The top circle has radius 12 cm, the bottom circle has radius 8 cm and the vertical height is 15 cm." font-family="sans-serif"><rect x="0" y="0" width="400" height="270" fill="#ffffff"/><path d="M80 60 L120 210 A80 15 0 0 0 280 210 L320 60 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><ellipse cx="200" cy="60" rx="120" ry="22" fill="#bbf7d0" stroke="#1f2937" stroke-width="2"/><path d="M120 210 A80 15 0 0 1 280 210" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4"/><g stroke="#334155" stroke-width="1.2"><line x1="200" y1="60" x2="320" y2="60"/><line x1="200" y1="210" x2="280" y2="210"/><line x1="200" y1="60" x2="200" y2="210" stroke-dasharray="5 4"/></g><path d="M200 202 L208 202 L208 210" fill="none" stroke="#334155" stroke-width="1"/><g font-size="13" fill="#1f2937"><text x="260" y="54" text-anchor="middle">12 cm</text><text x="240" y="204" text-anchor="middle">8 cm</text><text x="192" y="140" text-anchor="end">15 cm</text><text x="392" y="262" text-anchor="end" font-size="11">Not to scale</text></g></svg>`;
 
-const CIRCLE_TANGENT = `<svg viewBox="0 0 400 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Points A, B, C and D lie on a circle. A is at the bottom, B on the right, C at the top right and D on the left. A straight line through A touches the circle at A and continues to the point T on the right. Chords AB, BC, CD, DA and DB are drawn. Angle TAB is marked 58 degrees." font-family="sans-serif"><rect x="0" y="0" width="400" height="320" fill="#ffffff"/><circle cx="200" cy="165" r="115" fill="#ffffff" stroke="#1f2937" stroke-width="2"/><line x1="60" y1="280" x2="370" y2="280" stroke="#1f2937" stroke-width="2"/><g stroke="#334155" stroke-width="1.8" fill="none"><polygon points="200,280 303.4,114.6 254,63.5 90.6,129.5"/><line x1="303.4" y1="114.6" x2="90.6" y2="129.5"/></g><path d="M236 280 A36 36 0 0 0 219.1 249.5" fill="none" stroke="#1f2937" stroke-width="1.5"/><g fill="#1f2937"><circle cx="200" cy="280" r="3.5"/><circle cx="303.4" cy="114.6" r="3.5"/><circle cx="254" cy="63.5" r="3.5"/><circle cx="90.6" cy="129.5" r="3.5"/></g><g font-size="14" fill="#1f2937"><text x="195" y="300">A</text><text x="312" y="112">B</text><text x="258" y="56">C</text><text x="72" y="128">D</text><text x="372" y="298">T</text><text x="244" y="270" font-size="13">58°</text><text x="392" y="314" text-anchor="end" font-size="11">Diagram NOT accurately drawn</text></g></svg>`;
+const TANGENTS_P = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A circle with centre O. PA and PB are tangents to the circle from the point P outside the circle, touching it at A and B. C is a point on the major arc AB. Chords CA and CB are drawn, and radii OA and OB are dashed. Angle APB is 48 degrees." font-family="sans-serif"><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><circle cx="200" cy="150" r="80" fill="#f8fafc" stroke="#1f2937" stroke-width="2"/><g stroke="#1f2937" stroke-width="1.8"><line x1="396.7" y1="150" x2="232.54" y2="76.92"/><line x1="396.7" y1="150" x2="232.54" y2="223.08"/><line x1="124.82" y1="177.36" x2="232.54" y2="76.92"/><line x1="124.82" y1="177.36" x2="232.54" y2="223.08"/></g><g stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4"><line x1="200" y1="150" x2="232.54" y2="76.92"/><line x1="200" y1="150" x2="232.54" y2="223.08"/></g><path d="M369.3 137.8 A30 30 0 0 0 369.3 162.2" fill="none" stroke="#b91c1c" stroke-width="1.5"/><g fill="#1f2937"><circle cx="200" cy="150" r="3"/><circle cx="232.54" cy="76.92" r="3.5"/><circle cx="232.54" cy="223.08" r="3.5"/><circle cx="124.82" cy="177.36" r="3.5"/><circle cx="396.7" cy="150" r="3.5"/></g><g font-size="14" fill="#1f2937"><text x="184" y="148">O</text><text x="230" y="68">A</text><text x="230" y="244">B</text><text x="106" y="186">C</text><text x="404" y="155">P</text><text x="338" y="155" font-size="12" fill="#b91c1c">48°</text></g><text x="432" y="294" text-anchor="end" font-size="11" fill="#1f2937">Diagram NOT accurately drawn</text></svg>`;
 
-const PYRAMID = `<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pyramid VABCD with a rectangular base ABCD. AB is 8 metres and BC is 6 metres. The apex V is vertically above M, the centre of the base. VA is 13 metres." font-family="sans-serif"><rect x="0" y="0" width="420" height="300" fill="#ffffff"/><polygon points="80,260 300,260 370,200 225,50" fill="#c7d2fe" fill-opacity="0.5" stroke="none"/><g stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4" fill="none"><line x1="80" y1="260" x2="150" y2="200"/><line x1="150" y1="200" x2="370" y2="200"/><line x1="225" y1="50" x2="150" y2="200"/><line x1="80" y1="260" x2="370" y2="200"/><line x1="225" y1="50" x2="225" y2="230"/></g><g stroke="#1f2937" stroke-width="2" fill="none"><line x1="80" y1="260" x2="300" y2="260"/><line x1="300" y1="260" x2="370" y2="200"/><line x1="225" y1="50" x2="80" y2="260"/><line x1="225" y1="50" x2="300" y2="260"/><line x1="225" y1="50" x2="370" y2="200"/></g><path d="M225 220 L216 222 L216 232" fill="none" stroke="#334155" stroke-width="1"/><circle cx="225" cy="230" r="2.5" fill="#1f2937"/><g font-size="14" fill="#1f2937"><text x="66" y="272">A</text><text x="304" y="276">B</text><text x="376" y="200">C</text><text x="136" y="196">D</text><text x="220" y="42">V</text><text x="230" y="246">M</text></g><g font-size="13" fill="#1f2937"><text x="190" y="280" text-anchor="middle">8 m</text><text x="346" y="246">6 m</text><text x="140" y="150" text-anchor="end">13 m</text></g></svg>`;
+const PYRAMID = `<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A pyramid VABCD with a rectangular base ABCD. AB is 8 metres and BC is 6 metres. The apex V is vertically above M, the centre of the base. VA is 13 metres. N is the midpoint of BC; dashed lines join M to N and V to N." font-family="sans-serif"><rect x="0" y="0" width="420" height="300" fill="#ffffff"/><polygon points="80,260 300,260 370,200 225,50" fill="#c7d2fe" fill-opacity="0.5" stroke="none"/><g stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4" fill="none"><line x1="80" y1="260" x2="150" y2="200"/><line x1="150" y1="200" x2="370" y2="200"/><line x1="225" y1="50" x2="150" y2="200"/><line x1="80" y1="260" x2="370" y2="200"/><line x1="225" y1="50" x2="225" y2="230"/><line x1="225" y1="230" x2="335" y2="230"/><line x1="225" y1="50" x2="335" y2="230"/></g><g stroke="#1f2937" stroke-width="2" fill="none"><line x1="80" y1="260" x2="300" y2="260"/><line x1="300" y1="260" x2="370" y2="200"/><line x1="225" y1="50" x2="80" y2="260"/><line x1="225" y1="50" x2="300" y2="260"/><line x1="225" y1="50" x2="370" y2="200"/></g><path d="M225 220 L216 222 L216 232" fill="none" stroke="#334155" stroke-width="1"/><circle cx="225" cy="230" r="2.5" fill="#1f2937"/><circle cx="335" cy="230" r="2.5" fill="#1f2937"/><g font-size="14" fill="#1f2937"><text x="66" y="272">A</text><text x="304" y="276">B</text><text x="376" y="200">C</text><text x="136" y="196">D</text><text x="220" y="42">V</text><text x="230" y="246">M</text><text x="342" y="226">N</text></g><g font-size="13" fill="#1f2937"><text x="190" y="280" text-anchor="middle">8 m</text><text x="346" y="246">6 m</text><text x="140" y="150" text-anchor="end">13 m</text></g><text x="412" y="294" text-anchor="end" font-size="11" fill="#1f2937">Diagram NOT accurately drawn</text></svg>`;
 
 const VECTOR_PATH = `<svg viewBox="0 0 400 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle OAB with O at the bottom left, A to the right of O and B above and slightly right of O. OA is a and OB is b. P lies on AB. The line OA is extended to X so that A is the midpoint of OX. From X a line XY equal to b goes up to Y." font-family="sans-serif"><rect x="0" y="0" width="400" height="290" fill="#ffffff"/><g stroke="#1f2937" stroke-width="2" fill="none"><line x1="50" y1="250" x2="290" y2="250"/><line x1="50" y1="250" x2="110" y2="100"/><line x1="170" y1="250" x2="110" y2="100"/><line x1="290" y1="250" x2="350" y2="100"/></g><g fill="#1f2937"><polygon points="114,250 104,245 104,255"/><polygon points="81.5,171.3 82.4,182.5 73.2,178.7"/><polygon points="321.5,171.3 322.4,182.5 313.2,178.7"/><circle cx="50" cy="250" r="3.5"/><circle cx="170" cy="250" r="3.5"/><circle cx="290" cy="250" r="3.5"/><circle cx="110" cy="100" r="3.5"/><circle cx="350" cy="100" r="3.5"/><circle cx="150" cy="200" r="3.5"/></g><g font-size="14" fill="#1f2937"><text x="36" y="268">O</text><text x="166" y="270">A</text><text x="286" y="270">X</text><text x="104" y="90">B</text><text x="348" y="90">Y</text><text x="158" y="198">P</text><text x="106" y="242" font-weight="bold">a</text><text x="64" y="172" font-weight="bold">b</text><text x="336" y="182" font-weight="bold">b</text><text x="392" y="284" text-anchor="end" font-size="11">Diagram NOT accurately drawn</text></g></svg>`;
 
 const SHIP_BEARINGS = `<svg viewBox="0 0 380 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sketch, not to scale. A ship sails from P on a bearing of 062 degrees for 14 kilometres to A, then on a bearing of 155 degrees for 9 kilometres to B. North lines are drawn at P and at A. A dashed line joins P to B." font-family="sans-serif"><rect x="0" y="0" width="380" height="250" fill="#ffffff"/><g stroke="#334155" stroke-width="1.5"><line x1="90" y1="170" x2="90" y2="50"/><line x1="238.3" y1="91.1" x2="238.3" y2="25"/></g><polygon points="90,40 85,52 95,52" fill="#334155"/><polygon points="238.3,15 233.3,27 243.3,27" fill="#334155"/><g stroke="#1f2937" stroke-width="2"><line x1="90" y1="170" x2="238.3" y2="91.1"/><line x1="238.3" y1="91.1" x2="283.9" y2="189"/></g><line x1="90" y1="170" x2="283.9" y2="189" stroke="#334155" stroke-width="1.5" stroke-dasharray="6 4"/><path d="M90 140 A30 30 0 0 1 116.5 155.9" fill="none" stroke="#1f2937" stroke-width="1.3"/><path d="M238.3 69.1 A22 22 0 0 1 247.6 111" fill="none" stroke="#1f2937" stroke-width="1.3"/><g fill="#1f2937"><circle cx="90" cy="170" r="3.5"/><circle cx="238.3" cy="91.1" r="3.5"/><circle cx="283.9" cy="189" r="3.5"/></g><g font-size="13" fill="#1f2937"><text x="90" y="34" text-anchor="middle">N</text><text x="238.3" y="10" text-anchor="middle">N</text><text x="100" y="128">062°</text><text x="250" y="78">155°</text><text x="74" y="186">P</text><text x="222" y="86">A</text><text x="290" y="200">B</text><text x="150" y="112" text-anchor="middle">14 km</text><text x="274" y="140">9 km</text><text x="372" y="242" text-anchor="end" font-size="11">Not to scale</text></g></svg>`;
+
+const SIMILAR_TRI = `<svg viewBox="0 0 420 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with A at the top, B bottom left and C bottom right. D is on AB and E is on AC, with DE parallel to BC. AD is 6 cm, DB is 4 cm, DE is 7.5 cm and AE is 5.4 cm." font-family="sans-serif"><rect x="0" y="0" width="420" height="290" fill="#ffffff"/><polygon points="228.24,88.84 60,260 360,260" fill="#bae6fd" fill-opacity="0.6" stroke="#1f2937" stroke-width="2"/><line x1="127.3" y1="191.54" x2="307.3" y2="191.54" stroke="#1f2937" stroke-width="2"/><g stroke="#1f2937" stroke-width="1.5" fill="none"><path d="M211 186.5 L217 191.5 L211 196.5"/><path d="M206 255 L212 260 L206 265"/></g><g fill="#1f2937"><circle cx="127.3" cy="191.54" r="3"/><circle cx="307.3" cy="191.54" r="3"/></g><g font-size="14" fill="#1f2937"><text x="222" y="80">A</text><text x="44" y="276">B</text><text x="364" y="276">C</text><text x="108" y="192">D</text><text x="316" y="192">E</text></g><g font-size="12" fill="#1f2937"><text x="168" y="136" text-anchor="end">6 cm</text><text x="86" y="222" text-anchor="end">4 cm</text><text x="217" y="183" text-anchor="middle">7.5 cm</text><text x="276" y="136">5.4 cm</text></g></svg>`;
 
 export const paper: ExamPaper = {
   id: "exam-2b",
@@ -354,19 +356,19 @@ export const paper: ExamPaper = {
       topicId: "inequalities",
       guideRef: "quadratic-inequalities",
       difficulty: "core",
-      question: "Solve the inequality {{2x^2 + 5x >= 12}}",
-      answer: { type: "inequality", ineq: "x<=-4 or x>=1.5", display: "{{x <= -4}} or {{x >= 3/2}}" },
+      question: "Solve the inequality {{2x^2 - 3x >= 20}}",
+      answer: { type: "inequality", ineq: "x<=-2.5 or x>=4", display: "{{x <= -5/2}} or {{x >= 4}}" },
       traps: [
-        { spec: { type: "inequality", ineq: "-4<=x<=1.5" }, feedback: "Those are the right critical values, but the wrong region. The parabola y = 2x² + 5x − 12 is *below* the x-axis between −4 and 1.5. You want where it is above (≥ 0) — the two outside parts." },
-        { spec: { type: "inequality", ineq: "x<=-1.5 or x>=4" }, feedback: "Check your factorisation: (2x − 3)(x + 4) = 0 gives x = 1.5 and x = −4." },
+        { spec: { type: "inequality", ineq: "-2.5<=x<=4" }, feedback: "Those are the right critical values, but the wrong region. The parabola y = 2x² − 3x − 20 is *below* the x-axis between −2.5 and 4. You want where it is above (≥ 0) — the two outside parts." },
+        { spec: { type: "inequality", ineq: "x<=-4 or x>=2.5" }, feedback: "Check your factorisation: (2x + 5)(x − 4) = 0 gives x = −2.5 and x = 4." },
       ],
       solution: [
-        "Rearrange: 2x² + 5x − 12 ≥ 0.",
-        "Critical values: (2x − 3)(x + 4) = 0, so x = {{3/2}} or x = −4.",
-        "Sketch y = 2x² + 5x − 12: a ∪-shaped parabola crossing the x-axis at −4 and 1.5. It is on or above the axis outside the roots.",
-        "So **x ≤ −4 or x ≥ {{3/2}}**.",
+        "Rearrange: 2x² − 3x − 20 ≥ 0.",
+        "Critical values: (2x + 5)(x − 4) = 0, so x = {{-5/2}} or x = 4.",
+        "Sketch y = 2x² − 3x − 20: a ∪-shaped parabola crossing the x-axis at −2.5 and 4. It is on or above the axis outside the roots.",
+        "So **x ≤ {{-5/2}} or x ≥ 4**.",
       ],
-      commonError: "Writing −4 ≤ x ≤ 1.5 — the region *between* the roots is where the quadratic is negative.",
+      commonError: "Writing −2.5 ≤ x ≤ 4 — the region *between* the roots is where the quadratic is negative.",
       hints: [
         "Get everything on one side so the quadratic is compared with 0.",
         "Factorise to find the critical values.",
@@ -407,14 +409,15 @@ export const paper: ExamPaper = {
       guideRef: "inverse-proportion",
       difficulty: "core",
       question:
-        "The brightness, B, of light from a lamp is inversely proportional to the square of the distance, d, from the lamp.\n\nKenji moves his desk so that its distance from the lamp increases by 25%.\n\nBy what percentage does the brightness at the desk decrease?",
-      options: ["25%", "56.25%", "36%", "20%"],
+        "The time, T hours, that a team of volunteers takes to clean a beach is inversely proportional to the square root of the number of volunteers, n.\n\nWhen n = 16, T = 6.\n\nWork out the number of volunteers needed to clean the beach in 4 hours.",
+      options: ["24", "6", "36", "7.11"],
       answerIndex: 2,
       explanation:
-        "{{B = k/d^2}}. If d becomes 1.25d, then B becomes {{k/(1.25d)^2 = k/(1.5625 d^2)}} = 0.64 × the old brightness. That is a decrease of 100% − 64% = **36%**.\n\n20% comes from {{1/1.25}} = 0.8 — inverse proportion to d, forgetting the square. 56.25% comes from {{1.25^2 - 1}} — the distance squared goes *up* by 56.25%, but the brightness divides by 1.5625. 25% assumes the brightness simply falls by the same percentage as the distance rises.",
+        "{{T = k/sqrt(n)}}. When n = 16, T = 6: {{6 = k/4}}, so k = 24 and {{T = 24/sqrt(n)}}. When T = 4: {{sqrt(n) = 24/4 = 6}}, so n = {{6^2}} = **36**.\n\n6 is {{sqrt(n)}} — it still needs squaring. 24 comes from T = k/n (inverse proportion to n, forgetting the square root): k = 96 and n = 96 ÷ 4. 7.11 comes from direct proportion, T = k√n.",
       hints: [
-        "Write the relationship as an equation: {{B = k/d^2}}.",
-        "Replace d with 1.25d. What does B get multiplied by?",
+        "Write the relationship as an equation: {{T = k/sqrt(n)}}.",
+        "Use n = 16 and T = 6 to find k.",
+        "Substitute T = 4 and solve for n — remember to undo the square root.",
       ],
       strategy: "Introduce a variable",
     },
@@ -425,25 +428,27 @@ export const paper: ExamPaper = {
       guideRef: "histograms",
       difficulty: "core",
       question:
-        "The histogram gives information about the times, t minutes, that a group of Year 11 students took to travel to school one morning. No student took longer than 50 minutes.\n\nUse the histogram to work out an estimate for the number of students who took **more than 25 minutes**.",
-      diagram: JOURNEY_HIST,
-      answer: { type: "number", value: 22, display: "22 students" },
+        "The histogram gives information about the times, t minutes, that some Year 11 students spent revising one evening. The frequency density axis has not been numbered.\n\n24 students spent between 30 and 35 minutes revising (30 < t ≤ 35).\n\nWork out the **total** number of students.",
+      diagram: REVISION_HIST,
+      answer: { type: "number", value: 104, display: "104 students" },
       traps: [
-        { spec: { type: "number", value: 12 }, feedback: "That counts only the 30–50 class. Half of the 20–30 class (the part from 25 to 30) also took more than 25 minutes." },
-        { spec: { type: "number", value: 32 }, feedback: "You included the whole of the 20–30 class. Only the 25–30 part counts: half the width, so half of its 20 students." },
-        { spec: { type: "number", value: 2.6 }, feedback: "You added frequency densities. Frequency = frequency density × class width." },
+        { spec: { type: "number", value: 64 }, feedback: "You added the bar heights (4 + 13 + 24 + 18 + 5 small squares). Frequency is the *area* of a bar, not its height — the bars have different widths." },
+        { spec: { type: "number", value: 120 }, feedback: "There are five bars, but they are not all the same as the 30–35 bar. Work out each bar's frequency from its area." },
       ],
       solution: [
-        "Frequency = frequency density × class width.",
-        "20 < t ≤ 30: 2.0 × 10 = 20 students. The part from 25 to 30 is half of this class: 10 students (estimate).",
-        "30 < t ≤ 50: 0.6 × 20 = 12 students.",
-        "Estimate = 10 + 12 = **22 students**.",
+        "Frequency is proportional to the area of each bar. Count in small squares (each 5 minutes wide).",
+        "The 30–35 bar is 1 square wide and 24 squares tall: area 24 squares = 24 students, so **1 small square = 1 student**.",
+        "0–20: 4 wide × 4 tall = 16. 20–30: 2 × 13 = 26. 35–40: 1 × 18 = 18. 40–60: 4 × 5 = 20.",
+        "Total = 16 + 26 + 24 + 18 + 20 = **104 students**.",
       ],
-      commonError: "Reading the bar height as the frequency instead of multiplying by the class width.",
+      solutions: [
+        { label: "Find the density scale", steps: ["Frequency density of 30–35 = 24 ÷ 5 = 4.8, and that bar is 24 small squares tall, so one small square up is 0.2.", "Densities: 0.8, 2.6, 4.8, 3.6, 1.0. Frequencies = density × width: 16, 26, 24, 18, 20.", "Total = 104."] },
+      ],
+      commonError: "Adding the bar heights instead of using the areas.",
       hints: [
-        "In a histogram, the *area* of a bar is the frequency.",
-        "Which bars lie (fully or partly) to the right of t = 25?",
-        "Frequency = frequency density × class width. Take half of the 20–30 bar.",
+        "In a histogram, the *area* of a bar represents the frequency.",
+        "Use the 30–35 bar to work out how many students one small square of area stands for.",
+        "Find the area of every bar, then add.",
       ],
     },
     {
@@ -467,26 +472,28 @@ export const paper: ExamPaper = {
       kind: "short",
       id: "exam-2b-q19",
       topicId: "similarity-congruence",
-      guideRef: "area-volume-scale",
+      guideRef: "similar-lengths",
       difficulty: "core",
       question:
-        "Two water bottles are mathematically similar.\n\nThe smaller bottle has a surface area of 180 cm² and a volume of 320 cm³.\n\nThe larger bottle has a surface area of 405 cm².\n\nWork out the volume of the larger bottle.",
-      answer: { type: "number", value: 1080, display: "1080 cm³" },
+        "In triangle ABC, D is a point on AB and E is a point on AC. DE is parallel to BC.\n\nAD = 6 cm, DB = 4 cm, DE = 7.5 cm and AE = 5.4 cm.\n\nWork out the length of BC and the length of EC. Give your answers in the order BC, EC.",
+      diagram: SIMILAR_TRI,
+      answer: { type: "list", values: [12.5, 3.6], ordered: true, display: "BC = 12.5 cm, EC = 3.6 cm" },
       traps: [
-        { spec: { type: "number", value: 720 }, feedback: "You multiplied the volume by the *area* scale factor (2.25). Volumes scale by the cube of the length scale factor." },
-        { spec: { type: "number", value: 480 }, feedback: "You used the length scale factor (1.5). Volumes scale by 1.5³." },
-        { spec: { type: "number", value: 1620 }, feedback: "You squared the area scale factor (2.25² = 5.0625). Volume scale factor = (length scale factor)³, and the length scale factor is √2.25 = 1.5." },
+        { spec: { type: "list", values: [5, 3.6], ordered: true }, feedback: "For BC you used the scale factor {{4/6}}. Triangle ABC is the enlargement of triangle ADE, so compare the *whole* side AB = 10 cm with AD = 6 cm: scale factor {{10/6}}." },
+        { spec: { type: "list", values: [12.5, 9], ordered: true }, feedback: "9 cm is the whole of AC. EC is only the part from E to C: 9 − 5.4 = 3.6 cm." },
+        { spec: { type: "list", values: [11.25, 3.6], ordered: true }, feedback: "For BC you used the ratio DB : AD the wrong way. Compare matching sides of the two similar triangles: AB = 10 cm with AD = 6 cm." },
       ],
       solution: [
-        "Area scale factor = 405 ÷ 180 = 2.25.",
-        "Length scale factor = √2.25 = 1.5.",
-        "Volume scale factor = 1.5³ = 3.375.",
-        "Larger volume = 320 × 3.375 = **1080 cm³**.",
+        "DE is parallel to BC, so triangles ADE and ABC are similar (corresponding angles are equal; angle A is shared).",
+        "AB = 6 + 4 = 10 cm, so the scale factor from ADE to ABC is {{10/6 = 5/3}}.",
+        "BC = 7.5 × {{5/3}} = **12.5 cm**.",
+        "AC = 5.4 × {{5/3}} = 9 cm, so EC = 9 − 5.4 = **3.6 cm**.",
       ],
-      commonError: "Using the area scale factor directly on the volume.",
+      commonError: "Using DB (4 cm) instead of the whole side AB (10 cm) when finding the scale factor, or giving AC instead of EC.",
       hints: [
-        "Find the area scale factor first.",
-        "Area scale factor = k², volume scale factor = k³. What is k?",
+        "Why are triangles ADE and ABC similar?",
+        "Matching sides: AD ↔ AB, DE ↔ BC, AE ↔ AC. What is AB?",
+        "Find AC with the scale factor, then subtract AE to get EC.",
       ],
       strategy: "Use the inverse",
     },
@@ -526,22 +533,22 @@ export const paper: ExamPaper = {
       guideRef: "circle-theorems-2",
       difficulty: "core",
       question:
-        "A, B, C and D are points on a circle. The line AT is the tangent to the circle at A.\n\nAngle TAB = 58° and angle ABC = 104°.\n\nWork out the size of angle BDC. Give a reason for each stage of your working.",
-      diagram: CIRCLE_TANGENT,
+        "A, B and C are points on a circle with centre O. PA and PB are tangents to the circle, touching it at A and B. C lies on the major arc AB.\n\nAngle APB = 48°.\n\nWork out the size of angle ACB. Give a reason for each stage of your working.",
+      diagram: TANGENTS_P,
       marks: 4,
       modelAnswer:
-        "Angle ADB = 58°, because the angle between a tangent and a chord is equal to the angle in the alternate segment (alternate segment theorem).\n\nAngle ADC = 180° − 104° = 76°, because opposite angles of a cyclic quadrilateral add up to 180°.\n\nAngle BDC = angle ADC − angle ADB = 76° − 58° = **18°**.",
+        "Angle OAP = 90° and angle OBP = 90°, because a tangent is perpendicular to the radius at the point of contact.\n\nAngle AOB = 360° − 90° − 90° − 48° = 132°, because the angles in a quadrilateral (OAPB) add up to 360°.\n\nAngle ACB = 132° ÷ 2 = **66°**, because the angle at the centre is twice the angle at the circumference (both stand on the minor arc AB).",
       markScheme: [
-        { point: "Angle ADB = 58°", keywords: ["58", "adb"] },
-        { point: "Reason: alternate segment theorem", keywords: ["alternate segment", "tangent", "chord"] },
-        { point: "Angle ADC = 76° with reason: opposite angles of a cyclic quadrilateral add to 180°", keywords: ["76", "cyclic", "opposite", "180"] },
-        { point: "Angle BDC = 18°", keywords: ["18"] },
+        { point: "Angle OAP = angle OBP = 90° with reason: tangent is perpendicular to the radius", keywords: ["90", "perpendicular", "tangent", "radius"] },
+        { point: "Angle AOB = 132°", keywords: ["132", "aob"] },
+        { point: "Reason for AOB: angles in a quadrilateral add up to 360°", keywords: ["quadrilateral", "360"] },
+        { point: "Angle ACB = 66° with reason: angle at the centre is twice the angle at the circumference", keywords: ["66", "centre", "twice", "double", "circumference", "half"] },
       ],
-      commonError: "Writing \"alternate angles\" (that's for parallel lines) instead of the **alternate segment theorem**.",
+      commonError: "Assuming angle ACB = angle APB, or forgetting that the radius meets each tangent at 90°.",
       hints: [
-        "The tangent and the chord AB meet at A. Which theorem links that angle to an angle in the circle?",
-        "ABCD is a cyclic quadrilateral. What do you know about angle ABC and angle ADC?",
-        "Angle BDC is part of angle ADC.",
+        "Draw in the radii OA and OB. What angle does a radius make with a tangent?",
+        "OAPB is a quadrilateral. Find angle AOB.",
+        "Angle AOB and angle ACB stand on the same arc. Which theorem links them?",
       ],
       strategy: "Work backwards",
     },
@@ -552,26 +559,26 @@ export const paper: ExamPaper = {
       guideRef: "three-d",
       difficulty: "core",
       question:
-        "The diagram shows a pyramid VABCD. The base ABCD is a rectangle with AB = 8 m and BC = 6 m.\n\nThe vertex V is vertically above M, the centre of the base. VA = VB = VC = VD = 13 m.\n\nCalculate the size of the angle between the edge VA and the base ABCD. Give your answer correct to 1 decimal place.",
+        "The diagram shows a pyramid VABCD. The base ABCD is a rectangle with AB = 8 m and BC = 6 m.\n\nThe vertex V is vertically above M, the centre of the base. VA = VB = VC = VD = 13 m. N is the midpoint of BC.\n\nCalculate the size of the angle between the triangular face VBC and the base ABCD (angle VNM). Give your answer correct to 1 decimal place.",
       diagram: PYRAMID,
-      answer: { type: "number", value: 67.4, tolerance: 0.05, display: "67.4°" },
+      answer: { type: "number", value: 71.6, tolerance: 0.05, display: "71.6°" },
       traps: [
-        { spec: { type: "number", value: 72.1, tolerance: 0.05 }, feedback: "You used half of AB (4 m) as the adjacent side. The edge VA meets the base along AM, half of the diagonal AC — and AC = √(8² + 6²) = 10 m." },
-        { spec: { type: "number", value: 22.6, tolerance: 0.05 }, feedback: "That is the angle AVM at the top. The angle with the base is at A: angle VAM." },
-        { spec: { type: "number", value: 39.7, tolerance: 0.05 }, feedback: "You used the whole diagonal AC = 10 m. M is the centre, so AM is half of it: 5 m." },
+        { spec: { type: "number", value: 67.4, tolerance: 0.05 }, feedback: "67.4° is the angle between the *edge* VA and the base. The face VBC meets the base along BC, so use the triangle VMN, where N is the midpoint of BC." },
+        { spec: { type: "number", value: 76.0, tolerance: 0.05 }, feedback: "You used MN = 3 m (half of BC). N is the midpoint of BC, so MN runs parallel to AB: MN = half of AB = 4 m." },
+        { spec: { type: "number", value: 18.4, tolerance: 0.05 }, feedback: "That is angle MVN at the top. The angle with the base is at N: angle VNM." },
       ],
       solution: [
-        "The angle between VA and the base is angle VAM, where M is directly below V.",
-        "Diagonal AC = {{sqrt(8^2 + 6^2) = sqrt(100) = 10}} m, so AM = 5 m.",
-        "Triangle VAM is right-angled at M: {{cos VAM = 5/13}}.",
-        "Angle VAM = {{cos^(-1)(5/13)}} = 67.38…° = **67.4°**.",
-        "(Check: VM = √(13² − 5²) = 12 m, and tan 67.38° = 12 ÷ 5 = 2.4 ✓)",
+        "First find the height VM. Diagonal AC = {{sqrt(8^2 + 6^2) = 10}} m, so AM = 5 m.",
+        "Triangle VAM is right-angled at M: VM = {{sqrt(13^2 - 5^2) = 12}} m.",
+        "MN goes from the centre to the midpoint of BC, parallel to AB, so MN = 8 ÷ 2 = 4 m.",
+        "Triangle VMN is right-angled at M: {{tan VNM = 12/4 = 3}}.",
+        "Angle VNM = {{tan^(-1)(3)}} = 71.565…° = **71.6°**.",
       ],
-      commonError: "Using a side of the base (4 m or 3 m) instead of half of the diagonal.",
+      commonError: "Using the edge VA instead of the line VN that lies in the face and is perpendicular to BC, or taking MN as half of BC.",
       hints: [
-        "Find a right-angled triangle that contains VA and a line in the base.",
-        "V is directly above M, so triangle VAM has a right angle at M. How long is AM?",
-        "AM is half the diagonal AC. Use Pythagoras on the base, then cosine.",
+        "You need the height VM first. Which right-angled triangle contains VA and VM?",
+        "AM is half the diagonal of the base. Use Pythagoras twice: once in the base, once in triangle VAM.",
+        "Now look at triangle VMN. How long is MN, and which trig ratio links VM and MN?",
       ],
       strategy: "Draw a diagram",
     },

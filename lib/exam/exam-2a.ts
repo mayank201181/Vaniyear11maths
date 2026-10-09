@@ -60,21 +60,21 @@ export const paper: ExamPaper = {
       guideRef: "compound-growth",
       difficulty: "warmup",
       question:
-        "Arjun's grandmother invests $8000 in a savings account. The account pays 3.5% compound interest per year.\n\nWork out the value of the investment at the end of 4 years. Give your answer to the nearest cent.",
-      answer: { type: "number", value: 9180.18, tolerance: 0.006, display: "$9180.18" },
+        "Arjun's grandmother invests $8000 in a savings account. The account pays 4% compound interest per year.\n\nWork out the value of the investment at the end of 5 years. Give your answer to the nearest cent.",
+      answer: { type: "number", value: 9733.22, tolerance: 0.006, display: "$9733.22" },
       traps: [
-        { spec: { type: "number", value: 9120, tolerance: 0.006 }, feedback: "That is *simple* interest: 4 × 3.5% = 14% of $8000. With compound interest each year's 3.5% is worked out on the new, larger balance, so use the multiplier 1.035 four times." },
-        { spec: { type: "number", value: 1180.18, tolerance: 0.006 }, feedback: "That is only the interest earned. The question asks for the total value of the investment." },
+        { spec: { type: "number", value: 9600, tolerance: 0.006 }, feedback: "That is *simple* interest: 5 × 4% = 20% of $8000. With compound interest each year's 4% is worked out on the new, larger balance, so use the multiplier 1.04 five times." },
+        { spec: { type: "number", value: 1733.22, tolerance: 0.006 }, feedback: "That is only the interest earned. The question asks for the total value of the investment." },
       ],
       solution: [
-        "A 3.5% increase means the multiplier is 1 + 0.035 = 1.035.",
-        "After 4 years: 8000 × {{1.035^4}} = 8000 × 1.147 523… = 9180.184…",
-        "Value = **$9180.18** (to the nearest cent).",
+        "A 4% increase means the multiplier is 1 + 0.04 = 1.04.",
+        "After 5 years: 8000 × {{1.04^5}} = 8000 × 1.216 652… = 9733.223…",
+        "Value = **$9733.22** (to the nearest cent).",
       ],
-      commonError: "Using simple interest (adding 14% of $8000 once), giving $9120.",
+      commonError: "Using simple interest (adding 20% of $8000 once), giving $9600.",
       hints: [
-        "What single number do you multiply by to increase something by 3.5%?",
-        "Apply that multiplier once for each year: {{8000 * 1.035^4}}.",
+        "What single number do you multiply by to increase something by 4%?",
+        "Apply that multiplier once for each year: {{8000 * 1.04^5}}.",
       ],
     },
     {
