@@ -20,10 +20,10 @@ export const morePapers: Paper[] = [
         question:
           "The diagram shows a right-angled triangle.\n\nCalculate the length of the side marked x.\n\nGive your answer in cm correct to 3 significant figures.",
         diagram: `<svg viewBox="0 0 260 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Right-angled triangle with shorter sides 6.5 cm (horizontal) and 8.3 cm (vertical); the hypotenuse is marked x"><rect width="260" height="220" fill="#ffffff"/><polygon points="60,190 190,190 60,24" fill="#c7d2fe" stroke="#1f2937" stroke-width="2"/><polyline points="60,176 74,176 74,190" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="125" y="208" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">6.5 cm</text><text x="52" y="110" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1f2937">8.3 cm</text><text x="134" y="100" font-size="14" font-family="sans-serif" font-style="italic" fill="#1f2937">x</text></svg>`,
-        answer: { type: "number", value: 10.5, display: "10.5 cm" },
+        answer: { type: "number", value: 10.5, tolerance: 0.05, display: "10.5 cm" },
         traps: [
           { spec: { type: "number", value: 14.8 }, feedback: "You added the lengths (6.5 + 8.3). Pythagoras adds the *squares*: {{x^2 = 6.5^2 + 8.3^2}}." },
-          { spec: { type: "number", value: 5.16 }, feedback: "You subtracted the squares. x is opposite the right angle, so it is the hypotenuse — the longest side — and you add the squares." },
+          { spec: { type: "number", value: 5.16, tolerance: 0.005 }, feedback: "You subtracted the squares. x is opposite the right angle, so it is the hypotenuse — the longest side — and you add the squares." },
         ],
         solution: [
           "x is opposite the right angle, so it is the hypotenuse.",
@@ -66,7 +66,7 @@ export const morePapers: Paper[] = [
         id: "pythagoras-trigonometry-p3-q03",
         question:
           "A ladder 6 m long leans against a vertical wall on horizontal ground. The ladder makes an angle of 72° with the ground.\n\nHow far up the wall does the ladder reach?\n\nGive your answer in metres correct to 3 significant figures.",
-        answer: { type: "number", value: 5.71, display: "5.71 m" },
+        answer: { type: "number", value: 5.71, tolerance: 0.005, display: "5.71 m" },
         traps: [
           { spec: { type: "number", value: 1.85, tolerance: 0.01 }, feedback: "6 cos 72° is the distance of the foot of the ladder from the wall. The height is *opposite* the 72° angle, so use sin." },
           { spec: { type: "number", value: 18.5, tolerance: 0.05 }, feedback: "Tan needs the opposite and adjacent. The ladder (6 m) is the hypotenuse, so use {{h = 6 sin 72°}}." },
@@ -108,7 +108,7 @@ export const morePapers: Paper[] = [
         id: "pythagoras-trigonometry-p3-q05",
         question:
           "Arjun starts at point S. He walks 3.2 km due north and then 5.8 km due east to point F.\n\nWork out the bearing of S from F.\n\nGive your answer to the nearest degree.",
-        answer: { type: "number", value: 241, display: "241°" },
+        answer: { type: "number", value: 241, tolerance: 0.5, display: "241°" },
         traps: [
           { spec: { type: "number", value: 61 }, feedback: "061° is the bearing of F from S. You want the bearing of S **from F** — stand at F and face north. Add 180°: 241°." },
           { spec: { type: "number", value: 209 }, feedback: "{{tan^(-1)(3.2/5.8) = 28.9°}} is measured from the east–west line, not from north. Measure from north at S: {{tan^(-1)(5.8/3.2) = 61.1°}}, then reverse it." },
@@ -134,7 +134,7 @@ export const morePapers: Paper[] = [
         id: "pythagoras-trigonometry-p3-q06",
         question:
           "Mei stands on level ground 45 m from the base of a vertical HDB block. The angle of elevation of the top of the block from the ground where she stands is 58°.\n\nCalculate the height of the block.\n\nGive your answer in metres correct to 3 significant figures.",
-        answer: { type: "number", value: 72.0, display: "72.0 m" },
+        answer: { type: "number", value: 72.0, tolerance: 0.05, display: "72.0 m" },
         traps: [
           { spec: { type: "number", value: 28.1, tolerance: 0.05 }, feedback: "You divided by tan 58°. The height is opposite 58° and 45 m is adjacent, so {{h = 45 tan 58°}}." },
           { spec: { type: "number", value: 38.2, tolerance: 0.05 }, feedback: "45 m is not the hypotenuse — it is the horizontal distance (adjacent). Use tan, not sin." },
@@ -145,7 +145,7 @@ export const morePapers: Paper[] = [
           "h = 45 tan 58° = 72.015...",
           "h = 72.0 m (3 s.f.).",
         ],
-        commonError: "Writing 72 instead of 72.0 is fine for the value, but 3 s.f. means 72.0 — and check you multiplied, not divided.",
+        commonError: "Dividing by tan 58° instead of multiplying. (72 and 72.0 are the same value, but to 3 s.f. you write 72.0.)",
         difficulty: "core",
         guideRef: "bearings-elevation",
         hints: ["Sketch: horizontal ground, vertical block, line of sight from Mei to the top.", "Which two sides are involved — opposite, adjacent, hypotenuse?", "{{tan 58° = h/45}}. Rearrange for h."],
@@ -226,21 +226,21 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "pythagoras-trigonometry-p3-q10",
         question:
-          "The diagram shows a cuboid ABCDEFGH with AB = 8 cm, BC = 6 cm and CG = 5 cm.\n\nCalculate the size of the angle between the diagonal AG and the base ABCD.\n\nGive your answer correct to 1 decimal place.",
+          "The diagram shows a cuboid ABCDEFGH with AB = 15 cm, BC = 8 cm and CG = 6 cm.\n\nCalculate the size of the angle between the diagonal AG and the base ABCD.\n\nGive your answer correct to 1 decimal place.",
         diagram: `<svg viewBox="0 0 340 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuboid ABCDEFGH. Base ABCD with AB 15 cm along the front and BC 8 cm going back; vertical edge CG is 6 cm. The diagonal AG and the base diagonal AC are drawn."><rect x="0" y="0" width="340" height="260" fill="#ffffff"/><polygon points="40,232 294.0,180.0 294.0,96.0" fill="#fecaca" fill-opacity="0.45" stroke="none"/><line x1="40" y1="232" x2="250" y2="232" stroke="#1f2937" stroke-width="2"/><line x1="250" y1="232" x2="294.0" y2="180.0" stroke="#1f2937" stroke-width="2"/><line x1="40" y1="148" x2="250" y2="148" stroke="#1f2937" stroke-width="2"/><line x1="250" y1="148" x2="294.0" y2="96.0" stroke="#1f2937" stroke-width="2"/><line x1="294.0" y1="96.0" x2="84.0" y2="96.0" stroke="#1f2937" stroke-width="2"/><line x1="84.0" y1="96.0" x2="40" y2="148" stroke="#1f2937" stroke-width="2"/><line x1="40" y1="232" x2="40" y2="148" stroke="#1f2937" stroke-width="2"/><line x1="250" y1="232" x2="250" y2="148" stroke="#1f2937" stroke-width="2"/><line x1="294.0" y1="180.0" x2="294.0" y2="96.0" stroke="#1f2937" stroke-width="2"/><line x1="40" y1="232" x2="84.0" y2="180.0" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="84.0" y1="180.0" x2="294.0" y2="180.0" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="84.0" y1="180.0" x2="84.0" y2="96.0" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="40" y1="232" x2="294.0" y2="180.0" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="6 4"/><line x1="40" y1="232" x2="294.0" y2="96.0" stroke="#b91c1c" stroke-width="2.5"/><polyline points="284.2,182.0 284.2,172.0 294.0,170.0" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="28" y="244" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="258" y="248" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="306.0" y="186.0" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="76.0" y="174.0" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">D</text><text x="30" y="153" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">E</text><text x="262" y="166" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">F</text><text x="304.0" y="90.0" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">G</text><text x="78.0" y="88.0" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">H</text><text x="145.0" y="250" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">15 cm</text><text x="284.0" y="218.0" font-size="13" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">8 cm</text><text x="302.0" y="142.0" font-size="13" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">6 cm</text></svg>`,
-        answer: { type: "number", value: 26.6, tolerance: 0.05, display: "26.6°" },
+        answer: { type: "number", value: 19.4, tolerance: 0.05, display: "19.4°" },
         traps: [
-          { spec: { type: "number", value: 32, tolerance: 0.05 }, feedback: "{{tan^(-1)(5/8)}} uses AB, but the line on the base directly under AG is AC, not AB. AC = 10 cm." },
-          { spec: { type: "number", value: 63.4, tolerance: 0.05 }, feedback: "That is the angle between AG and the vertical edge CG. The angle with the base is at A: {{tan^(-1)(5/10)}}." },
+          { spec: { type: "number", value: 21.8, tolerance: 0.05 }, feedback: "{{tan^(-1)(6/15)}} uses AB, but the line on the base directly under AG is AC, not AB. AC = 17 cm." },
+          { spec: { type: "number", value: 70.6, tolerance: 0.05 }, feedback: "That is the angle between AG and the vertical edge CG. The angle with the base is at A: {{tan^(-1)(6/17)}}." },
         ],
         solution: [
           "The projection of AG onto the base is AC, so the angle we want is angle GAC in the right-angled triangle ACG (right angle at C).",
-          "{{AC^2 = 8^2 + 6^2 = 100}}, so AC = 10 cm.",
-          "{{tan(GAC) = CG/AC = 5/10 = 0.5}}.",
-          "{{GAC = tan^(-1)(0.5) = 26.565...°}} = 26.6° (1 d.p.).",
+          "{{AC^2 = 15^2 + 8^2 = 289}}, so AC = 17 cm (an 8-15-17 triple).",
+          "{{tan(GAC) = (CG)/(AC) = 6/17}}.",
+          "{{GAC = tan^(-1)(6/17) = 19.440...°}} = 19.4° (1 d.p.).",
         ],
         solutions: [
-          { label: "Using the space diagonal", steps: ["{{AG = sqrt(8^2 + 6^2 + 5^2) = sqrt(125)}}.", "{{sin(GAC) = 5/sqrt(125)}}, so GAC = 26.6°. Same angle, but tan with AC = 10 is cleaner."] },
+          { label: "Using the space diagonal", steps: ["{{AG = sqrt(15^2 + 8^2 + 6^2) = sqrt(325)}}.", "{{sin(GAC) = 6/sqrt(325)}}, so GAC = 19.4°. Same angle, but tan with AC = 17 is cleaner."] },
         ],
         commonError: "Using an edge (AB or AD) instead of the base diagonal AC as the adjacent side.",
         difficulty: "core",
@@ -344,20 +344,20 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "pythagoras-trigonometry-p3-q15",
         question:
-          "A square-based pyramid VABCD has a horizontal base ABCD of side 10 cm. The vertex V is directly above the centre of the base, and each sloping edge (VA, VB, VC, VD) is 13 cm.\n\nCalculate the angle between the edge VA and the base.\n\nGive your answer correct to 1 decimal place.",
-        answer: { type: "number", value: 57.0, tolerance: 0.06, display: "57.0°" },
+          "A square-based pyramid VABCD has a horizontal base ABCD of side 14 cm. The vertex V is directly above the centre of the base, and each sloping edge (VA, VB, VC, VD) is 15 cm.\n\nCalculate the angle between the edge VA and the base.\n\nGive your answer correct to 1 decimal place.",
+        answer: { type: "number", value: 48.7, tolerance: 0.05, display: "48.7°" },
         traps: [
-          { spec: { type: "number", value: 67.4, tolerance: 0.05 }, feedback: "{{cos^(-1)(5/13)}} uses half the *side* (5 cm). The foot of V is the centre of the square, and the distance from A to the centre is half the *diagonal*: {{5 sqrt(2)}} cm." },
-          { spec: { type: "number", value: 33.0, tolerance: 0.06 }, feedback: "That is the angle between VA and the vertical. The angle with the base is at A." },
+          { spec: { type: "number", value: 62.2, tolerance: 0.05 }, feedback: "{{cos^(-1)(7/15)}} uses half the *side* (7 cm). The foot of V is the centre of the square, and the distance from A to the centre is half the *diagonal*: {{7 sqrt(2)}} cm." },
+          { spec: { type: "number", value: 41.3, tolerance: 0.05 }, feedback: "That is the angle between VA and the vertical. The angle with the base is at A." },
         ],
         solution: [
           "Let O be the centre of the base, so V is directly above O and triangle VOA has a right angle at O.",
-          "Diagonal AC = {{sqrt(10^2 + 10^2) = 10 sqrt(2)}}, so {{AO = 5 sqrt(2) = 7.071...}} cm.",
-          "{{cos(VAO) = AO/VA = (5 sqrt(2))/13 = 0.5439...}}",
-          "Angle VAO = 57.048...° = 57.0° (1 d.p.).",
+          "Diagonal AC = {{sqrt(14^2 + 14^2) = 14 sqrt(2)}}, so {{AO = 7 sqrt(2) = 9.899...}} cm.",
+          "{{cos(VAO) = (AO)/(VA) = (7 sqrt(2))/15 = 0.6599...}}",
+          "Angle VAO = 48.702...° = 48.7° (1 d.p.).",
         ],
         solutions: [
-          { label: "Height first", steps: ["{{VO^2 = 13^2 - (5 sqrt(2))^2 = 169 - 50 = 119}}, so {{VO = sqrt(119)}}.", "{{tan(VAO) = sqrt(119)/(5 sqrt(2))}}, giving 57.0°.", "Longer — going straight to cos with the hypotenuse VA saves a step."] },
+          { label: "Height first", steps: ["{{VO^2 = 15^2 - (7 sqrt(2))^2 = 225 - 98 = 127}}, so {{VO = sqrt(127)}}.", "{{tan(VAO) = sqrt(127)/(7 sqrt(2))}}, giving 48.7°.", "Longer — going straight to cos with the hypotenuse VA saves a step."] },
         ],
         commonError: "Using half the side length (5 cm) instead of half the diagonal for AO.",
         difficulty: "challenge",
@@ -446,18 +446,18 @@ export const morePapers: Paper[] = [
       {
         kind: "short",
         id: "pythagoras-trigonometry-p4-q04",
-        question: "A is the point (−3, 4) and B is the point (5, −2).\n\nWork out the length of the line segment AB.",
-        answer: { type: "number", value: 10, display: "10 units" },
+        question: "A is the point (−3, 4) and B is the point (9, −1).\n\nWork out the length of the line segment AB.",
+        answer: { type: "number", value: 13, display: "13 units" },
         traps: [
-          { spec: { type: "number", value: 14 }, feedback: "You added the horizontal and vertical distances (8 + 6). Use Pythagoras: {{sqrt(8^2 + 6^2)}}." },
-          { spec: { type: "number", value: 6.32, tolerance: 0.01 }, feedback: "Careful with the negatives: the horizontal change is 5 − (−3) = 8, not 2. Then {{sqrt(8^2 + 6^2) = 10}}." },
+          { spec: { type: "number", value: 17 }, feedback: "You added the horizontal and vertical distances (12 + 5). Use Pythagoras: {{sqrt(12^2 + 5^2)}}." },
+          { spec: { type: "number", value: 7.81, tolerance: 0.005 }, feedback: "Careful with the negatives: the horizontal change is 9 − (−3) = 12, not 6. Then {{sqrt(12^2 + 5^2) = 13}}." },
         ],
         solution: [
-          "Horizontal change: 5 − (−3) = 8. Vertical change: −2 − 4 = −6.",
-          "{{AB^2 = 8^2 + (-6)^2 = 64 + 36 = 100}}.",
-          "AB = 10 units.",
+          "Horizontal change: 9 − (−3) = 12. Vertical change: −1 − 4 = −5.",
+          "{{AB^2 = 12^2 + (-5)^2 = 144 + 25 = 169}}.",
+          "AB = 13 units.",
         ],
-        commonError: "Subtracting a negative wrongly: 5 − (−3) is 8, not 2.",
+        commonError: "Subtracting a negative wrongly: 9 − (−3) is 12, not 6.",
         difficulty: "warmup",
         guideRef: "pythagoras",
         hints: ["Sketch A and B and complete a right-angled triangle with horizontal and vertical sides.", "How far across? How far down? Then Pythagoras."],
@@ -586,7 +586,7 @@ export const morePapers: Paper[] = [
         id: "pythagoras-trigonometry-p4-q10",
         question:
           "Using the same journey as before: a boat sails from harbour H 18 km on a bearing of 040° to A, then 25 km on a bearing of 130° to B. Angle HAB = 90°.\n\nWork out the bearing of B from H.\n\nGive your answer to the nearest degree.",
-        answer: { type: "number", value: 94, display: "094°" },
+        answer: { type: "number", value: 94, tolerance: 0.5, display: "094°" },
         traps: [
           { spec: { type: "number", value: 54 }, feedback: "54.2° is angle AHB — the angle inside the triangle. The bearing is measured from north: add the 40° that HA already makes with north." },
           { spec: { type: "number", value: 76 }, feedback: "{{tan^(-1)(18/25) = 35.8°}} is angle HBA, at B. You need the angle at H: {{tan^(-1)(25/18)}}." },
@@ -610,7 +610,7 @@ export const morePapers: Paper[] = [
         id: "pythagoras-trigonometry-p4-q11",
         question:
           "The diagram shows a wedge (a triangular prism) on a horizontal table. The base ABCD is a rectangle with AB = 24 cm and BC = 10 cm. The rectangular face BCEF is vertical, with CE = BF = 9 cm.\n\nCalculate the size of the angle between the line AE and the base ABCD.\n\nGive your answer correct to 1 decimal place.",
-        diagram: `<svg viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wedge with rectangular base ABCD, AB 24 cm along the front and BC 10 cm going back. Vertical rectangle BCEF at the right end with height 9 cm, F above B and E above C. AE and AC are drawn."><rect width="340" height="250" fill="#ffffff"/><polygon points="30,220 246,220 246,112" fill="#fde68a" fill-opacity="0.7" stroke="#1f2937" stroke-width="2"/><polygon points="246,220 296,180 296,72 246,112" fill="#fde68a" fill-opacity="0.45" stroke="#1f2937" stroke-width="2"/><polygon points="30,220 246,112 296,72 80,180" fill="#fde68a" fill-opacity="0.25" stroke="#1f2937" stroke-width="2"/><line x1="80" y1="180" x2="296" y2="180" stroke="#334155" stroke-dasharray="5,4"/><line x1="30" y1="220" x2="296" y2="180" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6,3"/><line x1="30" y1="220" x2="296" y2="72" stroke="#dc2626" stroke-width="2"/><polyline points="286,180 286,170 296,170" fill="none" stroke="#334155" stroke-width="1.2"/><text x="18" y="236" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="242" y="238" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="302" y="186" font-size="13" font-family="sans-serif" fill="#1f2937">C</text><text x="66" y="176" font-size="13" font-family="sans-serif" fill="#1f2937">D</text><text x="300" y="68" font-size="13" font-family="sans-serif" fill="#1f2937">E</text><text x="230" y="106" font-size="13" font-family="sans-serif" fill="#1f2937">F</text><text x="138" y="238" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1f2937">24 cm</text><text x="276" y="214" font-size="12" font-family="sans-serif" fill="#1f2937">10 cm</text><text x="302" y="130" font-size="12" font-family="sans-serif" fill="#1f2937">9 cm</text></svg>`,
+        diagram: `<svg viewBox="0 0 340 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wedge with rectangular base ABCD, AB 24 cm along the front and BC 10 cm going back. Vertical rectangle BCEF at the right end with height 9 cm, F above B and E above C. AE and AC are drawn."><rect width="340" height="250" fill="#ffffff"/><polygon points="30,220 246,220 246,139" fill="#fde68a" fill-opacity="0.7" stroke="#1f2937" stroke-width="2"/><polygon points="246,220 296,180 296,99 246,139" fill="#fde68a" fill-opacity="0.45" stroke="#1f2937" stroke-width="2"/><polygon points="30,220 246,139 296,99 80,180" fill="#fde68a" fill-opacity="0.25" stroke="#1f2937" stroke-width="2"/><line x1="80" y1="180" x2="296" y2="180" stroke="#334155" stroke-dasharray="5,4"/><line x1="30" y1="220" x2="296" y2="180" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="6,3"/><line x1="30" y1="220" x2="296" y2="99" stroke="#dc2626" stroke-width="2"/><polyline points="286,180 286,170 296,170" fill="none" stroke="#334155" stroke-width="1.2"/><text x="18" y="236" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="242" y="238" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="302" y="186" font-size="13" font-family="sans-serif" fill="#1f2937">C</text><text x="66" y="176" font-size="13" font-family="sans-serif" fill="#1f2937">D</text><text x="300" y="96" font-size="13" font-family="sans-serif" fill="#1f2937">E</text><text x="250" y="154" font-size="13" font-family="sans-serif" fill="#1f2937">F</text><text x="138" y="238" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1f2937">24 cm</text><text x="276" y="214" font-size="12" font-family="sans-serif" fill="#1f2937">10 cm</text><text x="302" y="144" font-size="12" font-family="sans-serif" fill="#1f2937">9 cm</text></svg>`,
         answer: { type: "number", value: 19.1, tolerance: 0.05, display: "19.1°" },
         traps: [
           { spec: { type: "number", value: 20.6, tolerance: 0.05 }, feedback: "{{tan^(-1)(9/24)}} is the angle FAB on the front face. E is above C, so the line on the base under AE is AC, not AB." },
@@ -683,7 +683,7 @@ export const morePapers: Paper[] = [
         question:
           "TP is a vertical mast standing at point P on horizontal ground.\n\nPoint A is 50 m due south of P. The angle of elevation of T from A is 31°.\nPoint B is 40 m due east of A.\n\nCalculate the angle of elevation of T from B.\n\nGive your answer correct to 1 decimal place.",
         diagram: `<svg viewBox="0 0 300 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D sketch: vertical mast TP at P. A is 50 m due south of P, B is 40 m due east of A, so angle PAB is 90 degrees on the ground. Lines TA and TB drawn. Diagram not drawn accurately."><rect width="300" height="230" fill="#ffffff"/><polygon points="110,110 60,190 250,190" fill="#bbf7d0" fill-opacity="0.6" stroke="#334155" stroke-dasharray="5,4"/><line x1="110" y1="110" x2="110" y2="20" stroke="#1f2937" stroke-width="3"/><line x1="110" y1="20" x2="60" y2="190" stroke="#1f2937" stroke-width="1.5"/><line x1="110" y1="20" x2="250" y2="190" stroke="#dc2626" stroke-width="1.5"/><line x1="60" y1="190" x2="250" y2="190" stroke="#1f2937" stroke-width="2"/><line x1="110" y1="110" x2="60" y2="190" stroke="#1f2937" stroke-width="2"/><text x="104" y="16" font-size="13" font-family="sans-serif" fill="#1f2937">T</text><text x="116" y="116" font-size="13" font-family="sans-serif" fill="#1f2937">P</text><text x="46" y="204" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="254" y="204" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="56" y="150" font-size="12" font-family="sans-serif" fill="#1f2937">50 m</text><text x="150" y="208" font-size="12" font-family="sans-serif" fill="#1f2937">40 m</text><text x="72" y="174" font-size="11" font-family="sans-serif" fill="#1f2937">31°</text><text x="200" y="224" font-size="10" font-family="sans-serif" fill="#334155">Not drawn accurately</text></svg>`,
-        answer: { type: "number", value: 25.1, tolerance: 0.06, display: "25.1°" },
+        answer: { type: "number", value: 25.1, tolerance: 0.05, display: "25.1°" },
         traps: [
           { spec: { type: "number", value: 36.9, tolerance: 0.05 }, feedback: "You used BP = 40 m. P is not 40 m from B — PB is the hypotenuse of the ground triangle PAB: {{sqrt(50^2 + 40^2)}}." },
           { spec: { type: "number", value: 31 }, feedback: "B is further from the mast than A, so the angle of elevation must be smaller than 31°." },
@@ -705,25 +705,25 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "pythagoras-trigonometry-p4-q15",
         question:
-          "A Pythagorean triple (a, b, c) has {{a^2 + b^2 = c^2}}. The shortest side is a = 15 and the hypotenuse is exactly 1 more than the longest of the other two sides, so c = b + 1.\n\nFind the value of c.",
-        answer: { type: "number", value: 113 },
+          "A Pythagorean triple (a, b, c) has {{a^2 + b^2 = c^2}}. The shortest side is a = 16 and the hypotenuse is exactly 2 more than the longest of the other two sides, so c = b + 2.\n\nFind the value of c.",
+        answer: { type: "number", value: 65 },
         traps: [
-          { spec: { type: "number", value: 17 }, feedback: "(8, 15, 17) is a triple, but there 15 is not the shortest side and 17 is 2 more than 15. Here a = 15 is the shortest and c = b + 1." },
-          { spec: { type: "number", value: 25 }, feedback: "(15, 20, 25) is a triple, but 25 is 5 more than 20, not 1 more." },
+          { spec: { type: "number", value: 34 }, feedback: "(16, 30, 34) is a triple, but 34 is 4 more than 30, not 2 more." },
+          { spec: { type: "number", value: 20 }, feedback: "(12, 16, 20) is a triple, but there 16 is not the shortest side, and 20 is 4 more than 16." },
         ],
         solution: [
-          "{{15^2 = c^2 - b^2 = (c - b)(c + b)}}.",
-          "c − b = 1, so {{c + b = 225}}.",
-          "Adding: 2c = 226, so c = 113 (and b = 112).",
-          "Check: {{112^2 + 15^2 = 12544 + 225 = 12769 = 113^2}} ✓.",
+          "{{16^2 = c^2 - b^2 = (c - b)(c + b)}}.",
+          "c − b = 2, so {{c + b = 256 ÷ 2 = 128}}.",
+          "Adding: 2c = 130, so c = 65 (and b = 63).",
+          "Check: {{16^2 + 63^2 = 256 + 3969 = 4225 = 65^2}} ✓.",
         ],
         solutions: [
-          { label: "Substitute and expand", steps: ["{{15^2 + b^2 = (b + 1)^2 = b^2 + 2b + 1}}.", "225 = 2b + 1, so b = 112 and c = 113.", "Same work — the difference of two squares just makes the structure visible: every odd a gives a triple with c − b = 1."] },
+          { label: "Substitute and expand", steps: ["{{16^2 + b^2 = (b + 2)^2 = b^2 + 4b + 4}}.", "256 = 4b + 4, so b = 63 and c = 65.", "Same work — the difference of two squares just makes the structure visible: every even a = 2k gives a triple with c − b = 2."] },
         ],
-        commonError: "Guessing a familiar triple containing 15 without checking the condition c = b + 1.",
+        commonError: "Guessing a familiar triple containing 16 without checking the condition c = b + 2.",
         difficulty: "challenge",
         guideRef: "pythagorean-triples",
-        hints: ["Rearrange to make {{c^2 - b^2}} the subject.", "{{c^2 - b^2}} is a difference of two squares: (c − b)(c + b).", "You know c − b = 1. So what is c + b?"],
+        hints: ["Rearrange to make {{c^2 - b^2}} the subject.", "{{c^2 - b^2}} is a difference of two squares: (c − b)(c + b).", "You know c − b = 2. So what is c + b?"],
         strategy: "Factorise a difference of two squares",
       },
     ],

@@ -116,10 +116,10 @@ function text(x: number, y: number, s: string, anchor: "start" | "middle" | "end
   return `<text x="${F(x)}" y="${F(y)}" ${TXT}${bold ? ' font-weight="700"' : ""} text-anchor="${anchor}">${s}</text>`;
 }
 /** Map maths points (y up) into a W×H box with a uniform scale. */
-function fitter(all: Pt[], W: number, H: number, pad: number): (p: Pt) => Pt {
+function fitter(all: Pt[], W: number, H: number, pad: number, padX = pad): (p: Pt) => Pt {
   const xs = all.map((p) => p[0]), ys = all.map((p) => p[1]);
   const x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
-  const s = Math.min((W - 2 * pad) / Math.max(x1 - x0, 1e-9), (H - 2 * pad) / Math.max(y1 - y0, 1e-9));
+  const s = Math.min((W - 2 * padX) / Math.max(x1 - x0, 1e-9), (H - 2 * pad) / Math.max(y1 - y0, 1e-9));
   const ox = (W - (x1 - x0) * s) / 2, oy = (H - (y1 - y0) * s) / 2;
   return (p: Pt): Pt => [ox + (p[0] - x0) * s, oy + (y1 - p[1]) * s];
 }
@@ -146,11 +146,11 @@ function sLab(p: Pt, q: Pt, away: Pt, s: string): string {
   [nx, ny] = [-ny, nx];
   if ((mx - away[0]) * nx + (my - away[1]) * ny < 0) [nx, ny] = [-nx, -ny];
   const anchor = nx > 0.45 ? "start" : nx < -0.45 ? "end" : "middle";
-  return text(mx + nx * 8, my + ny * (ny > 0 ? 13 : 8) + 4, s, anchor);
+  return text(mx + nx * 9, my + ny * (ny > 0 ? 15 : 11) + 4, s, anchor);
 }
-/** Parallel-line arrow (chevron) at the midpoint of PQ, pointing from P to Q. */
+/** Parallel-line arrow (chevron) 30% of the way along PQ, pointing from P to Q. */
 function arrow(p: Pt, q: Pt): string {
-  const mx = (p[0] + q[0]) / 2, my = (p[1] + q[1]) / 2;
+  const mx = p[0] + (q[0] - p[0]) * 0.3, my = p[1] + (q[1] - p[1]) * 0.3;
   const [ux, uy] = unitV(p, q);
   const [nx, ny] = [-uy, ux];
   const tip: Pt = [mx + ux * 4, my + uy * 4];
@@ -534,7 +534,7 @@ export const drills: Drill[] = [
       const w1 = Math.max(...t1.map((p0) => p0[0]));
       const gap = 0.35 * Math.max(s1[0], s2[0]);
       t2 = t2.map((pt) => [(flip ? s2[0] - pt[0] : pt[0]) + w1 + gap, pt[1]] as Pt) as [Pt, Pt, Pt];
-      const map = fitter([...t1, ...t2], 460, 230, 34);
+      const map = fitter([...t1, ...t2], 460, 230, 34, 56);
       const P1 = t1.map(map), P2 = t2.map(map);
       const c1 = centroid(P1), c2 = centroid(P2);
       const edge = (P: Pt[], i: number): [Pt, Pt] => (i === 0 ? [P[1], P[2]] : i === 1 ? [P[0], P[2]] : [P[0], P[1]]);
@@ -597,7 +597,7 @@ export const drills: Drill[] = [
       const A0 = tri[0], B0 = tri[1], C0 = tri[2];
       const D0: Pt = [A0[0] + ((B0[0] - A0[0]) * m) / n, A0[1] + ((B0[1] - A0[1]) * m) / n];
       const E0: Pt = [A0[0] + ((C0[0] - A0[0]) * m) / n, A0[1] + ((C0[1] - A0[1]) * m) / n];
-      const map = fitter([A0, B0, C0], 360, 260, 36);
+      const map = fitter([A0, B0, C0], 360, 260, 36, 56);
       const [A, B, C, D, E] = [A0, B0, C0, D0, E0].map(map);
       const cen = centroid([A, B, C]);
       const labels: Record<string, string> = {};
@@ -635,7 +635,7 @@ export const drills: Drill[] = [
       svg += polygon([A, D, E], "#fde68a");
       svg += line(D, E) + arrow(D, E) + arrow(B, C);
       const segs: Record<string, [Pt, Pt]> = { AD: [A, D], DB: [D, B], AE: [A, E], EC: [E, C], DE: [D, E], BC: [B, C] };
-      for (const [k, v] of Object.entries(labels)) svg += sLab(segs[k][0], segs[k][1], k === "DE" ? A : cen, `${v}`);
+      for (const [k, v] of Object.entries(labels)) svg += sLab(segs[k][0], segs[k][1], k === "DE" ? A : cen, `${v} cm`);
       svg += vLab(A, cen, "A") + vLab(B, cen, "B") + vLab(C, cen, "C") + vLab(D, cen, "D") + vLab(E, cen, "E");
       svg += "</svg>";
       return {
@@ -678,7 +678,7 @@ export const drills: Drill[] = [
       const f = n / m;
       const D0: Pt = [X0[0] + (X0[0] - A0[0]) * f, X0[1] + (X0[1] - A0[1]) * f];
       const C0: Pt = [X0[0] + (X0[0] - B0[0]) * f, X0[1] + (X0[1] - B0[1]) * f];
-      const map = fitter([A0, B0, C0, D0], 380, 280, 36);
+      const map = fitter([A0, B0, C0, D0], 380, 280, 36, 60);
       const [A, B, C, D, X] = [A0, B0, C0, D0, X0].map(map);
       const labels: Record<string, string> = {};
       let given: string[] = [], answer = 0, target = "", sol: string[] = [], traps: Trap[] = [];
@@ -718,8 +718,8 @@ export const drills: Drill[] = [
       const segs: Record<string, [Pt, Pt, Pt]> = { XA: [X, A, B], XD: [X, D, C], XB: [X, B, A], XC: [X, C, D], AB: [A, B, X], DC: [D, C, X] };
       let svg = svgOpen(380, 280, `AB parallel to DC; lines AD and BC cross at X. ${given.join(", ")}.`);
       svg += polygon([X, A, B], "#c7d2fe") + polygon([X, D, C], "#fde68a");
-      svg += arrow(A, B) + arrow(D, C);
-      for (const [k, v] of Object.entries(labels)) svg += sLab(segs[k][0], segs[k][1], segs[k][2], v);
+      svg += arrow(A, B) + arrow(C, D);
+      for (const [k, v] of Object.entries(labels)) svg += sLab(segs[k][0], segs[k][1], segs[k][2], `${v} cm`);
       svg += vLab(A, X, "A") + vLab(B, X, "B") + vLab(C, X, "C") + vLab(D, X, "D");
       const ua = unitV(X, A), uc = unitV(X, C);
       svg += vLab(X, [X[0] - (ua[0] + uc[0]), X[1] - (ua[1] + uc[1])], "X");

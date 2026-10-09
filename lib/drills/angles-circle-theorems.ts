@@ -1432,7 +1432,8 @@ function powerDiagram(R: number, OP: number, lines: PLine[], labels: Array<[stri
   const P: Pt = [O[0] - OP * sc, O[1]];
   const pts: Record<string, Pt> = { P };
   const segs: Array<[string, string]> = [];
-  const dirs: Record<string, Pt> = {};
+  const lineOf: Record<string, number> = {};
+  const lineDir: Pt[] = [];
   for (const L of lines) {
     const cos = OP === 0 ? 0 : (L.s1 + L.s2) / (2 * OP);
     const th = Math.acos(Math.max(-1, Math.min(1, cos)));
@@ -1441,8 +1442,9 @@ function powerDiagram(R: number, OP: number, lines: PLine[], labels: Array<[stri
     if (L.n2 !== L.n1) pts[L.n2] = add(P, u, L.s2 * sc);
     segs.push([L.n1, L.n2 === L.n1 ? "P" : L.n2]);
     if (external) segs.push(["P", L.n1]);
-    dirs[L.n1] = L.s1 >= 0 ? u : [-u[0], -u[1]];
-    dirs[L.n2] = u;
+    lineOf[L.n1] = lineDir.length;
+    lineOf[L.n2] = lineDir.length;
+    lineDir.push(u);
   }
   let extra = "";
   for (const [a, b, s] of labels) {
@@ -1450,17 +1452,16 @@ function powerDiagram(R: number, OP: number, lines: PLine[], labels: Array<[stri
     const B = pts[b];
     const u = dirTo(A, B);
     let n: Pt = [-u[1], u[0]];
-    // push the label away from the circle centre for external, away from P's other lines for internal
     const m = mid(A, B);
-    const ref: Pt = external ? [O[0], O[1]] : [P[0], P[1] + 0];
-    const away = dirTo(ref, m);
-    if (n[0] * away[0] + n[1] * away[1] < 0) n = [-n[0], -n[1]];
+    // Push the label away from the other line through P.
+    const other = lineDir[1 - lineOf[a === "P" ? b : a]];
+    let w: Pt = other;
     if (!external) {
-      // perpendicular choice: side with fewer other points
-      const toO = dirTo(m, O);
-      if (n[0] * toO[0] + n[1] * toO[1] > 0.3) n = [-n[0], -n[1]];
+      const v = dirTo(P, a === "P" ? B : A);
+      if (v[0] * other[0] + v[1] * other[1] < 0) w = [-other[0], -other[1]];
     }
-    const at = add(m, n, 12);
+    if (n[0] * w[0] + n[1] * w[1] > 0) n = [-n[0], -n[1]];
+    const at = add(m, n, 11);
     extra += tx([at[0], at[1] + 4.5], s, { size: 12, color: SOFT });
   }
   return drawScene({ w: 420, h: 260, c: O, R: R * sc, pts, onCircle: Object.keys(pts).filter((k) => k !== "P"), segs, extra, aria, hide: [] });
@@ -1487,7 +1488,7 @@ const intersectingChords: Drill = {
           const prod = a * b;
           if ((prod * (tier === 1 ? 2 : 10)) % c !== 0) return null;
           d = prod / c;
-          if (d > 25 || c === a || c === b) return null;
+          if (d > 25 || c === a || c === b || Math.min(a, b) / Math.max(a, b) < 0.3 || Math.min(c, d) / Math.max(c, d) < 0.3) return null;
           exprs = [`${a}`, `${b}`, `${c}`, "x"];
         } else if (kind === "linIn") {
           // AP = x, PB = b, CP = c, PD = x + k  → bx = c(x + k)
@@ -1517,7 +1518,8 @@ const intersectingChords: Drill = {
           exprs = ["x", `x + ${k}`, `${c}`, `${d}`];
         }
         if (a === b && c === d) return null;
-        const R = Math.max(a + b, c + d) / 2 * 1.18;
+        if (Math.min(a, b) / Math.max(a, b) < 0.22 || Math.min(c, d) / Math.max(c, d) < 0.22) return null;
+        const R = (Math.max(a + b, c + d) / 2) * 1.04;
         const OP = Math.sqrt(R * R - a * b);
         if (OP < 0.12 * R) return null;
         const diagram = powerDiagram(R, OP, [
@@ -1578,6 +1580,7 @@ const intersectingChords: Drill = {
           if (c === a || e < 2) return null;
         }
         const pd = c + e;
+        if (k > 3 * a || e > 3 * c) return null;
         const R = Math.max(k, e) / 2 * rng.pick([1.25, 1.4, 1.6]);
         const OP = Math.sqrt(R * R + a * (a + k));
         if ((2 * a + k) / (2 * OP) > 0.985 || (c + pd) / (2 * OP) > 0.985) return null;
@@ -1611,6 +1614,7 @@ const intersectingChords: Drill = {
         if (i > 200) return null;
         a = rng.int(2, 12);
         k = rng.int(2, 20);
+        if (k > 3.5 * a) continue;
         t = Math.sqrt(a * (a + k));
         if (Number.isInteger(t) || (tier === 3 && rng.bool(0.4))) break;
       }
@@ -1758,9 +1762,10 @@ function lociAnswer(rng: Rng, tier: Tier, n: number, d: number, plus: number, un
   const val = plus + (n / d) * Math.PI;
   const r3 = sf3(val);
   if (!exact && r3 === null) return null;
-  const pf = piFrac(n, d);
-  const expr = plus === 0 ? pf.expr : plus > 0 ? `${plus}+${pf.expr}` : `${pf.expr}${plus}`;
-  const show = plus === 0 ? pf.show : `{{${plus}}} + ${pf.show}`;
+  const pf = piFrac(Math.abs(n), d);
+  const sg = n < 0 ? "-" : "+";
+  const expr = plus === 0 ? pf.expr : `${plus}${sg}${pf.expr}`;
+  const show = plus === 0 ? pf.show : `{{${plus}}} ${n < 0 ? "−" : "+"} ${pf.show}`;
   return {
     exact,
     ask: exact ? `Give your answer in terms of π.` : `Give your answer correct to 3 significant figures.`,
@@ -1786,9 +1791,10 @@ const lociArea: Drill = {
       const name = rng.pick(["A goat", "A pony", "A donkey", "A sheep"]);
       if (kind === "corner" || kind === "wall") {
         const r = rng.int(3, 12);
-        const L = rng.int(r + 3, 25);
-        const W = rng.int(r + 2, 20);
         const quarter = kind === "corner";
+        const L = quarter ? rng.int(r + 3, 25) : rng.int(2 * r + 2, 2 * r + 14);
+        const W = quarter ? rng.int(r + 2, 20) : rng.int(r + 2, L - 1);
+        if (W >= L && !quarter) return null;
         const ans = lociAnswer(rng, tier, r * r, quarter ? 4 : 2, 0, unit);
         if (!ans) return null;
         const s = Math.min(320 / L, 190 / W);
