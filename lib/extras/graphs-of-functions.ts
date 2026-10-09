@@ -21,7 +21,7 @@ export const extras: TopicExtras = {
       steps: [
         "Tape the tape measure upright against a wall. Drop the ball from 100 cm next to it and film it in slow motion.",
         "Play the video back frame by frame. Write down the height of the top of each bounce: bounce 0 (100 cm), bounce 1, bounce 2, … up to bounce 5.",
-        "Work out the ratio of each height to the one before (for example {{h_2/h_1}}). What do you notice?",
+        "Work out the ratio of each height to the one before (for example, bounce 2 height ÷ bounce 1 height). What do you notice?",
         "Plot height (y) against bounce number (n). Is it a straight line or a curve?",
         "Fit a model {{h = 100 a^n}} using your average ratio for a. Use it to predict bounce 6, then check on the video.",
       ],
