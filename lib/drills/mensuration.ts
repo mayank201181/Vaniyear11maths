@@ -300,8 +300,8 @@ function shadeSvg(kind: Shade, l1: string, l2 = "", ratio = 0.5): string {
 
 /** Cone with base radius r and height h (slant l). Labels may be blank. */
 function coneSvg(r: number, h: number, lr: string, lh: string, ll: string): string {
-  const s = Math.min(170 / h, 120 / r);
-  const cx = 160, by = 205, top = by - h * s, rx = r * s, ry = Math.max(8, rx * 0.28);
+  const s = Math.min(160 / h, 115 / r);
+  const cx = 160, by = 196, top = by - h * s, rx = r * s, ry = Math.max(8, rx * 0.28);
   let body = `<path d="M${F(cx - rx)},${by} L${cx},${F(top)} L${F(cx + rx)},${by}" fill="${FILL}" ${STROKE}/>`;
   body += `<path d="M${F(cx - rx)},${by} A${F(rx)},${F(ry)} 0 0 0 ${F(cx + rx)},${by}" fill="${FILL}" ${STROKE}/>`;
   body += `<path d="M${F(cx - rx)},${by} A${F(rx)},${F(ry)} 0 0 1 ${F(cx + rx)},${by}" fill="none" ${DASH}/>`;
