@@ -12,6 +12,7 @@ const NAV = [
   { href: "/topics", label: "Topics", icon: "📚" },
   { href: "/daily", label: "Daily 5", icon: "🎯" },
   { href: "/review", label: "Review", icon: "🔁" },
+  { href: "/tutor", label: "Ask Pi", icon: "🦉" },
   { href: "/progress", label: "Progress", icon: "📈" },
 ];
 
@@ -127,7 +128,7 @@ export function MobileNav() {
   const path = usePathname() ?? "/";
   return (
     <nav className="no-print fixed inset-x-0 bottom-0 z-30 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden" aria-label="Main">
-      <div className="mx-auto grid max-w-md grid-cols-5">
+      <div className="mx-auto grid max-w-lg grid-cols-6">
         {NAV.map((n) => (
           <Link key={n.href} href={n.href} className={`flex flex-col items-center gap-0.5 py-2 text-[0.7rem] font-bold ${active(path, n.href) ? "text-brand" : "text-ink-2"}`} aria-current={active(path, n.href) ? "page" : undefined}>
             <span className="text-xl" aria-hidden>

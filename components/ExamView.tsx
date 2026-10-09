@@ -263,7 +263,7 @@ export function ExamView({ papers, topicTitles, practiceTopics = [] }: ExamViewP
         <>
           <ol className="grid gap-3 sm:grid-cols-3" aria-label="How it works">
             {[
-              { n: 1, title: "Choose a paper", text: "Calculator or non-calculator, timed or not." },
+              { n: 1, title: "Choose a paper", text: "Four Edexcel-style Higher papers (1H & 2H), timed or not." },
               { n: 2, title: "Answer everything", text: "Nothing is marked as you go — jump between questions freely." },
               { n: 3, title: "Mark & review", text: "Get your score, mark written answers, and see which topics to revise." },
             ].map((s) => (

@@ -1,46 +1,27 @@
 # Year 11 Maths Lab
 
-A complete Year 11 maths learning app — problem-first lessons, auto-marked practice, unlimited
-skill drills, a daily mixed set, spaced review, a cross-topic exam and a PIN-protected parent
-dashboard. Built for a Year 8 learner in Singapore on a UK-style curriculum (Cambridge Lower
-Secondary Stage 8 + England KS3 / White Rose Year 8), with **Art of Problem Solving** pedagogy
-throughout.
-
-**Live:** https://year11-maths.vercel.app
+A complete Year 11 (Grade 10) maths revision app for **Pearson Edexcel International GCSE
+Mathematics A (4MA1), Higher tier**, plus the school's **H+ (Higher Plus)** extension objectives —
+built for a learner at Tanglin Trust School, Singapore, with **Art of Problem Solving** pedagogy
+throughout. Built on the Year 8 Maths Lab engine.
 
 ## What's inside
 
-- **20 topics** across Number, Ratio & Proportion, Algebra, Geometry & Measure and Statistics &
-  Probability — mapped to Cambridge Stage 8 objectives (see `docs/CURRICULUM.md`), with Stage 9
-  look-ahead "stretch" sections.
-- **Lessons** — every section opens with a *try-this-first* discovery problem, then the idea is
-  derived (not decreed), with diagrams, step-by-step worked examples, a "your turn" check,
-  "why does this work?", named strategies and think-deeper prompts. Proper maths typesetting
-  (fractions, powers, roots) and read-aloud.
-- **Practice** — per topic: a quick check, 4 multiple-choice papers, 4 practice papers (mostly
-  auto-marked typed answers, plus explain/convince questions that are self-marked against a mark
-  scheme) and a 10-problem **AoPS-style challenge set**. ~3,700 audited questions; every one of the
-  ~3,300 auto-marked answers was also re-solved blind by two independent solvers and checked against
-  the key (`scripts/blind-export.ts` / `scripts/blind-compare.ts`).
-- **Auto-marking that understands maths** — accepts equivalent fractions, mixed numbers,
-  decimals, units, coordinates, ratios and algebraic expressions (checked by equivalence, with
-  factorised/expanded/simplified form checks), and gives targeted feedback on classic slips.
-- **Skill drills** — procedurally generated, unlimited fresh questions per fine-grained skill with
-  adaptive difficulty and mastery levels (New → Practising → Secure → Mastered, with "rusty"
-  decay).
-- **Daily 5** — five interleaved questions a day (focus topic, spaced reviews, an older skill and a
-  stretch problem): the honest measure of what has stuck.
-- **Review** — missed questions come back after 1, 3, 7, 16 and 35 days.
-- **Fluency sprints**, **the Big Exam** (calculator and non-calculator papers with results by
-  topic), **certificates**, a **formula sheet**, and **interactive explorables** for every topic.
-- **Professor Pi** — an AI tutor that gives hints, not answers (needs `ANTHROPIC_API_KEY`).
-- **Family accounts** with learner profiles and cloud sync, or **guest mode** on one device.
-  Progress from several devices or tabs is merged on the server (nothing a device did is lost
-  by another device saving an older copy); a parent-PIN reset is the only way to clear it.
-- **Parent dashboard** (PIN) — time, Daily 5 vs practice accuracy, hint use, skills, topic mastery,
-  "where to help" (weak topics, rusty skills, repeated slips), reported questions, and focus-topic
-  / goal settings.
-- Installable **PWA**, light/dark themes, mobile-first.
+- **22 topics** across Number, Ratio & Proportion, Algebra, Geometry & Measure and Statistics &
+  Probability — the school's Units 1–12 (see `docs/SCHOOL-OBJECTIVES.md`) plus the rest of the
+  4MA1 Higher specification (bounds, differentiation, vectors & transformations, loci). H+ sections
+  are badged.
+- **Lessons** — problem-first discovery, derivations, diagrams, worked examples with "your turn",
+  key points, exam mistakes, flashcards, formula notes (on the formula sheet vs learn it).
+- **Question bank** per topic — quick check, 3 MCQ papers, 4 practice papers (incl. an Edexcel
+  exam-style paper) and a 10-problem challenge set; mostly auto-marked typed answers (surds, π,
+  fractions, algebra checked by equivalence) plus written "show that"/proof questions self-marked
+  against a mark scheme.
+- **Four mock papers** (Paper 1H / 2H × two sets) with a topic-by-topic breakdown.
+- **Professor Pi** — an AI tutor (hints, not answers) inside every lesson and question, plus a
+  full-page tutor (`/tutor`) where she can ask anything or send a photo of a question or her working.
+- Skill drills, Daily 5, spaced review, progress & certificates, family accounts with cloud sync,
+  PIN-protected parent dashboard, installable PWA.
 
 ## Tech
 

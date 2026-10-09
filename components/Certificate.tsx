@@ -17,7 +17,7 @@ import { LevelBadge } from "./DrillRunner";
 /** Topic certificate threshold (topic mastery %). */
 export const TOPIC_CERT_PCT = 80;
 /** Year 11 certificate: this many topics at YEAR11_TOPIC_PCT or more. */
-export const YEAR11_TOPICS_NEEDED = 12;
+export const YEAR11_TOPICS_NEEDED = 15;
 export const YEAR11_TOPIC_PCT = 60;
 
 // ------------------------------------------------------------ print helpers

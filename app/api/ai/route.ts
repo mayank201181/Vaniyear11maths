@@ -28,6 +28,9 @@ How you teach (Art of Problem Solving style):
 - Explain why things work (show a picture in words, a pattern, or a short derivation), not just rules. Point out an elegant alternative method when there is one.
 - Praise specific good reasoning ("Nice — checking with an estimate was smart"), never empty praise. Treat the learner as a capable young adult; never be babyish. When useful, mention how a step would earn marks in an Edexcel mark scheme (method marks vs accuracy marks).
 - Be accurate. Double-check every number before you send it.
+- If the learner sends a photo (homework, a past-paper question, her own working), first say in one line what you can read, then coach as above. If it shows her working, find the FIRST mistake and ask a question that helps her spot it, rather than rewriting the whole solution. If the photo is unreadable, say so and ask her to type the question.
+- If she asks you to explain a topic from scratch, teach it properly: a short intuitive explanation, one worked example, then one quick question for her to try.
+- If she asks for practice questions, give 1-3 exam-style questions (Edexcel IGCSE Higher style) WITHOUT answers, and offer to check her answers.
 
 Style:
 - Short: usually 2-8 sentences. British spelling. Friendly, calm, encouraging.
@@ -47,7 +50,7 @@ function cleanTurns(raw: unknown): ChatTurn[] {
   const turns = raw
     .filter((m): m is ChatTurn => !!m && typeof m === "object" && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
     .map((m) => ({ role: m.role, content: m.content.slice(0, 2000) }))
-    .slice(-10);
+    .slice(-16);
   // The conversation must start with a user turn and alternate.
   while (turns.length && turns[0].role !== "user") turns.shift();
   const out: ChatTurn[] = [];
@@ -56,6 +59,18 @@ function cleanTurns(raw: unknown): ChatTurn[] {
     else out.push(t);
   }
   return out;
+}
+
+const IMAGE_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif"]);
+/** ~3.5 MB of base64 — the client downsizes photos well below this. */
+const MAX_IMAGE_B64 = 3_500_000;
+
+/** Accepts a data URL ("data:image/jpeg;base64,…") and returns its parts, or null. */
+function cleanImage(raw: unknown): { mediaType: "image/jpeg" | "image/png" | "image/webp" | "image/gif"; data: string } | null {
+  if (typeof raw !== "string" || raw.length > MAX_IMAGE_B64 + 100) return null;
+  const m = /^data:(image\/[a-z]+);base64,([A-Za-z0-9+/=]+)$/.exec(raw);
+  if (!m || !IMAGE_TYPES.has(m[1])) return null;
+  return { mediaType: m[1] as "image/jpeg" | "image/png" | "image/webp" | "image/gif", data: m[2] };
 }
 
 export async function POST(req: Request) {
@@ -82,11 +97,24 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Professor Pi couldn't answer just now. Please try again." }, { status: 503 });
   }
 
+  // Optional photo (e.g. a homework question), attached to the user turn it was sent with.
+  const image = cleanImage(body.image);
+  const imageTurn = Number.isInteger(body.imageTurn) ? Math.min(Math.max(0, body.imageTurn as number), turns.length - 1) : turns.length - 1;
+
   // Per-request context goes in the first user turn (after the cached system prompt).
-  const messages: Anthropic.Beta.BetaMessageParam[] = turns.map((t, i) => ({
-    role: t.role,
-    content: i === 0 && context ? `What I'm working on in the app:\n${context}\n\n---\n\n${t.content}` : t.content,
-  }));
+  const messages: Anthropic.Beta.BetaMessageParam[] = turns.map((t, i) => {
+    const text = i === 0 && context ? `What I'm working on in the app:\n${context}\n\n---\n\n${t.content}` : t.content;
+    if (image && i === imageTurn && t.role === "user") {
+      return {
+        role: t.role,
+        content: [
+          { type: "image" as const, source: { type: "base64" as const, media_type: image.mediaType, data: image.data } },
+          { type: "text" as const, text },
+        ],
+      };
+    }
+    return { role: t.role, content: text };
+  });
 
   const model = process.env.AI_MODEL || DEFAULT_MODEL;
   const client = new Anthropic();

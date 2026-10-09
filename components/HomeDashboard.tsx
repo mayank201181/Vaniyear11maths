@@ -605,6 +605,26 @@ export function HomeDashboard({ summaries }: { summaries: TopicSummary[] }) {
           </section>
         ) : null}
 
+        <section aria-labelledby="pi-h" className="card flex flex-col p-4 sm:p-5">
+          <div className="flex items-start gap-3">
+            <span aria-hidden className="text-4xl">
+              🦉
+            </span>
+            <div className="min-w-0 flex-1">
+              <h2 id="pi-h" className="text-xs font-bold uppercase tracking-wide text-ink-2">
+                Stuck on something?
+              </h2>
+              <p className="mt-1 font-extrabold">Ask Professor Pi</p>
+              <p className="mt-1 text-sm text-ink-2">Type a question or snap a photo of homework or your working — you get hints, not just answers.</p>
+            </div>
+          </div>
+          <div className="mt-auto pt-4">
+            <Link href="/tutor" className="btn btn-secondary">
+              Open the tutor
+            </Link>
+          </div>
+        </section>
+
         <section aria-labelledby="rank-h" className="card flex flex-col p-4 sm:p-5">
           <div className="flex items-center gap-3">
             <span aria-hidden className="text-4xl">
