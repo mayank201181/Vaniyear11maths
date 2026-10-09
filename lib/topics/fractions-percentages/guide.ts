@@ -371,7 +371,7 @@ export const guide: TopicGuide = {
           answer: "{{(x - 7)/((x + 2)(x - 1))}}",
           yourTurn: {
             question: "Your turn: write {{2/(x + 3) + 5/(x - 2)}} as a single fraction in its simplest form.",
-            answer: { type: "expression", expr: "(7x+11)/((x+3)(x-2))", display: "{{(7x + 11)/((x + 3)(x - 2))}}" },
+            answer: { type: "expression", expr: "(7x+11)/((x+3)(x-2))", form: "simplified", display: "{{(7x + 11)/((x + 3)(x - 2))}}" },
             solution: "{{(2(x - 2) + 5(x + 3))/((x + 3)(x - 2)) = (2x - 4 + 5x + 15)/((x + 3)(x - 2)) = (7x + 11)/((x + 3)(x - 2))}}.",
           },
         },
