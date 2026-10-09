@@ -163,11 +163,13 @@ function CircleTheoremLab() {
   let caption: ReactNode = null;
   let readouts: ReactNode = null;
   let aria = "";
+  let oDir = 300;
 
   if (mode === "centre") {
     const arc = standOn(pos.C);
     const theta = arc.sweep;
     const insc = theta / 2;
+    oDir = arc.start + theta / 2 + 180;
     shapes.push(
       <path key="arc" d={sweepPath(O, arc.start, arc.sweep, R)} fill="none" className="stroke-brand" strokeWidth={5} strokeLinecap="round" opacity={0.35} />,
       <line key="oa" x1={CX} y1={CY} x2={P.A[0]} y2={P.A[1]} className="stroke-brand" strokeWidth={2} />,
@@ -289,6 +291,7 @@ function CircleTheoremLab() {
     const T1 = toward(P.A, a + 90, 170);
     const T2 = toward(P.A, a - 90, 170);
     const ray = toward(P.A, rayDir, 60);
+    oDir = a + 180;
     shapes.push(
       <line key="t" x1={T1[0]} y1={T1[1]} x2={T2[0]} y2={T2[1]} className="stroke-ink" strokeWidth={2} />,
       <line key="oa" x1={CX} y1={CY} x2={P.A[0]} y2={P.A[1]} className="stroke-ink-2" strokeWidth={1.5} strokeDasharray="5 4" />,
@@ -325,7 +328,16 @@ function CircleTheoremLab() {
     aria = `Circle with a tangent at A, chord AB and a point C. The angle between the tangent and AB is ${deg(insc)}, equal to angle ACB.`;
     caption = (
       <>
-        <strong>Alternate segment theorem:</strong> the angle between the tangent at A and the chord AB (measured on the side away from C) equals angle ACB in the other segment — both are {deg(insc)}. Proof idea: the tangent is perpendicular to the radius OA, so angle OAB = 90° − {deg(insc)}; triangle OAB is isosceles, so angle AOB = {deg(2 * insc)}, and the angle at C is half of that.
+        <strong>Alternate segment theorem:</strong> the angle between the tangent at A and the chord AB (measured on the side away from C) equals angle ACB in the other segment — both are {deg(insc)}.{" "}
+        {insc <= 90 ? (
+          <>
+            Proof idea: the tangent is perpendicular to the radius OA, so angle OAB = 90° − {deg(insc)} = {deg(90 - insc)}; triangle OAB is isosceles, so angle AOB = 180° − 2 × {deg(90 - insc)} = {deg(2 * insc)}, and the angle at C is half of that.
+          </>
+        ) : (
+          <>
+            Here C is on the minor arc, so the tangent–chord angle is obtuse: angle OAB = {deg(insc)} − 90° = {deg(insc - 90)}, the reflex angle AOB is {deg(2 * insc)}, and angle ACB is half of that reflex angle.
+          </>
+        )}
       </>
     );
   }
@@ -361,7 +373,7 @@ function CircleTheoremLab() {
           {mode !== "segment" && mode !== "cyclic" ? (
             <>
               <circle cx={CX} cy={CY} r={3} className="fill-ink" />
-              <Label at={[CX + 12, CY + 14]} bold size={13}>
+              <Label at={toward(O, oDir, 14)} bold size={13}>
                 O
               </Label>
             </>
@@ -528,11 +540,11 @@ function PowerOfPoint() {
           {!inside ? <line x1={Oc[0]} y1={Oc[1]} x2={T[0]} y2={T[1]} className="stroke-ink-2" strokeWidth={1.2} strokeDasharray="3 4" /> : null}
           {lineEls}
           <circle cx={Oc[0]} cy={Oc[1]} r={3} className="fill-ink" />
-          <Label at={[Oc[0] + 10, Oc[1] + 16]} bold size={13}>
+          <Label at={[Oc[0] + 12, Oc[1] + 16]} bold size={13}>
             O
           </Label>
           <circle cx={Pc[0]} cy={Pc[1]} r={4.5} className="fill-ink" />
-          <Label at={[Pc[0] - (inside ? 0 : 12), Pc[1] + (inside ? 18 : 4)]} bold size={13}>
+          <Label at={[Pc[0] - (inside ? 10 : 12), Pc[1] + (inside ? 18 : 4)]} bold size={13}>
             P
           </Label>
           {!inside ? (

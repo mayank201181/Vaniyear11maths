@@ -43,9 +43,9 @@ export const guide: TopicGuide = {
           ],
           answer: "(a) {{(7pi + 18)}} cm (b) {{63/2 pi}} {{cm^2}}",
           yourTurn: {
-            question: "Your turn: a sector has radius 12 cm and angle 75°. Work out its area. Give your answer in terms of π.",
-            answer: { type: "expression", expr: "30pi", display: "{{30pi}} {{cm^2}}" },
-            solution: "{{75/360 = 5/24}} of the circle. Area = {{5/24 * pi * 12^2 = 5/24 * 144pi = 30pi}} {{cm^2}}.",
+            question: "Your turn: a sector has radius 10 cm and angle 54°. Work out its area. Give your answer in terms of π.",
+            answer: { type: "expression", expr: "15pi", display: "{{15pi}} {{cm^2}}" },
+            solution: "{{54/360 = 3/20}} of the circle. Area = {{3/20 * pi * 10^2 = 3/20 * 100pi = 15pi}} {{cm^2}}.",
           },
         },
         {
@@ -159,7 +159,7 @@ export const guide: TopicGuide = {
           "Each 1 cm slice is 6 × 1 = 6 {{cm^3}}, and there are 20 slices, so the box holds 6 × 20 = 120 {{cm^3}}. The shape of the end doesn't matter — only its **area**. That is the rule for every prism: **volume = area of cross-section × length**.",
       },
       body:
-        "A **prism** has the same cross-section all the way along: cuboids, triangular prisms, hexagonal prisms and (in the limit) cylinders.\n\n    {{\"Volume of a prism\" = \"area of cross-section\" * \"length\"}}\n    Cuboid: {{V = lwh}}\n    Cylinder: {{V = pi r^2 h}}\n\n**Surface area** is the total area of all the faces — picture the net.\n\n- Cuboid: {{2(lw + lh + wh)}} (three pairs of rectangles).\n- Triangular prism: two triangles + three rectangles.\n- Any prism: {{2 * \"cross-section\" + \"perimeter of cross-section\" * \"length\"}} — the side faces unroll into one long rectangle.\n- Cylinder: the curved surface unrolls into a rectangle h tall and {{2pi r}} wide, so **curved surface area = {{2pi rh}}**. A closed cylinder has total {{2pi r^2 + 2pi rh}}; an open-topped one {{pi r^2 + 2pi rh}}; a tube just {{2pi rh}}. Read the question to see which ends exist.\n\n**Capacity and units.** Capacity is volume measured in litres.\n\n| | |\n|---|---|\n| 1 {{cm^3}} | 1 ml |\n| 1000 {{cm^3}} | 1 litre |\n| 1 {{m^3}} | 1000 litres = 1 000 000 {{cm^3}} |\n\nPut every length in the same unit *before* multiplying: a tank 1.2 m by 80 cm by 50 cm is 120 × 80 × 50 = 480 000 {{cm^3}} = 480 litres. (Converting after multiplying is where the errors creep in: 1 {{m^3}} is {{100^3}} {{cm^3}}, not 100.)\n\n> The cylinder formulas {{pi r^2 h}} and {{2pi rh}} are on the formula sheet; the idea of a prism is not — you must spot the cross-section yourself.",
+        "A **prism** has the same cross-section all the way along: cuboids, triangular prisms, hexagonal prisms and (in the limit) cylinders.\n\n    {{\"Volume of a prism\" = \"area of cross-section\" * \"length\"}}\n    Cuboid: {{V = lwh}}\n    Cylinder: {{V = pi r^2 h}}\n\n**Surface area** is the total area of all the faces — picture the net.\n\n- Cuboid: {{2(lw + lh + wh)}} (three pairs of rectangles).\n- Triangular prism: two triangles + three rectangles.\n- Any prism: {{2 * \"cross-section\" + \"perimeter of cross-section\" * \"length\"}} — the side faces unroll into one long rectangle.\n- Cylinder: the curved surface unrolls into a rectangle h tall and {{2pi r}} wide, so **curved surface area = {{2pi rh}}**. A closed cylinder has total {{2pi r^2 + 2pi rh}}; an open-topped one {{pi r^2 + 2pi rh}}; a tube just {{2pi rh}}. Read the question to see which ends exist.\n\n**Capacity and units.** Capacity is volume measured in litres.\n\n| | |\n|---|---|\n| 1 {{cm^3}} | 1 ml |\n| 1000 {{cm^3}} | 1 litre |\n| 1 {{m^3}} | 1000 litres = 1 000 000 {{cm^3}} |\n\nPut every length in the same unit *before* multiplying: a tank 1.2 m by 80 cm by 50 cm is 120 × 80 × 50 = 480 000 {{cm^3}} = 480 litres. (Converting after multiplying is where the errors creep in: 1 {{m^3}} is {{100^3}} {{cm^3}}, not 100.)\n\n> Volume of a prism (cross-section × length) and the cylinder formulas {{pi r^2 h}} and {{2pi rh}} are on the formula sheet — but you must spot the cross-section yourself, and the surface-area method is not given.",
       diagram: `<svg viewBox="0 0 480 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Left: a cylinder of radius r and height h. Right: its net — a rectangle h tall and 2 pi r wide, with a circle of radius r attached above and below."><rect x="0" y="0" width="480" height="290" fill="#ffffff"/><rect x="40" y="60" width="100" height="160" fill="#bae6fd" stroke="none"/><path d="M40,220 A50,14 0 0,0 140,220" fill="#bae6fd" stroke="#1f2937" stroke-width="2"/><path d="M40,220 A50,14 0 0,1 140,220" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="40" y1="60" x2="40" y2="220" stroke="#1f2937" stroke-width="2"/><line x1="140" y1="60" x2="140" y2="220" stroke="#1f2937" stroke-width="2"/><ellipse cx="90" cy="60" rx="50" ry="14" fill="#c7d2fe" stroke="#1f2937" stroke-width="2"/><line x1="90" y1="60" x2="140" y2="60" stroke="#1f2937" stroke-width="1.5"/><circle cx="90" cy="60" r="2.5" fill="#1f2937"/><rect x="230" y="100" width="188" height="96" fill="#bae6fd" stroke="#1f2937" stroke-width="2"/><circle cx="324" cy="70" r="30" fill="#c7d2fe" stroke="#1f2937" stroke-width="2"/><circle cx="324" cy="226" r="30" fill="#c7d2fe" stroke="#1f2937" stroke-width="2"/><line x1="324" y1="70" x2="354" y2="70" stroke="#1f2937" stroke-width="1.5"/><g font-family="sans-serif" font-size="13" fill="#1f2937" font-style="italic"><text x="111" y="55">r</text><text x="150" y="145">h</text><text x="336" y="65">r</text><text x="426" y="153">h</text></g><g font-family="sans-serif" font-size="12" fill="#1f2937" text-anchor="middle"><text x="324" y="143">curved surface 2πrh</text><text x="324" y="188">width = 2πr</text><text x="324" y="231">πr²</text><text x="90" y="256">V = πr²h</text><text x="324" y="280">Total surface area = 2πr² + 2πrh</text></g></svg>`,
       diagramCaption: "Unroll the label of a can: its width is the circumference 2πr, so the curved surface is 2πr × h.",
       workedExamples: [
@@ -175,9 +175,9 @@ export const guide: TopicGuide = {
           ],
           answer: "(a) {{160pi}} {{cm^3}}, 0.503 litres (b) 352 {{cm^2}}",
           yourTurn: {
-            question: "Your turn: a closed cylinder has radius 3 cm and height 7 cm. Work out its total surface area. Give your answer in terms of π.",
-            answer: { type: "expression", expr: "60pi", display: "{{60pi}} {{cm^2}}" },
-            solution: "Ends: {{2 * pi * 3^2 = 18pi}}. Curved: {{2 * pi * 3 * 7 = 42pi}}. Total {{18pi + 42pi = 60pi}} {{cm^2}}.",
+            question: "Your turn: a closed cylinder has radius 5 cm and height 8 cm. Work out its total surface area. Give your answer in terms of π.",
+            answer: { type: "expression", expr: "130pi", display: "{{130pi}} {{cm^2}}" },
+            solution: "Ends: {{2 * pi * 5^2 = 50pi}}. Curved: {{2 * pi * 5 * 8 = 80pi}}. Total {{50pi + 80pi = 130pi}} {{cm^2}}.",
           },
         },
         {
@@ -328,10 +328,10 @@ export const guide: TopicGuide = {
           answer: "2.88 cm",
           yourTurn: {
             question:
-              "Your turn: a solid metal cylinder of radius 4 cm and height 9 cm is melted down and recast as a single sphere. Work out the radius of the sphere, in cm correct to 3 significant figures.",
-            answer: { type: "number", value: 4.76, tolerance: 0.005, display: "4.76 cm" },
+              "Your turn: a solid metal cylinder of radius 6 cm and height 5 cm is melted down and recast as a single sphere. Work out the radius of the sphere, in cm correct to 3 significant figures.",
+            answer: { type: "number", value: 5.13, tolerance: 0.005, display: "5.13 cm" },
             solution:
-              "Cylinder volume {{= pi * 4^2 * 9 = 144pi}}. Set {{4/3 pi R^3 = 144pi}}: {{R^3 = 144 * 3/4 = 108}}, so {{R = cbrt(108) = 4.762…}} = 4.76 cm.",
+              "Cylinder volume {{= pi * 6^2 * 5 = 180pi}}. Set {{4/3 pi R^3 = 180pi}}: {{R^3 = 180 * 3/4 = 135}}, so {{R = cbrt(135) = 5.129…}} = 5.13 cm.",
           },
         },
       ],

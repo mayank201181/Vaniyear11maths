@@ -290,7 +290,7 @@ const parallelLines: Drill = {
     const all: Pos[] = [];
     for (const line of [0, 1] as const) for (const q of QUADS) all.push({ line, q });
     return attempt(() => {
-      let phi = rng.int(40, 140);
+      const phi = rng.int(40, 140);
       if (phi > 77 && phi < 103) return null;
       const a = rng.pick(all);
       const b = rng.pick(all);
@@ -1199,7 +1199,6 @@ const altSegment: Drill = {
       const u = 180 - t - v;
       if (u < 30) return null;
       const iso = kind === "iso";
-      const vv = iso ? t : v;
       const uu = iso ? 180 - 2 * t : u;
       if (iso && (uu < 30 || t < 40)) return null;
       const withO = kind === "AOB" || kind === "OBA";
