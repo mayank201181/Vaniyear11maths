@@ -108,14 +108,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q06",
-        question: "A triangle has sides 5 cm, 7 cm and 8 cm.\n\nWork out the size of the angle **opposite the 7 cm side**.",
-        options: ["81.8°", "38.2°", "120°", "60°"],
+        question: "A triangle has sides 7 cm, 8 cm and 13 cm.\n\nWork out the size of the angle **opposite the 13 cm side**.",
+        options: ["32.2°", "27.8°", "60°", "120°"],
         answerIndex: 3,
         explanation:
-          "The angle is between the 5 cm and 8 cm sides: {{cos theta = (5^2 + 8^2 - 7^2)/(2 * 5 * 8) = 40/80 = 1/2}}, so θ = 60° exactly. 81.8° is the angle opposite the 8 cm side, and 38.2° the angle opposite 5 cm — the wrong side was put on the end of the numerator. 120° comes from a sign slip giving cos θ = −{{1/2}}.",
+          "The angle is between the 7 cm and 8 cm sides: {{cos theta = (7^2 + 8^2 - 13^2)/(2 * 7 * 8) = -56/112 = -1/2}}, so θ = 120° exactly — obtuse, because the cosine is negative. 32.2° is the angle opposite the 8 cm side, and 27.8° the angle opposite 7 cm — the wrong side was put on the end of the numerator. 60° comes from dropping the minus sign and using cos θ = {{1/2}}.",
         difficulty: "core",
         guideRef: "cosine-rule",
-        hints: ["The side opposite the angle you want is the one that gets **subtracted**.", "{{cos A = (b^2 + c^2 - a^2)/(2bc)}} with a = 7."],
+        hints: ["The side opposite the angle you want is the one that gets **subtracted**.", "{{cos A = (b^2 + c^2 - a^2)/(2bc)}} with a = 13. Keep the sign."],
         strategy: "Check by substituting",
       },
       {
@@ -188,11 +188,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q12",
-        question: "In triangle ABC, AB = 10 cm, BC = 7 cm and angle BAC = 40°.\n\nWhich statement about angle ACB is correct?",
-        options: ["Angle ACB = 66.7° or 113.3° — two different triangles fit", "Angle ACB = 66.7° only", "Angle ACB = 113.3° only", "No triangle is possible, because BC is shorter than AB"],
+        question: "In triangle ABC, AB = 11 cm, BC = 8 cm and angle BAC = 42°.\n\nWhich statement about angle ACB is correct?",
+        options: ["Angle ACB = 66.9° or 113.1° — two different triangles fit", "Angle ACB = 66.9° only", "Angle ACB = 113.1° only", "No triangle is possible, because BC is shorter than AB"],
         answerIndex: 0,
         explanation:
-          "sin C = {{(10 sin 40°)/7}} = 0.918…, so C = 66.7° **or** 180° − 66.7° = 113.3°. Both work: 40° + 113.3° = 153.3° < 180° leaves room for angle B. This is the **ambiguous case**: the 7 cm side can swing to meet the base line in two places. Taking only 66.7° is the usual exam slip. A triangle exists because sin C < 1.",
+          "sin C = {{(11 sin 42°)/8}} = 0.920…, so C = 66.9° **or** 180° − 66.9° = 113.1°. Both work: 42° + 113.1° = 155.1° < 180° leaves room for angle B. This is the **ambiguous case**: the 8 cm side can swing to meet the line from A in two places. Taking only 66.9° is the usual exam slip. A triangle exists because sin C < 1 (BC = 8 cm is longer than the shortest distance from B to that line, 11 sin 42° = 7.36 cm).",
         difficulty: "core",
         guideRef: "sine-rule",
         hints: ["Find sin C with the sine rule.", "Every sine value between 0 and 1 gives an acute angle **and** an obtuse one. Does the obtuse one fit with 40°?"],
@@ -201,11 +201,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q13",
-        question: "Angle θ is obtuse and {{sin theta = 3/5}}.\n\nWork out the exact value of cos θ.",
-        options: ["{{4/5}}", "{{2/5}}", "{{-4/5}}", "{{-3/4}}"],
+        question: "Angle θ is obtuse and {{sin theta = 8/17}}.\n\nWork out the exact value of cos θ.",
+        options: ["{{15/17}}", "{{9/17}}", "{{-15/17}}", "{{-8/15}}"],
         answerIndex: 2,
         explanation:
-          "{{cos^2 theta = 1 - sin^2 theta = 1 - 9/25 = 16/25}}, so cos θ = ±{{4/5}}. Obtuse angles (between 90° and 180°) have negative cosine, so cos θ = −{{4/5}}. {{4/5}} ignores the obtuse information; {{2/5}} comes from 1 − sin θ without squaring; −{{3/4}} is tan θ.",
+          "{{cos^2 theta = 1 - sin^2 theta = 1 - 64/289 = 225/289}}, so cos θ = ±{{15/17}}. Obtuse angles (between 90° and 180°) have negative cosine, so cos θ = −{{15/17}}. {{15/17}} ignores the obtuse information; {{9/17}} comes from 1 − sin θ without squaring; −{{8/15}} is tan θ.",
         difficulty: "challenge",
         guideRef: "trig-identities",
         hints: ["Which identity links sin θ and cos θ?", "{{sin^2 theta + cos^2 theta = 1}} gives two possible values. Which sign does cos θ have for 90° < θ < 180°?"],

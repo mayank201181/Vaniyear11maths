@@ -5,7 +5,7 @@
 // tenths/halves and passed through clean(). Bounded rejection loops remove
 // trivial or degenerate cases, and every trap is filtered so it can never equal
 // the correct answer.
-import type { Drill, DrillItem, Rng } from "./types.ts";
+import type { Drill } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
 import { big, br, clean, frac, gcd, num, ordinal, poly, roundTo, simplify, term } from "./helpers.ts";
 
@@ -360,7 +360,7 @@ const kthTerm: Drill = {
       prompt,
       answer: { type: "number", value: ans },
       solution: [
-        `a = ${num(a)} and d = ${terms[1] !== undefined ? `${num(terms[1])} − ${br(terms[0])} = ` : ""}${num(d)}.`,
+        `a = ${num(a)} and d = ${num(terms[1])} − ${br(terms[0])} = ${num(d)}.`,
         `The ${ordinal(k)} term is {{a + (${k} - 1)d}} = ${num(a)} + ${k - 1} × ${br(d)}.`,
         `= ${num(a)} ${clean((k - 1) * d) < 0 ? "−" : "+"} ${num(Math.abs(clean(((k - 1) * D) / 10)))} = ${num(ans)}.`,
       ],
@@ -522,7 +522,6 @@ const sumSeries: Drill = {
       hint: "Identify a, d and n, then substitute into the Sₙ formula (it's on the formula sheet).",
       traps: numTraps(ans, [
         [n * (2 * a + (n - 1) * d), "You forgot to halve: the formula has {{n/2}} in front."],
-        [Sn(a, d, n) + (a + n * d) * 0 + (n * d) / 2, "Check the bracket: it's 2a + (n − 1)d."],
         [(n * (a + (n - 1) * d)) / 2, "Inside the bracket it's 2a, not a: Sₙ = {{n/2}}(first + last), and first + last = 2a + (n − 1)d."],
       ]),
     };
@@ -841,7 +840,7 @@ const limitValue: Drill = {
       e = quad ? rng.nonZero(-5, 6) : 0;
       if (zeroTop) {
         if (b < 0) b = -b;
-      } else if (gcd(a, c) === Math.abs(a) && c % Math.abs(a) === 0 && tier === 1 && rng.bool(0.5)) continue;
+      }
       // denominators must be positive for n ≥ 1
       let ok = true;
       for (let n = 1; n <= 3; n++) if ((quad ? c * n * n + d : c * n + d) <= 0) ok = false;
@@ -875,7 +874,7 @@ const limitValue: Drill = {
       solution: [
         `Divide every term, top and bottom, by {{${v}}} (the highest power of n): {{${divided}}}.`,
         `As n → ∞, ${vanish}.`,
-        zeroTop ? `So the terms tend to {{0/${c}}} = 0.` : `So the terms tend to {{${a}/${c}}}${isInt || (lim.n === a && lim.d === c) ? "" : ` = ${qShow(lim)}`}${isInt ? ` = ${qShow(lim)}` : ""}.`,
+        zeroTop ? `So the terms tend to {{0/${c}}} = 0.` : `So the terms tend to {{${a}/${c}}}${lim.n === a && lim.d === c ? "" : ` = ${qShow(lim)}`}.`,
         zeroTop ? "The top stays fixed while the bottom grows without limit." : `Quick check: the leading terms dominate, so the ratio of the {{${v}}} coefficients is the limit.`,
       ],
       hint: "For very large n, which terms on the top and bottom really matter? Try dividing everything by the highest power of n.",
@@ -889,6 +888,3 @@ const limitValue: Drill = {
 };
 
 export const drills: Drill[] = [findNthTerm, kthTerm, useNthTerm, twoTerms, sumSeries, sumFirstLast, findN, quadNth, fractionNth, limitValue];
-
-// Keep the Rng/DrillItem types referenced for readers of this file.
-export type { Rng, DrillItem };
