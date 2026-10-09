@@ -21,6 +21,8 @@ const NAMES = ["Aisha", "Wei Ling", "Arjun", "Priya", "Marcus", "Siti", "Ethan",
 
 const sum = (xs: readonly number[]) => xs.reduce((a, b) => a + b, 0);
 const asc = (xs: readonly number[]) => [...xs].sort((a, b) => a - b);
+/** Keep a trap candidate only if it is positive. */
+const pos = (v: number) => (v > 0 ? v : null);
 
 /** Bounded rejection loop; falls back to fixed seeds so it is always deterministic. */
 function attempt(make: (r: Rng) => DrillItem | null, rng: Rng): DrillItem {
@@ -145,8 +147,8 @@ const GCTX: GCtx[] = [
     starts: [100, 150, 200], units: [10],
   },
   {
-    head: "Rainfall (r mm)", v: "r", unit: "mm", who: "days", qty: "daily rainfall", qtys: "daily rainfall amounts",
-    about: (w) => `the daily rainfall, in mm, at a weather station in Singapore on ${w} during the monsoon season`,
+    head: "Rainfall (r mm)", v: "r", unit: "mm", who: "weather stations", qty: "rainfall", qtys: "rainfall amounts",
+    about: (w) => `the rainfall, in mm, recorded in one week of the monsoon season by ${w} across Southeast Asia`,
     more: (x) => `had more than ${x} mm of rain`, between: (a, b) => `had between ${a} mm and ${b} mm of rain`,
     starts: [0], units: [5, 10],
   },
@@ -158,7 +160,7 @@ const GCTX: GCtx[] = [
   },
   {
     head: "Age (a years)", v: "a", unit: "years", who: "people", qty: "age", qtys: "ages",
-    about: (w) => `the ages, in years, of ${w} at a community centre yoga class`,
+    about: (w) => `the ages, in years, of ${w} attending yoga classes at a community centre`,
     more: (x) => `were older than ${x} years`, between: (a, b) => `were aged between ${a} and ${b} years`,
     starts: [10, 20], units: [5, 10],
   },
@@ -452,7 +454,7 @@ const raw: Drill[] = [
               hint: "Find the total before and the total after. The difference is the new value.",
               traps: numTraps(x, [
                 [b, "The new person's value isn't the new mean — compare the totals before and after."],
-                [n * b - n * a, `The new total is for ${n + 1} ${what[3]}: multiply the new mean by ${n + 1}.`],
+                [pos(n * b - n * a), `The new total is for ${n + 1} ${what[3]}: multiply the new mean by ${n + 1}.`],
               ]),
             };
           }
@@ -465,8 +467,8 @@ const raw: Drill[] = [
             solution: [`Total before: ${n} × ${a} = ${n * a}.`, `Total after: ${n - 1} × ${b} = ${(n - 1) * b}.`, `The ${what[4]} who left: ${n * a} − ${(n - 1) * b} = ${x} ${what[1]}.`],
             hint: "Totals, not means, can be added and subtracted.",
             traps: numTraps(x, [
-              [n * a - n * b, `After one leaves there are only ${n - 1} — multiply the new mean by ${n - 1}.`],
-              [a - b, "That's only the change in the mean. Work with the totals."],
+              [pos(n * a - n * b), `After one leaves there are only ${n - 1} — multiply the new mean by ${n - 1}.`],
+              [pos(a - b), "That's only the change in the mean. Work with the totals."],
             ]),
           };
         }
@@ -656,7 +658,7 @@ const raw: Drill[] = [
           solution: [
             `Σfx = ${S1} + ${xs[j]}k and Σf = ${N1} + k.`,
             `{{(${S1} + ${xs[j]}k)/(${N1} + k) = ${mm}}}, so ${S1} + ${xs[j]}k = ${num(clean((mT * N1) / 10))} + ${mm}k.`,
-            `${num(clean(xs[j] - mT / 10))}k = ${num(clean((mT * N1) / 10 - S1))}, so k = ${fs[j]}.`,
+            `Collect the k terms on one side: ${num(clean(Math.abs(xs[j] - mT / 10)))}k = ${num(clean(Math.abs((mT * N1) / 10 - S1)))}, so k = ${fs[j]}.`,
           ],
           hint: "Write Σfx and Σf in terms of k, then set Σfx ÷ Σf equal to the mean.",
         };
@@ -696,11 +698,15 @@ const raw: Drill[] = [
             prompt: `${pre}Find the median ${c.noun}.`,
             answer: { type: "number", value: ans },
             solution: [
-              `There are ${N} values, so the median is the {{(${N} + 1)/2}} = ${num((N + 1) / 2)}th value.`,
+              N % 2
+                ? `There are ${N} values, so the median is the {{(${N} + 1)/2}} = ${ordinal((N + 1) / 2)} value.`
+                : `There are ${N} values, so the median is the {{(${N} + 1)/2}} = ${num((N + 1) / 2)}th value: halfway between the ${ordinal(N / 2)} and ${ordinal(N / 2 + 1)} values.`,
               `Running totals: ${cfs.join(", ")}.`,
-              ra === rb
-                ? `The ${num((N + 1) / 2)}th value is in the row for ${xs[ra]}, so the median is ${ans}.`
-                : `The ${ordinal(N / 2)} value is ${xs[ra]} and the ${ordinal(N / 2 + 1)} is ${xs[rb]}, so the median is ${ans}.`,
+              N % 2
+                ? `The ${ordinal((N + 1) / 2)} value is in the row for ${xs[ra]}, so the median is ${ans}.`
+                : ra === rb
+                  ? `The ${ordinal(N / 2)} and ${ordinal(N / 2 + 1)} values are both ${xs[ra]}, so the median is ${ans}.`
+                  : `The ${ordinal(N / 2)} value is ${xs[ra]} and the ${ordinal(N / 2 + 1)} is ${xs[rb]}, so the median is (${xs[ra]} + ${xs[rb]}) ÷ 2 = ${ans}.`,
             ],
             hint: "Find the position of the middle value, then count down the frequencies.",
             traps: numTraps(ans, [
@@ -830,9 +836,9 @@ const raw: Drill[] = [
             prompt: `${pre}Find the class interval that contains the median.`,
             answer: classAnswer(b[lo], b[lo + 1], c.v),
             solution: [
-              `There are ${N} values, so the median is about the {{${N}/2}} = ${num(N / 2)}th value.`,
+              `There are ${N} values, so the median is about the {{${N}/2}} = ${N % 2 ? `${num(N / 2)}th` : ordinal(N / 2)} value.`,
               `Running totals: ${cfs.join(", ")}.`,
-              `The ${num(N / 2)}th value lies in ${cls(b[lo], b[lo + 1], c.v)}.`,
+              `The running total first reaches ${num(N / 2)} in the class ${cls(b[lo], b[lo + 1], c.v)}, so that class contains the median.`,
             ],
             hint: "Find the position of the middle value, then add up the frequencies until you pass it.",
             traps,
@@ -912,7 +918,7 @@ const raw: Drill[] = [
           return {
             prompt: `${pre}How many ${c.who} ${c.more(num(X))}?`,
             answer: { type: "number", value: ans },
-            solution: [`${cf[j]} ${c.who} are in the class up to ${X}, i.e. ${c.v} ≤ ${X}.`, `Total = ${N}, so ${N} − ${cf[j]} = ${ans} have ${c.v} > ${X}.`],
+            solution: [`From the table, ${cf[j]} ${c.who} have ${c.v} ≤ ${X}.`, `Total = ${N}, so ${N} − ${cf[j]} = ${ans} have ${c.v} > ${X}.`],
             hint: "The table gives how many are *at most* a value. Subtract from the total.",
             traps: numTraps(ans, [[cf[j], `${cf[j]} is how many have ${c.v} ≤ ${X}. You want *more than* ${X}: subtract from ${N}.`]]),
           };
@@ -923,7 +929,7 @@ const raw: Drill[] = [
         const B = b[j + 1];
         const ans = cf[j] - cf[i];
         return {
-          prompt: `${pre}How many ${c.who} ${c.between(num(A), num(B))}? (Values equal to ${num(A)} count as below; values equal to ${num(B)} count as inside.)`,
+          prompt: `${pre}How many ${c.who} ${c.between(num(A), num(B))}? (That is, ${cls(A, B, c.v)}.)`,
           answer: { type: "number", value: ans },
           solution: [`Up to ${B}: ${cf[j]}. Up to ${A}: ${cf[i]}.`, `Between: ${cf[j]} − ${cf[i]} = ${ans}.`],
           hint: "Subtract two cumulative frequencies.",
@@ -1004,14 +1010,14 @@ const raw: Drill[] = [
           return {
             prompt: `${intro}\n\nUse the graph to find an estimate for the interquartile range of the ${c.qtys}. ${acc}`,
             diagram: g,
-            answer: { type: "number", value: ans, tolerance: 1.5 * mx, display: `about ${num(ans)}` },
+            answer: { type: "number", value: ans, tolerance: mx, display: `about ${num(ans)}` },
             solution: [
               `Lower quartile: read across from ${num(N / 4)} → about ${num(rx(q1))}.`,
               `Upper quartile: read across from ${num((3 * N) / 4)} → about ${num(rx(q3))}.`,
               `IQR ≈ ${num(rx(q3))} − ${num(rx(q1))} = ${num(ans)} ${c.unit}.`,
             ],
             hint: "IQR = upper quartile − lower quartile. Read them at ¾ and ¼ of the total frequency.",
-            traps: numTraps(ans, [[rx(q3), "That's just the upper quartile — subtract the lower quartile."], [rx(q2), "That's the median."]], 1.5 * mx),
+            traps: numTraps(ans, [[rx(q3), "That's just the upper quartile — subtract the lower quartile."], [rx(q2), "That's the median."]], mx),
           };
         }
         if (ask === "more") {
@@ -1047,7 +1053,7 @@ const raw: Drill[] = [
         const val = read(((100 - p) * N) / 100);
         const ans = rx(val);
         return {
-          prompt: `${intro}\n\n${p}% of the ${c.who} have a ${c.qty} greater than *T* ${c.unit}. Use the graph to estimate *T*. ${acc}`,
+          prompt: `${intro}\n\n${p}% of the ${c.who} have ${/^[aeiou]/.test(c.qty) ? "an" : "a"} ${c.qty} greater than *T* ${c.unit}. Use the graph to estimate *T*. ${acc}`,
           diagram: g,
           answer: { type: "number", value: ans, tolerance: mx, display: `about ${num(ans)}` },
           solution: [
@@ -1095,8 +1101,8 @@ const raw: Drill[] = [
             prompt: `A histogram shows ${c.about(`some ${c.who}`)}. The bar for the class ${cls(loA, hiA, c.v)} is ${hA} cm tall and represents ${fA} ${c.who}. The bar for the class ${cls(hiA, hiB, c.v)} is ${hB} cm tall.\n\nHow many ${c.who} does the bar for ${cls(hiA, hiB, c.v)} represent?`,
             answer: { type: "number", value: fB },
             solution: [
-              `In a histogram **area** represents frequency. Frequency density for the first class = ${fA} ÷ ${wA} = ${num(clean(fA / wA))}, drawn ${hA} cm tall.`,
-              `So 1 cm of height = ${num(clean(fA / wA))} ÷ ${hA} = ${frac2(fA, wA * hA)} in frequency density.`,
+              `In a histogram **area** represents frequency. Frequency density for the first class = ${fA} ÷ ${wA} = ${frac2(fA, wA)}, drawn ${hA} cm tall.`,
+              `So 1 cm of height = ${frac2(fA, wA)} ÷ ${hA} = ${frac2(fA, wA * hA)} in frequency density.`,
               `Second bar: frequency density = ${hB} × ${frac2(fA, wA * hA)} = ${frac2(hB * fA, wA * hA)}; frequency = that × ${wB} = ${fB}.`,
             ],
             hint: "Frequency = frequency density × class width. The two classes have different widths.",

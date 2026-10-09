@@ -162,7 +162,7 @@ export const mcqPapers: Paper[] = [
         options: ["$7", "$12", "$5.57", "$15"],
         answerIndex: 0,
         explanation:
-          "Form the equations: {{2a + 3c = 45}} and {{3a + c = 43}}. From the second, {{c = 43 - 3a}}. Substitute: {{2a + 3(43 - 3a) = 45}}, so {{129 - 7a = 45}}, a = 12 and c = 43 − 36 = 7. Check: 24 + 21 = 45 ✓. $12 is the adult price (or what you get by swapping the 2 and 3 when forming the equations). $5.57 comes from swapping the two totals. $15 is 45 ÷ 3, which ignores the adults Aisha paid for.",
+          "Form the equations: {{2a + 3c = 45}} and {{3a + c = 43}}. From the second, {{c = 43 - 3a}}. Substitute: {{2a + 3(43 - 3a) = 45}}, so {{129 - 7a = 45}}, a = 12 and c = 43 − 36 = 7. Check: 24 + 21 = 45 ✓. $12 is the adult price, not the child price. $5.57 comes from swapping the two totals. $15 is 45 ÷ 3, which ignores the adults Aisha paid for.",
         difficulty: "core",
         guideRef: "simultaneous-linear",
         hints: [
@@ -284,7 +284,7 @@ export const mcqPapers: Paper[] = [
         options: ["x = −3", "x = 3", "x = 15", "x = −{{1/5}}"],
         answerIndex: 1,
         explanation:
-          "Add 2x to both sides: {{7 = 5x - 8}}. Add 8: {{15 = 5x}}, so x = 3. Check: 7 − 6 = 1 and 9 − 8 = 1 ✓. x = −3 is a sign slip (5x = −15). x = 15 comes from subtracting 2x instead of adding it, leaving x = 15. x = −{{1/5}} comes from 7 − 8 = 5x — the −8 moved across without changing sign.",
+          "Add 2x to both sides: {{7 = 5x - 8}}. Add 8: {{15 = 5x}}, so x = 3. Check: 7 − 6 = 1 and 9 − 8 = 1 ✓. x = −3 is a sign slip (5x = −15). x = 15 comes from 7 = x − 8 — taking 2x away from 3x instead of adding 2x to both sides. x = −{{1/5}} comes from 7 − 8 = 5x — the −8 moved across without changing sign.",
         difficulty: "warmup",
         guideRef: "linear-equations",
         hints: ["Add 2x to both sides so the x terms are only on the right, where they stay positive."],
@@ -608,7 +608,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "solving-equations-m3-q05",
-        question: "Solve {{(3x - 2)/4 - (2x + 1)/3 = 1/6}}.\n\nShow clear algebraic working.",
+        question: "Solve {{(3x - 2)/4 - (2x + 1)/3 = 1/6}}.",
         options: ["x = 4", "x = {{61/6}}", "x = 11", "x = 12"],
         answerIndex: 3,
         explanation:
