@@ -1095,26 +1095,27 @@ export const practice: TopicPractice = {
     {
       kind: "short",
       id: "further-trigonometry-ch-q06",
-      question: "Solve {{2sin^2 x + 3cos x = 3}} for 0° ≤ x ≤ 360°.\n\nGive every solution.",
-      answer: { type: "list", values: [0, 60, 300, 360], display: "x = 0°, 60°, 300°, 360°" },
+      question: "Solve {{2cos^2 x + 3sin x = 3}} for 0° ≤ x ≤ 360°.\n\nGive every solution.",
+      answer: { type: "list", values: [30, 90, 150], ordered: false, display: "x = 30°, 90°, 150°" },
       solution: [
-        "Replace {{sin^2 x}} by {{1 - cos^2 x}}: {{2 - 2cos^2 x + 3cos x = 3}}.",
-        "Rearrange: {{2cos^2 x - 3cos x + 1 = 0}}.",
-        "Factorise: (2cos x − 1)(cos x − 1) = 0, so {{cos x = 1/2}} or cos x = 1.",
-        "{{cos x = 1/2}}: x = 60° or 360° − 60° = 300°.",
-        "cos x = 1: x = 0° or 360°.",
-        "Solutions: 0°, 60°, 300°, 360°.",
+        "Replace {{cos^2 x}} by {{1 - sin^2 x}}: {{2 - 2sin^2 x + 3sin x = 3}}.",
+        "Rearrange: {{2sin^2 x - 3sin x + 1 = 0}}.",
+        "Factorise: (2sin x − 1)(sin x − 1) = 0, so {{sin x = 1/2}} or sin x = 1.",
+        "{{sin x = 1/2}}: x = 30° or 180° − 30° = 150°.",
+        "sin x = 1: x = 90° (the maximum of the sine curve — only one solution).",
+        "Solutions: 30°, 90°, 150°.",
       ],
       traps: [
-        { spec: { type: "list", values: [60, 300] }, feedback: "Don't forget cos x = 1, which gives x = 0° and x = 360° — both are in the interval." },
+        { spec: { type: "list", values: [30, 150] }, feedback: "Don't forget the other factor: sin x = 1 gives x = 90°." },
+        { spec: { type: "list", values: [210, 270, 330] }, feedback: "Check the signs: replacing {{cos^2 x}} by {{sin^2 x - 1}} (the identity backwards) gives sin x = −{{1/2}} and −1. The correct swap is {{cos^2 x = 1 - sin^2 x}}." },
       ],
-      commonError: "Replacing {{sin^2 x}} by {{cos^2 x - 1}} (the identity backwards), which flips the signs.",
+      commonError: "Replacing {{cos^2 x}} by {{sin^2 x - 1}} (the identity backwards), which flips the signs.",
       difficulty: "challenge",
       guideRef: "trig-equations",
       hints: [
-        "There's a mix of sin and cos. Which identity lets you write everything in cos x?",
-        "{{sin^2 x = 1 - cos^2 x}}. Substitute and tidy into a quadratic in cos x.",
-        "Factorise, then solve each factor over the full interval — including the end points.",
+        "There's a mix of sin and cos. Which identity lets you write everything in sin x?",
+        "{{cos^2 x = 1 - sin^2 x}}. Substitute and tidy into a quadratic in sin x.",
+        "Factorise, then solve each factor over the full interval.",
       ],
       strategy: "Use an identity",
     },
@@ -1123,7 +1124,7 @@ export const practice: TopicPractice = {
       id: "further-trigonometry-ch-q07",
       question:
         "Solve {{5 sin x = 2 tan x}} for 0° < x < 360°.\n\nGive every solution, correct to 1 decimal place where necessary.",
-      answer: { type: "list", values: [66.4, 180, 293.6], tolerance: 0.051, display: "x = 66.4°, 180°, 293.6°" },
+      answer: { type: "list", values: [66.4, 180, 293.6], ordered: false, tolerance: 0.051, display: "x = 66.4°, 180°, 293.6°" },
       solution: [
         "Write tan x as {{(sin x)/(cos x)}}: {{5 sin x = (2 sin x)/(cos x)}}.",
         "Multiply by cos x: 5 sin x cos x = 2 sin x, so sin x (5 cos x − 2) = 0.",
@@ -1214,7 +1215,7 @@ export const practice: TopicPractice = {
       question:
         "Two circles each have radius 10 cm. Their centres P and Q are 10 cm apart.\n\nWork out the exact area of the shaded region where the circles overlap. Give your answer in the form {{(a pi)/b - c sqrt(3)}} cm².",
       diagram: `<svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two circles each of radius 10 cm whose centres P and Q are 10 cm apart; the overlapping lens-shaped region is shaded"><rect x="0" y="0" width="360" height="240" fill="#ffffff"/><path d="M 180 50.7 A 80 80 0 0 1 180 189.3 A 80 80 0 0 1 180 50.7 Z" fill="#bbf7d0" stroke="none"/><circle cx="140" cy="120" r="80" fill="none" stroke="#1f2937" stroke-width="2"/><circle cx="220" cy="120" r="80" fill="none" stroke="#1f2937" stroke-width="2"/><line x1="140" y1="120" x2="220" y2="120" stroke="#334155" stroke-width="1.5"/><circle cx="140" cy="120" r="3" fill="#1f2937"/><circle cx="220" cy="120" r="3" fill="#1f2937"/><text x="128" y="124" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">P</text><text x="232" y="124" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">Q</text><text x="180" y="138" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1f2937">10 cm</text></svg>`,
-      answer: { type: "expression", expr: "200pi/3-50sqrt(3)", display: "{{(200 pi)/3 - 50 sqrt(3)}} cm² (≈ 123 cm²)" },
+      answer: { type: "expression", expr: "200pi/3-50sqrt(3)", form: "surd", display: "{{(200 pi)/3 - 50 sqrt(3)}} cm² (≈ 123 cm²)" },
       solution: [
         "Let the circles meet at X and Y. PX = PQ = QX = 10, so triangle PQX is equilateral and angle XPQ = 60°. By symmetry angle XPY = 120°.",
         "The overlap is two identical segments, each cut off by chord XY.",

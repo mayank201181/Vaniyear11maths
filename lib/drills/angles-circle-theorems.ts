@@ -1084,9 +1084,10 @@ function tangentAngle(rng: Rng, tier: Tier): DrillItem {
 }
 
 function tangentLength(rng: Rng, tier: Tier): DrillItem {
+  const exact = tier === 1 || (tier === 3 && rng.bool(0.5));
+  const mode0 = tier === 3 && exact ? "kite" : rng.pick(["findT", "findT", "findD"] as const);
   return attempt(() => {
     let r: number, t: number, d: number;
-    const exact = tier === 1 || (tier === 3 && rng.bool(0.5));
     if (exact) {
       const tr = rng.pick(TRIPLES);
       if (rng.bool(0.5)) [r, t, d] = [tr[0], tr[1], tr[2]];
@@ -1099,7 +1100,7 @@ function tangentLength(rng: Rng, tier: Tier): DrillItem {
     const unit = rng.pick(["cm", "m", "mm"]);
     const h = Math.asin(r / d) / RAD;
     if (h < 14 || h > 70) return null;
-    const mode = tier === 3 && exact ? "kite" : rng.pick(["findT", "findT", "findD"] as const);
+    const mode = mode0;
     if (!exact && mode === "findT") {
       // d must be a whole number for a clean question; reshape
       d = rng.int(r + 2, r + 25);
@@ -1190,13 +1191,13 @@ const altSegment: Drill = {
   level: 3,
   guideRef: "circle-theorems-2",
   generate(rng, tier) {
+    const kinds = tier === 1 ? (["SAB", "TAC"] as const) : tier === 2 ? (["BAC", "ABC"] as const) : (["AOB", "OBA", "iso"] as const);
+    const kind = rng.pick(kinds as readonly string[]);
     return attempt(() => {
       const t = rng.int(30, 75);
       const v = rng.int(30, 75);
       const u = 180 - t - v;
       if (u < 30) return null;
-      const kinds = tier === 1 ? (["SAB", "TAC"] as const) : tier === 2 ? (["BAC", "ABC"] as const) : (["AOB", "OBA", "iso"] as const);
-      const kind = rng.pick(kinds as readonly string[]);
       const iso = kind === "iso";
       const vv = iso ? t : v;
       const uu = iso ? 180 - 2 * t : u;
@@ -1304,6 +1305,7 @@ const chordBisector: Drill = {
   level: 2,
   guideRef: "chords",
   generate(rng, tier) {
+    const kind3 = rng.pick(["parallel", "pipe", "arch"] as const);
     return attempt(() => {
       const unit = rng.pick(["cm", "cm", "m"]);
       if (tier < 3) {
@@ -1358,7 +1360,7 @@ const chordBisector: Drill = {
         return { prompt: `${facts} ${ask}${acc}`, diagram, answer: { type: "number", value: ans }, solution: sol, hint: "Draw the radius to the end of the chord: you get a right-angled triangle with half the chord as one side.", traps: numTraps(ans, wrong) };
       }
       // tier 3
-      const kind = rng.pick(["parallel", "pipe", "arch"] as const);
+      const kind = kind3;
       if (kind === "parallel") {
         const r = rng.pick([5, 10, 13, 15, 17, 25, 26]);
         const opts = HDR.filter((x) => x[2] === r);
@@ -1480,8 +1482,8 @@ const intersectingChords: Drill = {
   guideRef: "chords",
   generate(rng, tier) {
     const unit = "cm";
+    const kind = tier === 1 ? "inside" : tier === 2 ? rng.pick(["inside", "outside", "tangent"] as const) : rng.pick(["quadIn", "linIn", "quadOut", "tangent3"] as const);
     return attempt(() => {
-      const kind = tier === 1 ? "inside" : tier === 2 ? rng.pick(["inside", "outside", "tangent"] as const) : rng.pick(["quadIn", "linIn", "quadOut", "tangent3"] as const);
       if (kind === "inside" || kind === "linIn" || kind === "quadIn") {
         let a: number, b: number, c: number, d: number;
         let x = 0;
@@ -1667,10 +1669,10 @@ const proofCentre: Drill = {
   level: 3,
   guideRef: "circle-proofs",
   generate(rng, tier) {
+    const kind = tier === 1 ? rng.pick(["exterior", "exterior2"] as const) : tier === 2 ? rng.pick(["whole", "back"] as const) : rng.pick(["bowtie", "semicircle"] as const);
     return attempt(() => {
       const c: Pt = [200, 135];
       const R = 105;
-      const kind = tier === 1 ? rng.pick(["exterior", "exterior2"] as const) : tier === 2 ? rng.pick(["whole", "back"] as const) : rng.pick(["bowtie", "semicircle"] as const);
       if (kind === "semicircle") {
         const a = rng.int(18, 70);
         if (a === 45) return null;
@@ -1790,9 +1792,9 @@ const lociArea: Drill = {
   level: 2,
   guideRef: "constructions-loci",
   generate(rng, tier) {
+    const kind = tier === 1 ? rng.pick(["corner", "wall", "square"] as const) : tier === 2 ? rng.pick(["path", "pond", "square"] as const) : rng.pick(["shed", "shed", "pond"] as const);
     return attempt(() => {
       const unit = "m";
-      const kind = tier === 1 ? rng.pick(["corner", "wall", "square"] as const) : tier === 2 ? rng.pick(["path", "pond", "square"] as const) : rng.pick(["shed", "shed", "pond"] as const);
       const name = rng.pick(["A goat", "A pony", "A donkey", "A sheep"]);
       if (kind === "corner" || kind === "wall") {
         const r = rng.int(3, 12);

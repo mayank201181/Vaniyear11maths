@@ -135,19 +135,19 @@ function ScaleFactorLab() {
         </div>
         {view === "volume" ? (
           <svg viewBox={`0 0 ${W} 250`} className="h-auto w-full" role="img" aria-label={`A unit cube and a similar cube of side ${dec(k)}. The big cube's volume is ${dec(kCu)} times the small one's.`}>
-            {cubeFaces(1, 40, 150, false, "s")}
-            <text x={40} y={196} fontSize={12} textAnchor="middle" className="fill-ink-2">original: 1 cube</text>
-            {cubeFaces(k, 240, 236 - 2 * k * cu * Math.sin(30 * RAD) - k * cu < 10 ? 10 + k * cu : 236 - 2 * k * cu * Math.sin(30 * RAD) - 0 * cu, true, "b")}
-            <text x={240} y={248} fontSize={12} textAnchor="middle" className="fill-ink-2">side {dec(k)} → volume {dec(kCu)}</text>
+            {cubeFaces(1, 60, 120, false, "s")}
+            <text x={60} y={164} fontSize={12} textAnchor="middle" className="fill-ink-2">original: 1 cube</text>
+            {cubeFaces(k, 255, 122, true, "b")}
+            <text x={255} y={244} fontSize={12} textAnchor="middle" className="fill-ink-2">side {dec(k)} → volume {dec(kCu)}</text>
           </svg>
         ) : (
           <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-label={`A 2 by 1 rectangle and a similar rectangle ${dec(2 * k)} by ${dec(k)}. ${view === "area" ? `Area ${dec(2 * kSq)} compared with 2, a factor of ${dec(kSq)}.` : `Perimeter ${dec(6 * k)} compared with 6, a factor of ${dec(k)}.`}`}>
-            {Array.from({ length: 13 }, (_, i) => (
-              <line key={`gx${i}`} x1={ex + i * u} y1={ey} x2={ex + i * u} y2={ey + 7 * u} className="stroke-line" strokeWidth={0.8} />
-            )).slice(0, 11)}
-            {Array.from({ length: 8 }, (_, i) => (
+            {Array.from({ length: 11 }, (_, i) => (
+              <line key={`gx${i}`} x1={ex + i * u} y1={ey} x2={ex + i * u} y2={ey + 6 * u} className="stroke-line" strokeWidth={0.8} />
+            ))}
+            {Array.from({ length: 7 }, (_, i) => (
               <line key={`gy${i}`} x1={ex} y1={ey + i * u} x2={ex + 10 * u} y2={ey + i * u} className="stroke-line" strokeWidth={0.8} />
-            )).slice(0, 7)}
+            ))}
             <rect x={ox} y={oy} width={2 * u} height={u} className={view === "area" ? "fill-accent-soft stroke-ink" : "fill-surface stroke-accent"} strokeWidth={view === "length" ? 3 : 1.5} />
             <text x={ox + u} y={oy + u + 16} fontSize={11} textAnchor="middle" className="fill-ink-2">2 × 1</text>
             <rect x={ex} y={ey} width={2 * k * u} height={k * u} className={view === "area" ? "fill-brand-soft stroke-ink" : "fill-surface stroke-brand"} fillOpacity={view === "area" ? 0.9 : 0} strokeWidth={view === "length" ? 3 : 1.5} />
@@ -224,10 +224,8 @@ function solve(c: Cond, v: Record<string, number>): Solved {
       if (A + B >= 180) return { tris: [], note: "No triangle: the angles must add up to 180°." };
       const make = (base: number): Tri => {
         const C = 180 - A - B;
-        const AB = (base * sin(C)) / sin(A + C) || 0;
-        // A at origin, C on the x-axis at `base`; B from angle A and AB = base·sin C / sin B.
+        // A at the origin, C on the x-axis at `base`; sine rule gives AB = base · sin C / sin B.
         const ABlen = (base * sin(C)) / sin(B);
-        void AB;
         return [[0, 0], [ABlen * cos(A), ABlen * sin(A)], [base, 0]];
       };
       return { tris: [make(4), make(7)], note: "Same three angles, different sizes: the triangles are **similar**, not congruent. AAA fixes the shape but not the size." };
