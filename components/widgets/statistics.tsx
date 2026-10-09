@@ -15,7 +15,9 @@ import { WidgetFrame, Stepper, Slider, Segmented, Readout, M, type WidgetDef } f
 
 /** Up to dp decimal places, trailing zeros removed, real minus sign. */
 function fmt(v: number, dp = 2): string {
-  const s = (Math.round(v * 10 ** dp) / 10 ** dp).toFixed(dp).replace(/\.?0+$/, "");
+  let s = (Math.round(v * 10 ** dp) / 10 ** dp).toFixed(dp);
+  if (s.includes(".")) s = s.replace(/\.?0+$/, "");
+  if (s === "-0") s = "0";
   return s.startsWith("-") ? "−" + s.slice(1) : s;
 }
 
@@ -150,8 +152,7 @@ function CumulativeBuilder() {
         Each point is plotted at the <strong>upper bound</strong> of its class, because only by the end of the class have all of its {N > 1 ? "values" : "value"} been
         counted. With <M>{`n = ${N}`}</M>, read across from <M>{`n/4 = ${fmt(N / 4)}`}</M>, <M>{`n/2 = ${fmt(N / 2)}`}</M> and <M>{`3n/4 = ${fmt((3 * N) / 4)}`}</M>:
         median ≈ <strong>{fmt(q2, 1)}</strong>, quartiles ≈ {fmt(q1, 1)} and {fmt(q3, 1)}, so IQR ≈ <strong>{fmt(q3 - q1, 1)}</strong> {preset.unit}. The graph is
-        steepest over {preset.v === "t" ? "" : ""}
-        <M>{`${b[steepest]} < ${preset.v} <= ${b[steepest + 1]}`}</M>, the modal class — steep means lots of data packed into a short interval. At {preset.v} ={" "}
+        steepest over <M>{`${b[steepest]} < ${preset.v} <= ${b[steepest + 1]}`}</M>, the modal class — steep means lots of data packed into a short interval. At {preset.v} ={" "}
         {fmt(x, 1)} the graph is at about {fmt(below, 1)}, so roughly <strong>{fmt(N - below, 0)}</strong> values are more than {fmt(x, 1)}.
       </>
     );
@@ -374,7 +375,7 @@ function HistogramStudio() {
   const caption: ReactNode =
     mode === "density" ? (
       <>
-        Each bar&apos;s <strong>height</strong> is frequency density <M>{`= "frequency" / "class width"`}</M>, so its <strong>area</strong> is the frequency. The
+        Each bar&apos;s <strong>height</strong> is frequency density = frequency ÷ class width, so its <strong>area</strong> is the frequency. The
         widest class, <M>{cls(widest)}</M>, has {f[widest]} values spread over {widths[widest]} {preset.unit}, so its bar is only {fmt(fd[widest], 2)} high.
         {modalF !== modalD ? (
           <>

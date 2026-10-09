@@ -243,7 +243,7 @@ function SegmentLab() {
   }
   if (show === "line") {
     parts.push(
-      `**Midpoint** = average the coordinates = {{(${qm(mid[0])}, ${qm(mid[1])})}}. **Length** = {{sqrt(${dx}^2 + ${dy}^2) = sqrt(${d2})}}${sk > 1 && sm > 1 ? ` = {{${surdMark(sk, sm)}}}` : sm === 1 ? ` = ${sk}` : ""} ≈ ${sig3(length)} — Pythagoras on the run and the rise.`,
+      `**Midpoint** = average the coordinates = {{(${qm(mid[0])}, ${qm(mid[1])})}}. **Length** = {{sqrt(${dx}^2 + ${dy}^2) = sqrt(${d2})}}${sk > 1 && sm > 1 ? ` = {{${surdMark(sk, sm)}}}` : sm === 1 ? ` = ${sk}` : ""}${sm === 1 ? "" : ` ≈ ${sig3(length)}`} — Pythagoras on the run and the rise.`,
     );
   } else if (show === "bisector") {
     parts.push(
@@ -258,7 +258,7 @@ function SegmentLab() {
   }
   const caption = parts.join(" ");
 
-  const aria = `Points A(${ax}, ${ay}) and B(${bx}, ${by}) on a grid from −8 to 8. ${vertical ? `Vertical line x = ${ax}.` : `Line with gradient ${qt(m as Q)} and y-intercept ${qt(c as Q)}.`} Midpoint (${qt(mid[0])}, ${qt(mid[1])}); length ${sig3(length)}.${
+  const aria = `Points A(${qt(q(ax))}, ${qt(q(ay))}) and B(${qt(q(bx))}, ${qt(q(by))}) on a grid from −8 to 8. ${vertical ? `Vertical line x = ${ax}.` : `Line with gradient ${qt(m as Q)} and y-intercept ${qt(c as Q)}.`} Midpoint (${qt(mid[0])}, ${qt(mid[1])}); length ${sig3(length)}.${
     show === "ratio" ? ` P(${qt(P[0])}, ${qt(P[1])}) divides AB in the ratio ${rm} to ${rn}.` : ""
   }`;
 
@@ -270,7 +270,7 @@ function SegmentLab() {
       <g key={name}>
         <circle cx={x} cy={y} r={isActive ? 9 : 7} className={isActive ? "fill-brand stroke-surface" : "fill-ink stroke-surface"} strokeWidth={2.5} />
         <text x={right ? x + 11 : x - 11} y={Math.max(14, y - 9)} fontSize={12} fontWeight={800} textAnchor={right ? "start" : "end"} className="fill-ink stroke-surface" strokeWidth={3} style={HALO}>
-          {name}({p[0]}, {p[1]})
+          {`${name}(${qt(q(p[0]))}, ${qt(q(p[1]))})`}
         </text>
       </g>
     );
@@ -325,8 +325,8 @@ function SegmentLab() {
           <PlaneGrid plane={PLANE} step={1} labels={false} />
           {[-8, -4, 4, 8].map((t) => (
             <g key={t}>
-              <text x={px(t)} y={py(0) + 13} fontSize={10} textAnchor="middle" className="fill-ink-2">{t}</text>
-              <text x={px(0) - 4} y={py(t) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">{t}</text>
+              <text x={px(t)} y={py(0) + 13} fontSize={10} textAnchor="middle" className="fill-ink-2">{qt(q(t))}</text>
+              <text x={px(0) - 4} y={py(t) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">{qt(q(t))}</text>
             </g>
           ))}
           {full ? <line x1={full[0]} y1={full[1]} x2={full[2]} y2={full[3]} className="stroke-brand" strokeWidth={1.5} strokeDasharray="5 4" opacity={0.7} /> : null}
@@ -364,10 +364,10 @@ function SegmentLab() {
         </svg>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          <Stepper label="A x" value={ax} min={LO} max={HI} onChange={(v) => place("A", [v, ay])} />
-          <Stepper label="A y" value={ay} min={LO} max={HI} onChange={(v) => place("A", [ax, v])} />
-          <Stepper label="B x" value={bx} min={LO} max={HI} onChange={(v) => place("B", [v, by])} />
-          <Stepper label="B y" value={by} min={LO} max={HI} onChange={(v) => place("B", [bx, v])} />
+          <Stepper label="A: x" value={ax} min={LO} max={HI} onChange={(v) => place("A", [v, ay])} />
+          <Stepper label="A: y" value={ay} min={LO} max={HI} onChange={(v) => place("A", [ax, v])} />
+          <Stepper label="B: x" value={bx} min={LO} max={HI} onChange={(v) => place("B", [v, by])} />
+          <Stepper label="B: y" value={by} min={LO} max={HI} onChange={(v) => place("B", [bx, v])} />
         </div>
 
         {show === "ratio" ? (
@@ -542,8 +542,8 @@ function TwoLines() {
           <PlaneGrid plane={PLANE} step={1} labels={false} />
           {[-8, -4, 4, 8].map((t) => (
             <g key={t}>
-              <text x={px(t)} y={py(0) + 13} fontSize={10} textAnchor="middle" className="fill-ink-2">{t}</text>
-              <text x={px(0) - 4} y={py(t) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">{t}</text>
+              <text x={px(t)} y={py(0) + 13} fontSize={10} textAnchor="middle" className="fill-ink-2">{qt(q(t))}</text>
+              <text x={px(0) - 4} y={py(t) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">{qt(q(t))}</text>
             </g>
           ))}
           {showTri ? <polygon points={triPts.map(([x, y]) => `${px(x)},${py(y)}`).join(" ")} className="fill-accent" opacity={0.3} /> : null}
