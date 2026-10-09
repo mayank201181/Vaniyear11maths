@@ -300,9 +300,7 @@ function CircleTheoremLab() {
     const mc = angleBetween(P.C, P.A, P.B, 24);
     // right angle between radius and tangent
     const u1 = toward([0, 0], a + 180, 9);
-    const u2 = toward([0, 0], rayDir + 180, 0);
     const v2 = toward([0, 0], a + 90, 9);
-    void u2;
     const sq = `M${f1(P.A[0] + u1[0])},${f1(P.A[1] + u1[1])} L${f1(P.A[0] + u1[0] + v2[0])},${f1(P.A[1] + u1[1] + v2[1])} L${f1(P.A[0] + v2[0])},${f1(P.A[1] + v2[1])}`;
     shapes.push(
       <path key="sq" d={sq} fill="none" className="stroke-ink-2" strokeWidth={1.3} />,
@@ -375,9 +373,6 @@ function CircleTheoremLab() {
               <g key={n}>
                 <circle cx={q[0]} cy={q[1]} r={14} className="fill-brand" opacity={0.15} />
                 <circle cx={q[0]} cy={q[1]} r={6} className="fill-surface stroke-brand" strokeWidth={2.5} />
-                <Label at={onC(pos[n]).map((v, i) => v + (i === 0 ? 1 : -1) * 0) as Pt} size={1}>
-                  {""}
-                </Label>
                 <Label at={toward(O, pos[n], R + 20)} bold size={14}>
                   {n}
                 </Label>
