@@ -799,7 +799,7 @@ export const drills: Drill[] = [
           `Let {{y = ${fx}}}. Multiply up: {{${cy}xy ${d < 0 ? "-" : "+"} ${Math.abs(d)}y = ${top}}}`,
           `Collect the x terms on one side: {{${cy}xy ${a < 0 ? "+" : "-"} ${Math.abs(a) === 1 ? "" : Math.abs(a)}x = ${b} ${d < 0 ? "+" : "-"} ${Math.abs(d)}y}}`,
           `Factorise and divide: {{x(${ps([-a, c], "y")}) = ${ps([b, -d], "y")}}}, so {{x = (${ps([b, -d], "y")})/(${ps([-a, c], "y")})}}`,
-          `Swap the letters: {{f^(-1)(x) = ${inv}}} (multiplying top and bottom by −1 gives an equivalent form).`,
+          `Swap the letters: {{f^(-1)(x) = ${inv}}}${a > 0 ? " (top and bottom multiplied by −1 to tidy the signs — an equivalent form)" : ""}.`,
         ],
         hint: "x appears twice after you multiply up: collect the x terms, factorise x out, then divide.",
         traps: [{ spec: { type: "expression", expr: `(${bot})/(${top})` }, feedback: "That is {{1/f(x)}} — flipping the fraction is not the inverse. Rearrange y = f(x) for x." }],

@@ -1013,7 +1013,7 @@ export const practice: TopicPractice = {
       id: "further-trigonometry-ch-q03",
       question:
         "Siti has two rods, 8 cm and 11 cm long, hinged together at one end. She swings them to make two sides of a triangle with angle θ between them, where 0° < θ < 180°.\n\nFind every value of θ for which the triangle's area is exactly 22 cm².",
-      answer: { type: "list", values: [30, 150], display: "θ = 30° or θ = 150°" },
+      answer: { type: "list", values: [30, 150], ordered: false, display: "θ = 30° or θ = 150°" },
       solution: [
         "{{Area = 1/2 * 8 * 11 * sin theta = 44 sin theta}}.",
         "{{44 sin theta = 22}}, so {{sin theta = 1/2}}.",
@@ -1036,23 +1036,23 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "further-trigonometry-ch-q04",
       question:
-        "The curve {{y = a sin(bx) + c}}, where a and b are positive constants, has a maximum point at (30°, 7). The next minimum point to the right is at (90°, −1).\n\nFind a, b and c. Give them in that order.",
-      answer: { type: "list", values: [4, 3, 3], ordered: true, display: "a = 4, b = 3, c = 3" },
+        "The curve {{y = a sin(bx) + c}}, where a and b are positive constants, has a maximum point at (15°, 9). The next minimum point to the right is at (45°, −1).\n\nFind a, b and c. Give them in that order.",
+      answer: { type: "list", values: [5, 6, 4], ordered: true, display: "a = 5, b = 6, c = 4" },
       solution: [
-        "The midline is halfway between 7 and −1: c = {{(7 + (-1))/2}} = 3.",
-        "The amplitude is the distance from midline to max: a = 7 − 3 = 4.",
-        "Max to next min is half a period: 90° − 30° = 60°, so the period is 120°.",
-        "y = sin(bx) has period {{360/b}}°, so {{360/b = 120}} and b = 3.",
-        "Check: x = 30° gives 4 sin 90° + 3 = 7 ✓; x = 90° gives 4 sin 270° + 3 = −1 ✓.",
+        "The midline is halfway between 9 and −1: c = {{(9 + (-1))/2}} = 4.",
+        "The amplitude is the distance from midline to max: a = 9 − 4 = 5.",
+        "Max to next min is half a period: 45° − 15° = 30°, so the period is 60°.",
+        "y = sin(bx) has period {{360/b}}°, so {{360/b = 60}} and b = 6.",
+        "Check: x = 15° gives 5 sin 90° + 4 = 9 ✓; x = 45° gives 5 sin 270° + 4 = −1 ✓.",
       ],
       traps: [
-        { spec: { type: "list", values: [8, 3, 3], ordered: true }, feedback: "8 is the distance from max to min. The amplitude is **half** of that." },
-        { spec: { type: "list", values: [4, 6, 3], ordered: true }, feedback: "Max to the next min is only **half** a period, so the full period is 120°, not 60°." },
+        { spec: { type: "list", values: [10, 6, 4], ordered: true }, feedback: "10 is the distance from max to min. The amplitude is **half** of that." },
+        { spec: { type: "list", values: [5, 12, 4], ordered: true }, feedback: "Max to the next min is only **half** a period, so the full period is 60°, not 30°." },
       ],
       difficulty: "challenge",
       guideRef: "trig-graphs",
       hints: [
-        "What vertical shift puts the midline halfway between 7 and −1?",
+        "What vertical shift puts the midline halfway between 9 and −1?",
         "How far is the max above the midline? That's a.",
         "From a max to the next min is what fraction of a full cycle? Use period = {{360/b}}.",
       ],
