@@ -283,7 +283,7 @@ function histogram(ctx: GCtx, b: readonly number[], fdT: readonly number[], u: n
 
 type Stat = "mean" | "median" | "range" | "mode";
 
-export const drills: Drill[] = [
+const raw: Drill[] = [
   // 1 ─ Averages and range of a list ---------------------------------------
   {
     id: `${T}.list-averages`,
@@ -1253,3 +1253,21 @@ function frac2(n: number, d: number): string {
   const dd = d / a;
   return dd === 1 ? String(nn) : `{{${nn}/${dd}}}`;
 }
+
+// The two discrete-table skills share one drill: mean (incl. a missing frequency at tier 3),
+// or median / mode / range.
+const tableMean = raw.find((d) => d.id === `${T}.table-mean`)!;
+const tableOther = raw.find((d) => d.id === `${T}.table-median-mode-range`)!;
+
+export const drills: Drill[] = raw
+  .filter((d) => d !== tableOther)
+  .map((d) =>
+    d === tableMean
+      ? {
+          ...d,
+          id: `${T}.frequency-table`,
+          title: "Mean, median, mode and range from a frequency table",
+          generate: (rng: Rng, tier: 1 | 2 | 3) => (rng.bool(0.5) ? tableMean.generate(rng, tier) : tableOther.generate(rng, tier)),
+        }
+      : d,
+  );
