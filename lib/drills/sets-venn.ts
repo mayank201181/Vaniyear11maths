@@ -674,34 +674,33 @@ export const drills: Drill[] = [
         const H = prod(shared);
         const Lc = H * prod(oA) * prod(oB);
         if (A > 1500 || B > 1500 || A === B) return null;
-        const aria = `Venn diagram of prime factors. A only: ${oA.join(", ")}. Both: ${shared.join(", ")}. B only: ${oB.join(", ")}.`;
-        const diagram = venn2(["A", "B"], [oA.map(String), shared.map(String), oB.map(String), [""]], aria, 13);
-        const ask = tier === 1 ? r.pick(["H", "L", "A"]) : r.pick(["H", "L", "B", "L"]);
+        const [X, Y] = r.pick([["A", "B"], ["P", "Q"], ["M", "N"], ["S", "T"]] as const);
+        const aria = `Venn diagram of prime factors. ${X} only: ${oA.join(", ")}. Both ${X} and ${Y}: ${shared.join(", ")}. ${Y} only: ${oB.join(", ")}.`;
+        const diagram = venn2([X, Y], [oA.map(String), shared.map(String), oB.map(String), [""]], aria, 13);
+        const ask = r.pick(["H", "L", "Y", "L"]);
         let q: string, ans: number, steps: string[];
         let cands: Array<[number, string]> = [];
         if (ask === "H") {
-          q = "Work out the highest common factor (HCF) of A and B.";
+          q = `Work out the highest common factor (HCF) of ${X} and ${Y}.`;
           ans = H;
           steps = [`The HCF is the product of the primes in the overlap.`, `HCF = ${shared.join(" × ")} = ${H}`];
           cands = [[Lc, "That's the LCM. The HCF uses only the overlap."]];
         } else if (ask === "L") {
-          q = "Work out the lowest common multiple (LCM) of A and B.";
+          q = `Work out the lowest common multiple (LCM) of ${X} and ${Y}.`;
           ans = Lc;
           steps = [`The LCM is the product of **every** prime in the diagram (each region once).`, `LCM = ${[...oA, ...shared, ...oB].join(" × ")} = ${Lc}`];
-          cands = [[H, "That's the HCF. The LCM multiplies everything in both circles."], [A * B, "A × B counts the overlap twice — multiply each prime in the diagram once."]];
+          cands = [[H, "That's the HCF. The LCM multiplies everything in both circles."], [A * B, `${X} × ${Y} counts the overlap twice — multiply each prime in the diagram once.`]];
         } else {
-          const isA = ask === "A";
-          q = `Work out the value of ${isA ? "A" : "B"}.`;
-          ans = isA ? A : B;
-          const fs = isA ? [...oA, ...shared] : [...shared, ...oB];
-          steps = [`${isA ? "A" : "B"} is the product of all the primes inside circle ${isA ? "A" : "B"}, including the overlap.`, `${isA ? "A" : "B"} = ${fs.join(" × ")} = ${ans}`];
-          cands = [[prod(isA ? oA : oB), "Include the primes in the overlap too — they are factors of both numbers."]];
+          q = `Work out the value of ${Y}.`;
+          ans = B;
+          steps = [`${Y} is the product of all the primes inside circle ${Y}, including the overlap.`, `${Y} = ${[...shared, ...oB].join(" × ")} = ${B}`];
+          cands = [[prod(oB), "Include the primes in the overlap too — they are factors of both numbers."], [Lc, `That's the LCM — ${Y} only uses the primes inside its own circle.`]];
         }
         return {
-          prompt: `The Venn diagram shows the prime factors of two numbers, A and B.\n\n${q}`,
+          prompt: `The Venn diagram shows the prime factors of two numbers, ${X} and ${Y}, where ${X} = ${A}.\n\n${q}`,
           diagram,
           answer: { type: "number", value: ans },
-          solution: steps,
+          solution: [`Check: ${X} = ${[...oA, ...shared].join(" × ")} = ${A} ✓`, ...steps],
           hint: "Overlap = primes the numbers share (HCF). Whole diagram = everything either number needs (LCM).",
           traps: numTraps(ans, cands),
         };
