@@ -94,7 +94,7 @@ const qm = (n: number, d: number): string => {
 /** Number answer for n/d (fractions and decimals both accepted). */
 const qSpec = (n: number, d: number): AnswerSpec => {
   const [a, b] = simplify(n, d);
-  return { type: "number", value: a / b, display: b === 1 ? num(a) : frac(a, b) };
+  return b === 1 ? { type: "number", value: a } : { type: "fraction", n: a, d: b, allowDecimal: true, display: frac(a, b) };
 };
 
 const NAMES = ["f", "g", "h"] as const;
@@ -315,7 +315,7 @@ export const drills: Drill[] = [
           r1 = rng.nonZero(-7, 7);
           r2 = rng.nonZero(-7, 7);
           k = rng.nonZero(-9, 9);
-          if (r1 !== r2 && r1 + r2 !== 0 || (r1 === -r2 && r1 !== r2 && rng.bool(0.3))) break;
+          if (r1 !== r2) break;
         }
         const den: P = [r1 * r2, -(r1 + r2), 1];
         return {
@@ -327,7 +327,7 @@ export const drills: Drill[] = [
             `{{(${ps([-r1, 1])})(${ps([-r2, 1])}) = 0}}, so x = ${num(r1)} or x = ${num(r2)}.`,
           ],
           hint: "Which inputs make the denominator zero? Factorise it.",
-          traps: [{ spec: { type: "list", values: [-r1, -r2] }, feedback: "Sign slip: (x − a) = 0 gives x = a." }],
+          traps: r1 + r2 !== 0 ? [{ spec: { type: "list", values: [-r1, -r2] }, feedback: "Sign slip: (x − a) = 0 gives x = a." }] : [],
         };
       }
       let a = 1, b = 3, k = 4;
@@ -346,7 +346,7 @@ export const drills: Drill[] = [
           prompt,
           answer: qSpec(-b, a),
           solution: [
-            "Division by zero is undefined, so the denominator cannot be 0.",
+            "You cannot divide by zero, so the denominator cannot be 0.",
             `{{${inside} = 0}}`,
             `x = ${qt(-b, a)}`,
           ],
@@ -554,20 +554,23 @@ export const drills: Drill[] = [
       const quadratic = tier >= 2 && rng.bool(tier === 2 ? 0.4 : 0.7);
       if (!quadratic) {
         let f: P = [1, 2], g: P = [3, 4], x = 2;
-        let ff = false;
+        const ff = tier === 3 && rng.bool(0.5);
         for (let i = 0; i < 100; i++) {
           f = [rng.nonZero(-8, 8), rng.pick(tier === 1 ? [2, 3, 4] : [2, 3, 4, -2, -3])];
           g = [rng.nonZero(-8, 8), rng.pick(tier === 1 ? [2, 3, 5] : [2, 3, 5, -2, -4])];
-          ff = tier === 3 && rng.bool(0.5);
           x = rng.int(tier === 1 ? 1 : -6, 7);
-          const inner = ff ? f : g;
-          if (x !== 0 && val(compose(f, inner), x) !== val(compose(inner === g ? g : f, f), x)) break;
+          if (x !== 0 && !same(compose(f, g), compose(g, f))) break;
         }
         const innerP = ff ? f : g;
         const comp = compose(f, innerP);
         const k = val(comp, x);
         const label = ff ? "ff" : "fg";
-        const innerName = ff ? "f" : "g";
+        const traps: Trap[] = [];
+        if (!ff) {
+          const gf = compose(g, f);
+          const [wn, wd] = simplify(k - gf[0], gf[1]);
+          if (wd === 1 && wn !== x) traps.push({ spec: { type: "number", value: wn }, feedback: "You solved gf(x) = k. In fg(x) the g acts first, so substitute g(x) into f." });
+        }
         return {
           prompt: `{{f(x) = ${ps(f)}}}${ff ? "" : `\n{{g(x) = ${ps(g)}}}`}\n\nSolve {{${label}(x) = ${k}}}.`,
           answer: { type: "number", value: x },
@@ -577,7 +580,7 @@ export const drills: Drill[] = [
             `x = ${num(x)}`,
           ],
           hint: `Find an expression for {{${label}(x)}} first, then solve the equation.`,
-          traps: [{ spec: { type: "number", value: val(ff ? f : compose(g, f), x) === x ? x + 1 : val(compose(g, f), x) }, feedback: "That is a value of the function, not the input x. Set the composite expression equal to the number and solve." }].filter((t) => (t.spec as { value: number }).value !== x),
+          traps,
         };
       }
       // Quadratic composite: two solutions.
@@ -588,10 +591,10 @@ export const drills: Drill[] = [
         if (rng.bool()) {
           // f(x) = x² + p, g linear: (cx + d)² + p = k
           const c = rng.pick([1, 2]);
-          const d = c === 1 ? rng.nonZero(-6, 6) : 2 * rng.nonZero(-3, 3) / 2 * (rng.bool() ? 1 : 1);
+          const d = rng.nonZero(-6, 6);
           const p = rng.int(-6, 6);
           f = [p, 0, 1];
-          g = [c === 2 && d % 1 !== 0 ? 2 : d, c];
+          g = [d, c];
           const x0 = rng.nonZero(-5, 5);
           r1 = x0;
           const s = g[1] * x0 + g[0];
@@ -645,7 +648,6 @@ export const drills: Drill[] = [
       const b = rng.nonZero(-9, 9);
       if (mode === "solve") {
         // Solve f⁻¹(x) = k  ⇔  x = f(k).
-        const c = rng.pick([2, 3, 4]);
         const k = rng.nonZero(-6, 8);
         const f: P = [b, a];
         const fk = val(f, k);
@@ -653,7 +655,6 @@ export const drills: Drill[] = [
         const traps: Trap[] = [];
         const [tn, td] = simplify(finvK[0], finvK[1]);
         if (tn !== fk * td) traps.push({ spec: qSpec(finvK[0], finvK[1]), feedback: `That is {{f^(-1)(${k})}}. The equation says the *output* of {{f^(-1)}} is ${num(k)}, so x = f(${num(k)}).` });
-        void c;
         return {
           prompt: `{{f(x) = ${ps(f)}}}\n\nSolve {{f^(-1)(x) = ${k}}}.`,
           answer: { type: "number", value: fk },
@@ -755,7 +756,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: -A },
           solution: [
             `Let {{y = (${ps([B, A])})/(${C === 1 ? "" : C}x + k)}}. Multiply up: {{${C === 1 ? "" : C}xy + ky = ${ps([B, A])}}}`,
-            `Collect x terms: {{${C === 1 ? "" : C}xy - ${A === 1 ? "" : A === -1 ? "-" : A}x = ${B} - ky}}, so {{f^(-1)(x) = (${B} - kx)/(${C === 1 ? "" : C}x ${A < 0 ? "+" : "-"} ${Math.abs(A)})}}`,
+            `Collect x terms: {{${C === 1 ? "" : C}xy ${A < 0 ? "+" : "-"} ${Math.abs(A) === 1 ? "" : Math.abs(A)}x = ${B} - ky}}, so {{f^(-1)(x) = (${B} - kx)/(${C === 1 ? "" : C}x ${A < 0 ? "+" : "-"} ${Math.abs(A)})}}`,
             `For this to equal f(x), compare denominators: k = ${num(-A)}. Check the numerator: {{${B} - (${-A})x = ${ps([B, A])}}} ✓`,
           ],
           hint: "Find f⁻¹(x) with k left in, then compare it with f(x) term by term.",
@@ -789,14 +790,14 @@ export const drills: Drill[] = [
         };
       }
       // inverse expression: x = (b − dy)/(cy − a) → f⁻¹(x) = (dx − b)/(a − cx)
-      const inv = `(${ps([-b, d])})/(${ps([a, -c])})`;
+      const inv = a > 0 ? `(${ps([-b, d])})/(${a} - ${c === 1 ? "" : c}x)` : `(${ps([b, -d])})/(${ps([-a, c])})`;
       const cy = c === 1 ? "" : `${c}`;
       return {
         prompt: `{{f(x) = ${fx}}}\n\nFind {{f^(-1)(x)}}. Give your answer as a single fraction in terms of x.`,
         answer: { type: "expression", expr: inv, display: `{{f^(-1)(x) = ${inv}}}` },
         solution: [
           `Let {{y = ${fx}}}. Multiply up: {{${cy}xy ${d < 0 ? "-" : "+"} ${Math.abs(d)}y = ${top}}}`,
-          `Collect the x terms on one side: {{${cy}xy - ${a === 1 ? "" : a === -1 ? "-" : a}x = ${b} ${d < 0 ? "+" : "-"} ${Math.abs(d)}y}}`,
+          `Collect the x terms on one side: {{${cy}xy ${a < 0 ? "+" : "-"} ${Math.abs(a) === 1 ? "" : Math.abs(a)}x = ${b} ${d < 0 ? "+" : "-"} ${Math.abs(d)}y}}`,
           `Factorise and divide: {{x(${ps([-a, c], "y")}) = ${ps([b, -d], "y")}}}, so {{x = (${ps([b, -d], "y")})/(${ps([-a, c], "y")})}}`,
           `Swap the letters: {{f^(-1)(x) = ${inv}}} (multiplying top and bottom by −1 gives an equivalent form).`,
         ],

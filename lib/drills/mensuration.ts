@@ -142,8 +142,6 @@ function numTraps(answer: number, cands: Array<[number, string]>): Trap[] {
   return out;
 }
 
-/** A plain number Ex (no π) for traps. */
-const plain = (v: number): Ex => ({ expr: num(clean(v)).replace("−", "-"), tex: num(clean(v)), value: v, whole: true });
 
 // ---------------------------------------------------------------------------
 // Diagrams (inline SVG, white background, to scale)

@@ -64,7 +64,7 @@ export const practice: TopicPractice = {
       solution: [
         "You cannot divide by zero, so exclude the value that makes the denominator 0.",
         "2x − 6 = 0 gives x = 3.",
-        "f(3) would be {{5/0}}, which is undefined.",
+        "f(3) would be {{5/0}}, which has no value — division by zero is impossible.",
       ],
       traps: [{ spec: { type: "number", value: 6 }, feedback: "Set the whole denominator equal to zero: 2x − 6 = 0, so 2x = 6 and x = 3." }],
       commonError: "Excluding x = 0 out of habit — the problem input is whatever makes the denominator zero.",
@@ -315,9 +315,9 @@ export const practice: TopicPractice = {
             "{{f(x) = 1/(x - 2)}}\n\nHana says, \"The domain of f is all real numbers.\"\n\n(a) Explain why Hana is wrong, and state the value that must be excluded.\n\n(b) Explain why 0 is not in the range of f.",
           marks: 3,
           modelAnswer:
-            "(a) When x = 2 the denominator is 2 − 2 = 0, and you cannot divide by zero, so f(2) is undefined. The domain is all real x except x = 2 (x ≠ 2).\n\n(b) If {{1/(x - 2) = 0}} then multiplying both sides by (x − 2) would give 1 = 0, which is impossible. A fraction with numerator 1 can never equal zero, so f(x) ≠ 0: 0 is not in the range.",
+            "(a) When x = 2 the denominator is 2 − 2 = 0, and you cannot divide by zero, so f(2) cannot be worked out. The domain is all real x except x = 2 (x ≠ 2).\n\n(b) If {{1/(x - 2) = 0}} then multiplying both sides by (x − 2) would give 1 = 0, which is impossible. A fraction with numerator 1 can never equal zero, so f(x) ≠ 0: 0 is not in the range.",
           markScheme: [
-            { point: "Explains that x = 2 makes the denominator zero (division by zero is undefined)", keywords: ["divide by zero", "division by zero", "denominator", "zero", "undefined", "0"] },
+            { point: "Explains that x = 2 makes the denominator zero (you cannot divide by zero)", keywords: ["divide by zero", "division by zero", "denominator", "zero", "undefined", "0"] },
             { point: "States the excluded value x = 2 (domain x ≠ 2)", keywords: ["x = 2", "x=2", "x ≠ 2", "x != 2", "2"] },
             { point: "Explains f(x) = 0 is impossible, e.g. 1/(x − 2) = 0 leads to 1 = 0, or numerator is never zero", keywords: ["1 = 0", "1=0", "numerator", "never", "impossible", "cannot"] },
           ],
@@ -654,18 +654,19 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "functions-p2-q12",
-          question: "{{f(x) = x^2 + 3}}, with domain x ≥ 0.\n\nFind f⁻¹(x). Write just the expression in x.",
-          answer: { type: "expression", expr: "sqrt(x-3)", display: "f⁻¹(x) = {{sqrt(x - 3)}}" },
+          question: "{{f(x) = x^2 - 3}}, with domain x ≥ 0.\n\nFind f⁻¹(x). Write just the expression in x.",
+          answer: { type: "expression", expr: "sqrt(x+3)", display: "f⁻¹(x) = {{sqrt(x + 3)}}" },
           solution: [
-            "y = {{x^2 + 3}}, so {{x^2 = y - 3}}.",
-            "x = {{sqrt(y - 3)}} — positive root only, because the domain of f is x ≥ 0.",
-            "f⁻¹(x) = {{sqrt(x - 3)}}, with domain x ≥ 3 (the range of f).",
+            "y = {{x^2 - 3}}, so {{x^2 = y + 3}}.",
+            "x = {{sqrt(y + 3)}} — positive root only, because the domain of f is x ≥ 0.",
+            "f⁻¹(x) = {{sqrt(x + 3)}}, with domain x ≥ −3 (the range of f).",
+            "Check: f(2) = 1 and f⁻¹(1) = √4 = 2 ✓.",
           ],
-          traps: [{ spec: { type: "expression", expr: "sqrt(x)-3" }, feedback: "Undo in reverse order: subtract 3 **first**, then square root: {{sqrt(x - 3)}}, not {{sqrt(x) - 3}}." }],
-          commonError: "Square rooting before subtracting 3.",
+          traps: [{ spec: { type: "expression", expr: "sqrt(x)+3" }, feedback: "Undo in reverse order: add 3 **first**, then square root: {{sqrt(x + 3)}}, not {{sqrt(x) + 3}}." }],
+          commonError: "Square rooting before adding 3.",
           difficulty: "core",
           guideRef: "inverse-functions",
-          hints: ["f does: square, then + 3. Undo in reverse order.", "Subtract 3, then square root.", "Why only the positive root? Look at the domain of f."],
+          hints: ["f does: square, then − 3. Undo in reverse order.", "Add 3, then square root.", "Why only the positive root? Look at the domain of f."],
           strategy: "Use the inverse",
         },
         {

@@ -117,10 +117,14 @@ function hm(min: number): string {
 }
 
 function numTrap(value: number, answer: number, feedback: string, out: Trap[]) {
-  const dup = out.some((t) => t.spec.type === "number" && Math.abs(t.spec.value - value) < 1e-9);
-  if (!dup && Number.isFinite(value) && value > 0 && Math.abs(value - answer) > 1e-6 * Math.max(1, Math.abs(answer))) {
-    out.push({ spec: { type: "number", value: clean(value, 10) }, feedback });
-  }
+  if (!Number.isFinite(value) || value <= 0) return;
+  // A non-terminating trap value is matched loosely (about ±0.5% — covers 3 s.f. typing).
+  const exact = Math.abs(value * 1000 - Math.round(value * 1000)) < 1e-6;
+  const v = exact ? clean(value) : roundTo(value, 4);
+  const tol = exact ? undefined : Math.abs(v) * 0.005;
+  if (Math.abs(v - answer) <= Math.max(1e-6 * Math.max(1, Math.abs(answer)), 2 * (tol ?? 0))) return;
+  if (out.some((t) => t.spec.type === "number" && Math.abs(t.spec.value - v) < 1e-9)) return;
+  out.push({ spec: tol ? { type: "number", value: v, tolerance: tol } : { type: "number", value: v }, feedback });
 }
 
 // ---------------------------------------------------------------------------
@@ -948,7 +952,7 @@ export const drills: Drill[] = [
           v2 = rng.int(3, 20) * (tier === 1 ? 10 : 5);
           if (v1 === v2) continue;
           d = lcm(v1, v2) * rng.int(1, 3);
-          if (d <= 600 && (tier > 1 || exactSig(2 * v1 * v2, v1 + v2))) break;
+          if (d <= (Math.max(v1, v2) <= 30 ? 150 : 600) && (tier > 1 || exactSig(2 * v1 * v2, v1 + v2))) break;
         }
         const T = d / v1 + d / v2;
         const N = 2 * v1 * v2, D = v1 + v2; // average = 2d/T = 2v1v2/(v1+v2)
@@ -956,7 +960,7 @@ export const drills: Drill[] = [
         const traps: Trap[] = [];
         numTrap(sigQ(v1 + v2, 2), ans, "Averaging the two speeds only works if you spend the SAME TIME at each. Use total distance ÷ total time.", traps);
         return {
-          prompt: `${name} cycles ${d} km to a campsite at an average speed of ${v1} km/h and returns along the same route at ${v2} km/h. Work out the average speed for the whole journey in km/h. Give your answer correct to 3 significant figures.`,
+          prompt: `${name} ${Math.max(v1, v2) <= 30 ? "cycles" : "drives"} ${d} km to ${Math.max(v1, v2) <= 30 ? "a campsite" : "a holiday resort"} at an average speed of ${v1} km/h and returns along the same route at ${v2} km/h. Work out the average speed for the whole journey in km/h. Give your answer correct to 3 significant figures.`,
           answer: { type: "number", value: ans },
           solution: [`Times: ${d} ÷ ${v1} = ${num(d / v1)} h and ${d} ÷ ${v2} = ${num(d / v2)} h, total ${num(clean(T))} h.`, `Total distance = ${2 * d} km.`, `Average speed = ${2 * d} ÷ ${num(clean(T))} ${eqSig(N, D, " km/h")}.`],
           hint: "Average speed = TOTAL distance ÷ TOTAL time. Find each time separately.",
@@ -1018,7 +1022,7 @@ export const drills: Drill[] = [
       numTrap(sigQ(v1 * v2D + v2N, 2 * v2D), ans, "Averaging the two speeds ignores how long each part took. Use total distance ÷ total time.", traps);
       numTrap(sigQ(D, T), ans, "You divided by minutes. Convert the total time to hours to get km/h.", traps);
       return {
-        prompt: `${name} travels by ${rng.pick(["car", "coach", "motorbike"])}. For the first ${hm(t1)} the average speed is ${v1} km/h. ${name} then travels a further ${d2} km in ${hm(t2)}. Work out the average speed for the whole journey in km/h.${tier === 1 ? "" : " Give your answer correct to 3 significant figures."}`,
+        prompt: `${name} travels by ${rng.pick(["car", "coach", "motorbike"])}. For the first ${t1 === 60 ? "hour" : hm(t1)} the average speed is ${v1} km/h. ${name} then travels a further ${d2} km in ${hm(t2)}. Work out the average speed for the whole journey in km/h.${tier === 1 ? "" : " Give your answer correct to 3 significant figures."}`,
         answer: { type: "number", value: ans },
         solution: [`First part: ${v1} × ${M(`${t1}/60`)} = ${d1} km.`, `Total distance = ${d1} + ${d2} = ${D} km; total time = ${hm(T)} = ${M(`${T}/60`)} h.`, `Average speed = ${D} ÷ ${M(`${T}/60`)} ${eqSig(D * 60, T, " km/h")}.`],
         hint: "Average speed = total distance ÷ total time. Find the missing distance first.",
@@ -1060,6 +1064,8 @@ export const drills: Drill[] = [
       const c = useAbstract ? null : rng.pick(ctxs[String(n)]);
       const Y = c ? c.y : "y", X = c ? c.x : "x";
       const pw = (s: string) => (n === 1 ? s : n === 0.5 ? `sqrt(${s})` : `${s}^${n}`);
+      const kpw = (k: string, s: string) => (n === 0.5 ? `${k} sqrt(${s})` : `${k}${pw(s)}`);
+      const pwv = (x: number) => (n === 1 ? `${x}` : M(pw(String(x))));
       const xn = (x: number) => (n === 0.5 ? Math.sqrt(x) : x ** n);
       const relWord = n === 1 ? X : n === 2 ? `the square of ${X}` : n === 3 ? `the cube of ${X}` : `the square root of ${X}`;
       const xPool = n === 0.5 ? [4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 196, 225, 400] : n === 3 ? [2, 3, 4, 5, 6, 10] : tier === 1 ? [2, 3, 4, 5, 6, 8, 10] : [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 15, 20];
@@ -1080,14 +1086,14 @@ export const drills: Drill[] = [
       const kText = kd === 1 ? `${kn}` : `${num(kn / kd)}`;
       const lead = c ? c.text : `${Y} is directly proportional to ${relWord}.`;
       const given = `When ${X} = ${x1}, ${Y} = ${num(y1)}.`;
-      const steps = [`${M(`${Y} = k${pw(X)}`)}. Substitute: ${num(y1)} = k × ${M(pw(String(x1)))} = ${num(xn(x1))}k, so k = ${kText}.`];
+      const steps = [`${M(`${Y} = ${kpw("k", X)}`)}. Substitute: ${num(y1)} = k × ${pwv(x1)}${n === 1 ? "" : ` = ${num(xn(x1))}k`}, so k = ${num(y1)} ÷ ${num(xn(x1))} = ${kText}.`];
       const ask = tier >= 2 && n !== 0.5 && rng.bool(0.3) ? "formula" : rng.pick(["y", "y", "x"] as const);
       if (ask === "formula") {
         const expr = `${kd === 1 ? kn : `(${kn}/${kd})`}${pw(X)}`;
         return {
           prompt: `${lead} ${given} Find a formula for ${Y} in terms of ${X}.`,
-          answer: { type: "expression", expr: expr.replace(/\b([A-Za-z])\b/g, "$1"), display: `{{${Y} = ${kText}${pw(X)}}}` },
-          solution: [...steps, `So ${M(`${Y} = ${kText}${pw(X)}`)}.`],
+          answer: { type: "expression", expr: expr.replace(/\b([A-Za-z])\b/g, "$1"), display: `{{${Y} = ${kpw(kText, X)}}}` },
+          solution: [...steps, `So ${M(`${Y} = ${kpw(kText, X)}`)}.`],
           hint: `Write ${Y} = k × ${relWord.replace("the ", "")}, then substitute the pair of values to find k.`,
         };
       }
@@ -1097,7 +1103,7 @@ export const drills: Drill[] = [
         return {
           prompt: `${lead} ${given} Work out the value of ${Y} when ${X} = ${x2}.`,
           answer: { type: "number", value: y2 },
-          solution: [...steps, `When ${X} = ${x2}: ${Y} = ${kText} × ${M(pw(String(x2)))} = ${kText} × ${num(xn(x2))} = ${num(y2)}.`],
+          solution: [...steps, n === 1 ? `When ${X} = ${x2}: ${Y} = ${kText} × ${x2} = ${num(y2)}.` : `When ${X} = ${x2}: ${Y} = ${kText} × ${pwv(x2)} = ${kText} × ${num(xn(x2))} = ${num(y2)}.`],
           hint: `Write ${Y} = k${n === 1 ? X : n === 0.5 ? `√${X}` : X + (n === 2 ? "²" : "³")} and use the given pair to find k first.`,
           traps,
         };
@@ -1108,8 +1114,8 @@ export const drills: Drill[] = [
         answer: { type: "number", value: x2 },
         solution: [
           ...steps,
-          `${num(y2)} = ${kText}${M(pw(X))}, so ${M(pw(X))} = ${num(y2)} ÷ ${kText} = ${num(xn(x2))}.`,
-          `${X} = ${n === 1 ? num(x2) : n === 2 ? `${M(`sqrt(${num(xn(x2))})`)} = ${x2}` : n === 3 ? `${M(`cbrt(${num(xn(x2))})`)} = ${x2}` : `${num(xn(x2))}² = ${x2}`}.`,
+          `${num(y2)} = ${M(kpw(kText, X))}, so ${M(pw(X))} = ${num(y2)} ÷ ${kText} = ${num(xn(x2))}.`,
+          ...(n === 1 ? [] : [`${X} = ${n === 2 ? `${M(`sqrt(${num(xn(x2))})`)} = ${x2}` : n === 3 ? `${M(`cbrt(${num(xn(x2))})`)} = ${x2}` : `${num(xn(x2))}² = ${x2}`}.`]),
         ],
         hint: "Find k first, then substitute the known value and undo the power.",
         traps,
@@ -1133,7 +1139,7 @@ export const drills: Drill[] = [
         [x1, x2] = rng.shuffle(xPool).slice(0, 2);
         k = x1 ** n * rng.int(2, tier === 1 ? 15 : 60);
         y1 = k / x1 ** n;
-        if (exactDp(k, x2 ** n, tier === 1 ? 0 : 2) && k / x2 ** n >= 0.1) {
+        if (exactDp(k, x2 ** n, tier === 3 ? 2 : tier === 2 ? 1 : 0) && k / x2 ** n >= 0.1) {
           y2 = clean(k / x2 ** n);
           if (kind === "workers" && !Number.isInteger(y2)) continue;
           break;
@@ -1149,7 +1155,7 @@ export const drills: Drill[] = [
         return {
           prompt: `It takes ${x1} people ${y1} hours to ${job}. Everyone works at the same rate. How long would it take ${x2} people? Give your answer in hours.`,
           answer: { type: "number", value: y2 },
-          solution: [`Total work = ${x1} × ${y1} = ${k} person-hours (this stays the same).`, `Time for ${x2} people = ${k} ÷ ${x2} = ${num(y2)} hours.`],
+          solution: [`Total work = ${x1} × ${y1} = ${k} person-hours (this stays the same).`, `Time for ${x2} people = ${k} ÷ ${x2} = ${num(y2)} hour${y2 === 1 ? "" : "s"}.`],
           hint: "Work out the total amount of work in person-hours first.",
           traps,
         };
@@ -1180,7 +1186,7 @@ export const drills: Drill[] = [
         return {
           prompt: `${info.text} When ${X} = ${X1}, ${Y} = ${num(y1)}. Work out the value of ${X} when ${Y} = ${num(y2)}.`,
           answer: { type: "number", value: X2 },
-          solution: [...steps, `${num(y2)} = ${M(`${big(K)}/${xp(X)}`)}, so ${M(xp(X))} = ${big(K)} ÷ ${num(y2)} = ${big(X2 ** n)}.`, ...(n === 2 ? [`${X} = ${M(`sqrt(${X2 ** 2})`)} = ${X2}.`] : [])],
+          solution: [...steps, `${num(y2)} = ${M(`${K}/${xp(X)}`)}, so ${M(xp(X))} = ${big(K)} ÷ ${num(y2)} = ${big(X2 ** n)}.`, ...(n === 2 ? [`${X} = ${M(`sqrt(${X2 ** 2})`)} = ${X2}.`] : [])],
           hint: "Find k, then rearrange to get the power of the unknown on its own.",
           traps,
         };
@@ -1190,7 +1196,7 @@ export const drills: Drill[] = [
       return {
         prompt: `${info.text} When ${X} = ${X1}, ${Y} = ${num(y1)}. Work out the value of ${Y} when ${X} = ${X2}.`,
         answer: { type: "number", value: y2 },
-        solution: [...steps, `When ${X} = ${X2}: ${Y} = ${M(`${big(K)}/${xp(String(X2))}`)} = ${big(K)} ÷ ${big(X2 ** n)} = ${num(y2)}.`],
+        solution: [...steps, `When ${X} = ${X2}: ${Y} = ${M(`${K}/${xp(String(X2))}`)} = ${big(K)} ÷ ${big(X2 ** n)} = ${num(y2)}.`],
         hint: `Write ${Y} = k ÷ ${n === 1 ? X : `${X}²`}, find k from the pair you know, then substitute.`,
         traps,
       };
@@ -1225,7 +1231,18 @@ export const drills: Drill[] = [
         return {
           prompt: `y is ${rel}. x is ${word}. What number is y multiplied by? (Give a fraction if y gets smaller.)`,
           answer: ans,
-          solution: [`${M(formula)}.`, `Replace x by ${halve ? M(`x/${f}`) : `${f}x`}: the factor ${halve ? M(`1/${f}`) : f} becomes ${halve ? M(`1/${f}`) : f}${n === 1 ? "" : n === 0.5 ? " square-rooted" : n === 2 ? " squared" : " cubed"} = ${halve ? M(`1/${xf}`) : xf}.`, inverse ? `Inverse, so flip it: y is multiplied by ${up ? xf : M(`1/${xf}`)}.` : `So y is multiplied by ${up ? xf : M(`1/${xf}`)}.`],
+          solution: (() => {
+            const newx = halve ? M(`x/${f}`) : `${f}x`;
+            const fT = halve ? M(`1/${f}`) : String(f);
+            const effT = halve ? M(`1/${xf}`) : String(xf);
+            const powName = n === 0.5 ? "√x" : n === 2 ? "x²" : "x³";
+            const line2 =
+              n === 1
+                ? `Replacing x by ${newx} multiplies x by ${fT}.`
+                : `Replacing x by ${newx} multiplies ${powName} by ${n === 0.5 ? M(`sqrt(${f})`) : halve ? M(`(1/${f})^${n}`) : M(`${f}^${n}`)} = ${effT}.`;
+            const ansT = up ? String(xf) : M(`1/${xf}`);
+            return [`${M(formula)}.`, line2, inverse ? `y is inversely proportional, so it is multiplied by the reciprocal: ${ansT}.` : `So y is multiplied by ${ansT}.`];
+          })(),
           hint: "Try a number: let x = 1 and then the new x. What happens to the formula?",
           traps,
         };
@@ -1265,7 +1282,7 @@ export const drills: Drill[] = [
           prompt: `A is directly proportional to the ${nn === 2 ? "square" : "cube"} of r. A ${yPct > 0 ? "increases" : "decreases"} by ${num(Math.abs(clean(yPct)))}%. Work out the percentage ${rp > 0 ? "increase" : "decrease"} in r.`,
           answer: { type: "number", value: Math.abs(rp) },
           solution: [
-            `A multiplier for A: ${num(clean(yb / 100 ** nn))}.`,
+            `The multiplier for A is ${num(clean(yb / 100 ** nn))}.`,
             `${M(`A = kr^${nn}`)}, so the multiplier for r is ${M(nn === 2 ? `sqrt(${num(clean(yb / 100 ** nn))})` : `cbrt(${num(clean(yb / 100 ** nn))})`)} = ${num(xb / 100)}.`,
             `So r ${rp > 0 ? "increases" : "decreases"} by ${Math.abs(rp)}%.`,
           ],
@@ -1286,7 +1303,11 @@ export const drills: Drill[] = [
         answer: { type: "number", value: ans },
         solution: [
           `${M(formula)}. The multiplier for x is ${xm}.`,
-          inverse ? `The power of x changes by ${effectText}, and y is inversely proportional, so y is multiplied by 1 ÷ ${num(effect)} = ${yMul}.` : `So y is multiplied by ${effectText}.`,
+          inverse
+            ? n === 1
+              ? `y is inversely proportional to x, so y is multiplied by 1 ÷ ${xm} = ${yMul}${yExact ? "." : " (keep the full value)."}`
+              : `${n === 0.5 ? "√x" : n === 2 ? "x²" : "x³"} is multiplied by ${effectText}, so y is multiplied by 1 ÷ ${num(effect)} = ${yMul}${yExact ? "." : " (keep the full value)."}`
+            : `So y is multiplied by ${effectText}.`,
           `Percentage ${yUp ? "increase" : "decrease"} = ${yUp ? `(${yMul} − 1)` : `(1 − ${yMul})`} × 100 ${eqSig(pctN, pctD, "%")}.`,
         ],
         hint: "Change the percentage into a multiplier for x, then work out what that does to the formula.",

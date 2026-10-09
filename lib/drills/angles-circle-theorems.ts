@@ -83,7 +83,7 @@ function svgOpen(w: number, h: number, aria: string): string {
 }
 
 function tx(p: Pt, s: string, o: { size?: number; anchor?: string; color?: string; bold?: boolean } = {}): string {
-  return `<text x="${f1(p[0])}" y="${f1(p[1])}" font-size="${o.size ?? 13}" font-family="sans-serif" text-anchor="${o.anchor ?? "middle"}" fill="${o.color ?? INK}"${o.bold ? ' font-weight="bold"' : ""}>${s}</text>`;
+  return `<text x="${f1(p[0])}" y="${f1(p[1])}" font-size="${o.size ?? 13}" font-family="sans-serif" text-anchor="${o.anchor ?? "middle"}" fill="${o.color ?? INK}" stroke="#ffffff" stroke-width="3" paint-order="stroke"${o.bold ? ' font-weight="bold"' : ""}>${s}</text>`;
 }
 
 function seg(a: Pt, b: Pt, o: { dash?: boolean; color?: string; w?: number } = {}): string {
@@ -124,7 +124,11 @@ function rightMark(V: Pt, A: Pt, B: Pt, s = 10): string {
   return `<path d="M${f1(p1[0])},${f1(p1[1])} L${f1(p2[0])},${f1(p2[1])} L${f1(p3[0])},${f1(p3[1])}" fill="none" stroke="${INK}" stroke-width="1.3"/>`;
 }
 
-function ptLabel(P: Pt, name: string, nbrs: Pt[], centre?: Pt): string {
+function ptLabel(P: Pt, name: string, nbrs: Pt[], centre?: Pt, force?: Pt): string {
+  if (force) {
+    const L0 = add(P, norm(force), 15);
+    return tx([L0[0], L0[1] + 5], name, { bold: true, size: 14 });
+  }
   let v: Pt = [0, 0];
   for (const q of nbrs) {
     const u = dirTo(P, q);
@@ -170,6 +174,7 @@ interface Scene {
   extra?: string;
   aria: string;
   hide?: string[];
+  labelDir?: Record<string, Pt>;
 }
 
 function drawScene(s: Scene): string {
@@ -183,7 +188,7 @@ function drawScene(s: Scene): string {
     if (s.hide?.includes(name)) continue;
     const nbrs = s.segs.filter((g) => g[0] === name || g[1] === name).map((g) => s.pts[g[0] === name ? g[1] : g[0]]);
     out += `<circle cx="${f1(P[0])}" cy="${f1(P[1])}" r="2.8" fill="${INK}"/>`;
-    out += ptLabel(P, name, nbrs, s.onCircle.includes(name) ? s.c : undefined);
+    out += ptLabel(P, name, nbrs, s.onCircle.includes(name) ? s.c : undefined, s.labelDir?.[name]);
   }
   return out + "</svg>";
 }
@@ -607,7 +612,7 @@ const polygons: Drill = {
   generate(rng, tier) {
     if (tier === 1) return rng.pick([polySum, polyRegular, polyFindN])(rng, tier);
     if (tier === 2) return rng.pick([polyRegular, polyFindN, polyFindN, (r: Rng) => polySumToN(r), (r: Rng) => polyIrregular(r)])(rng, tier);
-    return rng.pick([(r: Rng) => polyRatio(r), (r: Rng) => polyTess(r), (r: Rng) => polyAlgebra(r)])(rng, tier);
+    return rng.pick([(r: Rng) => polyRatio(r), (r: Rng) => polyTess(r), (r: Rng) => polyAlgebra(r)])(rng);
   },
 };
 
@@ -1015,7 +1020,7 @@ function tangentAngle(rng: Rng, tier: Tier): DrillItem {
     };
   }
   if (kind === "AOB" || kind === "PAB") {
-    const p = 2 * rng.int(20, 60);
+    const p = 2 * rng.int(18, 42);
     const h = p / 2;
     const { pts, c, R } = tangentPts(h, true);
     const aob = 180 - p;
@@ -1040,7 +1045,7 @@ function tangentAngle(rng: Rng, tier: Tier): DrillItem {
     };
   }
   if (kind === "ACB") {
-    const cc = rng.int(25, 68);
+    const cc = rng.int(48, 72);
     const p = 180 - 2 * cc;
     const { pts, c, R } = tangentPts(p / 2, true);
     pts.C = pol(c, R, 180 + rng.int(-40, 40));
@@ -1059,7 +1064,7 @@ function tangentAngle(rng: Rng, tier: Tier): DrillItem {
       traps: numTraps(p, [[2 * cc, "That's angle AOB. APB is 180° minus it."], [180 - cc, "Double ACB to get the angle at the centre first."]]),
     };
   }
-  const t = rng.int(25, 65);
+  const t = rng.int(48, 72);
   const p = 180 - 2 * t;
   const { pts, c, R } = tangentPts(p / 2, true);
   const diagram = drawScene({
@@ -1696,7 +1701,7 @@ const proofCentre: Drill = {
       if (kind === "exterior" || kind === "exterior2") {
         const useOAC = kind === "exterior2";
         const diagram = drawScene({
-          w: 400, h: 265, c, R, pts: { C: pts.C, D: pts.D, A: pts.A, O: c }, onCircle: ["A", "C", "D"],
+          w: 400, h: 265, c, R, pts: { C: pts.C, D: pts.D, A: pts.A, O: c }, onCircle: ["A", "C", "D"], labelDir: { O: [1, -0.2] },
           segs: [["C", "A"], ["O", "A"], ["C", "O"], ["O", "D", "dash"]],
           marks: [useOAC ? ["A", "O", "C", `${a}°`] : ["C", "A", "O", `${a}°`], ["O", "A", "D", "x", true]],
           aria: `Circle with centre O. C and A are on the circle; CO is extended to D. ${useOAC ? "Angle OAC" : "Angle OCA"} is ${a}° and angle AOD is marked x.`,
@@ -1714,7 +1719,7 @@ const proofCentre: Drill = {
         const back = kind === "back";
         const y = 2 * (a + b);
         const diagram = drawScene({
-          w: 400, h: 265, c, R, pts, onCircle: ["A", "B", "C", "D"],
+          w: 400, h: 265, c, R, pts, onCircle: ["A", "B", "C", "D"], labelDir: { O: [1, -0.45] },
           segs: [["C", "A"], ["C", "B"], ["O", "A"], ["O", "B"], ["C", "O"], ["O", "D", "dash"]],
           marks: back ? [["C", "A", "O", `${a}°`], ["O", "A", "B", `${y}°`], ["C", "O", "B", "x", true]] : [["C", "A", "O", `${a}°`], ["C", "O", "B", `${b}°`], ["O", "A", "B", "x", true]],
           aria: `Circle with centre O. C is at the top; CO is extended to D. A and B are on either side. Angle OCA is ${a}°. ${back ? `Angle AOB is ${y}° and angle OCB is marked x.` : `Angle OCB is ${b}° and angle AOB is marked x.`}`,
@@ -1735,7 +1740,7 @@ const proofCentre: Drill = {
       // bowtie: A and B on the same side of CD; AOB = 2(b − a)
       const y = 2 * (b - a);
       const diagram = drawScene({
-        w: 400, h: 265, c, R, pts, onCircle: ["A", "B", "C", "D"],
+        w: 400, h: 265, c, R, pts, onCircle: ["A", "B", "C", "D"], labelDir: { O: [1, -0.45] },
         segs: [["C", "A"], ["C", "B"], ["O", "A"], ["O", "B"], ["C", "O"], ["O", "D", "dash"]],
         marks: [["C", "A", "O", `${a}°`, false, 26], ["C", "A", "B", `${b - a}°`, false, 58], ["O", "A", "B", "x", true]],
         aria: `Circle with centre O. C is at the top and CO is extended to D. A and B are both on the left of CD. Angle OCA is ${a}°, angle ACB is ${b - a}° and angle AOB is marked x.`,

@@ -163,6 +163,7 @@ any file other than the one(s) your task names.
 - **Division convention (typed answers)**: after `/`, an implicit product is the denominator
   unless the numerator is a plain number — `y^2/4x^4` = y²/(4x⁴) but `3/5x` = (3/5)x. Always
   write keys with explicit brackets (`"x/2"`, `"(3/5)x"`, `"y^2/(4x^4)"`).
+- **Function notation**: typed answers may start with `f(x) =`, `f^-1(x) =`, `f⁻¹(x) =`, `fg(x) =` or `dy/dx =` — the checker strips it, so no "write just the expression" instruction is needed.
 - **Equations of lines/circles**: use `{ type: "equation", eq: "3x+2y-12=0" }` — any rearrangement
   or non-zero multiple is accepted (y = 6 − 1.5x, 6x + 4y = 24 …). Add `form: "general"` when the
   question demands "ax + by + c = 0 where a, b and c are integers". Don't use `text` for equations.

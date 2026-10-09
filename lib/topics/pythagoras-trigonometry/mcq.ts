@@ -133,14 +133,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "pythagoras-trigonometry-m1-q08",
-        question: "Arjun stands on level ground 40 m from the foot of a vertical tower. The angle of elevation of the top of the tower from where he stands is 28°.\n\nWork out the height of the tower. Give your answer correct to 3 significant figures. (Ignore Arjun's height.)",
-        options: ["18.8 m", "35.3 m", "21.3 m", "75.2 m"],
+        question: "Arjun stands on level ground 55 m from the foot of a vertical tower. The angle of elevation of the top of the tower from where he stands is 24°.\n\nWork out the height of the tower. Give your answer correct to 3 significant figures. (Ignore Arjun's height.)",
+        options: ["22.4 m", "50.2 m", "24.5 m", "124 m"],
         answerIndex: 2,
         explanation:
-          "The 40 m is **adjacent** to the 28° angle and the height is **opposite**, so {{h = 40 tan 28° = 21.27...}} ≈ 21.3 m. 18.8 m uses sin, which needs the line of sight (hypotenuse), not the ground distance; 35.3 m uses cos; 75.2 m divides by tan 28°.",
+          "The 55 m is **adjacent** to the 24° angle and the height is **opposite**, so {{h = 55 tan 24° = 24.48...}} ≈ 24.5 m. 22.4 m uses sin, which needs the line of sight (hypotenuse), not the ground distance; 50.2 m uses cos; 124 m divides by tan 24°.",
         difficulty: "core",
         guideRef: "bearings-elevation",
-        hints: ["Sketch the triangle: ground, tower and line of sight.", "Which side is the 40 m relative to the 28° angle?", "{{tan 28° = h/40}}."],
+        hints: ["Sketch the triangle: ground, tower and line of sight.", "Which side is the 55 m relative to the 24° angle?", "{{tan 24° = h/55}}."],
         strategy: "Draw a diagram",
       },
       {

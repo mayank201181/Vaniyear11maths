@@ -321,6 +321,9 @@ function stripEquation(input: string): string {
   const [l, r] = sides.map((x) => x.trim());
   if (/^[a-z]$/i.test(l)) return r;
   if (/^[a-z]$/i.test(r)) return l;
+  // Function / derivative notation on the left: f(x) =, f^-1(x) =, f⁻¹(x) =, fg(x) =, dy/dx =, v(t) =.
+  const lhs = l.replace(/\s+/g, "");
+  if (/^([a-z]{1,3}(\^\(?-1\)?)?\([a-z]\)|d[a-z]\/d[a-z])$/i.test(lhs)) return r;
   return s;
 }
 
