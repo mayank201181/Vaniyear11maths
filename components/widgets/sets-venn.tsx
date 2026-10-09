@@ -430,20 +430,20 @@ function VennProbability() {
         ) : (
           <>
             {def.label} counts the elements {def.words}. Numerator (dark): <strong>{num}</strong>. Denominator (dark + light): <strong>{den}</strong>. So{" "}
-            <M>{`${def.label.replace(/[()]/g, (c) => c)} = ${value}`}</M>.
+            {def.label} = <M>{value}</M>.
             {kind === "AgB" || kind === "BgA" ? (
               <>
                 {" "}
-                Compare with <M>{`P(A ∩ B) = ${both}/${total}`}</M> — same numerator, but the whole of ξ on the bottom.
+                Compare with P(A ∩ B) = <M>{`${both}/${total}`}</M> — same numerator, but the whole of ξ on the bottom.
               </>
             ) : null}{" "}
             {indep ? (
               <>
-                Here <M>{`P(A) * P(B) = ${nA}/${total} * ${nB}/${total} = P(A ∩ B)`}</M>, so A and B are <strong>independent</strong>: knowing B tells you nothing
+                Here P(A) × P(B) = <M>{`${nA}/${total} * ${nB}/${total} = ${both}/${total}`}</M> = P(A ∩ B), so A and B are <strong>independent</strong>: knowing B tells you nothing
                 about A.
               </>
             ) : (
-              <>A and B are not independent here, because <M>{`P(A) * P(B) != P(A ∩ B)`}</M>.</>
+              <>A and B are not independent here, because P(A) × P(B) ≠ P(A ∩ B).</>
             )}
           </>
         )
@@ -470,7 +470,7 @@ function VennProbability() {
           <Readout label="Independent?" value={indep ? "Yes" : "No"} tone={indep ? "good" : "bad"} />
         </div>
         <p className="text-xs text-ink-2">
-          Decimal: {dec}. Dark shading = the outcomes you want; light shading = the rest of the group you’re choosing from.
+          Decimal: {dec === "—" || num * 1000 % den === 0 ? dec : `≈ ${dec}`}. Dark shading = the outcomes you want; light shading = the rest of the group you’re choosing from.
         </p>
       </div>
     </WidgetFrame>
