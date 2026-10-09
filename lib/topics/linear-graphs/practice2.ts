@@ -614,7 +614,7 @@ export const morePapers: Paper[] = [
         answer: { type: "equation", eq: "4x-3y-8=0", form: "general", display: "4x − 3y − 8 = 0" },
         traps: [
           {
-            spec: { type: "equation", eq: "3x-4y-13=0" },
+            spec: { type: "equation", eq: "3x-4y+1=0" },
             feedback: "Check (−1, −4): your line misses it. The gradient is {{8/6 = 4/3}} (change in y over change in x), not {{3/4}}.",
           },
           {

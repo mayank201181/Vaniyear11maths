@@ -22,24 +22,24 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "linear-graphs-m1-q02",
-        question: "What is the gradient of the line {{3x + 2y = 12}}?",
-        options: ["3", "{{-2/3}}", "{{-3/2}}", "{{3/2}}"],
+        question: "What is the gradient of the line {{5x + 3y = 15}}?",
+        options: ["5", "{{-3/5}}", "{{-5/3}}", "{{5/3}}"],
         answerIndex: 2,
         explanation:
-          "Make y the subject: {{2y = -3x + 12}}, so {{y = -3/2 x + 6}} and the gradient is {{-3/2}}. 3 is the coefficient of x *before* rearranging — m can only be read off when the equation is y = mx + c. {{3/2}} forgets that 3x changes sign when it moves across. {{-2/3}} divides the wrong way round.",
+          "Make y the subject: {{3y = -5x + 15}}, so {{y = -5/3 x + 5}} and the gradient is {{-5/3}}. 5 is the coefficient of x *before* rearranging — m can only be read off when the equation is y = mx + c. {{5/3}} forgets that 5x changes sign when it moves across. {{-3/5}} divides the wrong way round.",
         difficulty: "warmup",
         guideRef: "y-mx-c",
-        hints: ["Rearrange into the form y = mx + c first — subtract 3x, then divide everything by 2."],
+        hints: ["Rearrange into the form y = mx + c first — subtract 5x, then divide everything by 3."],
         strategy: "Make it simpler",
       },
       {
         kind: "mcq",
         id: "linear-graphs-m1-q03",
         question: "A is the point (−2, 5) and B is the point (6, −1). Find the coordinates of the midpoint of AB.",
-        options: ["(4, 3)", "(2, 2)", "(4, 4)", "(2, 3)"],
+        options: ["(4, −3)", "(2, 2)", "(4, 4)", "(2, 3)"],
         answerIndex: 1,
         explanation:
-          "Midpoint = average of the coordinates: {{((-2 + 6)/2, (5 + (-1))/2) = (2, 2)}}. (4, 3) halves the *differences* (that is half the journey from A to B, not the point reached). (4, 4) adds but forgets to halve. (2, 3) treats −1 as +1 in the y-coordinate.",
+          "Midpoint = average of the coordinates: {{((-2 + 6)/2, (5 + (-1))/2) = (2, 2)}}. (4, −3) halves the *differences* (that is half the journey from A to B, not the point reached). (4, 4) adds but forgets to halve. (2, 3) treats −1 as +1 in the y-coordinate.",
         difficulty: "warmup",
         guideRef: "midpoint-distance",
         hints: ["The midpoint's coordinates are the means of the x-coordinates and of the y-coordinates."],
@@ -61,28 +61,28 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "linear-graphs-m1-q05",
-        question: "A straight line has gradient −2 and passes through the point (3, −1). Find its equation.",
-        options: ["{{y = -2x + 7}}", "{{y = -2x - 7}}", "{{y = -2x + 5}}", "{{y = -2x - 1}}"],
+        question: "A straight line has gradient −3 and passes through the point (2, −5). Find its equation.",
+        options: ["{{y = -3x + 11}}", "{{y = -3x - 11}}", "{{y = -3x + 1}}", "{{y = -3x - 5}}"],
         answerIndex: 2,
         explanation:
-          "Use {{y - y_1 = m(x - x_1)}}: {{y - (-1) = -2(x - 3)}}, so {{y + 1 = -2x + 6}} and {{y = -2x + 5}}. Check: −2 × 3 + 5 = −1 ✓. {{y = -2x + 7}} writes y − 1 instead of y + 1. {{y = -2x - 7}} uses x + 3 instead of x − 3. {{y = -2x - 1}} wrongly takes the y-coordinate of the point as the intercept — the point is not on the y-axis.",
+          "Use {{y - y_1 = m(x - x_1)}}: {{y - (-5) = -3(x - 2)}}, so {{y + 5 = -3x + 6}} and {{y = -3x + 1}}. Check: −3 × 2 + 1 = −5 ✓. {{y = -3x + 11}} writes y − 5 instead of y + 5. {{y = -3x - 11}} uses x + 2 instead of x − 2. {{y = -3x - 5}} wrongly takes the y-coordinate of the point as the intercept — the point is not on the y-axis.",
         difficulty: "core",
         guideRef: "point-gradient-form",
         hints: [
           "Which form of a line uses one point and the gradient?",
-          "Substitute into {{y - y_1 = m(x - x_1)}} with {{x_1 = 3}} and {{y_1 = -1}}.",
-          "Careful: {{y - (-1)}} is y + 1. Then expand −2(x − 3).",
+          "Substitute into {{y - y_1 = m(x - x_1)}} with {{x_1 = 2}} and {{y_1 = -5}}.",
+          "Careful: {{y - (-5)}} is y + 5. Then expand −3(x − 2).",
         ],
         strategy: "Check by substituting",
       },
       {
         kind: "mcq",
         id: "linear-graphs-m1-q06",
-        question: "Work out the length of the line segment joining (1, −2) and (7, 6).",
+        question: "Work out the length of the line segment joining (−2, 3) and (6, −3).",
         options: ["10", "14", "{{sqrt(52)}}", "100"],
         answerIndex: 0,
         explanation:
-          "Horizontal change 7 − 1 = 6, vertical change 6 − (−2) = 8. By Pythagoras, length = {{sqrt(6^2 + 8^2) = sqrt(100) = 10}}. 14 adds the two changes — that is the walk along the grid, not the straight line. {{sqrt(52)}} uses 6 − 2 = 4 for the vertical change (losing the double negative). 100 forgets the square root.",
+          "Horizontal change 6 − (−2) = 8, vertical change −3 − 3 = −6. By Pythagoras, length = {{sqrt(8^2 + (-6)^2) = sqrt(100) = 10}}. 14 adds the two changes — that is the walk along the grid, not the straight line. {{sqrt(52)}} uses 6 − 2 = 4 for the horizontal change (losing the double negative). 100 forgets the square root.",
         difficulty: "core",
         guideRef: "midpoint-distance",
         hints: [
@@ -390,7 +390,7 @@ export const mcqPapers: Paper[] = [
         options: ["{{3x - 4y - 17 = 0}}", "{{3x - 4y + 17 = 0}}", "{{4x - 3y - 18 = 0}}", "{{3x - 4y - 1 = 0}}"],
         answerIndex: 0,
         explanation:
-          "{{y + 2 = 3/4(x - 3)}}. Multiply by 4: {{4y + 8 = 3x - 9}}, so {{3x - 4y - 17 = 0}}. Check (3, −2): 9 + 8 − 17 = 0 ✓. {{3x - 4y + 17 = 0}} has every sign flipped except x — it is a different line. {{4x - 3y - 18 = 0}} uses gradient {{4/3}}. {{3x - 4y - 1 = 0}} writes y − 2 instead of y + 2.",
+          "{{y + 2 = 3/4(x - 3)}}. Multiply by 4: {{4y + 8 = 3x - 9}}, so {{3x - 4y - 17 = 0}}. Check (3, −2): 9 + 8 − 17 = 0 ✓. {{3x - 4y + 17 = 0}} has the wrong sign on the constant — it does not pass through (3, −2). {{4x - 3y - 18 = 0}} uses gradient {{4/3}}. {{3x - 4y - 1 = 0}} writes y − 2 instead of y + 2.",
         difficulty: "core",
         guideRef: "point-gradient-form",
         hints: [
@@ -440,11 +440,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "linear-graphs-m2-q13",
-        question: "The lines {{y = x + 2}} and {{y = -2x + 8}} and the y-axis form a triangle. Work out its area.",
-        options: ["6", "12", "4", "8"],
+        question: "The lines {{y = 3x + 1}} and {{y = -x + 9}} and the y-axis form a triangle. Work out its area.",
+        options: ["8", "16", "28", "9"],
         answerIndex: 0,
         explanation:
-          "The lines cross where {{x + 2 = -2x + 8}}: x = 2, y = 4. They meet the y-axis at (0, 2) and (0, 8), so the base along the y-axis is 8 − 2 = 6. The height is the horizontal distance to (2, 4), which is 2. Area = {{1/2 * 6 * 2 = 6}}. 12 forgets the {{1/2}} (or uses y = 4 as the height). 4 uses the y-coordinate 4 as the base. 8 uses the intercept 8 as the base.",
+          "The lines cross where {{3x + 1 = -x + 9}}: x = 2, y = 7. They meet the y-axis at (0, 1) and (0, 9), so the base along the y-axis is 9 − 1 = 8. The height is the horizontal distance to (2, 7), which is 2. Area = {{1/2 * 8 * 2 = 8}}. 16 forgets the {{1/2}}. 28 uses the y-coordinate 7 as the height. 9 uses the intercept 9 as the base.",
         difficulty: "challenge",
         guideRef: "intersections",
         hints: [

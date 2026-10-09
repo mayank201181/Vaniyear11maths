@@ -279,7 +279,7 @@ export const mcqPapers: Paper[] = [
         options: ["0.25", "0.01", "0.19", "0.76"],
         answerIndex: 1,
         explanation:
-          "For independent events, P(A and B) = P(A) × P(B) = 0.05 × 0.2 = 0.01. 0.25 adds them — the OR rule, used for the wrong word. 0.19 is 0.95 × 0.2 (alarm works and bus late). 0.76 is 0.95 × 0.8, the probability that neither happens.",
+          "For independent events, multiply: P(alarm fails and bus late) = 0.05 × 0.2 = 0.01. 0.25 adds them — the OR rule, used for the wrong word. 0.19 is 0.95 × 0.2 (alarm works and bus late). 0.76 is 0.95 × 0.8, the probability that neither happens.",
         difficulty: "warmup",
         guideRef: "or-and-rules",
         hints: ["For independent events, which operation goes with 'and'?"],
@@ -529,7 +529,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 1,
         explanation:
-          "P(A and B) = P(A) + P(B) − P(A or B) = 0.3 + 0.5 − 0.65 = 0.15. This is not 0, so A and B are **not** mutually exclusive (if they were, P(A or B) would be 0.8). And P(A) × P(B) = 0.3 × 0.5 = 0.15 = P(A and B), so they **are** independent. 'Mutually exclusive' is a trap: independence means one event does not change the chance of the other — it does not mean they cannot happen together.",
+          "From the addition rule, the probability that both happen is 0.3 + 0.5 − 0.65 = 0.15. This is not 0, so the events are **not** mutually exclusive (if they were, the probability of A or B would be 0.8). And 0.3 × 0.5 = 0.15 equals the probability that both happen, so they **are** independent. 'Mutually exclusive' is a trap: independence means one event does not change the chance of the other — it does not mean they cannot happen together.",
         difficulty: "core",
         guideRef: "or-and-rules",
         hints: ["Use P(A or B) = P(A) + P(B) − P(A and B) to find P(A and B).", "Mutually exclusive means P(A and B) = 0. Independent means P(A and B) = P(A) × P(B)."],

@@ -56,7 +56,7 @@ function rhs(m: Q, c: Q): string {
 /** "{{y = 3x - 2}}" */
 const lineMk = (m: Q, c: Q): string => `{{y = ${rhs(m, c)}}}`;
 
-/** ASCII answer expression "y=(2/3)x-5/3". */
+/** ASCII answer equation "y=(2/3)x-5/3". */
 function lineExpr(m: Q, c: Q): string {
   const [n, d] = m;
   let t = "";
@@ -66,7 +66,12 @@ function lineExpr(m: Q, c: Q): string {
   return `y=${t}${cs}`;
 }
 
-const lineSpec = (m: Q, c: Q): AnswerSpec => ({ type: "expression", expr: lineExpr(m, c), display: lineMk(m, c) });
+const lineSpec = (m: Q, c: Q): AnswerSpec => ({ type: "equation", eq: lineExpr(m, c), display: lineMk(m, c) });
+/** "ax + by + c = 0" as an equation spec (any rearrangement accepted unless form is "general"). */
+const eq0Spec = (a: number, b: number, c: number, general = false): AnswerSpec =>
+  general
+    ? { type: "equation", eq: `${poly([[a, "x"], [b, "y"], [c, ""]])}=0`, form: "general", display: impl0(a, b, c) }
+    : { type: "equation", eq: `${poly([[a, "x"], [b, "y"], [c, ""]])}=0` };
 
 /** Answer spec for a single rational value (gradient, intercept …). */
 function qSpec(a: Q): AnswerSpec {
@@ -426,17 +431,17 @@ export const drills: Drill[] = [
       const raw = [m[0], -m[1], m[1] * y1 - m[0] * x1];
       const [A, B, C] = normCoeffs(raw);
       const gradText = tier === 2 ? `has gradient ${qText(m)}` : `is parallel to the line with equation ${impl(pa, pb, pc)}`;
-      const prompt = `The line L ${gradText} and passes through the point ${pt(x1, y1)}. Find an equation of L in the form ax + by + c = 0, where a, b and c are integers with no common factor and a > 0. Give the values of a, b and c, in that order.`;
-      const traps: Trap[] = [{ spec: { type: "list", values: [A, B, -C], ordered: true }, feedback: "Check the sign of c — when everything moves to one side, every term changes sign." }];
-      if (B !== -A && B !== A) traps.push({ spec: { type: "list", values: normCoeffs([m[1], -m[0], m[0] * y1 - m[1] * x1]), ordered: true }, feedback: "The x and y coefficients have swapped — the gradient is −a ÷ b." });
+      const prompt = `The line L ${gradText} and passes through the point ${pt(x1, y1)}. Find an equation of L in the form ax + by + c = 0, where a, b and c are integers.`;
+      const traps: Trap[] = [{ spec: eq0Spec(A, B, -C), feedback: "Check the sign of c — when everything moves to one side, every term changes sign. Substitute the point to check." }];
+      if (B !== -A && B !== A) { const [sa, sb, sc] = normCoeffs([m[1], -m[0], m[0] * y1 - m[1] * x1]); traps.push({ spec: eq0Spec(sa, sb, sc), feedback: "The x and y coefficients have swapped — the gradient of ax + by + c = 0 is −a ÷ b." }); }
       const sol: string[] = [];
       if (tier === 3) sol.push(`Parallel lines have equal gradients. ${impl(pa, pb, pc)} gives {{y = ${rhs(m, q(pc, pb))}}}, so m = ${qText(m)}.`);
       sol.push(`{{${shift("y", y1)} = (${qAsc(m)})(${shift("x", x1)})}}`);
       sol.push(`Multiply both sides by ${m[1]}: {{${m[1]}(${shift("y", y1)}) = ${m[0] === 1 ? "" : m[0] === -1 ? "-" : m[0]}(${shift("x", x1)})}}, so {{${poly([[m[1], "y"], [-m[1] * y1, ""]])} = ${poly([[m[0], "x"], [-m[0] * x1, ""]])}}}.`);
-      sol.push(`Collect on one side with a positive x-term: ${impl0(A, B, C)}. So a = ${num(A)}, b = ${num(B)}, c = ${num(C)}.`);
+      sol.push(`Collect on one side with a positive x-term: ${impl0(A, B, C)}.`);
       return {
         prompt,
-        answer: { type: "list", values: [A, B, C], ordered: true, display: `a = ${num(A)}, b = ${num(B)}, c = ${num(C)} (${impl0(A, B, C)})` },
+        answer: eq0Spec(A, B, C, true),
         solution: sol,
         hint: "Write y − y₁ = m(x − x₁), then multiply by the denominator of m to clear the fraction.",
         traps,
