@@ -146,17 +146,17 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "number-bounds-p3-q06",
         question:
-          "Three lights on a Marina Bay light show flash at regular intervals:\n\n- the red light every 15 seconds,\n- the green light every 20 seconds,\n- the blue light every 36 seconds.\n\nAll three flash together at exactly 20:00. How many more times will all three flash together, up to and including 21:00?",
-        answer: { type: "number", value: 20, display: "20 times" },
+          "Three lights on a Marina Bay light show flash at regular intervals:\n\n- the red light every 16 seconds,\n- the green light every 24 seconds,\n- the blue light every 40 seconds.\n\nAll three flash together at exactly 20:00. How many more times will all three flash together, up to and including 21:00?",
+        answer: { type: "number", value: 15, display: "15 times" },
         traps: [
-          { spec: { type: "number", value: 60 }, feedback: "60 s is the LCM of 15 and 20 only. The blue light (every 36 s) must flash too — include all three numbers." },
-          { spec: { type: "number", value: 21 }, feedback: "Close — but the question says *more* times after 20:00, so don't count the flash at 20:00 itself." },
+          { spec: { type: "number", value: 75 }, feedback: "75 comes from 48 s, the LCM of 16 and 24 only. The blue light (every 40 s) must flash too — include all three numbers." },
+          { spec: { type: "number", value: 16 }, feedback: "Close — but the question says *more* times after 20:00, so don't count the flash at 20:00 itself." },
         ],
         solution: [
-          "They flash together at common multiples of 15, 20 and 36 seconds, so find the LCM.",
-          "{{15 = 3 * 5}}, {{20 = 2^2 * 5}}, {{36 = 2^2 * 3^2}}.",
-          "LCM = {{2^2 * 3^2 * 5 = 180}} seconds = 3 minutes.",
-          "In 60 minutes after 20:00 they flash together 60 ÷ 3 = 20 more times (20:03, 20:06, …, 21:00).",
+          "They flash together at common multiples of 16, 24 and 40 seconds, so find the LCM.",
+          "{{16 = 2^4}}, {{24 = 2^3 * 3}}, {{40 = 2^3 * 5}}.",
+          "LCM = {{2^4 * 3 * 5 = 240}} seconds = 4 minutes.",
+          "In 60 minutes after 20:00 they flash together 60 ÷ 4 = 15 more times (20:04, 20:08, …, 21:00).",
         ],
         commonError: "Using the HCF, or finding the LCM of only two of the three numbers.",
         difficulty: "core",
@@ -174,15 +174,11 @@ export const morePapers: Paper[] = [
         id: "number-bounds-p3-q07",
         question:
           "Kenji says he is 15 years old. Ages are always **truncated** to a whole number of years (you don't say you are 16 until your birthday).\n\nWrite down the error interval for Kenji's exact age, A years. Use A and the inequality signs < and ≤ (you may type <= for ≤).",
-        answer: { type: "text", accept: ["15<=A<16", "15≤A<16", "A>=15 and A<16", "15.0<=A<16.0"], display: "15 ≤ A < 16" },
+        answer: { type: "inequality", ineq: "15<=A<16", display: "15 ≤ A < 16" },
         traps: [
           {
-            spec: { type: "text", accept: ["14.5<=A<15.5", "14.5≤A<15.5"] },
+            spec: { type: "inequality", ineq: "14.5<=A<15.5" },
             feedback: "That's the error interval for *rounding*. Ages are truncated: someone aged 15 years 11 months still says 15, so A can be anything from 15 up to (not including) 16.",
-          },
-          {
-            spec: { type: "text", accept: ["15<=A<=16", "15≤A≤16", "15<A<16"] },
-            feedback: "Check the ends: on his 15th birthday (A = 15) he is 15, so 15 is included; on his 16th birthday he says 16, so 16 is excluded.",
           },
         ],
         solution: [
