@@ -8,14 +8,7 @@
 //     basic graph as a ghost, plus a horizontal line y = k whose intersections
 //     are the solutions of the equation in 0° ≤ x ≤ 360°.
 import { useId, useState, type ReactNode } from "react";
-import {
-  WidgetFrame,
-  Slider,
-  Segmented,
-  Readout,
-  M,
-  type WidgetDef,
-} from "./kit";
+import { WidgetFrame, Slider, Segmented, Readout, M, type WidgetDef } from "./kit";
 
 /* ------------------------------------------------------------------------ */
 /* Helpers                                                                    */
@@ -49,18 +42,12 @@ interface Tri {
   C: number;
 }
 
-function solveTriangle(
-  mode: Mode,
-  s: { a: number; b: number; c: number; A: number; B: number },
-): { tris: Tri[]; problem?: string } {
+function solveTriangle(mode: Mode, s: { a: number; b: number; c: number; A: number; B: number }): { tris: Tri[]; problem?: string } {
   const { a, b, c, A, B } = s;
   if (mode === "SAS") {
     const a2 = b * b + c * c - 2 * b * c * cosD(A);
     const aa = Math.sqrt(a2);
-    const BB =
-      Math.acos(
-        Math.max(-1, Math.min(1, (aa * aa + c * c - b * b) / (2 * aa * c))),
-      ) / RAD;
+    const BB = Math.acos(Math.max(-1, Math.min(1, (aa * aa + c * c - b * b) / (2 * aa * c)))) / RAD;
     return { tris: [{ a: aa, b, c, A, B: BB, C: 180 - A - BB }] };
   }
   if (mode === "SSS") {
@@ -83,9 +70,7 @@ function solveTriangle(
         problem: `A + B = ${A + B}°, which leaves nothing for C — the angles of a triangle add up to exactly 180°.`,
       };
     return {
-      tris: [
-        { a: (c * sinD(A)) / sinD(C), b: (c * sinD(B)) / sinD(C), c, A, B, C },
-      ],
+      tris: [{ a: (c * sinD(A)) / sinD(C), b: (c * sinD(B)) / sinD(C), c, A, B, C }],
     };
   }
   // SSA: angle A, adjacent side b, opposite side a.
@@ -107,8 +92,7 @@ function solveTriangle(
   if (!tris.length)
     return {
       tris,
-      problem:
-        "Both possible angles for B are too big to fit with A in one triangle.",
+      problem: "Both possible angles for B are too big to fit with A in one triangle.",
     };
   return { tris };
 }
@@ -145,12 +129,7 @@ function TriangleLab() {
   const Cpt: [number, number] = [drawB * cosD(drawA), drawB * sinD(drawA)];
   const showFigure = Boolean(T) || mode === "SSA";
   const Bpts = tris.map((t) => t.c);
-  const xs = [
-    0,
-    Cpt[0],
-    ...Bpts,
-    mode === "SSA" && !tris.length ? Math.max(b, a) : 0,
-  ];
+  const xs = [0, Cpt[0], ...Bpts, mode === "SSA" && !tris.length ? Math.max(b, a) : 0];
   const minX = Math.min(...xs);
   const maxX = Math.max(...xs, 1);
   const maxY = Math.max(Cpt[1], 1);
@@ -168,16 +147,13 @@ function TriangleLab() {
     rule = (
       <>
         <p>
-          Two sides and the angle <em>between</em> them →{" "}
-          <strong>cosine rule</strong> for the third side:
+          Two sides and the angle <em>between</em> them → <strong>cosine rule</strong> for the third side:
         </p>
         <p className="mt-1">
-          <M>{`a^2 = ${mk(b)}^2 + ${mk(c)}^2 - 2 * ${mk(b)} * ${mk(c)} * cos ${angA}° = ${mk(T.a * T.a)}`}</M>
-          , so a = {fmt(T.a, 2)}.
+          <M>{`a^2 = ${mk(b)}^2 + ${mk(c)}^2 - 2 * ${mk(b)} * ${mk(c)} * cos ${angA}° = ${mk(T.a * T.a)}`}</M>, so a = {fmt(T.a, 2)}.
         </p>
         <p className="mt-1">
-          Then the cosine rule again (rearranged) gives B = {fmt(T.B)}°, and C =
-          180° − A − B = {fmt(T.C)}°.
+          Then the cosine rule again (rearranged) gives B = {fmt(T.B)}°, and C = 180° − A − B = {fmt(T.C)}°.
         </p>
       </>
     );
@@ -188,8 +164,7 @@ function TriangleLab() {
           Three sides → <strong>cosine rule</strong>, rearranged for an angle:
         </p>
         <p className="mt-1">
-          <M>{`cos A = (${mk(b)}^2 + ${mk(c)}^2 - ${mk(a)}^2)/(2 * ${mk(b)} * ${mk(c)}) = ${mk((b * b + c * c - a * a) / (2 * b * c), 4)}`}</M>
-          , so A = {fmt(T.A)}°.
+          <M>{`cos A = (${mk(b)}^2 + ${mk(c)}^2 - ${mk(a)}^2)/(2 * ${mk(b)} * ${mk(c)}) = ${mk((b * b + c * c - a * a) / (2 * b * c), 4)}`}</M>, so A = {fmt(T.A)}°.
         </p>
         <p className="mt-1">
           {b * b + c * c - a * a < 0
@@ -204,13 +179,10 @@ function TriangleLab() {
     rule = (
       <>
         <p>
-          Two angles → the third is C = 180° − {angA}° − {angB}° = {fmt(T.C)}°.
-          Then the <strong>sine rule</strong> pairs c with C:
+          Two angles → the third is C = 180° − {angA}° − {angB}° = {fmt(T.C)}°. Then the <strong>sine rule</strong> pairs c with C:
         </p>
         <p className="mt-1">
-          <M>{`a = (${mk(c)} sin ${angA}°)/(sin ${mk(T.C, 1)}°) = ${mk(T.a)}`}</M>{" "}
-          and{" "}
-          <M>{`b = (${mk(c)} sin ${angB}°)/(sin ${mk(T.C, 1)}°) = ${mk(T.b)}`}</M>
+          <M>{`a = (${mk(c)} sin ${angA}°)/(sin ${mk(T.C, 1)}°) = ${mk(T.a)}`}</M> and <M>{`b = (${mk(c)} sin ${angB}°)/(sin ${mk(T.C, 1)}°) = ${mk(T.b)}`}</M>
         </p>
       </>
     );
@@ -219,12 +191,10 @@ function TriangleLab() {
     rule = (
       <>
         <p>
-          Two sides and an angle <em>not</em> between them →{" "}
-          <strong>sine rule</strong> for B:
+          Two sides and an angle <em>not</em> between them → <strong>sine rule</strong> for B:
         </p>
         <p className="mt-1">
-          <M>{`sin B = (${mk(b)} sin ${angA}°)/${mk(a)} = ${mk(sB, 4)}`}</M>, so
-          B = {fmt(tris[0].B)}°
+          <M>{`sin B = (${mk(b)} sin ${angA}°)/${mk(a)} = ${mk(sB, 4)}`}</M>, so B = {fmt(tris[0].B)}°
           {tris.length === 2 ? (
             <>
               {" "}
@@ -245,13 +215,9 @@ function TriangleLab() {
     caption =
       tris.length === 2 ? (
         <>
-          <strong>Two triangles!</strong> Side a ({fmt(a)}) is longer than the
-          height b sin A = {fmt(b * sinD(angA), 2)} but shorter than b ={" "}
-          {fmt(b)}, so it can swing to meet the base in <strong>two</strong>{" "}
-          places (the dashed circle shows every place it can reach). Both angles
-          have the same sine because <M>{"sin B = sin(180° - B)"}</M>.
-          That&apos;s the ambiguous case — an exam will tell you whether B is
-          acute or obtuse.
+          <strong>Two triangles!</strong> Side a ({fmt(a)}) is longer than the height b sin A = {fmt(b * sinD(angA), 2)} but shorter than b = {fmt(b)}, so it can swing to meet the
+          base in <strong>two</strong> places (the dashed circle shows every place it can reach). Both angles have the same sine because <M>{"sin B = sin(180° - B)"}</M>.
+          That&apos;s the ambiguous case — an exam will tell you whether B is acute or obtuse.
         </>
       ) : (
         <>
@@ -264,54 +230,25 @@ function TriangleLab() {
   else if (T)
     caption = (
       <>
-        Area{" "}
-        <M>{`= 1/2 bc sin A = 1/2 * ${mk(T.b)} * ${mk(T.c)} * sin ${mk(T.A, 1)}°`}</M>{" "}
-        = {fmt(area, 2)} square units. The largest angle (
-        {fmt(Math.max(T.A, T.B, T.C))}°) is always opposite the longest side (
-        {fmt(Math.max(T.a, T.b, T.c), 2)}).{" "}
-        {T.A > 90
-          ? "A is obtuse, so cos A is negative and the cosine rule adds instead of subtracts — side a gets extra long."
-          : ""}
+        Area <M>{`= 1/2 bc sin A = 1/2 * ${mk(T.b)} * ${mk(T.c)} * sin ${mk(T.A, 1)}°`}</M> = {fmt(area, 2)} square units. The largest angle ({fmt(Math.max(T.A, T.B, T.C))}°) is
+        always opposite the longest side ({fmt(Math.max(T.a, T.b, T.c), 2)}).{" "}
+        {T.A > 90 ? "A is obtuse, so cos A is negative and the cosine rule adds instead of subtracts — side a gets extra long." : ""}
       </>
     );
 
   const aria = problem
     ? `No triangle can be drawn: ${problem}`
     : `Triangle${tris.length === 2 ? "s" : ""} drawn to scale. ` +
-      tris
-        .map(
-          (t) =>
-            `Sides a ${fmt(t.a, 2)}, b ${fmt(t.b, 2)}, c ${fmt(t.c, 2)}; angles A ${fmt(t.A)}°, B ${fmt(t.B)}°, C ${fmt(t.C)}°.`,
-        )
-        .join(" Or: ");
+      tris.map((t) => `Sides a ${fmt(t.a, 2)}, b ${fmt(t.b, 2)}, c ${fmt(t.c, 2)}; angles A ${fmt(t.A)}°, B ${fmt(t.B)}°, C ${fmt(t.C)}°.`).join(" Or: ");
 
-  const lbl = (
-    x: number,
-    y: number,
-    text: string,
-    cls = "fill-ink",
-    size = 12,
-    weight = 600,
-  ) => (
-    <text
-      x={x}
-      y={y}
-      fontSize={size}
-      fontWeight={weight}
-      textAnchor="middle"
-      className={cls}
-    >
+  const lbl = (x: number, y: number, text: string, cls = "fill-ink", size = 12, weight = 600) => (
+    <text x={x} y={y} fontSize={size} fontWeight={weight} textAnchor="middle" className={cls}>
       {text}
     </text>
   );
 
   /** Point inside the angle at P (between rays to Q and R), dist px along the bisector. */
-  const inside = (
-    P: [number, number],
-    Q: [number, number],
-    R: [number, number],
-    deg: number,
-  ): [number, number] => {
+  const inside = (P: [number, number], Q: [number, number], R: [number, number], deg: number): [number, number] => {
     const u = (v: [number, number]): [number, number] => {
       const l = Math.hypot(v[0], v[1]) || 1;
       return [v[0] / l, v[1] / l];
@@ -347,75 +284,20 @@ function TriangleLab() {
           ]}
         />
         <p className="text-xs text-ink-2">
-          {mode === "SAS" &&
-            "You know sides b and c and the angle A between them."}
+          {mode === "SAS" && "You know sides b and c and the angle A between them."}
           {mode === "SSS" && "You know all three sides."}
-          {mode === "ASA" &&
-            "You know angles A and B and the side c between them."}
-          {mode === "SSA" &&
-            "You know angle A, the side b next to it, and the side a opposite it."}
+          {mode === "ASA" && "You know angles A and B and the side c between them."}
+          {mode === "SSA" && "You know angle A, the side b next to it, and the side a opposite it."}
         </p>
         <div className="grid gap-3 sm:grid-cols-3">
-          {mode === "SSS" || mode === "SSA" ? (
-            <Slider
-              label="side a"
-              value={a}
-              min={2}
-              max={14}
-              step={0.5}
-              onChange={setA}
-            />
-          ) : null}
-          {mode !== "ASA" ? (
-            <Slider
-              label="side b"
-              value={b}
-              min={2}
-              max={14}
-              step={0.5}
-              onChange={setB}
-            />
-          ) : null}
-          {mode !== "SSA" ? (
-            <Slider
-              label="side c"
-              value={c}
-              min={2}
-              max={14}
-              step={0.5}
-              onChange={setC}
-            />
-          ) : null}
-          {mode !== "SSS" ? (
-            <Slider
-              label="angle A"
-              value={angA}
-              min={10}
-              max={mode === "SSA" ? 150 : 170}
-              step={1}
-              onChange={setAngA}
-              format={(v) => `${v}°`}
-            />
-          ) : null}
-          {mode === "ASA" ? (
-            <Slider
-              label="angle B"
-              value={angB}
-              min={10}
-              max={160}
-              step={1}
-              onChange={setAngB}
-              format={(v) => `${v}°`}
-            />
-          ) : null}
+          {mode === "SSS" || mode === "SSA" ? <Slider label="side a" value={a} min={2} max={14} step={0.5} onChange={setA} /> : null}
+          {mode !== "ASA" ? <Slider label="side b" value={b} min={2} max={14} step={0.5} onChange={setB} /> : null}
+          {mode !== "SSA" ? <Slider label="side c" value={c} min={2} max={14} step={0.5} onChange={setC} /> : null}
+          {mode !== "SSS" ? <Slider label="angle A" value={angA} min={10} max={mode === "SSA" ? 150 : 170} step={1} onChange={setAngA} format={(v) => `${v}°`} /> : null}
+          {mode === "ASA" ? <Slider label="angle B" value={angB} min={10} max={160} step={1} onChange={setAngB} format={(v) => `${v}°`} /> : null}
         </div>
 
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="h-auto w-full rounded-xl border border-line bg-surface"
-          role="img"
-          aria-label={aria}
-        >
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full rounded-xl border border-line bg-surface" role="img" aria-label={aria}>
           <defs>
             <clipPath id={clip}>
               <rect x={0} y={0} width={W} height={H} />
@@ -423,23 +305,8 @@ function TriangleLab() {
           </defs>
           {mode === "SSA" ? (
             <g clipPath={`url(#${clip})`}>
-              <line
-                x1={0}
-                x2={W}
-                y1={pA[1]}
-                y2={pA[1]}
-                className="stroke-line"
-                strokeWidth={1.5}
-              />
-              <circle
-                cx={pC[0]}
-                cy={pC[1]}
-                r={a * sc}
-                fill="none"
-                className="stroke-accent"
-                strokeWidth={1.5}
-                strokeDasharray="5 4"
-              />
+              <line x1={0} x2={W} y1={pA[1]} y2={pA[1]} className="stroke-line" strokeWidth={1.5} />
+              <circle cx={pC[0]} cy={pC[1]} r={a * sc} fill="none" className="stroke-accent" strokeWidth={1.5} strokeDasharray="5 4" />
             </g>
           ) : null}
           {tris.map((t, i) => {
@@ -449,37 +316,16 @@ function TriangleLab() {
               <g key={i}>
                 <polygon
                   points={pts}
-                  className={
-                    i === 0 ? "fill-brand-soft stroke-brand" : "stroke-accent"
-                  }
+                  className={i === 0 ? "fill-brand-soft stroke-brand" : "stroke-accent"}
                   fill={i === 0 ? undefined : "none"}
                   strokeWidth={2}
                   strokeDasharray={i === 0 ? undefined : "6 4"}
                 />
-                {lbl(
-                  pB[0] + (i === 0 ? 8 : -8),
-                  pB[1] + 16,
-                  i === 0 ? "B" : "B₂",
-                  "fill-ink",
-                  13,
-                  800,
-                )}
-                {lbl(
-                  (pB[0] + pC[0]) / 2 + (i === 0 ? 18 : -18),
-                  (pB[1] + pC[1]) / 2,
-                  `a=${fmt(t.a)}`,
-                  i === 0 ? "fill-brand" : "fill-accent",
-                  11,
-                )}
+                {lbl(pB[0] + (i === 0 ? 8 : -8), pB[1] + 16, i === 0 ? "B" : "B₂", "fill-ink", 13, 800)}
+                {lbl((pB[0] + pC[0]) / 2 + (i === 0 ? 18 : -18), (pB[1] + pC[1]) / 2, `a=${fmt(t.a)}`, i === 0 ? "fill-brand" : "fill-accent", 11)}
                 {(() => {
                   const q = inside(pB, pA, pC, t.B);
-                  return lbl(
-                    q[0],
-                    q[1],
-                    `${fmt(t.B)}°`,
-                    i === 0 ? "fill-ink-2" : "fill-accent",
-                    11,
-                  );
+                  return lbl(q[0], q[1], `${fmt(t.B)}°`, i === 0 ? "fill-ink-2" : "fill-accent", 11);
                 })()}
                 {i === 0 && mode !== "SSA"
                   ? (() => {
@@ -498,62 +344,25 @@ function TriangleLab() {
                 const q = inside(pA, [X(1), Y(0)], pC, drawA);
                 return lbl(q[0], q[1], `${fmt(drawA)}°`, "fill-ink-2", 11);
               })()}
-              {lbl(
-                (pA[0] + pC[0]) / 2 - 22,
-                (pA[1] + pC[1]) / 2,
-                `b=${fmt(drawB)}`,
-                "fill-brand",
-                11,
-              )}
-              {T
-                ? lbl(
-                    (pA[0] + X(T.c)) / 2,
-                    pA[1] + 16,
-                    `c=${fmt(T.c)}`,
-                    "fill-brand",
-                    11,
-                  )
-                : null}
+              {lbl((pA[0] + pC[0]) / 2 - 22, (pA[1] + pC[1]) / 2, `b=${fmt(drawB)}`, "fill-brand", 11)}
+              {T ? lbl((pA[0] + X(T.c)) / 2, pA[1] + 16, `c=${fmt(T.c)}`, "fill-brand", 11) : null}
             </g>
           ) : (
-            lbl(
-              W / 2,
-              H / 2,
-              "No triangle with these measurements",
-              "fill-bad",
-              13,
-              700,
-            )
+            lbl(W / 2, H / 2, "No triangle with these measurements", "fill-bad", 13, 700)
           )}
         </svg>
 
         {T ? (
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-            <Readout
-              label="a, b, c"
-              value={`${fmt(T.a)}, ${fmt(T.b)}, ${fmt(T.c)}`}
-              tone="ink"
-            />
-            <Readout
-              label="A, B, C"
-              value={`${fmt(T.A)}°, ${fmt(T.B)}°, ${fmt(T.C)}°`}
-              tone="ink"
-            />
+            <Readout label="a, b, c" value={`${fmt(T.a)}, ${fmt(T.b)}, ${fmt(T.c)}`} tone="ink" />
+            <Readout label="A, B, C" value={`${fmt(T.A)}°, ${fmt(T.B)}°, ${fmt(T.C)}°`} tone="ink" />
             <Readout label="Area" value={fmt(area, 2)} />
-            <Readout
-              label="Triangles"
-              value={tris.length}
-              tone={tris.length === 2 ? "bad" : "good"}
-            />
+            <Readout label="Triangles" value={tris.length} tone={tris.length === 2 ? "bad" : "good"} />
           </div>
         ) : (
           <Readout label="Triangles" value={0} tone="bad" />
         )}
-        {rule ? (
-          <div className="rounded-xl bg-surface-2 p-3 text-sm leading-relaxed text-ink">
-            {rule}
-          </div>
-        ) : null}
+        {rule ? <div className="rounded-xl bg-surface-2 p-3 text-sm leading-relaxed text-ink">{rule}</div> : null}
       </div>
     </WidgetFrame>
   );
@@ -573,14 +382,7 @@ const F: Record<Fn, (d: number) => number> = {
 };
 
 /** All x in [0, 360] with a·f(b(x + p)) + d = k, rounded to 1 d.p. */
-function solutions(
-  fn: Fn,
-  a: number,
-  b: number,
-  p: number,
-  d: number,
-  k: number,
-): number[] {
+function solutions(fn: Fn, a: number, b: number, p: number, d: number, k: number): number[] {
   const v = (k - d) / a;
   let base: number[];
   if (fn === "tan") {
@@ -589,10 +391,7 @@ function solutions(
   } else {
     if (Math.abs(v) > 1 + 1e-12) return [];
     const w = Math.max(-1, Math.min(1, v));
-    base =
-      fn === "sin"
-        ? [Math.asin(w) / RAD, 180 - Math.asin(w) / RAD]
-        : [Math.acos(w) / RAD, 360 - Math.acos(w) / RAD];
+    base = fn === "sin" ? [Math.asin(w) / RAD, 180 - Math.asin(w) / RAD] : [Math.acos(w) / RAD, 360 - Math.acos(w) / RAD];
   }
   const out = new Map<string, number>();
   for (const u0 of base) {
@@ -630,22 +429,14 @@ function TrigGraphExplorer() {
   const g = (x: number) => a * F[fn](b * (x + p)) + d;
 
   // Path, broken at tan asymptotes.
-  const path = (
-    h: (x: number) => number,
-    isTan: boolean,
-    inner: (x: number) => number,
-  ): string => {
+  const path = (h: (x: number) => number, isTan: boolean, inner: (x: number) => number): string => {
     let s = "";
     let pen = false;
     let prevCos = 0;
     for (let i = 0; i <= 1440; i++) {
       const x = i / 4;
       const cu = cosD(inner(x));
-      if (
-        isTan &&
-        (Math.abs(cu) < 0.004 ||
-          (i > 0 && Math.sign(cu) !== Math.sign(prevCos)))
-      ) {
+      if (isTan && (Math.abs(cu) < 0.004 || (i > 0 && Math.sign(cu) !== Math.sign(prevCos)))) {
         pen = false;
         prevCos = cu;
         continue;
@@ -677,44 +468,23 @@ function TrigGraphExplorer() {
   // Equation text for maths markup.
   const aTxt = a === 1 ? "" : a === -1 ? "-" : mk(a);
   const pTxt = p === 0 ? "x" : `x ${p > 0 ? "+" : "-"} ${Math.abs(p)}`;
-  const inner =
-    b === 1
-      ? pTxt
-      : b === 0.5
-        ? p === 0
-          ? "x/2"
-          : `(${pTxt})/2`
-        : p === 0
-          ? `${b}x`
-          : `${b}(${pTxt})`;
+  const inner = b === 1 ? pTxt : b === 0.5 ? (p === 0 ? "x/2" : `(${pTxt})/2`) : p === 0 ? `${b}x` : `${b}(${pTxt})`;
   const eq = `y = ${aTxt}${fn}(${inner})${d === 0 ? "" : d > 0 ? ` + ${mk(d)}` : ` - ${mk(-d)}`}`;
 
   const steps: string[] = [];
-  if (b !== 1)
-    steps.push(
-      `a horizontal stretch, scale factor ${b === 0.5 ? "2" : `1/${b}`} (period ${fmt(period)}°)`,
-    );
-  if (p !== 0)
-    steps.push(
-      `a translation ${Math.abs(p)}° to the ${p > 0 ? "left" : "right"}`,
-    );
-  if (Math.abs(a) !== 1)
-    steps.push(`a vertical stretch, scale factor ${fmt(Math.abs(a))}`);
+  if (b !== 1) steps.push(`a horizontal stretch, scale factor ${b === 0.5 ? "2" : `1/${b}`} (period ${fmt(period)}°)`);
+  if (p !== 0) steps.push(`a translation ${Math.abs(p)}° to the ${p > 0 ? "left" : "right"}`);
+  if (Math.abs(a) !== 1) steps.push(`a vertical stretch, scale factor ${fmt(Math.abs(a))}`);
   if (a < 0) steps.push("a reflection in the x-axis");
-  if (d !== 0)
-    steps.push(`a translation ${fmt(Math.abs(d))} ${d > 0 ? "up" : "down"}`);
+  if (d !== 0) steps.push(`a translation ${fmt(Math.abs(d))} ${d > 0 ? "up" : "down"}`);
 
   const maxV = Math.abs(a) + d;
   const minV = d - Math.abs(a);
   const caption = (
     <>
-      Starting from <M>{`y = ${fn} x`}</M>, this graph is{" "}
-      {steps.length ? steps.join(", then ") : "the basic graph itself"}.{" "}
+      Starting from <M>{`y = ${fn} x`}</M>, this graph is {steps.length ? steps.join(", then ") : "the basic graph itself"}.{" "}
       {fn === "tan" ? (
-        <>
-          tan has no maximum or minimum — it shoots off to ±∞ at its asymptotes,
-          which are {fmt(period)}° apart.
-        </>
+        <>tan has no maximum or minimum — it shoots off to ±∞ at its asymptotes, which are {fmt(period)}° apart.</>
       ) : (
         <>
           Its values run from {fmt(minV)} to {fmt(maxV)}.
@@ -730,10 +500,7 @@ function TrigGraphExplorer() {
       ) : (
         <> — the equation has no solutions in this interval</>
       )}
-      .
-      {b > 1
-        ? ` Squashing by ${b} fits ${b} full cycles into 360°, which is why multiple-angle equations like sin ${b}x = k have more solutions.`
-        : ""}
+      .{b > 1 ? ` Squashing by ${b} fits ${b} full cycles into 360°, which is why multiple-angle equations like sin ${b}x = k have more solutions.` : ""}
     </>
   );
 
@@ -762,12 +529,7 @@ function TrigGraphExplorer() {
               { value: "tan", label: "tan" },
             ]}
           />
-          <button
-            type="button"
-            className="kbd min-h-[40px] px-3 text-sm"
-            aria-pressed={ghost}
-            onClick={() => setGhost((v) => !v)}
-          >
+          <button type="button" className="kbd min-h-[40px] px-3 text-sm" aria-pressed={ghost} onClick={() => setGhost((v) => !v)}>
             {ghost ? "Hide" : "Show"} y = {fn} x
           </button>
         </div>
@@ -775,19 +537,9 @@ function TrigGraphExplorer() {
           <M>{eq}</M>
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Slider
-            label="a (vertical stretch)"
-            value={a}
-            min={-3}
-            max={3}
-            step={0.5}
-            onChange={(v) => setAmp(v === 0 ? (a > 0 ? -0.5 : 0.5) : v)}
-            format={(v) => fmt(v)}
-          />
+          <Slider label="a (vertical stretch)" value={a} min={-3} max={3} step={0.5} onChange={(v) => setAmp(v === 0 ? (a > 0 ? -0.5 : 0.5) : v)} format={(v) => fmt(v)} />
           <div className="space-y-1">
-            <span className="text-sm font-semibold text-ink-2">
-              b (inside multiplier)
-            </span>
+            <span className="text-sm font-semibold text-ink-2">b (inside multiplier)</span>
             <div>
               <Segmented<BVal>
                 label="b"
@@ -802,178 +554,48 @@ function TrigGraphExplorer() {
               />
             </div>
           </div>
-          <Slider
-            label="p (inside shift)"
-            value={p}
-            min={-180}
-            max={180}
-            step={15}
-            onChange={setP}
-            format={(v) => `${fmt(v)}°`}
-          />
-          <Slider
-            label="d (vertical shift)"
-            value={d}
-            min={-3}
-            max={3}
-            step={0.5}
-            onChange={setD}
-            format={(v) => fmt(v)}
-          />
-          <Slider
-            label="line y = k"
-            value={k}
-            min={-6}
-            max={6}
-            step={0.1}
-            onChange={(v) => setK(Number(v.toFixed(1)))}
-            format={(v) => fmt(v)}
-          />
+          <Slider label="p (inside shift)" value={p} min={-180} max={180} step={15} onChange={setP} format={(v) => `${fmt(v)}°`} />
+          <Slider label="d (vertical shift)" value={d} min={-3} max={3} step={0.5} onChange={setD} format={(v) => fmt(v)} />
+          <Slider label="line y = k" value={k} min={-6} max={6} step={0.1} onChange={(v) => setK(Number(v.toFixed(1)))} format={(v) => fmt(v)} />
         </div>
 
-        <svg
-          viewBox={`0 0 ${W} ${H}`}
-          className="h-auto w-full rounded-xl border border-line bg-surface"
-          role="img"
-          aria-label={aria}
-        >
+        <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full rounded-xl border border-line bg-surface" role="img" aria-label={aria}>
           <defs>
             <clipPath id={clip}>
-              <rect
-                x={px(0)}
-                y={py(yMax)}
-                width={px(360) - px(0)}
-                height={py(-yMax) - py(yMax)}
-              />
+              <rect x={px(0)} y={py(yMax)} width={px(360) - px(0)} height={py(-yMax) - py(yMax)} />
             </clipPath>
           </defs>
-          {[30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360].map(
-            (x) => (
-              <line
-                key={`gx${x}`}
-                x1={px(x)}
-                x2={px(x)}
-                y1={py(yMax)}
-                y2={py(-yMax)}
-                className="stroke-line"
-                strokeWidth={x % 90 === 0 ? 1.2 : 0.6}
-              />
-            ),
-          )}
-          {[-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6].map((y) => (
-            <line
-              key={`gy${y}`}
-              x1={px(0)}
-              x2={px(360)}
-              y1={py(y)}
-              y2={py(y)}
-              className="stroke-line"
-              strokeWidth={0.6}
-            />
+          {[30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360].map((x) => (
+            <line key={`gx${x}`} x1={px(x)} x2={px(x)} y1={py(yMax)} y2={py(-yMax)} className="stroke-line" strokeWidth={x % 90 === 0 ? 1.2 : 0.6} />
           ))}
-          <line
-            x1={px(0)}
-            x2={px(360)}
-            y1={py(0)}
-            y2={py(0)}
-            className="stroke-ink-2"
-            strokeWidth={1.5}
-          />
-          <line
-            x1={px(0)}
-            x2={px(0)}
-            y1={py(yMax)}
-            y2={py(-yMax)}
-            className="stroke-ink-2"
-            strokeWidth={1.5}
-          />
+          {[-6, -5, -4, -3, -2, -1, 1, 2, 3, 4, 5, 6].map((y) => (
+            <line key={`gy${y}`} x1={px(0)} x2={px(360)} y1={py(y)} y2={py(y)} className="stroke-line" strokeWidth={0.6} />
+          ))}
+          <line x1={px(0)} x2={px(360)} y1={py(0)} y2={py(0)} className="stroke-ink-2" strokeWidth={1.5} />
+          <line x1={px(0)} x2={px(0)} y1={py(yMax)} y2={py(-yMax)} className="stroke-ink-2" strokeWidth={1.5} />
           {[90, 180, 270, 360].map((x) => (
-            <text
-              key={`lx${x}`}
-              x={px(x)}
-              y={H - 8}
-              fontSize={10}
-              textAnchor="middle"
-              className="fill-ink-2"
-            >
+            <text key={`lx${x}`} x={px(x)} y={H - 8} fontSize={10} textAnchor="middle" className="fill-ink-2">
               {x}°
             </text>
           ))}
           {[-6, -4, -2, 2, 4, 6].map((y) => (
-            <text
-              key={`ly${y}`}
-              x={L - 6}
-              y={py(y) + 3}
-              fontSize={10}
-              textAnchor="end"
-              className="fill-ink-2"
-            >
+            <text key={`ly${y}`} x={L - 6} y={py(y) + 3} fontSize={10} textAnchor="end" className="fill-ink-2">
               {fmt(y)}
             </text>
           ))}
           <g clipPath={`url(#${clip})`}>
             {asymptotes.map((x) => (
-              <line
-                key={`as${x}`}
-                x1={px(x)}
-                x2={px(x)}
-                y1={py(yMax)}
-                y2={py(-yMax)}
-                className="stroke-bad"
-                strokeWidth={1}
-                strokeDasharray="4 4"
-              />
+              <line key={`as${x}`} x1={px(x)} x2={px(x)} y1={py(yMax)} y2={py(-yMax)} className="stroke-bad" strokeWidth={1} strokeDasharray="4 4" />
             ))}
-            {ghost ? (
-              <path
-                d={base}
-                fill="none"
-                className="stroke-ink-2"
-                strokeWidth={1.5}
-                strokeDasharray="5 4"
-              />
-            ) : null}
-            <path
-              d={curve}
-              fill="none"
-              className="stroke-brand"
-              strokeWidth={2.5}
-            />
-            <line
-              x1={px(0)}
-              x2={px(360)}
-              y1={py(k)}
-              y2={py(k)}
-              className="stroke-accent"
-              strokeWidth={1.8}
-            />
+            {ghost ? <path d={base} fill="none" className="stroke-ink-2" strokeWidth={1.5} strokeDasharray="5 4" /> : null}
+            <path d={curve} fill="none" className="stroke-brand" strokeWidth={2.5} />
+            <line x1={px(0)} x2={px(360)} y1={py(k)} y2={py(k)} className="stroke-accent" strokeWidth={1.8} />
             {xs.map((x, i) => (
               <g key={`s${x}`}>
-                <line
-                  x1={px(x)}
-                  x2={px(x)}
-                  y1={py(k)}
-                  y2={py(0)}
-                  className="stroke-accent"
-                  strokeWidth={1}
-                  strokeDasharray="2 3"
-                />
-                <circle
-                  cx={px(x)}
-                  cy={py(k)}
-                  r={4.5}
-                  className="fill-accent stroke-ink"
-                  strokeWidth={1}
-                />
+                <line x1={px(x)} x2={px(x)} y1={py(k)} y2={py(0)} className="stroke-accent" strokeWidth={1} strokeDasharray="2 3" />
+                <circle cx={px(x)} cy={py(k)} r={4.5} className="fill-accent stroke-ink" strokeWidth={1} />
                 {xs.length <= 6 ? (
-                  <text
-                    x={px(x)}
-                    y={py(k) + (i % 2 ? 18 : -9)}
-                    fontSize={10}
-                    fontWeight={700}
-                    textAnchor="middle"
-                    className="fill-ink"
-                  >
+                  <text x={px(x)} y={py(k) + (i % 2 ? 18 : -9)} fontSize={10} fontWeight={700} textAnchor="middle" className="fill-ink">
                     {fmt(x)}°
                   </text>
                 ) : null}
@@ -984,21 +606,12 @@ function TrigGraphExplorer() {
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
           <Readout label="Period" value={`${fmt(period)}°`} tone="ink" />
-          <Readout
-            label={fn === "tan" ? "Amplitude" : "Max / min"}
-            value={fn === "tan" ? "none" : `${fmt(maxV)} / ${fmt(minV)}`}
-            tone="ink"
-          />
-          <Readout
-            label="Solutions"
-            value={xs.length}
-            tone={xs.length ? "good" : "bad"}
-          />
+          <Readout label={fn === "tan" ? "Amplitude" : "Max / min"} value={fn === "tan" ? "none" : `${fmt(maxV)} / ${fmt(minV)}`} tone="ink" />
+          <Readout label="Solutions" value={xs.length} tone={xs.length ? "good" : "bad"} />
           <Readout label="Line y = k" value={fmt(k)} tone="brand" />
         </div>
         <p className="text-sm text-ink">
-          <strong>Solutions in 0° ≤ x ≤ 360°:</strong>{" "}
-          {xs.length ? xs.map((x) => `x = ${fmt(x)}°`).join(", ") : "none"}
+          <strong>Solutions in 0° ≤ x ≤ 360°:</strong> {xs.length ? xs.map((x) => `x = ${fmt(x)}°`).join(", ") : "none"}
           {xs.length ? " (to 1 d.p.)" : ""}
         </p>
       </div>
@@ -1010,15 +623,13 @@ export const widgets: WidgetDef[] = [
   {
     id: "triangle-lab",
     title: "Triangle lab",
-    blurb:
-      "Build a triangle from SAS, SSS, ASA or SSA and watch the sine and cosine rules solve it — including the ambiguous case.",
+    blurb: "Build a triangle from SAS, SSS, ASA or SSA and watch the sine and cosine rules solve it — including the ambiguous case.",
     Component: TriangleLab,
   },
   {
     id: "trig-graph-explorer",
     title: "Trig graph explorer",
-    blurb:
-      "Stretch and shift sin, cos and tan, then slide a line y = k to see every solution in 0°–360°.",
+    blurb: "Stretch and shift sin, cos and tan, then slide a line y = k to see every solution in 0°–360°.",
     Component: TrigGraphExplorer,
   },
 ];

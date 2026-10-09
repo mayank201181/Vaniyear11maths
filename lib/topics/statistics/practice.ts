@@ -705,21 +705,21 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "statistics-p2-q04",
           question:
-            "The table shows the time, t minutes, that 40 students spent on homework one evening.\n\n| Time (t minutes) | Frequency |\n|---|---|\n| 0 < t ≤ 10 | 5 |\n| 10 < t ≤ 20 | 12 |\n| 20 < t ≤ 30 | 17 |\n| 30 < t ≤ 40 | 6 |\n\nJun is drawing a cumulative frequency graph. Write down the coordinates of the point he should plot for the class 20 < t ≤ 30.",
-          answer: { type: "list", values: [30, 34], ordered: true, display: "(30, 34)" },
+            "The table shows the masses, m grams, of 40 tomatoes.\n\n| Mass (m grams) | Frequency |\n|---|---|\n| 40 < m ≤ 60 | 5 |\n| 60 < m ≤ 80 | 12 |\n| 80 < m ≤ 100 | 17 |\n| 100 < m ≤ 120 | 6 |\n\nOlivia is drawing a cumulative frequency graph. Write down the coordinates of the point she should plot for the class 80 < m ≤ 100.",
+          answer: { type: "list", values: [100, 34], ordered: true, display: "(100, 34)" },
           solution: [
-            "Cumulative frequency up to t = 30: 5 + 12 + 17 = 34.",
-            "Plot at the **upper bound** of the class, because by t = 30 all 34 students have finished.",
-            "Point: (30, 34).",
+            "Cumulative frequency up to m = 100: 5 + 12 + 17 = 34.",
+            "Plot at the **upper bound** of the class, because all 34 of these tomatoes have a mass of 100 g or less.",
+            "Point: (100, 34).",
           ],
           traps: [
-            { spec: { type: "list", values: [25, 34], ordered: true }, feedback: "Cumulative frequency is plotted at the **upper** class boundary (30), not the midpoint — 34 students have finished by 30 minutes." },
-            { spec: { type: "list", values: [30, 17], ordered: true }, feedback: "17 is the frequency of this class alone. Cumulative frequency is the running total: 5 + 12 + 17." },
+            { spec: { type: "list", values: [90, 34], ordered: true }, feedback: "Cumulative frequency is plotted at the **upper** class boundary (100), not the midpoint — 34 tomatoes have a mass of 100 g or less." },
+            { spec: { type: "list", values: [100, 17], ordered: true }, feedback: "17 is the frequency of this class alone. Cumulative frequency is the running total: 5 + 12 + 17." },
           ],
           commonError: "Plotting at the midpoint instead of the upper bound.",
           difficulty: "warmup",
           guideRef: "cumulative-frequency",
-          hints: ["Cumulative frequency is a running total.", "Plot at the upper end of the class: t = 30."],
+          hints: ["Cumulative frequency is a running total.", "Plot at the upper end of the class: m = 100."],
           strategy: "Keep a running total",
         },
         {
@@ -1281,7 +1281,7 @@ export const practice: TopicPractice = {
       id: "statistics-ch-q09",
       question:
         "The whole numbers 1, 2, 3, …, 4k + 3 are written down, where k is a positive integer. Find the interquartile range, in terms of k, in its simplest form.",
-      answer: { type: "expression", expr: "2k+2", display: "2k + 2" },
+      answer: { type: "expression", expr: "2k+2", form: "simplified", display: "2k + 2" },
       solution: [
         "There are n = 4k + 3 numbers, and each number equals its position.",
         "Q1 is in position {{(n + 1)/4}} = {{(4k + 4)/4}} = k + 1, so Q1 = k + 1.",

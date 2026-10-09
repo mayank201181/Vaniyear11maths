@@ -200,22 +200,22 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "statistics-p3-q07",
         question:
-          "Siti records the queueing times, in minutes, at two stalls in a hawker centre one lunchtime.\n\n| | Median | Interquartile range |\n|---|---|---|\n| Stall A | 8 | 6 |\n| Stall B | 11 | 2 |\n\nCompare the queueing times at the two stalls. Siti wants to be sure of getting back to class on time. Which stall should she choose? Give a reason.",
+          "Siti can take either of two bus routes to school. She records her journey times, in minutes, on each route over a term.\n\n| | Median | Interquartile range |\n|---|---|---|\n| Route 12 | 18 | 9 |\n| Route 36 | 21 | 3 |\n\nCompare the journey times on the two routes. Siti must be at school by a fixed time every morning. Which route should she choose? Give a reason.",
         marks: 3,
         modelAnswer:
-          "On average the queue at Stall A is shorter, because its median (8 minutes) is lower than Stall B's (11 minutes).\n\nThe queueing times at Stall B are more consistent, because its interquartile range (2 minutes) is smaller than Stall A's (6 minutes).\n\nTo be *sure* of being on time she might choose Stall B: its times are predictable (the middle half lie within a 2-minute band), whereas at Stall A some waits could be much longer than 8 minutes. (Choosing A for the shorter typical wait also earns the mark if justified.)",
+          "On average the journey on Route 12 is quicker, because its median (18 minutes) is lower than Route 36's (21 minutes).\n\nThe journey times on Route 36 are more consistent, because its interquartile range (3 minutes) is smaller than Route 12's (9 minutes).\n\nTo be *sure* of arriving on time she might choose Route 36: its times are predictable (the middle half lie within a 3-minute band), whereas on Route 12 some journeys could take much longer than 18 minutes. (Choosing Route 12 for the shorter typical journey also earns the mark if justified.)",
         markScheme: [
-          { point: "Compares medians in context: Stall A has the shorter average wait (8 < 11)", keywords: ["median", "average", "shorter", "8", "lower", "less"] },
-          { point: "Compares IQRs in context: Stall B is more consistent / less spread (2 < 6)", keywords: ["iqr", "interquartile", "consistent", "spread", "varied", "2"] },
-          { point: "A choice justified by the consistency or the average", keywords: ["stall b", "predictable", "reliable", "consistent", "stall a"] },
+          { point: "Compares medians in context: Route 12 is quicker on average (18 < 21)", keywords: ["median", "average", "quicker", "faster", "shorter", "18", "lower", "less"] },
+          { point: "Compares IQRs in context: Route 36 is more consistent / less spread (3 < 9)", keywords: ["iqr", "interquartile", "consistent", "spread", "varied", "3", "9"] },
+          { point: "A choice justified by the consistency or the average", keywords: ["route 36", "36", "predictable", "reliable", "consistent", "route 12"] },
         ],
-        commonError: "Comparing the numbers without saying what they mean in context (e.g. 'B has a smaller IQR' with no mention of consistency of queueing times).",
+        commonError: "Comparing the numbers without saying what they mean in context (e.g. 'Route 36 has a smaller IQR' with no mention of how consistent the journey times are).",
         difficulty: "core",
         guideRef: "quartiles-iqr",
         hints: [
           "Make one comparison about the **average** and one about the **spread**.",
-          "What does a smaller IQR tell you about how predictable the wait is?",
-          "Always say what the numbers mean for the queues, not just which is bigger.",
+          "What does a smaller IQR tell you about how predictable the journey is?",
+          "Always say what the numbers mean for the journeys, not just which is bigger.",
         ],
         strategy: "Compare average and spread",
       },
@@ -386,36 +386,37 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "statistics-p3-q13",
         question:
-          "Zara has a list of n numbers with a mean of 15. She adds the number 31 to the list, and the mean rises to 17.\n\nWork out the value of n.",
-        answer: { type: "number", value: 7, display: "n = 7" },
+          "Zara has a list of n numbers with a mean of 15. She removes the number 3 from the list, and the mean of the numbers left is 16.\n\nWork out the value of n.",
+        answer: { type: "number", value: 13, display: "n = 13" },
         traps: [
           {
-            spec: { type: "number", value: 8 },
-            feedback: "8 is how many numbers there are **after** Zara adds 31. The question asks for n, the original count.",
+            spec: { type: "number", value: 12 },
+            feedback: "12 is how many numbers are left **after** Zara removes the 3. The question asks for n, the original count.",
           },
         ],
         solution: [
           "Original total = 15n.",
-          "New total = 15n + 31, with n + 1 numbers, and its mean is 17.",
-          "So 15n + 31 = 17(n + 1) = 17n + 17.",
-          "14 = 2n, so n = 7.",
+          "New total = 15n − 3, with n − 1 numbers, and its mean is 16.",
+          "So 15n − 3 = 16(n − 1) = 16n − 16.",
+          "n = 16 − 3 = 13.",
+          "Check: 13 numbers total 195; remove 3 → 192; 192 ÷ 12 = 16 ✓.",
         ],
         solutions: [
           {
-            label: "Share out the surplus",
+            label: "Share out the shortfall",
             steps: [
-              "The new number 31 is 16 above the old mean of 15.",
-              "That surplus of 16 is shared between all n + 1 numbers and raises the mean by 2.",
-              "So n + 1 = 16 ÷ 2 = 8, giving n = 7. Quicker, and it explains *why* the mean moves.",
+              "The removed number 3 is 12 below the old mean of 15.",
+              "Taking it away removes a shortfall of 12, which is shared between the n − 1 numbers left and raises their mean by 1.",
+              "So n − 1 = 12 ÷ 1 = 12, giving n = 13. Quicker, and it explains *why* the mean moves.",
             ],
           },
         ],
-        commonError: "Writing 15n + 31 = 17n, forgetting that the count has gone up to n + 1.",
+        commonError: "Writing 15n − 3 = 16n, forgetting that the count has gone down to n − 1.",
         difficulty: "challenge",
         guideRef: "averages-raw-data",
         hints: [
           "Write the original total in terms of n.",
-          "How many numbers are there after 31 is added? What is the new total?",
+          "How many numbers are left after 3 is removed? What is their total?",
           "Set new total = new mean × new count, and solve.",
         ],
         strategy: "Introduce a variable",
@@ -547,7 +548,7 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "statistics-p4-q03",
         question:
-          "The ages, in years, of the 15 members of a chess club are listed in order:\n\n12, 13, 13, 14, 15, 15, 16, 16, 17, 17, 18, 19, 21, 24, 35\n\nWork out the interquartile range of the ages.",
+          "The ages, in years, of the 15 volunteers at a beach clean-up at East Coast Park are listed in order:\n\n12, 13, 13, 14, 15, 15, 16, 16, 17, 17, 18, 19, 21, 24, 35\n\nWork out the interquartile range of the ages.",
         answer: { type: "number", value: 5, display: "5 years" },
         traps: [
           {
