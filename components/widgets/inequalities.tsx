@@ -481,8 +481,8 @@ function QuadraticInequality() {
       title="Quadratic inequality explorer"
       tryThis={[
         "Solve {{x^2 - 2x - 8 < 0}} in your head first, then check it here. Now switch to > — what changes?",
-        "Make a negative. Why does \"< 0\" now give the two outer pieces?",
-        "Find a, b, c where {{... > 0}} is true for EVERY x. What must the discriminant be?",
+        "Make {{a}} negative. Why does \"< 0\" now give the two outer pieces?",
+        "Find a, b, c where {{ax^2 + bx + c > 0}} is true for EVERY x. What must the discriminant be?",
         "Make the graph touch the axis (D = 0). Compare the answers for <, ≤, > and ≥.",
       ]}
       caption={caption}

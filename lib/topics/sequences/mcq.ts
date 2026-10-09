@@ -97,11 +97,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "sequences-m1-q07",
-        question: "Work out the sum of the first 20 terms of the arithmetic series 3 + 7 + 11 + 15 + …",
-        options: ["79", "860", "790", "820"],
+        question: "Work out the sum of the first 20 terms of the arithmetic series 2 + 9 + 16 + 23 + …",
+        options: ["135", "1440", "1350", "1370"],
         answerIndex: 3,
         explanation:
-          "a = 3, d = 4, n = 20: {{S_n = n/2 (2a + (n - 1)d)}} = 10 × (6 + 19 × 4) = 10 × 82 = **820**. Or: last term = 3 + 19 × 4 = 79, so {{S = 20/2}}(3 + 79) = 820. 79 is the 20th term, not the sum. 860 uses n instead of n − 1: 10 × (6 + 80). 790 uses a instead of 2a: 10 × (3 + 76).",
+          "a = 2, d = 7, n = 20: {{S_n = n/2 (2a + (n - 1)d)}} = 10 × (4 + 19 × 7) = 10 × 137 = **1370**. Or: last term = 2 + 19 × 7 = 135, so {{S = 20/2}}(2 + 135) = 1370. 135 is the 20th term, not the sum. 1440 uses n instead of n − 1: 10 × (4 + 140). 1350 uses a instead of 2a: 10 × (2 + 133).",
         difficulty: "core",
         guideRef: "arithmetic-series",
         hints: [
@@ -345,16 +345,16 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "sequences-m2-q07",
         question:
-          "A theatre has 25 rows of seats. The front row has 18 seats and each row has 2 more seats than the row in front. How many seats are there altogether?",
-        options: ["66", "1050", "1075", "1650"],
+          "A lecture theatre has 30 rows of seats. The front row has 15 seats and each row has 3 more seats than the row in front. How many seats are there altogether?",
+        options: ["102", "1755", "1800", "3060"],
         answerIndex: 1,
         explanation:
-          "a = 18, d = 2, n = 25. Back row: 18 + 24 × 2 = 66. Total = {{25/2}} × (18 + 66) = 25 × 42 = **1050**. 66 is just the back row. 1075 uses n instead of n − 1: {{25/2}} × (36 + 50). 1650 = 25 × 66, as if every row were as long as the back row.",
+          "a = 15, d = 3, n = 30. Back row: 15 + 29 × 3 = 102. Total = {{30/2}} × (15 + 102) = 15 × 117 = **1755**. 102 is just the back row. 1800 uses n instead of n − 1: 15 × (30 + 90). 3060 = 30 × 102, as if every row were as long as the back row.",
         difficulty: "core",
         guideRef: "arithmetic-series",
         hints: [
           "Is this asking for one row or the total?",
-          "Find the number of seats in row 25 first.",
+          "Find the number of seats in row 30 first.",
           "Total = {{n/2}}(first + last).",
         ],
         strategy: "Use a formula",
@@ -367,7 +367,7 @@ export const mcqPapers: Paper[] = [
         options: ["38", "7.625", "30", "8"],
         answerIndex: 3,
         explanation:
-          "A: 5n − 2. B: 62 − 3n (zero term 59 + 3 = 62). Solve 5n − 2 = 62 − 3n: 8n = 64, **n = 8**. Both 8th terms are 38 ✓. 38 is the common *value*, not n. 7.625 writes B as 59 − 3n (first term as constant). 30 subtracts 3n from both sides instead of adding (2n = 60).",
+          "A: 5n − 2. B: 62 − 3n (zero term 59 + 3 = 62). Solve 5n − 2 = 62 − 3n: 8n = 64, **n = 8**. Both 8th terms are 38 ✓. 38 is the common *value*, not n. 7.625 writes B as 59 − 3n (first term as constant). 30 comes from two slips: subtracting 3n instead of adding it, and moving the −2 the wrong way (2n = 60).",
         difficulty: "core",
         guideRef: "linear-nth-term",
         hints: [
@@ -447,17 +447,17 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "sequences-m2-q13",
         question:
-          "Siti runs 2 km on day 1 of her training plan and increases the distance by 0.5 km each day. On which day does her **total** distance first reach 100 km?",
-        options: ["Day 16", "Day 17", "Day 197", "Day 50"],
+          "Jun reads 15 pages of a novel on day 1 and reads 3 more pages each day than the day before. On which day does his **total** number of pages read first reach 500?",
+        options: ["Day 14", "Day 15", "Day 163", "Day 34"],
         answerIndex: 1,
         explanation:
-          "a = 2, d = 0.5: {{S_n = n/2 (4 + 0.5(n - 1)) = (n(n + 7))/4}}. Solve n(n + 7) = 400: {{n^2 + 7n - 400 = 0}} gives n ≈ 16.8. Check whole days: {{S_16 = (16 * 23)/4}} = 92 km; {{S_17 = (17 * 24)/4}} = 102 km. So **day 17**. Day 16 rounds 16.8 down — her total is still only 92 km. Day 197 is when a *single* run reaches 100 km (2 + 0.5(n − 1) = 100). Day 50 assumes she runs 2 km every day.",
+          "a = 15, d = 3: {{S_n = n/2 (30 + 3(n - 1)) = (n(3n + 27))/2}}. Solve {{(n(3n + 27))/2 = 500}}: {{3n^2 + 27n - 1000 = 0}} gives n ≈ 14.3. Check whole days: {{S_14 = (14 * 69)/2}} = 483 pages; {{S_15 = (15 * 72)/2}} = 540 pages. So **day 15**. Day 14 rounds 14.3 down — his total is still only 483. Day 163 is when a *single* day's reading first reaches 500 pages (15 + 3(n − 1) ≥ 500). Day 34 assumes he reads 15 pages every day (500 ÷ 15 = 33.3, rounded up).",
         difficulty: "challenge",
         guideRef: "arithmetic-series",
         hints: [
           "This is about the total, so you need {{S_n}}, not the nth term.",
-          "Form the inequality {{S_n >= 100}} and turn it into a quadratic.",
-          "n ≈ 16.8 — check {{S_16}} and {{S_17}} to decide.",
+          "Form the inequality {{S_n >= 500}} and turn it into a quadratic.",
+          "n ≈ 14.3 — check {{S_14}} and {{S_15}} to decide.",
         ],
         strategy: "Check by substituting",
       },
