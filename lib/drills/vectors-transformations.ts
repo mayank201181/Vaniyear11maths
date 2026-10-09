@@ -20,6 +20,7 @@ const NAMES = ["Aisha", "Wei Ling", "Arjun", "Priya", "Marcus", "Siti", "Ethan",
 const z = (n: number): number => (n === 0 ? 0 : clean(n));
 const pt = (p: P2): string => `(${num(p[0])}, ${num(p[1])})`;
 const cv = (p: P2): string => `{{col(${z(p[0])}, ${z(p[1])})}}`;
+const ib = (n: number): string => (n < 0 ? `(${z(n)})` : `${z(n)}`);
 const VTYPE = " Type your answer as top, bottom (for example 3, −2).";
 const add = (p: P2, q: P2): P2 => [z(p[0] + q[0]), z(p[1] + q[1])];
 const sub = (p: P2, q: P2): P2 => [z(p[0] - q[0]), z(p[1] - q[1])];
@@ -397,7 +398,7 @@ export const drills: Drill[] = [
           answer: coordSpec(P),
           solution: [
             `Vector from the centre to the image vertex: ${pt(I)} − ${pt(C)} = ${cv(di)}.`,
-            `The object is the image "undone": divide by the scale factor ${kS}: ${cv(di)} ÷ ${br(kv)} = ${cv(d)}.`,
+            `The object is the image "undone": divide by the scale factor ${kS}: ${cv(di)} ÷ ${kv < 0 ? `(${kS})` : kS} = ${cv(d)}.`,
             `Add the centre back: ${pt(C)} + ${cv(d)} = ${pt(P)}.`,
           ],
           hint: "Work backwards: the inverse of an enlargement with scale factor k is an enlargement with scale factor 1 ÷ k from the same centre.",
@@ -540,7 +541,7 @@ export const drills: Drill[] = [
         `Compare matching sides: side ${pt(A[0])}–${pt(A[1])} has length ${num(Math.round(lenA * 1000) / 1000)}; its image has length ${num(Math.round(lenB * 1000) / 1000)}. So the size of the scale factor is ${frShow(fr(Math.abs(k[0]), k[1]))}.`,
         kv < 0 ? "The image is upside down, on the other side of the centre, so the scale factor is negative." : kv < 1 ? "The image is smaller and the same way up, so the scale factor is a positive fraction." : "The image is bigger and the same way up, so the scale factor is positive.",
         `Join each vertex to its image with a straight line (ray). The lines all meet at the centre ${pt(C)}.`,
-        `Check: ${pt(C)} + ${kS} × ${cv(sub(A[0], C))} = ${pt(B[0])}. ✓`,
+        `Check: ${pt(C)} + ${kv < 0 ? `(${kS})` : kS} × ${cv(sub(A[0], C))} = ${pt(B[0])}. ✓`,
       ];
       const diagram = gridSvg([{ pts: A, fill: "#c7d2fe", label: "A" }, { pts: B, fill: "#fde68a", label: "B" }], `Grid with triangle A at ${A.map(pt).join(", ")} and its enlargement B at ${B.map(pt).join(", ")}.`);
       const stem = `Triangle A has vertices ${A.map(pt).join(", ")}. Triangle A is enlarged to give triangle B with vertices ${B.map(pt).join(", ")} (in the same order).`;
@@ -548,7 +549,7 @@ export const drills: Drill[] = [
         return {
           prompt: `${stem} Find the scale factor of the enlargement.`,
           diagram,
-          answer: { type: "number", value: clean(kv), display: kS },
+          answer: k[1] === 1 ? { type: "number", value: k[0], display: kS } : { type: "fraction", n: k[0], d: k[1], display: kS },
           solution: sol.slice(0, 2),
           hint: "Divide an image length by the matching object length. Then ask: is B the same way up, or upside down?",
           traps: numTraps(clean(kv), [
@@ -769,11 +770,11 @@ export const drills: Drill[] = [
         const R = add(mul(m, a), mul(n, b));
         const show = `{{${m}a ${n < 0 ? "-" : "+"} ${Math.abs(n) === 1 ? "" : Math.abs(n)}b}}`;
         return {
-          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)} . Work out ${show} as a column vector.${VTYPE}`,
+          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)}. Work out ${show} as a column vector.${VTYPE}`,
           answer: vecSpec(R),
           solution: [
             `${m}**a** = ${cv(mul(m, a))} and ${num(n)}**b** = ${cv(mul(n, b))}.`,
-            `Add the tops and add the bottoms: (${num(m * a[0])} + ${br(n * b[0])}, ${num(m * a[1])} + ${br(n * b[1])}) = ${cv(R)}.`,
+            `Add the tops and add the bottoms: {{col(${m * a[0]} + ${ib(n * b[0])}, ${m * a[1]} + ${ib(n * b[1])})}} = ${cv(R)}.`,
           ],
           hint: "Multiply each component by its scalar first, then combine top with top and bottom with bottom.",
           traps: pairTraps(R, [
