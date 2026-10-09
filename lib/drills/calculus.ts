@@ -692,7 +692,7 @@ export const drills: Drill[] = [
       ];
       if (ask === "times") {
         return {
-          prompt: `${intro}\n\nFind the two times at which the particle is instantaneously at rest.`,
+          prompt: `${intro}\n\nFind the two times at which ${givenV ? "it" : "the particle"} is instantaneously at rest.`,
           answer: { type: "list", values: [p, q], ordered: false, display: `t = ${p} and t = ${q}` },
           solution: restSteps,
           hint: "“At rest” means the velocity is zero.",
