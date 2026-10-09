@@ -343,7 +343,9 @@ export const drills: Drill[] = [
 
       if (kind === "diff") {
         // Two people: B has more than A.
-        let [a, b] = coprimeSet(rng, 2, 11).sort((x, y) => x - y);
+        const sorted = coprimeSet(rng, 2, 11).sort((x, y) => x - y);
+        const a = sorted[0];
+        let b = sorted[1];
         if (a === b) b = a + 1;
         const [A, B] = people(rng, 2);
         const d = (b - a) * u;

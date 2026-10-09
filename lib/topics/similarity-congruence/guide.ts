@@ -164,7 +164,7 @@ export const guide: TopicGuide = {
         "Estimate first: bigger shape, bigger answer",
       ],
       thinkDeeper:
-        "In triangle ABC, the point D lies on AC so that angle ABD = angle ACB. Show that triangle ABD is similar to triangle ACB, and hence prove that {{AB^2 = AD * AC}}. If AD = 4 cm and DC = 5 cm, how long is AB?",
+        "In triangle ABC, the point D lies on AC so that angle ABD = angle ACB. Show that triangle ABD is similar to triangle ACB, and hence prove that {{AB^2 = AD * AC}}. If AD = 4 cm and DC = 12 cm, how long is AB?",
     },
     // -----------------------------------------------------------------------
     {

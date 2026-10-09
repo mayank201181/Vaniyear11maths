@@ -211,11 +211,11 @@ function BracketMultiplier() {
   if (mode === "expand") {
     caption = third ? (
       <>
-        Three brackets: expand two first, then multiply <b>every</b> term of <M>{polyMk(two)}</M> by <M>{b3}</M> — that's {quadTerms.length * 2} products. Each power of <M>{"x"}</M> has its own colour, so same-coloured cells are like terms to collect.
+        Three brackets: expand two first, then multiply <b>every</b> term of <M>{polyMk(two)}</M> by <M>{b3}</M> — that&apos;s {quadTerms.length * 2} products. Each power of <M>{"x"}</M> has its own colour, so same-coloured cells are like terms to collect.
       </>
     ) : (
       <>
-        Every term in one bracket meets every term in the other: four products. The two blue cells are both <M>{"x"}</M> terms — collecting them gives the middle term {two[1] === 0 ? <>— here they cancel, so it's a <b>difference of two squares</b>.</> : <M>{termMk(two[1], 1) || "0"}</M>}.
+        Every term in one bracket meets every term in the other: four products. The two blue cells are both <M>{"x"}</M> terms — collecting them gives the middle term {two[1] === 0 ? <>— here they cancel, so it&apos;s a <b>difference of two squares</b>.</> : <M>{termMk(two[1], 1) || "0"}</M>}.
         {b === d && a === c ? <> Squaring a bracket gives the middle term twice — <M>{`(${linMk(a, b)})^2`}</M> is never just <M>{`${termMk(a * a, 2)} + ${b * b}`}</M>.</> : null}
       </>
     );

@@ -419,7 +419,7 @@ function ProportionExplorer() {
               </tr>
             </tbody>
           </table>
-          <p className="mt-1 text-xs text-ink-2">The last row is always k — that's how you spot the relationship from a table.</p>
+          <p className="mt-1 text-xs text-ink-2">The last row is always k — that&apos;s how you spot the relationship from a table.</p>
         </div>
       </div>
     </WidgetFrame>
