@@ -16,7 +16,7 @@ export const extras: TopicExtras = {
       emoji: "🌳",
       materials: ["A protractor", "A drinking straw and sticky tape", "String with a small weight (e.g. a key)", "A tape measure (or count paces)", "A calculator"],
       steps: [
-        "Make a clinometer. Tape the straw along the straight edge of the protractor and hang the weighted string from its centre. When you look up through the straw, the angle of elevation is 90° minus the angle the string shows.",
+        "Make a clinometer. Tape the straw along the straight edge of the protractor and hang the weighted string from its centre. Held level, the string hangs across 90°. When you tilt it to look up through the straw, the angle of elevation is the difference between the string's reading and 90°.",
         "Pick a tall tree or block of flats. Stand at a point P and measure the angle of elevation α to the top, T.",
         "Walk d metres straight towards it, to Q, and measure the new angle of elevation β. It should be bigger than α.",
         "In triangle PQT, the angle at T is β − α (the exterior angle at Q equals the sum of the two opposite interior angles). Use the sine rule: {{QT = (d sin alpha)/(sin(beta - alpha))}}.",

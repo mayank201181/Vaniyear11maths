@@ -300,7 +300,7 @@ export const guide: TopicGuide = {
           problem:
             "A plant pot is a frustum of a cone. The radius of its base is 3 cm, the radius of its top is 6 cm and it is 4 cm deep. Work out its volume. Give your answer in terms of π.",
           steps: [
-            "Complete the cone (upside down it is a cone with radius 6 at the wide end). Let the missing small cone have height x cm, so the whole cone has height x + 4.",
+            "Extend the sloping sides until they meet: the pot is a cone of radius 6 cm with a small cone of radius 3 cm cut off. Let the small cone have height x cm, so the whole cone has height x + 4.",
             "Similar cones: {{x/(x + 4) = 3/6}}, so 6x = 3x + 12, giving x = 4. The whole cone is 8 cm tall.",
             "Big cone: {{1/3 pi * 6^2 * 8 = 96pi}}. Small cone: {{1/3 pi * 3^2 * 4 = 12pi}}.",
             "Frustum = {{96pi - 12pi = 84pi}} {{cm^3}}.",
@@ -437,7 +437,7 @@ export const guide: TopicGuide = {
       { name: "Volume of a sphere", formula: "{{V = 4/3 pi r^3}}", note: "On the formula sheet" },
       { name: "Surface area of a sphere", formula: "{{A = 4pi r^2}}", note: "On the formula sheet" },
       { name: "Solid hemisphere", formula: "{{V = 2/3 pi r^3}}, total surface area {{3pi r^2}}", note: "Learn this — not given" },
-      { name: "Frustum", formula: "{{V = 1/3 pi R^2 H - 1/3 pi r^2 h}} {{= 1/3 pi h_f (R^2 + Rr + r^2)}}", note: "Learn this — not given" },
+      { name: "Frustum", formula: "big cone − small cone: {{1/3 pi R^2 H - 1/3 pi r^2 h}}; directly {{1/3 pi d (R^2 + Rr + r^2)}} where d is the frustum's own height", note: "Learn this — not given" },
       { name: "Capacity", formula: "1 {{cm^3}} = 1 ml; 1000 {{cm^3}} = 1 litre; 1 {{m^3}} = 1000 litres", note: "Learn this — not given" },
     ],
   },
