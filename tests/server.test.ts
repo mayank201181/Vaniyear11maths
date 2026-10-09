@@ -27,7 +27,13 @@ export async function put(key, body, o = {}) {
   store.set(key, { body, etag: ++n });
   return { url: "https://fake.blob/" + key };
 }
-export async function del(url) { await tick(); store.delete(url.slice("https://fake.blob/".length)); }
+export async function get(key, o = {}) {
+  await tick();
+  const b = store.get(key);
+  if (!b) return null;
+  return { statusCode: 200, stream: new Response(b.body).body, headers: new Headers(), blob: { url: "https://fake.blob/" + key, etag: '"' + b.etag + '"' } };
+}
+export async function del(key) { await tick(); store.delete(String(key).replace("https://fake.blob/", "")); }
 `;
 const hooks = `
 import { existsSync } from "node:fs";
@@ -179,7 +185,7 @@ test("Vercel Blob mode: missing keys read as null and conditional writes don't l
     const spec = "../lib/server/blob.ts?vercel=";
     const a = (await import(spec + "a")) as typeof import("../lib/server/blob.ts");
     const b = (await import(spec + "b")) as typeof import("../lib/server/blob.ts");
-    assert.equal(await a.readJson("names/nobody.json"), null, "BlobNotFoundError from head() means missing");
+    assert.equal(await a.readJson("names/nobody.json"), null, "a missing blob reads as null");
     assert.deepEqual(await a.updateJson<number>("counter.json", (c) => (c ?? 0) + 1), { value: 1, changed: true }, "creates a missing doc");
     assert.equal(await a.createJson("names/lim.json", { id: "a" }), true);
     assert.equal(await b.createJson("names/lim.json", { id: "b" }), false, "create-only write on an existing key");

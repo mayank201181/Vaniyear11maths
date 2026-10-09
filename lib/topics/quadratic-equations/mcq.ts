@@ -9,14 +9,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m1-q01",
-        question: "Solve {{(x - 3)^2 = 16}}.",
-        options: ["x = 7 or x = −1", "x = 7", "x = 19 or x = −13", "x = −7 or x = 1"],
+        question: "Solve {{(x - 2)^2 = 25}}.",
+        options: ["x = 7 or x = −3", "x = 7", "x = 27 or x = −23", "x = −7 or x = 3"],
         answerIndex: 0,
         explanation:
-          "No expanding needed: square-root both sides, remembering **both** roots. {{x - 3 = 4}} or {{x - 3 = -4}}, so x = 7 or x = −1. Check: {{(-1 - 3)^2 = 16}} ✓. x = 7 alone forgets the negative square root. x = 19 or −13 uses {{x - 3 = +- 16}} — the square root was never taken. x = −7 or 1 solves {{(x + 3)^2 = 16}}, a sign slip.",
+          "No expanding needed: square-root both sides, remembering **both** roots. {{x - 2 = 5}} or {{x - 2 = -5}}, so x = 7 or x = −3. Check: {{(-3 - 2)^2 = 25}} ✓. x = 7 alone forgets the negative square root. x = 27 or −23 uses {{x - 2 = +- 25}} — the square root was never taken. x = −7 or 3 solves {{(x + 2)^2 = 25}}, a sign slip.",
         difficulty: "warmup",
         guideRef: "solve-by-factorising",
-        hints: ["What undoes a square? And how many numbers square to give 16?"],
+        hints: ["What undoes a square? And how many numbers square to give 25?"],
         strategy: "Use the inverse",
       },
       {
@@ -35,11 +35,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m1-q03",
-        question: "Solve {{x^2 = 5x}}.",
-        options: ["x = 5", "x = 0 or x = 5", "x = 0 or x = −5", "x = {{sqrt(5)}} or x = {{-sqrt(5)}}"],
+        question: "Solve {{x^2 = 7x}}.",
+        options: ["x = 7", "x = 0 or x = 7", "x = 0 or x = −7", "x = {{sqrt(7)}} or x = {{-sqrt(7)}}"],
         answerIndex: 1,
         explanation:
-          "Rearrange to = 0 first: {{x^2 - 5x = 0}}, so {{x(x - 5) = 0}} and x = 0 or x = 5. Dividing both sides by x gives x = 5 only — it throws away x = 0, because you can't divide by something that might be zero. x = 0 or −5 is a sign slip in the bracket. ±{{sqrt(5)}} treats the equation as {{x^2 = 5}}.",
+          "Rearrange to = 0 first: {{x^2 - 7x = 0}}, so {{x(x - 7) = 0}} and x = 0 or x = 7. Dividing both sides by x gives x = 7 only — it throws away x = 0, because you can't divide by something that might be zero. x = 0 or −7 is a sign slip in the bracket. ±{{sqrt(7)}} treats the equation as {{x^2 = 7}}.",
         difficulty: "warmup",
         guideRef: "solve-by-factorising",
         hints: ["Don't divide by x — it might be 0. Get everything on one side and factorise instead."],
@@ -100,7 +100,7 @@ export const mcqPapers: Paper[] = [
         options: ["x = 4 ± {{sqrt(11)}}", "x = −4 ± {{sqrt(21)}}", "x = −8 ± {{sqrt(59)}}", "x = −4 ± {{sqrt(11)}}"],
         answerIndex: 3,
         explanation:
-          "Halve 8 to get 4: {{x^2 + 8x = (x + 4)^2 - 16}}. So {{(x + 4)^2 - 16 + 5 = 0}}, i.e. {{(x + 4)^2 = 11}}, giving {{x + 4 = +- sqrt(11)}} and x = −4 ± {{sqrt(11)}}. 4 ± {{sqrt(11)}} forgets to subtract 4 at the end (sign slip). −4 ± {{sqrt(21)}} adds the 16 instead of subtracting it. −8 ± {{sqrt(59)}} uses {{(x + 8)^2}} — the 8 wasn't halved.",
+          "Halve 8 to get 4: {{x^2 + 8x = (x + 4)^2 - 16}}. So {{(x + 4)^2 - 16 + 5 = 0}}, i.e. {{(x + 4)^2 = 11}}, giving {{x + 4 = +- sqrt(11)}} and x = −4 ± {{sqrt(11)}}. 4 ± {{sqrt(11)}} forgets to subtract 4 at the end (sign slip). −4 ± {{sqrt(21)}} uses 16 + 5 instead of 16 − 5. −8 ± {{sqrt(59)}} uses {{(x + 8)^2}} — the 8 wasn't halved.",
         difficulty: "core",
         guideRef: "solve-completing-square",
         hints: [
@@ -215,16 +215,16 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m1-q14",
-        question: "Solve {{x^4 - 5x^2 + 4 = 0}}.",
-        options: ["x = 1 or x = 4", "x = 1 or x = 2", "x = ±1 or x = ±2", "x = ±1 or x = ±4"],
+        question: "Solve {{x^4 - 10x^2 + 9 = 0}}.",
+        options: ["x = 1 or x = 9", "x = 1 or x = 3", "x = ±1 or x = ±3", "x = ±1 or x = ±9"],
         answerIndex: 2,
         explanation:
-          "Let {{u = x^2}}: {{u^2 - 5u + 4 = (u - 1)(u - 4) = 0}}, so u = 1 or u = 4. Now go back to x: {{x^2 = 1}} gives x = ±1 and {{x^2 = 4}} gives x = ±2 — four solutions. x = 1 or 4 stops at u. x = 1 or 2 forgets the negative square roots. ±1 or ±4 forgets to square-root the 4.",
+          "Let {{u = x^2}}: {{u^2 - 10u + 9 = (u - 1)(u - 9) = 0}}, so u = 1 or u = 9. Now go back to x: {{x^2 = 1}} gives x = ±1 and {{x^2 = 9}} gives x = ±3 — four solutions. x = 1 or 9 stops at u. x = 1 or 3 forgets the negative square roots. ±1 or ±9 forgets to square-root the 9.",
         difficulty: "challenge",
         guideRef: "disguised-quadratics",
         hints: [
           "Notice {{x^4 = (x^2)^2}}. What substitution turns this into an ordinary quadratic?",
-          "With {{u = x^2}} you get {{u^2 - 5u + 4 = 0}}. Solve for u.",
+          "With {{u = x^2}} you get {{u^2 - 10u + 9 = 0}}. Solve for u.",
           "Don't stop at u — each value of {{x^2}} gives two values of x.",
         ],
         strategy: "Introduce a variable",
@@ -356,7 +356,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 2,
         explanation:
-          "{{x^2 - 6x + 14 = (x - 3)^2 - 9 + 14 = (x - 3)^2 + 5}}. Setting this to 0 gives {{(x - 3)^2 = -5}}, but a square is never negative — so no real solutions. (The minimum value of the expression is 5, at x = 3.) 3 ± {{sqrt(5)}} moves +5 across without changing its sign. −3 ± {{sqrt(5)}} adds a bracket-sign slip too. 3 ± {{sqrt(23)}} adds the 9 instead of subtracting it.",
+          "{{x^2 - 6x + 14 = (x - 3)^2 - 9 + 14 = (x - 3)^2 + 5}}. Setting this to 0 gives {{(x - 3)^2 = -5}}, but a square is never negative — so no real solutions. (The minimum value of the expression is 5, at x = 3.) 3 ± {{sqrt(5)}} moves +5 across without changing its sign. −3 ± {{sqrt(5)}} adds a bracket-sign slip too. 3 ± {{sqrt(23)}} uses 9 + 14 instead of 9 − 14.",
         difficulty: "core",
         guideRef: "solve-completing-square",
         hints: [
@@ -386,17 +386,17 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m2-q09",
-        question: "The diagram shows the circle {{x^2 + y^2 = 25}} and the line {{y = x + 1}}, meeting at A and B. Find the coordinates of A and B.",
-        diagram: `<svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circle centre the origin radius 5 with the line y = x + 1 crossing it at two points A (upper right) and B (lower left)"><rect x="0" y="0" width="320" height="300" fill="#ffffff"/><line x1="10" y1="150" x2="310" y2="150" stroke="#334155" stroke-width="1.5"/><line x1="160" y1="290" x2="160" y2="10" stroke="#334155" stroke-width="1.5"/><text x="305" y="166" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="166" y="20" font-size="12" font-family="sans-serif" fill="#1f2937">y</text><text x="270" y="166" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#1f2937">5</text><text x="50" y="166" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#1f2937">−5</text><text x="152" y="44" font-size="11" text-anchor="end" font-family="sans-serif" fill="#1f2937">5</text><text x="152" y="264" font-size="11" text-anchor="end" font-family="sans-serif" fill="#1f2937">−5</text><circle cx="160" cy="150" r="110" fill="none" stroke="#1f2937" stroke-width="2"/><line x1="28" y1="260" x2="281" y2="7" stroke="#2563eb" stroke-width="2"/><circle cx="226" cy="62" r="4" fill="#1f2937"/><circle cx="72" cy="216" r="4" fill="#1f2937"/><text x="234" y="58" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="58" y="232" font-size="13" text-anchor="end" font-family="sans-serif" fill="#1f2937">B</text><text x="250" y="40" font-size="12" font-family="sans-serif" fill="#2563eb">y = x + 1</text></svg>`,
-        options: ["(3, −3) and (−4, 4)", "(4, 5) and (−3, −2)", "(3, 4) and (4, 3)", "(3, 4) and (−4, −3)"],
+        question: "The diagram shows the circle {{x^2 + y^2 = 25}} and the line {{y = x - 1}}, meeting at A and B. Find the coordinates of A and B.",
+        diagram: `<svg viewBox="0 0 320 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Circle centre the origin radius 5 with the line y = x − 1 crossing it at two points A (upper right) and B (lower left)"><rect x="0" y="0" width="320" height="300" fill="#ffffff"/><line x1="10" y1="150" x2="310" y2="150" stroke="#334155" stroke-width="1.5"/><line x1="160" y1="290" x2="160" y2="10" stroke="#334155" stroke-width="1.5"/><text x="305" y="166" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="166" y="20" font-size="12" font-family="sans-serif" fill="#1f2937">y</text><text x="270" y="166" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#1f2937">5</text><text x="50" y="166" font-size="11" text-anchor="middle" font-family="sans-serif" fill="#1f2937">−5</text><text x="152" y="44" font-size="11" text-anchor="end" font-family="sans-serif" fill="#1f2937">5</text><text x="152" y="264" font-size="11" text-anchor="end" font-family="sans-serif" fill="#1f2937">−5</text><circle cx="160" cy="150" r="110" fill="none" stroke="#1f2937" stroke-width="2"/><line x1="39" y1="293" x2="303" y2="29" stroke="#2563eb" stroke-width="2"/><circle cx="248" cy="84" r="4" fill="#1f2937"/><circle cx="94" cy="238" r="4" fill="#1f2937"/><text x="256" y="80" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="86" y="254" font-size="13" text-anchor="end" font-family="sans-serif" fill="#1f2937">B</text><text x="272" y="120" font-size="12" font-family="sans-serif" fill="#2563eb">y = x − 1</text></svg>`,
+        options: ["(4, −4) and (−3, 3)", "(−4, −5) and (3, 2)", "(4, 3) and (3, 4)", "(4, 3) and (−3, −4)"],
         answerIndex: 3,
         explanation:
-          "{{x^2 + (x + 1)^2 = 25}} → {{2x^2 + 2x + 1 = 25}} → {{x^2 + x - 12 = 0}} → {{(x + 4)(x - 3) = 0}}. Then y = x + 1: x = 3 → y = 4; x = −4 → y = −3. So A(3, 4), B(−4, −3) — matching the diagram. (3, −3) and (−4, 4) mix up the pairs. (4, 5) and (−3, −2) come from (x − 4)(x + 3). (4, 3) is on the circle but not on the line (3 ≠ 4 + 1).",
+          "{{x^2 + (x - 1)^2 = 25}} → {{2x^2 - 2x + 1 = 25}} → {{x^2 - x - 12 = 0}} → {{(x - 4)(x + 3) = 0}}. Then y = x − 1: x = 4 → y = 3; x = −3 → y = −4. So A(4, 3), B(−3, −4) — matching the diagram. (4, −4) and (−3, 3) mix up the pairs. (−4, −5) and (3, 2) come from the sign slip (x + 4)(x − 3). (3, 4) is on the circle but not on the line (4 ≠ 3 − 1).",
         difficulty: "core",
         guideRef: "linear-quadratic-simultaneous",
         hints: [
-          "Substitute y = x + 1 into the circle equation.",
-          "Expand {{(x + 1)^2}}, simplify, then divide through by 2.",
+          "Substitute y = x − 1 into the circle equation.",
+          "Expand {{(x - 1)^2}}, simplify, then divide through by 2.",
           "Use the line, not the circle, to find each y — that pairs them correctly.",
         ],
         strategy: "Draw a diagram",
@@ -476,16 +476,16 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m2-q14",
-        question: "Solve {{x - 5 sqrt(x) + 6 = 0}}.",
-        options: ["x = 2 or x = 3", "x = {{sqrt(2)}} or x = {{sqrt(3)}}", "x = 16 or x = 81", "x = 4 or x = 9"],
+        question: "Solve {{x - 6 sqrt(x) + 8 = 0}}.",
+        options: ["x = 2 or x = 4", "x = {{sqrt(2)}} or x = 2", "x = 16 or x = 256", "x = 4 or x = 16"],
         answerIndex: 3,
         explanation:
-          "Let {{u = sqrt(x)}}, so {{x = u^2}}: {{u^2 - 5u + 6 = (u - 2)(u - 3) = 0}}, giving {{sqrt(x) = 2}} or {{sqrt(x) = 3}}. Square: x = 4 or x = 9. Check: 4 − 5(2) + 6 = 0 ✓, 9 − 5(3) + 6 = 0 ✓. x = 2 or 3 stops at u. {{sqrt(2)}}, {{sqrt(3)}} square-roots instead of squaring. 16 or 81 squares twice.",
+          "Let {{u = sqrt(x)}}, so {{x = u^2}}: {{u^2 - 6u + 8 = (u - 2)(u - 4) = 0}}, giving {{sqrt(x) = 2}} or {{sqrt(x) = 4}}. Square: x = 4 or x = 16. Check: 4 − 6(2) + 8 = 0 ✓, 16 − 6(4) + 8 = 0 ✓. x = 2 or 4 stops at u. {{sqrt(2)}} and 2 square-root instead of squaring. 16 or 256 squares twice.",
         difficulty: "challenge",
         guideRef: "disguised-quadratics",
         hints: [
           "x is the square of {{sqrt(x)}}. What substitution makes this a normal quadratic?",
-          "With {{u = sqrt(x)}}: {{u^2 - 5u + 6 = 0}}.",
+          "With {{u = sqrt(x)}}: {{u^2 - 6u + 8 = 0}}.",
           "You've found {{sqrt(x)}}, not x. Undo the square root.",
         ],
         strategy: "Introduce a variable",
@@ -547,11 +547,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "quadratic-equations-m3-q03",
-        question: "Solve {{x + 6/x = 5}}.",
-        options: ["x = 1.5", "x = 1 or x = 6", "x = −2 or x = −3", "x = 2 or x = 3"],
+        question: "Solve {{x + 8/x = 6}}.",
+        options: ["x = 1.6", "x = 1 or x = 8", "x = −2 or x = −4", "x = 2 or x = 4"],
         answerIndex: 3,
         explanation:
-          "Multiply every term by x: {{x^2 + 6 = 5x}}, so {{x^2 - 5x + 6 = (x - 2)(x - 3) = 0}} → x = 2 or 3 (x ≠ 0 is fine). Check: 2 + 3 = 5 ✓. x = 1.5 multiplies only the fraction by x (x + 6 = 5x). 1 and 6 multiply to 6 but add to 7, not 5. −2 or −3 is a sign slip.",
+          "Multiply every term by x: {{x^2 + 8 = 6x}}, so {{x^2 - 6x + 8 = (x - 2)(x - 4) = 0}} → x = 2 or 4 (x ≠ 0 is fine). Check: 2 + 4 = 6 ✓ and 4 + 2 = 6 ✓. x = 1.6 multiplies only the fraction by x (x + 8 = 6x). 1 and 8 multiply to 8 but add to 9, not 6. −2 or −4 is a sign slip.",
         difficulty: "warmup",
         guideRef: "algebraic-fraction-equations",
         hints: ["Multiply **every** term by x, then rearrange to = 0."],

@@ -1,5 +1,5 @@
 import "server-only";
-import { put, head, del, BlobNotFoundError, BlobPreconditionFailedError } from "@vercel/blob";
+import { put, get, del, BlobNotFoundError, BlobPreconditionFailedError } from "@vercel/blob";
 import { promises as fs } from "fs";
 import path from "path";
 
@@ -17,7 +17,34 @@ import path from "path";
 
 const LOCAL_DIR = process.env.NODE_ENV !== "production" ? process.env.LOCAL_BLOB_DIR : undefined;
 
-const PUT_OPTIONS = { access: "public", addRandomSuffix: false, cacheControlMaxAge: 0, contentType: "application/json" } as const;
+// Stores made with a read-write token (older Vercel Blob) are public; stores connected through
+// BLOB_STORE_ID + Vercel OIDC can be private. Start from the likely mode and switch once if the
+// store rejects it. BLOB_ACCESS=public|private pins it.
+type Access = "public" | "private";
+let access: Access =
+  process.env.BLOB_ACCESS === "public" || process.env.BLOB_ACCESS === "private"
+    ? process.env.BLOB_ACCESS
+    : process.env.BLOB_STORE_ID
+      ? "private"
+      : "public";
+const pinned = process.env.BLOB_ACCESS === "public" || process.env.BLOB_ACCESS === "private";
+function putOptions() {
+  return { access, addRandomSuffix: false, cacheControlMaxAge: 0, contentType: "application/json" } as const;
+}
+/** The store refused this access mode (a public blob in a private store or vice versa). */
+function isAccessMismatch(e: unknown): boolean {
+  return !pinned && e instanceof Error && /(private|public).*(store|access)|(store|access).*(private|public)/i.test(e.message);
+}
+/** Run a blob call; on an access-mode mismatch, flip the mode once and retry. */
+async function withAccess<R>(fn: () => Promise<R>): Promise<R> {
+  try {
+    return await fn();
+  } catch (e) {
+    if (!isAccessMismatch(e)) throw e;
+    access = access === "public" ? "private" : "public";
+    return fn();
+  }
+}
 
 function localPath(key: string): string {
   const safe = key.replace(/\.\.+/g, "").replace(/^\/+/, "");
@@ -32,7 +59,7 @@ if (!process.env.BLOB_READ_WRITE_TOKEN) {
 }
 
 export function blobConfigured(): boolean {
-  return !!process.env.BLOB_READ_WRITE_TOKEN || !!LOCAL_DIR;
+  return !!process.env.BLOB_READ_WRITE_TOKEN || !!process.env.BLOB_STORE_ID || !!LOCAL_DIR;
 }
 
 // The library's error classes don't set `name` (it stays "Error") and BlobNotFoundError's
@@ -70,19 +97,17 @@ async function readTagged<T>(key: string): Promise<Tagged<T>> {
       throw e;
     }
   }
-  let meta: { url: string; etag: string };
+  let res: Awaited<ReturnType<typeof get>>;
   try {
-    meta = await head(key);
+    res = await withAccess(() => get(key, { access, useCache: false }));
   } catch (e) {
     if (isNotFound(e)) return MISSING;
     throw e;
   }
-  // If a write lands between head() and this fetch, the body is newer than the ETag and a
-  // conditional write with it fails (and is retried), so nothing is lost.
-  const res = await fetch(`${meta.url}?t=${Date.now()}`, { cache: "no-store" });
-  if (res.status === 404) return MISSING;
-  if (!res.ok) throw new Error(`Blob read failed (${res.status})`);
-  return { value: (await res.json()) as T, found: true, etag: meta.etag };
+  if (!res || res.statusCode !== 200 || !res.stream) return MISSING;
+  const text = await new Response(res.stream).text();
+  // If a write lands after this read, a conditional write with this ETag fails (and is retried).
+  return { value: JSON.parse(text) as T, found: true, etag: res.blob.etag };
 }
 
 export async function readJson<T>(key: string): Promise<T | null> {
@@ -105,14 +130,14 @@ async function writeLocal(key: string, data: string, create = false): Promise<vo
 
 export async function writeJson(key: string, value: unknown): Promise<void> {
   if (LOCAL_DIR) return writeLocal(key, JSON.stringify(value));
-  await put(key, JSON.stringify(value), { ...PUT_OPTIONS, allowOverwrite: true });
+  await withAccess(() => put(key, JSON.stringify(value), { ...putOptions(), allowOverwrite: true }));
 }
 
 /** Create `key` only if it doesn't exist yet. False when it already does (someone else got it). */
 export async function createJson(key: string, value: unknown): Promise<boolean> {
   try {
     if (LOCAL_DIR) await writeLocal(key, JSON.stringify(value), true);
-    else await put(key, JSON.stringify(value), { ...PUT_OPTIONS, allowOverwrite: false });
+    else await withAccess(() => put(key, JSON.stringify(value), { ...putOptions(), allowOverwrite: false }));
     return true;
   } catch (e) {
     if ((e as NodeJS.ErrnoException).code === "EEXIST" || (!LOCAL_DIR && isAlreadyExists(e))) return false;
@@ -157,7 +182,7 @@ export async function updateJson<T>(key: string, mutate: (current: T | null) => 
       try {
         if (LOCAL_DIR) await writeLocal(key, JSON.stringify(next));
         // (No ETag on an existing blob shouldn't happen; then fall back to a plain overwrite.)
-        else await put(key, JSON.stringify(next), { ...PUT_OPTIONS, ...(!found ? { allowOverwrite: false } : etag ? { ifMatch: etag } : { allowOverwrite: true }) });
+        else await withAccess(() => put(key, JSON.stringify(next), { ...putOptions(), ...(!found ? { allowOverwrite: false } : etag ? { ifMatch: etag } : { allowOverwrite: true }) }));
         return { value: next, changed: true };
       } catch (e) {
         if (LOCAL_DIR) throw e;
@@ -178,8 +203,7 @@ export async function deleteJson(key: string): Promise<void> {
       return;
     }
     try {
-      const meta = await head(key);
-      await del(meta.url);
+      await del(key);
     } catch {
       /* already gone */
     }

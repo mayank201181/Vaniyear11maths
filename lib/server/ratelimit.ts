@@ -112,7 +112,7 @@ export function clientId(req: Request): string {
     const groups = tail === undefined ? h : [...h, ...Array<string>(Math.max(0, 8 - h.length - t.length)).fill("0"), ...t];
     ip = `${groups.slice(0, 4).map((g) => g.replace(/^0+(?=.)/, "")).join(":")}::/64`;
   }
-  const salt = (process.env.AUTH_SECRET && process.env.AUTH_SECRET.length >= 32 ? process.env.AUTH_SECRET : "") || process.env.BLOB_READ_WRITE_TOKEN || "y11m-client";
+  const salt = (process.env.AUTH_SECRET && process.env.AUTH_SECRET.length >= 32 ? process.env.AUTH_SECRET : "") || process.env.BLOB_READ_WRITE_TOKEN || process.env.ANTHROPIC_API_KEY || "y11m-client";
   return createHmac("sha256", salt).update(`client:${ip}`).digest("hex").slice(0, 16);
 }
 

@@ -13,7 +13,7 @@ const SESSION_MAX_AGE_S = 60 * 60 * 24 * 365;
 
 /**
  * Signing secret. AUTH_SECRET is preferred; if it is missing we derive one from
- * the (server-only) Blob token rather than falling back to a public string.
+ * a server-only secret (the Blob token, else the AI key) rather than falling back to a public string.
  * A short AUTH_SECRET (< 32 chars, e.g. a placeholder) is ignored as too weak.
  */
 function secret(): string | null {
@@ -21,6 +21,10 @@ function secret(): string | null {
   if (configured && configured.length >= 32) return configured;
   if (process.env.BLOB_READ_WRITE_TOKEN) {
     return createHash("sha256").update(`y11m-session:${process.env.BLOB_READ_WRITE_TOKEN}`).digest("hex");
+  }
+  // OIDC-connected Blob stores have no token: derive from the AI key, which is also server-only.
+  if (process.env.ANTHROPIC_API_KEY) {
+    return createHash("sha256").update(`y11m-session:${process.env.ANTHROPIC_API_KEY}`).digest("hex");
   }
   if (process.env.NODE_ENV !== "production") return "dev-only-secret";
   return null;
