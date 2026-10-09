@@ -26,7 +26,7 @@ export const mcqPapers: Paper[] = [
         options: ["x = −7 or x = 2", "x = 14 or x = −1", "x = 7 or x = −2", "x = 7 or x = 2"],
         answerIndex: 2,
         explanation:
-          "Find two numbers that multiply to −14 and add to −5: −7 and +2. So {{(x - 7)(x + 2) = 0}}, giving x = 7 or x = −2. x = −7 or 2 copies the numbers from the brackets without changing sign. x = 14 or −1 uses a factor pair of −14 that adds to 13, not −5. x = 7 or 2 would need a product of +14.",
+          "Find two numbers that multiply to −14 and add to −5: −7 and +2. So {{(x - 7)(x + 2) = 0}}, giving x = 7 or x = −2. x = −7 or 2 copies the numbers from the brackets without changing sign. x = 14 or −1 comes from (x − 14)(x + 1): the pair −14 and 1 multiplies to −14 but adds to −13, not −5. x = 7 or 2 would need a product of +14.",
         difficulty: "warmup",
         guideRef: "solve-by-factorising",
         hints: ["Which pair of numbers multiplies to −14 and adds to −5? Then set each bracket equal to zero."],
@@ -134,7 +134,7 @@ export const mcqPapers: Paper[] = [
         options: ["(3, −1) and (−2, 4)", "(3, 4) and (−2, −1)", "(−3, −2) and (2, 3)", "(6, 7) and (−1, 0)"],
         answerIndex: 1,
         explanation:
-          "Set the two expressions for y equal: {{x^2 - 5 = x + 1}}, so {{x^2 - x - 6 = 0}} and {{(x - 3)(x + 2) = 0}}. Substitute each x into the **linear** equation: x = 3 → y = 4; x = −2 → y = −1. (3, −1) and (−2, 4) pair the y-values with the wrong x-values. (−3, −2) and (2, 3) come from factorising as (x + 3)(x − 2). (6, 7) and (−1, 0) use a factor pair of −6 that adds to +5, not −1.",
+          "Set the two expressions for y equal: {{x^2 - 5 = x + 1}}, so {{x^2 - x - 6 = 0}} and {{(x - 3)(x + 2) = 0}}. Substitute each x into the **linear** equation: x = 3 → y = 4; x = −2 → y = −1. (3, −1) and (−2, 4) pair the y-values with the wrong x-values. (−3, −2) and (2, 3) come from factorising as (x + 3)(x − 2). (6, 7) and (−1, 0) come from (x − 6)(x + 1): the pair −6 and 1 multiplies to −6 but adds to −5, not −1.",
         difficulty: "core",
         guideRef: "linear-quadratic-simultaneous",
         hints: [
@@ -564,7 +564,7 @@ export const mcqPapers: Paper[] = [
         options: ["x = −2 and x = 1", "x = 2 and x = −1", "x = {{sqrt(2)}} and x = {{-sqrt(2)}}", "x = 0 and x = 2"],
         answerIndex: 1,
         explanation:
-          "At an intersection both equations hold: {{x^2 = x + 2}}, so {{x^2 - x - 2 = (x - 2)(x + 1) = 0}} → x = 2 or x = −1 (points (2, 4) and (−1, 1)). −2 and 1 is a sign slip. ±{{sqrt(2)}} drops the x term (solving {{x^2 = 2}}). x = 0 is where the line… isn't — at x = 0 the curve is at 0 and the line at 2.",
+          "At an intersection both equations hold: {{x^2 = x + 2}}, so {{x^2 - x - 2 = (x - 2)(x + 1) = 0}} → x = 2 or x = −1 (points (2, 4) and (−1, 1)). −2 and 1 is a sign slip. ±{{sqrt(2)}} drops the x term (solving {{x^2 = 2}}). x = 0 and 2 is a guess: at x = 0 the curve is at y = 0 but the line is at y = 2, so they don't meet there.",
         difficulty: "warmup",
         guideRef: "linear-quadratic-simultaneous",
         hints: ["Where graphs meet, their y-values are equal. Set {{x^2 = x + 2}} and solve."],

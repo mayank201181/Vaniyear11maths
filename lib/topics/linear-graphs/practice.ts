@@ -92,7 +92,7 @@ export const practice: TopicPractice = {
       ],
       traps: [
         { spec: { type: "number", value: 14 }, feedback: "6 + 8 is the route along two sides of the triangle. The straight line is the hypotenuse: use Pythagoras." },
-        { spec: { type: "number", value: 6.32455532 }, feedback: "Careful with the double negative: 6 − (−2) = 8, not 4." },
+        { spec: { type: "expression", expr: "sqrt(40)" }, feedback: "Careful with the double negative: 6 − (−2) = 8, not 4." },
       ],
       commonError: "Writing 6 − (−2) as 4.",
       difficulty: "core",
@@ -1045,7 +1045,6 @@ export const practice: TopicPractice = {
         { label: "From P", steps: ["PB is 3 parts = 3 × (3, 1.5) = (9, 4.5).", "B = (2 + 9, 4 + 4.5) = (11, 8.5)."] },
       ],
       traps: [
-        { spec: { type: "list", values: [11, 8.5], ordered: false }, feedback: "Give the coordinates in the order (x, y)." },
         { spec: { type: "list", values: [6.5, 6.25], ordered: true }, feedback: "You've moved 3 parts from A — B is 5 parts (2 + 3) from A." },
       ],
       difficulty: "challenge",
