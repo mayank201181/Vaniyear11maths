@@ -514,14 +514,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "ratio-proportion-m3-q07",
-        question: "A box with weight 360 N rests on a face measuring 30 cm by 40 cm. Work out the pressure on the floor in N/m².",
-        options: ["0.3 N/m²", "3000 N/m²", "30 N/m²", "43.2 N/m²"],
+        question: "A box with weight 450 N rests on a face measuring 25 cm by 60 cm. Work out the pressure on the floor in N/m².",
+        options: ["0.3 N/m²", "3000 N/m²", "30 N/m²", "67.5 N/m²"],
         answerIndex: 1,
         explanation:
-          "Area = 0.3 m × 0.4 m = 0.12 m², so pressure = {{360/0.12}} = 3000 N/m². 0.3 is 360 ÷ 1200 — that is N/cm², not N/m². 30 uses 1200 cm² = 12 m². 43.2 multiplies force by area.",
+          "Area = 0.25 m × 0.6 m = 0.15 m², so pressure = {{450/0.15}} = 3000 N/m². 0.3 is 450 ÷ 1500 — that is N/cm², not N/m². 30 uses 1500 cm² = 15 m² (dividing by 100 instead of 10 000). 67.5 multiplies force by area.",
         difficulty: "core",
         guideRef: "compound-measures",
-        hints: ["The answer must be in N/m², so convert the lengths to metres before finding the area.", "Area = 0.3 × 0.4 m². Then pressure = force ÷ area."],
+        hints: ["The answer must be in N/m², so convert the lengths to metres before finding the area.", "Area = 0.25 × 0.6 m². Then pressure = force ÷ area."],
         strategy: "Check the units",
       },
       {

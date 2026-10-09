@@ -28,19 +28,19 @@ export const practice: TopicPractice = {
     {
       kind: "mcq",
       id: "functions-quiz-q02",
-      question: "Which one of these rules is **not** a function?",
+      question: "Which one of these graphs is **not** the graph of a function y = f(x)?",
       options: [
-        "x ↦ {{x^2}}, for all real x",
-        "x ↦ 5, for all real x",
-        "x ↦ {{+- sqrt(x)}} (both square roots), for x > 0",
-        "x ↦ {{1/x}}, for x ≠ 0",
+        "The parabola {{y = x^2 - 4}}",
+        "The horizontal line y = 3",
+        "The circle {{x^2 + y^2 = 25}}",
+        "The curve {{y = 1/x}}, x ≠ 0",
       ],
       answerIndex: 2,
       explanation:
-        "A function sends each input to **exactly one** output. The rule x ↦ ±√x sends 9 to both 3 and −3, so it is not a function. x ↦ {{x^2}} sends 3 and −3 to the same output 9 — that's many-to-one, which is allowed. x ↦ 5 is a constant function: every input has one output (it just happens to be the same one). x ↦ {{1/x}} is a function once 0 is excluded from the domain.",
+        "Use the vertical line test: a function gives **exactly one** y for each x, so no vertical line may cross its graph twice. The vertical line x = 3 meets the circle at (3, 4) and (3, −4) — one input, two outputs — so the circle is not a function. The parabola is many-to-one (x = 2 and x = −2 both give 0), which is allowed. The horizontal line y = 3 is a constant function: every x has one output. {{y = 1/x}} gives one y for every allowed x.",
       difficulty: "warmup",
       guideRef: "functions-as-mappings",
-      hints: ["The rule: every input must have exactly one output.", "Try input 9 in each rule. How many outputs do you get?"],
+      hints: ["Every input x must give exactly one output y.", "Imagine a vertical line, such as x = 3, sliding across each graph. Can it ever cross the graph twice?"],
       strategy: "Test a specific value",
     },
     {
