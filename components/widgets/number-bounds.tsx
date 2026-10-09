@@ -90,7 +90,6 @@ function ErrorIntervalZoom() {
   const hiF = how === "round" ? V + half : V + unitFine;
   const x = V + t;
   const fmt = (f: number) => trim(decStr(f, a.dec));
-  const shownStr = decStr(j * unitFine, a.dec).replace(/\.?0$/, "") === "" ? "0" : trim(decStr(j * unitFine, a.dec));
   // The value as written (keeps the zero that shows the accuracy, e.g. 6.0).
   const written = acc === "10" ? String(j * 10) : acc === "1" ? String(j) : acc === "0.1" ? decStr(j, 1) : decStr(j, 2);
 
@@ -175,7 +174,7 @@ function ErrorIntervalZoom() {
           <text x={px(x)} y={y - 44} fontSize={11} textAnchor="middle" className="fill-ink" fontWeight={700}>x</text>
         </svg>
         <p className="text-xs text-ink-2">
-          Shown value {shownStr === "" ? written : written}, correct to {how === "round" ? a.words : `${a.words} (truncated)`}. Filled circle: included. Open circle: not included.
+          Shown value {written}, correct to {how === "round" ? a.words : `${a.words} (truncated)`}. Filled circle: included. Open circle: not included.
         </p>
       </div>
     </WidgetFrame>
@@ -213,8 +212,12 @@ function BoundsCalculator() {
   const [bCount, setBCount] = useState(312);
   const [op, setOp] = useState<Op>("÷");
 
-  const A = bounds(aCount, aPrec);
-  const B = bounds(bCount, bPrec);
+  const aR = aPrec === "1" ? { min: 1, max: 99 } : { min: 10, max: 999 };
+  const bR = bPrec === "1" ? { min: 1, max: 99 } : { min: 10, max: 999 };
+  const aC = Math.min(aR.max, Math.max(aR.min, aCount));
+  const bC = Math.min(bR.max, Math.max(bR.min, bCount));
+  const A = bounds(aC, aPrec);
+  const B = bounds(bC, bPrec);
   const combos = [
     { a: "LB", b: "LB", av: A.lo, bv: B.lo, as: A.loStr, bs: B.loStr },
     { a: "LB", b: "UB", av: A.lo, bv: B.hi, as: A.loStr, bs: B.hiStr },
@@ -255,7 +258,6 @@ function BoundsCalculator() {
       : "The bounds don't agree even to 1 s.f., so the measurements are too rough to give a reliable answer."
   }`;
 
-  const opts = (p: Prec) => (p === "1" ? { min: 1, max: 99 } : { min: 10, max: 999 });
   const changePrec = (which: "a" | "b", p: Prec) => {
     // Keep the value roughly the same when the accuracy changes.
     if (which === "a") {
@@ -266,10 +268,6 @@ function BoundsCalculator() {
       setBPrec(p);
     }
   };
-  const aR = opts(aPrec), bR = opts(bPrec);
-  const aC = Math.min(aR.max, Math.max(aR.min, aCount));
-  const bC = Math.min(bR.max, Math.max(bR.min, bCount));
-
   return (
     <WidgetFrame
       title="Bounds calculator"

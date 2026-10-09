@@ -6,7 +6,7 @@ import type { ExamPaper } from "../types.ts";
 
 const CCA_VENN = `<svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram. The universal set is the 50 students in a CCA. Circle C is Choir and circle B is Badminton. Choir only 14, both 6, Badminton only 19, neither 11." font-family="sans-serif"><rect x="0" y="0" width="420" height="260" fill="#ffffff"/><rect x="20" y="20" width="380" height="220" fill="#ffffff" stroke="#1f2937" stroke-width="2"/><circle cx="165" cy="130" r="80" fill="#c7d2fe" fill-opacity="0.6" stroke="#1f2937" stroke-width="2"/><circle cx="255" cy="130" r="80" fill="#fde68a" fill-opacity="0.6" stroke="#1f2937" stroke-width="2"/><g font-size="15" fill="#1f2937" text-anchor="middle"><text x="125" y="135">14</text><text x="210" y="135">6</text><text x="295" y="135">19</text><text x="370" y="225">11</text></g><g font-size="14" fill="#1f2937" font-weight="bold"><text x="32" y="40">ξ</text><text x="100" y="58">C</text><text x="312" y="58">B</text></g></svg>`;
 
-const TANK_HIST = `__HIST__`;
+const JOURNEY_HIST = `<svg viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Histogram of journey times in minutes. Frequency density axis from 0 to 5 with gridlines every 0.2. Bars: 0 to 10 minutes height 1.2; 10 to 15 height 3.6; 15 to 20 height 4.4; 20 to 30 height 2.0; 30 to 50 height 0.6." font-family="sans-serif"><rect x="0" y="0" width="480" height="320" fill="#ffffff"/><g stroke="#e2e8f0" stroke-width="1"><line x1="60" y1="262" x2="460" y2="262"/><line x1="60" y1="254" x2="460" y2="254"/><line x1="60" y1="246" x2="460" y2="246"/><line x1="60" y1="238" x2="460" y2="238"/><line x1="60" y1="230" x2="460" y2="230" stroke="#cbd5e1"/><line x1="60" y1="222" x2="460" y2="222"/><line x1="60" y1="214" x2="460" y2="214"/><line x1="60" y1="206" x2="460" y2="206"/><line x1="60" y1="198" x2="460" y2="198"/><line x1="60" y1="190" x2="460" y2="190" stroke="#cbd5e1"/><line x1="60" y1="182" x2="460" y2="182"/><line x1="60" y1="174" x2="460" y2="174"/><line x1="60" y1="166" x2="460" y2="166"/><line x1="60" y1="158" x2="460" y2="158"/><line x1="60" y1="150" x2="460" y2="150" stroke="#cbd5e1"/><line x1="60" y1="142" x2="460" y2="142"/><line x1="60" y1="134" x2="460" y2="134"/><line x1="60" y1="126" x2="460" y2="126"/><line x1="60" y1="118" x2="460" y2="118"/><line x1="60" y1="110" x2="460" y2="110" stroke="#cbd5e1"/><line x1="60" y1="102" x2="460" y2="102"/><line x1="60" y1="94" x2="460" y2="94"/><line x1="60" y1="86" x2="460" y2="86"/><line x1="60" y1="78" x2="460" y2="78"/><line x1="60" y1="70" x2="460" y2="70" stroke="#cbd5e1"/><line x1="100" y1="70" x2="100" y2="270"/><line x1="140" y1="70" x2="140" y2="270"/><line x1="180" y1="70" x2="180" y2="270"/><line x1="220" y1="70" x2="220" y2="270"/><line x1="260" y1="70" x2="260" y2="270"/><line x1="300" y1="70" x2="300" y2="270"/><line x1="340" y1="70" x2="340" y2="270"/><line x1="380" y1="70" x2="380" y2="270"/><line x1="420" y1="70" x2="420" y2="270"/><line x1="460" y1="70" x2="460" y2="270"/></g><g fill="#c7d2fe" stroke="#1f2937" stroke-width="1.5"><rect x="60" y="222" width="80" height="48"/><rect x="140" y="126" width="40" height="144"/><rect x="180" y="94" width="40" height="176"/><rect x="220" y="190" width="80" height="80"/><rect x="300" y="246" width="160" height="24"/></g><line x1="60" y1="270" x2="468" y2="270" stroke="#1f2937" stroke-width="1.5"/><line x1="60" y1="270" x2="60" y2="62" stroke="#1f2937" stroke-width="1.5"/><g font-size="12" fill="#1f2937" text-anchor="middle"><text x="60" y="288">0</text><text x="140" y="288">10</text><text x="220" y="288">20</text><text x="300" y="288">30</text><text x="380" y="288">40</text><text x="460" y="288">50</text></g><g font-size="12" fill="#1f2937" text-anchor="end"><text x="54" y="274">0</text><text x="54" y="234">1</text><text x="54" y="194">2</text><text x="54" y="154">3</text><text x="54" y="114">4</text><text x="54" y="74">5</text></g><text x="260" y="310" font-size="13" fill="#1f2937" text-anchor="middle">Journey time, t (minutes)</text><text x="18" y="170" font-size="13" fill="#1f2937" text-anchor="middle" transform="rotate(-90 18 170)">Frequency density</text></svg>`;
 
 const POT_FRUSTUM = `<svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A plant pot in the shape of a frustum of a cone. The top circle has radius 12 cm, the bottom circle has radius 8 cm and the vertical height is 15 cm." font-family="sans-serif"><rect x="0" y="0" width="400" height="240" fill="#ffffff"/><path d="M80 60 L120 180 A80 15 0 0 0 280 180 L320 60 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><ellipse cx="200" cy="60" rx="120" ry="22" fill="#bbf7d0" stroke="#1f2937" stroke-width="2"/><path d="M120 180 A80 15 0 0 1 280 180" fill="none" stroke="#334155" stroke-width="1.2" stroke-dasharray="5 4"/><g stroke="#334155" stroke-width="1.2"><line x1="200" y1="60" x2="320" y2="60"/><line x1="200" y1="180" x2="280" y2="180"/><line x1="200" y1="60" x2="200" y2="180" stroke-dasharray="5 4"/></g><path d="M200 172 L208 172 L208 180" fill="none" stroke="#334155" stroke-width="1"/><g font-size="13" fill="#1f2937"><text x="260" y="54" text-anchor="middle">12 cm</text><text x="240" y="174" text-anchor="middle">8 cm</text><text x="192" y="125" text-anchor="end">15 cm</text><text x="392" y="232" text-anchor="end" font-size="11">Not to scale</text></g></svg>`;
 
@@ -289,7 +289,6 @@ export const paper: ExamPaper = {
         "{{x^4 - 81}} = {{(x^2)^2 - 9^2}}: difference of two squares.",
         "Look at each new bracket: can any of them be factorised again?",
       ],
-      strategy: "Look for an invariant",
     },
     {
       kind: "short",
@@ -423,7 +422,7 @@ export const paper: ExamPaper = {
       difficulty: "core",
       question:
         "The histogram gives information about the times, t minutes, that a group of Year 11 students took to travel to school one morning. No student took longer than 50 minutes.\n\nUse the histogram to work out an estimate for the number of students who took **more than 25 minutes**.",
-      diagram: TANK_HIST,
+      diagram: JOURNEY_HIST,
       answer: { type: "number", value: 22, display: "22 students" },
       traps: [
         { spec: { type: "number", value: 12 }, feedback: "That counts only the 30–50 class. Half of the 20–30 class (the part from 25 to 30) also took more than 25 minutes." },
@@ -472,7 +471,7 @@ export const paper: ExamPaper = {
       traps: [
         { spec: { type: "number", value: 720 }, feedback: "You multiplied the volume by the *area* scale factor (2.25). Volumes scale by the cube of the length scale factor." },
         { spec: { type: "number", value: 480 }, feedback: "You used the length scale factor (1.5). Volumes scale by 1.5³." },
-        { spec: { type: "number", value: 1620, tolerance: 0.5 }, feedback: "You cubed the area scale factor (2.25³ = 11.39…)? or squared it. Find the length scale factor first: √2.25 = 1.5, then cube that." },
+        { spec: { type: "number", value: 1620 }, feedback: "You squared the area scale factor (2.25² = 5.0625). Volume scale factor = (length scale factor)³, and the length scale factor is √2.25 = 1.5." },
       ],
       solution: [
         "Area scale factor = 405 ÷ 180 = 2.25.",
@@ -540,7 +539,7 @@ export const paper: ExamPaper = {
         "ABCD is a cyclic quadrilateral. What do you know about angle ABC and angle ADC?",
         "Angle BDC is part of angle ADC.",
       ],
-      strategy: "Name strategies: chain the theorems",
+      strategy: "Work backwards",
     },
     {
       kind: "short",
@@ -579,7 +578,7 @@ export const paper: ExamPaper = {
       guideRef: "vector-geometry",
       difficulty: "core",
       question:
-        "OAB is a triangle with {{vec(OA)}} = **a** and {{vec(OB)}} = **b**.\n\nP is the point on AB such that AP : PB = 1 : 2.\n\nThe line OA is extended to the point X so that OX = 2OA. The point Y is such that {{vec(XY)}} = **b**.\n\nProve that O, P and Y lie on a straight line, and find the ratio OP : PY.",
+        "OAB is a triangle with →OA = **a** and →OB = **b**.\n\nP is the point on AB such that AP : PB = 1 : 2.\n\nThe line OA is extended to the point X so that OX = 2OA. The point Y is such that →XY = **b**.\n\nProve that O, P and Y lie on a straight line, and find the ratio OP : PY.",
       diagram: VECTOR_PATH,
       marks: 4,
       modelAnswer:
@@ -592,11 +591,10 @@ export const paper: ExamPaper = {
       ],
       commonError: "Showing OY is a multiple of OP but not saying they share the point O — parallel alone is not enough for a straight line.",
       hints: [
-        "Write {{vec(AB)}} in terms of **a** and **b**, then take {{1/3}} of it to get {{vec(AP)}}.",
-        "Find {{vec(OP)}} and {{vec(OY)}}. Can you take a common factor out of {{vec(OP)}}?",
-        "If {{vec(OY)}} is a multiple of {{vec(OP)}}, what can you say — and what extra fact do you need for a straight line?",
+        "Write →AB in terms of **a** and **b**, then take {{1/3}} of it to get →AP.",
+        "Find →OP and →OY. Can you take a common factor out of →OP?",
+        "If →OY is a multiple of →OP, what can you say — and what extra fact do you need for a straight line?",
       ],
-      strategy: "Look for an invariant",
     },
 
     // ============================ CHALLENGE ================================
@@ -800,7 +798,6 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 19.3, tolerance: 0.05, display: "19.3 cm" },
       traps: [
         { spec: { type: "number", value: 6.46, tolerance: 0.01 }, feedback: "cos 150° is **negative** (−{{sqrt(3)/2}}), so −2bc cos A *adds* 96√3. An obtuse angle must give the longest side." },
-        { spec: { type: "number", value: 14.4, tolerance: 0.05 }, feedback: "Did you use sin 150° = 0.5 correctly? ½ × x(x + 4) × 0.5 = 24 gives x(x + 4) = 96, so x = 8, not some other value. Then use the cosine rule with AB = 8 and AC = 12." },
       ],
       solution: [
         "Area = {{1/2 ab sin C}}: {{1/2 * x(x + 4) * sin 150° = 24}}. Since sin 150° = {{1/2}}, this is {{1/4 x(x + 4) = 24}}.",
