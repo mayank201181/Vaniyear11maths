@@ -17,11 +17,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m1-q01",
         question:
-          "A biased spinner can land on red, blue, green or yellow. The table shows some of the probabilities.\n\n| Colour | Red | Blue | Green | Yellow |\n|---|---|---|---|---|\n| Probability | 0.3 | 0.25 | ? | 0.15 |\n\nWork out the probability that the spinner lands on green.",
-        options: ["0.3", "0.7", "0.4", "0.25"],
+          "A biased spinner can land on red, blue, green or yellow. The table shows some of the probabilities.\n\n| Colour | Red | Blue | Green | Yellow |\n|---|---|---|---|---|\n| Probability | 0.4 | 0.25 | ? | 0.15 |\n\nWork out the probability that the spinner lands on green.",
+        options: ["0.2", "0.8", "0.35", "0.25"],
         answerIndex: 0,
         explanation:
-          "The probabilities of all the outcomes must add to 1. 0.3 + 0.25 + 0.15 = 0.7, so P(green) = 1 − 0.7 = 0.3. 0.7 is the total of the given values — the subtraction from 1 was forgotten. 0.4 comes from mis-adding the known values to 0.6. 0.25 assumes the four colours are equally likely, but the spinner is biased.",
+          "The probabilities of all the outcomes must add to 1. 0.4 + 0.25 + 0.15 = 0.8, so P(green) = 1 − 0.8 = 0.2. 0.8 is the total of the given values — the subtraction from 1 was forgotten. 0.35 is 1 − 0.4 − 0.25, which forgets to subtract yellow as well. 0.25 assumes the four colours are equally likely, but the spinner is biased.",
         difficulty: "warmup",
         guideRef: "basic-probability",
         hints: ["What must all the probabilities in the table add up to?"],
@@ -72,14 +72,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m1-q05",
         question:
-          "The probability that Arjun's MRT train is late on any day is 0.1, independently of other days.\n\nWork out the probability that his train is late on **at least one** of the next 3 days.",
-        options: ["0.3", "0.001", "0.271", "0.729"],
+          "The probability that Arjun's school bus is late on any day is 0.2, independently of other days.\n\nWork out the probability that his bus is late on **at least one** of the next 3 days.",
+        options: ["0.6", "0.008", "0.488", "0.512"],
         answerIndex: 2,
         explanation:
-          "P(at least one late) = 1 − P(none late) = 1 − 0.9³ = 1 − 0.729 = 0.271. 0.3 adds 0.1 three times — that double-counts days where the train is late more than once (and would exceed 1 for 11 days). 0.001 is 0.1³, the probability it is late on *all three* days. 0.729 is the probability of *no* late trains.",
+          "P(at least one late) = 1 − P(none late) = 1 − 0.8³ = 1 − 0.512 = 0.488. 0.6 adds 0.2 three times — that double-counts days where the bus is late more than once (and would exceed 1 for 6 days). 0.008 is 0.2³, the probability it is late on *all three* days. 0.512 is the probability of *no* late buses.",
         difficulty: "core",
         guideRef: "or-and-rules",
-        hints: ["'At least one' has lots of cases. What is the opposite event?", "The opposite of 'at least one late' is 'none late'.", "P(none late) = 0.9 × 0.9 × 0.9."],
+        hints: ["'At least one' has lots of cases. What is the opposite event?", "The opposite of 'at least one late' is 'none late'.", "P(none late) = 0.8 × 0.8 × 0.8."],
         strategy: "Use the complement",
       },
       {
@@ -100,14 +100,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m1-q07",
         question:
-          "A bag contains 5 red counters and 3 blue counters. Priya takes a counter at random and does **not** replace it. She then takes a second counter at random.\n\nWork out the probability that both counters are red.",
-        options: ["{{25/64}}", "{{5/16}}", "{{15/28}}", "{{5/14}}"],
+          "A bag contains 6 red counters and 4 blue counters. Priya takes a counter at random and does **not** replace it. She then takes a second counter at random.\n\nWork out the probability that both counters are red.",
+        options: ["{{9/25}}", "{{3/10}}", "{{8/15}}", "{{1/3}}"],
         answerIndex: 3,
         explanation:
-          "Without replacement: {{5/8 * 4/7 = 20/56 = 5/14}}. {{25/64}} is {{5/8 * 5/8}} — that is *with* replacement. {{5/16}} uses {{4/8}} for the second pick: one red has gone, but so has one counter from the total, so the denominator must drop to 7. {{15/28}} is the probability of one of each colour.",
+          "Without replacement: {{6/10 * 5/9 = 30/90 = 1/3}}. {{9/25}} is {{6/10 * 6/10}} — that is *with* replacement. {{3/10}} uses {{5/10}} for the second pick: one red has gone, but so has one counter from the total, so the denominator must drop to 9. {{8/15}} is the probability of one of each colour.",
         difficulty: "core",
         guideRef: "tree-diagrams",
-        hints: ["After the first red is taken, how many reds are left? How many counters altogether?", "Second pick: {{4/7}}."],
+        hints: ["After the first red is taken, how many reds are left? How many counters altogether?", "Second pick: {{5/9}}."],
         strategy: "Draw a tree diagram",
       },
       {
@@ -129,14 +129,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m1-q09",
         question:
-          "A bag contains n counters. 3 of the counters are red. Two counters are taken at random without replacement. The probability that both are red is {{1/15}}.\n\nWhich equation does n satisfy?",
-        options: ["{{n^2 - n - 90 = 0}}", "{{n^2 - 90 = 0}}", "{{n^2 + n - 90 = 0}}", "{{n^2 - n - 15 = 0}}"],
+          "A bag contains n counters. 3 of the counters are red. Two counters are taken at random without replacement. The probability that both are red is {{1/7}}.\n\nWhich equation does n satisfy?",
+        options: ["{{n^2 - n - 42 = 0}}", "{{n^2 - 42 = 0}}", "{{n^2 + n - 42 = 0}}", "{{n^2 - n - 7 = 0}}"],
         answerIndex: 0,
         explanation:
-          "{{3/n * 2/(n-1) = 1/15}} so {{6/(n(n-1)) = 1/15}}, giving {{n(n-1) = 90}}, i.e. {{n^2 - n - 90 = 0}} (so n = 10). {{n^2 - 90 = 0}} uses n for both denominators — that is *with* replacement. {{n^2 + n - 90 = 0}} comes from writing the second denominator as n + 1. {{n^2 - n - 15 = 0}} forgets the 6 on top when cross-multiplying.",
+          "{{3/n * 2/(n-1) = 1/7}} so {{6/(n(n-1)) = 1/7}}, giving {{n(n-1) = 42}}, i.e. {{n^2 - n - 42 = 0}} (so n = 7). {{n^2 - 42 = 0}} comes from {{3/n * 2/n}}: the red count drops to 2 but the total is wrongly left as n. {{n^2 + n - 42 = 0}} comes from writing the second denominator as n + 1. {{n^2 - n - 7 = 0}} forgets the 6 on top when cross-multiplying.",
         difficulty: "core",
         guideRef: "algebraic-probability",
-        hints: ["Write P(red) for the first pick and the second pick in terms of n.", "Second pick: 2 reds left out of n − 1 counters.", "Set the product equal to {{1/15}} and cross-multiply."],
+        hints: ["Write P(red) for the first pick and the second pick in terms of n.", "Second pick: 2 reds left out of n − 1 counters.", "Set the product equal to {{1/7}} and cross-multiply."],
         strategy: "Introduce a variable",
       },
       {
@@ -346,11 +346,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m2-q09",
         question:
-          "A bag contains n counters, of which 4 are green. Two counters are taken at random without replacement. The probability that both are green is {{1/11}}.\n\nWork out the value of n.",
-        options: ["−11 or 12", "8", "13", "12"],
+          "A bag contains n counters, of which 5 are green. Two counters are taken at random without replacement. The probability that both are green is {{2/21}}.\n\nWork out the value of n.",
+        options: ["−14 or 15", "10", "16", "15"],
         answerIndex: 3,
         explanation:
-          "{{4/n * 3/(n-1) = 1/11}} gives {{n(n-1) = 132}}, so {{n^2 - n - 132 = 0}} and (n − 12)(n + 11) = 0. A number of counters cannot be negative, so n = 12. '−11 or 12' forgets to reject the impossible root. 8 is the number of counters that are *not* green. 13 comes from using n for both denominators (with replacement): {{n^2 = 176}}, n ≈ 13.3.",
+          "{{5/n * 4/(n-1) = 2/21}} gives {{20 * 21 = 2n(n-1)}}, so {{n(n-1) = 210}}, {{n^2 - n - 210 = 0}} and (n − 15)(n + 14) = 0. A number of counters cannot be negative, so n = 15. Check: {{5/15 * 4/14 = 20/210 = 2/21}}. '−14 or 15' forgets to reject the impossible root. 10 is the number of counters that are *not* green. 16 comes from using n for both denominators (with replacement): {{25/n^2 = 2/21}} gives {{n^2 = 262.5}}, n ≈ 16.2.",
         difficulty: "core",
         guideRef: "algebraic-probability",
         hints: ["Write the second pick's probability in terms of n.", "Cross-multiply to get a quadratic.", "Which root makes sense for a number of counters?"],
@@ -374,15 +374,15 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m2-q11",
         question:
-          "Six students, including Aisha and Ben, line up in a row for a CCA photo. Aisha and Ben must stand at the two ends of the row.\n\nIn how many different orders can the six students line up?",
-        options: ["48", "24", "720", "30"],
+          "Six students, including Aisha and Ben, line up in a row for a CCA photo. Aisha and Ben must stand **next to each other**.\n\nIn how many different orders can the six students line up?",
+        options: ["240", "120", "720", "480"],
         answerIndex: 0,
         explanation:
-          "Aisha and Ben fill the two ends in 2 ways (Aisha left or right). The other 4 students fill the middle 4 places in 4 × 3 × 2 × 1 = 24 ways. Total: 2 × 24 = 48. 24 forgets that Aisha and Ben can swap ends. 720 = 6! ignores the restriction. 30 = 6 × 5 just chooses two people for the ends.",
+          "Glue Aisha and Ben into one block. Now 5 units (the block and the other 4 students) line up in 5! = 120 ways, and inside the block Aisha and Ben can stand in 2 orders: 2 × 120 = 240. 120 forgets that the pair can swap (AB or BA). 720 = 6! ignores the restriction. 480 = 720 − 240 is the number of orders where they are *not* next to each other.",
         difficulty: "core",
         guideRef: "counting",
-        hints: ["Deal with the restricted positions first.", "How many ways for the ends? Then how many ways for the middle four?"],
-        strategy: "Deal with restrictions first",
+        hints: ["Treat Aisha and Ben as one 'super-person'. How many units are you arranging now?", "How many ways can those units be arranged? Then: in how many orders can the pair stand inside their block?"],
+        strategy: "Glue things together",
       },
       {
         kind: "mcq",
@@ -520,7 +520,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m3-q06",
         question:
-          "A and B are two events with P(A) = 0.3, P(B) = 0.5 and P(A or B) = 0.65.\n\nWhich statement is true?",
+          "A and B are two events with P(A) = 0.2, P(B) = 0.6 and P(A or B) = 0.68.\n\nWhich statement is true?",
         options: [
           "A and B are mutually exclusive but not independent",
           "A and B are independent but not mutually exclusive",
@@ -529,7 +529,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 1,
         explanation:
-          "From the addition rule, the probability that both happen is 0.3 + 0.5 − 0.65 = 0.15. This is not 0, so the events are **not** mutually exclusive (if they were, the probability of A or B would be 0.8). And 0.3 × 0.5 = 0.15 equals the probability that both happen, so they **are** independent. 'Mutually exclusive' is a trap: independence means one event does not change the chance of the other — it does not mean they cannot happen together.",
+          "From the addition rule, the probability that both happen is 0.2 + 0.6 − 0.68 = 0.12. This is not 0, so the events are **not** mutually exclusive (if they were, the probability of A or B would be 0.8). And 0.2 × 0.6 = 0.12 equals the probability that both happen, so they **are** independent. 'Mutually exclusive' is a trap: independence means one event does not change the chance of the other — it does not mean they cannot happen together.",
         difficulty: "core",
         guideRef: "or-and-rules",
         hints: ["Use P(A or B) = P(A) + P(B) − P(A and B) to find P(A and B).", "Mutually exclusive means P(A and B) = 0. Independent means P(A and B) = P(A) × P(B)."],
