@@ -212,8 +212,8 @@ function BoundsCalculator() {
   const [bCount, setBCount] = useState(312);
   const [op, setOp] = useState<Op>("÷");
 
-  const aR = aPrec === "1" ? { min: 1, max: 99 } : { min: 10, max: 999 };
-  const bR = bPrec === "1" ? { min: 1, max: 99 } : { min: 10, max: 999 };
+  const aR = aPrec === "1" ? { min: 1, max: 999 } : { min: 10, max: 999 };
+  const bR = bPrec === "1" ? { min: 1, max: 999 } : { min: 10, max: 999 };
   const aC = Math.min(aR.max, Math.max(aR.min, aCount));
   const bC = Math.min(bR.max, Math.max(bR.min, bCount));
   const A = bounds(aC, aPrec);

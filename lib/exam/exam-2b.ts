@@ -770,7 +770,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 56.25, display: "56.25 square units ({{225/4}})" },
       traps: [
         { spec: { type: "number", value: 112.5 }, feedback: "That's base × height. The area of a triangle is half of that." },
-        { spec: { type: "number", value: 2.25 }, feedback: "You used the gradient of the radius (2) for the tangent. The tangent is perpendicular to the radius, so its gradient is {{-1/2}}." },
+        { spec: { type: "number", value: 20.25 }, feedback: "Check the sign of the tangent gradient. Perpendicular gradients multiply to −1, so the tangent has gradient {{-1/2}}, not {{1/2}}." },
       ],
       solution: [
         "The circle has centre O. Gradient of radius OQ = {{6/3}} = 2.",
