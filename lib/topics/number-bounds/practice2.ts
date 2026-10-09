@@ -98,7 +98,7 @@ export const morePapers: Paper[] = [
           "By rounding each number to 1 significant figure, work out an estimate for\n\n{{(48.7 * 0.312)/0.0198}}",
         answer: { type: "number", value: 750, display: "750" },
         traps: [
-          { spec: { type: "number", value: 767.4, tolerance: 1 }, feedback: "That's the calculator value. An *estimate* uses 1 s.f. values: 50, 0.3 and 0.02." },
+          { spec: { type: "number", value: 767.39, tolerance: 0.5 }, feedback: "That's the calculator value. An *estimate* uses 1 s.f. values: 50, 0.3 and 0.02." },
           { spec: { type: "number", value: 7.5 }, feedback: "Dividing by 0.02 makes a number bigger, not smaller: 15 ÷ 0.02 = 1500 ÷ 2 = 750." },
         ],
         solution: [
@@ -464,12 +464,12 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 3.57, tolerance: 0.005, display: "3.57 (3.5681067…)" },
         traps: [
           {
-            spec: { type: "number", value: 23.5, tolerance: 0.05 },
-            feedback: "It looks as if you divided only {{2.3^2}} by 4.1 and then multiplied by 0.65. Put brackets round the whole numerator and the whole denominator.",
+            spec: { type: "number", value: 1.51, tolerance: 0.005 },
+            feedback: "You divided by 4.1 and then *multiplied* by 0.65. The whole denominator 4.1 × 0.65 needs brackets: divide by 2.665.",
           },
           {
-            spec: { type: "number", value: 3.98, tolerance: 0.01 },
-            feedback: "Check the square root: the root covers 17.8 only, not 17.8 + {{2.3^2}}.",
+            spec: { type: "number", value: 1.8, tolerance: 0.005 },
+            feedback: "Check the square root: it covers 17.8 only, not 17.8 + {{2.3^2}}. Close the root bracket straight after 17.8.",
           },
         ],
         solution: [
@@ -514,7 +514,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 12000, display: "12 000" },
         traps: [
           { spec: { type: "number", value: 480 }, feedback: "You multiplied by 0.2 instead of dividing. Dividing by 0.2 is the same as multiplying by 5." },
-          { spec: { type: "number", value: 12171.6, tolerance: 1 }, feedback: "That's the exact calculator value. An estimate uses each number rounded to 1 s.f.: 6, 400 and 0.2." },
+          { spec: { type: "number", value: 12171.41, tolerance: 0.5 }, feedback: "That's the exact calculator value. An estimate uses each number rounded to 1 s.f.: 6, 400 and 0.2." },
         ],
         solution: [
           "5.98 ≈ 6, 403 ≈ 400, 0.198 ≈ 0.2.",
@@ -691,7 +691,7 @@ export const morePapers: Paper[] = [
         traps: [
           { spec: { type: "number", value: 676000 }, feedback: "676 000 lets the first digit be 0. The first digit has only 9 choices (1–9)." },
           { spec: { type: "number", value: 140 }, feedback: "You've added the choices. For successive choices, multiply them (the product rule)." },
-          { spec: { type: "number", value: 468000 }, feedback: "Letters can repeat, so the second letter still has 26 choices, not 25." },
+          { spec: { type: "number", value: 585000 }, feedback: "Letters can repeat, so the second letter still has 26 choices, not 25." },
         ],
         solution: [
           "Letters: 26 × 26 = 676 choices.",

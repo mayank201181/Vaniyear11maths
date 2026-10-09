@@ -411,7 +411,7 @@ export const drills: Drill[] = [
         traps.push(solTrap({ ...s, loIncl: !s.loIncl, hiIncl: !s.hiIncl }, "Filled circle = included (≤ or ≥); open circle = not included (< or >). Check each end separately."));
       }
       const what = s.kind === "outside" ? "The number line shows two separate parts. Write down the inequality it represents." : "Write down the inequality shown on the number line, using x.";
-      const prompt = rng.pick([what, `${what} `, `Look at the number line. ${what}`]);
+      const prompt = `${rng.pick(["", "Look at the number line. ", "Here is a number line. "])}${what} (The number line runs from ${num(Math.round((Math.min(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)])) + Math.max(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)]))) / 2) - 5)} to ${num(Math.round((Math.min(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)])) + Math.max(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)]))) / 2) + 5)}.)`;
       const sol: string[] = [];
       if (s.kind === "single") {
         sol.push(`The circle at ${qTx(s.k)} is ${isIncl(s.op) ? "filled, so " + qTx(s.k) + " is included" : "open, so " + qTx(s.k) + " is not included"}.`);
@@ -495,12 +495,16 @@ export const drills: Drill[] = [
       }
       const inside = sat(h, test[0], test[1]);
       const val = h.A * test[0] + h.B * test[1];
-      const lhsVal = kind === "slope" ? `${test[1]} compared with ${num(-h.A * test[0] + h.C)}` : `${num(val)} compared with ${num(h.C)}`;
+      const rel = (u: number, w: number) => (u < w ? "<" : ">");
+      const lhsVal =
+        kind === "slope"
+          ? `y = ${num(test[1])} and ${plain(rhs[0].replace(/([+-])/g, " $1 ").replace(/^ - /, "-").trim())} = ${num(-h.A * test[0] + h.C)}, so here {{y ${rel(test[1], -h.A * test[0] + h.C)} ${lin(-h.A, h.C)}}}`
+          : `${lhs[0]} = ${num(val)}, so here {{${lhs[0]} ${rel(val, h.C)} ${h.C}}}`;
       return {
         prompt: rng.pick([
-          "The shaded region is bounded by the line shown. Write down the inequality satisfied by every point in the shaded region.",
-          "Write down the inequality that describes the shaded region.",
-          "Find the inequality that defines the shaded region. (A dashed line is not included.)",
+          `The shaded region is bounded by the line {{${display.slice(2, -2).replace(op, "=")}}}. Write down the inequality satisfied by every point in the shaded region.`,
+          `The diagram shows the line {{${display.slice(2, -2).replace(op, "=")}}} with one side shaded. Write down the inequality that describes the shaded region.`,
+          `Find the inequality that defines the shaded region, which is bounded by {{${display.slice(2, -2).replace(op, "=")}}}.`,
         ]),
         diagram: regionSvg([h], [label]),
         answer,
@@ -556,7 +560,7 @@ export const drills: Drill[] = [
               `Subtract ${c}x from both sides: {{${lin(diff, b)} ${op} ${d}}}.`,
               `${b > 0 ? "Subtract" : "Add"} ${Math.abs(b)}: {{${diff === -1 ? "-" : diff}x ${op} ${d - b}}}.`,
               `Divide by ${num(diff)} and flip the sign: ${solMk(s)}.`,
-              `Check: collecting x on the right instead gives {{${d - b} ${flip(op)} ${-diff === 1 ? "" : -diff}x}} — the same answer with no flip needed.`,
+              `Check: collecting x on the right instead gives {{${b - d} ${op} ${-diff === 1 ? "" : -diff}x}} — the same answer with no flip needed.`,
             ],
             s,
             "Either flip the sign when you divide by a negative, or collect the x terms on the side with more x's.",
