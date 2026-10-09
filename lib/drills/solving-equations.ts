@@ -4,7 +4,7 @@
 // (zero coefficients, parallel lines, fractions that cancel in the prompt).
 import type { Drill, Rng } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
-import { frac, gcd, lcm, num, br, poly, simplify, term } from "./helpers.ts";
+import { gcd, lcm, num, br, poly, simplify, term } from "./helpers.ts";
 
 const TOPIC = "solving-equations";
 
@@ -44,9 +44,6 @@ function plainSum(pairs: Array<[number, number]>): string {
     })
     .join(" ");
 }
-
-/** Same as plainSum but as ASCII for {{ }}. */
-const mathSum = (pairs: Array<[number, number]>): string => plainSum(pairs).replace(/−/g, "-").replace(/×/g, "*");
 
 const numTrap = (value: number, feedback: string): Trap => ({ spec: { type: "number", value }, feedback });
 const listTrap = (values: number[], feedback: string): Trap => ({ spec: { type: "list", values, ordered: true }, feedback });

@@ -337,3 +337,18 @@ test("expressions: harmless brackets in a simplified answer", () => {
   assert.equal(st(sim("10x+8"), "2(5x+4)"), "close");
   assert.equal(st(sim("3y^2-2y"), "y(3y-2)"), "close");
 });
+
+test("equations: any rearrangement or multiple of the keyed equation", () => {
+  const line: AnswerSpec = { type: "equation", eq: "3x+2y-12=0" };
+  for (const i of ["3x + 2y − 12 = 0", "y = 6 - 1.5x", "6x+4y=24", "2y = 12 - 3x", "-3x-2y+12=0", "y=-3/2x+6"]) assert.equal(st(line, i), "correct", i);
+  for (const i of ["3x+2y+12=0", "y=6+1.5x", "x=4"]) assert.equal(st(line, i), "incorrect", i);
+  assert.equal(st(line, "3x+2y-12"), "invalid");
+  const gen: AnswerSpec = { type: "equation", eq: "3x+2y-12=0", form: "general" };
+  assert.equal(st(gen, "6x+4y-24=0"), "correct");
+  assert.equal(st(gen, "y=6-1.5x"), "close");
+  assert.equal(st(gen, "1.5x+y-6=0"), "close");
+  const circle: AnswerSpec = { type: "equation", eq: "x^2+y^2=25" };
+  assert.equal(st(circle, "y^2 = 25 - x^2"), "correct");
+  assert.equal(st(circle, "x^2+y^2=5"), "incorrect");
+  assert.equal(specSelfCheck(line).status, "correct");
+});

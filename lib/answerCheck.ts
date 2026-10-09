@@ -72,6 +72,8 @@ export function displayAnswer(spec: AnswerSpec): string {
       return spec.parts.map(fmt).join(" : ");
     case "expression":
       return `{{${spec.expr}}}`;
+    case "equation":
+      return `{{${spec.eq}}}`;
     case "text":
       return spec.accept[0] ?? "";
   }
@@ -101,6 +103,8 @@ export function checkAnswer(spec: AnswerSpec, raw: string): CheckResult {
         return checkRatio(spec, input);
       case "expression":
         return checkExpression(spec, input);
+      case "equation":
+        return checkEquation(spec, input);
       case "text":
         return checkText(spec, input);
     }
@@ -383,6 +387,49 @@ function checkExpression(spec: Extract<AnswerSpec, { type: "expression" }>, inpu
   return { status: "correct" };
 }
 
+/** "lhs = rhs" → the expression lhs − rhs, or null if it isn't one equation. */
+function equationDiff(src: string): Expr | null {
+  const parts = normalizeInput(src).split("=");
+  if (parts.length !== 2 || !parts[0].trim() || !parts[1].trim()) return null;
+  const l = parseExpr(parts[0]);
+  const r = parseExpr(parts[1]);
+  return l && r ? { t: "sub", a: l, b: { t: "group", a: r } } : null;
+}
+
+function checkEquation(spec: Extract<AnswerSpec, { type: "equation" }>, input: string): CheckResult {
+  const expected = equationDiff(spec.eq);
+  if (!expected) return { status: "invalid", feedback: "This question's answer couldn't be checked automatically." };
+  if (!input.includes("=")) return { status: "invalid", feedback: "Write a full equation with an = sign, e.g. y = 2x + 3." };
+  const got = equationDiff(input);
+  if (!got) return { status: "invalid", feedback: "I couldn't read that equation. Use one = sign, e.g. 3x + 2y − 12 = 0." };
+  // Same equation ⇔ got = k × expected for a constant k ≠ 0 (checked at sample points).
+  const vars = Array.from(new Set([...exprVars(expected), ...exprVars(got)])).sort();
+  let ratio: number | null = null;
+  let valid = 0;
+  for (let k = 0; k < 12; k++) {
+    const env: Record<string, number> = {};
+    vars.forEach((v, j) => (env[v] = 0.37 + 1.13 * k - 0.71 * j + 0.29 * k * j));
+    const e = evalExpr(expected, env);
+    const g = evalExpr(got, env);
+    if (!Number.isFinite(e) || !Number.isFinite(g)) continue;
+    if (Math.abs(e) < 1e-9) {
+      if (Math.abs(g) > 1e-7) return { status: "incorrect" };
+      continue;
+    }
+    const r = g / e;
+    if (ratio === null) ratio = r;
+    else if (Math.abs(r - ratio) > 1e-7 * Math.max(1, Math.abs(ratio))) return { status: "incorrect" };
+    valid++;
+  }
+  if (valid < 4 || ratio === null || Math.abs(ratio) < 1e-12) return { status: "incorrect" };
+  if (spec.form === "general") {
+    const [lhs, rhs] = normalizeInput(input).split("=");
+    if (rhs.trim() !== "0") return { status: "close", feedback: "Right line — now write it in the form ax + by + c = 0 (everything on one side, = 0)." };
+    if (/[./]/.test(lhs)) return { status: "close", feedback: "Right line — now multiply through so a, b and c are all integers." };
+  }
+  return { status: "correct" };
+}
+
 function checkText(spec: Extract<AnswerSpec, { type: "text" }>, input: string): CheckResult {
   const n = normText(input);
   if (spec.accept.some((a) => normText(a) === n)) return { status: "correct" };
@@ -427,6 +474,7 @@ export function specSample(spec: AnswerSpec): string {
     case "list": return spec.values.join(", ");
     case "ratio": return spec.parts.join(":");
     case "expression": return spec.expr;
+    case "equation": return spec.eq;
     case "text": return spec.accept[0] ?? "";
   }
 }

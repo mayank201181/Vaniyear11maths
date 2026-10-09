@@ -242,35 +242,22 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "linear-graphs-p3-q08",
         question:
-          "The points P(1, 2), Q(5, 4) and R(3, 8) are the vertices of a triangle.\n\nShow that triangle PQR is a right-angled isosceles triangle.",
+          "The points A(0, 1), B(6, 4), C(5, 7) and D(1, 5) are the vertices of the quadrilateral ABCD.\n\nShow that ABCD is a trapezium but not a parallelogram.",
         marks: 3,
         modelAnswer:
-          "Gradient of PQ = {{(4 - 2)/(5 - 1) = 2/4 = 1/2}}. Gradient of QR = {{(8 - 4)/(3 - 5) = 4/(-2) = -2}}. Since {{1/2 * (-2) = -1}}, PQ is perpendicular to QR, so angle PQR = 90°. Length PQ = {{sqrt(4^2 + 2^2) = sqrt(20)}} and length QR = {{sqrt((-2)^2 + 4^2) = sqrt(20)}}, so PQ = QR. A triangle with a right angle and two equal sides is right-angled isosceles.",
+          "Gradient of AB = {{(4 - 1)/(6 - 0) = 3/6 = 1/2}}. Gradient of DC = {{(7 - 5)/(5 - 1) = 2/4 = 1/2}}. AB and DC have equal gradients, so AB is parallel to DC. Gradient of AD = {{(5 - 1)/(1 - 0) = 4}}. Gradient of BC = {{(7 - 4)/(5 - 6) = 3/(-1) = -3}}. These are different, so AD is not parallel to BC. ABCD has exactly one pair of parallel sides, so it is a trapezium and not a parallelogram.",
         markScheme: [
-          { point: "Gradients of PQ and QR found: 1/2 and −2", keywords: ["1/2", "0.5", "-2", "−2"] },
-          { point: "Product of gradients is −1, so PQ ⟂ QR (right angle at Q)", keywords: ["-1", "−1", "perpendicular", "right angle", "90"] },
-          { point: "PQ = QR = √20, so two equal sides (isosceles)", keywords: ["sqrt(20)", "√20", "2√5", "20", "equal", "pq = qr"] },
+          { point: "Gradients of AB and DC both 1/2, so AB ∥ DC", keywords: ["1/2", "0.5", "parallel"] },
+          { point: "Gradients of AD and BC: 4 and −3 (not equal)", keywords: ["4", "-3", "−3", "not equal", "different"] },
+          { point: "Conclusion: exactly one pair of parallel sides, so trapezium not parallelogram", keywords: ["one pair", "trapezium", "not a parallelogram", "only one"] },
         ],
-        solutions: [
-          {
-            label: "Gradients + lengths",
-            steps: ["m(PQ) × m(QR) = {{1/2 * (-2) = -1}} ⟹ right angle at Q.", "PQ² = 20 and QR² = 20 ⟹ PQ = QR."],
-          },
-          {
-            label: "Pythagoras only",
-            steps: [
-              "PQ² = 20, QR² = 20, PR² = 2² + 6² = 40.",
-              "PQ² + QR² = 40 = PR², so by the converse of Pythagoras the angle at Q is 90°, and PQ = QR.",
-            ],
-          },
-        ],
-        commonError: "Showing only the right angle (or only the equal sides) — both parts are needed.",
+        commonError: "Checking only one pair of sides — a parallelogram also has one pair of parallel sides, so you must show the other pair is NOT parallel.",
         difficulty: "core",
         guideRef: "parallel-perpendicular",
         hints: [
-          "Which vertex looks like it has the right angle? Find the gradients of the two sides that meet there.",
-          "Perpendicular gradients multiply to −1.",
-          "For 'isosceles', compare the lengths of the two sides that meet at the right angle.",
+          "What's the definition of a trapezium? Of a parallelogram?",
+          "Parallel sides have equal gradients. Find the gradient of each of the four sides.",
+          "You need one pair equal and the other pair different.",
         ],
         strategy: "Draw a diagram",
       },
@@ -356,17 +343,17 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "linear-graphs-p3-q12",
         question:
-          "A is the point (2, 1) and B is the point (6, 9).\n\nShow that the perpendicular bisector of AB has equation x + 2y = 14.",
+          "A is the point (−3, 2) and B is the point (5, 6).\n\nShow that the perpendicular bisector of AB has equation 2x + y = 6.",
         marks: 4,
         modelAnswer:
-          "Midpoint of AB = {{((2 + 6)/2, (1 + 9)/2) = (4, 5)}}. Gradient of AB = {{(9 - 1)/(6 - 2) = 8/4 = 2}}. The perpendicular gradient is {{-1/2}}, since {{2 * (-1/2) = -1}}. The perpendicular bisector passes through (4, 5) with gradient {{-1/2}}: {{y - 5 = -1/2 (x - 4)}}. Multiply by 2: 2y − 10 = −x + 4, so x + 2y = 14.",
+          "Midpoint of AB = {{((-3 + 5)/2, (2 + 6)/2) = (1, 4)}}. Gradient of AB = {{(6 - 2)/(5 - (-3)) = 4/8 = 1/2}}. The perpendicular gradient is −2, since {{1/2 * (-2) = -1}}. The perpendicular bisector passes through (1, 4) with gradient −2: y − 4 = −2(x − 1), so y = −2x + 6, which rearranges to 2x + y = 6.",
         markScheme: [
-          { point: "Midpoint (4, 5)", keywords: ["(4, 5)", "(4,5)", "4, 5", "midpoint"] },
-          { point: "Gradient of AB = 2", keywords: ["gradient of ab", "= 2", "8/4", "m = 2"] },
-          { point: "Perpendicular gradient −1/2", keywords: ["-1/2", "−1/2", "-0.5", "−0.5", "negative reciprocal"] },
-          { point: "Correct line through (4, 5) rearranged to x + 2y = 14", keywords: ["x + 2y = 14", "x+2y=14", "2y - 10", "y - 5"] },
+          { point: "Midpoint (1, 4)", keywords: ["(1, 4)", "(1,4)", "1, 4", "midpoint"] },
+          { point: "Gradient of AB = 1/2", keywords: ["1/2", "0.5", "4/8"] },
+          { point: "Perpendicular gradient −2", keywords: ["-2", "−2", "negative reciprocal"] },
+          { point: "Line through (1, 4) rearranged to 2x + y = 6", keywords: ["2x + y = 6", "2x+y=6", "y = -2x + 6", "y = −2x + 6", "y - 4"] },
         ],
-        commonError: "Using the gradient of AB (2) instead of the perpendicular gradient, or passing the line through A instead of the midpoint.",
+        commonError: "Using the gradient of AB ({{1/2}}) instead of the perpendicular gradient, or passing the line through A instead of the midpoint.",
         difficulty: "core",
         guideRef: "parallel-perpendicular",
         hints: [
@@ -606,10 +593,6 @@ export const morePapers: Paper[] = [
             spec: { type: "list", values: [4.3, 1.2], ordered: true },
             feedback: "Right values, wrong order — the charge per kilometre ($1.20) comes first.",
           },
-          {
-            spec: { type: "list", values: [2.275, 0], ordered: true },
-            feedback: "Dividing $9.10 by 4 assumes there's no fixed charge. Use the *change* in cost over the *change* in distance for the per-km rate.",
-          },
         ],
         solution: [
           "The per-km charge is the gradient: {{(16.30 - 9.10)/(10 - 4) = 7.20/6 = 1.20}}, so $1.20 per km.",
@@ -727,32 +710,37 @@ export const morePapers: Paper[] = [
       {
         kind: "written",
         id: "linear-graphs-p4-q08",
-        question: "The points A(−2, −1), B(2, 1) and C(8, 4) are marked on a coordinate grid.\n\nShow that A, B and C lie on a straight line.",
+        question:
+          "The points A(−1, 1), B(5, 3), C(6, 7) and D(0, 5) are the vertices of the quadrilateral ABCD.\n\nBy finding the midpoints of the diagonals AC and BD, show that ABCD is a parallelogram.",
         marks: 3,
         modelAnswer:
-          "Gradient of AB = {{(1 - (-1))/(2 - (-2)) = 2/4 = 1/2}}. Gradient of BC = {{(4 - 1)/(8 - 2) = 3/6 = 1/2}}. AB and BC have the same gradient, so they are parallel, and they share the point B. Two parallel lines through the same point are the same line, so A, B and C are collinear.",
+          "Midpoint of AC = {{((-1 + 6)/2, (1 + 7)/2) = (2.5, 4)}}. Midpoint of BD = {{((5 + 0)/2, (3 + 5)/2) = (2.5, 4)}}. The diagonals have the same midpoint, so they bisect each other. A quadrilateral whose diagonals bisect each other is a parallelogram.",
         markScheme: [
-          { point: "Gradient of AB = 1/2", keywords: ["1/2", "0.5", "2/4"] },
-          { point: "Gradient of BC = 1/2 (or AC = 1/2)", keywords: ["3/6", "5/10", "1/2", "0.5"] },
-          { point: "Equal gradients AND a common point B, so collinear", keywords: ["same gradient", "equal", "common point", "share", "point b", "straight line", "collinear"] },
+          { point: "Midpoint of AC = (2.5, 4)", keywords: ["(2.5, 4)", "(2.5,4)", "2.5", "5/2"] },
+          { point: "Midpoint of BD = (2.5, 4)", keywords: ["(2.5, 4)", "(2.5,4)", "2.5", "5/2"] },
+          { point: "Same midpoint, so diagonals bisect each other, hence parallelogram", keywords: ["same midpoint", "bisect", "parallelogram", "same point"] },
         ],
         solutions: [
           {
-            label: "Compare gradients",
-            steps: ["m(AB) = {{1/2}}, m(BC) = {{1/2}}, and B is on both ⟹ collinear."],
+            label: "Diagonals bisect each other",
+            steps: ["Both diagonals have midpoint (2.5, 4) ⟹ they bisect each other ⟹ parallelogram."],
           },
           {
-            label: "Equation then substitute",
-            steps: ["Line AB: gradient {{1/2}} through (2, 1) gives {{y = 1/2 x}}.", "At x = 8: y = 4, so C lies on line AB. ✓"],
+            label: "Opposite sides parallel",
+            steps: [
+              "Gradient AB = {{2/6 = 1/3}} and gradient DC = {{2/6 = 1/3}}, so AB ∥ DC.",
+              "Gradient AD = {{4/1 = 4}} and gradient BC = {{4/1 = 4}}, so AD ∥ BC.",
+              "Two pairs of parallel sides ⟹ parallelogram.",
+            ],
           },
         ],
-        commonError: "Stating only that the gradients are equal — parallel lines need a shared point to be the same line.",
+        commonError: "Finding only one midpoint, or not stating the property (diagonals bisect each other) that links equal midpoints to a parallelogram.",
         difficulty: "core",
-        guideRef: "y-mx-c",
+        guideRef: "midpoint-distance",
         hints: [
-          "If the three points are on one line, what must be true about the gradients AB and BC?",
-          "Work out both gradients.",
-          "Equal gradients alone mean parallel. What else do AB and BC have in common?",
+          "Which pairs of vertices are opposite each other? Those give the diagonals.",
+          "Find the midpoint of AC and the midpoint of BD.",
+          "What does it mean for the diagonals if their midpoints coincide?",
         ],
         strategy: "Look for an invariant",
       },
@@ -764,10 +752,6 @@ export const morePapers: Paper[] = [
           "Priya compares two mobile phone plans for overseas calls.\n\n| Plan | Monthly fee | Cost per minute |\n|---|---|---|\n| A | $18 | 5 cents |\n| B | $10 | 9 cents |\n\nThe graphs of monthly cost against minutes used are straight lines. Find the number of minutes for which both plans cost the same, and that cost in dollars. Give the number of minutes first.",
         answer: { type: "list", values: [200, 28], ordered: true, display: "200 minutes, $28" },
         traps: [
-          {
-            spec: { type: "list", values: [2, 18.1], ordered: true },
-            feedback: "Mixing cents and dollars. Write both costs in dollars: Plan A is 18 + 0.05m and Plan B is 10 + 0.09m.",
-          },
           {
             spec: { type: "list", values: [200, 18], ordered: true },
             feedback: "200 minutes is right. The cost at that point is 18 + 0.05 × 200 = $28, not just the monthly fee.",
@@ -794,32 +778,32 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p4-q10",
         question:
-          "A is the point (1, k) and B is the point (7, 3). The length of AB is 10 units.\n\nFind the two possible values of k.",
-        answer: { type: "list", values: [-5, 11], ordered: false, display: "k = −5 or k = 11" },
+          "A is the point (k, 2) and B is the point (3, −10). The length of AB is 13 units.\n\nFind the two possible values of k.",
+        answer: { type: "list", values: [-2, 8], ordered: false, display: "k = −2 or k = 8" },
         traps: [
           {
-            spec: { type: "list", values: [11], ordered: false },
-            feedback: "One value is right. When you square-root (3 − k)² = 64, remember both +8 and −8.",
+            spec: { type: "list", values: [8], ordered: false },
+            feedback: "One value is right. When you square-root (3 − k)² = 25, remember both +5 and −5 — A could be to the left or the right of B.",
           },
           {
-            spec: { type: "list", values: [-5], ordered: false },
-            feedback: "One value is right. When you square-root (3 − k)² = 64, remember both +8 and −8.",
+            spec: { type: "list", values: [-2], ordered: false },
+            feedback: "One value is right. When you square-root (3 − k)² = 25, remember both +5 and −5 — A could be to the left or the right of B.",
           },
         ],
         solution: [
-          "Horizontal change: 7 − 1 = 6. Vertical change: 3 − k.",
-          "Pythagoras: {{6^2 + (3 - k)^2 = 10^2}}, so {{(3 - k)^2 = 64}}.",
-          "3 − k = 8 or 3 − k = −8.",
-          "k = −5 or k = 11.",
-          "Check: from (1, −5) to (7, 3) the changes are 6 and 8, giving 10. ✓",
+          "Vertical change: 2 − (−10) = 12. Horizontal change: 3 − k.",
+          "Pythagoras: {{(3 - k)^2 + 12^2 = 13^2}}, so {{(3 - k)^2 = 169 - 144 = 25}}.",
+          "3 − k = 5 or 3 − k = −5.",
+          "k = −2 or k = 8.",
+          "Check: from (8, 2) to (3, −10) the changes are 5 and 12, giving 13. ✓",
         ],
         commonError: "Taking only the positive square root, which loses one of the two points.",
         difficulty: "core",
         guideRef: "midpoint-distance",
         hints: [
           "Write AB² using Pythagoras with k in it.",
-          "36 + (3 − k)² = 100.",
-          "(3 − k)² = 64 has two solutions. Why does that make sense on a diagram?",
+          "The vertical change is 12, so (3 − k)² + 144 = 169.",
+          "(3 − k)² = 25 has two solutions. Why does that make sense on a diagram?",
         ],
         strategy: "Split into cases",
       },
@@ -902,8 +886,8 @@ export const morePapers: Paper[] = [
             feedback: "Your line goes through (1, 1), which is the point with AP : PB = 1 : 2. P is {{2/3}} of the way from A to B: (5, 4).",
           },
           {
-            spec: { type: "expression", expr: "-4x/3+4" },
-            feedback: "Your line goes through the midpoint (3, 2.5)... check: P divides AB in ratio 2 : 1, so P is {{2/3}} of the way from A — at (5, 4).",
+            spec: { type: "expression", expr: "-4x/3+6.5" },
+            feedback: "Your line goes through the midpoint of AB, (3, 2.5). P divides AB in the ratio 2 : 1, so P is {{2/3}} of the way from A: (5, 4).",
           },
           {
             spec: { type: "expression", expr: "3x/4+1/4" },
@@ -986,38 +970,38 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "linear-graphs-p4-q15",
         question:
-          "The line L has equation y = 2x + 1. The point P has coordinates (6, 3).\n\nThe point F lies on L such that PF is perpendicular to L.\n\nShow that the shortest distance from P to L is {{2 sqrt(5)}}.",
+          "The line L has equation x + 2y = 4. The point P has coordinates (8, 8).\n\nThe point F lies on L such that PF is perpendicular to L.\n\nShow that the shortest distance from P to L is {{4 sqrt(5)}}.",
         marks: 4,
         modelAnswer:
-          "L has gradient 2, so PF has gradient {{-1/2}}. Line PF: {{y - 3 = -1/2 (x - 6)}}, i.e. {{y = -1/2 x + 6}}. F is where this meets L: {{2x + 1 = -1/2 x + 6}}, so 4x + 2 = −x + 12, 5x = 10, x = 2 and y = 5. F = (2, 5). PF = {{sqrt((6 - 2)^2 + (3 - 5)^2) = sqrt(16 + 4) = sqrt(20) = sqrt(4 * 5) = 2 sqrt(5)}}. The perpendicular is the shortest distance from a point to a line, so the shortest distance is {{2 sqrt(5)}}.",
+          "L: {{y = -1/2 x + 2}}, gradient {{-1/2}}, so PF has gradient 2. Line PF: y − 8 = 2(x − 8), i.e. y = 2x − 8. F is where this meets L: x + 2(2x − 8) = 4, so 5x − 16 = 4, 5x = 20, x = 4 and y = 0. F = (4, 0). PF = {{sqrt((8 - 4)^2 + (8 - 0)^2) = sqrt(16 + 64) = sqrt(80) = sqrt(16 * 5) = 4 sqrt(5)}}. The perpendicular is the shortest distance from a point to a line, so the shortest distance is {{4 sqrt(5)}}.",
         markScheme: [
-          { point: "Gradient of PF = −1/2 and equation y = −x/2 + 6 (or x + 2y = 12)", keywords: ["-1/2", "−1/2", "x + 2y = 12", "+ 6"] },
-          { point: "Solves simultaneously to find F = (2, 5)", keywords: ["(2, 5)", "(2,5)", "x = 2", "y = 5"] },
-          { point: "PF² = 4² + 2² = 20", keywords: ["16 + 4", "20", "sqrt(20)", "√20"] },
-          { point: "√20 simplified to 2√5", keywords: ["2√5", "2sqrt(5)", "2 sqrt(5)", "4 × 5", "4*5"] },
+          { point: "Gradient of L = −1/2, so gradient of PF = 2; PF: y = 2x − 8", keywords: ["-1/2", "−1/2", "2x - 8", "2x − 8", "gradient 2"] },
+          { point: "Solves simultaneously to find F = (4, 0)", keywords: ["(4, 0)", "(4,0)", "x = 4", "y = 0"] },
+          { point: "PF² = 4² + 8² = 80", keywords: ["16 + 64", "80", "sqrt(80)", "√80"] },
+          { point: "√80 simplified to 4√5", keywords: ["4√5", "4sqrt(5)", "4 sqrt(5)", "16 × 5", "16*5"] },
         ],
         solutions: [
           {
             label: "Foot of the perpendicular",
-            steps: ["Normal through P: {{y = -1/2 x + 6}}.", "F = (2, 5).", "PF = {{sqrt(20) = 2 sqrt(5)}}."],
+            steps: ["Normal through P: y = 2x − 8.", "F = (4, 0).", "PF = {{sqrt(80) = 4 sqrt(5)}}."],
           },
           {
             label: "Area of a triangle (check)",
             steps: [
-              "L crosses the axes at A(0, 1) and B({{-1/2}}, 0). Use A(0, 1) and C(2, 5) on L: AC = {{sqrt(4 + 16) = sqrt(20)}}.",
-              "Triangle APC: vectors AP = (6, 2), AC = (2, 4). Area = {{1/2 |6 * 4 - 2 * 2| = 10}}.",
-              "Height from P to AC = {{(2 * 10)/sqrt(20) = 20/sqrt(20) = sqrt(20) = 2 sqrt(5)}}. ✓",
+              "L meets the axes at A(4, 0) and C(0, 2): AC = {{sqrt(16 + 4) = sqrt(20) = 2 sqrt(5)}}.",
+              "Triangle APC: AP = (4, 8) and AC = (−4, 2), so area = {{1/2 * (4 * 2 - 8 * (-4)) = 1/2 * 40 = 20}}.",
+              "Height from P to L = {{(2 * 20)/(2 sqrt(5)) = 20/sqrt(5) = 4 sqrt(5)}}. ✓",
             ],
           },
         ],
-        commonError: "Measuring the distance from P to a convenient point on L (such as the y-intercept) instead of the foot of the perpendicular.",
+        commonError: "Measuring the distance from P to a convenient point on L (such as an intercept) instead of the foot of the perpendicular — or using gradient −2 for PF instead of 2.",
         difficulty: "challenge",
         guideRef: "parallel-perpendicular",
         hints: [
           "The shortest route from a point to a line meets the line at right angles.",
-          "Find the equation of the line through P perpendicular to L.",
+          "Rearrange L to find its gradient, then find the equation of the line through P perpendicular to L.",
           "Intersect it with L to find F, then use Pythagoras for PF.",
-          "Simplify √20 by taking out the square factor 4.",
+          "Simplify √80 by taking out the square factor 16.",
         ],
         strategy: "Draw a diagram",
       },

@@ -12,6 +12,7 @@ const KEYS_BY_TYPE: Record<AnswerSpec["type"], string[]> = {
   list: [",", "−", "/", "(", ")"],
   ratio: [":", "/", "."],
   expression: ["x", "y", "n", "^", "(", ")", "−", "/", "√", "π"],
+  equation: ["x", "y", "=", "^", "(", ")", "−", "/", "√"],
   text: ["<", ">", "≤", "≥", "−", "x"],
 };
 
@@ -21,12 +22,13 @@ const PLACEHOLDER: Record<AnswerSpec["type"], string> = {
   list: "e.g. 28, 35",
   ratio: "e.g. 3 : 4",
   expression: "e.g. 3x + 2 or 2(x − 1)",
+  equation: "e.g. y = 2x + 3 or 3x + 2y − 12 = 0",
   text: "Type your answer",
 };
 
 /** Convert typed input into display maths for the preview, read the way the marker reads it. */
 function previewMarkup(raw: string, type: AnswerSpec["type"]): string {
-  return typedToMathML(normalizeInput(raw), type === "expression");
+  return typedToMathML(normalizeInput(raw), type === "expression" || type === "equation");
 }
 
 export function AnswerInput({

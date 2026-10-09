@@ -49,6 +49,7 @@ export function checkSpec(where: string, spec: AnswerSpec, issues: Issue[]) {
   if (r.status !== "correct") issues.push({ where, problem: `answer spec fails its own check (${r.status}: ${r.feedback ?? ""}) ${JSON.stringify(spec)}` });
   if (spec.type === "number" && !Number.isFinite(spec.value)) issues.push({ where, problem: "number answer is not finite" });
   if (spec.type === "fraction" && (!Number.isInteger(spec.n) || !Number.isInteger(spec.d) || spec.d === 0)) issues.push({ where, problem: "fraction n/d must be integers, d≠0" });
+  if (spec.type === "equation" && (spec.eq.split("=").length !== 2)) issues.push({ where, problem: "equation answer needs exactly one =" });
   if (spec.type === "text" && (!spec.accept || spec.accept.length === 0)) issues.push({ where, problem: "text answer has no accepted strings" });
   if (spec.display) checkText(`${where}.display`, spec.display, issues);
 }

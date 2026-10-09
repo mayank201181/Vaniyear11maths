@@ -111,6 +111,17 @@ export type AnswerSpec =
       form?: "any" | "factorised" | "expanded" | "simplified" | "surd";
       display?: string;
     }
+  /**
+   * An equation such as a line "3x + 2y − 12 = 0" or a circle "x^2 + y^2 = 25". Any
+   * rearrangement or non-zero multiple is accepted (y = 6 − 1.5x, 6x + 4y = 24, …).
+   * form "general": must be written as ax + by + c = 0 with integer coefficients.
+   */
+  | {
+      type: "equation";
+      eq: string;
+      form?: "any" | "general";
+      display?: string;
+    }
   /** Free text matched against accepted alternatives (case/space-insensitive). */
   | {
       type: "text";

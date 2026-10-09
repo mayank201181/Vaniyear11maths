@@ -392,7 +392,7 @@ function UndoMachine() {
       caption={
         mode === "twice" ? (
           <p>
-            When the subject appears twice, a chain of inverse operations can't reach it. Instead, get rid of fractions, gather every term containing{" "}
+            When the subject appears twice, a chain of inverse operations can&apos;t reach it. Instead, get rid of fractions, gather every term containing{" "}
             <M>x</M> on one side, then <strong>factorise</strong> so x appears once. The new formula can&apos;t give y = 1 because that would mean dividing
             by zero — and indeed the original fraction never equals 1 (the top is always {p + q} more than the bottom).
           </p>
