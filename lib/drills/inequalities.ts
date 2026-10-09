@@ -118,10 +118,13 @@ const plain = (s: string): string => s.replace(/-/g, "−");
 // ===========================================================================
 // SVG: number line
 // ===========================================================================
-function numberLineSvg(s: Sol): string {
+/** Left-most value on the drawn number line (11 ticks, centred on the set). */
+function lineStart(s: Sol): number {
   const bounds = s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)];
-  const mid = Math.round((Math.min(...bounds) + Math.max(...bounds)) / 2);
-  const start = mid - 5;
+  return Math.round((Math.min(...bounds) + Math.max(...bounds)) / 2) - 5;
+}
+function numberLineSvg(s: Sol): string {
+  const start = lineStart(s);
   const X = (v: number): number => 30 + (v - start) * 30;
   const yAxis = 62, yLine = 34;
   let g = `<rect x="0" y="0" width="360" height="90" fill="#ffffff"/>`;
@@ -411,7 +414,7 @@ export const drills: Drill[] = [
         traps.push(solTrap({ ...s, loIncl: !s.loIncl, hiIncl: !s.hiIncl }, "Filled circle = included (≤ or ≥); open circle = not included (< or >). Check each end separately."));
       }
       const what = s.kind === "outside" ? "The number line shows two separate parts. Write down the inequality it represents." : "Write down the inequality shown on the number line, using x.";
-      const prompt = `${rng.pick(["", "Look at the number line. ", "Here is a number line. "])}${what} (The number line runs from ${num(Math.round((Math.min(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)])) + Math.max(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)]))) / 2) - 5)} to ${num(Math.round((Math.min(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)])) + Math.max(...(s.kind === "single" ? [qv(s.k)] : [qv(s.lo), qv(s.hi)]))) / 2) + 5)}.)`;
+      const prompt = `${rng.pick(["", "Look at the number line. ", "Here is a number line. "])}${what} (The number line runs from ${num(lineStart(s))} to ${num(lineStart(s) + 10)}.)`;
       const sol: string[] = [];
       if (s.kind === "single") {
         sol.push(`The circle at ${qTx(s.k)} is ${isIncl(s.op) ? "filled, so " + qTx(s.k) + " is included" : "open, so " + qTx(s.k) + " is not included"}.`);
