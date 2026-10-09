@@ -638,7 +638,7 @@ export const drills: Drill[] = [
       }
       return {
         prompt,
-        answer: { type: "expression", expr },
+        answer: { type: "expression", expr, form: "simplified" },
         solution: steps,
         hint: "Factorise every numerator and denominator completely, then cancel whole brackets.",
         traps: trap ? [trap] : [],
@@ -687,7 +687,7 @@ export const drills: Drill[] = [
       const trapOk = !(r + (sub ? -s : s) === 0 && p + (sub ? -q : q) === 0);
       return {
         prompt: `${lead}: {{${A}/${d1} ${op} ${B}/${d2}}}.`,
-        answer: { type: "expression", expr },
+        answer: { type: "expression", expr, form: "simplified" },
         solution: [
           `Common denominator: {{${d1}${d2}}}.`,
           `{{(${A === 1 ? "" : A}${d2} ${op} ${B === 1 ? "" : B}${d1})/(${d1}${d2})}}`,

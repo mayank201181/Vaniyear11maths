@@ -639,8 +639,8 @@ export const drills: Drill[] = [
         answer: { type: "list", values: [k, aVal], ordered: true, display: `k = ${num(k)}, a = ${aTxt}` },
         solution: [
           `Substitute both points: {{${y1} = k a^${x1}}} and {{${y2} = k a^${x2}}}.`,
-          `Divide the second by the first: {{a^${gap} = ${y2}/${y1}}} = ${ratioTxt}${gap > 1 ? `, so a = ${aTxt} (the positive ${root})` : `, so a = ${aTxt}`}.`,
-          x1 === 0 ? `At x = 0, {{a^0 = 1}} so k = ${num(k)}.` : `Then {{k = ${y1} / ${ib(aVal)}^${x1} = ${k}}}.`,
+          `Divide the second by the first: {{a^${gap} = ${y2}/${y1}}}${Number.isInteger(ratio) ? ` = ${ratioTxt}` : ` = ${ratioTxt}`.replace(/.*/, (m) => (ratioTxt.replace(/[{}]/g, "") === `${y2}/${y1}` ? "" : m))}${gap > 1 ? `, so a = ${aTxt} (the positive ${root})` : `, so a = ${aTxt}`}.`,
+          x1 === 0 ? `At x = 0, {{a^0 = 1}} so k = ${num(k)}.` : `Then {{k = ${y1} / ${ad === 1 ? an : `(${an}/${ad})`}^${x1} = ${k}}}.`,
         ],
         hint: "Divide one equation by the other — k cancels and you're left with a power of a.",
         traps: aVal === k ? [] : [{ spec: { type: "list", values: [aVal, k], ordered: true }, feedback: "Right numbers, wrong order: give k first, then a." }],

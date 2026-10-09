@@ -477,7 +477,7 @@ function TwoLines() {
     caption = `Both gradients are {{${qm(m1)}}}, so the lines are **parallel**: they never meet. Try to solve the simultaneous equations and the x-terms cancel, leaving the impossible {{${c1} = ${c2}}}. No solution.`;
   else {
     const bits = [
-      `Where the lines cross, both y-values are equal: {{${xTerm(m1) || "0"} ${c1 < 0 ? "-" : "+"} ${Math.abs(c1)} = ${xTerm(m2) || "0"} ${c2 < 0 ? "-" : "+"} ${Math.abs(c2)}}}, giving x = {{${qm(X as Q)}}} and y = {{${qm(Y as Q)}}}. That point solves **both** equations at once.`,
+      `Where the lines cross, both y-values are equal: {{${lineEq(m1, C1).slice(4)} = ${lineEq(m2, C2).slice(4)}}}, giving x = {{${qm(X as Q)}}} and y = {{${qm(Y as Q)}}}. That point solves **both** equations at once.`,
     ];
     if (perp) bits.push(`**Perpendicular!** {{${qm(m1)} * ${m2.n < 0 ? `(${qm(m2)})` : qm(m2)} = -1}} — each gradient is the negative reciprocal of the other.`);
     else if (!isZero(m1) && !isZero(m2)) bits.push(`m₁ × m₂ = {{${qm(mul(m1, m2))}}}, not −1, so they are not perpendicular.`);
