@@ -57,7 +57,7 @@ function tidy(terms: Term[]): Term[] {
   return [...m.entries()].filter(([, c]) => c !== 0).map(([n, c]) => [c, n] as Term).sort((a, b) => b[1] - a[1]);
 }
 
-const diff = (terms: Term[]): Term[] => tidy(terms.filter(([, n]) => n !== 0).map(([c, n]) => [clean(c * n), n - 1] as Term));
+const diff = (terms: Term[]): Term[] => tidy(terms.filter(([, n]) => n !== 0).map(([c, n]) => [clean(c * n, 10), n - 1] as Term));
 const evalAt = (terms: Term[], x: number): number => clean(terms.reduce((s, [c, n]) => s + c * Math.pow(x, n), 0));
 
 /** "{{3x^4}} → {{12x^3}}" for each term (constants → 0). */
@@ -91,9 +91,8 @@ function subst(terms: Term[], x: number): string {
     const k = Math.abs(c);
     let t: string;
     if (n === 0) t = `${k}`;
-    else if (n === -1) t = `${k}/${ib(x)}`;
-    else if (n < 0) t = `${k}/${ib(x)}^${-n}`;
-    else t = `${k === 1 ? "" : k}${ib(x).startsWith("(") || k !== 1 ? `(${clean(x)})` : clean(x)}${n === 1 ? "" : `^${n}`}`;
+    else if (n < 0) t = `${k}/(${clean(x)})${n === -1 ? "" : `^${-n}`}`;
+    else t = `${k === 1 ? "" : k}(${clean(x)})${n === 1 ? "" : `^${n}`}`;
     out += out ? (c < 0 ? ` - ${t}` : ` + ${t}`) : c < 0 ? `-${t}` : t;
   }
   return out || "0";
@@ -230,8 +229,8 @@ export const drills: Drill[] = [
         `A curve has equation {{${dep} = ${eq}}}. Find the gradient function {{${dName}}}.`,
       ]);
       const traps: Trap[] = [];
-      const noReduce = tidy(terms.filter(([, n]) => n !== 0).map(([c, n]) => [clean(c * n), n] as Term));
-      traps.push({ spec: { type: "expression", expr: polyA(noReduce, v) }, feedback: "Bring the power down AND reduce the power by one: {{x^n -> n x^(n-1)}}." });
+      const noReduce = tidy(terms.filter(([, n]) => n !== 0).map(([c, n]) => [clean(c * n, 10), n] as Term));
+      traps.push({ spec: { type: "expression", expr: polyA(noReduce, v) }, feedback: "Bring the power down AND reduce the power by one: {{x^n}} becomes {{n x^(n-1)}}." });
       const konst = terms.find(([, n]) => n === 0);
       if (konst) traps.push({ spec: { type: "expression", expr: polyA([...d, konst], v) }, feedback: `A constant term differentiates to 0 — the graph of {{${dep} = ${num(konst[0])}}} is flat.` });
       return {
@@ -239,10 +238,12 @@ export const drills: Drill[] = [
         answer: { type: "expression", expr: polyA(d, v), display: `{{${dName} = ${polyM(d, v)}}}` },
         solution: [
           `Differentiate each term: multiply by the power, then reduce the power by 1.`,
-          diffSteps(fracLead ? [[fracLead.p / fracLead.n, fracLead.n], ...terms.slice(1)] : terms, v).replace(/\{\{(-?)(\d+(?:\.\d+)?)([a-z])\^(\d)\}\} →/, (m, s, c, vv, n) => (fracLead && Number(n) === fracLead.n ? `{{${s}${Math.abs(fracLead.p)}/${fracLead.n} ${vv}^${n}}} →` : m)),
+          fracLead
+            ? [`{{${fracLead.p < 0 ? "-" : ""}${Math.abs(fracLead.p)}/${fracLead.n} ${v}^${fracLead.n}}} → {{${fracLead.n} * (${fracLead.p}/${fracLead.n}) ${v}^${fracLead.n - 1} = ${polyM([[fracLead.p, fracLead.n - 1]], v)}}}`, diffSteps(terms.slice(1), v)].filter(Boolean).join(", ")
+            : diffSteps(terms, v),
           `{{${dName} = ${polyM(d, v)}}}`,
         ],
-        hint: `Use {{${v}^n -> n${v}^(n-1)}} on each term separately. What happens to a number on its own?`,
+        hint: `Use the rule {{${v}^n}} becomes {{n ${v}^(n-1)}} on each term separately. What happens to a number on its own?`,
         traps,
       };
     },
@@ -433,7 +434,7 @@ export const drills: Drill[] = [
       const traps: Trap[] = [];
       const wrong = clean(y0 + m * k);
       if (wrong !== c) traps.push({ spec: { type: "equation", eq: `y = ${poly([[m, "x"], [wrong, ""]])}` }, feedback: `Sign slip: {{y - ${ib(y0)} = ${m}(x - ${ib(k)})}} — expand {{-${m} * ${ib(k)}}} carefully.` });
-      if (y0 !== m) traps.push({ spec: { type: "equation", eq: `y = ${poly([[y0, "x"], [clean(y0 - y0 * k), ""]])}` }, feedback: "You used the y-value as the gradient. The gradient comes from dy/dx." });
+      if (y0 !== m && y0 !== 0) traps.push({ spec: { type: "equation", eq: `y = ${poly([[y0, "x"], [clean(y0 - y0 * k), ""]])}` }, feedback: "You used the y-value as the gradient. The gradient comes from dy/dx." });
       return {
         prompt: `${rng.pick(["Find", "Work out"])} the equation of the tangent to the curve {{y = ${polyM(terms)}}} ${point}. Give your answer in the form {{y = mx + c}}.`,
         answer: lineSpec(m, c),
@@ -530,7 +531,7 @@ export const drills: Drill[] = [
         const askX = rng.bool(0.4);
         const A = 2 * k * k;
         return {
-          prompt: `${name} has ${L} m of fencing to make a rectangular vegetable plot against a long wall. The wall forms one side, so only three sides need fencing. The two sides at right angles to the wall are each x m long.\n\nShow that the area is {{A = ${L}x - 2x^2}}, then use calculus to find the ${askX ? "value of x that gives the maximum area" : "maximum possible area, in m²"}.`,
+          prompt: `${name} has ${L} m of fencing to make a rectangular vegetable plot against a long wall. The wall forms one side, so only three sides need fencing. The two sides at right angles to the wall are each x m long.\n\nThe area is {{A = ${L}x - 2x^2}} m². Use calculus to find the ${askX ? "value of x that gives the maximum area" : "maximum possible area, in m²"}.`,
           answer: { type: "number", value: askX ? k : A },
           solution: [
             `The side parallel to the wall is {{${L} - 2x}}, so {{A = x(${L} - 2x) = ${L}x - 2x^2}}.`,
@@ -548,7 +549,7 @@ export const drills: Drill[] = [
         const P = 2 * j * j - c;
         const askX = rng.bool(0.4);
         return {
-          prompt: `A hawker stall's daily profit, $P, from selling x bowls of vegetarian laksa (in tens) is modelled by {{P = ${b}x - 2x^2 - ${c}}}.\n\nUse calculus to find the ${askX ? "value of x that maximises the profit" : "maximum daily profit, in dollars"}.`,
+          prompt: `A hawker stall's daily profit, $P, when it sells x bowls of vegetarian laksa is modelled by {{P = ${b}x - 2x^2 - ${c}}}.\n\nUse calculus to find the ${askX ? "value of x that maximises the profit" : "maximum daily profit, in dollars"}.`,
           answer: { type: "number", value: askX ? j : P },
           solution: [
             `{{(dP)/(dx) = ${b} - 4x}}. Set it to 0: x = ${j}.`,
@@ -569,7 +570,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: askX ? k : V },
           solution: [
             `{{V = ${s * s}x - ${4 * s}x^2 + 4x^3}}, so {{(dV)/(dx) = ${s * s} - ${8 * s}x + 12x^2 = 12(x - ${k})(x - ${3 * k})}}.`,
-            `x = ${3 * k} would leave no base ({{${s} - 2 * ${3 * k} = 0}}), so x = ${k}. {{(d^2V)/(dx^2) = 24x - ${8 * s}}} = ${24 * k - 8 * s} < 0 at x = ${k}, so it is a maximum.`,
+            `x = ${3 * k} would leave no base ({{${s} - 2 * ${3 * k} = 0}}), so x = ${k}. {{(d^2V)/(dx^2) = 24x - ${8 * s}}} = ${num(24 * k - 8 * s)} < 0 at x = ${k}, so it is a maximum.`,
             `{{V = ${k}(${s} - ${2 * k})^2 = ${k} * ${(s - 2 * k) ** 2} = ${V}}} cm³.`,
           ],
           hint: "Expand V, differentiate, and solve dV/dx = 0. One of the two solutions makes no sense for the box.",
@@ -584,8 +585,8 @@ export const drills: Drill[] = [
         const who = rng.pick(["Jun", "Zara", "Kenji", "Priya"]);
         const askT = rng.bool(0.35);
         return {
-          prompt: `${who} throws a ball upwards. Its height, h metres, after t seconds is {{h = ${h0} + ${u}t - 5t^2}}.\n\nUse calculus to find ${askT ? "the time, in seconds, at which the ball is highest. Give your answer as a decimal." : "the greatest height of the ball, in metres. Give your answer as a decimal."}`,
-          answer: { type: "number", value: askT ? t : H, allowFraction: true },
+          prompt: `${who} throws a ball upwards. Its height, h metres, after t seconds is {{h = ${h0} + ${u}t - 5t^2}}.\n\nUse calculus to find ${askT ? "the time, in seconds, at which the ball is highest." : "the greatest height of the ball, in metres."}`,
+          answer: { type: "number", value: askT ? t : H },
           solution: [`{{(dh)/(dt) = ${u} - 10t = 0}}, so t = ${num(t)} s.`, `{{(d^2h)/(dt^2) = -10 < 0}}, so this is a maximum.`, `{{h = ${h0} + ${u} * ${t} - 5 * ${t}^2 = ${H}}} m.`],
           hint: "At the top, the ball's vertical velocity dh/dt is zero.",
           traps: askT ? [{ spec: { type: "number", value: H }, feedback: "That's the height — the question asks for the time." }] : [{ spec: { type: "number", value: t }, feedback: "That's the time. Substitute it into h." }],
@@ -596,7 +597,7 @@ export const drills: Drill[] = [
       const V = x * x * x;
       const A = 6 * x * x;
       return {
-        prompt: `A closed box is a cuboid with a square base of side x cm and volume ${V} cm³.\n\nShow that its surface area is {{A = 2x^2 + ${4 * V}/x}}, then use calculus to find the minimum surface area, in cm².`,
+        prompt: `A closed box is a cuboid with a square base of side x cm and volume ${V} cm³.\n\nIts surface area is {{A = 2x^2 + ${4 * V}/x}}. Use calculus to find the minimum surface area, in cm².`,
         answer: { type: "number", value: A },
         solution: [
           `Height = {{${V}/x^2}}, so {{A = 2x^2 + 4x * ${V}/x^2 = 2x^2 + ${4 * V}/x}}.`,
@@ -634,7 +635,7 @@ export const drills: Drill[] = [
         return {
           prompt: `${intro}\n\nFind the acceleration at t = ${T}, in m/s².`,
           answer: { type: "number", value: val },
-          solution: [`{{v = (ds)/(dt) = ${polyM(v, "t")}}}`, `{{a = (dv)/(dt) = ${polyM(acc, "t")}}}`, `At t = ${T}: {{a = ${subst(acc, T).replace(/x/g, "t")} = ${val}}} m/s².`],
+          solution: [`{{v = (ds)/(dt) = ${polyM(v, "t")}}}`, `{{a = (dv)/(dt) = ${polyM(acc, "t")}}}`, `At t = ${T}: {{a = ${subst(acc, T)} = ${val}}} m/s².`],
           hint: "Acceleration is the derivative of velocity, which is the derivative of displacement — differentiate twice.",
           traps: vT !== val ? [{ spec: { type: "number", value: vT }, feedback: "That's the velocity at that time. Differentiate once more for acceleration." }] : [],
         };
@@ -668,12 +669,17 @@ export const drills: Drill[] = [
         q = rng.int(p + 1, 7);
         if (q - p <= 4) break;
       }
+      const givenV = tier === 1;
+      const K = givenV ? rng.pick([1, 2, 3]) : 6;
+      if (givenV) {
+        p = rng.int(1, 6);
+        q = rng.int(p + 1, Math.min(p + 4, 9));
+      }
       const D = rng.int(0, 12);
       // s = 2t³ − 3(p+q)t² + 6pq t + D, v = 6(t − p)(t − q), a = 12t − 6(p+q)
       const s: Term[] = tidy([[2, 3], [-3 * (p + q), 2], [6 * p * q, 1], [D, 0]]);
-      const v = diff(s);
+      const v = givenV ? tidy([[K, 2], [-K * (p + q), 1], [K * p * q, 0]]) : diff(s);
       const acc = diff(v);
-      const givenV = tier === 1;
       const ask = tier === 3 ? rng.pick(["acc", "disp", "times"]) : "times";
       const vStr = polyM(v, "t");
       const intro = givenV
@@ -681,7 +687,7 @@ export const drills: Drill[] = [
         : `A particle moves along a straight line. Its displacement, s metres, from O at time t seconds is {{s = ${polyM(s, "t")}}}.`;
       const restSteps = [
         ...(givenV ? [] : [`{{v = (ds)/(dt) = ${vStr}}}`]),
-        `At rest means v = 0: {{${vStr} = 0}} → {{6(t^2 - ${p + q}t + ${p * q}) = 0}} → {{6(t - ${p})(t - ${q}) = 0}}.`,
+        `At rest means v = 0: {{${vStr} = 0}} → {{${K === 1 ? "" : K}(t^2 - ${p + q}t + ${p * q}) = 0}} → {{${K === 1 ? "" : K}(t - ${p})(t - ${q}) = 0}}.`,
         `t = ${p} s or t = ${q} s.`,
       ];
       if (ask === "times") {
@@ -698,7 +704,7 @@ export const drills: Drill[] = [
         return {
           prompt: `${intro}\n\nFind the acceleration of the particle when it is first at rest, in m/s².`,
           answer: { type: "number", value: aP },
-          solution: [...restSteps, `It is first at rest at t = ${p}. {{a = (dv)/(dt) = ${polyM(acc, "t")}}} = 12 × ${p} − ${6 * (p + q)} = ${aP} m/s².`],
+          solution: [...restSteps, `It is first at rest at t = ${p}. {{a = (dv)/(dt) = ${polyM(acc, "t")}}} = 12 × ${p} − ${6 * (p + q)} = ${num(aP)} m/s².`],
           hint: "First find when v = 0. Then differentiate v to get a, and use the earlier time.",
           traps: [{ spec: { type: "number", value: evalAt(acc, q) }, feedback: `That's the acceleration at t = ${q}, the second time it is at rest.` }],
         };
@@ -725,7 +731,7 @@ export const drills: Drill[] = [
     generate(rng, tier) {
       let terms: Term[] = [], k = 1, m = 0, y0 = 0;
       for (let i = 0; i < 100; i++) {
-        ({ terms, k } = makeCurve(rng, tier === 1 ? 1 : tier));
+        ({ terms, k } = makeCurve(rng, tier));
         m = evalAt(diff(terms), k);
         y0 = evalAt(terms, k);
         if (m !== 0 && y0 !== 0 && k + m * y0 !== 0) break;
@@ -738,7 +744,7 @@ export const drills: Drill[] = [
       ];
       if (ask === "grad") {
         const traps: Trap[] = [{ spec: { type: "number", value: m }, feedback: "That's the gradient of the tangent. The normal is perpendicular to it." }];
-        if (m !== 1 && m !== -1) traps.push({ spec: { type: "fraction", n: 1, d: m }, feedback: "Reciprocal — yes — but also change the sign: the gradients must multiply to −1." });
+        if (m !== 1 && m !== -1) traps.push({ spec: { type: "fraction", n: Math.sign(m), d: Math.abs(m) }, feedback: "Reciprocal — yes — but also change the sign: the gradients must multiply to −1." });
         return {
           prompt: `The curve C has equation ${curve}. Find the gradient of the normal to C at the point where x = ${num(k)}.`,
           answer: { type: "fraction", n: -1 * Math.sign(m), d: Math.abs(m), display: frac(-1, m) },
@@ -749,7 +755,7 @@ export const drills: Drill[] = [
       }
       const cst = -(k + m * y0);
       const eq = `${poly([[1, "x"], [m, "y"], [cst, ""]])} = 0`;
-      const steps = [...base, `The point is ${pt(k, y0)}. {{y - ${ib(y0)} = ${frac(-1, m).slice(2, -2)}(x - ${ib(k)})}}.`, `Multiply by ${num(m)} and rearrange: {{${eq}}}.`];
+      const steps = [...base, `The point is ${pt(k, y0)}. {{y - ${ib(y0)} = (${frac(-1, m).slice(2, -2)})(x - ${ib(k)})}}.`, `Multiply by ${num(m)} and rearrange: {{${eq}}}.`];
       if (ask === "xaxis") {
         const X = k + m * y0;
         const tangentX = (m * k - y0) / m;
