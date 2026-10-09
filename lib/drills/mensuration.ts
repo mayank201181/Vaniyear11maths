@@ -586,8 +586,8 @@ function perimeterReverse(rng: Rng): DrillItem | null {
     ],
     hint: "Work backwards from the area to find r first.",
     traps: [
-      { spec: { type: "expression", expr: piF(r).expr }, feedback: "That's only the curved edge — add the diameter." },
-      { spec: { type: "expression", expr: withK(2 * r, piF(2 * r)).expr }, feedback: "You used a whole circumference for the curved edge — a semicircle has half." },
+      { spec: { type: "expression" as const, expr: piF(r).expr }, feedback: "That's only the curved edge — add the diameter." },
+      { spec: { type: "expression" as const, expr: withK(2 * r, piF(2 * r)).expr }, feedback: "You used a whole circumference for the curved edge — a semicircle has half." },
     ].filter((tr) => tr.spec.expr !== P.expr),
   };
 }
@@ -1190,8 +1190,8 @@ function frustumItem(rng: Rng, tier: Tier): DrillItem | null {
       ],
       hint: "Similar solids: if lengths scale by k, volumes scale by k³.",
       traps: [
-        { spec: { type: "fraction", n: keep ? q - p : p, d: q }, feedback: "Volumes don't scale like lengths — cube the length scale factor." },
-        { spec: { type: "fraction", n: keep ? q * q - p * p : p * p, d: q * q }, feedback: "Squaring gives the AREA scale factor. Volume needs the cube." },
+        { spec: { type: "fraction" as const, n: keep ? q - p : p, d: q }, feedback: "Volumes don't scale like lengths — cube the length scale factor." },
+        { spec: { type: "fraction" as const, n: keep ? q * q - p * p : p * p, d: q * q }, feedback: "Squaring gives the AREA scale factor. Volume needs the cube." },
       ].filter((tr) => tr.spec.n * d !== n * tr.spec.d),
     };
   }

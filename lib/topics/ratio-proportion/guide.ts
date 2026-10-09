@@ -75,7 +75,7 @@ export const guide: TopicGuide = {
         "A ratio a : b says the two amounts are a × (one part) and b × (one part) for some unknown size of part. Call that size k. Then the amounts are ak and bk, the total is (a + b)k, and the difference is (b − a)k. Every sharing question is just one equation in k — whatever you are told, divide by the matching number of parts to get k.\n\nSimplifying works for the same reason: 24 : 36 means 24k and 36k, which is 2(12k) and 3(12k) — the same comparison with a part 12 times bigger. Multiplying or dividing every part by the same number never changes the comparison.",
       strategies: ["Use a bar model", "Introduce a variable (one part = k)", "Check by substituting", "Make it simpler"],
       thinkDeeper:
-        "The ratio of boys to girls in a club is 3 : 4. Four more boys join and the ratio becomes 1 : 1. Without algebra, use a bar model: what must one part be? Now explain why the answer would be impossible if *five* more boys joined instead.",
+        "The ratio of boys to girls in a club is 3 : 4. Four more boys join and the ratio becomes 1 : 1. Without algebra, use a bar model: what must one part be? Now change the story: 4 more boys join and the ratio becomes 4 : 5. Can a bar model still do it, or is it time to call one part k and write an equation? How many students are in the club at the end?",
     },
     // ------------------------------------------------------------------ 2
     {
