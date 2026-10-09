@@ -681,8 +681,9 @@ export const drills: Drill[] = [
       const acc = diff(v);
       const ask = tier === 3 ? rng.pick(["acc", "disp", "times"]) : "times";
       const vStr = polyM(v, "t");
+      const mover = givenV ? rng.pick(["A particle moves in a straight line", "A toy train moves along a straight track", "A robot vacuum moves along a straight line"]) : "";
       const intro = givenV
-        ? `A particle moves in a straight line. Its velocity, v m/s, at time t seconds is {{v = ${vStr}}}.`
+        ? `${mover}. Its velocity, v m/s, at time t seconds is {{v = ${vStr}}}.`
         : `A particle moves along a straight line. Its displacement, s metres, from O at time t seconds is {{s = ${polyM(s, "t")}}}.`;
       const restSteps = [
         ...(givenV ? [] : [`{{v = (ds)/(dt) = ${vStr}}}`]),

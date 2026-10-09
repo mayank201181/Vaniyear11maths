@@ -711,7 +711,7 @@ export const practice: TopicPractice = {
             "Which congruence condition uses a right angle, a hypotenuse and a side?",
             "For the second part: which points are equidistant from A and B? Where do all such points lie?",
           ],
-          strategy: "Introduce a variable",
+          strategy: "Look for congruent triangles",
         },
         {
           kind: "written",

@@ -255,13 +255,16 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "number-bounds-p1-q06",
           question:
-            "Hana has 84 roses and 126 orchids. She makes identical bunches using all the flowers, with no flowers left over. What is the greatest number of bunches she can make?",
-          answer: { type: "number", value: 42 },
-          traps: [{ spec: { type: "number", value: 252 }, feedback: "252 is the LCM. Splitting into equal groups with nothing left over needs the *highest common factor*." }],
-          solution: ["{{84 = 2^2 * 3 * 7}}, {{126 = 2 * 3^2 * 7}}.", "HCF = 2 × 3 × 7 = 42.", "42 bunches, each with 2 roses and 3 orchids."],
+            "Hana has 96 roses and 156 orchids. She makes identical bunches using all the flowers, with no flowers left over. What is the greatest number of bunches she can make?",
+          answer: { type: "number", value: 12 },
+          traps: [
+            { spec: { type: "number", value: 1248 }, feedback: "1248 is the LCM. Splitting into equal groups with nothing left over needs the *highest common factor*." },
+            { spec: { type: "number", value: 6 }, feedback: "6 divides both, but it isn't the *highest* common factor: 96 and 156 share {{2^2}}, not just 2." },
+          ],
+          solution: ["{{96 = 2^5 * 3}}, {{156 = 2^2 * 3 * 13}}.", "HCF = {{2^2 * 3 = 12}}.", "12 bunches, each with 8 roses and 13 orchids."],
           difficulty: "core",
           guideRef: "prime-factors-hcf-lcm",
-          hints: ["The number of bunches must divide into 84 *and* into 126.", "You want the biggest such number — HCF or LCM?"],
+          hints: ["The number of bunches must divide into 96 *and* into 156.", "You want the biggest such number — HCF or LCM?"],
           strategy: "HCF or LCM? Decide first",
         },
         {
