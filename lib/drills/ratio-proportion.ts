@@ -117,7 +117,8 @@ function hm(min: number): string {
 }
 
 function numTrap(value: number, answer: number, feedback: string, out: Trap[]) {
-  if (Number.isFinite(value) && value > 0 && Math.abs(value - answer) > 1e-6 * Math.max(1, Math.abs(answer))) {
+  const dup = out.some((t) => t.spec.type === "number" && Math.abs(t.spec.value - value) < 1e-9);
+  if (!dup && Number.isFinite(value) && value > 0 && Math.abs(value - answer) > 1e-6 * Math.max(1, Math.abs(answer))) {
     out.push({ spec: { type: "number", value: clean(value, 10) }, feedback });
   }
 }
@@ -347,7 +348,6 @@ export const drills: Drill[] = [
         const askText = ask === "total" ? "How much do they have altogether?" : `How much does ${ask === "A" ? A : B} have?`;
         const traps: Trap[] = [];
         numTrap(u / 100, ans / 100, `That is the value of ONE part. Now multiply by the number of parts you need.`, traps);
-        numTrap((d * (a + b)) / (100 * b), ans / 100, "The difference is worth the difference in parts, not one person's share.", traps);
         return {
           prompt: `The ratio of ${A}'s savings to ${B}'s savings is ${rs([a, b])}. ${B} has ${cash(d)} more than ${A}. ${askText}`,
           answer: { type: "number", value: ans / 100, display: cash(ans) },
@@ -368,9 +368,9 @@ export const drills: Drill[] = [
       const traps: Trap[] = [];
       numTrap(ml[known] * (target === m ? sum(parts) : parts[target]), ans, `Find ONE part first: divide ${big(ml[known])} ml by ${parts[known]}.`, traps);
       return {
-        prompt: `A paint colour is made by mixing ${listAnd(items)} paint in the ratio ${rs(parts)}. ${cap(items[known])} paint: ${big(ml[known])} ml is used. How much ${target === m ? "paint is made altogether" : `${items[target]} paint is needed`}? Give your answer in ml.`,
+        prompt: `A paint colour is made by mixing ${listAnd(items)} paint in the ratio ${rs(parts)}. ${big(ml[known])} ml of ${items[known]} paint is used. How much ${target === m ? "paint is made altogether" : `${items[target]} paint is needed`}? Give your answer in ml.`,
         answer: { type: "number", value: ans },
-        solution: [`${cap(items[known])} is ${parts[known]} part${parts[known] === 1 ? "" : "s"}: one part = ${big(ml[known])} ÷ ${parts[known]} = ${big(mlU)} ml.`, target === m ? `Total parts: ${sum(parts)}, so the total is ${sum(parts)} × ${big(mlU)} = ${big(ans)} ml.` : `${cap(items[target])} is ${parts[target]} parts: ${parts[target]} × ${big(mlU)} = ${big(ans)} ml.`],
+        solution: [`${cap(items[known])} is ${parts[known]} part${parts[known] === 1 ? "" : "s"}: one part = ${big(ml[known])} ÷ ${parts[known]} = ${big(mlU)} ml.`, target === m ? `Total parts: ${sum(parts)}, so the total is ${sum(parts)} × ${big(mlU)} = ${big(ans)} ml.` : `${cap(items[target])} is ${plural(parts[target], "part")}: ${parts[target]} × ${big(mlU)} = ${big(ans)} ml.`],
         hint: "Use the share you know to find the size of one part.",
         traps,
       };
@@ -414,7 +414,7 @@ export const drills: Drill[] = [
         answer: { type: "ratio", parts: ans, simplest: true },
         solution: [
           ...(useFrac ? [`"${frac(a, b)} of" means ${t.x} : ${t.y} = ${rs([a, b])}.`] : []),
-          `The ${t.y} are ${b} parts in one ratio and ${c} parts in the other. Make them both ${L} (the LCM).`,
+          `The ${t.y} are ${plural(b, "part")} in one ratio and ${plural(c, "part")} in the other. Make them both ${L} (the LCM).`,
           `${rs([a, b])} = ${rs([(a * L) / b, L])} and ${rs([c, d])} = ${rs([L, (d * L) / c])}.`,
           `So ${t.x} : ${t.y} : ${t.z} = ${rs([(a * L) / b, L, (d * L) / c])}${hcfAll([(a * L) / b, L, (d * L) / c]) > 1 ? ` = ${rs(three)}` : ""}.`,
           ...(askAC ? [`Leave out the ${t.y}: ${t.x} : ${t.z} = ${rs(ans)}.`] : []),
@@ -684,7 +684,7 @@ export const drills: Drill[] = [
       for (let i = 0; i < 500; i++) {
         [a, b] = coprimeSet(rng, 2, tier === 1 ? 7 : 9);
         k = rng.int(2, tier === 1 ? 10 : 20);
-        t = rng.int(1, tier === 1 ? 20 : 40);
+        t = rng.int(2, tier === 1 ? 20 : 40);
         [c, d] = simplifyParts(addRed ? [a * k + t, b * k] : [a * k, b * k + t]);
         if (c <= (tier === 1 ? 9 : 15) && d <= (tier === 1 ? 9 : 15) && c * b !== a * d) break;
       }
@@ -1299,6 +1299,10 @@ export const drills: Drill[] = [
 /** Coefficient of x for display: 1 → "x", 3 → "3x". */
 function cx(c: number): string {
   return c === 1 ? "x" : `${c}x`;
+}
+
+function plural(n: number, one: string): string {
+  return `${big(n)} ${one}${n === 1 ? "" : "s"}`;
 }
 
 function cap(s: string): string {
