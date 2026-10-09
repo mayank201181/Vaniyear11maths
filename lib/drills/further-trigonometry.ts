@@ -183,11 +183,11 @@ function solve(fn: Fn, k: number, m: number, lo: number, hi: number): number[] {
 
 const listAns = (xs: number[]): AnswerSpec => ({ type: "list", values: xs, tolerance: 0.1, display: xs.map((x) => degStr(x)).join(", ") });
 
-/** k as a short exact string for prompts: 0.5, −0.35, {{1/3}}. */
-function kText(n: number, d: number): string {
-  return d === 1 ? num(n) : frac(n, d);
+/** k inside {{ }} as a decimal when it terminates (0.5, -0.35), else a fraction. */
+function kDec(n: number, d: number): string {
+  return 100 % d === 0 ? String(clean(n / d)) : kMk(n, d);
 }
-/** k inside {{ }}: "1/3", "-0.4". */
+/** k inside {{ }} as a fraction: "1/3", "-2/5". */
 function kMk(n: number, d: number): string {
   const [a, b] = [n / gcd(n, d), d / gcd(n, d)];
   return b === 1 ? String(a) : `${a < 0 ? "-" : ""}${Math.abs(a)}/${b}`;
@@ -508,8 +508,8 @@ export const drills: Drill[] = [
         answer: ansDeg(A),
         solution: [
           want === "named" ? `Angle ${n0} is opposite ${n1}${n2} = ${a}.` : `The ${want} angle is opposite the ${want} side, ${n1}${n2} = ${a}, so it is angle ${n0}.`,
-          `{{cos ${n0} = (b^2 + c^2 - a^2)/(2bc) = (${b}^2 + ${c}^2 - ${a}^2)/(2 * ${b} * ${c}) = ${(b * b + c * c - a * a) / g}/${(2 * b * c) / g}}}${Number.isInteger(cosA * 1000) ? "" : ` = ${clean(roundTo(cosA, 5))}...`}`,
-          `${n0} = {{cos^(-1)(${clean(roundTo(cosA, 5))}${Number.isInteger(cosA * 1000) ? "" : "..."})}} = ${degStr(A)}${cosA < 0 ? " — obtuse, because the cosine is negative." : ""}`,
+          `{{cos ${n0} = (b^2 + c^2 - a^2)/(2bc) = (${b}^2 + ${c}^2 - ${a}^2)/(2 * ${b} * ${c}) = ${(b * b + c * c - a * a) / g}/${(2 * b * c) / g}}} = ${num(roundTo(cosA, 5))}${Number.isInteger(roundTo(cosA * 1000, 6)) ? "" : "..."}`,
+          `${n0} = {{cos^(-1)(${clean(roundTo(cosA, 5))}${Number.isInteger(roundTo(cosA * 1000, 6)) ? "" : "..."})}} = ${degStr(A)}${cosA < 0 ? " — obtuse, because the cosine is negative." : ""}`,
         ],
         hint: want === "named" ? "The side opposite the angle you want goes *last*, with the minus sign: {{cos A = (b^2 + c^2 - a^2)/(2bc)}}." : "The largest angle is always opposite the largest side (smallest opposite smallest).",
         traps: [
@@ -534,8 +534,8 @@ export const drills: Drill[] = [
         if (tier === 1) {
           const opts: [number, number][] = fn === "tan" ? [[1, 1], [-1, 1]] : [[1, 2], [-1, 2]];
           [n, d] = rng.pick(opts);
-          if (fn === "tan" && rng.bool(0.4)) [n, d] = [rng.pick([2, 3, -2, -3]), 1];
-          if (fn !== "tan" && rng.bool(0.5)) [n, d] = [rng.pick([3, 4, 7, -3, -4, -7]), 10];
+          if (fn === "tan" && rng.bool(0.6)) [n, d] = [rng.pick([2, 3, 4, 5, -2, -3, -4, -5]), rng.pick([1, 1, 2])];
+          if (fn !== "tan" && rng.bool(0.6)) [n, d] = [rng.pick([1, 2, 3, 4, 6, 7, 8, 9, -1, -2, -3, -4, -6, -7, -8, -9]), 10];
         } else {
           d = fn === "tan" ? 10 : 100;
           n = fn === "tan" ? rng.nonZero(-35, 35) : rng.nonZero(-95, 95);
@@ -563,7 +563,7 @@ export const drills: Drill[] = [
           rearr = `{{${m}${fn} x ${cst < 0 ? "-" : "+"} ${Math.abs(cst)} = ${clean(kk + cst)}}}`;
         }
       }
-      const eqStr = `{{${fn} x = ${kMk(n, d)}}}`;
+      const eqStr = `{{${fn} x = ${kDec(n, d)}}}`;
       const k = n / d;
       const pv = fn === "sin" ? asinD(k) : fn === "cos" ? acosD(k) : atanD(k);
       const rule =
@@ -575,7 +575,7 @@ export const drills: Drill[] = [
       const rangeTxt = lo === 0 ? "0° ≤ x ≤ 360°" : "−180° ≤ x ≤ 180°";
       const steps: string[] = [];
       if (rearr) steps.push(`Rearrange: ${eqStr}.`);
-      steps.push(`Calculator: x = {{${fn}^(-1)(${kMk(n, d)})}} = ${degStr(pv)}.`);
+      steps.push(`Calculator: x = {{${fn}^(-1)(${kDec(n, d)})}} = ${degStr(pv)}.`);
       steps.push(rule);
       steps.push(`In ${rangeTxt}: x = ${xs.map((x) => degStr(x)).join(", ")}.`);
       const traps: Trap[] = [];
@@ -733,7 +733,7 @@ export const drills: Drill[] = [
     guideRef: "trig-identities",
     generate(rng, tier) {
       const triples: [number, number, number][] = [[3, 4, 5], [5, 12, 13], [8, 15, 17], [7, 24, 25], [20, 21, 29], [9, 40, 41], [12, 35, 37]];
-      const [p0, q0, r] = rng.pick(tier === 1 ? triples.slice(0, 3) : triples);
+      const [p0, q0, r] = rng.pick(tier === 1 ? triples.slice(0, 5) : triples);
       const [p, q] = rng.bool() ? [p0, q0] : [q0, p0];
       // Quadrant: 1 = acute; 2 = obtuse; 3, 4 for tier 3.
       const quad = tier === 1 ? 1 : tier === 2 ? rng.pick([1, 2, 2]) : rng.pick([2, 3, 4]);
@@ -803,11 +803,11 @@ export const drills: Drill[] = [
           const us = solve(fn, k, 1, 0, 360 * m);
           const firstLap = solve(fn, k, 1, 0, 360).map((u) => dp1(u / m));
           return {
-            prompt: `Solve {{${fn} ${m}x = ${kMk(n, d)}}} for ${range}. Give all the solutions, correct to 1 decimal place where necessary.`,
+            prompt: `Solve {{${fn} ${m}x = ${kDec(n, d)}}} for ${range}. Give all the solutions, correct to 1 decimal place where necessary.`,
             answer: listAns(xs),
             solution: [
               `Let u = ${m}x. Then 0° ≤ u ≤ ${360 * m}° — the interval is ${m} times as long.`,
-              `{{${fn}^(-1)(${kMk(n, d)})}} = ${degStr(pv)}. All u in range: ${us.map((u) => degStr(u)).join(", ")}.`,
+              `{{${fn}^(-1)(${kDec(n, d)})}} = ${degStr(pv)}. All u in range: ${us.map((u) => degStr(u)).join(", ")}.`,
               `Divide each by ${m}: x = ${xs.map((x) => degStr(x)).join(", ")}.`,
             ],
             hint: `Substitute u = ${m}x and remember to stretch the interval for u to 0°–${360 * m}° *before* you divide by ${m}.`,

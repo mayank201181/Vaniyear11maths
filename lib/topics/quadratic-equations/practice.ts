@@ -1213,7 +1213,7 @@ export const practice: TopicPractice = {
       ],
       traps: [
         { spec: { type: "number", value: 4 }, feedback: "4 is {{c^2}}. Square-root to find c." },
-        { spec: { type: "number", value: 2.8 }, feedback: "3 hours 12 minutes is 3 + {{12/60}} = 3.2 hours, not 3.12 hours." },
+        { spec: { type: "number", value: 1.57, tolerance: 0.01 }, feedback: "3 hours 12 minutes is 3 + {{12/60}} = 3.2 hours, not 3.12 hours." },
       ],
       difficulty: "challenge",
       guideRef: "algebraic-fraction-equations",

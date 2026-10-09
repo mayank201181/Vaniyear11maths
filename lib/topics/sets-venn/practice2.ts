@@ -140,28 +140,28 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "sets-venn-p3-q05",
         question:
-          "There are 50 students in a sports CCA. 28 of them play badminton, 19 swim and 8 do both.\n\nHow many of the 50 students do neither badminton nor swimming?",
+          "There are 50 students in a sports CCA. 28 of them play netball, 19 do rock climbing and 8 do both.\n\nHow many of the 50 students do neither netball nor rock climbing?",
         answer: { type: "number", value: 11 },
         traps: [
           {
             spec: { type: "number", value: 3 },
-            feedback: "50 − (28 + 19) = 3 counts the 8 students who do both twice. Fill in the overlap first: badminton only = 20, swim only = 11.",
+            feedback: "50 − (28 + 19) = 3 counts the 8 students who do both twice. Fill in the overlap first: netball only = 20, climbing only = 11.",
           },
           {
             spec: { type: "number", value: 19 },
-            feedback: "That's 50 − 28 − 19 + 8 + 8 — the overlap has been added back once too often. Badminton only + both + swim only = 20 + 8 + 11 = 39.",
+            feedback: "That's 50 − 28 − 19 + 8 + 8 — the overlap has been added back once too often. Netball only + both + climbing only = 20 + 8 + 11 = 39.",
           },
         ],
         solution: [
           "Start in the centre: 8 do both.",
-          "Badminton only = 28 − 8 = 20. Swim only = 19 − 8 = 11.",
+          "Netball only = 28 − 8 = 20. Climbing only = 19 − 8 = 11.",
           "Inside the circles: 20 + 8 + 11 = 39.",
           "Neither = 50 − 39 = 11.",
         ],
         solutions: [
           {
             label: "Addition rule",
-            steps: ["n(B ∪ S) = n(B) + n(S) − n(B ∩ S) = 28 + 19 − 8 = 39.", "Neither = 50 − 39 = 11."],
+            steps: ["n(N ∪ R) = n(N) + n(R) − n(N ∩ R) = 28 + 19 − 8 = 39.", "Neither = 50 − 39 = 11."],
           },
         ],
         commonError: "Forgetting to subtract the overlap from each circle before adding.",
@@ -169,7 +169,7 @@ export const morePapers: Paper[] = [
         guideRef: "venn-diagrams",
         hints: [
           "Draw a two-circle Venn diagram. Which number goes in first?",
-          "Put 8 in the overlap. How many play badminton but do not swim?",
+          "Put 8 in the overlap. How many play netball but do not climb?",
           "Add everything inside the circles and subtract from 50.",
         ],
         strategy: "Fill from the centre outwards",
@@ -607,7 +607,7 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "sets-venn-p4-q05",
         question:
-          "60 people at a hawker centre were asked whether they had chendol and whether they had kaya toast.\n\n25 people had chendol. 30 people had kaya toast. 12 people had neither.\n\nHow many people had both chendol and kaya toast?",
+          "60 people at a food festival were asked whether they had tried durian and whether they had tried mango sticky rice.\n\n25 people had tried durian. 30 people had tried mango sticky rice. 12 people had tried neither.\n\nHow many people had tried both durian and mango sticky rice?",
         answer: { type: "number", value: 7 },
         traps: [
           {
@@ -635,7 +635,7 @@ export const morePapers: Paper[] = [
         guideRef: "venn-diagrams",
         hints: [
           "Let x be the number who had both. What goes in each region?",
-          "Chendol only = 25 − x, kaya toast only = 30 − x.",
+          "Durian only = 25 − x, mango sticky rice only = 30 − x.",
           "All four regions add up to 60.",
         ],
         strategy: "Introduce a variable",

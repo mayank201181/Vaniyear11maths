@@ -671,13 +671,13 @@ export const drills: Drill[] = [
         show = sides.map(num);
       }
       const order = rng.shuffle([0, 1, 2]);
-      const unit = rng.pick(["cm", "m", "mm"] as const);
+      const name = rng.pick(["A triangle", "Triangle PQR", "Triangle ABC", "A triangular garden bed"]);
+      const unit = name.includes("garden") ? "m" : rng.pick(["cm", "m", "mm"] as const);
       const list = order.map((i) => show[i]);
       const sorted = [0, 1, 2].sort((x, y) => sq[x] - sq[y]);
       const [i0, i1, i2] = sorted;
       const sum = clean(sq[i0] + sq[i1]);
       const isRight = Math.abs(sum - sq[i2]) < 1e-9;
-      const name = rng.pick(["A triangle", "Triangle PQR", "Triangle ABC", "A triangular garden bed"]);
       const sqText = (i: number) => (show[i].startsWith("{{") ? `{{(sqrt(${sq[i]}))^2 = ${sq[i]}}}` : `{{${show[i]}^2 = ${num(sq[i])}}}`);
       return {
         prompt: `${name} has sides of length ${list[0]} ${unit}, ${list[1]} ${unit} and ${list[2]} ${unit}. Is it a right-angled triangle? Type **yes** or **no**.`,
@@ -983,7 +983,7 @@ export const drills: Drill[] = [
         const [who, pr] = rng.pick([["Priya", "Her"], ["Kenji", "His"], ["Zara", "Her"], ["Marcus", "His"], ["Siti", "Her"], ["Jun", "His"]] as const);
         const up = d * tanD(a), exact = up + eye, ans = sf(exact);
         return {
-          prompt: `${who} stands on level ground ${num(d)} m from the foot of ${what}. ${eye ? `${pr} eyes are ${num(eye)} m above the ground. ` : ""}The angle of elevation of the top from ${eye ? `${pr.toLowerCase()} eyes` : "where they stand"} is ${a}°. Work out the height of ${what.replace(/^an? /, "the ")}. ${sfNote}`,
+          prompt: `${who} stands on level ground ${num(d)} m from the foot of ${what}. ${eye ? `${pr} eyes are ${num(eye)} m above the ground. ` : ""}The angle of elevation of the top from ${eye ? `${pr.toLowerCase()} eyes` : `where ${pr === "Her" ? "she stands" : "he stands"}`} is ${a}°. Work out the height of ${what.replace(/^an? /, "the ")}. ${sfNote}`,
           diagram: eye ? undefined : rightTriSvg({ w: d, h: up, base: `${num(d)} m`, height: "h", angleP: `${a}°`, aria: `Right-angled triangle: horizontal ground ${num(d)} metres, vertical height h, angle of elevation ${a} degrees at ground level.` }),
           answer: { type: "number", value: ans },
           solution: [

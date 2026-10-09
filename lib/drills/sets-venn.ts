@@ -33,6 +33,9 @@ function attempt(make: (r: Rng) => DrillItem | null, rng: Rng): DrillItem {
 /** Plain-text algebra with a real minus sign: "2x − 3". */
 const alg = (s: string) => s.replace(/ - /g, " − ").replace(/^-/, "−");
 
+/** Bracket an expression only when it has more than one term. */
+const wrapE = (e: string) => (/ [+-] /.test(e) ? `(${e})` : e);
+
 /** A set written out: {2, 4, 6}. */
 const setStr = (xs: readonly number[]) => `{${xs.join(", ")}}`;
 
@@ -418,7 +421,7 @@ export const drills: Drill[] = [
           if (ans === 0) return null;
           const names = R3NAME(["A", "B", "C"]);
           return {
-            prompt: `The Venn diagram shows the number of elements in each region.\n\nWork out n(${e.s}).`,
+            prompt: `The Venn diagram shows the number of elements in each region of the sets A, B and C. n(ξ) = ${total}.\n\nWork out n(${e.s}).`,
             diagram: venn3Counts(["A", "B", "C"], c),
             answer: { type: "number", value: ans },
             solution: [
@@ -437,7 +440,7 @@ export const drills: Drill[] = [
         if (ans === 0) return null;
         const names = REG2NAME(["A", "B"]);
         return {
-          prompt: `The Venn diagram shows the number of elements in each region.\n\nWork out n(${e.s}).`,
+          prompt: `The Venn diagram shows the number of elements in each region of the sets A and B. n(ξ) = ${total}.\n\nWork out n(${e.s}).`,
           diagram: venn2Counts(["A", "B"], c),
           answer: { type: "number", value: ans },
           solution: [
@@ -545,7 +548,7 @@ export const drills: Drill[] = [
         if (mode === "x" || mode === "nA" || mode === "nB") {
           const ans = mode === "x" ? x : mode === "nA" ? A : B;
           const steps = [
-            `All the regions add up to n(ξ): {{${exprs.map((e) => `(${e})`).join(" + ")} = ${total}}}`,
+            `All the regions add up to n(ξ): {{${exprs.map(wrapE).join(" + ")} = ${total}}}`,
             `Simplify: {{${eqn}}}, so {{${sc}x = ${total - sk}}} and {{x = ${x}}}.`,
           ];
           if (mode === "nA") steps.push(`n(A) = (${alg(exprs[0])}) + (${alg(exprs[1])}) = ${vals[0]} + ${vals[1]} = ${A}`);
@@ -571,7 +574,7 @@ export const drills: Drill[] = [
           diagram,
           answer: { type: "number", value: total },
           solution: [
-            `n(${useA ? "A" : "B"}) is the two regions inside circle ${useA ? "A" : "B"}: {{(${exprs[i0]}) + (${exprs[i1]}) = ${given}}}`,
+            `n(${useA ? "A" : "B"}) is the two regions inside circle ${useA ? "A" : "B"}: {{${wrapE(exprs[i0])} + ${wrapE(exprs[i1])} = ${given}}}`,
             `{{${poly([[sc2, "x"], [sk2, ""]])} = ${given}}}, so {{x = ${x}}}.`,
             `Regions: ${vals.join(", ")}. n(ξ) = ${vals.join(" + ")} = ${total}`,
           ],
