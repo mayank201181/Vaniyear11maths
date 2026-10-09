@@ -100,12 +100,12 @@ const dirTo = (a: Pt, b: Pt): Pt => norm([b[0] - a[0], b[1] - a[1]]);
 const mid = (a: Pt, b: Pt): Pt => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
 
 /** Arc + label for the (non-reflex) angle AVB. */
-function angleMark(V: Pt, A: Pt, B: Pt, label: string, unknown = false): string {
+function angleMark(V: Pt, A: Pt, B: Pt, label: string, unknown = false, rOver?: number): string {
   const u1 = dirTo(V, A);
   const u2 = dirTo(V, B);
   const dot = u1[0] * u2[0] + u1[1] * u2[1];
   const ang = Math.acos(Math.max(-1, Math.min(1, dot))) / RAD;
-  const r = ang < 35 ? 30 : ang < 60 ? 24 : 19;
+  const r = rOver ?? (ang < 35 ? 30 : ang < 60 ? 24 : 19);
   const color = unknown ? UNK : INK;
   const s = add(V, u1, r);
   const e = add(V, u2, r);
@@ -147,6 +147,16 @@ function lenLabel(P: Pt, Q: Pt, s: string, off = 12): string {
   return tx([m[0], m[1] + 4.5], s, { size: 12, color: SOFT });
 }
 
+/** Length label at the middle of PQ, on the side away from point `away`. */
+function lenAway(P: Pt, Q: Pt, s: string, away: Pt, off = 13): string {
+  const u = dirTo(P, Q);
+  let n: Pt = [-u[1], u[0]];
+  const m = mid(P, Q);
+  if (n[0] * (m[0] - away[0]) + n[1] * (m[1] - away[1]) < 0) n = [-n[0], -n[1]];
+  const at = add(m, n, off);
+  return tx([at[0], at[1] + 4.5], s, { size: 12, color: SOFT });
+}
+
 interface Scene {
   w: number;
   h: number;
@@ -155,7 +165,7 @@ interface Scene {
   pts: Record<string, Pt>;
   onCircle: string[];
   segs: Array<[string, string] | [string, string, "dash"]>;
-  marks?: Array<[string, string, string, string] | [string, string, string, string, boolean]>;
+  marks?: Array<[string, string, string, string] | [string, string, string, string, boolean] | [string, string, string, string, boolean, number]>;
   rights?: Array<[string, string, string]>;
   extra?: string;
   aria: string;
@@ -167,7 +177,7 @@ function drawScene(s: Scene): string {
   out += `<circle cx="${f1(s.c[0])}" cy="${f1(s.c[1])}" r="${f1(s.R)}" fill="none" stroke="${SOFT}" stroke-width="2"/>`;
   for (const g of s.segs) out += seg(s.pts[g[0]], s.pts[g[1]], { dash: g[2] === "dash" });
   out += s.extra ?? "";
-  for (const m of s.marks ?? []) out += angleMark(s.pts[m[0]], s.pts[m[1]], s.pts[m[2]], m[3], m[4] ?? false);
+  for (const m of s.marks ?? []) out += angleMark(s.pts[m[0]], s.pts[m[1]], s.pts[m[2]], m[3], m[4] ?? false, m[5]);
   for (const r of s.rights ?? []) out += rightMark(s.pts[r[0]], s.pts[r[1]], s.pts[r[2]]);
   for (const [name, P] of Object.entries(s.pts)) {
     if (s.hide?.includes(name)) continue;
@@ -1102,10 +1112,9 @@ function tangentLength(rng: Rng, tier: Tier): DrillItem {
     const O = pts.O;
     const A = pts.A;
     const P = pts.P;
-    extra += lenLabel(O, A, `${r} ${unit}`, 12);
-    if (mode === "findT") extra += lenLabel(O, P, `${num(d)} ${unit}`, -12);
-    else if (mode === "findD") extra += lenLabel(A, P, `${num(t)} ${unit}`, 12);
-    else extra += lenLabel(O, P, `${num(d)} ${unit}`, -12);
+    extra += lenAway(O, A, `${r} ${unit}`, P);
+    if (mode === "findD") extra += lenAway(A, P, `${num(t)} ${unit}`, O);
+    else extra += tx([(O[0] + P[0]) / 2, O[1] + (both ? -8 : 17)], `${num(d)} ${unit}`, { size: 12, color: SOFT });
     const segs: Array<[string, string]> = both ? [["O", "A"], ["O", "B"], ["A", "P"], ["B", "P"], ["O", "P"]] : [["O", "A"], ["A", "P"], ["O", "P"]];
     const diagram = drawScene({
       w: 420, h: 270, c, R, pts, onCircle: both ? ["A", "B"] : ["A"], segs, extra,
@@ -1324,7 +1333,7 @@ const chordBisector: Drill = {
           let e = "";
           if (mode !== "radius") e += lenLabel(p.O, p.B, `${num(r)} ${unit}`, -12);
           if (mode !== "dist") e += tx([p.M[0] - 14, (p.O[1] + p.M[1]) / 2 + 4], `${num(d)} ${unit}`, { size: 12, color: SOFT, anchor: "end" });
-          if (mode !== "chord") e += tx([p.M[0] - 40, p.M[1] + 18], `AB = ${num(2 * h)} ${unit}`, { size: 12, color: SOFT });
+          if (mode !== "chord") e += tx([200, 252], `AB = ${num(2 * h)} ${unit}`, { size: 12, color: SOFT });
           return e;
         }, `Circle with centre O. Chord AB with midpoint M; OM is perpendicular to AB. ${mode === "chord" ? `Radius ${num(r)} ${unit}, OM ${num(d)} ${unit}.` : mode === "dist" ? `Radius ${num(r)} ${unit}, AB ${num(2 * h)} ${unit}.` : `AB ${num(2 * h)} ${unit}, OM ${num(d)} ${unit}.`}`);
         const facts = mode === "chord" ? `The radius is ${num(r)} ${unit} and the chord is ${num(d)} ${unit} from the centre O.` : mode === "dist" ? `The radius is ${num(r)} ${unit} and the chord AB is ${num(2 * h)} ${unit} long.` : `The chord AB is ${num(2 * h)} ${unit} long and its midpoint M is ${num(d)} ${unit} from the centre O.`;
@@ -1724,7 +1733,7 @@ const proofCentre: Drill = {
       const diagram = drawScene({
         w: 400, h: 265, c, R, pts, onCircle: ["A", "B", "C", "D"],
         segs: [["C", "A"], ["C", "B"], ["O", "A"], ["O", "B"], ["C", "O"], ["O", "D", "dash"]],
-        marks: [["C", "A", "O", `${a}°`], ["C", "B", "O", `${b - a}°`], ["O", "A", "B", "x", true]],
+        marks: [["C", "A", "O", `${a}°`, false, 26], ["C", "A", "B", `${b - a}°`, false, 58], ["O", "A", "B", "x", true]],
         aria: `Circle with centre O. C is at the top and CO is extended to D. A and B are both on the left of CD. Angle OCA is ${a}°, angle ACB is ${b - a}° and angle AOB is marked x.`,
       });
       return {
