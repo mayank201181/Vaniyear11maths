@@ -64,7 +64,7 @@ function coefVariants(B: number, c: number): string[] {
 
 /** Answer a + b√c (integers); text match so only the simplified form counts. */
 function surdAns(a: number, b: number, c: number): AnswerSpec {
-  if (b === 0) return { type: "number", value: a };
+  if (b === 0 || c === 1) return { type: "number", value: a + b };
   const vs = coefVariants(Math.abs(b), c);
   const accept: string[] = [];
   for (const v of vs) {
@@ -448,7 +448,7 @@ export const drills: Drill[] = [
       }
 
       // Division (bare or in context): answer C = A ÷ B, with A = B × C built exactly.
-      const C: Big = { I: twoSig(rng), e: rng.int(-6, 7) - 1 };
+      const C: Big = { I: twoSig(rng), e: kind === "ctxDiv" ? rng.int(2, 6) - 1 : rng.int(-6, 7) - 1 };
       const Bd: Big = { I: rng.pick([2, 3, 4, 5, 6, 8, 12, 15, 16, 25]), e: rng.int(-6, 6) };
       const A: Big = { I: C.I * Bd.I, e: C.e + Bd.e };
 
@@ -477,7 +477,7 @@ export const drills: Drill[] = [
 
       const a = sf(A), b = sf(Bd), c = sf(C);
       const traps: Trap[] = [];
-      if (b.exp !== 0) traps.push({ spec: { type: "number", value: clean(c.mant * Math.pow(10, a.exp + b.exp - (a.exp - b.exp - c.exp))), standardForm: true }, feedback: "When you divide, SUBTRACT the powers of 10 (you added them)." });
+      if (b.exp !== 0) traps.push({ spec: { type: "number", value: clean(c.mant * Math.pow(10, c.exp + 2 * b.exp)), standardForm: true }, feedback: "When you divide, SUBTRACT the powers of 10 (you added them)." });
       const text =
         kind === "ctxDiv"
           ? rng.pick([
@@ -767,7 +767,7 @@ export const drills: Drill[] = [
               s === 1 ? `{{sqrt(${a * b}) = ${k}}}, so the answer is ${coef}.` : `{{sqrt(${a * b}) = sqrt(${k * k}) * sqrt(${s}) = ${sm(k, s)}}}${p * q > 1 ? `, so the answer is {{${p * q} * ${sm(k, s)} = ${sm(coef, s)}}}` : ""}.`,
             ],
             hint: "{{sqrt(a) * sqrt(b) = sqrt(ab)}}, then look for a square factor.",
-            traps: s === 1 ? traps.filter((t) => t.spec.type === "expression" && !t.spec.expr.startsWith(`${p * q}sqrt(${a * b})`)) : traps,
+            traps,
           };
         }, null as never);
       }
@@ -777,7 +777,7 @@ export const drills: Drill[] = [
         const b = rng.pick(SQUAREFREE.slice(0, 8));
         const t = rng.pick([2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 18, 20]);
         const a = b * t;
-        if (a > 300) return null;
+        if (a > 300 || splitSquare(a)[1] === 1) return null;
         const q = kind === "divc" ? rng.int(2, 4) : 1;
         const r = kind === "divc" ? rng.int(1, 4) : 1;
         const p = q * r;
@@ -923,18 +923,17 @@ export const drills: Drill[] = [
           if (N === 0) return null;
           const denM = m > 1 ? `${m}sqrt(${a})` : `sqrt(${kk * kk * a})`;
           const traps: Trap[] = [{ spec: { type: "expression", expr: `${k}/(${denCoef}sqrt(${a}))` }, feedback: "That has the right value, but the denominator still contains a surd — multiply top and bottom by the surd." }];
-          const wrong = simplify(k, denCoef * a);
-          if (!(wrong[0] === N && wrong[1] === D && D === 1)) traps.push({ spec: ratAns(wrong[0], wrong[1]), feedback: `You've lost the surd on top: {{${k} * sqrt(${a})}} stays as a surd.` });
+          traps.push({ spec: ratAns(N, D), feedback: `You've lost the surd on top: {{${k} * sqrt(${a})}} stays as a surd.` });
           return {
             prompt: `Rationalise the denominator of {{${k}/${denM}}}. Give your answer in its simplest form.`,
             answer: fracSurdAns(N, D, a),
             solution: [
               ...(kk > 1 ? [`First simplify: {{sqrt(${kk * kk * a}) = ${kk}sqrt(${a})}}.`] : []),
-              `Multiply top and bottom by {{sqrt(${a})}}: {{(${k}sqrt(${a}))/(${denCoef === 1 ? "" : denCoef + " * "}${a})}}.`,
-              `= {{(${k}sqrt(${a}))/${denCoef * a}}}${N !== k || D !== denCoef * a ? ` = ${D === 1 ? `{{${sm(N, a)}}}` : `{{(${sm(N, a)})/${D}}}`}` : ""}`,
+              `Multiply top and bottom by {{sqrt(${a})}}: {{(${sm(k, a)})/(${denCoef === 1 ? "" : denCoef + " * "}${a})}}.`,
+              `= {{(${sm(k, a)})/${denCoef * a}}}${N !== k || D !== denCoef * a ? ` = ${D === 1 ? `{{${sm(N, a)}}}` : `{{(${sm(N, a)})/${D}}}`}` : ""}`,
             ],
             hint: `Multiply the top and the bottom by {{sqrt(${a})}} — because {{sqrt(${a}) * sqrt(${a}) = ${a}}}.`,
-            traps: traps.filter((t) => !(t.spec.type === "number" && D === 1)),
+            traps,
           };
         }, null as never);
       }
@@ -982,7 +981,7 @@ export const drills: Drill[] = [
         const numM = c > 0 ? `${c} + sqrt(${b})` : `sqrt(${b}) - ${-c}`;
         const denM = `${a} ${sg < 0 ? "-" : "+"} sqrt(${b})`, conjM = `${a} ${sg < 0 ? "+" : "-"} sqrt(${b})`;
         return {
-          prompt: `Show the working to write {{(${numM})/(${denM})}} in the form {{p + q sqrt(${b})}}, where p and q are integers. Give your answer.`,
+          prompt: `Write {{(${numM})/(${denM})}} in the form {{p + q sqrt(${b})}}, where p and q are integers.`,
           answer: surdAns(A, Bc, b),
           solution: [
             `Multiply top and bottom by {{${conjM}}}.`,
@@ -1022,19 +1021,23 @@ export const drills: Drill[] = [
         const coef = tier >= 2 && u === 1 && rng.bool(0.4) ? rng.int(2, 5) : 1;
         const rhs = ratM(coef * Nn, Nd).slice(2, -2);
         const lhs = `${coef === 1 ? "" : coef}x^(${p}/${q})`;
+        const NM = ratM(Nn, Nd).slice(2, -2);
+        const RM = (neg ? ratM(Nd, Nn) : ratM(Nn, Nd)).slice(2, -2);
+        const inv = `${neg ? "-" : ""}${q}/${pAbs}`;
+        const rootName = pAbs === 2 ? "square" : pAbs === 3 ? "cube" : `${pAbs}th`;
         const traps: Trap[] = [];
         const nVal = Nn / Nd;
         const wrongPow = Math.pow(nVal, p / q);
         if (Number.isInteger(Math.round(wrongPow * 1e9) / 1e9) && Math.abs(wrongPow - xn / xd) > 1e-9) traps.push({ spec: { type: "number", value: Math.round(wrongPow) }, feedback: `To undo a power of {{${p}/${q}}}, raise both sides to the RECIPROCAL power {{${q}/${p}}}.` });
         if (Number.isInteger((nVal * q) / p) && (nVal * q) / p !== xn / xd) traps.push({ spec: { type: "number", value: (nVal * q) / p }, feedback: `A power isn't undone by multiplying by {{${q}/${p}}} — raise to the power {{${q}/${p}}} instead.` });
         return {
-          prompt: `${rng.pick(["Solve", "Find x, where x > 0, if"])} {{${lhs} = ${rhs}}}${rng.pick(["", ""])}. ${coef === 1 ? "" : ""}Give x as a whole number or a fraction${u > 1 || neg ? " in its simplest form" : ""}.`.replace("Solve {{", "Solve, for x > 0, {{"),
+          prompt: `${rng.bool() ? `Solve {{${lhs} = ${rhs}}}, where x > 0.` : `Find the positive value of x for which {{${lhs} = ${rhs}}}.`} Give x as a whole number or a fraction in its simplest form.`,
           answer: ratAns(xn, xd),
           solution: [
-            ...(coef > 1 ? [`Divide both sides by ${coef}: {{x^(${p}/${q}) = ${ratM(Nn, Nd).slice(2, -2)}}}.`] : []),
-            `Raise both sides to the power {{${q}/${p}}}: {{x = (${ratM(Nn, Nd).slice(2, -2)})^(${q}/${p})}}.`,
-            neg ? `The negative index flips the fraction: {{(${ratM(Nd, Nn).slice(2, -2)})^(${q}/${pAbs})}}.` : `Root first: the ${pAbs === 2 ? "square" : pAbs === 3 ? "cube" : `${pAbs}th`} root of {{${ratM(Nn, Nd).slice(2, -2)}}} is {{${ratM(t, u).slice(2, -2)}}}.`,
-            neg ? `The ${pAbs === 2 ? "square" : pAbs === 3 ? "cube" : `${pAbs}th`} root is {{${ratM(t, u).slice(2, -2)}}}; then the power ${q}: x = ${ratM(xn, xd)}.` : `Then the power ${q}: x = {{(${ratM(t, u).slice(2, -2)})^${q}}} = ${ratM(xn, xd)}.`,
+            ...(coef > 1 ? [`Divide both sides by ${coef}: {{x^(${p}/${q}) = ${NM}}}.`] : []),
+            `Raise both sides to the reciprocal power {{${inv}}}: {{x = (${NM})^(${inv})}}.`,
+            ...(neg ? [`The minus sign flips the fraction: {{x = (${RM})^(${q}/${pAbs})}}.`] : []),
+            `The ${rootName} root of {{${RM}}} is {{${ratM(t, u).slice(2, -2)}}}; then raise to the power ${q}: x = ${ratM(xn, xd)}.`,
           ],
           hint: `What power undoes {{${p}/${q}}}? (Its reciprocal.)`,
           traps,

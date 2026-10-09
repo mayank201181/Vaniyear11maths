@@ -162,17 +162,29 @@ function solve2(
 ): { steps: string[]; x: number; y: number } {
   const [a, b, c] = e1;
   const [d, e, f] = e2;
+  // Eliminate whichever letter needs the smaller multipliers (or is already missing).
+  const yEasy = b === 0 || e === 0;
+  const xEasy = a === 0 || d === 0;
+  if (!yEasy && (xEasy || lcm(Math.abs(a), Math.abs(d)) < lcm(Math.abs(b), Math.abs(e)))) {
+    const r = solve2([b, a, c], [e, d, f], vy, vx, l1, l2, cs);
+    return { steps: r.steps, x: r.y, y: r.x };
+  }
   const det = a * e - b * d;
   const x = (c * e - b * f) / det;
   const y = (a * f - c * d) / det;
   const csm = (v: number) => cs(v).replace(/−/g, "-");
+  /** coefficient × value for substitution inside {{ }}: "3 * (-2)", "-(4.50)", "5". */
+  const sv = (k: number, v: number): string => {
+    const p = v < 0 ? `(${csm(v)})` : csm(v);
+    return k === 1 ? p : k === -1 ? `-${p}` : `${k} * ${p}`;
+  };
   const steps: string[] = [];
-  if (b === 0 || e === 0) {
+  if (yEasy) {
     const own = b === 0;
     const p = own ? a : d, q = own ? d : a, r = own ? e : b, lab = own ? l1 : l2;
     const cOwn = own ? c : f, cOther = own ? f : c, other = own ? l2 : l1;
     steps.push(`${lab} has no ${vy}-term: ${M(`${term(p, vx)} = ${csm(cOwn)}`)}, so ${vx} = ${cs(x)}.`);
-    steps.push(`Substitute into ${other}: ${M(`${q === 0 ? "" : `${mathSum([[q, x]])} + `}${term(r, vy)} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
+    steps.push(`Substitute into ${other}: ${M(`${q === 0 ? "" : `${sv(q, x)} ${r < 0 ? "-" : "+"} `}${q === 0 ? term(r, vy) : term(Math.abs(r), vy)} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
     return { steps, x, y };
   }
   const L = lcm(Math.abs(b), Math.abs(e));
@@ -188,10 +200,10 @@ function solve2(
     steps.push(`Make the ${vy}-coefficients match. ${parts.join("; ")}.`);
   }
   steps.push(
-    `The ${vy}-terms have ${same ? "the same sign, so subtract" : "opposite signs, so add"}: ${M(`${term(K, vx)} = ${csm(R)}`)}, so ${vx} = ${cs(R)} ÷ ${br(K)} = ${cs(x)}.`,
+    `The ${vy}-terms have ${same ? "the same sign, so subtract" : "opposite signs, so add"}: ${M(`${term(K, vx)} = ${csm(R)}`)}${K === 1 ? "" : `, so ${vx} = ${cs(R)} ÷ ${K < 0 ? `(${cs(K * 100 / 100).replace(/^/, "") === cs(K) ? num(K) : num(K)})` : num(K)} = ${cs(x)}`}.`,
   );
   steps.push(
-    `Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${mathSum([[a, x]])} ${b < 0 ? "-" : "+"} ${term(Math.abs(b), vy)} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)}${b === 1 ? "" : ` and ${vy} = ${cs(y)}`}.`,
+    `Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${sv(a, x)} ${b < 0 ? "-" : "+"} ${term(Math.abs(b), vy)} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)}${b === 1 ? "" : ` and ${vy} = ${cs(y)}`}.`,
   );
   return { steps, x, y };
 }

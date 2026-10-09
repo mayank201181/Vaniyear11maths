@@ -262,9 +262,9 @@ export function parseExpr(input: string): Expr | null {
         pos++;
         let right = parseUnary();
         if (!right) return null;
-        // After "/", an implicit product belongs to the denominator: y^2/4x^4 = y²/(4x⁴),
-        // matching how {{ }} maths markup displays it.
-        if (t.v === "/") {
+        // After "/", an implicit product belongs to the denominator when the numerator isn't a
+        // plain number: y^2/4x^4 = y²/(4x⁴). A number over a number stays a coefficient: 3/5x = (3/5)x.
+        if (t.v === "/" && left.t !== "num") {
           while (startsAtom(peek())) {
             const more = parsePower();
             if (!more) return null;

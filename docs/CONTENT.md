@@ -160,6 +160,6 @@ any file other than the one(s) your task names.
   expr: "6sqrt(2)", form: "surd" }`). The checker then marks a decimal, an unsimplified surd (√72)
   or a surd left in a denominator (5/√3) as "close" with targeted feedback. Write roots as
   `sqrt(…)`, higher roots as powers `^(1/4)` (there is no root4).
-- **Division convention (typed answers and keys)**: an implicit product after `/` is the
-  denominator — `y^2/4x^4` = y²/(4x⁴), `1/2x` = 1/(2x) — exactly as `{{ }}` displays it. Write
-  keys with explicit brackets anyway (`"x/2"`, `"(1/2)x"`, `"y^2/(4x^4)"`).
+- **Division convention (typed answers)**: after `/`, an implicit product is the denominator
+  unless the numerator is a plain number — `y^2/4x^4` = y²/(4x⁴) but `3/5x` = (3/5)x. Always
+  write keys with explicit brackets (`"x/2"`, `"(3/5)x"`, `"y^2/(4x^4)"`).
