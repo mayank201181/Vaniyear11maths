@@ -6,7 +6,7 @@
 // ---------------------------------------------------------------------------
 import type { Drill, Rng } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
-import { frac, num, br, poly, simplify } from "./helpers.ts";
+import { frac, gcd, num, br, poly, simplify } from "./helpers.ts";
 
 const TOPIC = "inequalities";
 
@@ -106,6 +106,7 @@ function solSpec(s: Sol, v = "x"): AnswerSpec {
   return { type: "text", accept: [...acc], display: solMk(s, v) };
 }
 const solTrap = (s: Sol, feedback: string): Trap => ({ spec: solSpec(s), feedback });
+const numTrap = (value: number, feedback: string): Trap => ({ spec: { type: "number", value }, feedback });
 
 // ---------- small formatting ----------
 /** "ax + b" ASCII for markup. */
@@ -870,7 +871,12 @@ export const drills: Drill[] = [
         for (let n = Math.ceil(lo) - 1; n <= Math.floor(hi) + 1; n++) if (incl ? n >= lo - 1e-9 && n <= hi + 1e-9 : n > lo + 1e-9 && n < hi - 1e-9) c++;
         return c;
       };
-      const ask = rng.pick(["How many integers satisfy", "Find the number of integer values of x that satisfy", "How many whole-number solutions (integers, positive, negative or zero) does this inequality have:"]);
+      const [askA, askB] = rng.pick([
+        ["How many integers satisfy", "?"],
+        ["Find the number of integer values of x that satisfy", "."],
+        ["How many integer solutions (positive, negative or zero) does this inequality have:", "?"],
+      ] as const);
+      const ask = (ineq: string): string => `${askA} {{${ineq}}}${askB}`;
       if (kind === "square") {
         let k = 2;
         for (let i = 0; i < 50; i++) {
@@ -883,7 +889,7 @@ export const drills: Drill[] = [
         const alt = count(-rt, rt, strictOp);
         const top = Math.floor(rt - (exact && strictOp ? 1 : 0));
         return {
-          prompt: `${ask} {{x^2 ${op} ${k}}}?`,
+          prompt: ask(`x^2 ${op} ${k}`),
           answer: { type: "number", value: n },
           solution: [
             `Critical values: {{x = +- sqrt(${k})}}${exact ? ` = ±${rt}` : ` ≈ ±${Math.round(rt * 100) / 100}`}.`,
@@ -892,8 +898,8 @@ export const drills: Drill[] = [
           ],
           hint: "Square roots come in pairs: x can be negative too. Which integers lie between −√k and √k?",
           traps: [
-            { spec: { type: "number", value: top }, feedback: `You only counted the positive side. Negative numbers squared are positive too, so −1, −2, … also work.` },
-            ...(alt !== n ? [{ spec: { type: "number", value: alt }, feedback: "Check the end values: is the inequality strict (<) or not (≤)?" }] : []),
+            numTrap(top, "You only counted the positive side. Negative numbers squared are positive too, so −1, −2, … also work."),
+            ...(alt !== n ? [numTrap(alt, "Check the end values: is the inequality strict (<) or not (≤)?")] : []),
           ],
         };
       }
@@ -907,7 +913,7 @@ export const drills: Drill[] = [
         const n = count(p, r, !strictOp), alt = count(p, r, strictOp);
         const expr = poly([[1, "x^2"], [-(p + r), "x"], [p * r, ""]]);
         return {
-          prompt: `${ask} {{${expr} ${op} 0}}?`,
+          prompt: ask(`${expr} ${op} 0`),
           answer: { type: "number", value: n },
           solution: [
             `Factorise: {{(x ${p < 0 ? "+" : "-"} ${Math.abs(p)})(x ${r < 0 ? "+" : "-"} ${Math.abs(r)}) ${op} 0}}. Critical values ${num(p)} and ${num(r)}.`,
@@ -921,7 +927,7 @@ export const drills: Drill[] = [
       // non-monic: (a x − u)(x − v) ≤ 0
       for (let i = 0; i < 100; i++) {
         const a = rng.int(2, 4), u = rng.nonZero(-11, 11), v = rng.int(-5, 6);
-        if (u % a === 0 || v === 0) continue;
+        if (gcd(u, a) !== 1 || v === 0) continue;
         const r1 = u / a;
         const lo = Math.min(r1, v), hi = Math.max(r1, v);
         if (hi - lo < 1.5) continue;
@@ -929,7 +935,7 @@ export const drills: Drill[] = [
         const expr = poly([[a, "x^2"], [-(a * v + u), "x"], [u * v, ""]]);
         const ra = q(u, a);
         return {
-          prompt: `${ask} {{${expr} ${op} 0}}?`,
+          prompt: ask(`${expr} ${op} 0`),
           answer: { type: "number", value: n },
           solution: [
             `Factorise: {{(${lin(a, -u)})(x ${v < 0 ? "+" : "-"} ${Math.abs(v)}) ${op} 0}}. Critical values ${qTx(ra)} and ${num(v)}.`,
@@ -957,7 +963,7 @@ export const drills: Drill[] = [
       for (let i = 0; i < 200; i++) {
         const a = rng.pick(tier === 1 ? [2, 3] : [2, 3, 4, 5]);
         const u = rng.nonZero(-12, 12), v = rng.int(-6, 6);
-        if (u % a === 0) continue; // keep one fractional root
+        if (gcd(u, a) !== 1) continue; // one fractional root, and (ax − u) has no common factor
         const r1 = q(u, a), r2 = q(v);
         if (qv(r1) === qv(r2)) continue;
         const [lo, hi] = qv(r1) < qv(r2) ? [r1, r2] : [r2, r1];
