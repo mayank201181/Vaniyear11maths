@@ -107,7 +107,7 @@ export const practice: TopicPractice = {
       solution: ["fg(x) = f(g(x)) = f(x + 4).", "Replace x in f by (x + 4): 3(x + 4) − 2.", "= 3x + 12 − 2 = 3x + 10."],
       traps: [
         { spec: { type: "expression", expr: "3x+2" }, feedback: "That's gf(x) = (3x − 2) + 4. For fg(x), g goes in first: f(x + 4) = 3(x + 4) − 2." },
-        { spec: { type: "expression", expr: "3x+2+0*x" }, feedback: "Check your expansion: 3(x + 4) = 3x + 12, then subtract 2." },
+        { spec: { type: "expression", expr: "3x+14" }, feedback: "Check the constant: 3(x + 4) = 3x + 12, then **subtract** 2 to get 3x + 10." },
       ],
       commonError: "Writing 3x + 4 − 2 — forgetting to multiply the whole of (x + 4) by 3.",
       difficulty: "core",
