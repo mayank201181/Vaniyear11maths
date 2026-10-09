@@ -97,7 +97,7 @@ function SectorLab() {
     else if (measure === "area") caption = `The sector is {{${fr}}} of the whole disc, so its area is {{${fr} * pi * ${r}^2 = ${areaExact}}} ≈ ${sig3(area)} cm². Double the radius and the area is multiplied by 4 — area grows with {{r^2}}.`;
     else caption = `A sector's perimeter is the arc PLUS two radii: {{${2 * r} + ${arcExact}}} ≈ ${sig3(per)} cm. Forgetting the two straight edges is the most common slip in exams.`;
   } else {
-    caption = `Curl the sector round until its straight edges meet. The radius ${r} becomes the cone's slant height l, and the arc ({{${arcExact}}}) becomes the base circumference {{2 pi rho}}, so the base radius is {{rho = ${rhoM}}}. The curved area is still the sector's area: {{${fr} * pi * ${r}^2 = pi * ${rhoM} * ${r}}} — that is exactly {{pi r l}}.`;
+    caption = `Curl the sector round until its straight edges meet. The radius ${r} becomes the cone's slant height l, and the arc ({{${arcExact}}}) becomes the base circumference {{2 pi ρ}}, so the base radius is {{ρ = ${rhoM}}}. The curved area is still the sector's area: {{${fr} * pi * ${r}^2 = pi * ${rhoM} * ${r}}} — that is exactly {{pi r l}}.`;
   }
 
   // Sector-mode drawing.

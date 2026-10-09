@@ -95,14 +95,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q05",
-        question: "In triangle ABC, BC = 9 cm, AC = 7 cm and angle BAC = 72°.\n\nWork out the size of angle ABC. Give your answer correct to 1 decimal place.",
-        options: ["132.3°", "47.7°", "56.0°", "51.1°"],
+        question: "In triangle ABC, BC = 13 cm, AC = 9 cm and angle BAC = 68°.\n\nWork out the size of angle ABC. Give your answer correct to 1 decimal place.",
+        options: ["140.1°", "39.9°", "47.1°", "43.8°"],
         answerIndex: 1,
         explanation:
-          "BC is opposite A and AC is opposite B, so {{(sin B)/7 = (sin 72°)/9}}, giving sin B = 0.7397… and B = 47.7°. 132.3° is the other angle with the same sine, but 72° + 132.3° > 180°, so it cannot fit in this triangle. 56.0° treats angles as proportional to sides (72 × {{7/9}}) — they are not. 51.1° is {{sin^(-1)(7/9)}}, forgetting the sin 72°.",
+          "BC is opposite A and AC is opposite B, so {{(sin B)/9 = (sin 68°)/13}}, giving sin B = 0.6418… and B = 39.9°. 140.1° is the other angle with the same sine, but 68° + 140.1° > 180°, so it cannot fit in this triangle. 47.1° treats angles as proportional to sides (68 × {{9/13}}) — they are not. 43.8° is {{sin^(-1)(9/13)}}, forgetting the sin 68°.",
         difficulty: "core",
         guideRef: "sine-rule",
-        hints: ["Finding an angle? Put the sines on top: {{(sin B)/b = (sin A)/a}}.", "Which side is opposite B, and which is opposite A?", "sin B = {{(7 sin 72°)/9}}. Then check whether the obtuse alternative could fit."],
+        hints: ["Finding an angle? Put the sines on top: {{(sin B)/b = (sin A)/a}}.", "Which side is opposite B, and which is opposite A?", "sin B = {{(9 sin 68°)/13}}. Then check whether the obtuse alternative could fit."],
         strategy: "Check by substituting",
       },
       {
