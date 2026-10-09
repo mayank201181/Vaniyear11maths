@@ -135,7 +135,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 4.6, display: "x = 4.6 (or {{23/5}})" },
       traps: [
         { spec: { type: "number", value: 1.4 }, feedback: "Sign slip: the minus sign in front of the second fraction multiplies *both* terms: −4(x + 2) = −4x − 8, not −4x + 8." },
-        { spec: { type: "number", value: 3.4 }, feedback: "When you multiplied through by 12, the right-hand side must be multiplied too: 1 × 12 = 12." },
+        { spec: { type: "number", value: 2.4 }, feedback: "When you multiplied through by 12, the right-hand side must be multiplied too: 1 × 12 = 12, not 1." },
       ],
       solution: [
         "Multiply every term by 12 (the LCM of 4 and 3): 3(3x − 1) − 4(x + 2) = 12.",
@@ -268,7 +268,6 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 29, display: "29 weeks" },
       traps: [
         { spec: { type: "number", value: 28 }, feedback: "After 28 weeks she has 28 × (2 × 28 + 13) = $1932 — not yet more than $2000. Round **up** when the answer must exceed a target." },
-        { spec: { type: "number", value: 497 }, feedback: "That would be the week in which she saves $2000 in that single week. The question is about her *total* savings — use the sum formula." },
       ],
       solution: [
         "Arithmetic series with a = 15, d = 4.",
@@ -401,7 +400,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 41.1, tolerance: 0.05, display: "41.1°" },
       traps: [
         { spec: { type: "number", value: 51.0, tolerance: 0.05 }, feedback: "You used half the side (17.5 m), which gives the angle between a sloping *face* and the base. The edge EA sits above the diagonal, so you need AM = half of AC." },
-        { spec: { type: "number", value: 31.7, tolerance: 0.05 }, feedback: "You used the full diagonal AC. M is the centre of the base, so AM is only half of AC." },
+        { spec: { type: "number", value: 23.6, tolerance: 0.05 }, feedback: "You used the full diagonal AC. M is the centre of the base, so AM is only half of AC." },
       ],
       solution: [
         "The angle is EAM, in right-angled triangle EAM (right angle at M).",
@@ -587,7 +586,7 @@ export const paper: ExamPaper = {
       guideRef: "rationalising",
       difficulty: "core",
       question:
-        "Show that {{(5 + sqrt(3))/(2 - sqrt(3))}} can be written in the form {{a + b sqrt(3)}}, where a and b are integers.\n\nGive your answer in that form.",
+        "Write {{(5 + sqrt(3))/(2 - sqrt(3))}} in the form {{a + b sqrt(3)}}, where a and b are integers.\n\nShow your working clearly.",
       answer: { type: "expression", expr: "13+7sqrt(3)", form: "surd", display: "{{13 + 7 sqrt(3)}}" },
       traps: [
         { spec: { type: "expression", expr: "(13+7sqrt(3))/7" }, feedback: "Check the denominator: {{(2 - sqrt(3))(2 + sqrt(3)) = 4 - 3 = 1}}, not 7. The minus sign comes from {{-(sqrt(3))^2}}." },
@@ -674,7 +673,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 4800, display: "4800 cm²" },
       traps: [
         { spec: { type: "number", value: 40 }, feedback: "x = 40 cm is the base length that gives the minimum. The question asks for the minimum *area* — substitute x = 40 back into A." },
-        { spec: { type: "number", value: 6400 }, feedback: "That includes a lid (2x² instead of x²). The bins are open-topped, so there is only one square face." },
+        { spec: { type: "number", value: 6048, tolerance: 3 }, feedback: "That is the minimum for a box *with* a lid (A = 2x² + {{128000/x}}). The bins are open-topped, so there is only one square face: A = x² + {{128000/x}}." },
       ],
       solution: [
         "Volume: x²h = 32 000, so h = {{32000/x^2}}.",
