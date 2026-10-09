@@ -4,7 +4,7 @@ import type { TopicPractice } from "../../types.ts";
 // Venn diagrams (generated from exact geometry: circles r = 65 centred 70 apart)
 // ---------------------------------------------------------------------------
 
-const Q_D1 = `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram: universal set ξ with overlapping circles A and B. A only: 7. A and B: 4. B only: 9. Outside both circles: 5."><rect x="10" y="10" width="300" height="180" fill="#ffffff" stroke="#334155" stroke-width="1.5"/><circle cx="125" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><circle cx="195" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="20" y="30" font-family="sans-serif" fill="#1f2937" font-size="14" font-style="italic">ξ</text><text x="70" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">A</text><text x="250" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">B</text><text x="95" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">7</text><text x="160" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">4</text><text x="225" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">9</text><text x="280" y="178" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">5</text></svg>`;
+const Q_D1 = `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram: universal set ξ with overlapping circles A and B. A only: 8. A and B: 3. B only: 10. Outside both circles: 4."><rect x="10" y="10" width="300" height="180" fill="#ffffff" stroke="#334155" stroke-width="1.5"/><circle cx="125" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><circle cx="195" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="20" y="30" font-family="sans-serif" fill="#1f2937" font-size="14" font-style="italic">ξ</text><text x="70" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">A</text><text x="250" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">B</text><text x="95" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">8</text><text x="160" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">3</text><text x="225" y="110" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">10</text><text x="280" y="178" font-family="sans-serif" fill="#1f2937" font-size="13" text-anchor="middle">4</text></svg>`;
 
 const Q_SHADE = `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram: universal set ξ with overlapping circles A and B. Only the part of B that is outside A is shaded."><rect x="10" y="10" width="300" height="180" fill="#ffffff" stroke="#334155" stroke-width="1.5"/><path d="M160,50.23 A65,65 0 1,1 160,159.77 A65,65 0 0,0 160,50.23 Z" fill="#fde68a" fill-rule="evenodd" stroke="none"/><circle cx="125" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><circle cx="195" cy="105" r="65" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="20" y="30" font-family="sans-serif" fill="#1f2937" font-size="14" font-style="italic">ξ</text><text x="70" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">A</text><text x="250" y="42" font-family="sans-serif" fill="#1f2937" font-size="14" font-weight="bold" text-anchor="middle">B</text></svg>`;
 
@@ -78,15 +78,15 @@ export const practice: TopicPractice = {
       id: "sets-venn-quiz-q03",
       question: "The Venn diagram shows the number of elements in each region.\n\nFind n(A ∪ B).",
       diagram: Q_D1,
-      answer: { type: "number", value: 20 },
+      answer: { type: "number", value: 21 },
       solution: [
         "A ∪ B is everything inside at least one circle.",
-        "n(A ∪ B) = 7 + 4 + 9 = 20.",
-        "The 5 outside both circles are *not* in A ∪ B.",
+        "n(A ∪ B) = 8 + 3 + 10 = 21.",
+        "The 4 outside both circles are *not* in A ∪ B.",
       ],
       traps: [
-        { spec: { type: "number", value: 24 }, feedback: "You added n(A) = 11 and n(B) = 13, so the 4 in the overlap got counted twice. Add each region once: 7 + 4 + 9." },
-        { spec: { type: "number", value: 25 }, feedback: "25 is n(ξ). The 5 outside both circles are not in A or B." },
+        { spec: { type: "number", value: 24 }, feedback: "You added n(A) = 11 and n(B) = 13, so the 3 in the overlap got counted twice. Add each region once: 8 + 3 + 10." },
+        { spec: { type: "number", value: 25 }, feedback: "25 is n(ξ). The 4 outside both circles are not in A or B." },
       ],
       commonError: "Counting the overlap twice by adding n(A) and n(B).",
       difficulty: "warmup",
@@ -98,19 +98,19 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "sets-venn-quiz-q04",
       question:
-        "In a class of 32 students, 19 play badminton, 15 play netball and 6 play neither sport.\n\nHow many students play both badminton and netball?",
+        "In a class of 32 students, 19 play basketball, 15 play netball and 6 play neither sport.\n\nHow many students play both basketball and netball?",
       answer: { type: "number", value: 8 },
       solution: [
         "Students who play at least one sport: 32 − 6 = 26.",
-        "Badminton + netball counts the 'both' group twice: 19 + 15 = 34.",
+        "Basketball + netball counts the 'both' group twice: 19 + 15 = 34.",
         "So the overlap is 34 − 26 = 8.",
-        "Check: only badminton 11, both 8, only netball 7, neither 6 → 11 + 8 + 7 + 6 = 32 ✓",
+        "Check: only basketball 11, both 8, only netball 7, neither 6 → 11 + 8 + 7 + 6 = 32 ✓",
       ],
       solutions: [
         {
           label: "Algebra in the Venn diagram",
           steps: [
-            "Let x play both. Then only badminton = 19 − x and only netball = 15 − x.",
+            "Let x play both. Then only basketball = 19 − x and only netball = 15 − x.",
             "(19 − x) + x + (15 − x) + 6 = 32.",
             "40 − x = 32, so x = 8.",
           ],
@@ -238,10 +238,10 @@ export const practice: TopicPractice = {
       id: "sets-venn-quiz-q10",
       question: "Use the Venn diagram. An element of ξ is chosen at random.\n\nWhat is P(A′)?",
       diagram: Q_D1,
-      options: ["{{11/25}}", "{{1/5}}", "{{9/25}}", "{{14/25}}"],
+      options: ["{{11/25}}", "{{4/25}}", "{{2/5}}", "{{14/25}}"],
       answerIndex: 3,
       explanation:
-        "A′ is everything *not* in A: the 9 in B only and the 5 outside both, so P(A′) = {{14/25}}. {{11/25}} is P(A). {{9/25}} forgets the 5 outside both circles, and {{1/5}} = {{5/25}} uses only the outside region.",
+        "A′ is everything *not* in A: the 10 in B only and the 4 outside both, so P(A′) = {{14/25}}. {{11/25}} is P(A). {{2/5}} = {{10/25}} forgets the 4 outside both circles, and {{4/25}} uses only the outside region.",
       difficulty: "core",
       guideRef: "venn-probability",
       hints: ["A′ means 'not in A'. Which regions are outside circle A?", "Don't forget the region outside both circles."],
@@ -391,7 +391,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "sets-venn-p1-q07",
           question:
-            "60 students were asked which sciences they take: Maths (M), Physics (P) and Chemistry (C).\n\n- 4 take all three.\n- 10 take M and P.\n- 9 take M and C.\n- 7 take P and C.\n- 30 take M, 24 take P and 22 take C.\n\nHow many of the 60 students take none of the three subjects?",
+            "60 students were asked which of these subjects they take: Maths (M), Physics (P) and Chemistry (C).\n\n- 4 take all three.\n- 10 take M and P.\n- 9 take M and C.\n- 7 take P and C.\n- 30 take M, 24 take P and 22 take C.\n\nHow many of the 60 students take none of the three subjects?",
           answer: { type: "number", value: 6 },
           solution: [
             "Fill in from the centre: M ∩ P ∩ C = 4.",
