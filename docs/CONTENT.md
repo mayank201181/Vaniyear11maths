@@ -167,3 +167,6 @@ any file other than the one(s) your task names.
 - **Equations of lines/circles**: use `{ type: "equation", eq: "3x+2y-12=0" }` — any rearrangement
   or non-zero multiple is accepted (y = 6 − 1.5x, 6x + 4y = 24 …). Add `form: "general"` when the
   question demands "ax + by + c = 0 where a, b and c are integers". Don't use `text` for equations.
+- **Inequality answers**: use `{ type: "inequality", ineq: "-2<x<=5" }` (or `"x<-1 or x>4"`,
+  `"x>=3"`). Answers are compared as solution sets, so "5 ≥ x > −2", "x > −2 and x ≤ 5" and either
+  order of an "or" are accepted, and a wrong < / ≤ gets "close" feedback. Don't use `text` for inequalities.

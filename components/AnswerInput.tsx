@@ -13,6 +13,7 @@ const KEYS_BY_TYPE: Record<AnswerSpec["type"], string[]> = {
   ratio: [":", "/", "."],
   expression: ["x", "y", "n", "^", "(", ")", "−", "/", "√", "π"],
   equation: ["x", "y", "=", "^", "(", ")", "−", "/", "√"],
+  inequality: ["x", "<", ">", "≤", "≥", "−", "/", " or "],
   text: ["<", ">", "≤", "≥", "−", "x"],
 };
 
@@ -23,6 +24,7 @@ const PLACEHOLDER: Record<AnswerSpec["type"], string> = {
   ratio: "e.g. 3 : 4",
   expression: "e.g. 3x + 2 or 2(x − 1)",
   equation: "e.g. y = 2x + 3 or 3x + 2y − 12 = 0",
+  inequality: "e.g. x > 3, −2 < x ≤ 5 or x < −1 or x > 4",
   text: "Type your answer",
 };
 

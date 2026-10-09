@@ -1107,7 +1107,7 @@ export const practice: TopicPractice = {
       ],
       traps: [
         { spec: { type: "list", values: [30, 150] }, feedback: "Don't forget the other factor: sin x = 1 gives x = 90°." },
-        { spec: { type: "list", values: [210, 270, 330] }, feedback: "Check the signs: replacing {{cos^2 x}} by {{sin^2 x - 1}} (the identity backwards) gives sin x = −{{1/2}} and −1. The correct swap is {{cos^2 x = 1 - sin^2 x}}." },
+        { spec: { type: "list", values: [210, 270, 330] }, feedback: "Sign slip: {{-2sin^2 x + 3sin x - 1 = 0}} times −1 is {{2sin^2 x - 3sin x + 1 = 0}} — **every** term changes sign. That gives sin x = {{1/2}} or 1, not negative values." },
       ],
       commonError: "Replacing {{cos^2 x}} by {{sin^2 x - 1}} (the identity backwards), which flips the signs.",
       difficulty: "challenge",

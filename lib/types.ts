@@ -122,6 +122,16 @@ export type AnswerSpec =
       form?: "any" | "general";
       display?: string;
     }
+  /**
+   * An inequality / solution set in one variable, compared as a set of intervals, so
+   * "x > 3", "3 < x", "-2 < x < 5", "-2 < x and x < 5", "x < -1 or x > 4" (any order) all work.
+   * Use ≤/≥ or <=/>= for inclusive ends. Endpoints are numbers (fractions/surds allowed).
+   */
+  | {
+      type: "inequality";
+      ineq: string;
+      display?: string;
+    }
   /** Free text matched against accepted alternatives (case/space-insensitive). */
   | {
       type: "text";

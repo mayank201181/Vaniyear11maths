@@ -352,3 +352,19 @@ test("equations: any rearrangement or multiple of the keyed equation", () => {
   assert.equal(st(circle, "x^2+y^2=5"), "incorrect");
   assert.equal(specSelfCheck(line).status, "correct");
 });
+
+test("inequalities: compared as solution sets", () => {
+  const one: AnswerSpec = { type: "inequality", ineq: "x>3" };
+  for (const i of ["x > 3", "3 < x", "x>3"]) assert.equal(st(one, i), "correct", i);
+  assert.equal(st(one, "x >= 3"), "close");
+  assert.equal(st(one, "x < 3"), "incorrect");
+  const band: AnswerSpec = { type: "inequality", ineq: "-2<x<=5" };
+  for (const i of ["-2 < x ≤ 5", "x > -2 and x <= 5", "5 >= x > -2"]) assert.equal(st(band, i), "correct", i);
+  assert.equal(st(band, "-2 <= x <= 5"), "close");
+  const two: AnswerSpec = { type: "inequality", ineq: "x<-1 or x>4" };
+  for (const i of ["x < -1 or x > 4", "x > 4 or x < −1", "x<-1, x>4"]) assert.equal(st(two, i), "correct", i);
+  assert.equal(st(two, "-1 < x < 4"), "incorrect");
+  const surd: AnswerSpec = { type: "inequality", ineq: "-sqrt(3)<=x<=sqrt(3)" };
+  assert.equal(st(surd, "-√3 ≤ x ≤ √3"), "correct");
+  assert.equal(st(one, "banana"), "invalid");
+});

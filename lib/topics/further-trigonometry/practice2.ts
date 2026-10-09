@@ -116,18 +116,18 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "further-trigonometry-p3-q05",
         question:
-          "A triangle has sides of length 5 cm, 7 cm and 10 cm.\n\nCalculate the size of its largest angle.\n\nGive your answer in degrees, correct to 1 decimal place.",
-        answer: { type: "number", value: 111.8, tolerance: 0.05, display: "111.8°" },
+          "A triangle has sides of length 6 cm, 8 cm and 12 cm.\n\nCalculate the size of its largest angle.\n\nGive your answer in degrees, correct to 1 decimal place.",
+        answer: { type: "number", value: 117.3, tolerance: 0.05, display: "117.3°" },
         traps: [
-          { spec: { type: "number", value: 68.2, tolerance: 0.05 }, feedback: "Your cosine has the wrong sign. {{cos C = (5^2 + 7^2 - 10^2)/(2 * 5 * 7) = -26/70}}, which is negative, so the angle is obtuse." },
-          { spec: { type: "number", value: 27.7, tolerance: 0.05 }, feedback: "That's the *smallest* angle (opposite 5 cm). The largest angle is opposite the longest side, 10 cm." },
+          { spec: { type: "number", value: 62.7, tolerance: 0.05 }, feedback: "Your cosine has the wrong sign. {{cos C = (6^2 + 8^2 - 12^2)/(2 * 6 * 8) = -44/96}}, which is negative, so the angle is obtuse." },
+          { spec: { type: "number", value: 26.4, tolerance: 0.05 }, feedback: "That's the *smallest* angle (opposite 6 cm). The largest angle is opposite the longest side, 12 cm." },
         ],
         solution: [
-          "The largest angle is opposite the longest side, 10 cm. Call it C.",
-          "{{cos C = (5^2 + 7^2 - 10^2)/(2 * 5 * 7) = (25 + 49 - 100)/70 = -26/70 = -0.37143}}",
-          "{{C = cos^(-1)(-0.37143) = 111.80...°}}",
-          "Largest angle = **111.8°** (1 d.p.).",
-          "The negative cosine is a built-in check: it tells you the angle is obtuse, because {{10^2 > 5^2 + 7^2}}.",
+          "The largest angle is opposite the longest side, 12 cm. Call it C.",
+          "{{cos C = (6^2 + 8^2 - 12^2)/(2 * 6 * 8) = (36 + 64 - 144)/96 = -44/96 = -0.45833}}",
+          "{{C = cos^(-1)(-0.45833) = 117.27...°}}",
+          "Largest angle = **117.3°** (1 d.p.).",
+          "The negative cosine is a built-in check: it tells you the angle is obtuse, because {{12^2 > 6^2 + 8^2}}.",
         ],
         commonError: "Putting the longest side in the wrong place in the formula — the side opposite the angle you want is the one you subtract.",
         difficulty: "core",
@@ -145,7 +145,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p3-q06",
         question:
           "In triangle ABC, BC = 12 cm, AC = 15 cm and angle BAC = 40°.\n\nThere are **two** possible triangles that fit this information.\n\nFind both possible sizes of angle ABC. Give each answer correct to 1 decimal place, separated by a comma.",
-        answer: { type: "list", values: [53.5, 126.5], tolerance: 0.06, display: "53.5° and 126.5°" },
+        answer: { type: "list", values: [53.5, 126.5], ordered: false, tolerance: 0.06, display: "53.5° and 126.5°" },
         traps: [
           { spec: { type: "number", value: 53.5, tolerance: 0.06 }, feedback: "That's one of them. sin B = 0.8035 also has an obtuse solution: 180° − 53.5° = 126.5°. Check it fits: 40° + 126.5° < 180° ✓." },
           { spec: { type: "list", values: [31.0, 149.0], tolerance: 0.1 }, feedback: "Your sine rule ratio is upside down. AC = 15 is opposite B and BC = 12 is opposite A, so {{sin B = (15 sin 40°)/12}}." },
@@ -201,7 +201,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p3-q08",
         question:
           "Solve {{4 sin x + 3 = 0}} for 0° ≤ x ≤ 360°.\n\nGive your answers correct to 1 decimal place, separated by a comma.",
-        answer: { type: "list", values: [228.6, 311.4], tolerance: 0.06, display: "x = 228.6°, 311.4°" },
+        answer: { type: "list", values: [228.6, 311.4], ordered: false, tolerance: 0.06, display: "x = 228.6°, 311.4°" },
         traps: [
           { spec: { type: "list", values: [48.6, 131.4], tolerance: 0.06 }, feedback: "Those solve sin x = +0.75. Here {{sin x = -3/4}}, so x is where the sine graph is *below* the axis: between 180° and 360°." },
           { spec: { type: "number", value: -48.6, tolerance: 0.06 }, feedback: "−48.6° is the calculator's answer, but it's outside 0° ≤ x ≤ 360°. Add 360° to get 311.4°, and use symmetry for the other one: 180° + 48.6° = 228.6°." },
@@ -283,20 +283,20 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "further-trigonometry-p3-q11",
         question:
-          "OAB is a sector of a circle with centre O and radius 10 cm. Angle AOB = 70°.\n\nThe shaded segment lies between the chord AB and the arc AB.\n\nWork out the area of the shaded segment. Give your answer in cm², correct to 3 significant figures.",
-        diagram: `<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sector OAB of a circle with centre O, radius 10 cm and angle AOB 70 degrees; the segment between chord AB and the arc is shaded"><rect x="0" y="0" width="400" height="250" fill="#ffffff"/><path d="M 136.9 160.1 A 110 110 0 0 0 263.1 160.1 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><path d="M 136.9 160.1 L 200 70 L 263.1 160.1" fill="none" stroke="#1f2937" stroke-width="2"/><circle cx="200" cy="70" r="2.5" fill="#1f2937"/><text x="200" y="60" font-size="14" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#1f2937">O</text><text x="124.9" y="168.1" font-size="14" font-family="sans-serif" text-anchor="end" font-weight="bold" fill="#1f2937">A</text><text x="275.1" y="168.1" font-size="14" font-family="sans-serif" text-anchor="start" font-weight="bold" fill="#1f2937">B</text><path d="M 186.2 89.7 A 24 24 0 0 0 213.8 89.7" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="200" y="116" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">70°</text><text x="158.5" y="115.1" font-size="13" font-family="sans-serif" text-anchor="end" fill="#334155">10 cm</text><text x="392" y="242" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">Diagram NOT accurately drawn</text></svg>`,
-        answer: { type: "number", value: 14.1, tolerance: 0.05, display: "14.1 cm²" },
+          "OAB is a sector of a circle with centre O and radius 12 cm. Angle AOB = 54°.\n\nThe shaded segment lies between the chord AB and the arc AB.\n\nWork out the area of the shaded segment. Give your answer in cm², correct to 3 significant figures.",
+        diagram: `<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Sector OAB of a circle with centre O, radius 12 cm and angle AOB 54 degrees; the segment between chord AB and the arc is shaded"><rect x="0" y="0" width="400" height="250" fill="#ffffff"/><path d="M 150.1 168 A 110 110 0 0 0 249.9 168 Z" fill="#fde68a" stroke="#1f2937" stroke-width="2"/><path d="M 150.1 168 L 200 70 L 249.9 168" fill="none" stroke="#1f2937" stroke-width="2"/><circle cx="200" cy="70" r="2.5" fill="#1f2937"/><text x="200" y="60" font-size="14" font-family="sans-serif" text-anchor="middle" font-weight="bold" fill="#1f2937">O</text><text x="138.1" y="176" font-size="14" font-family="sans-serif" text-anchor="end" font-weight="bold" fill="#1f2937">A</text><text x="261.9" y="176" font-size="14" font-family="sans-serif" text-anchor="start" font-weight="bold" fill="#1f2937">B</text><path d="M 189.1 91.4 A 24 24 0 0 0 210.9 91.4" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="200" y="114" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">54°</text><text x="167" y="119" font-size="13" font-family="sans-serif" text-anchor="end" fill="#334155">12 cm</text><text x="392" y="242" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">Diagram NOT accurately drawn</text></svg>`,
+        answer: { type: "number", value: 9.61, tolerance: 0.005, display: "9.61 cm²" },
         traps: [
-          { spec: { type: "number", value: 61.1, tolerance: 0.05 }, feedback: "That's the whole sector. Subtract the area of triangle OAB to leave just the segment." },
-          { spec: { type: "number", value: 47.0, tolerance: 0.05 }, feedback: "That's the area of triangle OAB. The segment is sector − triangle." },
+          { spec: { type: "number", value: 67.9, tolerance: 0.05 }, feedback: "That's the whole sector. Subtract the area of triangle OAB to leave just the segment." },
+          { spec: { type: "number", value: 58.2, tolerance: 0.05 }, feedback: "That's the area of triangle OAB. The segment is sector − triangle." },
         ],
         solution: [
-          "Sector area = {{70/360 * pi * 10^2 = 61.087...}} cm².",
-          "Triangle OAB = {{1/2 * 10 * 10 * sin 70° = 50 * 0.93969 = 46.985...}} cm².",
-          "Segment = 61.087 − 46.985 = 14.102… cm².",
-          "Area = **14.1 cm²** (3 s.f.).",
+          "Sector area = {{54/360 * pi * 12^2 = 67.858...}} cm².",
+          "Triangle OAB = {{1/2 * 12 * 12 * sin 54° = 72 * 0.80902 = 58.249...}} cm².",
+          "Segment = 67.858 − 58.249 = 9.609… cm².",
+          "Area = **9.61 cm²** (3 s.f.).",
         ],
-        commonError: "Rounding the sector and triangle to 3 s.f. before subtracting (61.1 − 47.0 = 14.1 happens to survive here, but often it doesn't). Keep full calculator values.",
+        commonError: "Rounding the sector and triangle to 3 s.f. before subtracting: 67.9 − 58.2 = 9.7, which is wrong to 3 s.f. Keep full calculator values.",
         difficulty: "core",
         guideRef: "area-sine",
         hints: [
@@ -366,7 +366,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p3-q14",
         question:
           "Solve {{2 sin^2 x + sin x - 1 = 0}} for 0° ≤ x ≤ 360°.\n\nGive all solutions, separated by commas.",
-        answer: { type: "list", values: [30, 150, 270], display: "x = 30°, 150°, 270°" },
+        answer: { type: "list", values: [30, 150, 270], ordered: false, display: "x = 30°, 150°, 270°" },
         traps: [
           { spec: { type: "list", values: [30, 150] }, feedback: "You've solved sin x = {{1/2}}, but the other factor gives sin x = −1 too. Where is the sine curve at its minimum?" },
           { spec: { type: "list", values: [90, 210, 330] }, feedback: "Check your factorisation by expanding: you need (2 sin x − 1)(sin x + 1), which gives sin x = {{1/2}} or sin x = −1." },
@@ -512,7 +512,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p4-q04",
         question:
           "Given that cos 72° = 0.309 correct to 3 significant figures, find the two values of x between 0° and 360° for which cos x = −0.309.\n\nGive your answers separated by a comma.",
-        answer: { type: "list", values: [108, 252], display: "x = 108°, 252°" },
+        answer: { type: "list", values: [108, 252], ordered: false, display: "x = 108°, 252°" },
         traps: [
           { spec: { type: "list", values: [72, 288] }, feedback: "Those are where cos x = +0.309. Cosine is negative between 90° and 270°." },
           { spec: { type: "list", values: [108, 288] }, feedback: "108° is right, but cos 288° = cos 72° is positive. The y = cos x graph is symmetrical about x = 180°, so the partner of 108° is 360° − 108° = 252°." },
@@ -617,24 +617,24 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "further-trigonometry-p4-q08",
         question:
-          "In triangle ABC, AC = x cm, AB = (x + 2) cm, BC = 7 cm and angle BAC = 60°.\n\n(a) Show that {{x^2 + 2x - 45 = 0}}.\n\n(b) Hence find the length of AC, correct to 3 significant figures.",
-        diagram: `<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with AB x plus 2 cm, AC x cm, angle BAC 60 degrees and BC 7 cm"><rect x="0" y="0" width="400" height="250" fill="#ffffff"/><polygon points="78.8,196 321.2,196 168.8,40" fill="#c7d2fe" stroke="#1f2937" stroke-width="2"/><text x="64.3" y="207.8" font-size="14" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#1f2937">A</text><text x="336.1" y="206.9" font-size="14" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#1f2937">B</text><text x="165.7" y="29.3" font-size="14" font-family="sans-serif" font-weight="bold" text-anchor="middle" fill="#1f2937">C</text><text x="200" y="213" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#334155">(x + 2) cm</text><text x="115.2" y="117" font-size="13" font-family="sans-serif" text-anchor="end" fill="#334155">x cm</text><text x="252.2" y="114.6" font-size="13" font-family="sans-serif" text-anchor="start" fill="#334155">7 cm</text><path d="M 89.8 176.9 A 22 22 0 0 1 100.8 196" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="115.2" y="180" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">60°</text><text x="392" y="242" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">Diagram NOT accurately drawn</text></svg>`,
+          "In triangle ABC, AC = x cm, AB = (x + 4) cm, BC = 9 cm and angle BAC = 60°.\n\n(a) Show that {{x^2 + 4x - 65 = 0}}.\n\n(b) Hence find the length of AC, correct to 3 significant figures.",
+        diagram: `<svg viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with AB x plus 4 cm, AC x cm, angle BAC 60 degrees and BC 9 cm"><rect x="0" y="0" width="400" height="250" fill="#ffffff"/><polygon points="64.1,198 335.9,198 147.3,54" fill="#c7d2fe" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><text x="49.3" y="209" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><path d="M 88.1 198 A 24 24 0 0 0 76.1 177.2" fill="none" stroke="#1f2937" stroke-width="1.2"/><text x="95.3" y="184" font-size="12" font-family="sans-serif" text-anchor="middle" fill="#1f2937">60°</text><text x="255.4" y="119.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">9 cm</text><text x="351.1" y="207.8" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="82.8" y="124" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">x cm</text><text x="141.8" y="44" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="200" y="217" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">(x + 4) cm</text><text x="392" y="242" font-size="11" font-family="sans-serif" text-anchor="end" fill="#334155">Diagram NOT accurately drawn</text></svg>`,
         marks: 4,
         modelAnswer:
-          "(a) Cosine rule with the 60° angle: {{7^2 = x^2 + (x + 2)^2 - 2x(x + 2) cos 60°}}.\n\ncos 60° = {{1/2}}, so {{49 = x^2 + x^2 + 4x + 4 - x(x + 2)}}\n\n{{49 = 2x^2 + 4x + 4 - x^2 - 2x = x^2 + 2x + 4}}\n\nSo {{x^2 + 2x - 45 = 0}}, as required.\n\n(b) {{x = (-2 +- sqrt(4 + 180))/2 = (-2 +- sqrt(184))/2 = -1 +- sqrt(46)}}.\n\nx must be positive, so x = −1 + √46 = 5.782… AC = 5.78 cm (3 s.f.).",
+          "(a) Cosine rule with the 60° angle: {{9^2 = x^2 + (x + 4)^2 - 2x(x + 4) cos 60°}}.\n\ncos 60° = {{1/2}}, so {{81 = x^2 + x^2 + 8x + 16 - x(x + 4)}}\n\n{{81 = 2x^2 + 8x + 16 - x^2 - 4x = x^2 + 4x + 16}}\n\nSo {{x^2 + 4x - 65 = 0}}, as required.\n\n(b) Complete the square: {{(x + 2)^2 - 4 - 65 = 0}}, so {{(x + 2)^2 = 69}} and {{x = -2 +- sqrt(69)}}.\n\nx must be positive, so x = −2 + √69 = 6.3066… AC = 6.31 cm (3 s.f.).",
         markScheme: [
-          { point: "Correct cosine rule substitution: 49 = x² + (x + 2)² − 2x(x + 2) cos 60°", keywords: ["49", "cos 60", "(x + 2)^2", "(x+2)^2", "(x + 2)²", "2x(x + 2)"] },
-          { point: "Uses cos 60° = ½ and expands correctly to x² + 2x + 4 = 49 (or equivalent), reaching the given equation", keywords: ["1/2", "x^2 + 2x + 4", "x² + 2x + 4", "2x^2 + 4x + 4", "x^2 + 2x - 45"] },
-          { point: "Correct method to solve the quadratic (formula or completing the square)", keywords: ["sqrt(184)", "√184", "sqrt(46)", "√46", "(x + 1)^2 = 46", "(x+1)^2=46"] },
-          { point: "AC = 5.78 cm, rejecting the negative root", keywords: ["5.78", "negative", "reject"] },
+          { point: "Correct cosine rule substitution: 81 = x² + (x + 4)² − 2x(x + 4) cos 60°", keywords: ["81", "cos 60", "(x + 4)^2", "(x+4)^2", "(x + 4)²", "2x(x + 4)"] },
+          { point: "Uses cos 60° = ½ and expands correctly to x² + 4x + 16 = 81 (or equivalent), reaching the given equation", keywords: ["1/2", "x^2 + 4x + 16", "x² + 4x + 16", "2x^2 + 8x + 16", "x^2 + 4x - 65"] },
+          { point: "Correct method to solve the quadratic (formula or completing the square)", keywords: ["sqrt(276)", "√276", "sqrt(69)", "√69", "(x + 2)^2 = 69", "(x+2)^2=69"] },
+          { point: "AC = 6.31 cm, rejecting the negative root", keywords: ["6.31", "negative", "reject"] },
         ],
-        commonError: "Expanding {{(x + 2)^2}} as {{x^2 + 4}}. Always write the bracket out twice.",
+        commonError: "Expanding {{(x + 4)^2}} as {{x^2 + 16}}. Always write the bracket out twice.",
         difficulty: "core",
         guideRef: "cosine-rule",
         hints: [
           "Which side is opposite the 60° angle? Write the cosine rule with that side on the left.",
           "cos 60° = {{1/2}} exactly, which cancels the 2 in 2bc.",
-          "For (b), the quadratic does not factorise. Use the formula or complete the square: {{(x + 1)^2 = 46}}.",
+          "For (b), the quadratic does not factorise. Use the formula or complete the square: {{(x + 2)^2 = 69}}.",
         ],
         strategy: "Introduce a variable",
       },
@@ -671,26 +671,26 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "further-trigonometry-p4-q10",
         question:
-          "The curve with equation {{y = 2 + sin(x - 45°)}} is drawn for 0° ≤ x ≤ 360°.\n\nWrite down the coordinates of its maximum point. Give the x-coordinate first.",
-        answer: { type: "list", values: [135, 3], ordered: true, display: "(135°, 3)" },
+          "The curve with equation {{y = 2cos(x + 30°) + 1}} is drawn for 0° ≤ x ≤ 360°.\n\nWrite down the coordinates of its maximum point in this interval. Give the x-coordinate first.",
+        answer: { type: "list", values: [330, 3], ordered: true, display: "(330°, 3)" },
         traps: [
-          { spec: { type: "list", values: [45, 3], ordered: true }, feedback: "sin(x − 45°) is y = sin x translated 45° to the *right*, not the left. The maximum moves from x = 90° to x = 135°." },
-          { spec: { type: "list", values: [135, 1], ordered: true }, feedback: "135° is right. The maximum of sin is 1, then the + 2 lifts it: y = 2 + 1 = 3." },
+          { spec: { type: "list", values: [30, 3], ordered: true }, feedback: "cos(x + 30°) is y = cos x translated 30° to the *left*, not the right." },
+          { spec: { type: "list", values: [330, 2], ordered: true }, feedback: "330° is right. The stretch makes the top 2 × 1 = 2, then the + 1 lifts it: y = 2 + 1 = 3." },
         ],
         solution: [
-          "y = sin x has its maximum at (90°, 1).",
-          "Replacing x by x − 45° translates the graph 45° to the **right**: maximum at (135°, 1).",
-          "Adding 2 translates it 2 **up**: maximum at (135°, 3).",
-          "Check: at x = 135°, y = 2 + sin 90° = 3 ✓.",
-          "Maximum point **(135°, 3)**.",
+          "y = cos x has maximum points at (0°, 1) and (360°, 1).",
+          "Replacing x by x + 30° translates the graph 30° to the **left**: the maxima move to (−30°, 1) and (330°, 1). Only 330° is in the interval.",
+          "Multiplying by 2 stretches vertically (max 2); adding 1 translates up 1: maximum at (330°, 3).",
+          "Check: at x = 330°, y = 2 cos 360° + 1 = 3 ✓.",
+          "Maximum point **(330°, 3)**.",
         ],
-        commonError: "Moving the graph left for x − 45°. Inside the bracket, the shift goes the 'opposite' way to the sign.",
+        commonError: "Moving the maximum at 0° to −30° and stopping there — that is outside the interval. Use the next maximum of y = cos x, at 360°.",
         difficulty: "core",
         guideRef: "trig-graphs",
         hints: [
-          "Where is the maximum point of y = sin x?",
-          "Which way does f(x − 45°) move a graph? Which way does f(x) + 2 move it?",
-          "Apply both translations to (90°, 1).",
+          "Where are the maximum points of y = cos x for 0° ≤ x ≤ 360°?",
+          "Which way does f(x + 30°) move a graph? What do × 2 and + 1 do to the y-values?",
+          "Apply the transformations to the maximum at (360°, 1) — the one at (0°, 1) moves out of the interval.",
         ],
         strategy: "Check by substituting",
       },
@@ -700,7 +700,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p4-q11",
         question:
           "Solve {{3 tan x = 5}} for 0° ≤ x ≤ 360°.\n\nGive your answers correct to 1 decimal place, separated by a comma.",
-        answer: { type: "list", values: [59.0, 239.0], tolerance: 0.06, display: "x = 59.0°, 239.0°" },
+        answer: { type: "list", values: [59.0, 239.0], ordered: false, tolerance: 0.06, display: "x = 59.0°, 239.0°" },
         traps: [
           { spec: { type: "list", values: [59.0, 121.0], tolerance: 0.06 }, feedback: "180° − x is the *sine* symmetry. The tan graph repeats every 180°, so the second solution is 59.0° + 180° = 239.0°." },
           { spec: { type: "list", values: [59.0, 301.0], tolerance: 0.06 }, feedback: "360° − x is the *cosine* symmetry. tan has period 180°, so add 180°: 239.0°." },
@@ -812,7 +812,7 @@ export const morePapers: Paper[] = [
         id: "further-trigonometry-p4-q15",
         question:
           "Solve {{2 sin^2 x = 3 cos x}} for 0° ≤ x ≤ 360°.\n\nGive all solutions, separated by commas.",
-        answer: { type: "list", values: [60, 300], display: "x = 60°, 300°" },
+        answer: { type: "list", values: [60, 300], ordered: false, display: "x = 60°, 300°" },
         traps: [
           { spec: { type: "list", values: [60, 120] }, feedback: "cos x = {{1/2}} is right, but 180° − 60° is the *sine* symmetry: cos 120° = −{{1/2}}. Use 360° − 60° = 300°." },
           { spec: { type: "number", value: 60 }, feedback: "60° is one solution. The cosine graph is symmetrical about 180°, so 360° − 60° = 300° works too." },

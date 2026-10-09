@@ -35,6 +35,7 @@ function form(a: AnswerSpec): string {
     case "ratio": return `a ratio with ${a.parts.length} parts like 3:4${a.simplest ? " in simplest form" : ""}`;
     case "expression": return `an algebraic expression in plain text like 3x+2 or 2(x-1)${a.form && a.form !== "any" ? ` (${a.form})` : ""}`;
     case "equation": return `an equation with one = sign like y = 2x + 3${a.form === "general" ? " written as ax + by + c = 0 with integers" : ""}`;
+    case "inequality": return "an inequality such as x > 3, -2 < x <= 5 or x < -1 or x > 4";
     case "text": return "a short word/phrase/inequality";
   }
 }

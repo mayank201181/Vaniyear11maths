@@ -74,6 +74,8 @@ export function displayAnswer(spec: AnswerSpec): string {
       return `{{${spec.expr}}}`;
     case "equation":
       return `{{${spec.eq}}}`;
+    case "inequality":
+      return `{{${spec.ineq}}}`;
     case "text":
       return spec.accept[0] ?? "";
   }
@@ -105,6 +107,8 @@ export function checkAnswer(spec: AnswerSpec, raw: string): CheckResult {
         return checkExpression(spec, input);
       case "equation":
         return checkEquation(spec, input);
+      case "inequality":
+        return checkInequality(spec, input);
       case "text":
         return checkText(spec, input);
     }
@@ -433,6 +437,77 @@ function checkEquation(spec: Extract<AnswerSpec, { type: "equation" }>, input: s
   return { status: "correct" };
 }
 
+interface Interval {
+  lo: number;
+  loIn: boolean;
+  hi: number;
+  hiIn: boolean;
+}
+
+/** Parse "x > 3", "-2 < x <= 5", "a and b", "a or b" (also "," and "∪") into a sorted list of intervals. */
+function parseSolutionSet(src: string): { variable: string; set: Interval[] } | null {
+  const s = normalizeInput(src)
+    .toLowerCase()
+    .replace(/≤|=</g, "<=")
+    .replace(/≥|=>/g, ">=")
+    .replace(/∪|\bu\b/g, " or ")
+    .replace(/,/g, " or ");
+  let variable = "";
+  const ors = s.split(/\bor\b/).map((t) => t.trim()).filter(Boolean);
+  if (!ors.length) return null;
+  const out: Interval[] = [];
+  for (const part of ors) {
+    let iv: Interval = { lo: -Infinity, loIn: false, hi: Infinity, hiIn: false };
+    for (const piece of part.split(/\band\b|&/).map((t) => t.trim()).filter(Boolean)) {
+      const tokens = piece.split(/(<=|>=|<|>)/).map((t) => t.trim());
+      if (tokens.length < 3 || tokens.length % 2 === 0) return null;
+      for (let i = 0; i + 2 < tokens.length; i += 2) {
+        const [a, op, b] = [tokens[i], tokens[i + 1], tokens[i + 2]];
+        const aVar = /^[a-z]$/.test(a), bVar = /^[a-z]$/.test(b);
+        if (aVar === bVar) return null;
+        const v = aVar ? a : b;
+        if (variable && variable !== v) return null;
+        variable = v;
+        const numExpr = parseExpr(aVar ? b : a);
+        if (!numExpr || exprVars(numExpr).size) return null;
+        const n = evalExpr(numExpr, {});
+        if (!Number.isFinite(n)) return null;
+        // Rewrite as "x op n".
+        const flip: Record<string, string> = { "<": ">", ">": "<", "<=": ">=", ">=": "<=" };
+        const o = aVar ? op : flip[op];
+        if (o === ">" || o === ">=") {
+          if (n > iv.lo || (n === iv.lo && o === ">")) iv = { ...iv, lo: n, loIn: o === ">=" };
+        } else if (n < iv.hi || (n === iv.hi && o === "<")) iv = { ...iv, hi: n, hiIn: o === "<=" };
+      }
+    }
+    out.push(iv);
+  }
+  out.sort((p, q) => p.lo - q.lo || p.hi - q.hi);
+  return variable ? { variable, set: out } : null;
+}
+
+function checkInequality(spec: Extract<AnswerSpec, { type: "inequality" }>, input: string): CheckResult {
+  const want = parseSolutionSet(spec.ineq);
+  if (!want) return { status: "invalid", feedback: "This question's answer couldn't be checked automatically." };
+  const got = parseSolutionSet(input);
+  if (!got) return { status: "invalid", feedback: "Write an inequality such as x > 3, −2 < x ≤ 5 or x < −1 or x > 4." };
+  if (got.variable !== want.variable || got.set.length !== want.set.length) return { status: "incorrect" };
+  const close = (a: number, b: number) => (a === b) || Math.abs(a - b) < 1e-9 * Math.max(1, Math.abs(a));
+  let endsOnly = true;
+  for (let i = 0; i < want.set.length; i++) {
+    const w = want.set[i], g = got.set[i];
+    if (!close(w.lo, g.lo) || !close(w.hi, g.hi)) { endsOnly = false; break; }
+  }
+  if (!endsOnly) return { status: "incorrect" };
+  for (let i = 0; i < want.set.length; i++) {
+    const w = want.set[i], g = got.set[i];
+    if ((Number.isFinite(w.lo) && w.loIn !== g.loIn) || (Number.isFinite(w.hi) && w.hiIn !== g.hiIn)) {
+      return { status: "close", feedback: "Right critical values — check which ends are included: < or ≤ (open or closed circle)?" };
+    }
+  }
+  return { status: "correct" };
+}
+
 function checkText(spec: Extract<AnswerSpec, { type: "text" }>, input: string): CheckResult {
   const n = normText(input);
   if (spec.accept.some((a) => normText(a) === n)) return { status: "correct" };
@@ -478,6 +553,7 @@ export function specSample(spec: AnswerSpec): string {
     case "ratio": return spec.parts.join(":");
     case "expression": return spec.expr;
     case "equation": return spec.eq;
+    case "inequality": return spec.ineq;
     case "text": return spec.accept[0] ?? "";
   }
 }

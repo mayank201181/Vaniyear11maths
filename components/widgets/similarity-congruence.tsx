@@ -171,7 +171,7 @@ type Tri = [P2, P2, P2]; // A, B, C in maths units (y up)
 
 interface Solved {
   tris: Tri[];
-  /** Labels for the given parts, drawn on the first triangle: [from, to, text] or an angle at a vertex index. */
+  /** Plain-language explanation of what the learner is seeing. */
   note: string;
 }
 
