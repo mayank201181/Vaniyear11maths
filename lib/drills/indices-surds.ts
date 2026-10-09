@@ -180,6 +180,13 @@ function ordinary(b: Big): string {
   return `${s.slice(0, point)}.${s.slice(point)}`;
 }
 
+/** Keep answers well inside the checker's precision and free of long decimal strings. */
+function okSf(b: Big): boolean {
+  const { exp } = sf(b);
+  const digits = String(norm(b).I).length;
+  return exp >= -9 && exp <= 14 && !(exp < 0 && -exp + digits - 1 >= 9);
+}
+
 function sfAns(b: Big): AnswerSpec {
   const { value } = sf(b);
   return { type: "number", value, standardForm: true, display: `{{${sfM(b)}}}` };
@@ -236,7 +243,7 @@ export const drills: Drill[] = [
         const ans: Mono = { c: c1 * c2, e: [p1 + p2, r1 + r2] };
         const traps: Trap[] = [];
         if (p1 * p2 !== p1 + p2) traps.push({ spec: { type: "expression", expr: monoA({ c: c1 * c2, e: [p1 * p2, r1 * r2 || r1 + r2] }, v) }, feedback: "When you multiply powers of the same letter you ADD the indices — you multiplied them." });
-        traps.push({ spec: { type: "expression", expr: monoA({ c: c1 + c2, e: ans.e }, v) }, feedback: "The numbers in front are multiplied, not added." });
+        if (c1 + c2 !== c1 * c2) traps.push({ spec: { type: "expression", expr: monoA({ c: c1 + c2, e: ans.e }, v) }, feedback: "The numbers in front are multiplied, not added." });
         return {
           prompt: `${rng.pick(["Simplify", "Simplify fully"])} {{${monoM(A, v)} * ${monoM(B, v)}}}.`,
           answer: monoSpec(ans, v),
@@ -334,7 +341,9 @@ export const drills: Drill[] = [
           answer: monoSpec(ans, v),
           solution: [
             `Apply the power {{${m}/${n}}} to every factor.`,
-            `Number: {{${ipow(k, n)}^(${m}/${n}) = (${n === 2 ? `sqrt(${ipow(k, n)})` : `cbrt(${ipow(k, n)})`})^${m} = ${k}^${m} = ${ans.c}}}.`,
+            m === 1
+              ? `Number: {{${ipow(k, n)}^(1/${n}) = ${n === 2 ? `sqrt(${ipow(k, n)})` : `cbrt(${ipow(k, n)})`} = ${k}}}.`
+              : `Number: {{${ipow(k, n)}^(${m}/${n}) = (${n === 2 ? `sqrt(${ipow(k, n)})` : `cbrt(${ipow(k, n)})`})^${m} = ${k}^${m} = ${ans.c}}}.`,
             `Letters: multiply each index by {{${m}/${n}}}: ${a * n} → ${a * m}, ${b * n} → ${b * m}.`,
             `Answer: {{${monoM(ans, v)}}}`,
           ],
@@ -394,7 +403,7 @@ export const drills: Drill[] = [
         if (I % 10 === 0) return drills[2].generate(rng, tier);
         const small = rng.bool();
         const digits = String(I).length;
-        const exp = small ? -rng.int(2, tier === 1 ? 5 : 7) : rng.int(3, tier === 1 ? 7 : 9);
+        const exp = small ? -rng.int(2, tier === 1 ? 5 : 8 - digits) : rng.int(3, tier === 1 ? 7 : 9);
         const b: Big = { I, e: exp - (digits - 1) };
         const { mant, value } = sf(b);
         if (kind === "to") {
@@ -427,8 +436,12 @@ export const drills: Drill[] = [
       }
 
       if (kind === "mul") {
-        const A: Big = { I: twoSig(rng), e: rng.int(-8, 8) - 1 };
-        const B: Big = { I: twoSig(rng), e: rng.int(-8, 8) - 1 };
+        let A: Big = { I: 25, e: 2 }, B: Big = { I: 32, e: -5 };
+        for (let i = 0; i < 100; i++) {
+          A = { I: twoSig(rng), e: rng.int(-8, 8) - 1 };
+          B = { I: twoSig(rng), e: rng.int(-8, 8) - 1 };
+          if (okSf({ I: A.I * B.I, e: A.e + B.e })) break;
+        }
         const P: Big = { I: A.I * B.I, e: A.e + B.e };
         const a = sf(A), bb = sf(B), p = sf(P);
         const rawM = clean(a.mant * bb.mant);
@@ -448,8 +461,12 @@ export const drills: Drill[] = [
       }
 
       // Division (bare or in context): answer C = A ÷ B, with A = B × C built exactly.
-      const C: Big = { I: twoSig(rng), e: kind === "ctxDiv" ? rng.int(2, 6) - 1 : rng.int(-6, 7) - 1 };
-      const Bd: Big = { I: rng.pick([2, 3, 4, 5, 6, 8, 12, 15, 16, 25]), e: rng.int(-6, 6) };
+      let C: Big = { I: 24, e: 3 }, Bd: Big = { I: 4, e: 2 };
+      for (let i = 0; i < 100; i++) {
+        C = { I: twoSig(rng), e: kind === "ctxDiv" ? rng.int(2, 6) - 1 : rng.int(-6, 7) - 1 };
+        Bd = { I: rng.pick([2, 3, 4, 5, 6, 8, 12, 15, 16, 25]), e: rng.int(-6, 6) };
+        if (okSf(C) && okSf({ I: C.I * Bd.I, e: C.e + Bd.e }) && sf(C).exp + 2 * sf(Bd).exp >= -9) break;
+      }
       const A: Big = { I: C.I * Bd.I, e: C.e + Bd.e };
 
       if (kind === "ctxMul") {
@@ -628,7 +645,9 @@ export const drills: Drill[] = [
             prompt: `Solve {{${P}^x = ${rhsM}}}.${tail}`,
             answer: ratAns(xn, xd, true),
             solution: [
-              `Write both sides as powers of ${c}: {{${P}^x = ${m === 1 ? `${c}^x` : `(${c}^${m})^x = ${c}^(${m}x)`}}} and {{${rhsM} = ${c}${ex(kd === 1 ? k : `1/${kd}`)}}}.`,
+              m === 1
+                ? `The left side is already a power of ${c}. Write the right side as one too: {{${rhsM} = ${c}${ex(kd === 1 ? k : `1/${kd}`)}}}.`
+                : `Write both sides as powers of ${c}: {{${P}^x = (${c}^${m})^x = ${c}^(${m}x)}} and {{${rhsM} = ${c}${ex(kd === 1 ? k : `1/${kd}`)}}}.`,
               `Equate the indices: {{${m === 1 ? "" : m}x = ${kd === 1 ? k : `1/${kd}`}}}.`,
               `x = ${ratM(xn, xd)}`,
             ],
@@ -764,7 +783,7 @@ export const drills: Drill[] = [
             solution: [
               ...(p * q > 1 ? [`Multiply the numbers outside: ${p} × ${q} = ${p * q}.`] : []),
               `Multiply under the roots: {{sqrt(${a}) * sqrt(${b}) = sqrt(${a * b})}}.`,
-              s === 1 ? `{{sqrt(${a * b}) = ${k}}}, so the answer is ${coef}.` : `{{sqrt(${a * b}) = sqrt(${k * k}) * sqrt(${s}) = ${sm(k, s)}}}${p * q > 1 ? `, so the answer is {{${p * q} * ${sm(k, s)} = ${sm(coef, s)}}}` : ""}.`,
+              s === 1 ? `{{sqrt(${a * b}) = ${k}}}, so the answer is ${coef}.` : k === 1 ? `${a * b} has no square factor, so the answer is {{${sm(coef, s)}}}.` : `{{sqrt(${a * b}) = sqrt(${k * k}) * sqrt(${s}) = ${sm(k, s)}}}${p * q > 1 ? `, so the answer is {{${p * q} * ${sm(k, s)} = ${sm(coef, s)}}}` : ""}.`,
             ],
             hint: "{{sqrt(a) * sqrt(b) = sqrt(ab)}}, then look for a square factor.",
             traps,
@@ -987,7 +1006,7 @@ export const drills: Drill[] = [
             `Multiply top and bottom by {{${conjM}}}.`,
             `Bottom: {{${a * a} - ${b}}} = ${num(D)}.`,
             `Top: {{(${numM})(${conjM})}} = {{${ss(P, Q, b)}}}.`,
-            `Divide by ${num(D)}: {{${ss(A, Bc, b)}}}.`,
+            D === 1 ? `The denominator is 1, so the answer is {{${ss(A, Bc, b)}}}.` : `Divide by ${num(D)}: {{${ss(A, Bc, b)}}}.`,
           ],
           hint: "Multiply top and bottom by the conjugate of the denominator, then expand the top carefully (four terms).",
           traps: [{ spec: { type: "expression", expr: `(${c}+sqrt(${b}))/(${a}${sg < 0 ? "-" : "+"}sqrt(${b}))` }, feedback: "That has the right value, but it isn't rationalised — multiply top and bottom by the conjugate." }],
@@ -1061,7 +1080,7 @@ export const drills: Drill[] = [
           .filter(([k]) => k !== 0)
           .map(([k, body], i) => {
             const mag = Math.abs(k);
-            const t = body === "" ? String(mag) : mag === 1 ? body : `${mag} * ${body}`;
+            const t = body === "" ? String(mag) : mag === 1 ? body : body.startsWith("y") ? `${mag}${body}` : `${mag} * ${body}`;
             return i === 0 ? (k < 0 ? `-${t}` : t) : `${k < 0 ? "-" : "+"} ${t}`;
           })
           .join(" ");
@@ -1130,8 +1149,10 @@ export const drills: Drill[] = [
         const S = ipow(c, m + 1) + ipow(c, n), P = ipow(c, m + n);
         const r2 = n - 1;
         const r2M = r2 >= 0 ? String(ipow(c, r2)) : `1/${c}`;
+        const form = rng.int(0, 2);
+        const eq = form === 2 ? `${c}^(2x+1) + ${P} = ${S} * ${yv}` : `${join([[1, `${c}^(2x+1)`], [-S, yv], [P, ""]])} = 0`;
         return {
-          prompt: `Solve {{${join([[1, `${c}^(2x+1)`], [-S, yv], [P, ""]])} = 0}}.`,
+          prompt: `${form === 1 ? "Find all the values of x for which" : "Solve"} {{${eq}}}.`,
           answer: { type: "list", values: [m, r2] },
           solution: [
             `{{${c}^(2x+1) = ${c} * (${c}^x)^2}}. Let {{y = ${c}^x}}: {{${c}y^2 - ${S}y + ${P} = 0}}.`,

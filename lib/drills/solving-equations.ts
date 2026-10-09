@@ -159,14 +159,15 @@ function solve2(
   l1: string,
   l2: string,
   cs: (v: number) => string = (v) => num(v),
+  swapped = false,
 ): { steps: string[]; x: number; y: number } {
   const [a, b, c] = e1;
   const [d, e, f] = e2;
   // Eliminate whichever letter needs the smaller multipliers (or is already missing).
   const yEasy = b === 0 || e === 0;
   const xEasy = a === 0 || d === 0;
-  if (!yEasy && (xEasy || lcm(Math.abs(a), Math.abs(d)) < lcm(Math.abs(b), Math.abs(e)))) {
-    const r = solve2([b, a, c], [e, d, f], vy, vx, l1, l2, cs);
+  if (!swapped && !yEasy && (xEasy || lcm(Math.abs(a), Math.abs(d)) < lcm(Math.abs(b), Math.abs(e)))) {
+    const r = solve2([b, a, c], [e, d, f], vy, vx, l1, l2, cs, true);
     return { steps: r.steps, x: r.y, y: r.x };
   }
   const det = a * e - b * d;
@@ -178,13 +179,20 @@ function solve2(
     const p = v < 0 ? `(${csm(v)})` : csm(v);
     return k === 1 ? p : k === -1 ? `-${p}` : `${k} * ${p}`;
   };
+  /** Two signed parts joined in the original (x then y) order. */
+  const pair = (px: [number, string], py: [number, string]): string => {
+    const [f1, f2] = swapped ? [py, px] : [px, py];
+    if (f1[0] === 0) return `${f2[0] < 0 ? "-" : ""}${f2[1]}`;
+    return `${f1[0] < 0 ? "-" : ""}${f1[1]} ${f2[0] < 0 ? "-" : "+"} ${f2[1]}`;
+  };
+  const eqD = (p: number, q: number, r: number) => (swapped ? eq2(q, p, r, vy, vx, csm) : eq2(p, q, r, vx, vy, csm));
   const steps: string[] = [];
   if (yEasy) {
     const own = b === 0;
     const p = own ? a : d, q = own ? d : a, r = own ? e : b, lab = own ? l1 : l2;
     const cOwn = own ? c : f, cOther = own ? f : c, other = own ? l2 : l1;
     steps.push(`${lab} has no ${vy}-term: ${M(`${term(p, vx)} = ${csm(cOwn)}`)}, so ${vx} = ${cs(x)}.`);
-    steps.push(`Substitute into ${other}: ${M(`${q === 0 ? "" : `${sv(q, x)} ${r < 0 ? "-" : "+"} `}${q === 0 ? term(r, vy) : term(Math.abs(r), vy)} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
+    steps.push(`Substitute into ${other}: ${M(`${pair([q, sv(Math.abs(q), x)], [r, term(Math.abs(r), vy)])} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
     return { steps, x, y };
   }
   const L = lcm(Math.abs(b), Math.abs(e));
@@ -195,15 +203,15 @@ function solve2(
   const R = same ? m1 * c - m2 * f : m1 * c + m2 * f;
   if (m1 !== 1 || m2 !== 1) {
     const parts: string[] = [];
-    if (m1 !== 1) parts.push(`${l1} × ${m1}: ${M(eq2(m1 * a, m1 * b, m1 * c, vx, vy, csm))}`);
-    if (m2 !== 1) parts.push(`${l2} × ${m2}: ${M(eq2(m2 * d, m2 * e, m2 * f, vx, vy, csm))}`);
+    if (m1 !== 1) parts.push(`${l1} × ${m1}: ${M(eqD(m1 * a, m1 * b, m1 * c))}`);
+    if (m2 !== 1) parts.push(`${l2} × ${m2}: ${M(eqD(m2 * d, m2 * e, m2 * f))}`);
     steps.push(`Make the ${vy}-coefficients match. ${parts.join("; ")}.`);
   }
   steps.push(
-    `The ${vy}-terms have ${same ? "the same sign, so subtract" : "opposite signs, so add"}: ${M(`${term(K, vx)} = ${csm(R)}`)}${K === 1 ? "" : `, so ${vx} = ${cs(R)} ÷ ${K < 0 ? `(${cs(K * 100 / 100).replace(/^/, "") === cs(K) ? num(K) : num(K)})` : num(K)} = ${cs(x)}`}.`,
+    `The ${vy}-terms have ${same ? "the same sign, so subtract" : "opposite signs, so add"}: ${M(`${term(K, vx)} = ${csm(R)}`)}${K === 1 ? "" : `, so ${vx} = ${cs(R)} ÷ ${br(K)} = ${cs(x)}`}.`,
   );
   steps.push(
-    `Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${sv(a, x)} ${b < 0 ? "-" : "+"} ${term(Math.abs(b), vy)} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)}${b === 1 ? "" : ` and ${vy} = ${cs(y)}`}.`,
+    `Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${pair([a, sv(Math.abs(a), x)], [b, term(Math.abs(b), vy)])} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)}${b === 1 ? "" : ` and ${vy} = ${cs(y)}`}.`,
   );
   return { steps, x, y };
 }
@@ -1020,7 +1028,7 @@ export const drills: Drill[] = [
           const step = tickets ? (tier === 1 ? 100 : 50) : 10;
           const Xc = tickets ? rng.int(1200 / step, 4000 / step) * step : rng.int(12, 30) * step;
           const Yc = tickets ? rng.int(600 / step, 3000 / step) * step : rng.int(10, 25) * step;
-          if (Xc === Yc || (tickets && Yc >= Xc)) continue;
+          if (Xc === Yc || (tickets && Yc > Xc - 300)) continue;
           const a1 = rng.int(1, 5), c1 = rng.int(1, 6), a2 = rng.int(1, 5), c2 = rng.int(1, 6);
           if (a1 * c2 - a2 * c1 === 0) continue;
           const T1 = a1 * Xc + c1 * Yc, T2 = a2 * Xc + c2 * Yc;
@@ -1094,7 +1102,7 @@ export const drills: Drill[] = [
           prompt: `The straight line ${M("y = mx + c")} passes through the points (${num(x1)}, ${num(y1)}) and (${num(x2)}, ${num(y2)}). Use simultaneous equations to find m and c. Give your answer as m, c.`,
           answer: { type: "list", values: [mm, cc], ordered: true, display: `m = ${num(mm)}, c = ${num(cc)}` },
           solution: [
-            `Substitute each point into y = mx + c: (1) ${M(`${y1} = ${x1 === 0 ? "" : `${x1}m + `}c`)}; (2) ${M(`${y2} = ${x2 === 0 ? "" : `${x2}m + `}c`)}.`,
+            `Substitute each point into y = mx + c: (1) ${M(`${y1} = ${x1 === 0 ? "" : `${term(x1, "m")} + `}c`)}; (2) ${M(`${y2} = ${x2 === 0 ? "" : `${term(x2, "m")} + `}c`)}.`,
             ...steps,
           ],
           hint: "Each point gives you one equation in m and c.",
@@ -1146,7 +1154,7 @@ export const drills: Drill[] = [
         const e4 = combo(1), e5 = combo(2);
         if (!e4 || !e5) continue;
         if (e4[0] * e5[1] - e4[1] * e5[0] === 0) continue;
-        if (Math.max(...e4.map(Math.abs), ...e5.map(Math.abs)) > 60) continue;
+        if (Math.max(...e4.map(Math.abs), ...e5.map(Math.abs)) > (tier === 3 ? 40 : 30) || Math.max(Math.abs(e4[0]), Math.abs(e4[1]), Math.abs(e5[0]), Math.abs(e5[1])) > 12) continue;
         const how = (ri: number) => {
           const r = rows[ri][2];
           if (r === 0) return `(${ri + 1}) has no z-term, so call it (5): ${M(eq2(e5[0], e5[1], e5[2], "x", "y"))}.`;
@@ -1168,7 +1176,7 @@ export const drills: Drill[] = [
             how(1),
             how(2),
             ...two.steps,
-            `Substitute x = ${num(x)} and y = ${num(y)} into (1): ${M(`${term(c1, "z")} = ${d[0]} - (${a1 * x + b1 * y})`)}, so z = ${num(z)}.`,
+            `Substitute x = ${num(x)} and y = ${num(y)} into (1): ${M(`${term(c1, "z")} = ${d[0]} - ${a1 * x + b1 * y < 0 ? `(${a1 * x + b1 * y})` : a1 * x + b1 * y}`)}, so ${c1 === 1 ? `z = ${num(z)}` : `${M(`${term(c1, "z")} = ${c1 * z}`)} and z = ${num(z)}`}.`,
             `Check in (3): ${plainSum([[a3, x], [b3, y], [c3, z]])} = ${num(d[2])} ✓`,
           ],
           hint: "Use one equation to knock z out of each of the other two. That leaves two equations in x and y.",
