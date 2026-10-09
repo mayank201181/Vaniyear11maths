@@ -163,14 +163,13 @@ export const drills: Drill[] = [
           if (b % a !== 0 && exactDp(b, a, 3)) break;
         }
         const n = clean(b / a);
-        const [A, B] = people(rng, 1).concat(["x"]);
+        const A = rng.pick(NAMES);
         const ctx = rng.pick([
           `Write the ratio ${rs([a, b])} in the form 1 : n.`,
           `On a school trip there are ${a} teachers and ${b} students. Write the ratio teachers : students in the form 1 : n.`,
           `${A} mixes ${a * 10} ml of cordial with ${b * 10} ml of water. Write the ratio cordial : water in the form 1 : n.`,
           `A model is built to scale: ${a} cm on the model represents ${b} cm on the real object. Write the ratio model : real in the form 1 : n.`,
         ]);
-        void B;
         const traps: Trap[] = [];
         if (exactDp(a, b, 4)) numTrap(clean(a / b), n, "You divided the wrong way round. Divide both parts by the FIRST part so it becomes 1.", traps);
         return {
@@ -493,11 +492,11 @@ export const drills: Drill[] = [
           const N = A * R.r, D = 100;
           const ans = R.dp === 0 ? roundQ(N, D, 0) : roundQ(N, D, 2);
           const traps: Trap[] = [];
-          numTrap(roundQ(A * 100 * 100, R.r, R.dp), ans, `You divided by the rate. Each S$1 is worth ${rateText} ${R.cur}, so you get MORE ${R.cur} — multiply.`, traps);
+          numTrap(roundQ(A * 100, R.r, 2), ans, `You divided by the rate. Each S$1 is worth ${rateText} ${R.cur}, so you get MORE ${R.cur} — multiply.`, traps);
           return {
             prompt: `The exchange rate is S$1 = ${R.sym}${rateText}. ${name} changes S$${big(A)} into ${R.cur}. How many ${R.cur} does ${name} get?${R.dp === 0 ? " Give your answer to the nearest whole number." : ""}`,
             answer: { type: "number", value: ans },
-            solution: [`Each S$1 gives ${R.sym}${rateText}.`, `${big(A)} × ${rateText} = ${R.sym}${num(clean(N / D))}${clean(N / D) !== ans ? ` ≈ ${R.sym}${num(ans)}` : ""}.`],
+            solution: [`Each S$1 gives ${R.sym}${rateText}.`, `${big(A)} × ${rateText} = ${R.sym}${big(clean(N / D))}${clean(N / D) !== ans ? ` ≈ ${R.sym}${big(ans)}` : ""}.`],
             hint: "Will you get more or fewer of the other currency than you put in? Multiply or divide accordingly.",
             traps,
           };
@@ -537,7 +536,7 @@ export const drills: Drill[] = [
             lim1 = Math.floor((h1 * p) / q1);
             lim2 = Math.floor((h2 * p) / q2);
             best = Math.min(lim1, lim2);
-            if (lim1 !== lim2 && best >= 3 && best <= 40 && Math.abs(lim1 - lim2) >= 2) break;
+            if (exactDp(q1, p, 2) && exactDp(q2, p, 2) && lim1 !== lim2 && best >= 3 && best <= 40 && Math.abs(lim1 - lim2) >= 2) break;
           }
           const traps: Trap[] = [];
           numTrap(Math.max(lim1, lim2), best, "That ingredient would run out first for the other one — the SMALLER limit decides.", traps);
@@ -560,7 +559,7 @@ export const drills: Drill[] = [
           p = rng.pick([2, 3, 4, 5, 6, 8]);
           p2 = rng.int(2, tier === 1 ? 12 : 30);
           q = rng.int(2, 24) * (tier === 1 ? 50 : 15);
-          if (p2 !== p && (q * p2) % p === 0) break;
+          if (p2 !== p && q % p === 0) break;
         }
         const ans = (q * p2) / p;
         const traps: Trap[] = [];
@@ -991,11 +990,11 @@ export const drills: Drill[] = [
             `Speed needed = ${d2} ÷ ${M(`${t2}/60`)} ${eqSig(N, D, " km/h")}.`,
           ],
           hint: "Work backwards: how much time does the target average allow in total? How much is left?",
-          traps: (() => {
+          traps: 2 * V - v1 > 0 ? (() => {
             const tr: Trap[] = [];
-            numTrap(sigQ(2 * V - v1 > 0 ? 2 * V - v1 : 1, 1), ans, "Speeds don't average like that — work with total distance and total time.", tr);
+            numTrap(2 * V - v1, ans, `Speeds don't average like that (${V} is not halfway between ${v1} and your answer) — work with total distance and total time.`, tr);
             return tr;
-          })(),
+          })() : [],
         };
       }
 
@@ -1187,7 +1186,7 @@ export const drills: Drill[] = [
         };
       }
       numTrap(clean(roundTo((y1 * X2) / X1, 6)), y2, "As one quantity goes up the other goes DOWN — this is inverse, not direct, proportion.", traps);
-      if (n === 2) numTrap(clean(roundTo((K / scale ** 0) / X2, 6)), y2, `Remember to square ${X}: divide k by ${X}², not ${X}.`, traps);
+      if (n === 2) numTrap(clean(roundTo(K / X2, 6)), y2, `Remember to square ${X}: divide k by ${X}², not ${X}.`, traps);
       return {
         prompt: `${info.text} When ${X} = ${X1}, ${Y} = ${num(y1)}. Work out the value of ${Y} when ${X} = ${X2}.`,
         answer: { type: "number", value: y2 },
@@ -1278,18 +1277,20 @@ export const drills: Drill[] = [
       numTrap(Math.abs(p) * (n === 0.5 ? 0.5 : n), ans, `Percentages don't simply multiply by the power. Use the multiplier ${num(base / 100)} and raise it to the power${inverse ? " (then take the reciprocal)" : ""}.`, traps);
       if (inverse) numTrap(Math.abs(p), ans, "For inverse proportion the percentage change in y is NOT the same as in x. Use the reciprocal of the multiplier.", traps);
       const xm = num(base / 100);
-      const mulText = n === 1 ? xm : n === 0.5 ? `${M(`sqrt(${xm})`)} = ${num(Math.sqrt(base) / 10)}` : `${M(`${xm}^${n}`)} = ${num(clean((base ** n) / 100 ** n))}`;
-      const ym = inverse ? (n === 1 ? D / N : n === 0.5 ? D / N : D / N) : N / D;
+      const effect = n === 0.5 ? clean(Math.sqrt(base) / 10) : clean(base ** n / 100 ** n);
+      const effectText = n === 1 ? xm : n === 0.5 ? `${M(`sqrt(${xm})`)} = ${num(effect)}` : `${M(`${xm}^${n}`)} = ${num(effect)}`;
+      const yExact = exactDp(N, D, 6);
+      const yMul = yExact ? num(clean(N / D)) : `${num(clean(N / D, 6))}…`;
       return {
         prompt: `y is ${rel}. x is ${xWord}. Work out the percentage ${yUp ? "increase" : "decrease"} in y.${exactSig(pctN, pctD) ? "" : " Give your answer correct to 3 significant figures."}`,
         answer: { type: "number", value: ans },
         solution: [
-          `${M(formula)}. Multiplier for x: ${xm}.`,
-          inverse ? `y is multiplied by ${M(`1/(${mulText.split(" = ").pop()})`)} ${eqSig(N, D)}.` : `y is multiplied by ${mulText}.`,
-          `Percentage ${yUp ? "increase" : "decrease"} = ${M(`|${num(clean(N / D, 7))} - 1| * 100`)} ${eqSig(pctN, pctD, "%")}.`,
-        ].map((s) => s.replace("1/(", "1/(")),
+          `${M(formula)}. The multiplier for x is ${xm}.`,
+          inverse ? `The power of x changes by ${effectText}, and y is inversely proportional, so y is multiplied by 1 ÷ ${num(effect)} = ${yMul}.` : `So y is multiplied by ${effectText}.`,
+          `Percentage ${yUp ? "increase" : "decrease"} = ${yUp ? `(${yMul} − 1)` : `(1 − ${yMul})`} × 100 ${eqSig(pctN, pctD, "%")}.`,
+        ],
         hint: "Change the percentage into a multiplier for x, then work out what that does to the formula.",
-        traps: ym > 0 ? traps : traps,
+        traps,
       };
     },
   },

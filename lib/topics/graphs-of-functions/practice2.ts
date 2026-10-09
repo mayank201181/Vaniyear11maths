@@ -163,29 +163,29 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "graphs-of-functions-p3-q06",
         question:
-          "Arjun has drawn the graph of {{y = x^2 - 3x}}.\n\nHe wants to solve the equation {{x^2 + x - 4 = 0}} by drawing a straight line on the same axes.\n\nFind the equation of the straight line he should draw. Give your answer in the form y = mx + c.",
-        answer: { type: "equation", eq: "y=-4x+4", display: "y = −4x + 4" },
+          "Arjun has drawn the graph of {{y = x^2 - 3x}}.\n\nHe wants to solve the equation {{x^2 - 6x + 1 = 0}} by drawing a straight line on the same axes.\n\nFind the equation of the straight line he should draw. Give your answer in the form y = mx + c.",
+        answer: { type: "equation", eq: "y=3x-1", display: "y = 3x − 1" },
         traps: [
           {
-            spec: { type: "equation", eq: "y=4x-4" },
-            feedback: "Sign slip. You need {{x^2 - 3x}} on the left, so *subtract* 4x and *add* 4 on both sides of {{x^2 + x - 4 = 0}}: {{x^2 - 3x = -4x + 4}}.",
+            spec: { type: "equation", eq: "y=-3x+1" },
+            feedback: "Sign slip. You need {{x^2 - 3x}} on the left, so *add* 3x and *subtract* 1 on both sides of {{x^2 - 6x + 1 = 0}}: {{x^2 - 3x = 3x - 1}}.",
           },
           {
-            spec: { type: "equation", eq: "y=-x+4" },
-            feedback: "That rearranges {{x^2 = -x + 4}}, which needs the graph of {{y = x^2}}. Arjun's curve is {{y = x^2 - 3x}}, so the left side must be {{x^2 - 3x}}.",
+            spec: { type: "equation", eq: "y=6x-1" },
+            feedback: "That rearranges {{x^2 = 6x - 1}}, which needs the graph of {{y = x^2}}. Arjun's curve is {{y = x^2 - 3x}}, so the left side must be {{x^2 - 3x}}.",
           },
         ],
         solution: [
           "Rearrange the equation so one side is exactly the curve, {{x^2 - 3x}}.",
-          "{{x^2 + x - 4 = 0}} ⟹ {{x^2 - 3x = -4x + 4}} (subtract 4x and add 4 on both sides).",
-          "So draw y = −4x + 4; the x-coordinates where it crosses the curve are the solutions.",
+          "{{x^2 - 6x + 1 = 0}} ⟹ {{x^2 - 3x = 3x - 1}} (add 3x and subtract 1 on both sides).",
+          "So draw y = 3x − 1; the x-coordinates where it crosses the curve are the solutions.",
         ],
         solutions: [
           {
             label: "Subtract the equations",
             steps: [
-              "Line = curve − (equation): {{(x^2 - 3x) - (x^2 + x - 4) = -4x + 4}}.",
-              "So y = −4x + 4.",
+              "Line = curve − (equation): {{(x^2 - 3x) - (x^2 - 6x + 1) = 3x - 1}}.",
+              "So y = 3x − 1.",
             ],
           },
         ],
@@ -194,8 +194,8 @@ export const morePapers: Paper[] = [
         guideRef: "graphical-solutions",
         hints: [
           "You want an equation of the form {{x^2 - 3x = (something)}}.",
-          "Starting from {{x^2 + x - 4 = 0}}, what do you do to both sides to turn +x into −3x?",
-          "Subtract 4x and add 4 on both sides.",
+          "Starting from {{x^2 - 6x + 1 = 0}}, what do you add to both sides to turn −6x into −3x?",
+          "Add 3x and subtract 1 on both sides.",
         ],
         strategy: "Work backwards",
       },

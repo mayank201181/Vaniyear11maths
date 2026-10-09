@@ -11,8 +11,8 @@ const SHARED_SIDE = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/sv
 // p1-q09: cuboid 12 × 5 × 4 in oblique projection; AG and AC highlighted.
 const CUBOID = `<svg viewBox="0 0 440 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuboid ABCDEFGH. The base ABCD has AB = 12 cm and BC = 5 cm. The vertical edges AE, BF, CG and DH are 4 cm. The diagonal AG and the base diagonal AC are drawn."><rect x="0" y="0" width="440" height="290" fill="#ffffff"/><polygon points="55,255 364,205 364,117" fill="#fecaca" fill-opacity="0.45" stroke="none"/><line x1="55" y1="255" x2="319" y2="255" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="255" x2="364" y2="205" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="167" x2="319" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="167" x2="364" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="364" y1="117" x2="100" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="100" y1="117" x2="55" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="255" x2="55" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="255" x2="319" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="364" y1="205" x2="364" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="255" x2="100" y2="205" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="100" y1="205" x2="364" y2="205" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="100" y1="205" x2="100" y2="117" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="55" y1="255" x2="364" y2="205" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="6 4"/><line x1="55" y1="255" x2="364" y2="117" stroke="#b91c1c" stroke-width="2.5"/><polyline points="354.1,206.6 354.1,196.6 364,195" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="43" y="267" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="327" y="271" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="376" y="211" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="92" y="199" font-size="14" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">D</text><text x="45" y="172" font-size="14" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">E</text><text x="331" y="185" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">F</text><text x="374" y="111" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">G</text><text x="94" y="109" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">H</text><text x="187.0" y="275" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">12 cm</text><text x="355.5" y="242.0" font-size="14" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">5 cm</text><text x="374" y="165.0" font-size="14" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">4 cm</text></svg>`;
 
-// p1-q13: right square-based pyramid, base 10 cm, slant edges 13 cm.
-const PYRAMID = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Right square-based pyramid VABCD. The base ABCD is a square of side 10 cm. Each sloping edge such as VA is 13 cm. M is the centre of the base, directly below V."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><line x1="80" y1="260" x2="280" y2="260" stroke="#1f2937" stroke-width="2"/><line x1="280" y1="260" x2="360" y2="200" stroke="#1f2937" stroke-width="2"/><line x1="80" y1="260" x2="160" y2="200" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="160" y1="200" x2="360" y2="200" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="220" y1="40" x2="80" y2="260" stroke="#1f2937" stroke-width="2"/><line x1="220" y1="40" x2="280" y2="260" stroke="#1f2937" stroke-width="2"/><line x1="220" y1="40" x2="360" y2="200" stroke="#1f2937" stroke-width="2"/><line x1="220" y1="40" x2="160" y2="200" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="220" y1="40" x2="220" y2="230" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="80" y1="260" x2="220" y2="230" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="220" cy="230" r="3" fill="#b91c1c"/><text x="226" y="244" font-size="13" font-family="sans-serif" fill="#1f2937">M</text><text x="214" y="32" font-size="14" font-family="sans-serif" fill="#1f2937">V</text><text x="64" y="276" font-size="14" font-family="sans-serif" fill="#1f2937">A</text><text x="280" y="278" font-size="14" font-family="sans-serif" fill="#1f2937">B</text><text x="366" y="204" font-size="14" font-family="sans-serif" fill="#1f2937">C</text><text x="146" y="196" font-size="14" font-family="sans-serif" fill="#1f2937">D</text><text x="160" y="280" font-size="13" font-family="sans-serif" fill="#1f2937">10 cm</text><text x="258" y="150" font-size="13" font-family="sans-serif" fill="#1f2937">13 cm</text></svg>`;
+// p1-q13: right square-based pyramid, base 6 cm, slant edges 9 cm (25 px per cm; VM = sqrt(63) ≈ 7.94 cm).
+const PYRAMID = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Right square-based pyramid VABCD. The base ABCD is a square of side 6 cm. Each sloping edge such as VA is 9 cm. M is the centre of the base, directly below V."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><line x1="110" y1="262" x2="260" y2="262" stroke="#1f2937" stroke-width="2"/><line x1="260" y1="262" x2="320" y2="217" stroke="#1f2937" stroke-width="2"/><line x1="110" y1="262" x2="170" y2="217" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="170" y1="217" x2="320" y2="217" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="215" y1="41.5" x2="110" y2="262" stroke="#1f2937" stroke-width="2"/><line x1="215" y1="41.5" x2="260" y2="262" stroke="#1f2937" stroke-width="2"/><line x1="215" y1="41.5" x2="320" y2="217" stroke="#1f2937" stroke-width="2"/><line x1="215" y1="41.5" x2="170" y2="217" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="215" y1="41.5" x2="215" y2="239.5" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><line x1="110" y1="262" x2="215" y2="239.5" stroke="#b91c1c" stroke-width="1.5" stroke-dasharray="4 3"/><circle cx="215" cy="239.5" r="3" fill="#b91c1c"/><text x="222" y="252" font-size="13" font-family="sans-serif" fill="#1f2937">M</text><text x="209" y="33" font-size="14" font-family="sans-serif" fill="#1f2937">V</text><text x="94" y="278" font-size="14" font-family="sans-serif" fill="#1f2937">A</text><text x="258" y="280" font-size="14" font-family="sans-serif" fill="#1f2937">B</text><text x="326" y="222" font-size="14" font-family="sans-serif" fill="#1f2937">C</text><text x="156" y="212" font-size="14" font-family="sans-serif" fill="#1f2937">D</text><text x="185" y="282" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937">6 cm</text><text x="284" y="135" font-size="13" font-family="sans-serif" fill="#1f2937">9 cm</text></svg>`;
 
 export const practice: TopicPractice = {
   // =========================================================================
@@ -395,23 +395,23 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "pythagoras-trigonometry-p1-q13",
           question:
-            "The diagram shows a right square-based pyramid VABCD. The base is a square of side 10 cm and each sloping edge is 13 cm. M is the centre of the base, directly below V.\n\nWork out (a) the vertical height VM and (b) the angle between the edge VA and the base. Give the height correct to 3 significant figures and the angle correct to 1 decimal place, height first.",
+            "The diagram shows a right square-based pyramid VABCD. The base is a square of side 6 cm and each sloping edge is 9 cm. M is the centre of the base, directly below V.\n\nWork out (a) the vertical height VM and (b) the angle between the edge VA and the base. Give the height correct to 3 significant figures and the angle correct to 1 decimal place, height first.",
           diagram: PYRAMID,
-          answer: { type: "list", values: [10.9, 57.0], ordered: true, tolerance: 0.05, display: "10.9 cm, 57.0°" },
+          answer: { type: "list", values: [7.94, 61.9], ordered: true, tolerance: 0.005, display: "7.94 cm, 61.9°" },
           solution: [
-            "AC is a diagonal of the base: {{AC = sqrt(10^2 + 10^2) = 10sqrt(2)}}, so {{AM = 5sqrt(2) = 7.071...}} cm.",
-            "Triangle VMA is right-angled at M: {{VM = sqrt(13^2 - (5sqrt(2))^2) = sqrt(169 - 50) = sqrt(119) = 10.908...}} = 10.9 cm.",
-            "The angle between VA and the base is angle VAM: {{cos(VAM) = (5sqrt(2))/13}}.",
-            "{{VAM = cos^(-1)(7.071/13) = 57.05...°}} = 57.0°.",
+            "AC is a diagonal of the base: {{AC = sqrt(6^2 + 6^2) = 6sqrt(2)}}, so {{AM = 3sqrt(2) = 4.242...}} cm.",
+            "Triangle VMA is right-angled at M: {{VM = sqrt(9^2 - (3sqrt(2))^2) = sqrt(81 - 18) = sqrt(63) = 7.937...}} = 7.94 cm.",
+            "The angle between VA and the base is angle VAM: {{cos(VAM) = (3sqrt(2))/9}}.",
+            "{{VAM = cos^(-1)(4.2426.../9) = 61.87...°}} = 61.9°.",
           ],
-          commonError: "Using half the side (5 cm) instead of half the diagonal for AM.",
-          traps: [{ spec: { type: "list", values: [12, 67.4], ordered: true, tolerance: 0.05 }, feedback: "M is the centre of the square, so AM is half the **diagonal** ({{5sqrt(2)}}), not half a side (5)." }],
+          commonError: "Using half the side (3 cm) instead of half the diagonal for AM.",
+          traps: [{ spec: { type: "list", values: [8.49, 70.5], ordered: true, tolerance: 0.005 }, feedback: "M is the centre of the square, so AM is half the **diagonal** ({{3sqrt(2)}}), not half a side (3)." }],
           difficulty: "challenge",
           guideRef: "three-d",
           hints: [
             "Which right-angled triangle contains VA, VM and the base? Its third side is AM.",
             "AM is half the diagonal of the square base.",
-            "{{AM = 5sqrt(2)}}; then {{VM^2 = 13^2 - AM^2}} and {{cos(VAM) = (AM)/13}}.",
+            "{{AM = 3sqrt(2)}}; then {{VM^2 = 9^2 - AM^2}} and {{cos(VAM) = (AM)/9}}.",
           ],
           strategy: "Find the right right-angled triangle",
         },
@@ -486,7 +486,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q02",
           question:
             "In a right-angled triangle, angle θ = 34° and the side adjacent to θ is 9 cm. Work out the length of the hypotenuse. Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 10.9, display: "10.9 cm" },
+          answer: { type: "number", value: 10.9, tolerance: 0.05, display: "10.9 cm" },
           solution: ["A and H: CAH. {{cos 34° = 9/h}}.", "{{h = 9/(cos 34°) = 10.855...}} = 10.9 cm."],
           commonError: "Multiplying: 9 cos 34° = 7.46 cm — shorter than the adjacent side, so it can't be the hypotenuse.",
           traps: [{ spec: { type: "number", value: 7.46, tolerance: 0.01 }, feedback: "The hypotenuse must be longer than 9 cm. When the unknown is on the bottom, divide: {{h = 9/(cos 34°)}}." }],
@@ -500,10 +500,10 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q03",
           question:
             "A vertical lamp post is 12 m tall. Mei stands on level ground 20 m from its base. Work out the angle of elevation of the top of the lamp post from where Mei's feet are. Give your answer correct to 1 decimal place.",
-          answer: { type: "number", value: 31, display: "31.0°" },
+          answer: { type: "number", value: 31, tolerance: 0.05, display: "31.0°" },
           solution: ["Opposite 12, adjacent 20: {{tan θ = 12/20}}.", "{{θ = tan^(-1)(0.6) = 30.96...°}} = 31.0°."],
           commonError: "Using {{tan^(-1)(20/12)}} = 59.0° — that's the angle at the top of the post.",
-          traps: [{ spec: { type: "number", value: 59 }, feedback: "That's the angle at the top of the lamp post. Elevation is measured at the ground: {{tan θ = 12/20}}." }],
+          traps: [{ spec: { type: "number", value: 59, tolerance: 0.05 }, feedback: "That's the angle at the top of the lamp post. Elevation is measured at the ground: {{tan θ = 12/20}}." }],
           difficulty: "warmup",
           guideRef: "bearings-elevation",
           hints: ["The angle of elevation is at Mei's position, up from the horizontal.", "{{tan θ = 12/20}}"],
@@ -525,18 +525,18 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "pythagoras-trigonometry-p2-q05",
-          question: "An isosceles triangle has two sides of 13 cm and a base of 10 cm. Work out its area in cm².",
-          answer: { type: "number", value: 60, display: "60 cm²" },
+          question: "An isosceles triangle has two sides of 10 cm and a base of 12 cm. Work out its area in cm².",
+          answer: { type: "number", value: 48, display: "48 cm²" },
           solution: [
-            "The line of symmetry splits the base into two halves of 5 cm and meets it at right angles.",
-            "Height: {{h = sqrt(13^2 - 5^2) = sqrt(144) = 12}} cm.",
-            "Area = {{1/2 * 10 * 12 = 60}} cm².",
+            "The line of symmetry splits the base into two halves of 6 cm and meets it at right angles.",
+            "Height: {{h = sqrt(10^2 - 6^2) = sqrt(64) = 8}} cm.",
+            "Area = {{1/2 * 12 * 8 = 48}} cm².",
           ],
-          commonError: "Using 13 as the height (area 65 cm²) — the sloping side is not perpendicular to the base.",
-          traps: [{ spec: { type: "number", value: 65 }, feedback: "13 cm is a sloping side, not the perpendicular height. Find the height with Pythagoras first." }],
+          commonError: "Using 10 as the height (area 60 cm²) — the sloping side is not perpendicular to the base.",
+          traps: [{ spec: { type: "number", value: 60 }, feedback: "10 cm is a sloping side, not the perpendicular height. Find the height with Pythagoras first." }],
           difficulty: "core",
           guideRef: "pythagoras",
-          hints: ["You need the perpendicular height.", "Split the isosceles triangle down its line of symmetry into two right-angled triangles.", "Each has hypotenuse 13 and base 5."],
+          hints: ["You need the perpendicular height.", "Split the isosceles triangle down its line of symmetry into two right-angled triangles.", "Each has hypotenuse 10 and base 6."],
           strategy: "Use symmetry",
         },
         {
@@ -562,10 +562,10 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q07",
           question:
             "An isosceles triangle has two equal sides of 9 cm and a base of 14 cm. Work out the size of one of its base angles. Give your answer correct to 1 decimal place.",
-          answer: { type: "number", value: 38.9, display: "38.9°" },
+          answer: { type: "number", value: 38.9, tolerance: 0.05, display: "38.9°" },
           solution: ["Split down the line of symmetry: a right-angled triangle with hypotenuse 9 and base 7.", "{{cos θ = 7/9}}", "{{θ = cos^(-1)(7/9) = 38.94...°}} = 38.9°."],
           commonError: "Using the full base: {{cos^(-1)(14/9)}} gives a calculator error — 14 can't be adjacent to a hypotenuse of 9.",
-          traps: [{ spec: { type: "number", value: 51.1 }, feedback: "That's the angle at the top of the half-triangle. The base angle is next to the 7 cm side: {{cos θ = 7/9}}." }],
+          traps: [{ spec: { type: "number", value: 51.1, tolerance: 0.05 }, feedback: "That's the angle at the top of the half-triangle. The base angle is next to the 7 cm side: {{cos θ = 7/9}}." }],
           difficulty: "core",
           guideRef: "sohcahtoa",
           hints: ["Trig needs a right angle. Where can you make one?", "Halve the triangle: the base becomes 7 cm.", "Adjacent 7, hypotenuse 9 → cos."],
@@ -576,7 +576,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q08",
           question:
             "Wei Ling cycles 9 km due north from her home H, then 14 km due west to point P. Work out the bearing of P from H. Give your answer correct to the nearest degree.",
-          answer: { type: "number", value: 303, display: "303°" },
+          answer: { type: "number", value: 303, tolerance: 0.5, display: "303°" },
           solution: [
             "At H, the angle between north and HP is {{tan^(-1)(14/9) = 57.26...°}}, measured anticlockwise (towards west).",
             "Bearings are clockwise from north, so the bearing is 360° − 57.26° = 302.7° = 303°.",
@@ -609,14 +609,14 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q10",
           question:
             "A vertical flagpole stands at one corner of a horizontal rectangular field measuring 40 m by 30 m. From the diagonally opposite corner, the angle of elevation of the top of the flagpole is 12°. Work out the height of the flagpole. Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 10.6, display: "10.6 m" },
+          answer: { type: "number", value: 10.6, tolerance: 0.05, display: "10.6 m" },
           solution: [
             "The diagonal of the field: {{sqrt(40^2 + 30^2) = 50}} m.",
             "The diagonal, the flagpole and the line of sight form a right-angled triangle.",
             "{{h = 50 tan 12° = 10.627...}} = 10.6 m.",
           ],
           commonError: "Using 40 m (a side of the field) instead of the 50 m diagonal: 8.50 m.",
-          traps: [{ spec: { type: "number", value: 8.5, tolerance: 0.01 }, feedback: "The opposite corner is along the diagonal, not a side. Find the 50 m diagonal first." }],
+          traps: [{ spec: { type: "number", value: 8.5, tolerance: 0.005 }, feedback: "The opposite corner is along the diagonal, not a side. Find the 50 m diagonal first." }],
           difficulty: "core",
           guideRef: "three-d",
           hints: ["How far is the opposite corner from the foot of the flagpole?", "Diagonal = {{sqrt(40^2 + 30^2)}}.", "Then height = diagonal × tan 12°."],
@@ -693,7 +693,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p2-q14",
           question:
             "Two boats leave port O at the same time. Boat P sails 20 km on a bearing of 035°. Boat Q sails 15 km on a bearing of 125°.\n\nWork out the bearing of Q from P. Give your answer correct to the nearest degree.",
-          answer: { type: "number", value: 178, display: "178°" },
+          answer: { type: "number", value: 178, tolerance: 0.5, display: "178°" },
           solution: [
             "Angle POQ = 125° − 35° = 90°, so triangle POQ is right-angled at O (and PQ = {{sqrt(20^2 + 15^2) = 25}} km).",
             "Angle OPQ: {{tan(OPQ) = 15/20}}, so OPQ = 36.87°.",
@@ -800,7 +800,7 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-ch-q03",
       question:
         "A regular pentagon has sides of length 10 cm. Work out its area. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 172, display: "172 cm²" },
+      answer: { type: "number", value: 172, tolerance: 0.5, display: "172 cm²" },
       solution: [
         "Join the centre O to every vertex: 5 congruent isosceles triangles, each with angle {{360° ÷ 5 = 72°}} at O.",
         "Split one in half: a right-angled triangle with angle 36° at O and opposite side 5 cm.",
@@ -823,7 +823,7 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-ch-q04",
       question:
         "From the top of a 50 m tall HDB block, Siti measures the angle of elevation of the top of a taller condominium as 20° and the angle of depression of its base as 35°. Both buildings stand on the same level ground.\n\nWork out the height of the condominium. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 76, display: "76.0 m" },
+      answer: { type: "number", value: 76, tolerance: 0.05, display: "76.0 m" },
       solution: [
         "Let d be the horizontal distance between the buildings.",
         "Lower triangle (depression 35°): {{tan 35° = 50/d}}, so {{d = 50/(tan 35°) = 71.407...}} m.",
@@ -876,7 +876,7 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-ch-q06",
       question:
         "ABCDEFGH is a cube of side 2 cm. ABCD is the base and E, F, G, H lie directly above A, B, C, D respectively. M is the midpoint of the top edge GH.\n\nWork out the angle between the line AM and the base ABCD. Give your answer correct to 1 decimal place.",
-      answer: { type: "number", value: 41.8, display: "41.8°" },
+      answer: { type: "number", value: 41.8, tolerance: 0.05, display: "41.8°" },
       solution: [
         "The point of the base directly below M is N, the midpoint of CD.",
         "AN: along AD 2 cm, across DN 1 cm, so {{AN = sqrt(2^2 + 1^2) = sqrt(5)}} cm.",

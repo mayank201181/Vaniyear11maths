@@ -103,6 +103,9 @@ const YES = ["yes", "y", "yes it is", "yes, it is", "it is", "true", "yes it's a
 const NO = ["no", "n", "no it is not", "no, it is not", "no it isn't", "no, it isn't", "no it's not", "no, it's not", "it is not", "not a term", "it is not a term", "false"];
 
 /** "a n + b" inside {{ }} as a numerator/denominator piece, bracketed when it has two terms. */
+/** Integer inside {{ }} with ASCII minus, bracketed when negative: (-3). */
+const ib = (n: number): string => (n < 0 ? `(${n})` : `${n}`);
+
 const bk = (s: string): string => (/[+-]/.test(s.replace(/^-/, "")) ? `(${s})` : s);
 
 const FORMULA = "{{S_n = n/2 (2a + (n - 1)d)}}";
@@ -234,14 +237,14 @@ const useNthTerm: Drill = {
         solution: [
           ...find,
           `Set the nth term equal to ${num(X)}: {{${nth} = ${X}}}.`,
-          `${a > 0 ? `{{${term(a, "n")} = ${X} - ${br(b)} = ${X - b}}}` : `{{${term(-a, "n")} = ${b} - ${br(X)} = ${b - X}}}`}.`,
-          `n = ${num(X - b)} ÷ ${br(a)} = ${k}, so ${num(X)} is the ${ordinal(k)} term.`,
+          `${a > 0 ? `{{${term(a, "n")} = ${X} - ${ib(b)} = ${X - b}}}` : `{{${term(-a, "n")} = ${b} - ${ib(X)} = ${b - X}}}`}.`,
+          `n = ${a > 0 ? `${num(X - b)} ÷ ${a}` : `${num(b - X)} ÷ ${-a}`} = ${k}, so ${num(X)} is the ${ordinal(k)} term.`,
         ],
         hint: "Make an equation: nth term = the value, then solve for n.",
         traps: numTraps(k, [
           [(X + b) / a, "Check the sign when you move the constant across — undo it with the inverse operation."],
           [X / a, "Deal with the constant term before dividing by the coefficient of n."],
-        ]),
+        ].filter(([v]) => Number.isInteger(v) && (v as number) > 0) as Array<[number, string]>),
       };
     }
 
@@ -417,7 +420,7 @@ const twoTerms: Drill = {
     } else {
       intro = `In an arithmetic sequence, the ${ordinal(u)} term is ${num(P)} and the ${ordinal(v)} term is ${num(Q)}.`;
       solve = [
-        `From the ${ordinal(u)} term to the ${ordinal(v)} term is ${v - u} steps of d: {{${v - u}d = ${Q} - ${br(P)} = ${Q - P}}}, so d = ${num(d)}.`,
+        `From the ${ordinal(u)} term to the ${ordinal(v)} term is ${v - u} steps of d: {{${v - u}d = ${Q} - ${ib(P)} = ${Q - P}}}, so d = ${num(d)}.`,
         `{{a + ${u - 1}d = ${P}}}, so a = ${num(P)} − ${u - 1} × ${br(d)} = ${num(a)}.`,
       ];
     }
@@ -879,7 +882,7 @@ const limitValue: Drill = {
       ],
       hint: "For very large n, which terms on the top and bottom really matter? Try dividing everything by the highest power of n.",
       traps: qTraps(lim, [
-        [q(b, d), "Those are the constant terms — they matter less and less as n grows. Look at the terms with the highest power of n."],
+        [quad ? q(e, d) : q(b, d), "Those are the constant terms — they matter less and less as n grows. Look at the terms with the highest power of n."],
         ...(a !== 0 ? ([[q(c, a), "Upside down: the limit is (top coefficient) ÷ (bottom coefficient)."]] as Array<[Q, string]>) : []),
         [q(a + b + e, c + d), "That's the 1st term (n = 1). The question asks where the terms end up for very large n."],
       ]),

@@ -314,14 +314,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m2-q06",
-        question: "Priya walks 5 km on a bearing of 060°, then turns and walks 8 km on a bearing of 170°.\n\nHow far is she from her starting point? Give your answer correct to 3 significant figures.",
-        options: ["10.8 km", "9.43 km", "7.85 km", "61.6 km"],
+        question: "Priya walks 5 km on a bearing of 070°, then turns and walks 8 km on a bearing of 155°.\n\nHow far is she from her starting point? Give your answer correct to 3 significant figures.",
+        options: ["9.06 km", "9.43 km", "9.80 km", "96.0 km"],
         answerIndex: 2,
         explanation:
-          "At the turning point, the back-bearing to the start is 060° + 180° = 240°. The angle between 240° and 170° is 70°, so the triangle has sides 5 and 8 with 70° between them. {{d^2 = 5^2 + 8^2 - 2 * 5 * 8 * cos 70°}} = 61.6…, so d = 7.85 km. 10.8 km uses 110° (the difference between the two bearings), which is the angle **outside** the triangle. 9.43 km assumes a right angle (Pythagoras). 61.6 km is d² — no square root.",
+          "At the turning point, the back-bearing to the start is 070° + 180° = 250°. The angle between 250° and 155° is 95°, so the triangle has sides 5 and 8 with 95° between them. {{d^2 = 5^2 + 8^2 - 2 * 5 * 8 * cos 95°}} = 89 + 6.97… = 95.97…, so d = 9.80 km. 9.06 km uses 85° (the difference between the two bearings), which is the angle **outside** the triangle. 9.43 km assumes a right angle (Pythagoras). 96.0 km is d² — no square root.",
         difficulty: "core",
         guideRef: "cosine-rule",
-        hints: ["Sketch it with a north line at each point.", "At the turn, find the bearing back to the start: 060° + 180°.", "The angle inside the triangle is between 240° and 170°."],
+        hints: ["Sketch it with a north line at each point.", "At the turn, find the bearing back to the start: 070° + 180°.", "The angle inside the triangle is between 250° and 155°."],
         strategy: "Draw a diagram",
       },
       {
@@ -408,14 +408,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m2-q13",
-        question: "Solve {{2cos^2 x - cos x - 1 = 0}} for 0° ≤ x ≤ 360°.",
-        options: ["120°, 240°", "0°, 120°, 240°, 360°", "0°, 60°, 300°, 360°", "0°, 120°, 360°"],
+        question: "Solve {{2cos^2 x + cos x - 1 = 0}} for 0° ≤ x ≤ 360°.",
+        options: ["60°, 300°", "60°, 180°, 300°", "0°, 120°, 240°, 360°", "60°, 120°, 180°"],
         answerIndex: 1,
         explanation:
-          "Let c = cos x: {{2c^2 - c - 1 = (2c + 1)(c - 1) = 0}}, so cos x = −{{1/2}} or cos x = 1. cos x = −{{1/2}} gives 120° and 360° − 120° = 240°; cos x = 1 gives 0° and 360° (both ends are included). 120°, 240° forgets the cos x = 1 branch; 0°, 60°, 300°, 360° comes from a sign slip giving cos x = +{{1/2}}; 0°, 120°, 360° misses the second solution of cos x = −{{1/2}}.",
+          "Let c = cos x: {{2c^2 + c - 1 = (2c - 1)(c + 1) = 0}}, so cos x = {{1/2}} or cos x = −1. cos x = {{1/2}} gives 60° and 360° − 60° = 300°; cos x = −1 gives 180° (the minimum of the cos graph). 60°, 300° forgets the cos x = −1 branch; 0°, 120°, 240°, 360° comes from a sign slip in the factors, giving cos x = −{{1/2}} or 1; 60°, 120°, 180° uses the **sine** symmetry (180° − 60°) for a cosine equation.",
         difficulty: "challenge",
         guideRef: "trig-equations",
-        hints: ["It's a quadratic in disguise. Let c = cos x.", "Factorise {{2c^2 - c - 1}}.", "Each value of cos x can give more than one angle — and check the end points 0° and 360°."],
+        hints: ["It's a quadratic in disguise. Let c = cos x.", "Factorise {{2c^2 + c - 1}}.", "Each value of cos x can give more than one angle. Use the symmetry of the **cos** graph."],
         strategy: "Introduce a variable",
       },
       {
@@ -495,14 +495,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m3-q04",
-        question: "sin 30° = 0.5. Which other angle between 0° and 360° also has a sine of 0.5?",
-        options: ["210°", "330°", "150°", "60°"],
+        question: "cos 40° = 0.766 (to 3 s.f.). Which other angle between 0° and 360° also has a cosine of 0.766?",
+        options: ["140°", "220°", "320°", "50°"],
         answerIndex: 2,
         explanation:
-          "The sine graph is symmetrical about 90°, so sin(180° − 30°) = sin 150° = 0.5. sin 210° and sin 330° are both −0.5 (the graph is below the axis between 180° and 360°). sin 60° = {{sqrt(3)/2}} ≈ 0.866.",
+          "The cosine graph is symmetrical about x = 180°, so cos(360° − 40°) = cos 320° = 0.766. cos 140° and cos 220° are both −0.766 (the graph is below the axis between 90° and 270°) — 140° uses the **sine** symmetry 180° − x. cos 50° = sin 40° ≈ 0.643.",
         difficulty: "warmup",
         guideRef: "trig-graphs",
-        hints: ["Sketch y = sin x. Where else is the curve at height 0.5?"],
+        hints: ["Sketch y = cos x. Where else is the curve at height 0.766?"],
         strategy: "Use symmetry",
       },
       {
@@ -522,15 +522,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m3-q06",
-        question: "The diagram shows triangle ABC with AB = 5 cm, AC = 8 cm and BC = 7 cm.\n\nCalculate the area of triangle ABC. Give your answer correct to 3 significant figures.",
+        question: "The diagram shows triangle ABC with AB = 6 cm, AC = 9 cm and BC = 10 cm.\n\nCalculate the area of triangle ABC. Give your answer correct to 3 significant figures.",
         diagram: D_M3Q06,
-        options: ["17.3 cm²", "20 cm²", "34.6 cm²", "17.5 cm²"],
+        options: ["26.7 cm²", "27 cm²", "53.3 cm²", "30 cm²"],
         answerIndex: 0,
         explanation:
-          "No angle is given, so find one first. {{cos A = (5^2 + 8^2 - 7^2)/(2 * 5 * 8) = 40/80 = 1/2}}, so A = 60°. Area = {{1/2 * 5 * 8 * sin 60°}} = {{10 sqrt(3)}} = 17.3 cm². 20 cm² is {{1/2 * 5 * 8}} without sin A — only right for a right angle. 34.6 cm² forgets the half. 17.5 cm² is {{1/2 * 5 * 7}}, treating the triangle as right-angled with the wrong pair of sides.",
+          "No angle is given, so find one first. {{cos A = (6^2 + 9^2 - 10^2)/(2 * 6 * 9) = 17/108}}, so A = 80.94…°. Area = {{1/2 * 6 * 9 * sin A}} = 27 × 0.9875… = 26.7 cm². 27 cm² is {{1/2 * 6 * 9}} without sin A — only right for a right angle. 53.3 cm² forgets the half. 30 cm² is {{1/2 * 6 * 10}}, treating the triangle as right-angled with the wrong pair of sides.",
         difficulty: "core",
         guideRef: "area-sine",
-        hints: ["To use {{1/2 ab sin C}} you need an angle. How can you get one from three sides?", "Use the cosine rule for angle A (between the 5 cm and 8 cm sides).", "Then area = {{1/2 * 5 * 8 * sin A}}."],
+        hints: ["To use {{1/2 ab sin C}} you need an angle. How can you get one from three sides?", "Use the cosine rule for angle A (between the 6 cm and 9 cm sides).", "Then area = {{1/2 * 6 * 9 * sin A}}, keeping the full value of A."],
         strategy: "Work backwards",
       },
       {
@@ -603,14 +603,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m3-q12",
-        question: "Simplify fully {{(1 - cos^2 x)/(sin x cos x)}}.",
-        options: ["{{1/(cos x)}}", "tan x", "sin x", "{{1/(tan x)}}"],
+        question: "Simplify fully {{(1 - sin^2 x) tan x}}.",
+        options: ["{{sin x}}", "{{sin x cos x}}", "{{-sin x cos x}}", "{{(cos^3 x)/(sin x)}}"],
         answerIndex: 1,
         explanation:
-          "From {{sin^2 x + cos^2 x = 1}}, {{1 - cos^2 x = sin^2 x}}. So the expression is {{(sin^2 x)/(sin x cos x) = (sin x)/(cos x)}} = tan x. {{1/(cos x)}} replaces {{1 - cos^2 x}} with sin x instead of sin²x. sin x cancels the cos x wrongly. {{1/(tan x)}} turns the fraction upside down.",
+          "From {{sin^2 x + cos^2 x = 1}}, {{1 - sin^2 x = cos^2 x}}. So the expression is {{cos^2 x * (sin x)/(cos x)}} = sin x cos x. sin x comes from replacing {{1 - sin^2 x}} with cos x instead of cos²x. −sin x cos x comes from writing {{1 - sin^2 x = -cos^2 x}} (a sign slip). {{(cos^3 x)/(sin x)}} uses tan x upside down, {{(cos x)/(sin x)}}.",
         difficulty: "core",
         guideRef: "trig-identities",
-        hints: ["Can you rewrite {{1 - cos^2 x}} using a Pythagorean identity?", "Cancel a factor of sin x, then use {{tan x = (sin x)/(cos x)}}."],
+        hints: ["Can you rewrite {{1 - sin^2 x}} using a Pythagorean identity?", "Replace tan x by {{(sin x)/(cos x)}} and cancel a factor of cos x."],
         strategy: "Make it simpler",
       },
       {

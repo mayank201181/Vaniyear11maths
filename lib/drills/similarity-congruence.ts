@@ -52,7 +52,7 @@ function numTraps(answer: number, cands: Array<[number, string]>): Trap[] {
   const out: Trap[] = [];
   for (const [v0, feedback] of cands) {
     const v = clean(v0);
-    if (!Number.isFinite(v) || v <= 0) continue;
+    if (!Number.isFinite(v) || v < 1e-4) continue;
     if (seen.some((s) => Math.abs(s - v) <= 0.012 * Math.max(Math.abs(s), 1e-9))) continue;
     seen.push(v);
     out.push({ spec: { type: "number", value: v }, feedback });
@@ -166,7 +166,7 @@ function arrow(p: Pt, q: Pt): string {
 /** Side of a triangle opposite vertex i: 0 → BC, 1 → AC, 2 → AB (letters from L). */
 const sideName = (L: string, i: number) => (i === 0 ? L[1] + L[2] : i === 1 ? L[0] + L[2] : L[0] + L[1]);
 /** Side joining vertices i and j, written in the order given. */
-const pairName = (L: string, i: number, j: number) => L[i] + L[j];
+const pairName = (L: string, i: number, j: number) => (i < j ? L[i] + L[j] : L[j] + L[i]);
 const pairKey = (i: number, j: number) => (i < j ? `${i}${j}` : `${j}${i}`);
 
 // ===========================================================================
@@ -249,7 +249,7 @@ export const drills: Drill[] = [
         }
       }
       if (tier >= 2) facts = rng.shuffle(facts);
-      const show = (L: string, f: Fact) => (f.kind === "s" ? `${pairName(L, f.i, f.j)} = ${f.v} cm` : `angle ${L[f.i]} = ${f.v}°`);
+      const show = (L: string, f: Fact) => (f.kind === "s" ? `${pairName(L, Math.min(f.i, f.j), Math.max(f.i, f.j))} = ${f.v} cm` : `angle ${L[f.i]} = ${f.v}°`);
       const rows = facts.map((f) => `| ${show(L1, f)} | ${show(L2, f)} |`).join("\n");
       const prompt =
         `Here are some facts about triangle ${L1} and triangle ${other}.\n\n| Triangle ${L1} | Triangle ${other} |\n|---|---|\n${rows}\n\n` +
