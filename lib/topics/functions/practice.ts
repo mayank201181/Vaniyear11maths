@@ -562,7 +562,10 @@ export const practice: TopicPractice = {
             "1 + 8 = 4x − 3x, so x = 9.",
             "Check: f(9) = {{28/7}} = 4 ✓.",
           ],
-          traps: [{ spec: { type: "number", value: -7 }, feedback: "Check the expansion: 4(x − 2) = 4x − **8**. Then 3x + 1 = 4x − 8 gives x = 9." }],
+          traps: [
+            { spec: { type: "number", value: -7 }, feedback: "Check the sign in the expansion: 4(x − 2) = 4x − 8, not 4x + 8. Then 3x + 1 = 4x − 8 gives x = 9." },
+            { spec: { type: "number", value: 3 }, feedback: "Multiply the whole bracket by 4: 4(x − 2) = 4x − **8**, not 4x − 2. Then 3x + 1 = 4x − 8 gives x = 9." },
+          ],
           commonError: "Multiplying only the x by 4: writing 4x − 2 instead of 4x − 8.",
           difficulty: "core",
           guideRef: "functions-as-mappings",

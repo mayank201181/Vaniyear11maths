@@ -414,11 +414,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "sequences-m2-q11",
-        question: "Find an expression for the nth term of the sequence {{3/5}}, {{5/8}}, {{7/11}}, {{9/14}}, …",
-        options: ["{{(2n + 3)/(3n + 5)}}", "{{(3n + 2)/(2n + 1)}}", "{{(2n + 1)/(3n + 5)}}", "{{(2n + 1)/(3n + 2)}}"],
+        question: "Find an expression for the nth term of the sequence {{5/2}}, {{8/7}}, {{11/12}}, {{14/17}}, …",
+        options: ["{{(3n + 5)/(5n + 2)}}", "{{(5n - 3)/(3n + 2)}}", "{{(3n + 2)/(5n + 2)}}", "{{(3n + 2)/(5n - 3)}}"],
         answerIndex: 3,
         explanation:
-          "Treat the numerators and denominators as two separate linear sequences. Tops 3, 5, 7, 9: 2n + 1. Bottoms 5, 8, 11, 14: 3n + 2. So the nth term is **{{(2n + 1)/(3n + 2)}}**. Check n = 4: {{9/14}} ✓. {{(2n + 3)/(3n + 5)}} uses the first terms as the constants. {{(2n + 1)/(3n + 5)}} makes that slip on the bottom only. {{(3n + 2)/(2n + 1)}} is upside down.",
+          "Treat the numerators and denominators as two separate linear sequences. Tops 5, 8, 11, 14: 3n + 2. Bottoms 2, 7, 12, 17: 5n − 3. So the nth term is **{{(3n + 2)/(5n - 3)}}**. Check n = 4: {{14/17}} ✓. {{(3n + 5)/(5n + 2)}} uses the first terms as the constants. {{(3n + 2)/(5n + 2)}} makes that slip on the bottom only. {{(5n - 3)/(3n + 2)}} is upside down.",
         difficulty: "core",
         guideRef: "quadratic-sequences",
         hints: [

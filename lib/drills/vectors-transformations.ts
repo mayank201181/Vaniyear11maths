@@ -960,33 +960,36 @@ export const drills: Drill[] = [
       if (shape === "tri") {
         const [m, n] = rng.pick(RATIOS);
         const t = fr(m, m + n);
+        const PN = rng.pick(["P", "X", "N", "D", "Q"]);
         const P = lAdd(A_, lMul(t, lSub(B_, A_)));
         const targets: Array<[string, Lin, string]> = [
           ["AB", lSub(B_, A_), "AB = AO + OB = −a + b."],
-          ["AP", lMul(t, lSub(B_, A_)), `AP is ${frShow(t)} of AB, and AB = b − a.`],
-          ["OP", P, `OP = OA + AP = a + ${frShow(t)}(b − a).`],
-          ["PB", lMul(fSub(fr(1), t), lSub(B_, A_)), `PB is ${frShow(fSub(fr(1), t))} of AB.`],
-          ["BP", lMul(fNeg(fSub(fr(1), t)), lSub(B_, A_)), `BP goes from B back towards A: ${frShow(fSub(fr(1), t))} of BA, and BA = a − b.`],
+          [`A${PN}`, lMul(t, lSub(B_, A_)), `A${PN} is ${frShow(t)} of AB, and AB = b − a.`],
+          [`O${PN}`, P, `O${PN} = OA + A${PN} = a + ${frShow(t)}(b − a).`],
+          [`${PN}B`, lMul(fSub(fr(1), t), lSub(B_, A_)), `${PN}B is ${frShow(fSub(fr(1), t))} of AB, and AB = b − a.`],
+          [`B${PN}`, lMul(fNeg(fSub(fr(1), t)), lSub(B_, A_)), `B${PN} goes from B back towards A: ${frShow(fSub(fr(1), t))} of BA, and BA = a − b.`],
+          [`${PN}O`, lMul(fr(-1), P), `${PN}O = −O${PN}, and O${PN} = OA + A${PN} = a + ${frShow(t)}(b − a).`],
         ];
         const pool = tier === 1 ? targets.slice(0, 3) : targets.slice(1);
         const [lab, ans, why] = rng.pick(pool);
         const O: P2 = [50, 225], Ap: P2 = [165, 45], Bp: P2 = [405, 205];
         const Pp = lerp(Ap, Bp, m / (m + n));
         const diagram =
-          svgOpen(460, 260, `Triangle OAB with vector a from O to A and b from O to B. P lies on AB with AP to PB in the ratio ${m} to ${n}.`) +
+          svgOpen(460, 260, `Triangle OAB with vector a from O to A and b from O to B. ${PN} lies on AB with A${PN} to ${PN}B in the ratio ${m} to ${n}.`) +
           arrow(O, Ap, "a", 1) + arrow(O, Bp, "b", -1) + seg(Ap, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, PN, 6, -12) + "</svg>";
         const steps = [why];
-        if (lab === "OP") steps.push(`= a + ${frShow(t)}b − ${frShow(t)}a.`);
+        if (lab === `O${PN}`) steps.push(`= a + ${frShow(t)}b − ${frShow(t)}a.`);
         steps.push(`${lab} = ${linShow(ans)}.`);
+        const where = m === n ? `${PN} is the midpoint of AB` : rng.bool() ? `${PN} is the point on AB such that A${PN} : ${PN}B = ${m} : ${n}` : `${PN} lies on AB with A${PN} = ${frShow(t)} AB`;
         return {
-          prompt: `OAB is a triangle with OA = **a** and OB = **b** (vectors). P is the point on AB such that AP : PB = ${m} : ${n}. Find the vector ${lab} in terms of **a** and **b**. Simplify your answer.`,
+          prompt: `OAB is a triangle with OA = **a** and OB = **b** (vectors). ${where}. Find the vector ${lab} in terms of **a** and **b**. Simplify your answer.`,
           diagram,
           answer: linSpec(ans),
           solution: steps,
-          hint: "Find AB first (go A → O → B). Then use the ratio: AP is what fraction of AB?",
+          hint: `Find AB first (go A → O → B). Then use the ratio: A${PN} is what fraction of AB?`,
           traps: linTraps(ans, [
             [lMul(fr(-1), ans), "Check the direction — your vector points the opposite way."],
-            [lab === "OP" ? lAdd(A_, lMul(fr(m, n), lSub(B_, A_))) : lMul(fr(m, n), lSub(B_, A_)), `The ratio ${m} : ${n} means AP is ${frShow(t)} of AB — split into ${m + n} parts, not ${frShow(fr(m, n))}.`],
+            [lab === `O${PN}` ? lAdd(A_, lMul(fr(m, n), lSub(B_, A_))) : lMul(fr(m, n), lSub(B_, A_)), `The ratio ${m} : ${n} means A${PN} is ${frShow(t)} of AB — split AB into ${m + n} equal parts.`],
             [lAdd(A_, lMul(t, lAdd(A_, B_))), "AB is b − a, not a + b: to go from A to B you travel backwards along a."],
           ]),
         };

@@ -130,7 +130,7 @@ const CURVES: Record<
     df: (x) => 2 * x,
     dfStr: "2x",
     chord: (a, h) => 2 * a + h,
-    chordStr: (a) => `((${mn(a)} + h)^2 - ${a < 0 ? `(${mn(a)})` : mn(a)}^2)/h = ${polyStr([[2 * a, ""]]) === "0" ? "" : `${mn(2 * a)} + `}h`,
+    chordStr: (a) => polyStr([[2 * a, ""], [1, "h"]]),
   },
   cubic: {
     label: "x³ − 3x",
@@ -350,7 +350,7 @@ function CurveAndGradient() {
 
   const W = 340;
   const xMin = motion ? 0 : -5;
-  const xMax = motion ? 8 : 5;
+  const xMax = motion ? 6 : 5;
   const top = makePlane({ width: W, height: 230, xMin, xMax, yMin: -40, yMax: 40, pad: 20 });
   const bot = makePlane({ width: W, height: 170, xMin, xMax, yMin: -40, yMax: 40, pad: 20 });
 
