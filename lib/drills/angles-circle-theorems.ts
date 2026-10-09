@@ -27,7 +27,7 @@ function numTraps(answer: number, cands: Array<[number, string]>): Trap[] {
   const seen: number[] = [answer];
   const out: Trap[] = [];
   for (const [v, feedback] of cands) {
-    if (!Number.isFinite(v) || v <= 0) continue;
+    if (!Number.isFinite(v) || v <= 0 || Math.abs(v * 100 - Math.round(v * 100)) > 1e-6) continue;
     if (seen.some((s) => Math.abs(s - v) <= 0.011 * Math.max(Math.abs(s), 1))) continue;
     seen.push(v);
     out.push({ spec: { type: "number", value: clean(v) }, feedback });
@@ -62,6 +62,7 @@ function piFrac(n: number, d: number): { expr: string; show: string } {
   const g = gcd(n, d);
   const a = n / g, b = d / g;
   if (b === 1) return a === 1 ? { expr: "pi", show: "{{pi}}" } : { expr: `${a}pi`, show: `{{${a} pi}}` };
+  if (a === 1) return { expr: `pi/${b}`, show: `{{pi/${b}}}` };
   return { expr: `${a}pi/${b}`, show: `{{(${a} pi)/${b}}}` };
 }
 
@@ -529,7 +530,13 @@ function polyTess(rng: Rng): DrillItem {
   const idx = rng.int(0, set.length - 1);
   const missing = set[idx];
   const known = set.filter((_, i) => i !== idx);
-  const names = known.map((n) => (n === 3 ? "an equilateral triangle" : n === 4 ? "a square" : `a regular ${pname(n)}`));
+  const NUMW = ["", "", "two", "three", "four"];
+  const names: string[] = [];
+  for (const n of Array.from(new Set(known))) {
+    const k = known.filter((m) => m === n).length;
+    const one = n === 3 ? "equilateral triangle" : n === 4 ? "square" : `regular ${pname(n)}`;
+    names.push(k === 1 ? an(one) : `${NUMW[k]} ${one.replace(/(polygon|gon|triangle|square)$/, "$1s").replace(/x$/, "xs")}`);
+  }
   const total = known.reduce((s, n) => s + REG_INT[n], 0);
   const gap = 360 - total;
   return {
@@ -1535,7 +1542,7 @@ const intersectingChords: Drill = {
           prompt: `The chords AB and CD of a circle intersect at P. AP = x cm, PB = (x + ${k}) cm, CP = ${c} cm and PD = ${d} cm. Work out the value of x.`,
           diagram,
           answer: { type: "number", value: x },
-          solution: [`Intersecting chords: x(x + ${k}) = ${c} × ${d} = ${c * d}`, `x² + ${k}x − ${c * d} = 0`, `(x − ${x})(x + ${x + k}) = 0, so x = ${x} or x = −${x + k}`, `x is a length, so x = ${x}`],
+          solution: [`Intersecting chords: x(x + ${k}) = ${c} × ${d} = ${c * d}`, `x² + ${k === 1 ? "" : k}x − ${c * d} = 0`, `(x − ${x})(x + ${x + k}) = 0, so x = ${x} or x = −${x + k}`, `x is a length, so x = ${x}`],
           hint: "AP × PB = CP × PD gives a quadratic. Which root makes sense for a length?",
           traps: numTraps(x, [[x + k, "That's PB. The question asks for x."]]),
         };
@@ -1584,7 +1591,7 @@ const intersectingChords: Drill = {
           prompt: `P is a point outside a circle. A line from P meets the circle at A and B, and another line from P meets the circle at C and D. PA = x cm, AB = ${k} cm, PC = ${c} cm and CD = ${num(e)} cm. Work out the value of x.`,
           diagram,
           answer: { type: "number", value: a },
-          solution: [`PA × PB = PC × PD: x(x + ${k}) = ${c} × ${num(pd)} = ${num(c * pd)}`, `x² + ${k}x − ${num(c * pd)} = 0`, `(x − ${a})(x + ${a + k}) = 0, so x = ${a} (a length is positive)`],
+          solution: [`PA × PB = PC × PD: x(x + ${k}) = ${c} × ${num(pd)} = ${num(c * pd)}`, `x² + ${k === 1 ? "" : k}x − ${num(c * pd)} = 0`, `(x − ${a})(x + ${a + k}) = 0, so x = ${a} (a length is positive)`],
           hint: "PB = x + " + k + ". Form a quadratic and reject the negative root.",
           traps: numTraps(a, [[a + k, "That's PB, not PA."]]),
         };

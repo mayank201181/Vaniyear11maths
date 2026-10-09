@@ -241,7 +241,7 @@ function FrustumBuilder() {
   const smallM = isCyl || isCone ? "0" : piM(r * r * h1n, 3 * h1d);
 
   // Drawing: fixed scale so changing R, r, h really changes the picture.
-  const W = 340, Hs = 270, s = 13, cx = 170, by = 238;
+  const W = 360, Hs = 270, s = 12, cx = 185, by = 238;
   const ty = by - h * s;
   const rx = R * s, tx = r * s;
   const ry = Math.max(6, rx * 0.25), tyr = Math.max(3, tx * 0.25);

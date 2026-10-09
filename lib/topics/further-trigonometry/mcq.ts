@@ -42,12 +42,12 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q01",
-        question: "In triangle ABC, angle BAC = 40°, angle ABC = 65° and BC = 8 cm.\n\nWork out the length of AC. Give your answer correct to 3 significant figures.",
+        question: "In triangle ABC, angle BAC = 47°, angle ABC = 58° and BC = 9 cm.\n\nWork out the length of AC. Give your answer correct to 3 significant figures.",
         diagram: D_M1Q01,
-        options: ["11.3 cm", "5.67 cm", "12.0 cm", "7.25 cm"],
+        options: ["10.4 cm", "7.76 cm", "11.9 cm", "7.63 cm"],
         answerIndex: 0,
         explanation:
-          "AC is opposite angle B and BC is opposite angle A, so {{(AC)/(sin 65°) = 8/(sin 40°)}}, giving AC = {{(8 sin 65°)/(sin 40°)}} = 11.279… = 11.3 cm. 5.67 cm comes from flipping the angles ({{(8 sin 40°)/(sin 65°)}}). 12.0 cm uses angle C = 75°, which is opposite AB, not AC. 7.25 cm is just 8 sin 65° — the division by sin 40° has been forgotten.",
+          "AC is opposite angle B and BC is opposite angle A, so {{(AC)/(sin 58°) = 9/(sin 47°)}}, giving AC = {{(9 sin 58°)/(sin 47°)}} = 10.436… = 10.4 cm. 7.76 cm comes from flipping the angles ({{(9 sin 47°)/(sin 58°)}}). 11.9 cm uses angle C = 75°, which is opposite AB, not AC. 7.63 cm is just 9 sin 58° — the division by sin 47° has been forgotten.",
         difficulty: "warmup",
         guideRef: "sine-rule",
         hints: ["Pair each side with the angle **opposite** it.", "{{(AC)/(sin B) = (BC)/(sin A)}}"],
@@ -56,11 +56,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m1-q02",
-        question: "In triangle PQR, PQ = 9 cm, PR = 6 cm and angle QPR = 50°.\n\nWork out the length of QR. Give your answer correct to 3 significant figures.",
-        options: ["47.6 cm", "13.7 cm", "6.90 cm", "2.41 cm"],
+        question: "In triangle PQR, PQ = 10 cm, PR = 7 cm and angle QPR = 55°.\n\nWork out the length of QR. Give your answer correct to 3 significant figures.",
+        options: ["68.7 cm", "15.1 cm", "8.29 cm", "2.27 cm"],
         answerIndex: 2,
         explanation:
-          "Two sides and the angle between them: use the cosine rule. {{QR^2 = 9^2 + 6^2 - 2 * 9 * 6 * cos 50°}} = 117 − 69.42… = 47.578…, so QR = {{sqrt(47.578...)}} = 6.90 cm. 47.6 cm is QR² — the square root is missing. 13.7 cm adds the 2bc cos A term instead of subtracting it. 2.41 cm comes from working out (81 + 36 − 108) first and then multiplying by cos 50° — a calculator-order slip.",
+          "Two sides and the angle between them: use the cosine rule. {{QR^2 = 10^2 + 7^2 - 2 * 10 * 7 * cos 55°}} = 149 − 80.30… = 68.699…, so QR = {{sqrt(68.699...)}} = 8.29 cm. 68.7 cm is QR² — the square root is missing. 15.1 cm adds the 2bc cos A term instead of subtracting it. 2.27 cm comes from working out (100 + 49 − 140) first and then multiplying by cos 55° — a calculator-order slip.",
         difficulty: "warmup",
         guideRef: "cosine-rule",
         hints: ["You know two sides and the angle **between** them. Which rule fits?", "{{a^2 = b^2 + c^2 - 2bc cos A}}, then square root."],
