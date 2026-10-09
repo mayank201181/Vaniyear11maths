@@ -181,7 +181,7 @@ export const morePapers: Paper[] = [
         markScheme: [
           { point: "First reflection: (x, y) → (−4 − x, y) (or correct reasoning with distances to the line)", keywords: ["-4 - x", "−4 − x", "-4-x", "(-4-x, y)"] },
           { point: "Second reflection gives (6 − (−4 − x), y) = (x + 10, y)", keywords: ["6 -", "x + 10", "x+10", "10 + x"] },
-          { point: "Concludes translation by {{col(10, 0)}} — every point moves by the same vector", keywords: ["translation", "{{col(10, 0)}}", "10 right", "same vector", "10, 0"] },
+          { point: "Concludes translation by {{col(10, 0)}} — every point moves by the same vector", keywords: ["(10, 0)", "10 right", "10 units right", "10, 0", "10 to the right"] },
         ],
         commonError: "Testing just one point. One point can't show the whole shape moves by the same vector — use a general point (x, y), or argue with the distance to each line.",
         solutions: [
@@ -204,7 +204,7 @@ export const morePapers: Paper[] = [
         markScheme: [
           { point: "Enlargement", keywords: ["enlargement", "enlarge"] },
           { point: "Scale factor −1/2 (negative, size one half)", keywords: ["-1/2", "−1/2", "-0.5", "−0.5", "negative"] },
-          { point: "Centre (0, 1)", keywords: ["(0, 1)", "(0,1)", "centre"] },
+          { point: "Centre (0, 1)", keywords: ["(0, 1)", "(0,1)"] },
         ],
         commonError: "Giving scale factor 2 or +{{1/2}}: B is *smaller* (so the size is {{1/2}}) and on the opposite side of the centre (so it is negative).",
         difficulty: "core",
@@ -471,8 +471,8 @@ export const morePapers: Paper[] = [
           "Rotation, 90° anticlockwise, centre (−1, 2). Check with the vertex (1, 3): it is {{col(2, 1)}} from (−1, 2); a quarter-turn anticlockwise gives {{col(-1, 2)}}, which lands at (−2, 4) — a vertex of B. The other vertices also match: (4, 3) → (−2, 7) and (1, 5) → (−4, 4).",
         markScheme: [
           { point: "Rotation", keywords: ["rotation", "rotate"] },
-          { point: "90° anticlockwise (or 270° clockwise)", keywords: ["90", "anticlockwise", "anti-clockwise", "270"] },
-          { point: "Centre (−1, 2)", keywords: ["(-1, 2)", "(−1, 2)", "(-1,2)", "centre"] },
+          { point: "90° anticlockwise (or 270° clockwise)", keywords: ["anticlockwise", "anti-clockwise", "anti clockwise", "270"] },
+          { point: "Centre (−1, 2)", keywords: ["(-1, 2)", "(−1, 2)", "(-1,2)", "(−1,2)"] },
         ],
         commonError: "Leaving out one of the three facts — type, angle with direction, and centre are each a mark. 'Turned 90°' alone scores 1 at most.",
         difficulty: "core",
@@ -678,7 +678,7 @@ export const morePapers: Paper[] = [
           "Shape P is rotated 180° about the point (1, 2) to give shape Q. Shape Q is then rotated 180° about the point (4, 0) to give shape R.\n\nThe single transformation that maps P onto R is a translation. Find its column vector. Give your answer as x, y.",
         answer: { type: "list", values: [6, -4], ordered: true, display: "{{col(6, -4)}}" },
         traps: [
-          { spec: { type: "list", values: [3, -2], ordered: true }, feedback: "(3, −2) is the vector from the first centre to the second. Two half-turns move every point **twice** that distance — follow the point (1, 2) to check." },
+          { spec: { type: "list", values: [3, -2], ordered: true }, feedback: "{{col(3, -2)}} is the vector from the first centre to the second. Two half-turns move every point **twice** that distance — follow the point (1, 2) to check." },
           { spec: { type: "list", values: [0, 0], ordered: true }, feedback: "Two half-turns make a full turn, so R faces the same way as P — but the centres are different, so R has moved. Follow the point (1, 2) through both rotations." },
           { spec: { type: "list", values: [-6, 4], ordered: true }, feedback: "Right size, wrong direction. Follow (1, 2): the first rotation leaves it fixed, the second sends it to (7, −2)." },
         ],

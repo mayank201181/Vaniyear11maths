@@ -369,7 +369,7 @@ export const paper: ExamPaper = {
       traps: [
         { spec: { type: "number", value: 27 }, feedback: "In month 27 he saves 8 × 27 + 30 = $246 — not yet more than $250. n > 27.5, so round *up*." },
         { spec: { type: "number", value: 27.5 }, feedback: "Months are whole numbers. In month 27 he saves $246 and in month 28 he saves $254 — so which month is the first one over $250?" },
-        { spec: { type: "number", value: 18 }, feedback: "Check the common difference: 7 steps (from month 5 to month 12) add $56, so d = 56 ÷ 7 = 8, not 56 ÷ 12." },
+        { spec: { type: "number", value: 31 }, feedback: "Check the common difference: from month 5 to month 12 there are 7 steps, not 8, so d = 56 ÷ 7 = 8." },
       ],
       solution: [
         "From month 5 to month 12 is 7 steps, and the amount rises by 126 − 70 = $56, so d = 56 ÷ 7 = 8.",
@@ -447,14 +447,14 @@ export const paper: ExamPaper = {
       guideRef: "area-volume-scale",
       difficulty: "core",
       question:
-        "Two perfume bottles are mathematically similar. The smaller bottle has surface area 180 cm² and the larger has surface area 405 cm².\n\nThe volume of the smaller bottle is 240 cm³. What is the volume of the larger bottle?",
-      options: ["540 cm³", "360 cm³", "1215 cm³", "810 cm³"],
+        "Two perfume bottles are mathematically similar. The smaller bottle has volume 216 cm³ and the larger has volume 512 cm³.\n\nThe surface area of the smaller bottle is 270 cm². What is the surface area of the larger bottle?",
+      options: ["640 cm²", "360 cm²", "853 cm²", "480 cm²"],
       answerIndex: 3,
       explanation:
-        "Area scale factor = {{405/180}} = 2.25, so the length scale factor k = {{sqrt(2.25)}} = 1.5 and the volume scale factor is {{1.5^3}} = 3.375. Volume = 240 × 3.375 = 810 cm³. 540 cm³ wrongly uses the area factor 2.25 for volume; 360 cm³ uses the length factor; 1215 cm³ squares the area factor ({{2.25^2}}) instead of going via lengths.",
+        "Volume scale factor = {{512/216 = 64/27}}. The length scale factor k is its cube root: k = {{4/3}} (because {{4^3 = 64}} and {{3^3 = 27}}). The area scale factor is {{k^2 = 16/9}}. Surface area = 270 × {{16/9}} = 480 cm². 640 cm² wrongly uses the volume factor {{64/27}} on an area; 360 cm² uses the length factor {{4/3}}; 853 cm² uses {{(16/9)^2}} — squaring the area factor again instead of using it once.",
       hints: [
-        "Area scale factor = {{k^2}}. Find k first.",
-        "Volume scale factor = {{k^3}}.",
+        "Volume scale factor = {{k^3}}. Take the cube root to find k.",
+        "Area scale factor = {{k^2}}.",
       ],
       strategy: "Work backwards",
     },
@@ -465,23 +465,24 @@ export const paper: ExamPaper = {
       guideRef: "histograms",
       difficulty: "core",
       question:
-        "The histogram shows information about the time, t minutes, that 100 students spent on homework one evening.\n\nWork out an estimate for the number of students who spent more than 50 minutes on homework.",
+        "The histogram shows information about the time, t minutes, that 100 students spent on homework one evening.\n\nWork out an estimate for the **median** time. Give your answer in minutes.",
       diagram: HOMEWORK_HISTOGRAM,
-      answer: { type: "number", value: 30, display: "30 students" },
+      answer: { type: "number", value: 37.5, tolerance: 0.25, display: "37.5 minutes" },
       traps: [
-        { spec: { type: "number", value: 16 }, feedback: "That is only the 60–100 class. Students in the second half of the 40–60 class (50 to 60 minutes) also count." },
-        { spec: { type: "number", value: 44 }, feedback: "You included the whole 40–60 class. Only the part from 50 to 60 minutes counts: 10 × 1.4 = 14 students." },
+        { spec: { type: "number", value: 35 }, feedback: "35 is the midpoint of the class that contains the median. Use the frequencies to find *how far* into the 30–40 class the 50th student is." },
+        { spec: { type: "number", value: 50 }, feedback: "50 minutes is halfway along the time axis, not the time of the middle student. Find the frequencies first and count to the 50th student." },
       ],
       solution: [
-        "Frequency = frequency density × class width.",
-        "50 < t ≤ 60: 10 × 1.4 = 14 students (half of the 40–60 bar, assuming students are spread evenly).",
-        "60 < t ≤ 100: 40 × 0.4 = 16 students.",
-        "Estimate = 14 + 16 = **30 students**.",
+        "Frequency = frequency density × class width: 0–20: 0.7 × 20 = 14; 20–30: 1.8 × 10 = 18; 30–40: 2.4 × 10 = 24; 40–60: 1.4 × 20 = 28; 60–100: 0.4 × 40 = 16 (total 100 ✓).",
+        "The median is the 50th value. Running totals: 14, 32, 56, … so it lies in the 30–40 class.",
+        "We need 50 − 32 = 18 of the 24 students in that class: {{18/24}} of the way through it.",
+        "Median ≈ 30 + {{18/24}} × 10 = 30 + 7.5 = **37.5 minutes**.",
       ],
-      commonError: "Reading the bar heights as frequencies instead of multiplying by the class width.",
+      commonError: "Reading the bar heights as frequencies, or giving the midpoint of the median class.",
       hints: [
-        "In a histogram, the *area* of a bar gives the frequency.",
-        "Only part of the 40–60 bar is more than 50 minutes. What width is that part?",
+        "Turn each bar into a frequency: frequency = frequency density × class width.",
+        "Add up the frequencies in order until you pass the 50th student. Which class is the median in?",
+        "Assume the students in that class are spread evenly and find how far into the class the 50th one is.",
       ],
     },
     {
@@ -545,7 +546,7 @@ export const paper: ExamPaper = {
       guideRef: "vector-geometry",
       difficulty: "core",
       question:
-        "OAB is a triangle. **OA** = **a** and **OB** = **b**.\n\nP is the point on AB such that AP : PB = 2 : 3.\n\nWhich expression is **OP** in terms of **a** and **b**?",
+        "OAB is a triangle. →OA = **a** and →OB = **b**.\n\nP is the point on AB such that AP : PB = 2 : 3.\n\nWhich expression is →OP in terms of **a** and **b**?",
       diagram: VECTOR_AB,
       options: [
         "{{3/5}}**a** + {{2/5}}**b**",
@@ -555,7 +556,7 @@ export const paper: ExamPaper = {
       ],
       answerIndex: 0,
       explanation:
-        "**AB** = **b** − **a**. P is {{2/5}} of the way from A to B, so **OP** = **a** + {{2/5}}(**b** − **a**) = {{3/5}}**a** + {{2/5}}**b**. Check: P is closer to A, so it should have more **a** than **b**. {{2/5}}**a** + {{3/5}}**b** gets the ratio the wrong way round; {{1/3}}**a** + {{2/3}}**b** uses {{2/3}} of AB (reading 2 : 3 as a fraction); {{2/5}}(**b** − **a**) is only **AP** — it forgets to start at O.",
+        "→AB = **b** − **a**. P is {{2/5}} of the way from A to B, so →OP = **a** + {{2/5}}(**b** − **a**) = {{3/5}}**a** + {{2/5}}**b**. Check: P is closer to A, so it should have more **a** than **b**. {{2/5}}**a** + {{3/5}}**b** gets the ratio the wrong way round; {{1/3}}**a** + {{2/3}}**b** uses {{2/3}} of AB (reading 2 : 3 as a fraction); {{2/5}}(**b** − **a**) is only →AP — it forgets to start at O.",
       hints: [
         "Go from O to A, then part of the way along AB.",
         "AP : PB = 2 : 3 means AP is {{2/5}} of AB.",
@@ -679,11 +680,11 @@ export const paper: ExamPaper = {
       guideRef: "vector-geometry",
       difficulty: "challenge",
       question:
-        "OAB is a triangle. **OA** = **a** and **OB** = **b**.\n\nM is the midpoint of OA. P is the point on AB such that AP : PB = 2 : 1. The line OB is extended to the point Q so that **OQ** = 2**b**.\n\nProve that M, P and Q lie on a straight line.",
+        "OAB is a triangle. →OA = **a** and →OB = **b**.\n\nM is the midpoint of OA. P is the point on AB such that AP : PB = 2 : 1. The line OB is extended to the point Q so that →OQ = 2**b**.\n\nProve that M, P and Q lie on a straight line.",
       diagram: VECTOR_COLLINEAR,
       marks: 4,
       modelAnswer:
-        "**OM** = {{1/2}}**a**. **OP** = **a** + {{2/3}}(**b** − **a**) = {{1/3}}**a** + {{2/3}}**b**.\n\n**MP** = **OP** − **OM** = −{{1/6}}**a** + {{2/3}}**b** = {{1/6}}(4**b** − **a**).\n\n**MQ** = **OQ** − **OM** = 2**b** − {{1/2}}**a** = {{1/2}}(4**b** − **a**).\n\nSo **MQ** = 3**MP**: the vectors are parallel, and they share the point M, so M, P and Q lie on a straight line.",
+        "→OM = {{1/2}}**a**. →OP = **a** + {{2/3}}(**b** − **a**) = {{1/3}}**a** + {{2/3}}**b**.\n\n→MP = →OP − →OM = −{{1/6}}**a** + {{2/3}}**b** = {{1/6}}(4**b** − **a**).\n\n→MQ = →OQ − →OM = 2**b** − {{1/2}}**a** = {{1/2}}(4**b** − **a**).\n\nSo →MQ = 3→MP: the vectors are parallel, and they share the point M, so M, P and Q lie on a straight line.",
       markScheme: [
         { point: "Finds OP = (1/3)a + (2/3)b (or AP = (2/3)(b − a))", keywords: ["1/3a", "2/3b", "2/3(b-a)", "op"] },
         { point: "Finds MP = −(1/6)a + (2/3)b or equivalent", keywords: ["mp", "-1/6a", "1/6(4b-a)"] },
@@ -693,8 +694,8 @@ export const paper: ExamPaper = {
       commonError: "Showing the vectors are parallel but not stating that they share a common point — parallel alone does not prove the points are on one line.",
       hints: [
         "Collinear means two vectors along the line are multiples of each other *and* share a point.",
-        "Find **OP** first: go from O to A, then {{2/3}} of the way along AB.",
-        "Find **MP** and **MQ**. Can you take out the same bracket (4**b** − **a**)?",
+        "Find →OP first: go from O to A, then {{2/3}} of the way along AB.",
+        "Find →MP and →MQ. Can you take out the same bracket (4**b** − **a**)?",
       ],
       strategy: "Look for an invariant",
     },

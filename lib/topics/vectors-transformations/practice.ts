@@ -402,7 +402,7 @@ export const practice: TopicPractice = {
           markScheme: [
             { point: "First reflection: (x, y) → (x, 4 − y) (or a correct numerical example)", keywords: ["4 - y", "4 − y", "4-y"] },
             { point: "Second reflection: → (x, −2 − (4 − y)) = (x, y − 6)", keywords: ["y - 6", "y − 6", "y-6", "-2 -", "−2 −"] },
-            { point: "Conclusion: translation by {{col(0, -6)}} — every point moves the same", keywords: ["translation", "(0, -6)", "(0, −6)", "0, -6", "0, −6", "6 down"] },
+            { point: "Conclusion: translation by {{col(0, -6)}} — every point moves the same", keywords: ["(0, -6)", "(0, −6)", "0, -6", "0, −6", "6 down", "6 units down"] },
           ],
           commonError: "Testing one point only and then claiming it is a translation — check a general point (x, y) or at least two points. Also watch the direction: the move is from the first mirror towards the second, so it is down.",
           difficulty: "core",
@@ -559,7 +559,7 @@ export const practice: TopicPractice = {
           markScheme: [
             { point: "Reflection in y = x: (x, y) → (y, x)", keywords: ["(y, x)", "y, x", "swap"] },
             { point: "Then reflection in y-axis: → (−y, x)", keywords: ["(-y, x)", "(−y, x)", "-y, x", "−y, x"] },
-            { point: "Rotation 90° anticlockwise about (0, 0) — all three features", keywords: ["rotation", "90", "anticlockwise", "origin", "(0, 0)"] },
+            { point: "Rotation 90° anticlockwise about (0, 0) — all three features, including the centre", keywords: ["about the origin", "about o", "centre o", "origin", "(0, 0)", "(0,0)"] },
           ],
           commonError: "Leaving out the centre or the direction — 'describe fully' needs angle, direction AND centre.",
           difficulty: "challenge",
@@ -672,7 +672,7 @@ export const practice: TopicPractice = {
             "Rotation, 90° clockwise, about the centre (1, −1).\n\nCheck: from (1, −1), vertex (1, 2) is 3 up; after a quarter-turn clockwise it is 3 right, at (4, −1) ✓. Vertex (1, 5) is 6 up → 6 right, (7, −1) ✓. Vertex (3, 2) is {{col(2, 3)}} from the centre → {{col(3, -2)}}, at (4, −3) ✓.",
           markScheme: [
             { point: "Rotation (one transformation only)", keywords: ["rotation", "rotate"] },
-            { point: "90° clockwise (or 270° anticlockwise)", keywords: ["90", "clockwise", "270"] },
+            { point: "90° clockwise (or 270° anticlockwise)", keywords: ["90° clockwise", "90 clockwise", "90 degrees clockwise", " clockwise", "270"] },
             { point: "Centre (1, −1)", keywords: ["(1, -1)", "(1, −1)", "1, -1", "1, −1", "1,-1"] },
           ],
           commonError: "Describing two transformations (e.g. 'rotate then translate') — the question asks for a single one.",
@@ -1133,30 +1133,34 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "vectors-transformations-ch-q08",
       question:
-        "An enlargement with scale factor 2 and centre (0, 0) is followed by an enlargement with scale factor {{1/2}} and centre (4, 0).\n\nThe result is a translation. Find its column vector. Type the top entry, then the bottom entry.",
-      answer: { type: "list", values: [2, 0], ordered: true, display: "{{col(2, 0)}}" },
+        "An enlargement with scale factor −2 and centre (1, 0) is followed by an enlargement with scale factor {{-1/2}} and centre (3, 2).\n\nThe result is a translation. Find its column vector. Type the top entry, then the bottom entry.",
+      answer: { type: "list", values: [3, 3], ordered: true, display: "{{col(3, 3)}}" },
       solution: [
-        "First: (x, y) → (2x, 2y).",
-        "Second, about C = (4, 0): image = C + {{1/2}}(point − C) = (4 + {{1/2}}(2x − 4), {{1/2}}(2y)) = (x + 2, y).",
-        "Every point moves by {{col(2, 0)}}, so it's the translation {{col(2, 0)}}.",
+        "First, about (1, 0): image = (1, 0) − 2((x, y) − (1, 0)) = (3 − 2x, −2y).",
+        "Second, about C = (3, 2): image = C − {{1/2}}(point − C) = (3 − {{1/2}}(3 − 2x − 3), 2 − {{1/2}}(−2y − 2)) = (3 + x, 3 + y).",
+        "Every point moves by {{col(3, 3)}}, so it's the translation {{col(3, 3)}}.",
       ],
       solutions: [
         {
           label: "Track one point",
           steps: [
-            "Scale factors multiply: 2 × {{1/2}} = 1, so the combined map is a translation (or the identity) — just track one point.",
-            "(0, 0) → (0, 0) → (4, 0) + {{1/2}}((0, 0) − (4, 0)) = (2, 0). Vector {{col(2, 0)}}.",
+            "Scale factors multiply: −2 × {{-1/2}} = 1, so the combined map keeps size and orientation — it is a translation (or no change). Just track one point.",
+            "The first centre (1, 0) stays put under the first enlargement. The second sends it to (3, 2) − {{1/2}}((1, 0) − (3, 2)) = (3, 2) + {{col(1, 1)}} = (4, 3).",
+            "(1, 0) → (4, 3) is a move of {{col(3, 3)}}.",
           ],
         },
       ],
-      traps: [{ spec: { type: "list", values: [0, 0], ordered: true }, feedback: "The sizes cancel (2 × {{1/2}} = 1), but the centres are different, so the shape still moves." }],
-      commonError: "Thinking the two enlargements cancel out completely because 2 × {{1/2}} = 1.",
+      traps: [
+        { spec: { type: "list", values: [0, 0], ordered: true }, feedback: "The scale factors multiply to 1, so the size is unchanged — but the centres are different, so the shape still moves." },
+        { spec: { type: "list", values: [1, 1], ordered: true }, feedback: "Check the sign of the second scale factor. It is {{-1/2}}, so the vector from (3, 2) to the point is halved **and reversed**. Track (1, 0) to check." },
+      ],
+      commonError: "Thinking the two enlargements cancel out completely because −2 × {{-1/2}} = 1.",
       difficulty: "challenge",
       guideRef: "combined-transformations",
       hints: [
         "What is the overall scale factor? What kind of transformation has scale factor 1?",
         "Follow a general point (x, y) through both enlargements.",
-        "Or follow the single point (0, 0) — it's easy because it's the first centre.",
+        "Or follow the single point (1, 0) — it's easy because it's the first centre, so the first enlargement doesn't move it.",
       ],
       strategy: "Try small cases",
     },
