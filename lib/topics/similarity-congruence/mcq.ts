@@ -2,17 +2,17 @@
 // Diagrams are drawn to scale from the lengths and angles in each question.
 import type { Paper } from "../../types.ts";
 
-const M1Q06 = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with D on AB and E on AC. DE is parallel to BC. AD is 4 cm, DB is 6 cm, DE is 5 cm and BC is x."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><polygon points="150,30 80,270 392.5,270" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="122" y1="126" x2="247" y2="126" stroke="#1f2937" stroke-width="2"/><polyline points="182.5,130.8 188.5,126 182.5,121.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="234.2,274.8 240.2,270 234.2,265.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><text x="145.3" y="21.3" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="68.1" y="281.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="405.3" y="280.1" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="110" y="130" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">D</text><text x="259" y="130" font-size="13" font-family="sans-serif" text-anchor="start" fill="#1f2937" font-weight="bold">E</text><text x="122.6" y="78.6" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">4 cm</text><text x="87.6" y="198.6" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="184.5" y="118" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">5 cm</text><text x="236.2" y="292" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">x</text></svg>`;
+const M1Q06 = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with D on AB and E on AC. DE is parallel to BC. AD is 6 cm, DB is 3 cm, DE is 8 cm and BC is x."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><polygon points="155.1,68.1 60,272 360,272" fill="#c7d2fe" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="91.7" y1="204" x2="291.7" y2="204" stroke="#1f2937" stroke-width="2"/><polyline points="188.7,208.8 194.7,204 188.7,199.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="207,276.8 213,272 207,267.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><text x="151.4" y="59.1" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="49" y="284" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="371" y="284" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="79.7" y="208" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">D</text><text x="303.7" y="208" font-size="13" font-family="sans-serif" text-anchor="start" fill="#1f2937" font-weight="bold">E</text><text x="103.5" y="131.3" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="55.9" y="233.2" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">3 cm</text><text x="191.7" y="196" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">8 cm</text><text x="210" y="292" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">x</text></svg>`;
 
 const M1Q07 = `<svg viewBox="0 0 440 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two triangles ABC and EDC meeting at C. Lines AE and BD cross at C. AB is parallel to DE. AC is 6 cm, CE is 9 cm, AB is 8 cm, BC is 5 cm and DE is x."><rect x="0" y="0" width="440" height="260" fill="#ffffff"/><polygon points="169.1,67.1 280.7,76.8 230,125" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polygon points="230,125 321.3,211.8 153.9,197.4" fill="#fde68a" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="222.5,76.5 228.9,72.3 223.3,67" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="235.2,209.2 241.6,204.9 236,199.6" fill="none" stroke="#1f2937" stroke-width="1.6"/><text x="156.1" y="66.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="294.3" y="78" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="334.3" y="221.4" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">E</text><text x="140.3" y="205.1" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">D</text><text x="246" y="130" font-size="13" font-family="sans-serif" text-anchor="start" fill="#1f2937" font-weight="bold">C</text><text x="226.1" y="62.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">8 cm</text><text x="189.9" y="110.7" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="265" y="115.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">5 cm</text><text x="285.3" y="162.8" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">9 cm</text><text x="236.4" y="223.1" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">x</text></svg>`;
 
-const M1Q12 = `<svg viewBox="0 0 440 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Parallelogram ABCD with diagonal AC drawn, splitting it into triangles ABC and CDA."><rect x="0" y="0" width="440" height="260" fill="#ffffff"/><polygon points="60,220 300,220 380,70 140,70" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="60" y1="220" x2="380" y2="70" stroke="#1f2937" stroke-width="2"/><polyline points="178,224.8 184,220 178,215.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="258,74.8 264,70 258,65.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="101.9,151.7 100.5,144.1 93.4,147.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="104.7,146.4 103.3,138.8 96.2,141.9" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="341.9,151.7 340.5,144.1 333.4,147.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="344.7,146.4 343.3,138.8 336.2,141.9" fill="none" stroke="#1f2937" stroke-width="1.6"/><text x="47.3" y="230.4" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="310.2" y="234.1" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="392.7" y="68.6" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="129.8" y="64.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">D</text></svg>`;
+const M1Q12 = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Straight lines AE and BD cross at C. AB is parallel to DE. C is the midpoint of AE: AC and CE are marked equal. Triangles ABC and EDC are shaded."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><polygon points="70,58 318,66 220,150" fill="#c7d2fe" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polygon points="370,242 122,234 220,150" fill="#fde68a" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="190.8,66.7 197,62.1 191.2,57.1" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="242.8,242.7 249,238.1 243.2,233.1" fill="none" stroke="#1f2937" stroke-width="1.6"/><line x1="141.9" y1="109.1" x2="148.1" y2="98.9" stroke="#1f2937" stroke-width="1.6"/><line x1="291.9" y1="201.1" x2="298.1" y2="190.9" stroke="#1f2937" stroke-width="1.6"/><text x="58" y="56" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="330" y="64" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="220" y="138" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="110" y="246" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">D</text><text x="382" y="254" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">E</text></svg>`;
 
 const M1Q14 = `<svg viewBox="0 0 440 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with D on AB and the line CD drawn. Angle ACD equals angle ABC, shown by matching arcs. AC is 6 cm and AD is 4 cm."><rect x="0" y="0" width="440" height="300" fill="#ffffff"/><polygon points="40,262 400,262 194.3,78.1" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="194.3" y1="78.1" x2="200" y2="262" stroke="#1f2937" stroke-width="2"/><path d="M 195.1 104.1 A 26 26 0 0 1 177.6 98.1" fill="none" stroke="#b45309" stroke-width="1.8"/><path d="M 366 262 A 34 34 0 0 1 374.6 239.3" fill="none" stroke="#b45309" stroke-width="1.8"/><text x="26.8" y="271.2" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="413.3" y="270.8" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="192.3" y="68.8" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="200" y="281" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">D</text><text x="106.4" y="165.6" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="120" y="280" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">4 cm</text></svg>`;
 
-const M2Q06 = `<svg viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Right-angled triangle ABC with the right angle at B: AB is 6 cm, BC is 8 cm. Right-angled triangle PQR with the right angle at Q, drawn in a different orientation: PQ is 9 cm and QR is x."><rect x="0" y="0" width="440" height="280" fill="#ffffff"/><polygon points="50,158 50,230 146,230" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="50,219 61,219 61,230" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 66 170 A 20 20 0 0 1 50 178" fill="none" stroke="#b45309" stroke-width="1.8"/><polygon points="398,250 290,250 290,106" fill="#bbf7d0" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="301,250 301,239 290,239" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 374 250 A 24 24 0 0 1 383.6 230.8" fill="none" stroke="#b45309" stroke-width="1.8"/><text x="42.2" y="150.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="38.8" y="242.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="159.1" y="239.4" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="409.6" y="262.3" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">P</text><text x="281.6" y="265.7" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">Q</text><text x="285.1" y="97.4" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">R</text><text x="30" y="198.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="98" y="248.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">8 cm</text><text x="344" y="268.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">9 cm</text><text x="276" y="182.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">x</text></svg>`;
+const M2Q06 = `<svg viewBox="0 0 440 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Right-angled triangle ABC with the right angle at B: AB is 4 cm, BC is 6 cm. Right-angled triangle PQR with the right angle at Q, drawn in a different orientation: PQ is 10 cm and QR is x."><rect x="0" y="0" width="440" height="280" fill="#ffffff"/><polygon points="60,192 60,240 132,240" fill="#c7d2fe" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="60,229 71,229 71,240" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 60 208 A 16 16 0 0 0 73.3 200.9" fill="none" stroke="#b45309" stroke-width="1.8"/><polygon points="390,262 270,262 270,82" fill="#bbf7d0" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><polyline points="281,262 281,251 270,251" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 366 262 A 24 24 0 0 1 376.7 242" fill="none" stroke="#b45309" stroke-width="1.8"/><text x="52" y="184" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="49" y="252" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="144" y="248" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="401" y="274" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">P</text><text x="260" y="276" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">Q</text><text x="264" y="74" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">R</text><text x="52" y="220" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1e3a8a">4 cm</text><text x="96" y="258" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">6 cm</text><text x="330" y="278" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">10 cm</text><text x="260" y="176" font-size="13" font-family="sans-serif" text-anchor="end" fill="#1e3a8a">x</text></svg>`;
 
-const M2Q12 = `<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Isosceles triangle ABC with AB equal to AC, marked with single ticks. M is the midpoint of BC, with BM and MC marked with double ticks. The line AM is drawn."><rect x="0" y="0" width="400" height="280" fill="#ffffff"/><polygon points="200,30 80,250 320,250" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="200" y1="30" x2="200" y2="250" stroke="#1f2937" stroke-width="2"/><line x1="145.3" y1="142.9" x2="134.7" y2="137.1" stroke="#1f2937" stroke-width="1.6"/><line x1="265.3" y1="137.1" x2="254.7" y2="142.9" stroke="#1f2937" stroke-width="1.6"/><line x1="137.5" y1="244" x2="137.5" y2="256" stroke="#1f2937" stroke-width="1.6"/><line x1="142.5" y1="244" x2="142.5" y2="256" stroke="#1f2937" stroke-width="1.6"/><line x1="257.5" y1="244" x2="257.5" y2="256" stroke="#1f2937" stroke-width="1.6"/><line x1="262.5" y1="244" x2="262.5" y2="256" stroke="#1f2937" stroke-width="1.6"/><text x="200" y="20.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="68.1" y="261.8" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="331.9" y="261.8" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="200" y="270" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">M</text></svg>`;
+const M2Q12 = `<svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Isosceles triangle ABC with AB equal to AC, marked with single ticks. M is the point on BC with AM perpendicular to BC, shown by a right-angle mark at M."><rect x="0" y="0" width="400" height="280" fill="#ffffff"/><polygon points="200,30 80,250 320,250" fill="#c7d2fe" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="200" y1="30" x2="200" y2="250" stroke="#1f2937" stroke-width="2"/><line x1="134.7" y1="137.1" x2="145.3" y2="142.9" stroke="#1f2937" stroke-width="1.6"/><line x1="254.7" y1="142.9" x2="265.3" y2="137.1" stroke="#1f2937" stroke-width="1.6"/><polyline points="200,238 212,238 212,250" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="200" y="20.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="68" y="262" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="332" y="262" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="200" y="270" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">M</text></svg>`;
 
 const M2Q13 = `<svg viewBox="0 0 420 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Trapezium ABCD with AB parallel to DC. AB is 12 cm and DC is 8 cm. The diagonals AC and BD cross at X. AC is 15 cm."><rect x="0" y="0" width="420" height="290" fill="#ffffff"/><polygon points="30,250 330,250 359,70 159,70" fill="#c7d2fe" fill-opacity="0.45" stroke="#1f2937" stroke-width="2" stroke-linejoin="round"/><line x1="30" y1="250" x2="359" y2="70" stroke="#1f2937" stroke-width="2"/><line x1="330" y1="250" x2="159" y2="70" stroke="#1f2937" stroke-width="2"/><polyline points="178,254.8 184,250 178,245.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><polyline points="257,74.8 263,70 257,65.2" fill="none" stroke="#1f2937" stroke-width="1.6"/><text x="17.4" y="260.5" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="340.9" y="263.3" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="370.7" y="66.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="151.2" y="62.9" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">D</text><text x="227.4" y="164" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">X</text><text x="180" y="274" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">12 cm</text><text x="259" y="60" font-size="13" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">8 cm</text></svg>`;
 
@@ -110,12 +110,12 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m1-q06",
         question:
-          "In the diagram, DE is parallel to BC. AD = 4 cm, DB = 6 cm and DE = 5 cm.\n\nWork out the length of BC, marked x.",
+          "In the diagram, DE is parallel to BC. AD = 6 cm, DB = 3 cm and DE = 8 cm.\n\nWork out the length of BC, marked x.",
         diagram: M1Q06,
-        options: ["7.5 cm", "11 cm", "12.5 cm", "2 cm"],
+        options: ["4 cm", "11 cm", "12 cm", "5.33 cm"],
         answerIndex: 2,
         explanation:
-          "Triangles ADE and ABC are similar (DE ∥ BC gives equal corresponding angles). Compare **whole** sides: AB = 4 + 6 = 10 cm, so the scale factor is {{10/4 = 2.5}} and BC = 5 × 2.5 = 12.5 cm. 7.5 cm uses DB = 6 as if it were a side of the big triangle ({{6/4}}); 11 cm adds 6 to 5; 2 cm applies the scale factor the wrong way round ({{5 * 4/10}}).",
+          "Triangles ADE and ABC are similar (DE ∥ BC gives equal corresponding angles). Compare **whole** sides: AB = 6 + 3 = 9 cm, so the scale factor is {{9/6 = 1.5}} and BC = 8 × 1.5 = 12 cm. 4 cm uses DB = 3 as if it were a side of the big triangle ({{8 * 3/6}}); 11 cm adds 3 to 8; 5.33 cm divides by the scale factor — but BC is in the bigger triangle, so it must be longer than DE.",
         difficulty: "core",
         guideRef: "similar-lengths",
         hints: [
@@ -174,14 +174,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m1-q10",
         question:
-          "Two bottles are mathematically similar. The smaller bottle is 12 cm tall and holds 400 cm³. The larger bottle is 18 cm tall.\n\nWork out the volume of the larger bottle.",
-        options: ["600 cm³", "900 cm³", "1350 cm³", "118.5 cm³"],
+          "Two vases are mathematically similar. The smaller vase is 16 cm tall and holds 256 cm³. The larger vase is 20 cm tall.\n\nWork out the volume of the larger vase.",
+        options: ["320 cm³", "400 cm³", "500 cm³", "131 cm³"],
         answerIndex: 2,
         explanation:
-          "Linear scale factor {{k = 18/12 = 1.5}}, so the volume factor is {{1.5^3 = 3.375}}. 400 × 3.375 = 1350 cm³. 600 cm³ uses k (lengths only); 900 cm³ uses {{k^2}} (areas); 118.5 cm³ divides by 3.375 — but the bigger bottle must hold more.",
+          "Linear scale factor {{k = 20/16 = 5/4}}, so the volume factor is {{(5/4)^3 = 125/64}}. {{256 * 125/64 = 500}} cm³. 320 cm³ uses k (lengths only); 400 cm³ uses {{k^2}} (areas); 131 cm³ divides by {{125/64}} — but the bigger vase must hold more.",
         difficulty: "core",
         guideRef: "area-volume-scale",
-        hints: ["Find the linear scale factor from the heights.", "Volume is length × length × length, so cube the scale factor."],
+        hints: ["Find the linear scale factor from the heights — keep it as a fraction.", "Volume is length × length × length, so cube the scale factor."],
         strategy: "Lengths → areas → volumes",
       },
       {
@@ -202,22 +202,23 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m1-q12",
         question:
-          "ABCD is a parallelogram. The diagonal AC splits it into triangles ABC and CDA.\n\nWhich argument correctly proves that triangle ABC is congruent to triangle CDA?",
+          "The straight lines AE and BD cross at C. AB is parallel to DE, and C is the midpoint of AE.\n\nWhich argument correctly proves that triangle ABC is congruent to triangle EDC?",
         diagram: M1Q12,
         options: [
-          "Angle ABC = angle CDA, angle BAC = angle DCA and angle BCA = angle DAC, so the triangles are congruent (AAA).",
-          "AB = CD and BC = DA (opposite sides of a parallelogram) and angle BAC = angle DCA, so the triangles are congruent (SAS).",
-          "AB = CD and AC is common, so the triangles are congruent (RHS).",
-          "AB = CD and BC = DA (opposite sides of a parallelogram) and AC is common, so the triangles are congruent (SSS).",
+          "AC = EC (C is the midpoint of AE) and AB = ED, so the triangles are congruent (SAS).",
+          "Angle BAC = angle DEC and angle ABC = angle EDC (alternate angles), and angle ACB = angle ECD (vertically opposite), so the triangles are congruent (AAA).",
+          "AC = EC (C is the midpoint of AE), angle BAC = angle DEC (corresponding angles) and BC = DC, so the triangles are congruent (SAS).",
+          "AC = EC (C is the midpoint of AE), angle BAC = angle DEC (alternate angles, AB ∥ DE) and angle ACB = angle ECD (vertically opposite), so the triangles are congruent (ASA).",
         ],
         answerIndex: 3,
         explanation:
-          "Opposite sides of a parallelogram are equal, and AC is a side of both triangles, so all three pairs of sides match: SSS. The AAA argument only proves the triangles similar. The 'SAS' argument uses angle BAC, which is **not** between sides AB and BC, so it is really SSA. RHS needs a right angle, and a parallelogram's angles need not be 90°.",
+          "The ASA argument uses only known facts, each with a correct reason: AC = EC from the midpoint, the alternate angles at A and E from the parallel lines, and the vertically opposite angles at C. The equal sides AC and EC lie between the two pairs of equal angles, so ASA. The first argument assumes AB = ED, which is what congruence would *give* you. The AAA argument only proves the triangles similar. The last argument assumes BC = DC (not given), calls alternate angles 'corresponding', and its angle is not between AC and BC.",
         difficulty: "core",
         guideRef: "congruence",
         hints: [
-          "For each argument, check the condition really applies — is the angle between the two sides? Is there a right angle?",
-          "Which side do the two triangles share?",
+          "For each argument, check that every fact is actually known and has the right reason.",
+          "What do the parallel lines give you at A and E? What do you know about the two angles at C?",
+          "Is the equal side between the two pairs of equal angles?",
         ],
         strategy: "Check each condition",
       },
@@ -225,17 +226,17 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m1-q13",
         question:
-          "Two solids are mathematically similar. Their surface areas are 64 cm² and 144 cm². The volume of the larger solid is 810 cm³.\n\nWork out the volume of the smaller solid.",
-        options: ["240 cm³", "360 cm³", "540 cm³", "2733.75 cm³"],
+          "Two solids are mathematically similar. Their volumes are 81 cm³ and 192 cm³. The surface area of the larger solid is 144 cm².\n\nWork out the surface area of the smaller solid.",
+        options: ["81 cm²", "60.75 cm²", "108 cm²", "256 cm²"],
         answerIndex: 0,
         explanation:
-          "Area factor {{144/64 = 9/4}}, so {{k = sqrt(9/4) = 3/2}} and the volume factor is {{(3/2)^3 = 27/8}}. Smaller volume = {{810 * 8/27 = 240}} cm³. 360 cm³ divides by the area factor {{9/4}}; 540 cm³ divides by k; 2733.75 cm³ multiplies — but you are going from the larger solid to the smaller one.",
+          "Volume factor {{192/81 = 64/27}}, so {{k = cbrt(64/27) = 4/3}} and the area factor is {{(4/3)^2 = 16/9}}. Smaller surface area = {{144 * 9/16 = 81}} cm². 60.75 cm² divides by the volume factor {{64/27}}; 108 cm² divides by k; 256 cm² multiplies by {{16/9}} — but you are going from the larger solid to the smaller one.",
         difficulty: "challenge",
         guideRef: "area-volume-scale",
         hints: [
-          "You can't jump straight from an area factor to a volume factor. What do you need in between?",
-          "Area factor = {{k^2}}: square-root it to get k.",
-          "Then cube k — and remember you are making the solid *smaller*.",
+          "You can't jump straight from a volume factor to an area factor. What do you need in between?",
+          "Volume factor = {{k^3}}: simplify {{192/81}}, then take the cube root.",
+          "Then square k — and remember you are making the solid *smaller*.",
         ],
         strategy: "Go back to the length factor",
       },
@@ -369,12 +370,12 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m2-q06",
         question:
-          "Triangles ABC and PQR are similar, with angle A = angle P and angle B = angle Q = 90°.\n\nAB = 6 cm, BC = 8 cm and PQ = 9 cm. Work out the length of QR, marked x.",
+          "Triangles ABC and PQR are similar, with angle A = angle P and angle B = angle Q = 90°.\n\nAB = 4 cm, BC = 6 cm and PQ = 10 cm. Work out the length of QR, marked x.",
         diagram: M2Q06,
-        options: ["11 cm", "12 cm", "5.33 cm", "15 cm"],
+        options: ["12 cm", "15 cm", "2.4 cm", "6.67 cm"],
         answerIndex: 1,
         explanation:
-          "PQ matches AB (both join the matching angle to the right angle), so the scale factor is {{9/6 = 1.5}} and QR = BC × 1.5 = 8 × 1.5 = 12 cm. 15 cm is PR, the hypotenuse (AC = 10 cm scaled); 11 cm adds 3 cm; 5.33 cm divides 8 by 1.5.",
+          "PQ matches AB (both join the matching angle to the right angle), so the scale factor is {{10/4 = 2.5}} and QR = BC × 2.5 = 6 × 2.5 = 15 cm. 12 cm adds 6 cm because PQ is 6 cm longer than AB; 2.4 cm divides 6 by 2.5; 6.67 cm pairs PQ with BC instead of AB ({{4 * 10/6}}).",
         difficulty: "core",
         guideRef: "similar-lengths",
         hints: [
@@ -387,14 +388,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m2-q07",
         question:
-          "At the same time of day, Priya (1.6 m tall) casts a shadow 2.4 m long and a tree in the Botanic Gardens casts a shadow 18 m long.\n\nWork out the height of the tree.",
-        options: ["12 m", "27 m", "17.2 m", "28.8 m"],
+          "Jun holds a 30 cm ruler upright at arm's length, 60 cm in front of his eye. The ruler exactly covers a vertical flagpole whose base is 40 m in front of his eye, measured horizontally.\n\nWork out the height of the flagpole.",
+        options: ["20 m", "80 m", "12 m", "2000 m"],
         answerIndex: 0,
         explanation:
-          "The sun's rays meet the ground at the same angle, so the triangles (height, shadow) are similar. Shadow scale factor {{18/2.4 = 7.5}}, so the tree is 1.6 × 7.5 = 12 m. 27 m uses the ratio upside down ({{18 * 2.4/1.6}}); 17.2 m subtracts the 0.8 m difference; 28.8 m multiplies 18 by 1.6.",
+          "The ruler and the flagpole are parallel, and the lines of sight from Jun's eye to their ends make two similar triangles with a shared angle at his eye. In metres the distances are 0.6 m and 40 m, so the scale factor is {{40/0.6 = 200/3}} and the flagpole is {{0.3 * 200/3 = 20}} m tall. 80 m uses the ratio upside down ({{40 * 0.6/0.3}}); 12 m multiplies 0.3 by 40 and forgets the 0.6 m; 2000 m mixes units, using 30 (cm) with 0.6 (m).",
         difficulty: "core",
         guideRef: "similar-lengths",
-        hints: ["Sketch both right-angled triangles: height up, shadow along the ground.", "Why are they similar? Then find the scale factor from the shadows."],
+        hints: ["Sketch it: two vertical lines (ruler and flagpole) and two lines of sight from the eye.", "Put every length in metres first. Then scale factor = 40 ÷ 0.6."],
         strategy: "Draw a diagram",
       },
       {
@@ -456,15 +457,15 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m2-q12",
         question:
-          "Triangle ABC is isosceles with AB = AC. M is the midpoint of BC.\n\nWhich condition proves that triangles ABM and ACM are congruent, using only the facts given?",
+          "Triangle ABC is isosceles with AB = AC. M is the point on BC such that AM is perpendicular to BC.\n\nWhich condition proves that triangles ABM and ACM are congruent, using only the facts given?",
         diagram: M2Q12,
-        options: ["RHS", "SSS", "SAS", "ASA"],
+        options: ["SSS", "RHS", "SAS", "AAA"],
         answerIndex: 1,
         explanation:
-          "AB = AC (given), BM = CM (M is the midpoint) and AM is common to both: three pairs of sides, so SSS. RHS is tempting, but we don't yet *know* that AM is perpendicular to BC — that is what the congruence lets us prove afterwards. No angle is given, so SAS and ASA can't be used yet.",
+          "Both triangles have a right angle at M, their hypotenuses AB and AC are equal (given), and AM is common: right angle, hypotenuse, side — RHS. SSS is tempting, but BM = CM is not given; it is what the congruence lets you prove afterwards (M turns out to be the midpoint). SAS would need the angle between two known pairs of sides, and AAA only ever proves triangles similar.",
         difficulty: "core",
         guideRef: "congruence",
-        hints: ["List every pair of equal sides — don't forget a side the triangles share.", "Are you allowed to assume the right angle at M?"],
+        hints: ["Which angle do you know in both triangles?", "Which side is the hypotenuse of triangle ABM? Is BM = CM given — or something you'd prove later?"],
         strategy: "Don't assume what you want to prove",
       },
       {
@@ -547,14 +548,14 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m3-q02",
         question:
-          "Zara enlarges a photo that is 15 cm long and 10 cm wide. The enlarged photo is similar to the original and is 25 cm wide.\n\nWork out the length of the enlarged photo.",
-        options: ["30 cm", "6 cm", "37.5 cm", "375 cm"],
+          "Zara has a poster that is 40 cm wide and 60 cm tall. She prints a smaller copy that is mathematically similar to the poster and is 24 cm tall.\n\nWork out the width of the smaller copy.",
+        options: ["4 cm", "36 cm", "16 cm", "100 cm"],
         answerIndex: 2,
         explanation:
-          "Scale factor {{25/10 = 2.5}}, so the length is 15 × 2.5 = 37.5 cm. 30 cm adds 15 cm, the same amount the width grew — that distorts the picture; 6 cm applies the factor the wrong way round; 375 cm multiplies 15 by 25.",
+          "Scale factor {{24/60 = 0.4}}, so the width is 40 × 0.4 = 16 cm. 4 cm subtracts 36 cm, the same amount the height shrank — that distorts the picture; 36 cm pairs the width with the height the wrong way round ({{24 * 60/40}}); 100 cm divides by 0.4 instead of multiplying — but a smaller copy must be narrower.",
         difficulty: "warmup",
         guideRef: "similar-lengths",
-        hints: ["Find the scale factor from the widths: {{25/10}}."],
+        hints: ["Find the scale factor from the heights: {{24/60}}."],
         strategy: "Find the scale factor first",
       },
       {
@@ -763,16 +764,16 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "similarity-congruence-m3-q15",
         question:
-          "Two tins are mathematically similar. The areas of their bases are 45 cm² and 80 cm². The larger tin has a capacity of 1.28 litres.\n\nWork out the capacity of the smaller tin, in cm³.",
-        options: ["720 cm³", "540 cm³", "960 cm³", "5400 cm³"],
+          "Two tins are mathematically similar. The areas of their bases are 36 cm² and 81 cm². The larger tin has a capacity of 1.35 litres.\n\nWork out the capacity of the smaller tin, in cm³.",
+        options: ["600 cm³", "400 cm³", "900 cm³", "4000 cm³"],
         answerIndex: 1,
         explanation:
-          "Area factor {{80/45 = 16/9}}, so {{k = 4/3}} and the volume factor is {{64/27}}. 1.28 litres = 1280 cm³. Smaller capacity = {{1280 * 27/64 = 540}} cm³. 720 cm³ divides by the area factor; 960 cm³ divides by k; 5400 cm³ converts 1.28 litres as 12 800 cm³ (1 litre is 1000 cm³, not 10 000).",
+          "Area factor {{81/36 = 9/4}}, so {{k = 3/2}} and the volume factor is {{27/8}}. 1.35 litres = 1350 cm³. Smaller capacity = {{1350 * 8/27 = 400}} cm³. 600 cm³ divides by the area factor; 900 cm³ divides by k; 4000 cm³ converts 1.35 litres as 13 500 cm³ (1 litre is 1000 cm³, not 10 000).",
         difficulty: "challenge",
         guideRef: "area-volume-scale",
         hints: [
           "Change litres to cm³ first: 1 litre = 1000 cm³.",
-          "From the base areas, find k (simplify {{80/45}} first).",
+          "From the base areas, find k (simplify {{81/36}} first).",
           "Volume factor = {{k^3}}; you are going to the *smaller* tin, so divide.",
         ],
         strategy: "Go back to the length factor",

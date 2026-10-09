@@ -47,6 +47,8 @@ function q(v: number): string {
   }
   return String(parseFloat(v.toFixed(3)));
 }
+/** Bracket negatives and fractions before squaring. */
+const sq = (v: number) => (v < 0 || !Number.isInteger(v) ? `(${q(v)})` : q(v));
 const col = (v: P2) => `col(${q(v[0])}, ${q(v[1])})`;
 const pt = (p: P2) => `(${n(p[0])}, ${n(p[1])})`;
 
@@ -136,7 +138,7 @@ const SECONDS: Record<Second, { label: string; T: Aff | null; name: string }> = 
   ryx: { label: "reflect in y = x", T: reflYX, name: "reflection in y = x" },
   r90: { label: "rotate 90° anticlockwise about O", T: rot(90, [0, 0]), name: "rotation 90° anticlockwise about O" },
   r180: { label: "rotate 180° about O", T: rot(180, [0, 0]), name: "rotation 180° about O" },
-  t: { label: "translate by col(2, −3)", T: trans([2, -3]), name: "translation by col(2, −3)" },
+  t: { label: "translate 2 right, 3 down", T: trans([2, -3]), name: "translation by {{col(2, -3)}}" },
   e2: { label: "enlarge ×2 from O", T: enl(2, [0, 0]), name: "enlargement, scale factor 2, centre O" },
 };
 const KS = [-2, -1, -0.5, 0.5, 2, 3];
@@ -169,7 +171,7 @@ function TransformationMachine() {
     firstName = `enlargement, scale factor ${n(sf)}, centre ${pt(C)}`;
   } else {
     T1 = trans([tx, ty]);
-    firstName = `translation by col(${n(tx)}, ${n(ty)})`;
+    firstName = `translation by {{${col([tx, ty])}}}`;
   }
   const T2 = SECONDS[second].T;
   const total = T2 ? compose(T2, T1) : T1;
@@ -215,7 +217,8 @@ function TransformationMachine() {
     "Which settings leave a vertex of the shape invariant (not moving)?",
   ];
 
-  const ariaLabel = `Grid from −10 to 10. Object L-shape with vertices ${SHAPE.map(pt).join(", ")}. Image after ${firstName}${T2 ? ` then ${SECONDS[second].name}` : ""}: ${final.map(pt).join(", ")}.`;
+  const plain = (s: string) => s.replace(/\{\{col\(([^,]+), ([^)]+)\)\}\}/g, "($1, $2)");
+  const ariaLabel = plain(`Grid from −10 to 10. Object L-shape with vertices ${SHAPE.map(pt).join(", ")}. Image after ${firstName}${T2 ? ` then ${SECONDS[second].name}` : ""}: ${final.map(pt).join(", ")}.`);
   const captionText =
     `${T2 ? `**${firstName}**, then **${SECONDS[second].name}**` : `**${firstName}**`} is ${desc.text}.` +
     (desc.kind === "reflection" ? " Every point on the mirror line is invariant." : desc.kind === "rotation" || desc.kind === "enlargement" ? ` The only invariant point is the centre ${desc.centre ? pt(desc.centre) : ""}.` : desc.kind === "translation" ? " A translation has no invariant points." : "") +
@@ -340,7 +343,8 @@ function magnitude(v: P2): string {
   const g = gcd(k, 2);
   const kk = k / g, dd = 2 / g;
   const root = m === 1 ? String(kk) : kk === 1 ? `sqrt(${m})` : `${kk}sqrt(${m})`;
-  return dd === 1 ? root : `${root}/2`.replace(/^(\d+)\/2$/, (_, a) => `${a}/2`);
+  if (dd === 1) return root;
+  return m === 1 ? `${kk}/2` : `(${root})/2`;
 }
 
 /** c₁a + c₂b in maths markup with exact coefficients. */
@@ -391,7 +395,7 @@ function VectorLab() {
   let caption: string;
   let aria: string;
   if (mode === "combine") {
-    caption = `{{${q(lam)} a ${mu < 0 ? "-" : "+"} ${q(Math.abs(mu))} b}} = {{${q(lam)} ${col(a)} ${mu < 0 ? "-" : "+"} ${q(Math.abs(mu))} ${col(b)} = ${col(R)}}}. Tip-to-tail: walk along {{${q(lam)} a}} (blue), then {{${q(mu)} b}} (orange); the dashed green arrow goes straight there. Its length is {{sqrt(${q(R[0])}^2 + ${q(R[1])}^2) = ${magnitude(R)}}}${Number.isInteger(R[0] * R[0] + R[1] * R[1]) && !Number.isInteger(Math.sqrt(R[0] * R[0] + R[1] * R[1])) ? ` ≈ ${n(parseFloat(Math.hypot(R[0], R[1]).toPrecision(3)))}` : ""} by Pythagoras.${parallel ? " Careful: a and b are parallel here, so every combination lies on one line." : ""}`;
+    caption = `{{${q(lam)} a ${mu < 0 ? "-" : "+"} ${q(Math.abs(mu))} b}} = {{${q(lam)} ${col(a)} ${mu < 0 ? "-" : "+"} ${q(Math.abs(mu))} ${col(b)} = ${col(R)}}}. Tip-to-tail: walk along {{${q(lam)} a}} (blue), then {{${q(mu)} b}} (orange); the dashed green arrow goes straight there. Its length is {{sqrt(${sq(R[0])}^2 + ${sq(R[1])}^2) = ${magnitude(R)}}}${Number.isInteger(R[0] * R[0] + R[1] * R[1]) && !Number.isInteger(Math.sqrt(R[0] * R[0] + R[1] * R[1])) ? ` ≈ ${n(parseFloat(Math.hypot(R[0], R[1]).toPrecision(3)))}` : ""} by Pythagoras.${parallel ? " Careful: a and b are parallel here, so every combination lies on one line." : ""}`;
     aria = `Vectors a = (${ax}, ${ay}) and b = (${bx}, ${by}). ${lam} a plus ${mu} b drawn tip to tail, resultant (${R[0]}, ${R[1]}).`;
   } else {
     caption = `→AB = **b** − **a** = {{${col(AB)}}}. P splits AB in the ratio ${m} : ${nn}, so →AP = {{${q(t)}}}→AB. Then →OP = **a** + {{${q(t)}}}(**b** − **a**) = {{${abExpr(1 - t, t)}}} = {{${col(P)}}}.${m === nn ? " With 1 : 1, P is the midpoint and →OP = {{1/2}}(**a** + **b**)." : ""} Notice the coefficients of a and b always add up to 1 — that's the sign that P lies on the line AB.`;

@@ -66,7 +66,7 @@ export const guide: TopicGuide = {
               "Your turn: ABC is isosceles with AB = AC. BC is extended to D, and angle ACD = 124°. Work out the size of angle BAC, in degrees.",
             answer: { type: "number", value: 68, display: "68°" },
             solution:
-              "Angle ACB = 180° − 124° = 56° (straight line). Angle ABC = 56° (base angles of an isosceles triangle). Angle BAC = 180° − 56° − 56° = 68° (angles in a triangle). Or: exterior angle 124° = BAC + 56°, so BAC = 68°.",
+              "Angle ACB = 180° − 124° = 56° (angles on a straight line add up to 180°). Angle ABC = 56° (base angles of an isosceles triangle are equal). Angle BAC = 180° − 56° − 56° = 68° (angles in a triangle add up to 180°). Or: exterior angle 124° = BAC + 56°, so BAC = 68°.",
           },
         },
       ],
@@ -185,19 +185,19 @@ export const guide: TopicGuide = {
         {
           title: "Semicircle, then same segment",
           problem:
-            "AB is a diameter of a circle. C and D are points on the circle, with D on the same side of chord AC as B. Angle CAB = 34°. Work out the size of angle ADC. Give reasons.",
+            "AB is a diameter of a circle. C and D are points on the circle, with D on the same side of chord AC as B. Angle CAB = 31°. Work out the size of angle ADC. Give reasons.",
           steps: [
             "AB is a diameter, so angle ACB = 90° (the angle in a semicircle is 90°).",
-            "In triangle ABC: angle ABC = 180° − 90° − 34° = 56° (angles in a triangle add up to 180°).",
-            "Angles ADC and ABC both stand on the chord AC, with D and B on the same side of it. Angles in the same segment are equal, so angle ADC = 56°.",
+            "In triangle ABC: angle ABC = 180° − 90° − 31° = 59° (angles in a triangle add up to 180°).",
+            "Angles ADC and ABC both stand on the chord AC, with D and B on the same side of it. Angles in the same segment are equal, so angle ADC = 59°.",
           ],
-          answer: "Angle ADC = 56°",
+          answer: "Angle ADC = 59°",
           yourTurn: {
             question:
               "Your turn: AB is a diameter of a circle and C is on the circle. D is on the circle, on the same side of chord AC as B. Angle CAB = 27°. Work out angle ADC, in degrees.",
             answer: { type: "number", value: 63, display: "63°" },
             solution:
-              "Angle ACB = 90° (angle in a semicircle). Angle ABC = 180° − 90° − 27° = 63°. Angle ADC = angle ABC = 63° (angles in the same segment are equal).",
+              "Angle ACB = 90° (the angle in a semicircle is 90°). Angle ABC = 180° − 90° − 27° = 63° (angles in a triangle add up to 180°). Angle ADC = angle ABC = 63° (angles in the same segment are equal).",
           },
         },
       ],
@@ -246,7 +246,7 @@ export const guide: TopicGuide = {
               "Your turn: PA and PB are tangents to a circle, centre O, at A and B. Angle APB = 70°. C is a point on the major arc AB. Work out angle ACB, in degrees.",
             answer: { type: "number", value: 55, display: "55°" },
             solution:
-              "Angle AOB = 360° − 90° − 90° − 70° = 110° (tangents ⟂ radii, angles in a quadrilateral). Angle ACB = 110° ÷ 2 = 55° (angle at the centre is twice the angle at the circumference).",
+              "Angle AOB = 360° − 90° − 90° − 70° = 110° (a tangent is perpendicular to the radius; angles in a quadrilateral add up to 360°). Angle ACB = 110° ÷ 2 = 55° (the angle at the centre is twice the angle at the circumference).",
           },
         },
         {
@@ -265,7 +265,7 @@ export const guide: TopicGuide = {
               "Your turn: A, B, C and D lie on a circle in that order. TA is the tangent at A, with T on the same side as B. Angle TAB = 42° and angle BAD = 100°. Work out angle ACD, in degrees.",
             answer: { type: "number", value: 38, display: "38°" },
             solution:
-              "Angle ACB = 42° (alternate segment theorem). Angle BCD = 180° − 100° = 80° (cyclic quadrilateral). Angle ACD = 80° − 42° = 38°.",
+              "Angle ACB = 42° (alternate segment theorem). Angle BCD = 180° − 100° = 80° (opposite angles of a cyclic quadrilateral add up to 180°). Angle ACD = 80° − 42° = 38°.",
           },
         },
       ],
@@ -388,7 +388,7 @@ export const guide: TopicGuide = {
         {
           title: "Prove: opposite angles of a cyclic quadrilateral add up to 180°",
           problem:
-            "ABCD is a cyclic quadrilateral with centre O. Prove that angle BAD + angle BCD = 180°.",
+            "ABCD is a cyclic quadrilateral in a circle with centre O. Prove that angle BAD + angle BCD = 180°.",
           steps: [
             "Let angle BAD = x. Angle BAD stands on arc BCD, so the angle at the centre on that arc is 2x (the angle at the centre is twice the angle at the circumference).",
             "Let angle BCD = y. It stands on arc BAD, so the angle at the centre on that arc is 2y.",
@@ -398,10 +398,10 @@ export const guide: TopicGuide = {
           answer: "Proved: 2x + 2y = 360°, so x + y = 180°.",
           yourTurn: {
             question:
-              "Your turn: in cyclic quadrilateral ABCD with centre O, the angle at O subtended by arc BCD is 140°. Work out angle BCD, in degrees.",
-            answer: { type: "number", value: 110, display: "110°" },
+              "Your turn: ABCD is a cyclic quadrilateral in a circle with centre O. The angle at O subtended by arc BCD is 160°. Work out angle BCD, in degrees.",
+            answer: { type: "number", value: 100, display: "100°" },
             solution:
-              "Angle BAD stands on arc BCD, so angle BAD = 140° ÷ 2 = 70°. Opposite angles of a cyclic quadrilateral add up to 180°, so angle BCD = 180° − 70° = 110°.",
+              "Angle BAD stands on arc BCD, so angle BAD = 160° ÷ 2 = 80° (the angle at the centre is twice the angle at the circumference). Opposite angles of a cyclic quadrilateral add up to 180°, so angle BCD = 180° − 80° = 100°.",
           },
         },
       ],
