@@ -115,7 +115,7 @@ function TreeLab() {
   const resD = conditional ? condNum : D;
 
   // ---- SVG geometry ----
-  const W = 380;
+  const W = 400;
   const H = 280;
   const x0 = 18;
   const x1 = 130;
@@ -242,7 +242,7 @@ function TreeLab() {
                       </text>
                       <rect x={x2 + 18} y={y2(a, b) - 14} width={W - x2 - 22} height={28} rx={6} className={on ? "fill-brand-soft stroke-brand" : "fill-surface-2 stroke-line"} strokeWidth={1} />
                       <text x={x2 + 26} y={y2(a, b) + 4} fontSize={11} className="fill-ink" fontWeight={on ? 700 : 400}>
-                        {`${a}${b}: ${l.n1}/${t} × ${l.n2}/${t2} = ${l.num}/${D}`}
+                        {`${l.n1}/${t} × ${l.n2}/${t2} = ${l.num}/${D}`}
                       </text>
                     </g>
                   );
@@ -298,11 +298,11 @@ function PascalExplorer() {
   const base = `(${a}${b < 0 ? ` - ${Math.abs(b) === 1 ? "" : Math.abs(b)}x` : ` + ${b === 1 ? "" : b}x`})^${n}`;
 
   // ---- Pascal SVG ----
-  const W = 360;
+  const W = 380;
   const rowH = 28;
   const H = (n + 1) * rowH + 16;
   const cell = 34;
-  const cx = (row: number, i: number) => W / 2 + (i - row / 2) * cell;
+  const cx = (row: number, i: number) => W / 2 + 14 + (i - row / 2) * cell;
   const cy = (row: number) => 18 + row * rowH;
 
   const aria = `Pascal's triangle rows 0 to ${n}. Row ${n} is ${Array.from({ length: n + 1 }, (_, i) => nCr(n, i)).join(", ")}. Highlighted: entry ${k} of row ${n}, which is ${C}${
@@ -322,7 +322,7 @@ function PascalExplorer() {
         <>
           Expanding <M>{base}</M> means multiplying {n} brackets. To get an <M>{k === 0 ? "x^0" : k === 1 ? "x" : `x^${k}`}</M> term, choose <M>{`${b}x`}</M> from {k} of the {n} brackets and{" "}
           <M>{String(a)}</M> from the other {n - k}. There are <strong>{n}C{k} = {C}</strong> ways to choose those brackets — that is the number in row {n} of Pascal&apos;s triangle. So the term is{" "}
-          {C} × <M>{`${bracket(a)}^${n - k}`}</M> × <M>{`(${b}x)^${k}`}</M> = {C} × {a ** (n - k)} × {bracket(b ** k)} <M>{k === 0 ? "" : k === 1 ? "x" : `x^${k}`}</M> ={" "}
+          {C} × <M>{`${bracket(a)}^${n - k}`}</M> × <M>{`(${b}x)^${k}`}</M> = {C} × {a ** (n - k)} × {bracket(b ** k)}{k === 0 ? "" : <M>{k === 1 ? "x" : `x^${k}`}</M>} ={" "}
           <strong>
             <M>{termText(target, k, true) || "0"}</M>
           </strong>
