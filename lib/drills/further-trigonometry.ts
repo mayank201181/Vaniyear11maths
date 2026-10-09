@@ -33,8 +33,20 @@ function sfStr(x: number): string {
   return s.startsWith("-") ? "−" + s.slice(1) : s;
 }
 const dp1 = (x: number): number => roundTo(x, 1);
+/** Intermediate value for working, truncated (never misleadingly rounded) with "..." if inexact. ASCII minus, for use inside {{ }}. */
+function ap(x: number, dp = 4): string {
+  const f = Math.pow(10, dp);
+  const t = clean(Math.trunc(x * f + Math.sign(x) * 1e-7) / f);
+  return Math.abs(t - x) < 1e-9 ? String(t) : `${t}...`;
+}
+/** Same, for plain text (real minus sign). */
+const apT = (x: number, dp = 4): string => ap(x, dp).replace(/^-/, "−");
 /** Angle display to 1 d.p. (whole numbers stay whole). */
-const degStr = (x: number): string => `${num(dp1(x))}°`;
+function degStr(x: number): string {
+  const r = dp1(x);
+  const s = Math.abs(x - Math.round(x)) < 1e-6 ? String(Math.round(x)) : r.toFixed(1);
+  return `${s.replace(/^-/, "−")}°`;
+}
 
 /** A length/area answer to 3 s.f. (one unit of slack for early rounding). */
 function ans3(x: number, unit: string): AnswerSpec {
@@ -232,7 +244,7 @@ export const drills: Drill[] = [
       const steps: string[] = [];
       if (giveC) steps.push(`First find the angle opposite ${sideB}: angle ${n1} = 180° − ${A}° − ${C}° = ${B}°.`);
       steps.push(`Pair each side with its opposite angle: {{x/(sin ${B}°) = ${num(a)}/(sin ${A}°)}}.`);
-      steps.push(`{{x = (${num(a)} sin ${B}°)/(sin ${A}°) = ${clean(roundTo(b, 4))}...}}`);
+      steps.push(`{{x = (${num(a)} sin ${B}°)/(sin ${A}°) = ${ap(b, 4)}}}`);
       steps.push(`${sideB} = ${sfStr(b)} ${unit} (3 s.f.)`);
       return {
         prompt: `${intro}\n\nWork out the length of ${sideB}. Give your answer correct to 3 significant figures.`,
@@ -273,7 +285,7 @@ export const drills: Drill[] = [
           solution: [
             `Draw it. At Q, the angle between the way back to P (bearing ${b3(t1 + 180)}°) and the way on to R (bearing ${b3(t2)}°) is ${t1 + 180}° − ${t2}° = ${Q}°.`,
             `Cosine rule with the included angle: {{PR^2 = ${num(p)}^2 + ${num(q)}^2 - 2 * ${num(p)} * ${num(q)} * cos ${Q}°}}`,
-            `{{PR^2 = ${clean(roundTo(pr * pr, 4))}...}}, so PR = ${sfStr(pr)} km (3 s.f.)`,
+            `{{PR^2 = ${ap(pr * pr, 4)}}}, so PR = ${sfStr(pr)} km (3 s.f.)`,
           ],
           hint: "Sketch both legs with North lines at P and Q. Angle PQR = 180° − (the change in bearing).",
           traps: [
@@ -303,8 +315,8 @@ export const drills: Drill[] = [
         answer: ans3(a, unit),
         solution: [
           `Two sides and the angle between them (SAS), so use the cosine rule: {{a^2 = b^2 + c^2 - 2bc cos A}}.`,
-          `{{${s0}^2 = ${num(b)}^2 + ${num(c)}^2 - 2 * ${num(b)} * ${num(c)} * cos ${A}° = ${clean(roundTo(a2, 4))}...}}`,
-          `${A > 90 ? `(cos ${A}° is negative, so the last term is *added* — the side opposite an obtuse angle is long.) ` : ""}${s0} = {{sqrt(${clean(roundTo(a2, 4))}...)}} = ${sfStr(a)} ${unit} (3 s.f.)`,
+          `{{${s0}^2 = ${num(b)}^2 + ${num(c)}^2 - 2 * ${num(b)} * ${num(c)} * cos ${A}° = ${ap(a2, 4)}}}`,
+          `${A > 90 ? `(cos ${A}° is negative, so the last term is *added* — the side opposite an obtuse angle is long.) ` : ""}${s0} = {{sqrt(${ap(a2, 4)})}} = ${sfStr(a)} ${unit} (3 s.f.)`,
         ],
         hint: "You know two sides and the angle *between* them — that's the cosine rule, not the sine rule.",
         traps: [
@@ -368,8 +380,8 @@ export const drills: Drill[] = [
           answer: ansDeg(ang),
           solution: [
             `Area = {{1/2 ab sin C}}, so {{${S} = 1/2 * ${a} * ${b} * sin C}}.`,
-            `{{sin C = (2 * ${S})/(${a} * ${b}) = ${clean(roundTo(s, 5))}...}}`,
-            obtuse ? `{{sin^(-1)}} gives ${degStr(acute)}, but C is obtuse: C = 180° − ${degStr(acute)} = ${degStr(ang)}.` : `C = {{sin^(-1)(${clean(roundTo(s, 5))}...)}} = ${degStr(ang)}`,
+            `{{sin C = (2 * ${S})/(${a} * ${b}) = ${ap(s, 5)}}}`,
+            obtuse ? `{{sin^(-1)}} gives ${degStr(acute)}, but C is obtuse: C = 180° − ${degStr(acute)} = ${degStr(ang)}.` : `C = {{sin^(-1)(${ap(s, 5)})}} = ${degStr(ang)}`,
           ],
           hint: "Substitute what you know into {{Area = 1/2 ab sin C}} and make sin C the subject.",
           traps: [
@@ -395,7 +407,7 @@ export const drills: Drill[] = [
           answer: ans3(area, `${unit}²`),
           solution: [
             "A diagonal splits the parallelogram into two congruent triangles.",
-            `Each triangle: {{1/2 * ${num(a)} * ${num(b)} * sin ${C}°}}. Two of them: {{${num(a)} * ${num(b)} * sin ${C}° = ${clean(roundTo(area, 4))}...}}`,
+            `Each triangle: {{1/2 * ${num(a)} * ${num(b)} * sin ${C}°}}. Two of them: {{${num(a)} * ${num(b)} * sin ${C}° = ${ap(area, 4)}}}`,
             `Area = ${sfStr(area)} ${unit}² (3 s.f.)`,
           ],
           hint: "Cut it along a diagonal into two identical triangles.",
@@ -408,7 +420,7 @@ export const drills: Drill[] = [
         answer: ans3(area, `${unit}²`),
         solution: [
           `The angle ${C}° is between the two known sides, so use {{Area = 1/2 ab sin C}}.`,
-          `{{Area = 1/2 * ${num(a)} * ${num(b)} * sin ${C}° = ${clean(roundTo(area, 4))}...}}`,
+          `{{Area = 1/2 * ${num(a)} * ${num(b)} * sin ${C}° = ${ap(area, 4)}}}`,
           `Area = ${sfStr(area)} ${unit}² (3 s.f.)`,
         ],
         hint: "Check the angle is the one *between* the two sides you know, then use {{1/2 ab sin C}}.",
@@ -435,6 +447,7 @@ export const drills: Drill[] = [
       let A = 50, a = 10, b = 8, s = 0.5;
       for (let i = 0; i < 300; i++) {
         A = ambiguous ? rng.int(25, 60) : tier === 1 ? 5 * rng.int(8, 22) : rng.int(35, 125);
+        if (A === 90) continue;
         a = tier === 1 ? rng.int(5, 20) : tenths(rng.int(40, 200));
         b = tier === 1 ? rng.int(5, 20) : tenths(rng.int(40, 200));
         s = (b * sinD(A)) / a;
@@ -454,10 +467,10 @@ export const drills: Drill[] = [
         answer: ansDeg(Bang),
         solution: [
           `Sides with their opposite angles: ${sideA} faces ${n0}, ${sideB} faces ${n1}. Put the angles on top: {{(sin ${n1})/${num(b)} = (sin ${A}°)/${num(a)}}}.`,
-          `{{sin ${n1} = (${num(b)} sin ${A}°)/${num(a)} = ${clean(roundTo(s, 5))}...}}`,
+          `{{sin ${n1} = (${num(b)} sin ${A}°)/${num(a)} = ${ap(s, 5)}}}`,
           ambiguous
             ? `{{sin^(-1)}} gives ${degStr(acute)}, but sin is positive in two places: the obtuse answer is 180° − ${degStr(acute)} = ${degStr(Bang)}. (Check: ${A}° + ${degStr(Bang)} < 180°, so this triangle exists.)`
-            : `Angle ${n1} = {{sin^(-1)(${clean(roundTo(s, 5))}...)}} = ${degStr(Bang)}. (It must be acute: it faces the shorter side ${sideB}, so it is smaller than ${A}°.)`,
+            : `Angle ${n1} = {{sin^(-1)(${ap(s, 5)})}} = ${degStr(Bang)}. (It must be acute: it faces the shorter side ${sideB}, so it is smaller than ${A}°.)`,
         ],
         hint: ambiguous ? "Your calculator gives an acute angle. Which obtuse angle has the same sine?" : "When you want an angle, flip the sine rule: {{(sin B)/b = (sin A)/a}}.",
         traps: [
@@ -508,8 +521,8 @@ export const drills: Drill[] = [
         answer: ansDeg(A),
         solution: [
           want === "named" ? `Angle ${n0} is opposite ${n1}${n2} = ${a}.` : `The ${want} angle is opposite the ${want} side, ${n1}${n2} = ${a}, so it is angle ${n0}.`,
-          `{{cos ${n0} = (b^2 + c^2 - a^2)/(2bc) = (${b}^2 + ${c}^2 - ${a}^2)/(2 * ${b} * ${c}) = ${(b * b + c * c - a * a) / g}/${(2 * b * c) / g}}} = ${num(roundTo(cosA, 5))}${Number.isInteger(roundTo(cosA * 1000, 6)) ? "" : "..."}`,
-          `${n0} = {{cos^(-1)(${clean(roundTo(cosA, 5))}${Number.isInteger(roundTo(cosA * 1000, 6)) ? "" : "..."})}} = ${degStr(A)}${cosA < 0 ? " — obtuse, because the cosine is negative." : ""}`,
+          `{{cos ${n0} = (b^2 + c^2 - a^2)/(2bc) = (${b}^2 + ${c}^2 - ${a}^2)/(2 * ${b} * ${c}) = ${(b * b + c * c - a * a) / g}/${(2 * b * c) / g}}} = ${apT(cosA, 5)}`,
+          `${n0} = {{cos^(-1)(${ap(cosA, 5)})}} = ${degStr(A)}${cosA < 0 ? " — obtuse, because the cosine is negative." : ""}`,
         ],
         hint: want === "named" ? "The side opposite the angle you want goes *last*, with the minus sign: {{cos A = (b^2 + c^2 - a^2)/(2bc)}}." : "The largest angle is always opposite the largest side (smallest opposite smallest).",
         traps: [
@@ -704,11 +717,11 @@ export const drills: Drill[] = [
         : `The diagram shows a circle, centre O, radius ${num(r)} ${unit}. A and B are points on the circle with angle AOB = ${th}°.`;
       const what = ctx ? "the area of the tinted part" : `the area of the shaded ${major ? "major" : "minor"} segment`;
       const steps = [
-        `Sector AOB: {{${th}/360 * pi * ${num(r)}^2 = ${clean(roundTo(sector, 4))}...}}`,
-        `Triangle AOB: {{1/2 * ${num(r)}^2 * sin ${th}° = ${clean(roundTo(tri, 4))}...}}`,
-        `Minor segment = sector − triangle = ${clean(roundTo(minor, 4))}...`,
+        `Sector AOB: {{${th}/360 * pi * ${num(r)}^2 = ${ap(sector, 4)}}}`,
+        `Triangle AOB: {{1/2 * ${num(r)}^2 * sin ${th}° = ${ap(tri, 4)}}}`,
+        `Minor segment = sector − triangle = ${ap(minor, 4)}`,
       ];
-      if (major) steps.push(`Major segment = whole circle − minor segment = {{pi * ${num(r)}^2}} − ${clean(roundTo(minor, 4))}... = ${sfStr(area)} ${unit}²`);
+      if (major) steps.push(`Major segment = whole circle − minor segment = {{pi * ${num(r)}^2}} − ${ap(minor, 4)} = ${sfStr(area)} ${unit}²`);
       else steps.push(`Area = ${sfStr(area)} ${unit}² (3 s.f.)`);
       return {
         prompt: `${intro}\n\nWork out ${what}. Give your answer correct to 3 significant figures.`,
