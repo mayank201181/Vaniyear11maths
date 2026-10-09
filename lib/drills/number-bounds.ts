@@ -808,7 +808,7 @@ export const drills: Drill[] = [
         } else {
           sol.push(`Half of ${unitStr} is ${show(h)}. Lower bound = ${shown} − ${show(h)} = ${show(loI)}; upper bound = ${shown} + ${show(h)} = ${show(hiI)}.`);
         }
-        sol.push(`Error interval: {{${show(loI)} <= ${ctx.v} < ${show(hiI)}}}${ctx.u}. (The upper bound itself would round up, so it is not included.)`);
+        sol.push(`Error interval: {{${show(loI)} <= ${ctx.v} < ${show(hiI)}}}${ctx.u}. ` + (o.trunc ? `(A value of exactly ${show(hiI)} would be shown as ${show(hiI)}, not ${shown}, so it is not included.)` : "(A value of exactly the upper bound would round up, so it is not included.)"));
         const cands: Array<[number, number, string]> = [
           [U, L, "Right numbers — but give the lower bound first."],
         ];
@@ -1214,7 +1214,7 @@ export const drills: Drill[] = [
         const allNd = 9 * P10(nd - 1);
         const pr = r.int(0, 1);
         return {
-          prompt: pr === 0 ? `How many ${nd}-digit whole numbers ${c.t}? (A ${nd}-digit number cannot start with 0.)` : `Ethan lists every ${nd}-digit whole number that ${c.t.replace(/^are /, "is ").replace(/^have /, "has ").replace(/^contain /, "contains ")}. How many numbers are on his list?`,
+          prompt: pr === 0 ? `How many ${nd}-digit whole numbers ${c.t}? (A ${nd}-digit number cannot start with 0.)` : `Ethan lists every ${nd}-digit whole number that ${c.t.replace(/^are /, "is ").replace(/^have /, "has ").replace(/^contain /, "contains ").replace("their", "its")}. How many numbers are on his list?`,
           answer: numAns(ans, grp(String(ans))),
           solution: [...c.steps, `Total: ${c.calc} = ${grp(String(ans))}.`],
           hint: "Which position has the strictest rule? Deal with it first, then count the choices for the others.",
