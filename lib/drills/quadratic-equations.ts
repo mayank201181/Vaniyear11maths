@@ -364,7 +364,7 @@ function formula3sf(rng: Rng, tier: Tier): DrillItem {
   let a = 1, b = 5, c = 3, D = 13;
   let r1 = 0, r2 = 0;
   for (let i = 0; i < 300; i++) {
-    a = tier === 1 ? rng.pick([1, 1, 2, 3]) : rng.nonZero(-5, 6);
+    a = tier === 1 ? rng.pick([1, 1, 2, 3]) : rng.int(1, 6);
     b = rng.nonZero(tier === 1 ? -9 : -12, tier === 1 ? 9 : 12);
     c = rng.nonZero(tier === 1 ? -9 : -12, tier === 1 ? 9 : 12);
     D = b * b - 4 * a * c;
@@ -658,7 +658,7 @@ function algebraicFractions(rng: Rng, tier: Tier): DrillItem {
     if (!Number.isInteger(a) || !Number.isInteger(b) || a === 0 || b === 0 || Math.abs(a) > 15 || Math.abs(b) > 15) continue;
     const B = c * (p + q) - a - b, C = c * p * q - a * q - b * p;
     const eq = `${fracTerm(a, p, true)}${fracTerm(b, q, false)} = ${c}`;
-    const lhsExp = `${a}${den(q)} ${b < 0 ? "-" : "+"} ${Math.abs(b)}${den(p)}`;
+    const lhsExp = `${a === 1 ? "" : a === -1 ? "-" : a}${den(q)} ${b < 0 ? "-" : "+"} ${Math.abs(b) === 1 ? "" : Math.abs(b)}${den(p)}`;
     const factored = half ? `${fac(r1)}(${lin(2, -n2)})` : `${c === 1 ? "" : c}${fac(r1)}${fac(r2)}`;
     const vals = half ? [r1, clean(r2)] : [r1, r2];
     const shows = half ? [num(r1), rt(n2, 2)] : [num(r1), num(r2)];

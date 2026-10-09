@@ -30,13 +30,13 @@ export const practice: TopicPractice = {
       kind: "mcq",
       id: "fractions-percentages-quiz-q02",
       question: "Which of these fractions is equal to a **terminating** decimal?",
-      options: ["{{7/40}}", "{{5/12}}", "{{3/14}}", "{{4/15}}"],
-      answerIndex: 0,
+      options: ["{{7/30}}", "{{21/75}}", "{{5/18}}", "{{8/45}}"],
+      answerIndex: 1,
       explanation:
-        "A fraction in simplest form terminates exactly when its denominator has no prime factors other than 2 and 5. 40 = {{2^3 * 5}}, so {{7/40}} = 0.175. {{5/12}} recurs because 12 = {{2^2 * 3}} contains a 3; {{3/14}} recurs because 14 contains a 7; {{4/15}} recurs because 15 contains a 3.",
+        "Simplify first, then test the denominator: only 2s and 5s means it terminates. {{21/75 = 7/25}} (the 3 cancels) and 25 = {{5^2}}, so it is 0.28. {{7/30}} has a 2 and a 5 in its denominator, but 30 = 2 × 3 × 5 also contains a 3 that does not cancel, so it recurs (0.2333…). {{5/18}} recurs (18 = 2 × {{3^2}}). {{8/45}} looks like it has a 5, but 45 = {{3^2 * 5}} and nothing cancels, so it recurs (0.1777…).",
       difficulty: "warmup",
       guideRef: "recurring-decimals",
-      hints: ["Write each denominator as a product of primes.", "Which primes are allowed in the denominator of a terminating decimal?"],
+      hints: ["Write each fraction in its simplest form first.", "Then write each denominator as a product of primes — only 2s and 5s are allowed."],
       strategy: "Eliminate options",
     },
     {
@@ -84,7 +84,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "fractions-percentages-quiz-q06",
       question: "Simplify fully {{(x^2 - 9)/(x^2 + 5x + 6)}}.",
-      answer: { type: "expression", expr: "(x-3)/(x+2)", display: "{{(x-3)/(x+2)}}" },
+      answer: { type: "expression", expr: "(x-3)/(x+2)", form: "simplified", display: "{{(x-3)/(x+2)}}" },
       solution: [
         "Numerator (difference of two squares): {{x^2 - 9 = (x + 3)(x - 3)}}.",
         "Denominator: {{x^2 + 5x + 6 = (x + 2)(x + 3)}}.",
@@ -244,7 +244,7 @@ export const practice: TopicPractice = {
             { point: "Subtracts to get 990x = 315", keywords: ["990x", "990", "315"] },
             { point: "Simplifies 315/990 to 7/22", keywords: ["315/990", "7/22"] },
           ],
-          commonError: "Using 10x − x: the tails .81818… and .31818… don't match, so the recurring part doesn't cancel. Choose multiples whose decimal parts are identical.",
+          commonError: "Using 10x − x: the decimal parts .181818… and .318181… don't match, so the recurring part doesn't cancel. Choose multiples whose decimal parts are identical (10x and 1000x).",
           difficulty: "core",
           guideRef: "recurring-decimals",
           hints: ["Let x = 0.3181818… The '3' does not repeat — only the 18 does.", "Find two multiples of x whose decimal parts are both .181818…", "Try 10x and 1000x, then subtract."],
@@ -297,7 +297,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p1-q10",
           question: "Simplify fully {{(3x + 6)/(x^2 - 4)}}.",
-          answer: { type: "expression", expr: "3/(x-2)", display: "{{3/(x-2)}}" },
+          answer: { type: "expression", expr: "3/(x-2)", form: "simplified", display: "{{3/(x-2)}}" },
           solution: [
             "Numerator: {{3x + 6 = 3(x + 2)}}.",
             "Denominator: {{x^2 - 4 = (x + 2)(x - 2)}}.",
@@ -313,7 +313,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p1-q11",
           question: "Write {{2/(x + 1) + 3/(x - 2)}} as a single fraction in its simplest form.",
-          answer: { type: "expression", expr: "(5x-1)/((x+1)(x-2))", display: "{{(5x - 1)/((x + 1)(x - 2))}}" },
+          answer: { type: "expression", expr: "(5x-1)/((x+1)(x-2))", form: "simplified", display: "{{(5x - 1)/((x + 1)(x - 2))}}" },
           traps: [{ spec: { type: "expression", expr: "5/(2x-1)" }, feedback: "You added tops and bottoms. Use the common denominator (x + 1)(x − 2), just as with number fractions." }],
           solution: [
             "Common denominator: {{(x + 1)(x - 2)}}.",
@@ -362,7 +362,7 @@ export const practice: TopicPractice = {
           solutions: [
             { label: "Year-by-year table", steps: ["12 000 → 10 200 → 8670 → 7369.50 → 6264.08 → 5324.46 → 4525.79.", "The sixth value is the first below 5000."] },
           ],
-          commonError: "Stopping at 5 years because the value is 'close to' $5000, or using simple depreciation (12 000 ÷ 1800 ≈ 3.9 years).",
+          commonError: "Stopping at 5 years because the value is 'close to' $5000, or using simple depreciation (a $1800 loss each year: 7000 ÷ 1800 ≈ 3.9, so 4 years).",
           difficulty: "challenge",
           guideRef: "compound-growth",
           hints: ["Write a formula for the value after n years.", "Try values of n — trial and improvement is fine here.", "Compare {{12000 * 0.85^5}} and {{12000 * 0.85^6}} with 5000."],
@@ -372,7 +372,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p1-q14",
           question: "Simplify fully {{(2x^2 + 5x - 3)/(4x^2 - 1) ÷ (x^2 + 3x)/(2x + 1)}}.",
-          answer: { type: "expression", expr: "1/x", display: "{{1/x}}" },
+          answer: { type: "expression", expr: "1/x", form: "simplified", display: "{{1/x}}" },
           traps: [{ spec: { type: "expression", expr: "(x+3)^2*x/(2x+1)^2" }, feedback: "You multiplied instead of dividing. Flip the second fraction first." }],
           solution: [
             "Factorise everything: {{2x^2 + 5x - 3 = (2x - 1)(x + 3)}}, {{4x^2 - 1 = (2x - 1)(2x + 1)}}, {{x^2 + 3x = x(x + 3)}}.",
@@ -490,7 +490,7 @@ export const practice: TopicPractice = {
             { point: "Subtracts to get 990x = 126", keywords: ["990x", "990", "126"] },
             { point: "Simplifies 126/990 to 7/55", keywords: ["126/990", "7/55"] },
           ],
-          commonError: "Writing 100x − x = 12.6, which leaves a non-recurring decimal behind and doesn't finish the proof cleanly.",
+          commonError: "Choosing 10x and 100x: 1.2727… and 12.7272… have different tails (.2727… and .7272…), so subtracting them does not remove the recurring part.",
           difficulty: "core",
           guideRef: "recurring-decimals",
           hints: ["Only the 27 repeats — the 1 does not.", "Find two multiples of x that both end .272727…", "10x and 1000x work. Subtract."],
@@ -542,7 +542,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p2-q10",
           question: "Simplify fully {{(x^2 + 3x - 10)/(2x^2 - 8x + 8)}}.",
-          answer: { type: "expression", expr: "(x+5)/(2(x-2))", display: "{{(x + 5)/(2(x - 2))}}" },
+          answer: { type: "expression", expr: "(x+5)/(2(x-2))", form: "simplified", display: "{{(x + 5)/(2(x - 2))}}" },
           solution: [
             "Numerator: {{x^2 + 3x - 10 = (x + 5)(x - 2)}}.",
             "Denominator: {{2x^2 - 8x + 8 = 2(x^2 - 4x + 4) = 2(x - 2)^2}}.",
@@ -558,7 +558,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p2-q11",
           question: "Simplify fully {{(x^2 - 16)/(3x) * (6x^2)/(x + 4)}}. Give your answer in the form ax(x + b).",
-          answer: { type: "expression", expr: "2x(x-4)", display: "{{2x(x - 4)}}" },
+          answer: { type: "expression", expr: "2x(x-4)", form: "factorised", display: "{{2x(x - 4)}}" },
           solution: [
             "Factorise: {{x^2 - 16 = (x + 4)(x - 4)}}.",
             "{{((x + 4)(x - 4))/(3x) * (6x^2)/(x + 4)}}.",
@@ -609,7 +609,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "fractions-percentages-p2-q14",
           question: "Write {{1/(x - 2) - 4/(x^2 - 4)}} as a single fraction in its simplest form.",
-          answer: { type: "expression", expr: "1/(x+2)", display: "{{1/(x + 2)}}" },
+          answer: { type: "expression", expr: "1/(x+2)", form: "simplified", display: "{{1/(x + 2)}}" },
           traps: [{ spec: { type: "expression", expr: "-3/(x^2-4)" }, feedback: "You changed the denominator of {{1/(x - 2)}} to {{x^2 - 4}} but left its numerator as 1. Multiply top and bottom by (x + 2)." }],
           solution: [
             "{{x^2 - 4 = (x - 2)(x + 2)}}, so that is the common denominator.",
@@ -847,7 +847,7 @@ export const practice: TopicPractice = {
       id: "fractions-percentages-ch-q09",
       question:
         "Write {{1/(x(x + 1)) + 1/((x + 1)(x + 2)) + 1/((x + 2)(x + 3))}} as a single fraction in its simplest form.",
-      answer: { type: "expression", expr: "3/(x(x+3))", display: "{{3/(x(x + 3))}}" },
+      answer: { type: "expression", expr: "3/(x(x+3))", form: "simplified", display: "{{3/(x(x + 3))}}" },
       solution: [
         "Notice {{1/(k(k + 1)) = 1/k - 1/(k + 1)}} (check: {{((k + 1) - k)/(k(k + 1))}}).",
         "So the sum is {{(1/x - 1/(x + 1)) + (1/(x + 1) - 1/(x + 2)) + (1/(x + 2) - 1/(x + 3))}}.",
