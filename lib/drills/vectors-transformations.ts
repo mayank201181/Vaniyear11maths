@@ -978,7 +978,7 @@ export const drills: Drill[] = [
         const Pp = lerp(Ap, Bp, m / (m + n));
         const diagram =
           svgOpen(460, 260, `Triangle OAB with vector a from O to A and b from O to B. ${PN} lies on AB with A${PN} to ${PN}B in the ratio ${m} to ${n}.`) +
-          arrow(O, Ap, "a", 1) + arrow(O, Bp, "b", -1) + seg(Ap, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, PN, 6, -12) + "</svg>";
+          arrow(O, Ap, "a", -1) + arrow(O, Bp, "b", 1) + seg(Ap, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, PN, 6, -12) + "</svg>";
         const steps = [why];
         if (lab === `O${PN}`) steps.push(`= a + ${frShow(t)}b − ${frShow(t)}a.`);
         steps.push(`${lab} = ${linShow(ans)}.`);
@@ -1016,7 +1016,7 @@ export const drills: Drill[] = [
         const Mp = lerp(Ap, Bp, 0.5), Np = lerp(Cp, Bp, m / (m + n));
         const diagram =
           svgOpen(450, 260, `Parallelogram OABC with OA = a along the bottom and OC = b up the left side. M is the midpoint of AB and N is on CB with CN to NB in the ratio ${m} to ${n}.`) +
-          arrow(O, Ap, "a", -1) + arrow(O, Cp, "b", 1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 10, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + dot(Np, "N", 0, -10) + "</svg>";
+          arrow(O, Ap, "a", 1) + arrow(O, Cp, "b", -1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 10, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + dot(Np, "N", 0, -10) + "</svg>";
         return {
           prompt: `OABC is a parallelogram with →OA = **a** and →OC = **b**. M is the midpoint of AB. N is the point on CB such that CN : NB = ${m} : ${n}. Find →${lab} in terms of **a** and **b**. Simplify your answer.`,
           diagram,
@@ -1045,7 +1045,7 @@ export const drills: Drill[] = [
       const Mp = lerp(Ap, Bp, 0.5);
       const diagram =
         svgOpen(460, 255, `Trapezium OABC with OA = a along the bottom, OC = b, and CB parallel to OA and ${k} times as long. M is the midpoint of AB.`) +
-        arrow(O, Ap, "a", -1) + arrow(O, Cp, "b", 1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 6, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + "</svg>";
+        arrow(O, Ap, "a", 1) + arrow(O, Cp, "b", -1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 6, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + "</svg>";
       return {
         prompt: `OABC is a trapezium. →OA = **a**, →OC = **b** and →CB = ${k}**a**. M is the midpoint of AB. Find →${lab} in terms of **a** and **b**. Simplify your answer.`,
         diagram,
@@ -1130,7 +1130,7 @@ export const drills: Drill[] = [
         const Pp = lerp(Ap, Bp, m / (m + n));
         const diagram =
           svgOpen(460, 260, `Triangle OAB with OA = a and OB = b, and P on AB with AP to PB in the ratio ${m} to ${n}.`) +
-          arrow(O, Ap, "a", 1) + arrow(O, Bp, "b", -1) + seg(Ap, Bp) + seg(O, Pp, true) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, "P", 6, -12) + "</svg>";
+          arrow(O, Ap, "a", -1) + arrow(O, Bp, "b", 1) + seg(Ap, Bp) + seg(O, Pp, true) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, "P", 6, -12) + "</svg>";
         const OP = L(fr(n, m + n), fr(m, m + n));
         return {
           prompt: `OAB is a triangle with →OA = **a** and →OB = **b**. P is on AB with AP : PB = ${m} : ${n}. The point Q has →OQ = k**a** + ${c === 1 ? "" : c}**b**. Given that O, P and Q lie on a straight line, find the value of k.`,

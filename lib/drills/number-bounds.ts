@@ -433,12 +433,12 @@ export const drills: Drill[] = [
         let prompt: string;
         if (tmpl === 0) prompt = `${three ? "Three bus services" : "Two bus services"} leave Jurong East interchange together at 07:00. They leave every ${list} minutes respectively. How many minutes after 07:00 do they next all leave together?`;
         else if (tmpl === 1) prompt = `${three ? "Three lights" : "Two lights"} flash every ${list} seconds respectively. They flash together at midnight. After how many seconds do they next flash together?`;
-        else prompt = `Wei Ling's ${three ? "three timers" : "two timers"} beep every ${list} minutes respectively. They all beep together at 09:00. How many minutes later do they next all beep together?`;
+        else prompt = `Wei Ling's ${three ? "three timers" : "two timers"} beep every ${list} minutes respectively. They ${three ? "all " : ""}beep together at 09:00. How many minutes later do they next ${three ? "all " : ""}beep together?`;
         const prod = per.reduce((s, x) => s * x, 1);
         return {
           prompt,
           answer: numAns(L),
-          solution: [`They meet again at a time that is a multiple of every period: the LCM.`, per.map((x) => `{{${x} = ${idx(primesOf(x), expsOver(x, primesOf(x)))}}}`).join(", ") + ".", `LCM = ${L}, so after ${L}.`],
+          solution: [`They meet again at a time that is a multiple of every period: the LCM.`, per.map((x) => (primesOf(x).length === 1 && primesOf(x)[0] === x ? `${x} is prime` : `{{${x} = ${idx(primesOf(x), expsOver(x, primesOf(x)))}}}`)).join(", ") + ".", `LCM = ${L}, so after ${L} ${tmpl === 1 ? "seconds" : "minutes"}.`],
           hint: "Each one repeats on multiples of its own period. When do the lists of multiples first match?",
           traps: numTraps(L, [[prod, "Multiplying the periods gives a common multiple, but not the first one."], [per.reduce((s, x) => gcd(s, x), 0), "That's the HCF — you want the first time they coincide again, a common MULTIPLE."]]),
         };
@@ -887,8 +887,8 @@ export const drills: Drill[] = [
         }
         if (mode === "multiple") {
           const ctx = r.pick([
-            { s: "A stack of {n} identical textbooks. Each book is {x} cm thick, correct to {acc}.", what: "height of the stack", unit: "cm", u: [100], rng: [1, 5] },
-            { s: "A row of {n} identical floor tiles laid edge to edge. Each tile is {x} cm long, correct to {acc}.", what: "length of the row", unit: "cm", u: [1000, 5000], rng: [20, 60] },
+            { s: "Zara makes a stack of {n} identical textbooks. Each book is {x} cm thick, correct to {acc}.", what: "height of the stack", unit: "cm", u: [100], rng: [1, 5] },
+            { s: "Jun lays {n} identical floor tiles edge to edge in a row. Each tile is {x} cm long, correct to {acc}.", what: "length of the row", unit: "cm", u: [1000, 5000], rng: [20, 60] },
             { s: "A lift carries {n} boxes of durians. Each box has a mass of {x} kg, correct to {acc}.", what: "total mass of the boxes", unit: "kg", u: [1000, 100], rng: [8, 30] },
           ]);
           const u = r.pick(ctx.u);
@@ -1077,8 +1077,7 @@ export const drills: Drill[] = [
             break;
           }
         }
-        if (k < (tier === 1 ? 2 : 1) || k > 3) return null;
-        if (k === 1 && LB < 1) return null;
+        if (k < 2 || k > 3) return null;
         const ans = roundSf(UB, k).v;
         const finerU = roundSf(UB, k + 1), finerL = roundSf(LB, k + 1);
         const direct = roundSf(top.v / bot.v, 3);
@@ -1152,7 +1151,7 @@ export const drills: Drill[] = [
             fs.push(n - i);
           }
           return {
-            prompt: `A CCA club has ${n} members. One person is chosen as ${roles.join(", ").replace(/, ([^,]+)$/, " and $1")}. Nobody can hold two roles. In how many different ways can the roles be filled?`,
+            prompt: `A CCA club has ${n} members. A different person is chosen for each of these roles: ${roles.join(", ").replace(/, ([^,]+)$/, " and $1")}. Nobody can hold two roles. In how many different ways can the roles be filled?`,
             answer: numAns(ans, grp(String(ans))),
             solution: [`${n} choices for ${roles[0]}, then ${n - 1} left for ${roles[1]}${k > 2 ? ", and so on" : ""}.`, `${fs.join(" × ")} = ${grp(String(ans))}.`],
             hint: "After the first role is filled, how many people are left for the next?",
