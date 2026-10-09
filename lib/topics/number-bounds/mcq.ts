@@ -472,7 +472,7 @@ export const mcqPapers: Paper[] = [
         ],
         answerIndex: 1,
         explanation:
-          "In 0.050 the significant figures are 5 and the final 0, so the last one is in the **thousandths** place: the unit is 0.001 and half of it is 0.0005. Interval: {{0.0495 <= x < 0.0505}}. {{0.045 <= x < 0.055}} treats 0.050 as 1 s.f. (ignoring the trailing zero); {{0.04995 <= x < 0.05005}} treats it as 3 s.f.; the last option has the inequality signs the wrong way round.",
+          "In 0.050 the significant figures are 5 and the final 0, so the last one is in the **thousandths** place: the unit is 0.001 and half of it is 0.0005. Interval: {{0.0495 <= x < 0.0505}}. {{0.045 <= x < 0.055}} treats 0.050 as 1 s.f. (ignoring the trailing zero); {{0.04995 <= x < 0.05005}} treats it as 3 s.f.; {{0.0495 < x <= 0.0505}} has the inequality signs the wrong way round.",
         difficulty: "challenge",
         guideRef: "error-intervals",
         hints: [
@@ -537,7 +537,7 @@ export const mcqPapers: Paper[] = [
         options: ["{{4.5 <= L < 4.7}}", "{{4.595 <= L < 4.605}}", "{{4.55 < L <= 4.65}}", "{{4.55 <= L < 4.65}}"],
         answerIndex: 3,
         explanation:
-          "10 cm = 0.1 m, so half a unit is 0.05 m: {{4.55 <= L < 4.65}}. {{4.595 <= L < 4.605}} treats it as the nearest *centimetre*; {{4.5 <= L < 4.7}} uses a whole unit; the remaining option has the ≤ and < at the wrong ends.",
+          "10 cm = 0.1 m, so half a unit is 0.05 m: {{4.55 <= L < 4.65}}. {{4.595 <= L < 4.605}} treats it as the nearest *centimetre*; {{4.5 <= L < 4.7}} uses a whole unit; {{4.55 < L <= 4.65}} has the ≤ and < at the wrong ends.",
         difficulty: "warmup",
         guideRef: "error-intervals",
         hints: ["Convert 10 cm to metres first, then halve it."],
@@ -720,9 +720,8 @@ export const mcqPapers: Paper[] = [
           "There's a shortcut linking HCF, LCM and the two numbers. Test it on 4 and 6.",
           "HCF × LCM = 48 × n.",
         ],
-        solutionsNote: undefined,
         strategy: "Use prime factors",
-      } as never,
+      },
       {
         kind: "mcq",
         id: "number-bounds-m3-q15",

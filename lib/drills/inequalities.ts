@@ -135,25 +135,18 @@ function numberLineSvg(s: Sol): string {
   const arrowL = `<polygon points="18,${yLine} 30,${yLine - 6} 30,${yLine + 6}" fill="#1f2937"/>`;
   const dot = (v: number, incl: boolean) =>
     `<circle cx="${X(v)}" cy="${yLine}" r="6" fill="${incl ? "#1f2937" : "#ffffff"}" stroke="#1f2937" stroke-width="2"/>`;
-  let label = "";
   if (s.kind === "single") {
     const k = qv(s.k);
     g += isLess(s.op) ? seg(24, X(k)) + arrowL : seg(X(k), 336) + arrowR;
     g += dot(k, isIncl(s.op));
-    label = `x ${SYM[s.op]} ${num(k)}`;
   } else if (s.kind === "between") {
     const a = qv(s.lo), b = qv(s.hi);
     g += seg(X(a), X(b)) + dot(a, s.loIncl) + dot(b, s.hiIncl);
-    label = `${num(a)} ${s.loIncl ? "≤" : "<"} x ${s.hiIncl ? "≤" : "<"} ${num(b)}`;
   } else {
     const a = qv(s.lo), b = qv(s.hi);
     g += seg(24, X(a)) + arrowL + seg(X(b), 336) + arrowR + dot(a, s.loIncl) + dot(b, s.hiIncl);
-    label = `x ${s.loIncl ? "≤" : "<"} ${num(a)} or x ${s.hiIncl ? "≥" : ">"} ${num(b)}`;
   }
-  return `<svg viewBox="0 0 360 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Number line from ${num(start)} to ${num(start + 10)} showing a set of values (a filled circle means the end value is included, an open circle means it is not)">${g}</svg>`.replace(
-    "aria-label=\"Number line",
-    `data-set="${label.length}" aria-label="Number line`,
-  ).replace(/ data-set="\d+"/, "");
+  return `<svg viewBox="0 0 360 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Number line from ${num(start)} to ${num(start + 10)} with a solution set drawn above it; a filled circle means the end value is included, an open circle means it is not">${g}</svg>`;
 }
 
 // ===========================================================================
