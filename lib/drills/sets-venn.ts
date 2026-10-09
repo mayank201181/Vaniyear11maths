@@ -36,6 +36,16 @@ const alg = (s: string) => s.replace(/ - /g, " − ").replace(/^-/, "−");
 /** Bracket an expression only when it has more than one term. */
 const wrapE = (e: string) => (/ [+-] /.test(e) ? `(${e})` : e);
 
+/** "4 + 7 = 11", or just "11" when there is one part. */
+const addUp = (parts: readonly number[], sep = " + ") => (parts.length > 1 ? `${parts.join(sep)} = ${sum(parts)}` : `${sum(parts)}`);
+/** Product version of addUp. */
+const mulUp = (parts: readonly number[]) => (parts.length > 1 ? `${parts.join(" × ")} = ${prod(parts)}` : `${prod(parts)}`);
+/** "take Art" + "take Drama" → "take Art and Drama". */
+function both2(v1: string, v2: string): string {
+  const w = v1.split(" ")[0];
+  return v2.startsWith(w + " ") ? `${v1} and ${v2.slice(w.length + 1)}` : `${v1} and ${v2}`;
+}
+
 /** A set written out: {2, 4, 6}. */
 const setStr = (xs: readonly number[]) => `{${xs.join(", ")}}`;
 
@@ -426,7 +436,7 @@ export const drills: Drill[] = [
             answer: { type: "number", value: ans },
             solution: [
               `${e.s} is made of the region${keys.length > 1 ? "s" : ""}: ${keys.map((k) => names[k]).join("; ")}.`,
-              `n(${e.s}) = ${keys.map((k) => c[k]).join(" + ")} = ${ans}`,
+              `n(${e.s}) = ${addUp(keys.map((k) => c[k]))}`,
             ],
             hint: "Shade the region on a sketch first: ∩ keeps only what is in both, ∪ takes everything from either, ′ flips inside and outside.",
             traps: numTraps(ans, [[total - ans, "That's the complement of the set you were asked for — everything outside it."]]),
@@ -446,7 +456,7 @@ export const drills: Drill[] = [
           solution: [
             `${e.s} means the elements that are ${e.words}.`,
             `Regions: ${idx.map((i) => names[i]).join("; ")}.`,
-            `n(${e.s}) = ${idx.map((i) => c[i]).join(" + ")} = ${ans}`,
+            `n(${e.s}) = ${addUp(idx.map((i) => c[i]))}`,
           ],
           hint: "Say the notation in words first, then shade the matching regions.",
           traps: numTraps(ans, [[total - ans, "That's the complement — the regions you were *not* asked for."]]),
@@ -474,7 +484,7 @@ export const drills: Drill[] = [
         const nQ = qOnly + both;
         if (pOnly === qOnly) return null;
         const ask = tier === 1 ? "both" : r.pick(tier === 2 ? ["both", "pOnly", "exactlyOne"] : ["exactlyOne", "notBoth", "pNotQ"]);
-        const story = `There are ${N} ${ctx.who}.\n\n- ${nP} ${ctx.p}.\n- ${nQ} ${ctx.q}.\n- ${none} do neither.`;
+        const story = `There are ${N} ${ctx.who}.\n\n- ${nP} ${ctx.p}.\n- ${nQ} ${ctx.q}.\n- ${none} ${none === 1 ? "does" : "do"} neither.`;
         const fill = [
           `Let the overlap be x. Then ${ctx.p} only = ${nP} − x and ${ctx.q} only = ${nQ} − x.`,
           `Total: (${nP} − x) + x + (${nQ} − x) + ${none} = ${N}, so ${nP + nQ + none} − x = ${N} and x = ${both}.`,
@@ -482,7 +492,7 @@ export const drills: Drill[] = [
         let q: string, ans: number, extra: string;
         let cands: Array<[number, string]> = [];
         if (ask === "both") {
-          q = `How many of them ${ctx.p} **and** ${ctx.q}?`;
+          q = `How many of them ${both2(ctx.p, ctx.q).replace(" and ", " **and** ")}?`;
           ans = both;
           extra = `So ${both} ${ctx.p} and ${ctx.q}.`;
           cands = [[nP + nQ - N, "You forgot the people who do neither — take them out of the total first."]];
@@ -603,10 +613,10 @@ export const drills: Drill[] = [
         const total = sum(R3.map((k) => c[k]));
         const facts = [
           `${nI(0)} ${ctx.verbs[0]}, ${nI(1)} ${ctx.verbs[1]} and ${nI(2)} ${ctx.verbs[2]}.`,
-          `${nPair(0, 1)} ${ctx.verbs[0]} and ${ctx.verbs[1]}.`,
-          `${nPair(0, 2)} ${ctx.verbs[0]} and ${ctx.verbs[2]}.`,
-          `${nPair(1, 2)} ${ctx.verbs[1]} and ${ctx.verbs[2]}.`,
-          `${c["111"]} do all three.`,
+          `${nPair(0, 1)} ${both2(ctx.verbs[0], ctx.verbs[1])}.`,
+          `${nPair(0, 2)} ${both2(ctx.verbs[0], ctx.verbs[2])}.`,
+          `${nPair(1, 2)} ${both2(ctx.verbs[1], ctx.verbs[2])}.`,
+          `${c["111"]} ${c["111"] === 1 ? "does" : "do"} all three.`,
         ];
         const ask = tier === 1 ? r.pick(["only0", "none"]) : r.pick(["none", "exactlyOne", "exactlyTwo", "only1"]);
         const exOne = c["100"] + c["010"] + c["001"];
@@ -683,7 +693,7 @@ export const drills: Drill[] = [
         if (ask === "H") {
           q = `Work out the highest common factor (HCF) of ${X} and ${Y}.`;
           ans = H;
-          steps = [`The HCF is the product of the primes in the overlap.`, `HCF = ${shared.join(" × ")} = ${H}`];
+          steps = [`The HCF is the product of the primes in the overlap.`, `HCF = ${mulUp(shared)}`];
           cands = [[Lc, "That's the LCM. The HCF uses only the overlap."]];
         } else if (ask === "L") {
           q = `Work out the lowest common multiple (LCM) of ${X} and ${Y}.`;
@@ -783,7 +793,7 @@ export const drills: Drill[] = [
           diagram: venn2Counts(ctx.L, c),
           answer: fracAns(n, total),
           solution: [
-            `${s} is the region${idx.length > 1 ? "s" : ""}: ${idx.map((i) => REG2NAME(ctx.L)[i]).join("; ")} → ${idx.map((i) => c[i]).join(" + ")} = ${n}.`,
+            `${s} is the region${idx.length > 1 ? "s" : ""}: ${idx.map((i) => REG2NAME(ctx.L)[i]).join("; ")} → ${addUp(idx.map((i) => c[i]))}.`,
             `Total in ξ = ${c.join(" + ")} = ${total}.`,
             `P(${s}) = ${frac(n, total, { simplify: false })}${gcd(n, total) > 1 ? ` = ${frac(n, total)}` : ""}`,
           ],
@@ -825,8 +835,8 @@ export const drills: Drill[] = [
             diagram: venn3Counts(L, c),
             answer: fracAns(n, d),
             solution: [
-              `'Given ${cd.g}' means the new total is only the people in ${cd.g}: ${gK.map((k) => c[k]).join(" + ")} = ${d}.`,
-              `Of those, the ones in ${cd.e}: ${eK.map((k) => c[k]).join(" + ")} = ${n}.`,
+              `'Given ${cd.g}' means the new total is only the people in ${cd.g}: ${addUp(gK.map((k) => c[k]))}.`,
+              `Of those, the ones in ${cd.e}: ${addUp(eK.map((k) => c[k]))}.`,
               `P(${cd.e} | ${cd.g}) = ${frac(n, d, { simplify: false })}${gcd(n, d) > 1 ? ` = ${frac(n, d)}` : ""}`,
             ],
             hint: "'Given' shrinks the sample space: the denominator is only the elements in the given set.",
@@ -860,7 +870,7 @@ export const drills: Drill[] = [
           diagram: venn2Counts(ctx.L, c),
           answer: fracAns(n, d),
           solution: [
-            `Given ${gName}: only look at the region${gIdx.length > 1 ? "s" : ""} in ${gName} → ${gIdx.map((i) => c[i]).join(" + ")} = ${d}.`,
+            `Given ${gName}: only look at the region${gIdx.length > 1 ? "s" : ""} in ${gName} → ${addUp(gIdx.map((i) => c[i]))}.`,
             `Of these, the ones in ${note.split(" | ")[0]}: ${n}.`,
             `P(${note}) = ${frac(n, d, { simplify: false })}${gcd(n, d) > 1 ? ` = ${frac(n, d)}` : ""}`,
           ],

@@ -814,7 +814,7 @@ export const drills: Drill[] = [
           const k = n / d;
           const pv = fn === "sin" ? asinD(k) : fn === "cos" ? acosD(k) : atanD(k);
           const us = solve(fn, k, 1, 0, 360 * m);
-          const firstLap = solve(fn, k, 1, 0, 360).map((u) => dp1(u / m));
+          const firstLap = solve(fn, k, m, 0, 360 / m);
           return {
             prompt: `Solve {{${fn} ${m}x = ${kDec(n, d)}}} for ${range}. Give all the solutions, correct to 1 decimal place where necessary.`,
             answer: listAns(xs),
@@ -882,7 +882,7 @@ export const drills: Drill[] = [
         const bad = [n1 / d1, n2 / d2].filter((v) => Math.abs(v) > 1);
         const steps: string[] = [];
         if (pre) steps.push(pre);
-        steps.push(`Factorise as a quadratic in {{${f}}}: {{${factor(n1, d1)}${factor(n2, d2)} = 0}}, so {{${f} = ${kMk(n1, d1)}}} or {{${f} = ${kMk(n2, d2)}}}.`);
+        steps.push(`Factorise as a quadratic in {{${f}}}: {{${n2 === 0 ? factor(n2, d2) + factor(n1, d1) : factor(n1, d1) + factor(n2, d2)} = 0}}, so {{${f} = ${kMk(n1, d1)}}} or {{${f} = ${kMk(n2, d2)}}}.`);
         if (bad.length) steps.push(`{{${f} = ${bad.map((v) => (v === n1 / d1 ? kMk(n1, d1) : kMk(n2, d2))).join("")}}} has no solutions: {{${f}}} is always between −1 and 1.`);
         for (const [n, d] of [[n1, d1], [n2, d2]] as [number, number][]) {
           if (Math.abs(n / d) > 1) continue;
