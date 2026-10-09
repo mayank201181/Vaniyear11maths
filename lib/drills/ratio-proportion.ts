@@ -669,9 +669,9 @@ export const drills: Drill[] = [
           prompt: `${A} and ${B} have ${money ? "money" : what} in the ratio ${rs([a, b])}. ${A} gives ${amt(t)} to ${B}. The ratio is now ${rs([c, d])}. How ${money ? "much money" : "many " + what} ${ask === "total" ? "do they have altogether" : `did ${ask === "A" ? A : B} have at the start`}?`,
           answer: { type: "number", value: ans },
           solution: [
-            `Let ${A} = ${a}x and ${B} = ${b}x. The total stays the same.`,
-            `After: ${M(`(${a}x - ${t}) / (${b}x + ${t}) = ${c}/${d}`)}, so ${d}(${a}x − ${t}) = ${c}(${b}x + ${t}).`,
-            `${d * a}x − ${d * t} = ${c * b}x + ${c * t} → ${d * a - c * b}x = ${c * t + d * t} → x = ${k}.`,
+            `Let ${A} = ${cx(a)} and ${B} = ${cx(b)}. The total stays the same.`,
+            `After: ${M(`(${cx(a)} - ${t}) / (${cx(b)} + ${t}) = ${c}/${d}`)}, so ${d}(${cx(a)} − ${t}) = ${c}(${cx(b)} + ${t}).`,
+            `${cx(d * a)} − ${d * t} = ${cx(c * b)} + ${c * t} → ${cx(d * a - c * b)} = ${c * t + d * t} → x = ${k}.`,
             `${ask === "A" ? `${A} had ${a} × ${k}` : ask === "B" ? `${B} had ${b} × ${k}` : `Total = ${a + b} × ${k}`} = ${amt(ans)}.`,
           ],
           hint: "Write the starting amounts as multiples of x (like 3x and 2x), then write an equation for the new ratio.",
@@ -697,9 +697,9 @@ export const drills: Drill[] = [
         prompt: `A bag contains red and blue counters in the ratio ${rs([a, b])}. ${B} adds ${t} ${addRed ? "red" : "blue"} counters to the bag. The ratio of red to blue counters is now ${rs([c, d])}. How many ${askRed ? "red" : "blue"} counters were in the bag at the start?`,
         answer: { type: "number", value: ans },
         solution: [
-          `Let red = ${a}x and blue = ${b}x at the start.`,
-          addRed ? `After: ${M(`(${a}x + ${t}) / (${b}x) = ${c}/${d}`)}, so ${d}(${a}x + ${t}) = ${c * b}x.` : `After: ${M(`(${a}x) / (${b}x + ${t}) = ${c}/${d}`)}, so ${d * a}x = ${c}(${b}x + ${t}).`,
-          addRed ? `${d * a}x + ${d * t} = ${c * b}x → ${c * b - d * a}x = ${d * t} → x = ${k}.` : `${d * a}x = ${c * b}x + ${c * t} → ${d * a - c * b}x = ${c * t} → x = ${k}.`,
+          `Let red = ${cx(a)} and blue = ${cx(b)} at the start.`,
+          addRed ? `After: ${M(`(${cx(a)} + ${t}) / (${cx(b)}) = ${c}/${d}`)}, so ${d}(${cx(a)} + ${t}) = ${cx(c * b)}.` : `After: ${M(`(${cx(a)}) / (${cx(b)} + ${t}) = ${c}/${d}`)}, so ${cx(d * a)} = ${c}(${cx(b)} + ${t}).`,
+          addRed ? `${cx(d * a)} + ${d * t} = ${cx(c * b)} → ${cx(c * b - d * a)} = ${d * t} → x = ${k}.` : `${cx(d * a)} = ${cx(c * b)} + ${c * t} → ${cx(d * a - c * b)} = ${c * t} → x = ${k}.`,
           `${askRed ? "Red" : "Blue"} at the start = ${askRed ? a : b} × ${k} = ${ans}.`,
         ],
         hint: "Call the starting numbers ax and bx. Only one colour changes — write the new ratio as an equation.",
@@ -1295,6 +1295,11 @@ export const drills: Drill[] = [
     },
   },
 ];
+
+/** Coefficient of x for display: 1 → "x", 3 → "3x". */
+function cx(c: number): string {
+  return c === 1 ? "x" : `${c}x`;
+}
 
 function cap(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1);

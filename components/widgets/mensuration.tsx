@@ -163,7 +163,7 @@ function SectorLab() {
               <text x={cx} y={cy + 20} fontSize={12} textAnchor="middle" className="fill-ink-2">
                 {th}°
               </text>
-              <text x={cx + Rpx * Math.cos((90 + th / 2) * RAD) / 2 - 8} y={cy - (Rpx * Math.sin((90 + th / 2) * RAD)) / 2 - 6} fontSize={12} textAnchor="end" className="fill-ink-2">
+              <text x={cx + (Rpx / 2) * Math.cos((90 + th / 2) * RAD) + 16 * Math.cos((180 + th / 2) * RAD)} y={cy - (Rpx / 2) * Math.sin((90 + th / 2) * RAD) - 16 * Math.sin((180 + th / 2) * RAD) + 4} fontSize={12} textAnchor="middle" className="fill-ink-2">
                 r = {r}
               </text>
             </svg>
@@ -190,7 +190,7 @@ function SectorLab() {
               <path d={`M${(ccx - crx).toFixed(1)},${cby} A${crx.toFixed(1)},${cry.toFixed(1)} 0 0 1 ${(ccx + crx).toFixed(1)},${cby}`} fill="none" className="stroke-accent" strokeWidth={1.5} strokeDasharray="4 3" />
               <line x1={ccx} y1={capex} x2={ccx} y2={cby} className="stroke-ink-2" strokeWidth={1.2} strokeDasharray="4 3" />
               <line x1={ccx} y1={cby} x2={ccx + crx} y2={cby} className="stroke-ink-2" strokeWidth={1.2} strokeDasharray="4 3" />
-              <text x={ccx + crx / 2 + 8} y={(capex + cby) / 2} fontSize={12} className="fill-ink-2">l = {r}</text>
+              <text x={ccx + crx / 2 + 8} y={(capex + cby) / 2 - 8} fontSize={12} className="fill-ink-2">l = {r}</text>
               <text x={ccx} y={222} fontSize={12} textAnchor="middle" className="fill-ink-2">cone</text>
             </svg>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
@@ -241,14 +241,14 @@ function FrustumBuilder() {
   const smallM = isCyl || isCone ? "0" : piM(r * r * h1n, 3 * h1d);
 
   // Drawing: fixed scale so changing R, r, h really changes the picture.
-  const W = 360, Hs = 270, s = 12, cx = 185, by = 238;
+  const W = 360, Hs = 290, s = 12, cx = 185, by = 238;
   const ty = by - h * s;
   const rx = R * s, tx = r * s;
   const ry = Math.max(6, rx * 0.25), tyr = Math.max(3, tx * 0.25);
   const apexY = isCyl ? null : by - (Hn / h1d) * s;
 
   let caption: string;
-  if (isCyl) caption = `With r = R the sides are parallel: no cone, just a **cylinder**. Volume = {{pi R^2 h = ${frustumM}}} ≈ ${sig3(frustumV)}.`;
+  if (isCyl) caption = `With r = R the sides are parallel: no cone, just a **cylinder**. Volume = {{pi R^2 h = ${frustumM}}} ≈ ${sig3(frustumV)} cm³.`;
   else if (isCone) caption = `With r = 0 there's nothing cut off: it's a whole **cone**, and its volume {{${frustumM}}} is exactly {{1/3}} of the cylinder with the same base and height.`;
   else
     caption = `Similar triangles: the missing cone has height {{x}} where {{x/${r} = (x + ${h})/${R}}}, so {{x = ${fracM(h1n, h1d)}}}. Frustum = big cone − small cone = {{${bigM} - ${smallM} = ${frustumM}}} ≈ ${sig3(frustumV)} cm³. It is {{${share}}} of the cylinder with the same base and height.`;

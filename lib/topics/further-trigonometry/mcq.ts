@@ -616,14 +616,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m3-q13",
-        question: "Solve tan 2x = 1 for 0° ≤ x ≤ 360°.",
-        options: ["22.5°, 112.5°", "45°, 225°", "22.5°, 202.5°", "22.5°, 112.5°, 202.5°, 292.5°"],
+        question: "Solve sin 2x = 0.5 for 0° ≤ x ≤ 360°.",
+        options: ["15°, 75°", "30°, 150°", "15°, 195°", "15°, 75°, 195°, 255°"],
         answerIndex: 3,
         explanation:
-          "If 0° ≤ x ≤ 360° then 0° ≤ 2x ≤ 720°. tan 2x = 1 gives 2x = 45°, 225°, 405°, 585° (adding 180° each time), so x = 22.5°, 112.5°, 202.5°, 292.5°. 22.5°, 112.5° only looks for 2x in 0°–360°. 45°, 225° forgets to halve. 22.5°, 202.5° halves first and then adds 180°, but the period of tan 2x is 90°.",
+          "If 0° ≤ x ≤ 360° then 0° ≤ 2x ≤ 720°. sin 2x = 0.5 gives 2x = 30°, 150°, 390°, 510° (the pair 30°, 150°, then each + 360°), so x = 15°, 75°, 195°, 255°. 15°, 75° only looks for 2x in 0°–360°. 30°, 150° forgets to halve. 15°, 195° halves 30° and then adds 180° (the period of sin 2x) but misses the partner 75° from 180° − 30°.",
         difficulty: "challenge",
         guideRef: "trig-equations",
-        hints: ["Let u = 2x. What interval is u in?", "Solve tan u = 1 for every u in 0°–720°.", "Now halve each value."],
+        hints: ["Let u = 2x. What interval is u in?", "Solve sin u = 0.5 for every u in 0°–720°.", "Now halve each value."],
         strategy: "Introduce a variable",
       },
       {

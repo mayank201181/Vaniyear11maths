@@ -354,8 +354,8 @@ const kthTerm: Drill = {
     const ans = clean((A + (k - 1) * D) / 10);
     const terms = [0, 1, 2, 3].map((j) => clean((A + j * D) / 10));
     const name = rng.pick(NAMES);
-    const prompt = rng.pick([
-      `An arithmetic sequence has first term ${num(a)} and common difference ${num(d)}.\n\nFind the ${ordinal(k)} term.`,
+    const given = rng.bool(0.35);
+    const prompt = given ? `An arithmetic sequence has first term ${num(a)} and common difference ${num(d)}.\n\nFind the ${ordinal(k)} term.` : rng.pick([
       `Here are the first four terms of an arithmetic sequence: ${seqText(terms)}\n\nUse {{a + (n - 1)d}} to find the ${ordinal(k)} term.`,
       `${name}'s arithmetic sequence starts ${seqText(terms)}\n\nWork out the ${ordinal(k)} term of the sequence.`,
     ]);
@@ -363,7 +363,7 @@ const kthTerm: Drill = {
       prompt,
       answer: { type: "number", value: ans },
       solution: [
-        `a = ${num(a)} and d = ${num(terms[1])} − ${br(terms[0])} = ${num(d)}.`,
+        given ? `a = ${num(a)} and d = ${num(d)}.` : `a = ${num(a)} and d = ${num(terms[1])} − ${br(terms[0])} = ${num(d)}.`,
         `The ${ordinal(k)} term is {{a + (${k} - 1)d}} = ${num(a)} + ${k - 1} × ${br(d)}.`,
         `= ${num(a)} ${clean((k - 1) * d) < 0 ? "−" : "+"} ${num(Math.abs(clean(((k - 1) * D) / 10)))} = ${num(ans)}.`,
       ],
@@ -754,8 +754,8 @@ const quadNth: Drill = {
       solution: [
         `First differences: ${d1.map(num).join(", ")}. Second differences: all ${num(d2)}.`,
         `The coefficient of {{n^2}} is half the second difference: ${num(d2)} ÷ 2 = ${num(A)}.`,
-        `Subtract {{${term(A, "n^2")}}} from each term: ${rem.map(num).join(", ")} — a linear sequence with nth term {{${poly([[B, "n"], [C, ""]])}}}.`,
-        `So the nth term is {{${ans}}}. Check n = 3: ${num(A)} × 9 ${B < 0 ? "−" : "+"} ${num(Math.abs(B))} × 3 ${C < 0 ? "−" : "+"} ${num(Math.abs(C))} = ${num(vals[2])} ✓`,
+        `Subtract {{${term(A, "n^2")}}} from each term: ${rem.map(num).join(", ")} — a linear sequence with nth term {{${lin(B, C)}}}.`,
+        `So the nth term is {{${ans}}}. Check n = 3: ${[`${num(A)} × 9`, B ? `${B < 0 ? "−" : "+"} ${num(Math.abs(B))} × 3` : "", C ? `${C < 0 ? "−" : "+"} ${num(Math.abs(C))}` : ""].filter(Boolean).join(" ")} = ${num(vals[2])} ✓`,
       ],
       hint: "Find the second difference. Half of it is the coefficient of n²; take that n² part away and what's left is linear.",
       traps: exprTraps(
