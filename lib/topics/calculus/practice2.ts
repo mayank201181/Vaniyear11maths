@@ -1,0 +1,916 @@
+// ---------------------------------------------------------------------------
+// Differentiation — Practice Papers 3 and 4.
+// Paper 3: mixed practice across every section (mostly auto-marked, 3 written).
+// Paper 4: exam style, modelled on Edexcel 4MA1 Higher calculus questions —
+//          contexts, multi-step, "show that", exact and 3 s.f. answers.
+// ---------------------------------------------------------------------------
+import type { Paper } from "../../types.ts";
+
+export const morePapers: Paper[] = [
+  // =========================================================================
+  // PRACTICE PAPER 3
+  // =========================================================================
+  {
+    id: "calculus-p3",
+    title: "Practice Paper 3",
+    questions: [
+      // ---------------------------------------------------------------- q01
+      {
+        kind: "short",
+        id: "calculus-p3-q01",
+        question: "{{y = 6x^4 + 2x^3 - 9x + 11}}\n\nFind {{dy/dx}}.",
+        answer: { type: "expression", expr: "24x^3+6x^2-9", display: "{{dy/dx = 24x^3 + 6x^2 - 9}}" },
+        traps: [
+          {
+            spec: { type: "expression", expr: "24x^3+6x^2+2" },
+            feedback: "The constant 11 differentiates to **0** — a constant term doesn't change, so it adds nothing to the gradient. Only the −9x term leaves a constant (−9).",
+          },
+          {
+            spec: { type: "expression", expr: "24x^4+6x^3-9x" },
+            feedback: "You multiplied by the power but forgot to **reduce** the power by one: {{6x^4 -> 24x^3}}, not {{24x^4}}.",
+          },
+        ],
+        solution: [
+          "Differentiate term by term: multiply by the power, then reduce the power by one.",
+          "{{6x^4 -> 24x^3}}, {{2x^3 -> 6x^2}}, {{-9x -> -9}}, {{11 -> 0}}.",
+          "{{dy/dx = 24x^3 + 6x^2 - 9}}.",
+        ],
+        commonError: "Keeping the constant term, or forgetting that −9x differentiates to −9 (not 0 and not −9x).",
+        difficulty: "warmup",
+        guideRef: "differentiating-powers",
+        hints: [
+          "For {{ax^n}}, the derivative is {{nax^(n-1)}}. Do one term at a time.",
+          "What happens to a constant like 11?",
+        ],
+        strategy: "Make it simpler",
+      },
+      // ---------------------------------------------------------------- q02
+      {
+        kind: "mcq",
+        id: "calculus-p3-q02",
+        question:
+          "P is the point (1, 2) on the curve {{y = 2x^2}}. Chords are drawn from P to points on the curve with x-coordinates 2, 1.1 and 1.01. Their gradients are 6, 4.2 and 4.02.\n\nWhat is the gradient of the **tangent** to the curve at P?",
+        options: ["6", "2", "4", "4.02"],
+        answerIndex: 2,
+        explanation:
+          "As the second point slides towards P, the chord gradients 6, 4.2, 4.02 get closer and closer to **4** — that limit is the tangent's gradient. It agrees with {{dy/dx = 4x = 4 * 1 = 4}}. 4.02 is still a chord (slightly too steep), 6 is the first chord, and 2 is the y-coordinate of P, not a gradient.",
+        difficulty: "warmup",
+        guideRef: "gradient-of-a-curve",
+        hints: [
+          "What value are 6, 4.2, 4.02 heading towards as the chords shrink?",
+          "Check with {{dy/dx = 4x}} at x = 1.",
+        ],
+        strategy: "Find a pattern",
+      },
+      // ---------------------------------------------------------------- q03
+      {
+        kind: "short",
+        id: "calculus-p3-q03",
+        question: "Find the gradient of the curve {{y = x^3 - 5x^2}} at the point where x = 3.",
+        answer: { type: "number", value: -3 },
+        traps: [
+          {
+            spec: { type: "number", value: -18 },
+            feedback: "−18 is the **y-coordinate** at x = 3 ({{27 - 45}}). The gradient comes from {{dy/dx}}, not from y.",
+          },
+        ],
+        solution: ["{{dy/dx = 3x^2 - 10x}}.", "At x = 3: {{3(3)^2 - 10(3) = 27 - 30 = -3}}.", "The gradient is negative, so the curve is going downhill at x = 3."],
+        commonError: "Substituting x = 3 into the equation of the curve instead of into {{dy/dx}}.",
+        difficulty: "warmup",
+        guideRef: "tangents",
+        hints: ["Differentiate first, then substitute x = 3.", "{{dy/dx = 3x^2 - 10x}}."],
+        strategy: "Check by substituting",
+      },
+      // ---------------------------------------------------------------- q04
+      {
+        kind: "short",
+        id: "calculus-p3-q04",
+        question:
+          "A remote-control car moves along a straight track. Its displacement from the start, s metres, after t seconds is {{s = 2t^2 + 5t}}.\n\nWork out its velocity when t = 4. Give your answer in m/s.",
+        answer: { type: "number", value: 21, display: "21 m/s" },
+        traps: [
+          {
+            spec: { type: "number", value: 52 },
+            feedback: "52 m is the **displacement** at t = 4. Velocity is the rate of change of displacement: {{v = ds/dt}}.",
+          },
+        ],
+        solution: ["{{v = ds/dt = 4t + 5}}.", "At t = 4: v = 16 + 5 = 21 m/s."],
+        commonError: "Substituting into s instead of differentiating first.",
+        difficulty: "warmup",
+        guideRef: "kinematics",
+        hints: ["Velocity is {{ds/dt}}.", "Differentiate {{2t^2 + 5t}}, then put t = 4."],
+      },
+      // ---------------------------------------------------------------- q05
+      {
+        kind: "short",
+        id: "calculus-p3-q05",
+        question: "{{y = x(2x - 3)^2}}\n\nFind {{dy/dx}}.",
+        answer: { type: "expression", expr: "12x^2-24x+9", display: "{{dy/dx = 12x^2 - 24x + 9}}" },
+        traps: [
+          {
+            spec: { type: "expression", expr: "4x-6" },
+            feedback: "You can't differentiate each factor separately and multiply ({{1 * 2(2x - 3)}}). Expand fully first: {{x(4x^2 - 12x + 9) = 4x^3 - 12x^2 + 9x}}.",
+          },
+          {
+            spec: { type: "expression", expr: "12x^2+9" },
+            feedback: "Did you square {{(2x - 3)}} as {{4x^2 + 9}}? The middle term −12x is missing, so you've lost the −24x term.",
+          },
+        ],
+        solution: [
+          "Expand the square: {{(2x - 3)^2 = 4x^2 - 12x + 9}}.",
+          "Multiply by x: {{y = 4x^3 - 12x^2 + 9x}}.",
+          "Differentiate term by term: {{dy/dx = 12x^2 - 24x + 9}}.",
+        ],
+        commonError: "Squaring the bracket as {{4x^2 + 9}}, or differentiating the factors separately.",
+        difficulty: "core",
+        guideRef: "differentiating-powers",
+        hints: [
+          "The rule works on a sum of powers of x, not on products of brackets. What should you do first?",
+          "Expand {{(2x - 3)(2x - 3)}} first, then multiply every term by x.",
+          "{{4x^3 - 12x^2 + 9x}}: now differentiate each term.",
+        ],
+        strategy: "Make it simpler",
+      },
+      // ---------------------------------------------------------------- q06
+      {
+        kind: "short",
+        id: "calculus-p3-q06",
+        question: "{{y = (2x^3 + 5)/x}}\n\nFind {{dy/dx}}.",
+        answer: { type: "expression", expr: "4x-5/(x^2)", display: "{{dy/dx = 4x - 5/x^2}}" },
+        traps: [
+          {
+            spec: { type: "expression", expr: "6x^2" },
+            feedback: "You can't differentiate the top and the bottom separately. Split the fraction first: {{(2x^3)/x + 5/x = 2x^2 + 5x^(-1)}}.",
+          },
+          {
+            spec: { type: "expression", expr: "4x+5/(x^2)" },
+            feedback: "Sign slip: {{5x^(-1)}} differentiates to {{-1 * 5x^(-2) = -5x^(-2)}}. The power is negative, so the coefficient changes sign.",
+          },
+        ],
+        solution: [
+          "Split into separate terms: {{y = (2x^3)/x + 5/x = 2x^2 + 5x^(-1)}}.",
+          "Differentiate: {{dy/dx = 4x + (-1)(5)x^(-2) = 4x - 5x^(-2)}}.",
+          "So {{dy/dx = 4x - 5/x^2}}.",
+        ],
+        commonError: "Differentiating numerator and denominator separately, or getting the power wrong: −1 − 1 = −2, not 0.",
+        difficulty: "core",
+        guideRef: "differentiating-powers",
+        hints: [
+          "Can you write y as a sum of powers of x?",
+          "Divide each term on top by x.",
+          "{{y = 2x^2 + 5x^(-1)}}. Bring the −1 down and subtract one from the power.",
+        ],
+        strategy: "Make it simpler",
+      },
+      // ---------------------------------------------------------------- q07
+      {
+        kind: "short",
+        id: "calculus-p3-q07",
+        question:
+          "The curve C has equation {{y = x^3 - 3x^2 + 6x}}.\n\nFind the x-coordinates of the two points on C where the gradient is 15.",
+        answer: { type: "list", values: [3, -1], display: "x = 3 and x = −1" },
+        traps: [
+          {
+            spec: { type: "list", values: [-3, 1] },
+            feedback: "Check your factorising: {{x^2 - 2x - 3 = (x - 3)(x + 1)}}, so x = 3 or x = −1. Substitute back to check: {{3(9) - 6(3) + 6 = 15}}.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 3x^2 - 6x + 6}}.",
+          "Set equal to 15: {{3x^2 - 6x + 6 = 15}}, so {{3x^2 - 6x - 9 = 0}}.",
+          "Divide by 3: {{x^2 - 2x - 3 = 0}}, so {{(x - 3)(x + 1) = 0}}.",
+          "x = 3 or x = −1.",
+        ],
+        commonError: "Setting the original equation y = 15 instead of the gradient {{dy/dx = 15}}.",
+        difficulty: "core",
+        guideRef: "tangents",
+        hints: [
+          "'Gradient is 15' means which expression equals 15?",
+          "Form {{3x^2 - 6x + 6 = 15}} and rearrange to = 0.",
+          "Divide through by 3 before factorising.",
+        ],
+        strategy: "Introduce a variable",
+      },
+      // ---------------------------------------------------------------- q08
+      {
+        kind: "short",
+        id: "calculus-p3-q08",
+        question:
+          "Find the equation of the tangent to the curve {{y = 2x^2 - 5x + 1}} at the point where x = 3. Give your answer in the form y = mx + c.",
+        answer: { type: "equation", eq: "y=7x-17", display: "y = 7x − 17" },
+        traps: [
+          {
+            spec: { type: "equation", eq: "y=7x-21" },
+            feedback: "That line passes through (3, 0), not the point on the curve. Find y at x = 3 first: {{2(9) - 15 + 1 = 4}}, so use (3, 4).",
+          },
+          {
+            spec: { type: "equation", eq: "y=4x-8" },
+            feedback: "You've used the y-value (4) as the gradient. The gradient is {{dy/dx = 4x - 5 = 7}} at x = 3.",
+          },
+        ],
+        solution: [
+          "Point: y = {{2(3)^2 - 5(3) + 1 = 18 - 15 + 1 = 4}}, so (3, 4).",
+          "Gradient: {{dy/dx = 4x - 5 = 4(3) - 5 = 7}}.",
+          "{{y - 4 = 7(x - 3)}}, so y = 7x − 21 + 4.",
+          "y = 7x − 17.",
+        ],
+        commonError: "Mixing up the y-coordinate and the gradient, or forgetting to find the y-coordinate at all.",
+        difficulty: "core",
+        guideRef: "tangents",
+        hints: [
+          "A straight line needs a point and a gradient. Which do you have so far?",
+          "Find y at x = 3, then find {{dy/dx}} at x = 3.",
+          "Use {{y - y_1 = m(x - x_1)}} with (3, 4) and m = 7.",
+        ],
+        strategy: "Break it into steps",
+      },
+      // ---------------------------------------------------------------- q09
+      {
+        kind: "short",
+        id: "calculus-p3-q09",
+        question:
+          "The curve {{y = x^3 + 3x^2 - 24x + 5}} has two turning points.\n\nFind the coordinates of the **maximum** point. Give your answer as (x, y).",
+        answer: { type: "list", values: [-4, 85], ordered: true, display: "(−4, 85)" },
+        traps: [
+          {
+            spec: { type: "list", values: [2, -23], ordered: true },
+            feedback: "(2, −23) is a turning point, but it's the **minimum**: {{(d^2y)/(dx^2) = 6x + 6 = 18 > 0}} there. Check the other one.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 3x^2 + 6x - 24 = 3(x^2 + 2x - 8) = 3(x + 4)(x - 2)}}.",
+          "{{dy/dx = 0}} when x = −4 or x = 2.",
+          "{{(d^2y)/(dx^2) = 6x + 6}}. At x = −4 it is −18 < 0, so a maximum. (At x = 2 it is 18 > 0: minimum.)",
+          "At x = −4: {{y = (-4)^3 + 3(-4)^2 - 24(-4) + 5 = -64 + 48 + 96 + 5 = 85}}.",
+          "Maximum point: (−4, 85).",
+        ],
+        solutions: [
+          {
+            label: "Shape of a positive cubic",
+            steps: [
+              "The {{x^3}} coefficient is positive, so the curve goes up–down–up.",
+              "So the left-hand turning point (smaller x) is the maximum: x = −4, giving (−4, 85).",
+            ],
+          },
+        ],
+        commonError: "Sign errors when cubing or squaring −4: {{(-4)^3 = -64}} but {{(-4)^2 = +16}}.",
+        difficulty: "core",
+        guideRef: "turning-points",
+        hints: [
+          "At a turning point, what is the gradient?",
+          "Solve {{3x^2 + 6x - 24 = 0}} — take out the common factor 3 first.",
+          "Decide which x gives the maximum using {{(d^2y)/(dx^2)}} or the shape of the cubic.",
+        ],
+        strategy: "Use symmetry / shape",
+      },
+      // ---------------------------------------------------------------- q10
+      {
+        kind: "written",
+        id: "calculus-p3-q10",
+        question:
+          "The curve C has equation {{y = x^4 - 8x^2 + 3}}.\n\nShow that (2, −13) is a turning point on C, and determine whether it is a maximum or a minimum.",
+        marks: 3,
+        modelAnswer:
+          "At x = 2, {{y = 16 - 32 + 3 = -13}}, so (2, −13) lies on C.\n\n{{dy/dx = 4x^3 - 16x}}. At x = 2: {{4(8) - 16(2) = 32 - 32 = 0}}, so (2, −13) is a turning point.\n\n{{(d^2y)/(dx^2) = 12x^2 - 16}}. At x = 2: 48 − 16 = 32 > 0, so it is a **minimum**.",
+        markScheme: [
+          { point: "Differentiates correctly: dy/dx = 4x³ − 16x", keywords: ["4x^3", "4x³", "16x", "dy/dx"] },
+          { point: "Substitutes x = 2 to show dy/dx = 0 (and y = −13)", keywords: ["= 0", "32 - 32", "32 − 32", "-13", "−13"] },
+          { point: "Uses second derivative (32 > 0) or gradient either side to conclude minimum", keywords: ["minimum", "min", "32", "12x^2", "> 0", "positive"] },
+        ],
+        commonError: "Stopping after showing dy/dx = 0 without deciding the nature, or saying 'maximum' because the second derivative is large.",
+        difficulty: "core",
+        guideRef: "turning-points",
+        hints: [
+          "What must be true about {{dy/dx}} at a turning point?",
+          "Find {{dy/dx}} and substitute x = 2.",
+          "For the nature: find {{(d^2y)/(dx^2)}} at x = 2. Positive means a minimum (a 'smile').",
+        ],
+        solutions: [
+          {
+            label: "Gradient either side",
+            steps: [
+              "At x = 1.9: {{dy/dx = 4(6.859) - 30.4 = -2.964}} (negative).",
+              "At x = 2.1: {{dy/dx = 4(9.261) - 33.6 = 3.444}} (positive).",
+              "Gradient goes − then 0 then +, so the point is a minimum.",
+            ],
+          },
+        ],
+        strategy: "Check by substituting",
+      },
+      // ---------------------------------------------------------------- q11
+      {
+        kind: "short",
+        id: "calculus-p3-q11",
+        question:
+          "A particle P moves along a straight line. Its displacement from a fixed point O at time t seconds is s metres, where {{s = t^3 - 12t^2 + 45t}}.\n\nFind the two values of t when P is instantaneously at rest.",
+        answer: { type: "list", values: [3, 5], display: "t = 3 and t = 5" },
+        traps: [
+          {
+            spec: { type: "number", value: 4 },
+            feedback: "t = 4 is when the **acceleration** is zero. 'At rest' means the velocity {{ds/dt}} is zero.",
+          },
+        ],
+        solution: [
+          "{{v = ds/dt = 3t^2 - 24t + 45}}.",
+          "At rest: v = 0, so {{3(t^2 - 8t + 15) = 0}}.",
+          "{{(t - 3)(t - 5) = 0}}, so t = 3 or t = 5.",
+        ],
+        commonError: "Solving s = 0 (back at O) instead of v = 0 (at rest).",
+        difficulty: "core",
+        guideRef: "kinematics",
+        hints: [
+          "'At rest' means which quantity is zero?",
+          "Differentiate s to get v, then solve v = 0.",
+          "Take out the factor 3, then factorise {{t^2 - 8t + 15}}.",
+        ],
+      },
+      // ---------------------------------------------------------------- q12
+      {
+        kind: "written",
+        id: "calculus-p3-q12",
+        question:
+          "Wei Ling is asked to differentiate {{y = 1/x^2}}. She writes:\n\n    {{dy/dx = 1/(2x)}}\n\nExplain the mistake she has made and find the correct expression for {{dy/dx}}.",
+        marks: 3,
+        modelAnswer:
+          "She has differentiated the denominator {{x^2}} on its own (getting 2x) and left it on the bottom. The rule {{d/dx (x^n) = nx^(n-1)}} only works on a power of x, so first write {{y = x^(-2)}}.\n\nThen {{dy/dx = -2x^(-3) = -2/x^3}}.",
+        markScheme: [
+          { point: "Identifies the error: differentiated the denominator separately / didn't write as a power of x", keywords: ["denominator", "bottom", "power", "x^-2", "x^(-2)", "negative power", "separately"] },
+          { point: "Rewrites y as x^(−2)", keywords: ["x^-2", "x^(-2)", "x⁻²", "-2"] },
+          { point: "Correct derivative −2x^(−3) or −2/x³", keywords: ["-2x^-3", "-2x^(-3)", "-2/x^3", "−2/x³", "-3"] },
+        ],
+        commonError: "Writing the derivative as {{-2x^(-1)}}: subtracting one from −2 gives −3, not −1.",
+        difficulty: "core",
+        guideRef: "differentiating-powers",
+        hints: [
+          "Can the power rule be applied to a fraction directly?",
+          "Write {{1/x^2}} as a power of x.",
+          "{{x^(-2)}}: multiply by −2, then subtract 1 from the power.",
+        ],
+        strategy: "Spot the error",
+      },
+      // ---------------------------------------------------------------- q13
+      {
+        kind: "short",
+        id: "calculus-p3-q13",
+        question:
+          "A curve has equation {{y = 2x^3 + 3x^2 - 12x}}.\n\nFind the set of values of x for which y is **decreasing** (the gradient is negative). Give your answer as an inequality.",
+        answer: { type: "inequality", ineq: "-2<x<1", display: "−2 < x < 1" },
+        traps: [
+          {
+            spec: { type: "inequality", ineq: "x<-2 or x>1" },
+            feedback: "That's where the gradient is **positive** (the curve is increasing). {{6(x + 2)(x - 1) < 0}} between the roots, because the gradient graph is a ∪-shaped parabola.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 6x^2 + 6x - 12 = 6(x^2 + x - 2) = 6(x + 2)(x - 1)}}.",
+          "Decreasing means {{dy/dx < 0}}: {{6(x + 2)(x - 1) < 0}}.",
+          "The gradient function is a ∪-shaped quadratic with roots −2 and 1, so it is negative **between** them.",
+          "−2 < x < 1.",
+        ],
+        commonError: "Choosing the outside region, or solving only dy/dx = 0 and stopping at x = −2 and x = 1.",
+        difficulty: "challenge",
+        guideRef: "turning-points",
+        hints: [
+          "'Decreasing' is a statement about which expression?",
+          "Solve the quadratic inequality {{6x^2 + 6x - 12 < 0}}.",
+          "Find the critical values, then sketch the ∪-shaped gradient graph: where is it below the x-axis?",
+        ],
+        strategy: "Draw a diagram",
+      },
+      // ---------------------------------------------------------------- q14
+      {
+        kind: "written",
+        id: "calculus-p3-q14",
+        question:
+          "Jun is designing a closed cardboard gift box for a set of lotus-paste mooncakes. The box is a cuboid whose base measures x cm by 2x cm, and its height is h cm. The volume of the box must be 72 cm³.\n\n(a) Show that the total surface area, A cm², of the box is {{A = 4x^2 + 216/x}}.\n\n(b) Find the value of x that makes A as small as possible, and show that this gives a minimum.",
+        marks: 4,
+        modelAnswer:
+          "(a) Volume: {{x * 2x * h = 2x^2 h = 72}}, so {{h = 36/x^2}}.\nSurface area = top and bottom + two x by h faces + two 2x by h faces = {{2(2x^2) + 2xh + 4xh = 4x^2 + 6xh}}.\nSubstitute: {{A = 4x^2 + 6x * 36/x^2 = 4x^2 + 216/x}}.\n\n(b) {{A = 4x^2 + 216x^(-1)}}, so {{dA/dx = 8x - 216/x^2}}.\nSet {{dA/dx = 0}}: {{8x^3 = 216}}, {{x^3 = 27}}, x = 3.\n{{(d^2A)/(dx^2) = 8 + 432/x^3}} = 8 + 16 = 24 > 0 at x = 3, so this is a minimum. (The box is 3 cm by 6 cm by 4 cm, with A = 36 + 72 = 108 cm².)",
+        markScheme: [
+          { point: "Uses volume to write h = 36/x² and forms A = 4x² + 6xh", keywords: ["36/x^2", "h =", "6xh", "2x^2h", "2x²h", "72"] },
+          { point: "Differentiates: dA/dx = 8x − 216/x²", keywords: ["8x", "216/x^2", "-216", "x^-2", "da/dx"] },
+          { point: "Solves dA/dx = 0 to get x = 3", keywords: ["x = 3", "x^3 = 27", "27", "8x^3"] },
+          { point: "Justifies minimum (second derivative 24 > 0, or gradient sign change)", keywords: ["minimum", "24", "> 0", "positive", "432"] },
+        ],
+        commonError: "Treating the box as having a square base (2x² instead of 4x² for top and bottom), or differentiating {{216/x}} as 216.",
+        difficulty: "challenge",
+        guideRef: "turning-points",
+        hints: [
+          "There are two unknowns, x and h. Which fact lets you get rid of h?",
+          "List the six faces in pairs: x by 2x, x by h and 2x by h.",
+          "Write {{216/x}} as {{216x^(-1)}} before differentiating, then solve dA/dx = 0.",
+          "Check the nature: {{(d^2A)/(dx^2)}} at x = 3.",
+        ],
+        solutions: [
+          {
+            label: "Sign of the gradient either side",
+            steps: [
+              "At x = 2.9: {{dA/dx = 23.2 - 216/8.41 = 23.2 - 25.7 < 0}}.",
+              "At x = 3.1: {{dA/dx = 24.8 - 216/9.61 = 24.8 - 22.5 > 0}}.",
+              "Gradient goes − to +, so x = 3 gives a minimum.",
+            ],
+          },
+        ],
+        strategy: "Introduce a variable",
+      },
+      // ---------------------------------------------------------------- q15
+      {
+        kind: "short",
+        id: "calculus-p3-q15",
+        question:
+          "The point P(2, 3) lies on the curve {{y = x^2 - 2x + 3}}. The normal to the curve at P meets the curve again at the point Q.\n\nFind the coordinates of Q. Give your answer as (x, y) using decimals.",
+        answer: { type: "list", values: [-0.5, 4.25], ordered: true, display: "(−0.5, 4.25)" },
+        traps: [
+          {
+            spec: { type: "list", values: [2, 3], ordered: true },
+            feedback: "That's P itself. The equation {{2x^2 - 3x - 2 = 0}} has two roots — one is x = 2 (point P), the other gives Q.",
+          },
+          {
+            spec: { type: "list", values: [0.5, 2.25], ordered: true },
+            feedback: "Your normal has gradient {{+1/2}}. The normal's gradient is the **negative** reciprocal of the tangent's: {{-1/2}}.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 2x - 2}}; at x = 2 the tangent gradient is 2.",
+          "Normal gradient = {{-1/2}}. Normal: {{y - 3 = -1/2 (x - 2)}}, i.e. {{y = 4 - 1/2 x}}.",
+          "Meet the curve: {{x^2 - 2x + 3 = 4 - 1/2 x}}. Multiply by 2: {{2x^2 - 4x + 6 = 8 - x}}.",
+          "{{2x^2 - 3x - 2 = 0}}, so {{(2x + 1)(x - 2) = 0}}: x = 2 (that's P) or x = −0.5.",
+          "y = 4 + 0.25 = 4.25. Check on the curve: 0.25 + 1 + 3 = 4.25 ✓.",
+          "Q is (−0.5, 4.25).",
+        ],
+        commonError: "Using the tangent gradient (or its positive reciprocal) for the normal, or forgetting that x = 2 must be one root (a good check on your quadratic).",
+        difficulty: "challenge",
+        guideRef: "normals",
+        hints: [
+          "The normal is perpendicular to the tangent. What is its gradient?",
+          "Write the normal as y = … and set it equal to the curve's equation.",
+          "You already know one solution of the resulting quadratic (x = 2). Use it to factorise.",
+        ],
+        strategy: "Use what you know",
+      },
+    ],
+  },
+
+  // =========================================================================
+  // PRACTICE PAPER 4 — EXAM STYLE
+  // =========================================================================
+  {
+    id: "calculus-p4",
+    title: "Practice Paper 4 — Exam style",
+    questions: [
+      // ---------------------------------------------------------------- q01
+      {
+        kind: "short",
+        id: "calculus-p4-q01",
+        question: "{{y = 3x^2 - 8/x + 5}}\n\nFind {{dy/dx}}.",
+        answer: { type: "expression", expr: "6x+8/(x^2)", display: "{{dy/dx = 6x + 8/x^2}}" },
+        traps: [
+          {
+            spec: { type: "expression", expr: "6x-8/(x^2)" },
+            feedback: "Sign check: {{-8/x = -8x^(-1)}}. Multiplying by the power −1 gives {{+8x^(-2)}}, so the term is **+**{{8/x^2}}.",
+          },
+          {
+            spec: { type: "expression", expr: "6x" },
+            feedback: "The {{-8/x}} term doesn't vanish — it's {{-8x^(-1)}}, a power of x. Only the constant 5 differentiates to 0.",
+          },
+        ],
+        solution: [
+          "Write as powers of x: {{y = 3x^2 - 8x^(-1) + 5}}.",
+          "{{dy/dx = 6x - 8(-1)x^(-2) + 0 = 6x + 8x^(-2)}}.",
+          "{{dy/dx = 6x + 8/x^2}}.",
+        ],
+        commonError: "Losing the sign: (−8) × (−1) = +8.",
+        difficulty: "warmup",
+        guideRef: "differentiating-powers",
+        hints: [
+          "Rewrite {{8/x}} as a power of x first.",
+          "{{-8x^(-1)}}: multiply by −1 and reduce the power to −2.",
+        ],
+        strategy: "Make it simpler",
+      },
+      // ---------------------------------------------------------------- q02
+      {
+        kind: "short",
+        id: "calculus-p4-q02",
+        question: "The curve C has equation {{y = x^3 - 4x^2 + 7}}.\n\nWork out the gradient of C at the point (3, −2).",
+        answer: { type: "number", value: 3 },
+        traps: [
+          {
+            spec: { type: "number", value: -2 },
+            feedback: "−2 is the y-coordinate of the point. The gradient is the value of {{dy/dx}} at x = 3.",
+          },
+        ],
+        solution: ["{{dy/dx = 3x^2 - 8x}}.", "At x = 3: {{3(9) - 8(3) = 27 - 24 = 3}}."],
+        commonError: "Substituting into y instead of dy/dx.",
+        difficulty: "warmup",
+        guideRef: "tangents",
+        hints: ["Find {{dy/dx}} and substitute the x-coordinate.", "{{dy/dx = 3x^2 - 8x}}."],
+      },
+      // ---------------------------------------------------------------- q03
+      {
+        kind: "short",
+        id: "calculus-p4-q03",
+        question:
+          "A camera drone rises vertically above Marina Bay. Its height, h metres, t seconds after take-off is {{h = 0.4t^3 + 2t}}, for 0 ≤ t ≤ 6.\n\nWork out the velocity of the drone when t = 5. Give your answer in m/s.",
+        answer: { type: "number", value: 32, display: "32 m/s" },
+        traps: [
+          {
+            spec: { type: "number", value: 60 },
+            feedback: "60 m is the **height** at t = 5. Velocity is {{dh/dt}}.",
+          },
+          {
+            spec: { type: "number", value: 12 },
+            feedback: "Check the derivative of {{0.4t^3}}: multiply by 3 to get {{1.2t^2}}, then substitute t = 5: 1.2 × 25 + 2 = 32.",
+          },
+        ],
+        solution: ["{{v = dh/dt = 1.2t^2 + 2}}.", "At t = 5: v = 1.2 × 25 + 2 = 30 + 2 = 32 m/s."],
+        commonError: "Substituting t = 5 into h instead of into {{dh/dt}}.",
+        difficulty: "warmup",
+        guideRef: "kinematics",
+        hints: ["Velocity is the rate of change of height: differentiate h.", "{{dh/dt = 1.2t^2 + 2}}."],
+      },
+      // ---------------------------------------------------------------- q04
+      {
+        kind: "short",
+        id: "calculus-p4-q04",
+        question:
+          "The points P(1, 1) and Q(1.1, 1.4641) lie on the curve {{y = x^4}}.\n\nWork out the gradient of the chord PQ. Give your answer as a decimal.",
+        answer: { type: "number", value: 4.641, allowFraction: false },
+        traps: [
+          {
+            spec: { type: "number", value: 4 },
+            feedback: "4 is the gradient of the **tangent** at P ({{4x^3}} at x = 1). The chord to Q is slightly steeper: {{(1.4641 - 1)/(1.1 - 1)}}.",
+          },
+          {
+            spec: { type: "number", value: 0.2155, tolerance: 0.0005 },
+            feedback: "Gradient is change in y ÷ change in x — you've divided the other way up.",
+          },
+        ],
+        solution: [
+          "Gradient = {{(1.4641 - 1)/(1.1 - 1) = 0.4641/0.1 = 4.641}}.",
+          "As Q moves closer to P, the chord gradient approaches 4, the gradient of the tangent at P ({{dy/dx = 4x^3 = 4}}).",
+        ],
+        commonError: "Dividing change in x by change in y.",
+        difficulty: "warmup",
+        guideRef: "gradient-of-a-curve",
+        hints: ["Gradient of a straight line = {{(change in y)/(change in x)}}."],
+      },
+      // ---------------------------------------------------------------- q05
+      {
+        kind: "short",
+        id: "calculus-p4-q05",
+        question:
+          "The curve C has equation {{y = x^2 + 4x - 7}}.\n\nFind the coordinates of the point on C at which the gradient is 10. Give your answer as (x, y).",
+        answer: { type: "list", values: [3, 14], ordered: true, display: "(3, 14)" },
+        traps: [
+          {
+            spec: { type: "list", values: [3, 10], ordered: true },
+            feedback: "x = 3 is right, but the y-coordinate comes from the curve, not the gradient: {{9 + 12 - 7 = 14}}.",
+          },
+          {
+            spec: { type: "list", values: [7, 70], ordered: true },
+            feedback: "Check your equation: {{2x + 4 = 10}} gives 2x = 6, so x = 3.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 2x + 4}}.",
+          "{{2x + 4 = 10}}, so x = 3.",
+          "y = {{9 + 12 - 7 = 14}}.",
+          "The point is (3, 14).",
+        ],
+        commonError: "Giving the gradient (10) as the y-coordinate.",
+        difficulty: "core",
+        guideRef: "tangents",
+        hints: [
+          "Which expression gives the gradient?",
+          "Solve {{2x + 4 = 10}}.",
+          "Substitute your x back into the equation of the **curve** to get y.",
+        ],
+      },
+      // ---------------------------------------------------------------- q06
+      {
+        kind: "short",
+        id: "calculus-p4-q06",
+        question: "{{y = (x^2 + 2)(3x - 5)}}\n\nFind {{dy/dx}}.",
+        answer: { type: "expression", expr: "9x^2-10x+6", display: "{{dy/dx = 9x^2 - 10x + 6}}" },
+        traps: [
+          {
+            spec: { type: "expression", expr: "6x" },
+            feedback: "You can't differentiate each bracket and multiply the results ({{2x * 3}}). Expand first: {{3x^3 - 5x^2 + 6x - 10}}.",
+          },
+        ],
+        solution: [
+          "Expand: {{(x^2 + 2)(3x - 5) = 3x^3 - 5x^2 + 6x - 10}}.",
+          "Differentiate: {{dy/dx = 9x^2 - 10x + 6}}.",
+        ],
+        commonError: "Differentiating each bracket separately and multiplying.",
+        difficulty: "core",
+        guideRef: "differentiating-powers",
+        hints: [
+          "The power rule needs a sum of terms, not a product of brackets.",
+          "Expand the brackets — four products.",
+          "{{3x^3 - 5x^2 + 6x - 10}}: now differentiate term by term.",
+        ],
+        strategy: "Make it simpler",
+      },
+      // ---------------------------------------------------------------- q07
+      {
+        kind: "short",
+        id: "calculus-p4-q07",
+        question:
+          "The cost, $C, of running a delivery van on a particular route at an average speed of v km/h is modelled by\n\n    {{C = v/4 + 900/v}}\n\nFind the value of v for which C is a minimum, and the minimum cost. Give v first, then C.",
+        answer: { type: "list", values: [60, 30], ordered: true, display: "v = 60 km/h, C = $30" },
+        traps: [
+          {
+            spec: { type: "list", values: [30, 60], ordered: true },
+            feedback: "Right numbers, wrong order: give v (the speed) first, then the cost C.",
+          },
+          {
+            spec: { type: "list", values: [60, 60], ordered: true },
+            feedback: "v = 60 is right. Now substitute carefully: {{60/4 + 900/60 = 15 + 15 = 30}}.",
+          },
+        ],
+        solution: [
+          "{{C = 1/4 v + 900v^(-1)}}, so {{dC/dv = 1/4 - 900/v^2}}.",
+          "Minimum when {{dC/dv = 0}}: {{v^2 = 3600}}, so v = 60 (speed is positive).",
+          "{{(d^2C)/(dv^2) = 1800/v^3 > 0}} for v > 0, so this is a minimum.",
+          "C = {{60/4 + 900/60 = 15 + 15 = 30}}.",
+        ],
+        commonError: "Differentiating {{900/v}} as 900 or as {{900/v^2}} with the wrong sign.",
+        difficulty: "core",
+        guideRef: "turning-points",
+        hints: [
+          "At a minimum, what is {{dC/dv}}?",
+          "Write {{900/v}} as {{900v^(-1)}} before differentiating.",
+          "Solve {{1/4 = 900/v^2}}, then substitute v back into C.",
+        ],
+      },
+      // ---------------------------------------------------------------- q08
+      {
+        kind: "written",
+        id: "calculus-p4-q08",
+        question:
+          "A solid cuboid has a square base of side x cm and height h cm. The total surface area of the cuboid is 600 cm².\n\nShow that the volume, V cm³, of the cuboid is given by {{V = 150x - 1/2 x^3}}.",
+        marks: 3,
+        modelAnswer:
+          "Surface area: two square ends and four rectangles, so {{2x^2 + 4xh = 600}}.\n\nRearrange: {{4xh = 600 - 2x^2}}, so {{h = (600 - 2x^2)/(4x) = (300 - x^2)/(2x)}}.\n\n{{V = x^2 h = x^2 * (300 - x^2)/(2x) = (x(300 - x^2))/2 = 150x - 1/2 x^3}}.",
+        markScheme: [
+          { point: "Correct surface area equation 2x² + 4xh = 600", keywords: ["2x^2", "2x²", "4xh", "600"] },
+          { point: "Makes h the subject: h = (600 − 2x²)/(4x) or equivalent", keywords: ["h =", "(600 - 2x^2)/4x", "300 - x^2", "/4x", "/2x"] },
+          { point: "Substitutes into V = x²h and simplifies to 150x − ½x³", keywords: ["x^2h", "x²h", "150x", "x^3/2", "1/2 x^3"] },
+        ],
+        commonError: "Using 6x² for the surface area (only true for a cube), or only counting one square face.",
+        difficulty: "core",
+        guideRef: "turning-points",
+        hints: [
+          "Write down the surface area: how many square faces and how many rectangular faces?",
+          "Use {{2x^2 + 4xh = 600}} to make h the subject.",
+          "Substitute h into {{V = x^2 h}} and simplify.",
+        ],
+        strategy: "Work backwards",
+      },
+      // ---------------------------------------------------------------- q09
+      {
+        kind: "short",
+        id: "calculus-p4-q09",
+        question:
+          "For the cuboid in the previous question, {{V = 150x - 1/2 x^3}}, where the base is x cm by x cm and the total surface area is 600 cm².\n\nFind the maximum possible volume of the cuboid. Give your answer in cm³.",
+        answer: { type: "number", value: 1000, display: "1000 cm³" },
+        traps: [
+          {
+            spec: { type: "number", value: 10 },
+            feedback: "x = 10 cm is the side length that gives the maximum. The question asks for the maximum **volume**: substitute x = 10 into V.",
+          },
+          {
+            spec: { type: "number", value: 2000 },
+            feedback: "Check the second term: {{1/2 * 10^3 = 500}}, so V = 1500 − 500 = 1000.",
+          },
+        ],
+        solution: [
+          "{{dV/dx = 150 - 3/2 x^2}}.",
+          "{{dV/dx = 0}}: {{3/2 x^2 = 150}}, {{x^2 = 100}}, x = 10 (length is positive).",
+          "{{(d^2V)/(dx^2) = -3x = -30 < 0}}, so a maximum.",
+          "V = {{150(10) - 1/2 (1000) = 1500 - 500 = 1000}} cm³.",
+          "(Check: h = {{(300 - 100)/20 = 10}}, so the best cuboid is a 10 cm cube.)",
+        ],
+        commonError: "Stopping at x = 10 instead of finding V.",
+        difficulty: "core",
+        guideRef: "turning-points",
+        hints: [
+          "Maximum volume: where is {{dV/dx = 0}}?",
+          "Differentiate: {{dV/dx = 150 - 3/2 x^2}}.",
+          "Solve for x, then substitute back into V.",
+        ],
+      },
+      // ---------------------------------------------------------------- q10
+      {
+        kind: "short",
+        id: "calculus-p4-q10",
+        question:
+          "A particle P moves along a straight line. At time t seconds, the displacement of P from a fixed point O is s metres, where\n\n    {{s = 2t^3 - 21t^2 + 60t}}\n\nFind the displacement of P from O at the **first** time that P is instantaneously at rest. Give your answer in metres.",
+        answer: { type: "number", value: 52, display: "52 m" },
+        traps: [
+          {
+            spec: { type: "number", value: 25 },
+            feedback: "25 m is the displacement at t = 5, the **second** time P is at rest. The first time is t = 2.",
+          },
+          {
+            spec: { type: "number", value: 2 },
+            feedback: "t = 2 is the time. The question asks for the displacement s at that time.",
+          },
+        ],
+        solution: [
+          "{{v = ds/dt = 6t^2 - 42t + 60 = 6(t^2 - 7t + 10) = 6(t - 2)(t - 5)}}.",
+          "At rest when v = 0: t = 2 or t = 5. The first time is t = 2.",
+          "s = {{2(8) - 21(4) + 60(2) = 16 - 84 + 120 = 52}} m.",
+        ],
+        commonError: "Giving the time instead of the displacement, or using the later time.",
+        difficulty: "core",
+        guideRef: "kinematics",
+        hints: [
+          "'At rest' means v = 0. How do you get v from s?",
+          "Factorise {{6t^2 - 42t + 60}} — take out 6 first.",
+          "Use the smaller t, and substitute it into s.",
+        ],
+      },
+      // ---------------------------------------------------------------- q11
+      {
+        kind: "written",
+        id: "calculus-p4-q11",
+        question:
+          "A cyclist rides along a straight MRT-side path. Her velocity, v m/s, at time t seconds is\n\n    {{v = 3t^2 - 12t + 15}}\n\nFind her minimum velocity, and hence explain why she never comes to rest.",
+        marks: 3,
+        modelAnswer:
+          "Acceleration {{a = dv/dt = 6t - 12}}. The minimum velocity is when a = 0, i.e. t = 2 (and {{(d^2v)/(dt^2) = 6 > 0}}, so it is a minimum).\n\nAt t = 2: {{v = 3(4) - 12(2) + 15 = 12 - 24 + 15 = 3}} m/s.\n\nThe smallest velocity is 3 m/s, which is greater than 0, so v is never zero — she never comes to rest.",
+        markScheme: [
+          { point: "Differentiates to get a = 6t − 12 and sets it to 0", keywords: ["6t - 12", "6t−12", "dv/dt", "= 0", "a ="] },
+          { point: "Finds t = 2 and minimum velocity 3 m/s", keywords: ["t = 2", "3 m/s", "v = 3", "minimum"] },
+          { point: "Concludes v ≥ 3 > 0 so never at rest", keywords: ["never", "> 0", "positive", "not zero", "always"] },
+        ],
+        commonError: "Setting v = 0 and saying 'no answer' without explaining why — a negative discriminant or the minimum value is the justification.",
+        difficulty: "core",
+        guideRef: "kinematics",
+        hints: [
+          "Velocity is smallest when it stops decreasing: what is the acceleration then?",
+          "Solve {{dv/dt = 6t - 12 = 0}}.",
+          "Find v at that time. If the smallest velocity is positive, can v ever be 0?",
+        ],
+        solutions: [
+          {
+            label: "Completing the square",
+            steps: [
+              "{{v = 3(t^2 - 4t + 5) = 3((t - 2)^2 + 1) = 3(t - 2)^2 + 3}}.",
+              "{{(t - 2)^2 >= 0}}, so {{v >= 3}}: minimum 3 m/s at t = 2, never zero.",
+            ],
+          },
+        ],
+        strategy: "Consider extremes",
+      },
+      // ---------------------------------------------------------------- q12
+      {
+        kind: "short",
+        id: "calculus-p4-q12",
+        question:
+          "The curve C has equation {{y = x + 16/x}}, x > 0.\n\nFind the equation of the tangent to C at the point where x = 2. Give your answer in the form y = mx + c.",
+        answer: { type: "equation", eq: "y=-3x+16", display: "y = −3x + 16" },
+        traps: [
+          {
+            spec: { type: "equation", eq: "y=5x" },
+            feedback: "Sign slip: {{16/x = 16x^(-1)}} differentiates to {{-16x^(-2)}}, so the gradient at x = 2 is {{1 - 4 = -3}}, not 5.",
+          },
+          {
+            spec: { type: "equation", eq: "y=-3x+10" },
+            feedback: "The tangent passes through (2, 10), so use {{y - 10 = -3(x - 2)}}: c = 10 + 6 = 16.",
+          },
+        ],
+        solution: [
+          "Point: y = {{2 + 16/2 = 10}}, so (2, 10).",
+          "{{y = x + 16x^(-1)}}, {{dy/dx = 1 - 16x^(-2) = 1 - 16/x^2}}.",
+          "At x = 2: gradient = {{1 - 16/4 = -3}}.",
+          "{{y - 10 = -3(x - 2)}}, so y = −3x + 16.",
+        ],
+        commonError: "Differentiating {{16/x}} as {{16/x^2}} (losing the minus sign).",
+        difficulty: "core",
+        guideRef: "tangents",
+        hints: [
+          "You need the point and the gradient at x = 2.",
+          "Write {{16/x}} as {{16x^(-1)}} to differentiate.",
+          "Gradient −3 through (2, 10): use {{y - y_1 = m(x - x_1)}}.",
+        ],
+      },
+      // ---------------------------------------------------------------- q13
+      {
+        kind: "written",
+        id: "calculus-p4-q13",
+        question:
+          "The curve C has equation {{y = x^3 + 3x^2 + 3x - 1}}.\n\n(a) Prove that the gradient of C is never negative.\n\n(b) Find the coordinates of the only point on C where the gradient is zero.",
+        marks: 4,
+        modelAnswer:
+          "(a) {{dy/dx = 3x^2 + 6x + 3 = 3(x^2 + 2x + 1) = 3(x + 1)^2}}.\nA square is never negative, so {{3(x + 1)^2 >= 0}} for all x: the gradient is never negative.\n\n(b) The gradient is zero only when {{(x + 1)^2 = 0}}, i.e. x = −1.\n{{y = -1 + 3 - 3 - 1 = -2}}. The point is (−1, −2).\n\n(It is a stationary point but not a turning point: the gradient is positive on both sides, so the curve flattens and keeps rising.)",
+        markScheme: [
+          { point: "dy/dx = 3x² + 6x + 3", keywords: ["3x^2 + 6x + 3", "3x²+6x+3", "6x", "dy/dx"] },
+          { point: "Writes as 3(x + 1)²", keywords: ["3(x+1)^2", "(x+1)^2", "(x + 1)^2", "(x+1)²", "complete"] },
+          { point: "States a square is ≥ 0 so gradient never negative", keywords: ["square", ">= 0", "≥ 0", "never negative", "positive", "discriminant"] },
+          { point: "Point (−1, −2)", keywords: ["(-1, -2)", "(−1, −2)", "x = -1", "-2", "−2"] },
+        ],
+        commonError: "Testing a few values of x and claiming that proves it — a proof must work for every x.",
+        difficulty: "challenge",
+        guideRef: "turning-points",
+        hints: [
+          "Find {{dy/dx}}. What kind of expression is it?",
+          "Take out the factor 3. Do you recognise {{x^2 + 2x + 1}}?",
+          "{{3(x + 1)^2}} — what do you know about squares?",
+          "For (b), solve {{(x + 1)^2 = 0}} and substitute into y.",
+        ],
+        solutions: [
+          {
+            label: "Discriminant",
+            steps: [
+              "For {{3x^2 + 6x + 3}}: {{b^2 - 4ac = 36 - 36 = 0}}.",
+              "So the ∪-shaped gradient graph just touches the x-axis once and is never below it.",
+            ],
+          },
+        ],
+        strategy: "Look for an invariant",
+      },
+      // ---------------------------------------------------------------- q14
+      {
+        kind: "short",
+        id: "calculus-p4-q14",
+        question:
+          "A community garden bed is a rectangle with a semicircle on one end. The width of the rectangle (the diameter of the semicircle) is x metres. The perimeter of the bed is 40 m. The area, A m², of the bed is given by\n\n    {{A = 20x - (1/2 + pi/8)x^2}}\n\nFind the maximum area of the garden bed. Give your answer correct to 3 significant figures.",
+        answer: { type: "number", value: 112, tolerance: 0.5, display: "112 m² (3 s.f.)" },
+        traps: [
+          {
+            spec: { type: "number", value: 11.2, tolerance: 0.05 },
+            feedback: "x ≈ 11.2 m is the width that gives the maximum. Now substitute it into A to find the maximum **area**.",
+          },
+          {
+            spec: { type: "number", value: 200, tolerance: 0.5 },
+            feedback: "200 comes from dropping the {{pi/8}} part of the coefficient. Keep the whole bracket: {{dA/dx = 20 - 2(1/2 + pi/8)x = 20 - (1 + pi/4)x}}.",
+          },
+        ],
+        solution: [
+          "{{dA/dx = 20 - 2(1/2 + pi/8)x = 20 - (1 + pi/4)x}}.",
+          "Set {{dA/dx = 0}}: {{x = 20/(1 + pi/4) = 80/(4 + pi) = 11.201...}} m.",
+          "{{(d^2A)/(dx^2) = -(1 + pi/4) < 0}}, so this is a maximum.",
+          "A = {{20(11.201...) - (1/2 + pi/8)(11.201...)^2 = 224.04... - 112.02... = 112.01...}}",
+          "Maximum area = 112 m² (3 s.f.).",
+        ],
+        solutions: [
+          {
+            label: "Symmetry of the parabola",
+            steps: [
+              "A is a ∩-shaped quadratic in x with roots x = 0 and {{x = 20/(1/2 + pi/8) = 160/(4 + pi)}}.",
+              "The maximum is halfway between the roots: {{x = 80/(4 + pi) = 11.201...}}.",
+              "At that point {{A = 20x - 10x = 10x = 112.01...}}, so 112 m².",
+            ],
+          },
+        ],
+        commonError: "Rounding x to 11 too early (gives 111.98…, still 112 here, but keep the full calculator value to be safe), or giving x instead of A.",
+        difficulty: "challenge",
+        guideRef: "turning-points",
+        hints: [
+          "Maximum area: where is {{dA/dx = 0}}?",
+          "Treat {{(1/2 + pi/8)}} as a single constant k: the derivative of {{kx^2}} is 2kx.",
+          "Solve for x, keep it in your calculator, and substitute into A.",
+        ],
+      },
+      // ---------------------------------------------------------------- q15
+      {
+        kind: "short",
+        id: "calculus-p4-q15",
+        question:
+          "The diagram shows part of the curve {{y = x^2 + 3}} and the point P(1, 4) on the curve. The tangent to the curve at P meets the x-axis at A. The normal to the curve at P meets the x-axis at B.\n\nWork out the area of triangle PAB.",
+        diagram: `<svg viewBox="0 0 450 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axes with the curve y = x squared plus 3, the point P at (1, 4), the tangent at P meeting the x-axis at A to the left of the origin, and the normal at P meeting the x-axis at B far to the right"><rect x="0" y="0" width="450" height="300" fill="#ffffff"/><line x1="5" y1="255" x2="438" y2="255" stroke="#334155" stroke-width="1.5"/><line x1="70" y1="295" x2="70" y2="12" stroke="#334155" stroke-width="1.5"/><text x="440" y="259" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="75" y="16" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><text x="66" y="270" font-size="11" font-family="sans-serif" fill="#1f2937" text-anchor="end">O</text><path d="M14.0 60.4 L17.5 71.3 L21.0 81.4 L24.5 90.8 L28.0 99.6 L31.5 107.7 L35.0 115.0 L38.5 121.7 L42.0 127.6 L45.5 132.8 L49.0 137.4 L52.5 141.3 L56.0 144.4 L59.5 146.9 L63.0 148.6 L66.5 149.6 L70.0 150.0 L73.5 149.6 L77.0 148.6 L80.5 146.9 L84.0 144.4 L87.5 141.3 L91.0 137.4 L94.5 132.8 L98.0 127.6 L101.5 121.7 L105.0 115.0 L108.5 107.7 L112.0 99.6 L115.5 90.8 L119.0 81.4 L122.5 71.3 L126.0 60.4 L129.5 48.8 L133.0 36.6" stroke="#1d4ed8" stroke-width="2" fill="none"/><line x1="17.5" y1="290" x2="126" y2="73" stroke="#b45309" stroke-width="1.5"/><line x1="28" y1="76.5" x2="420" y2="272.5" stroke="#047857" stroke-width="1.5"/><circle cx="105" cy="115" r="3.5" fill="#1f2937"/><circle cx="35" cy="255" r="3" fill="#1f2937"/><circle cx="385" cy="255" r="3" fill="#1f2937"/><text x="124" y="108" font-size="13" font-family="sans-serif" fill="#1f2937">P(1, 4)</text><text x="22" y="272" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="381" y="273" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="130" y="72" font-size="12" font-family="sans-serif" fill="#b45309">tangent</text><text x="300" y="200" font-size="12" font-family="sans-serif" fill="#047857">normal</text><text x="138" y="40" font-size="12" font-family="sans-serif" fill="#1d4ed8">y = x² + 3</text></svg>`,
+        answer: { type: "number", value: 20, display: "20 square units" },
+        traps: [
+          {
+            spec: { type: "number", value: 18 },
+            feedback: "You've used OB = 9 as the base. A is at (−1, 0), to the **left** of O, so AB = 9 − (−1) = 10.",
+          },
+          {
+            spec: { type: "number", value: 40 },
+            feedback: "Don't forget the ½ in the area of a triangle: {{1/2 * 10 * 4 = 20}}.",
+          },
+        ],
+        solution: [
+          "{{dy/dx = 2x}}, so the tangent gradient at P is 2.",
+          "Tangent: {{y - 4 = 2(x - 1)}}, i.e. y = 2x + 2. At y = 0: x = −1, so A is (−1, 0).",
+          "Normal gradient = {{-1/2}}. Normal: {{y - 4 = -1/2 (x - 1)}}. At y = 0: {{-4 = -1/2 (x - 1)}}, so x − 1 = 8 and B is (9, 0).",
+          "Base AB = 9 − (−1) = 10, height = 4 (the y-coordinate of P).",
+          "Area = {{1/2 * 10 * 4 = 20}} square units.",
+        ],
+        commonError: "Using the tangent gradient for the normal, measuring the base from O instead of from A, or forgetting to halve.",
+        difficulty: "challenge",
+        guideRef: "normals",
+        hints: [
+          "Find the gradient at P, then the gradient of the normal (negative reciprocal).",
+          "Write the equations of both lines and set y = 0 in each to find A and B.",
+          "AB is the base on the x-axis. What is the perpendicular height from P?",
+        ],
+        strategy: "Draw a diagram",
+      },
+    ],
+  },
+];
