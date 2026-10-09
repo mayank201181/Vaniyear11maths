@@ -560,7 +560,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "number-bounds-m3-q05",
         question:
-          "Two lighthouses flash every 45 seconds and every 60 seconds. They flash together at exactly 9 pm. How many more times will they flash together in the next hour?",
+          "Two lighthouses flash every 45 seconds and every 60 seconds. They flash together at exactly 9 pm. How many more times will they flash together after 9 pm, up to and including 10 pm?",
         options: ["20", "240", "80", "1"],
         answerIndex: 0,
         explanation:

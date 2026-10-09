@@ -225,7 +225,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "number-bounds-p1-q04",
           question: "Use your calculator to work out {{(sqrt(17.4) + 2.3^2)/(4.1 - 1.75)}}. Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 4.03 },
+          answer: { type: "number", value: 4.03, tolerance: 0.005 },
           traps: [
             { spec: { type: "number", value: 6.42, tolerance: 0.005 }, feedback: "Only {{2.3^2}} was divided by 2.35. Put brackets round the whole numerator (or use the fraction button)." },
           ],
@@ -376,7 +376,7 @@ export const practice: TopicPractice = {
           id: "number-bounds-p1-q13",
           question:
             "a = 8.6 and b = 3.2, each correct to 1 decimal place.\n\nWork out the upper bound of {{(a + b)/(a - b)}}. Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 2.23 },
+          answer: { type: "number", value: 2.23, tolerance: 0.005 },
           traps: [
             { spec: { type: "number", value: 2.15, tolerance: 0.005 }, feedback: "That's a = 8.65, b = 3.15 — making a big feels natural, but a is also in the denominator, where a smaller a − b helps more. Try a = 8.55, b = 3.25." },
             { spec: { type: "number", value: 2.19, tolerance: 0.005 }, feedback: "That's the value from the rounded numbers. Test each combination of bounds for a and b." },
@@ -559,8 +559,8 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "number-bounds-p2-q08",
           question: "Use your calculator to work out {{(5.2^3 - sqrt(40))/(1.8 * 6.25)}}. Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 11.9 },
-          traps: [{ spec: { type: "number", value: 11.94, tolerance: 0.005 }, feedback: "Right value, but give it to 3 significant figures: 11.9." }],
+          answer: { type: "number", value: 11.9, tolerance: 0.05 },
+          traps: [{ spec: { type: "number", value: 140, tolerance: 0.5 }, feedback: "Only {{sqrt(40)}} was divided by the denominator. Put brackets round the whole numerator, (5.2³ − √40), or use the fraction key." }],
           solution: ["{{5.2^3}} = 140.608; {{sqrt(40)}} = 6.3245…", "Numerator: 134.2834…", "Denominator: 1.8 × 6.25 = 11.25.", "134.2834… ÷ 11.25 = 11.936… = 11.9 (3 s.f.)."],
           difficulty: "core",
           guideRef: "rounding-estimation",
@@ -598,7 +598,7 @@ export const practice: TopicPractice = {
           id: "number-bounds-p2-q11",
           question:
             "The radius of a circular hawker-centre table is 4.7 dm, correct to 1 decimal place. Work out the lower bound for the area of the table top. Give your answer in dm² correct to 3 significant figures.",
-          answer: { type: "number", value: 67.9 },
+          answer: { type: "number", value: 67.9, tolerance: 0.05 },
           traps: [{ spec: { type: "number", value: 69.4, tolerance: 0.05 }, feedback: "That's {{pi * 4.7^2}} with the rounded radius. Use the lower bound of the radius, 4.65 dm." }],
           solution: ["Lower bound of radius = 4.65 dm.", "{{pi * 4.65^2}} = 67.929… = 67.9 dm² (3 s.f.)."],
           difficulty: "core",
@@ -648,7 +648,7 @@ export const practice: TopicPractice = {
           question:
             "In the right-angled triangle shown, the side opposite θ is 5.4 cm and the side adjacent to θ is 8.2 cm, each correct to 1 decimal place.\n\nWork out the lower bound for the angle θ. Give your answer in degrees correct to 1 decimal place.",
           diagram: trigBounds,
-          answer: { type: "number", value: 33.0, display: "33.0°" },
+          answer: { type: "number", value: 33.0, tolerance: 0.05, display: "33.0°" },
           traps: [
             { spec: { type: "number", value: 33.8 }, feedback: "That's the upper bound (5.45 over 8.15). For the smallest angle, make tan θ smallest: smallest opposite over largest adjacent." },
             { spec: { type: "number", value: 33.4 }, feedback: "That uses the rounded lengths. Use the bounds: 5.35 and 8.25." },
@@ -813,7 +813,7 @@ export const practice: TopicPractice = {
       id: "number-bounds-ch-q06",
       question:
         "For a lens, {{f = (uv)/(u + v)}}. u = 12 cm and v = 20 cm, both correct to the nearest centimetre.\n\nWork out the upper bound of f. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 7.77 },
+      answer: { type: "number", value: 7.77, tolerance: 0.005 },
       traps: [
         { spec: { type: "number", value: 8.27, tolerance: 0.005 }, feedback: "You used upper bounds on top and lower bounds below — but u and v can't be 12.5 and 11.5 at the same time. Each letter takes ONE value." },
         { spec: { type: "number", value: 7.5 }, feedback: "That's the value from the rounded measurements, not the upper bound." },
@@ -842,7 +842,7 @@ export const practice: TopicPractice = {
       id: "number-bounds-ch-q07",
       question:
         "The period of a pendulum is {{T = 2 pi sqrt(L/g)}}. L = 0.80 m, correct to 2 significant figures, and g = 9.8 m/s², correct to 1 decimal place.\n\nWork out the lower bound for T. Give your answer in seconds correct to 3 significant figures.",
-      answer: { type: "number", value: 1.79 },
+      answer: { type: "number", value: 1.79, tolerance: 0.005 },
       traps: [
         { spec: { type: "number", value: 1.80, tolerance: 0.004 }, feedback: "Check your bounds: L to 2 s.f. means ±0.005 (so 0.795), and for the smallest T divide by the *largest* g, 9.85." },
       ],

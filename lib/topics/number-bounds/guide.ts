@@ -123,7 +123,7 @@ export const guide: TopicGuide = {
           answer: "(a) 6.773983371 (b) 6.77",
           yourTurn: {
             question: "Your turn: work out {{(5.6 + 2.35^2)/sqrt(19.1 - 4.3)}}. Give your answer correct to 3 significant figures.",
-            answer: { type: "number", value: 2.89 },
+            answer: { type: "number", value: 2.89, tolerance: 0.005 },
             solution: "Numerator 5.6 + 5.5225 = 11.1225. Denominator {{sqrt(14.8) = 3.8471...}}. 11.1225 ÷ 3.8471… = 2.891156… = 2.89 (3 s.f.).",
           },
         },
@@ -239,7 +239,7 @@ export const guide: TopicGuide = {
           yourTurn: {
             question:
               "Your turn: a metal block has mass 250 g, correct to the nearest 10 g, and volume 32 cm³, correct to the nearest cm³. Work out the upper bound of its density in g/cm³. Give your answer correct to 3 significant figures.",
-            answer: { type: "number", value: 8.1, display: "8.10" },
+            answer: { type: "number", value: 8.1, tolerance: 0.005, display: "8.10" },
             solution: "Mass UB = 255 g; volume LB = 31.5 cm³. UB density = {{255/31.5}} = 8.0952… = 8.10 g/cm³ (3 s.f.).",
           },
         },

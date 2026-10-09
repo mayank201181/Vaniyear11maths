@@ -1,5 +1,5 @@
 // Vectors & Transformations — MCQ papers (3 × 15). Options are shuffled at display time.
-// Column vectors are written (x, y) with x on top. Grid diagrams are drawn exactly from the stated coordinates.
+// Column vectors use the {{col(x, y)}} markup (x on top). Grid diagrams are drawn exactly from the stated coordinates.
 import type { Paper } from "../../types.ts";
 
 const D_M1_Q04 = `<svg viewBox="0 0 288 216" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid from x = −4 to 6 and y = −2 to 5. Triangle A has vertices (2, 1), (4, 1) and (2, 4). Triangle B has vertices (0, 1), (−2, 1) and (0, 4)."><rect x="0" y="0" width="288" height="216" fill="#ffffff"/><line x1="24" y1="192" x2="24" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="48" y1="192" x2="48" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="72" y1="192" x2="72" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="96" y1="192" x2="96" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="120" y1="192" x2="120" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="144" y1="192" x2="144" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="168" y1="192" x2="168" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="192" y1="192" x2="192" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="216" y1="192" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="240" y1="192" x2="240" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="264" y1="192" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="192" x2="264" y2="192" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="264" y2="168" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="264" y2="144" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="120" x2="264" y2="120" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="96" x2="264" y2="96" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="72" x2="264" y2="72" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="48" x2="264" y2="48" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="24" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="264" y2="144" stroke="#334155" stroke-width="1.5"/><line x1="120" y1="192" x2="120" y2="24" stroke="#334155" stroke-width="1.5"/><text x="270" y="148" font-size="12" font-style="italic" font-family="sans-serif" fill="#334155">x</text><text x="125" y="16" font-size="12" font-style="italic" font-family="sans-serif" fill="#334155">y</text><text x="24" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−4</text><text x="48" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−3</text><text x="72" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−2</text><text x="96" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−1</text><text x="144" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">1</text><text x="168" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">2</text><text x="192" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">3</text><text x="216" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">4</text><text x="240" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">5</text><text x="264" y="157" font-size="10" text-anchor="middle" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">6</text><text x="116" y="196" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−2</text><text x="116" y="172" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">−1</text><text x="116" y="124" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">1</text><text x="116" y="100" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">2</text><text x="116" y="76" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">3</text><text x="116" y="52" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">4</text><text x="116" y="28" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155" stroke="#ffffff" stroke-width="3" paint-order="stroke">5</text><text x="116" y="157" font-size="10" text-anchor="end" font-family="sans-serif" fill="#334155">0</text><polygon points="168,120 216,120 168,48" fill="#c7d2fe" fill-opacity="0.8" stroke="#1f2937" stroke-width="1.5"/><text x="183.60000000000002" y="101" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif" fill="#1f2937" stroke="#ffffff" stroke-width="3" paint-order="stroke">A</text><polygon points="120,120 72,120 120,48" fill="#fde68a" fill-opacity="0.8" stroke="#1f2937" stroke-width="1.5"/><text x="104.4" y="101" font-size="14" font-weight="bold" text-anchor="middle" font-family="sans-serif" fill="#1f2937" stroke="#ffffff" stroke-width="3" paint-order="stroke">B</text></svg>`;
@@ -36,7 +36,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m1-q01",
-        question: "The point P(2, −1) is translated by the column vector (−3, 4) — that is, −3 in x and 4 in y. What are the coordinates of the image of P?",
+        question: "The point P(2, −1) is translated by the column vector {{col(-3, 4)}}. What are the coordinates of the image of P?",
         options: [
           "(5, −5)",
           "(−6, −4)",
@@ -55,15 +55,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m1-q02",
-        question: "Given the column vectors **a** = (3, −2) and **b** = (−1, 5), work out 2**a** − **b**.",
+        question: "Given the column vectors **a** = {{col(3, -2)}} and **b** = {{col(-1, 5)}}, work out 2**a** − **b**.",
         options: [
-          "(7, −9)",
-          "(5, 1)",
-          "(5, −9)",
-          "(4, −7)",
+          "{{col(7, -9)}}",
+          "{{col(5, 1)}}",
+          "{{col(5, -9)}}",
+          "{{col(4, -7)}}",
         ],
         answerIndex: 0,
-        explanation: "2**a** = (6, −4). Then 2**a** − **b** = (6 − (−1), −4 − 5) = (7, −9). (5, 1) is 2**a** + **b**; (5, −9) treats 6 − (−1) as 6 − 1; (4, −7) is **a** − **b**, forgetting to double **a**.",
+        explanation: "2**a** = {{col(6, -4)}}. Then 2**a** − **b** = {{col(6 - (-1), -4 - 5) = col(7, -9)}}. {{col(5, 1)}} is 2**a** + **b**; {{col(5, -9)}} treats 6 − (−1) as 6 − 1; {{col(4, -7)}} is **a** − **b**, forgetting to double **a**.",
         difficulty: "warmup",
         guideRef: "vector-basics",
         hints: [
@@ -74,7 +74,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m1-q03",
-        question: "Work out the magnitude of the vector (−5, 12).",
+        question: "Work out the magnitude of the vector {{col(-5, 12)}}.",
         options: [
           "7",
           "17",
@@ -99,10 +99,10 @@ export const mcqPapers: Paper[] = [
           "Reflection in the line {{y = 1}}",
           "Reflection in the line {{x = 1}}",
           "Reflection in the y-axis",
-          "Translation by the vector (−4, 0)",
+          "Translation by the vector {{col(-4, 0)}}",
         ],
         answerIndex: 1,
-        explanation: "B is a mirror image of A (it is flipped), and each vertex is the same distance either side of the vertical line through x = 1: (2, 1) ↔ (0, 1), (4, 1) ↔ (−2, 1). So it is a reflection in {{x = 1}}. The line {{y = 1}} is horizontal — a classic mix-up, since vertical lines are x = …. The y-axis (x = 0) would send (2, 4) to (−2, 4), but the matching vertex of B is (0, 4). A translation never flips a shape, and (−4, 0) would move (2, 4) to (−2, 4), not (0, 4).",
+        explanation: "B is a mirror image of A (it is flipped), and each vertex is the same distance either side of the vertical line through x = 1: (2, 1) ↔ (0, 1), (4, 1) ↔ (−2, 1). So it is a reflection in {{x = 1}}. The line {{y = 1}} is horizontal — a classic mix-up, since vertical lines are x = …. The y-axis (x = 0) would send (2, 4) to (−2, 4), but the matching vertex of B is (0, 4). A translation never flips a shape, and {{col(-4, 0)}} would move (2, 4) to (−2, 4), not (0, 4).",
         difficulty: "warmup",
         guideRef: "transformations",
         hints: [
@@ -142,7 +142,7 @@ export const mcqPapers: Paper[] = [
           "(−3, −1)",
         ],
         answerIndex: 3,
-        explanation: "Vector from the centre to P: (3 − 1, 2 − 1) = (2, 1). Multiply by −2: (−4, −2). Add to the centre: (1 − 4, 1 − 2) = (−3, −1). (5, 3) uses scale factor +2 (image on the same side as P); (−6, −4) multiplies P's coordinates by −2, which only works when the centre is the origin; (−1, 0) uses scale factor −1.",
+        explanation: "Vector from the centre to P: {{col(3 - 1, 2 - 1) = col(2, 1)}}. Multiply by −2: {{col(-4, -2)}}. Add to the centre: (1 − 4, 1 − 2) = (−3, −1). (5, 3) uses scale factor +2 (image on the same side as P); (−6, −4) multiplies P's coordinates by −2, which only works when the centre is the origin; (−1, 0) uses scale factor −1.",
         difficulty: "core",
         guideRef: "transformations",
         hints: [
@@ -196,7 +196,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m1-q09",
-        question: "A transformation consists of a reflection in the x-axis followed by a translation by the vector (4, 0). Which statement about invariant points is true?",
+        question: "A transformation consists of a reflection in the x-axis followed by a translation by the vector {{col(4, 0)}}. Which statement about invariant points is true?",
         options: [
           "(2, 0) is the only invariant point",
           "(4, 0) is the only invariant point",
@@ -218,13 +218,13 @@ export const mcqPapers: Paper[] = [
         id: "vectors-transformations-m1-q10",
         question: "A is the point (2, −1) and B is the point (7, 3). Which column vector is →AB?",
         options: [
-          "(−5, −4)",
-          "(5, 4)",
-          "(9, 2)",
-          "(4.5, 1)",
+          "{{col(-5, -4)}}",
+          "{{col(5, 4)}}",
+          "{{col(9, 2)}}",
+          "{{col(4.5, 1)}}",
         ],
         answerIndex: 1,
-        explanation: "→AB = →OB − →OA (end minus start) = (7 − 2, 3 − (−1)) = (5, 4). (−5, −4) is →BA (start minus end); (9, 2) adds the position vectors; (4.5, 1) is the midpoint of AB, a point, not a journey.",
+        explanation: "→AB = →OB − →OA (end minus start) = {{col(7 - 2, 3 - (-1)) = col(5, 4)}}. {{col(-5, -4)}} is →BA (start minus end); {{col(9, 2)}} adds the position vectors; {{col(4.5, 1)}} is the position vector of the midpoint of AB — a position, not the journey from A to B.",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
@@ -236,7 +236,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m1-q11",
-        question: "The vector (k, 3) is parallel to the vector (8, 12). What is the value of k?",
+        question: "The vector {{col(k, 3)}} is parallel to the vector {{col(8, 12)}}. What is the value of k?",
         options: [
           "−1",
           "32",
@@ -244,7 +244,7 @@ export const mcqPapers: Paper[] = [
           "4.5",
         ],
         answerIndex: 2,
-        explanation: "Parallel vectors are scalar multiples of each other. (8, 12) = 4 × (2, 3), so (k, 3) must be (2, 3): k = 2. −1 comes from adding/subtracting (12 − 3 = 9, so 8 − 9) — parallel means multiply, not add. 32 uses the multiplier upside down (8 × 4 instead of 8 ÷ 4). 4.5 sets {{k/3 = 12/8}}, mixing up which components pair up.",
+        explanation: "Parallel vectors are scalar multiples of each other. {{col(8, 12) = 4 col(2, 3)}}, so {{col(k, 3)}} must be {{col(2, 3)}}: k = 2. −1 comes from adding/subtracting (12 − 3 = 9, so 8 − 9) — parallel means multiply, not add. 32 uses the multiplier upside down (8 × 4 instead of 8 ÷ 4). 4.5 sets {{k/3 = 12/8}}, mixing up which components pair up.",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
@@ -366,19 +366,19 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m2-q02",
-        question: "Which of these vectors is parallel to (2, −3)?",
+        question: "Which of these vectors is parallel to {{col(2, -3)}}?",
         options: [
-          "(3, −2)",
-          "(−4, 6)",
-          "(4, 6)",
-          "(−2, −3)",
+          "{{col(3, -2)}}",
+          "{{col(-4, 6)}}",
+          "{{col(4, 6)}}",
+          "{{col(-2, -3)}}",
         ],
         answerIndex: 1,
-        explanation: "(−4, 6) = −2 × (2, −3), a scalar multiple, so it is parallel (pointing the opposite way). (3, −2) swaps the components; (4, 6) and (−2, −3) only change one sign, so they are not multiples of (2, −3).",
+        explanation: "{{col(-4, 6) = -2 col(2, -3)}}, a scalar multiple, so it is parallel (pointing the opposite way). {{col(3, -2)}} swaps the components; {{col(4, 6)}} and {{col(-2, -3)}} only change one sign, so they are not multiples of {{col(2, -3)}}.",
         difficulty: "warmup",
         guideRef: "vector-basics",
         hints: [
-          "Parallel vectors are scalar multiples: find a single number k with k × (2, −3) equal to the option.",
+          "Parallel vectors are scalar multiples: find a single number k with k × {{col(2, -3)}} equal to the option.",
         ],
         strategy: "Use the scalar multiple",
       },
@@ -387,13 +387,13 @@ export const mcqPapers: Paper[] = [
         id: "vectors-transformations-m2-q03",
         question: "A translation maps the point A(1, −2) onto A′(−3, 1). Which column vector describes the translation?",
         options: [
-          "(−4, 3)",
-          "(4, −3)",
-          "(−3, 1)",
-          "(−2, −1)",
+          "{{col(-4, 3)}}",
+          "{{col(4, -3)}}",
+          "{{col(-3, 1)}}",
+          "{{col(-2, -1)}}",
         ],
         answerIndex: 0,
-        explanation: "Vector = image − object = (−3 − 1, 1 − (−2)) = (−4, 3): 4 left and 3 up. (4, −3) is the reverse journey, A′ back to A; (−3, 1) is just the coordinates of the image; (−2, −1) adds the two points.",
+        explanation: "Vector = image − object = {{col(-3 - 1, 1 - (-2)) = col(-4, 3)}}: 4 left and 3 up. {{col(4, -3)}} is the reverse journey, A′ back to A; {{col(-3, 1)}} just copies the coordinates of the image; {{col(-2, -1)}} adds the two points.",
         difficulty: "warmup",
         guideRef: "transformations",
         hints: [
@@ -432,7 +432,7 @@ export const mcqPapers: Paper[] = [
           "(−4, 0)",
         ],
         answerIndex: 2,
-        explanation: "Centre to point: (5 − (−1), 6 − 2) = (6, 4). Halve it: (3, 2). Add to the centre: (−1 + 3, 2 + 2) = (2, 4). (2.5, 3) halves the coordinates, as if the centre were the origin; (11, 10) uses scale factor 2 ('a half' does not mean doubling); (−4, 0) uses scale factor {{-1/2}}.",
+        explanation: "Centre to point: {{col(5 - (-1), 6 - 2) = col(6, 4)}}. Halve it: {{col(3, 2)}}. Add to the centre: (−1 + 3, 2 + 2) = (2, 4). (2.5, 3) halves the coordinates, as if the centre were the origin; (11, 10) uses scale factor 2 ('a half' does not mean doubling); (−4, 0) uses scale factor {{-1/2}}.",
         difficulty: "core",
         guideRef: "transformations",
         hints: [
@@ -486,15 +486,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m2-q08",
-        question: "The point (2, 5) is reflected in the y-axis. The image is then translated by the vector (3, −1). What are the coordinates of the final image?",
+        question: "The point (2, 5) is reflected in the y-axis. The image is then translated by the vector {{col(3, -1)}}. What are the coordinates of the final image?",
         options: [
           "(1, 4)",
           "(−5, 4)",
           "(5, −6)",
-          "(−1, 6)",
+          "(−5, 6)",
         ],
         answerIndex: 0,
-        explanation: "Reflect in the y-axis: (2, 5) → (−2, 5). Translate: (−2 + 3, 5 − 1) = (1, 4). (−5, 4) does the steps in the wrong order (translate first, then reflect); (5, −6) reflects in the x-axis instead; (−1, 6) subtracts the translation vector.",
+        explanation: "Reflect in the y-axis: (2, 5) → (−2, 5). Translate: (−2 + 3, 5 − 1) = (1, 4). (−5, 4) does the steps in the wrong order (translate first, then reflect); (5, −6) reflects in the x-axis instead; (−5, 6) subtracts the translation vector.",
         difficulty: "core",
         guideRef: "combined-transformations",
         hints: [
@@ -511,7 +511,7 @@ export const mcqPapers: Paper[] = [
           "Rotation 90° clockwise about (0, 0)",
           "Reflection in the line {{y = -x}}",
           "Enlargement, scale factor 2, centre (1, 1)",
-          "Translation by the vector (3, 3)",
+          "Translation by the vector {{col(3, 3)}}",
         ],
         answerIndex: 1,
         explanation: "Every point on a mirror line stays where it is, so a reflection fixes a whole line — here every point (t, −t). A rotation fixes only its centre; an enlargement (scale factor ≠ 1) fixes only its centre; a translation fixes nothing at all.",
@@ -526,7 +526,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m2-q10",
-        question: "**p** = (1, 3) and **q** = (−2, −1). Find the magnitude of 2**p** − **q**. Give your answer as a surd.",
+        question: "**p** = {{col(1, 3)}} and **q** = {{col(-2, -1)}}. Find the magnitude of 2**p** − **q**. Give your answer as a surd.",
         options: [
           "{{sqrt(65)}}",
           "5",
@@ -534,20 +534,20 @@ export const mcqPapers: Paper[] = [
           "7",
         ],
         answerIndex: 0,
-        explanation: "2**p** − **q** = (2 − (−2), 6 − (−1)) = (4, 7). Magnitude = {{sqrt(4^2 + 7^2) = sqrt(16 + 49) = sqrt(65)}}. 5 is the length of 2**p** + **q** = (0, 5); 11 adds the components 4 + 7 instead of using Pythagoras; 7 comes from (0, 7), slipping on 2 − (−2).",
+        explanation: "2**p** − **q** = {{col(2 - (-2), 6 - (-1)) = col(4, 7)}}. Magnitude = {{sqrt(4^2 + 7^2) = sqrt(16 + 49) = sqrt(65)}}. 5 is the length of 2**p** + **q** = {{col(0, 5)}}; 11 adds the components 4 + 7 instead of using Pythagoras; 7 comes from {{col(0, 7)}}, slipping on 2 − (−2).",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
           "Find the vector first, then its length.",
           "Subtracting a negative: 2 − (−2) = 4 and 6 − (−1) = 7.",
-          "Length of (x, y) = {{sqrt(x^2 + y^2)}}.",
+          "Length of {{col(x, y)}} = {{sqrt(x^2 + y^2)}}.",
         ],
         strategy: "Do one step at a time",
       },
       {
         kind: "mcq",
         id: "vectors-transformations-m2-q11",
-        question: "O is the origin. →OA = (3, 1) and →AB = (−5, 4). What are the coordinates of B?",
+        question: "O is the origin. →OA = {{col(3, 1)}} and →AB = {{col(-5, 4)}}. What are the coordinates of B?",
         options: [
           "(−8, 3)",
           "(8, −3)",
@@ -555,7 +555,7 @@ export const mcqPapers: Paper[] = [
           "(−2, 5)",
         ],
         answerIndex: 3,
-        explanation: "→OB = →OA + →AB = (3 + (−5), 1 + 4) = (−2, 5), and the position vector of B gives its coordinates. (−8, 3) is →AB − →OA; (8, −3) is →OA − →AB; (−5, 4) treats the journey A → B as if it started at O.",
+        explanation: "→OB = →OA + →AB = {{col(3 + (-5), 1 + 4) = col(-2, 5)}}, and the position vector of B gives its coordinates: (−2, 5). (−8, 3) comes from →AB − →OA; (8, −3) from →OA − →AB; (−5, 4) treats the journey A → B as if it started at O.",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
@@ -612,12 +612,12 @@ export const mcqPapers: Paper[] = [
         question: "A shape is enlarged by scale factor 2, centre (0, 0). The image is then enlarged by scale factor {{1/2}}, centre (4, 0). Which single transformation maps the original shape to the final image?",
         options: [
           "No change: every point maps to itself, because 2 × {{1/2}} = 1",
-          "Translation by the vector (4, 0)",
-          "Translation by the vector (−2, 0)",
-          "Translation by the vector (2, 0)",
+          "Translation by the vector {{col(4, 0)}}",
+          "Translation by the vector {{col(-2, 0)}}",
+          "Translation by the vector {{col(2, 0)}}",
         ],
         answerIndex: 3,
-        explanation: "Follow (x, y): first → (2x, 2y). Then the vector from (4, 0) is (2x − 4, 2y); halve it → (x − 2, y); add to (4, 0) → (x + 2, y). Every point moves 2 to the right: a translation by (2, 0). The scale factors do multiply to 1, so the shape is the same size — but the different centres mean it has moved. Test with the origin: (0, 0) → (0, 0) → (2, 0).",
+        explanation: "Follow (x, y): first → (2x, 2y). Then the vector from (4, 0) is {{col(2x - 4, 2y)}}; halve it → {{col(x - 2, y)}}; add to (4, 0) → (x + 2, y). Every point moves 2 to the right: a translation by {{col(2, 0)}}. The scale factors do multiply to 1, so the shape is the same size — but the different centres mean it has moved. Test with the origin: (0, 0) → (0, 0) → (2, 0).",
         difficulty: "challenge",
         guideRef: "combined-transformations",
         hints: [
@@ -678,7 +678,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m3-q02",
-        question: "(2, y) + (x, −5) = (−1, 3), where each bracket is a column vector. Find x and y.",
+        question: "{{col(2, y) + col(x, -5) = col(-1, 3)}}. Find x and y.",
         options: [
           "x = 1, y = −2",
           "x = −3, y = −2",
@@ -766,7 +766,7 @@ export const mcqPapers: Paper[] = [
           "2",
         ],
         answerIndex: 2,
-        explanation: "With centre O, image = k × object: (−3, 2) = k(6, −4) gives k = {{-1/2}}. The image is smaller (half the distance from O) and on the opposite side of the centre. {{1/2}} ignores the change of side; −2 and 2 divide the wrong way round (object ÷ image).",
+        explanation: "With centre O, image = k × object: {{col(-3, 2) = k col(6, -4)}} gives k = {{-1/2}}. The image is smaller (half the distance from O) and on the opposite side of the centre. {{1/2}} ignores the change of side; −2 and 2 divide the wrong way round (object ÷ image).",
         difficulty: "core",
         guideRef: "transformations",
         hints: [
@@ -780,13 +780,13 @@ export const mcqPapers: Paper[] = [
         id: "vectors-transformations-m3-q07",
         question: "A shape is reflected in the line {{x = 1}}, and then the image is reflected in the line {{x = 4}}. Which single transformation has the same effect?",
         options: [
-          "Translation by the vector (6, 0)",
-          "Translation by the vector (3, 0)",
+          "Translation by the vector {{col(6, 0)}}",
+          "Translation by the vector {{col(3, 0)}}",
           "Reflection in the line {{x = 2.5}}",
-          "Translation by the vector (−6, 0)",
+          "Translation by the vector {{col(-6, 0)}}",
         ],
         answerIndex: 0,
-        explanation: "Track a point, e.g. (1, 0): it is on the first mirror so stays at (1, 0), then reflects in x = 4 to (7, 0) — a shift of 6. In general (x, y) → (2 − x, y) → (8 − (2 − x), y) = (x + 6, y). Two reflections in parallel mirrors give a translation of **twice** the gap between them, in the direction from the first mirror to the second. (3, 0) is just the gap; (−6, 0) is the reverse order; two flips cannot make a single reflection.",
+        explanation: "Track a point, e.g. (1, 0): it is on the first mirror so stays at (1, 0), then reflects in x = 4 to (7, 0) — a shift of 6. In general (x, y) → (2 − x, y) → (8 − (2 − x), y) = (x + 6, y). Two reflections in parallel mirrors give a translation of **twice** the gap between them, in the direction from the first mirror to the second. {{col(3, 0)}} is just the gap; {{col(-6, 0)}} is the reverse order; two flips cannot make a single reflection.",
         difficulty: "core",
         guideRef: "combined-transformations",
         hints: [
@@ -819,7 +819,7 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "vectors-transformations-m3-q09",
-        question: "A drone flies the displacement (12, −5) metres and then the displacement (−3, 17) metres. How far is it from its starting point at the end?",
+        question: "A drone flies the displacement {{col(12, -5)}} metres and then the displacement {{col(-3, 17)}} metres. How far is it from its starting point at the end?",
         options: [
           "30.3 m",
           "21 m",
@@ -827,7 +827,7 @@ export const mcqPapers: Paper[] = [
           "15 m",
         ],
         answerIndex: 3,
-        explanation: "Resultant displacement = (12 + (−3), −5 + 17) = (9, 12). Distance = {{sqrt(9^2 + 12^2) = sqrt(225) = 15}} m. 30.3 m adds the lengths of the two legs (13 + 17.3) — that is distance flown, not distance from the start; 21 m adds 9 + 12; 26.6 m uses (15, 22), adding the sizes of the components and ignoring the signs.",
+        explanation: "Resultant displacement = {{col(12 + (-3), -5 + 17) = col(9, 12)}}. Distance = {{sqrt(9^2 + 12^2) = sqrt(225) = 15}} m. 30.3 m adds the lengths of the two legs (13 + 17.3) — that is distance flown, not distance from the start; 21 m adds 9 + 12; 26.6 m uses {{col(15, 22)}}, adding the sizes of the components and ignoring the signs.",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
@@ -841,18 +841,18 @@ export const mcqPapers: Paper[] = [
         id: "vectors-transformations-m3-q10",
         question: "A is the point (−1, 4) and B is the point (5, −2). M is the midpoint of AB. Which column vector is →OM?",
         options: [
-          "(3, −3)",
-          "(2, 1)",
-          "(6, −6)",
-          "(4, 2)",
+          "{{col(3, -3)}}",
+          "{{col(2, 1)}}",
+          "{{col(6, -6)}}",
+          "{{col(4, 2)}}",
         ],
         answerIndex: 1,
-        explanation: "→OM = {{1/2}}(→OA + →OB) = {{1/2}}(4, 2) = (2, 1). Or →OM = →OA + {{1/2}}→AB = (−1, 4) + (3, −3) = (2, 1). (3, −3) is →AM, half of AB without starting from A; (6, −6) is →AB; (4, 2) is the sum of the position vectors before halving.",
+        explanation: "→OM = {{1/2}}(→OA + →OB) = {{1/2 col(4, 2) = col(2, 1)}}. Or →OM = →OA + {{1/2}}→AB = {{col(-1, 4) + col(3, -3) = col(2, 1)}}. {{col(3, -3)}} is →AM — half of →AB, without adding it on to →OA; {{col(6, -6)}} is →AB; {{col(4, 2)}} is the sum of the position vectors before halving.",
         difficulty: "core",
         guideRef: "vector-basics",
         hints: [
           "The position vector of a midpoint is the average of the two position vectors.",
-          "Add (−1, 4) and (5, −2), then halve.",
+          "Add {{col(-1, 4)}} and {{col(5, -2)}}, then halve.",
         ],
         strategy: "Use position vectors",
       },
@@ -911,7 +911,7 @@ export const mcqPapers: Paper[] = [
           "(5, −1)",
         ],
         answerIndex: 1,
-        explanation: "Let the centre be C(c, d). Then →CP′ = −2 →CP: 7 − c = −2(1 − c) gives c = 3, and −3 − d = −2(3 − d) gives d = 1. So C is (3, 1). Check: →CP = (−2, 2), × −2 = (4, −4), and (3, 1) + (4, −4) = (7, −3) ✓. Equivalently, C divides PP′ in the ratio 1 : 2. (4, 0) is the midpoint (scale factor −1); (−5, 9) solves with scale factor +2; (5, −1) divides PP′ in 2 : 1, the wrong way round.",
+        explanation: "Let the centre be C(c, d). Then →CP′ = −2 →CP: 7 − c = −2(1 − c) gives c = 3, and −3 − d = −2(3 − d) gives d = 1. So C is (3, 1). Check: →CP = {{col(-2, 2)}}, × −2 = {{col(4, -4)}}, and (3, 1) + {{col(4, -4)}} = (7, −3) ✓. Equivalently, C divides PP′ in the ratio 1 : 2. (4, 0) is the midpoint (scale factor −1); (−5, 9) solves with scale factor +2; (5, −1) divides PP′ in 2 : 1, the wrong way round.",
         difficulty: "challenge",
         guideRef: "transformations",
         hints: [
