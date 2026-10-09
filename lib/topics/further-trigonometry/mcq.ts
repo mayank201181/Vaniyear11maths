@@ -261,14 +261,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m2-q02",
-        question: "A triangle has sides 7 cm, 8 cm and 9 cm.\n\nWork out the size of the **smallest** angle. Give your answer correct to 1 decimal place.",
-        options: ["48.2°", "73.4°", "58.4°", "131.8°"],
+        question: "A triangle has sides 6 cm, 9 cm and 11 cm.\n\nWork out the size of the **smallest** angle. Give your answer correct to 1 decimal place.",
+        options: ["33.0°", "92.1°", "54.8°", "147.0°"],
         answerIndex: 0,
         explanation:
-          "The smallest angle is opposite the shortest side (7 cm): {{cos theta = (8^2 + 9^2 - 7^2)/(2 * 8 * 9) = 96/144 = 2/3}}, so θ = 48.2°. 73.4° is the largest angle (opposite 9 cm) and 58.4° is opposite 8 cm. 131.8° is 180° − 48.2°, from a sign slip. Check: 48.2° + 58.4° + 73.4° = 180° ✓.",
+          "The smallest angle is opposite the shortest side (6 cm): {{cos theta = (9^2 + 11^2 - 6^2)/(2 * 9 * 11) = 166/198 = 83/99}}, so θ = 33.0°. 92.1° is the largest angle (opposite 11 cm) and 54.8° is opposite 9 cm. 147.0° is 180° − 33.0°, from a sign slip. Check: 33.0° + 54.8° + 92.1° ≈ 180° ✓.",
         difficulty: "warmup",
         guideRef: "cosine-rule",
-        hints: ["The smallest angle is opposite the shortest side.", "{{cos A = (b^2 + c^2 - a^2)/(2bc)}} with a = 7."],
+        hints: ["The smallest angle is opposite the shortest side.", "{{cos A = (b^2 + c^2 - a^2)/(2bc)}} with a = 6."],
         strategy: "Consider extremes",
       },
       {
@@ -300,15 +300,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m2-q05",
-        question: "Coastguard station B is 15 km due east of station A. A boat C is on a bearing of 040° from A and on a bearing of 320° from B.\n\nWork out the distance AC. Give your answer correct to 3 significant figures.",
+        question: "Coastguard station B is 18 km due east of station A. A boat C is on a bearing of 040° from A and on a bearing of 330° from B.\n\nWork out the distance AC. Give your answer correct to 3 significant figures.",
         diagram: D_M2Q05,
-        options: ["11.7 km", "19.3 km", "9.79 km", "11.5 km"],
+        options: ["16.6 km", "19.5 km", "9.58 km", "14.7 km"],
         answerIndex: 0,
         explanation:
-          "Bearing 040° from A means angle CAB = 90° − 40° = 50°. Bearing 320° from B means C is 40° west of north, so angle CBA = 90° − 40° = 50°. Then angle ACB = 80°. Sine rule: AC = {{(15 sin 50°)/(sin 80°)}} = 11.7 km. 19.3 km flips the fraction; 9.79 km uses 40° (the bearing angle) instead of the angle inside the triangle; 11.5 km is 15 sin 50° with no division.",
+          "Bearing 040° from A means angle CAB = 90° − 40° = 50°. Bearing 330° from B means C is 30° west of north, so angle CBA = 90° − 30° = 60°. Then angle ACB = 70°. AC is opposite angle B: AC = {{(18 sin 60°)/(sin 70°)}} = 16.6 km. 19.5 km flips the fraction; 9.58 km uses the bearing angles 40° and 30° as if they were inside the triangle; 14.7 km pairs AC with the 50° angle at A, but that angle is opposite BC.",
         difficulty: "core",
         guideRef: "sine-rule",
-        hints: ["Bearings are measured from north, but you need the angles **inside** the triangle.", "Angle CAB = 90° − 40°. What about angle CBA?", "Angle ACB is opposite the 15 km side; AC is opposite angle B."],
+        hints: ["Bearings are measured from north, but you need the angles **inside** the triangle.", "Angle CAB = 90° − 40°. What about angle CBA?", "Angle ACB is opposite the 18 km side; AC is opposite angle B."],
         strategy: "Draw a diagram",
       },
       {

@@ -3,7 +3,7 @@
 // and every exact answer is a clean integer or half; "3 s.f." answers are rounded once,
 // at the end, from the full-precision value. Triangle diagrams are drawn to scale from
 // the actual side lengths (law of cosines), with parallel lines really parallel.
-import type { Drill, Rng } from "./types.ts";
+import type { Drill } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
 import { big, clean, gcd, num } from "./helpers.ts";
 
@@ -628,7 +628,7 @@ export const drills: Drill[] = [
         labels.AE = num(AE); labels.DE = num(DE); labels.BC = num(BC);
         answer = EC; target = "EC";
         sol = [`Scale factor = {{BC/DE}} = {{${num(BC)}/${num(DE)}}} = ${kText}.`, `AC = AE × ${fracM(n, m)} = ${num(AE)} × ${fracM(n, m)} = ${num(AC)} cm.`, `EC = AC − AE = ${num(AC)} − ${num(AE)} = ${num(EC)} cm.`];
-        traps = numTraps(EC, [[AC, "That's the whole of AC. The question asks for EC, so subtract AE."], [(AE * BC) / DE - DE, "Subtract AE (not DE) from AC."]]);
+        traps = numTraps(EC, [[AC, "That's the whole of AC. The question asks for EC, so subtract AE."], [(AE * DE) / BC, "Scale factor upside down — AC must be longer than AE."]]);
       }
       let svg = svgOpen(360, 260, `Triangle ABC with D on AB and E on AC, DE parallel to BC. ${given.join(", ")}.`);
       svg += polygon([A, B, C], "#c7d2fe");
@@ -695,7 +695,7 @@ export const drills: Drill[] = [
         Object.assign(labels, { XA: num(XA), AB: num(AB), DC: num(DC) });
         answer = XD; target = "XD";
         sol = [sfLine, `XD corresponds to XA (both lie on line AD), so XD = ${num(XA)} × ${fracM(n, m)} = ${num(XD)} cm.`];
-        traps = numTraps(XD, [[(XA * AB) / DC, "Scale factor upside down — the triangle with DC is the one containing XD."], [(XA * DC) / AB === XD ? 0 : (XB * DC) / AB, "XD matches XA, not XB: they are on the same straight line through X."]]);
+        traps = numTraps(XD, [[(XA * AB) / DC, "Scale factor upside down — the triangle with DC is the one containing XD."], [(XB * DC) / AB, "XD matches XA, not XB: they are on the same straight line through X."]]);
       } else if (vr === "XC") {
         given = [`XB = ${num(XB)} cm`, `AB = ${num(AB)} cm`, `DC = ${num(DC)} cm`];
         Object.assign(labels, { XB: num(XB), AB: num(AB), DC: num(DC) });
@@ -926,10 +926,6 @@ export const drills: Drill[] = [
           ansVal = (known * Math.pow(p, d)) / Math.pow(q, d);
           answer = ans3(ansVal, unit);
         }
-        if (reverse) {
-          // Swap roles: given Q's measurement, find P's.
-          lenText = `The ${ctx.len} of P is ${lp} cm and the ${ctx.len} of Q is ${lq} cm.`;
-        }
       }
       // With `reverse`, the known value belongs to Q and we find P (scale factor q/p from Q to P).
       // Re-derive in that case so the numbers stay nice.
@@ -947,7 +943,6 @@ export const drills: Drill[] = [
         }
         [p, q] = [q, p];
       }
-      if (reverse && tier === 1) { givenName = "Q"; findName = "P"; }
       const kT = fracM(p, q);
       const kd = d === 2 ? `{{(${p}/${q})^2}}` : `{{(${p}/${q})^3}}`;
       const kdText = q === 1 ? `${p}${d === 2 ? "²" : "³"} = ${Math.pow(p, d)}` : `${kd} = {{${Math.pow(p, d)}/${Math.pow(q, d)}}}`;
@@ -1196,5 +1191,3 @@ export const drills: Drill[] = [
   },
 ];
 
-// Keep the Rng import used for helper signatures in editors that strip unused types.
-export type { Rng };

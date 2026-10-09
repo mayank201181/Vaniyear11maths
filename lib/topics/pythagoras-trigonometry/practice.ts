@@ -8,7 +8,7 @@ import type { TopicPractice } from "../../types.ts";
 // Scale 22 px per cm: BD = 6.25 cm, BC = 13.31 cm.
 const SHARED_SIDE = `<svg viewBox="0 0 460 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Triangle ABC with a right angle at B. AB is vertical and 8 cm long. D lies on CB between C and B. Angle ACB is 31 degrees and angle ADB is 52 degrees."><rect x="0" y="0" width="460" height="300" fill="#ffffff"/><polygon points="107,260 400,260 400,84" fill="#e0e7ff" stroke="none"/><line x1="107" y1="260" x2="400" y2="260" stroke="#1f2937" stroke-width="2"/><line x1="400" y1="260" x2="400" y2="84" stroke="#1f2937" stroke-width="2"/><line x1="107" y1="260" x2="400" y2="84" stroke="#1f2937" stroke-width="2"/><line x1="262.5" y1="260" x2="400" y2="84" stroke="#1f2937" stroke-width="2"/><polyline points="386,260 386,246 400,246" fill="none" stroke="#1f2937" stroke-width="1.5"/><path d="M 147 260 A 40 40 0 0 0 141.3 239.4" fill="none" stroke="#334155" stroke-width="1.5"/><text x="152" y="252" font-size="13" font-family="sans-serif" fill="#1f2937">31°</text><path d="M 290.5 260 A 28 28 0 0 0 279.7 237.9" fill="none" stroke="#334155" stroke-width="1.5"/><text x="294" y="250" font-size="13" font-family="sans-serif" fill="#1f2937">52°</text><text x="94" y="278" font-size="14" font-family="sans-serif" fill="#1f2937">C</text><text x="256" y="278" font-size="14" font-family="sans-serif" fill="#1f2937">D</text><text x="404" y="278" font-size="14" font-family="sans-serif" fill="#1f2937">B</text><text x="404" y="80" font-size="14" font-family="sans-serif" fill="#1f2937">A</text><text x="408" y="176" font-size="13" font-family="sans-serif" fill="#1f2937">8 cm</text></svg>`;
 
-// p1-q09: cuboid 8 × 6 × 5 in oblique projection; AG and AC highlighted.
+// p1-q09: cuboid 12 × 5 × 4 in oblique projection; AG and AC highlighted.
 const CUBOID = `<svg viewBox="0 0 440 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cuboid ABCDEFGH. The base ABCD has AB = 12 cm and BC = 5 cm. The vertical edges AE, BF, CG and DH are 4 cm. The diagonal AG and the base diagonal AC are drawn."><rect x="0" y="0" width="440" height="290" fill="#ffffff"/><polygon points="55,255 364,205 364,117" fill="#fecaca" fill-opacity="0.45" stroke="none"/><line x1="55" y1="255" x2="319" y2="255" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="255" x2="364" y2="205" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="167" x2="319" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="167" x2="364" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="364" y1="117" x2="100" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="100" y1="117" x2="55" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="255" x2="55" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="319" y1="255" x2="319" y2="167" stroke="#1f2937" stroke-width="2"/><line x1="364" y1="205" x2="364" y2="117" stroke="#1f2937" stroke-width="2"/><line x1="55" y1="255" x2="100" y2="205" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="100" y1="205" x2="364" y2="205" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="100" y1="205" x2="100" y2="117" stroke="#64748b" stroke-width="1.5" stroke-dasharray="5 4"/><line x1="55" y1="255" x2="364" y2="205" stroke="#1d4ed8" stroke-width="2" stroke-dasharray="6 4"/><line x1="55" y1="255" x2="364" y2="117" stroke="#b91c1c" stroke-width="2.5"/><polyline points="354.1,206.6 354.1,196.6 364,195" fill="none" stroke="#1f2937" stroke-width="1.5"/><text x="43" y="267" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">A</text><text x="327" y="271" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">B</text><text x="376" y="211" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">C</text><text x="92" y="199" font-size="14" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">D</text><text x="45" y="172" font-size="14" font-family="sans-serif" text-anchor="end" fill="#1f2937" font-weight="bold">E</text><text x="331" y="185" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">F</text><text x="374" y="111" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">G</text><text x="94" y="109" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1f2937" font-weight="bold">H</text><text x="187.0" y="275" font-size="14" font-family="sans-serif" text-anchor="middle" fill="#1e3a8a">12 cm</text><text x="355.5" y="242.0" font-size="14" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">5 cm</text><text x="374" y="165.0" font-size="14" font-family="sans-serif" text-anchor="start" fill="#1e3a8a">4 cm</text></svg>`;
 
 // p1-q13: right square-based pyramid, base 10 cm, slant edges 13 cm.
@@ -24,7 +24,7 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-quiz-q01",
       question:
         "A right-angled triangle has shorter sides 7 cm and 10 cm. Work out the length of the hypotenuse. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 12.2, display: "12.2 cm" },
+      answer: { type: "number", value: 12.2, tolerance: 0.05, display: "12.2 cm" },
       solution: ["{{c^2 = 7^2 + 10^2 = 49 + 100 = 149}}", "{{c = sqrt(149) = 12.206...}}", "c = 12.2 cm (3 s.f.)."],
       commonError: "Forgetting the square root and giving 149.",
       traps: [
@@ -69,7 +69,7 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-quiz-q04",
       question:
         "Triangle ABC has a right angle at B. AB = 12 cm and angle BAC = 40°. Work out the length of BC. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 10.1, display: "10.1 cm" },
+      answer: { type: "number", value: 10.1, tolerance: 0.05, display: "10.1 cm" },
       solution: [
         "From angle A: BC is opposite, AB is adjacent. Use TOA.",
         "{{tan 40° = (BC)/12}}",
@@ -90,10 +90,10 @@ export const practice: TopicPractice = {
       id: "pythagoras-trigonometry-quiz-q05",
       question:
         "In a right-angled triangle, the side adjacent to angle θ is 7 cm and the hypotenuse is 11 cm. Work out θ. Give your answer correct to 1 decimal place.",
-      answer: { type: "number", value: 50.5, display: "50.5°" },
+      answer: { type: "number", value: 50.5, tolerance: 0.05, display: "50.5°" },
       solution: ["Adjacent and hypotenuse: CAH.", "{{cos θ = 7/11}}", "{{θ = cos^(-1)(7/11) = 50.478...°}} = 50.5°."],
       commonError: "Using {{sin^(-1)}} and getting 39.5° — that is the *other* acute angle.",
-      traps: [{ spec: { type: "number", value: 39.5 }, feedback: "That's the other acute angle. With adjacent and hypotenuse, use cos." }],
+      traps: [{ spec: { type: "number", value: 39.5, tolerance: 0.05 }, feedback: "That's the other acute angle. With adjacent and hypotenuse, use cos." }],
       difficulty: "core",
       guideRef: "sohcahtoa",
       hints: ["Which two sides do you know, relative to θ?", "A and H → cos.", "Use the inverse: {{θ = cos^(-1)(7/11)}}."],
@@ -116,27 +116,27 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "pythagoras-trigonometry-quiz-q07",
       question:
-        "Arjun stands on level ground 40 m from the foot of a vertical rain tree. The angle of elevation of the top of the tree from the ground where he stands is 28°. Work out the height of the tree. Give your answer correct to 3 significant figures.",
-      answer: { type: "number", value: 21.3, display: "21.3 m" },
-      solution: ["Height is opposite the 28° angle; 40 m is adjacent.", "{{h = 40 tan 28° = 21.268...}}", "h = 21.3 m."],
-      commonError: "Using 40 sin 28° = 18.8 m — 40 m is along the ground (adjacent), not the hypotenuse.",
-      traps: [{ spec: { type: "number", value: 18.8, tolerance: 0.05 }, feedback: "The 40 m is along the ground — the adjacent side, not the hypotenuse. Use tan." }],
+        "Priya stands on level ground 35 m from the foot of a vertical rain tree. The angle of elevation of the top of the tree from the ground where she stands is 33°. Work out the height of the tree. Give your answer correct to 3 significant figures.",
+      answer: { type: "number", value: 22.7, tolerance: 0.05, display: "22.7 m" },
+      solution: ["Height is opposite the 33° angle; 35 m is adjacent.", "{{h = 35 tan 33° = 22.729...}}", "h = 22.7 m."],
+      commonError: "Using 35 sin 33° = 19.1 m — 35 m is along the ground (adjacent), not the hypotenuse.",
+      traps: [{ spec: { type: "number", value: 19.1, tolerance: 0.05 }, feedback: "The 35 m is along the ground — the adjacent side, not the hypotenuse. Use tan." }],
       difficulty: "core",
       guideRef: "bearings-elevation",
-      hints: ["Draw the right-angled triangle: ground, tree, line of sight.", "Height is opposite 28°, ground distance is adjacent.", "{{tan 28° = h/40}}"],
+      hints: ["Draw the right-angled triangle: ground, tree, line of sight.", "Height is opposite 33°, ground distance is adjacent.", "{{tan 33° = h/35}}"],
       strategy: "Draw a diagram",
     },
     {
       kind: "short",
       id: "pythagoras-trigonometry-quiz-q08",
-      question: "A cuboid measures 3 cm by 4 cm by 12 cm. Work out the length of the diagonal from one corner to the opposite corner (the space diagonal), in cm.",
-      answer: { type: "number", value: 13, display: "13 cm" },
-      solution: ["Base diagonal: {{sqrt(3^2 + 4^2) = 5}} cm.", "Space diagonal: {{sqrt(5^2 + 12^2) = sqrt(169) = 13}} cm.", "In one step: {{d = sqrt(3^2 + 4^2 + 12^2) = sqrt(169) = 13}}."],
-      commonError: "Stopping at the base diagonal (5 cm).",
-      traps: [{ spec: { type: "number", value: 5 }, feedback: "That's only the diagonal of the 3 × 4 face. Now use it with the 12 cm edge." }],
+      question: "A cuboid measures 2 cm by 3 cm by 6 cm. Work out the length of the diagonal from one corner to the opposite corner (the space diagonal), in cm.",
+      answer: { type: "number", value: 7, display: "7 cm" },
+      solution: ["Base diagonal of the 2 × 3 face: {{sqrt(2^2 + 3^2) = sqrt(13)}} cm (keep it exact).", "Space diagonal: {{sqrt((sqrt(13))^2 + 6^2) = sqrt(13 + 36) = sqrt(49) = 7}} cm.", "In one step: {{d = sqrt(2^2 + 3^2 + 6^2) = sqrt(49) = 7}}."],
+      commonError: "Stopping at the base diagonal ({{sqrt(13)}} ≈ 3.61 cm).",
+      traps: [{ spec: { type: "number", value: 3.61, tolerance: 0.005 }, feedback: "That's only the diagonal of the 2 × 3 face. Now use it with the 6 cm edge." }],
       difficulty: "core",
       guideRef: "three-d",
-      hints: ["Find the diagonal of the base first.", "The base diagonal, the 12 cm edge and the space diagonal make a right-angled triangle.", "Or use {{d^2 = a^2 + b^2 + c^2}}."],
+      hints: ["Find the diagonal of the base first.", "The base diagonal, the 6 cm edge and the space diagonal make a right-angled triangle.", "Or use {{d^2 = a^2 + b^2 + c^2}}."],
       strategy: "Find the right right-angled triangle",
     },
     {
@@ -181,7 +181,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p1-q01",
           question:
             "A 5.5 m ladder leans against a vertical wall. The foot of the ladder is on level ground, 1.8 m from the wall. How far up the wall does the ladder reach? Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 5.2, display: "5.20 m" },
+          answer: { type: "number", value: 5.2, tolerance: 0.005, display: "5.20 m" },
           solution: ["The ladder is the hypotenuse.", "{{h^2 = 5.5^2 - 1.8^2 = 30.25 - 3.24 = 27.01}}", "{{h = sqrt(27.01) = 5.197...}} = 5.20 m."],
           commonError: "Adding the squares: {{sqrt(33.49) = 5.79}} m — more than the ladder's length.",
           traps: [{ spec: { type: "number", value: 5.79, tolerance: 0.01 }, feedback: "The ladder is the hypotenuse, so the height must be less than 5.5 m. Subtract the squares." }],
@@ -208,7 +208,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p1-q03",
           question:
             "A wheelchair ramp rises 5 m over a horizontal distance of 9 m. Work out the angle the ramp makes with the horizontal. Give your answer correct to 1 decimal place.",
-          answer: { type: "number", value: 29.1, display: "29.1°" },
+          answer: { type: "number", value: 29.1, tolerance: 0.05, display: "29.1°" },
           solution: ["Opposite = 5, adjacent = 9: TOA.", "{{tan θ = 5/9}}", "{{θ = tan^(-1)(5/9) = 29.05...°}} = 29.1°."],
           commonError: "Using {{sin^(-1)(5/9)}} = 33.7° — 9 m is horizontal (adjacent), not the slope.",
           traps: [{ spec: { type: "number", value: 33.7 }, feedback: "9 m is the horizontal distance — adjacent, not hypotenuse. Use tan." }],
@@ -234,19 +234,19 @@ export const practice: TopicPractice = {
           kind: "written",
           id: "pythagoras-trigonometry-p1-q05",
           question:
-            "A triangle has sides 6 cm, 9 cm and 11 cm.\n\nIs the triangle right-angled? Show your working and explain your conclusion.",
+            "A triangle has sides 8 cm, 11 cm and 14 cm.\n\nIs the triangle right-angled? Show your working and explain your conclusion.",
           marks: 3,
           modelAnswer:
-            "If it were right-angled, the longest side (11 cm) would be the hypotenuse, so {{6^2 + 9^2}} would equal {{11^2}}.\n\n{{6^2 + 9^2 = 36 + 81 = 117}} and {{11^2 = 121}}.\n\nSince 117 ≠ 121, the triangle is **not** right-angled. (In fact {{11^2 > 6^2 + 9^2}}, so the angle opposite the 11 cm side is slightly more than 90° — it is obtuse.)",
+            "If it were right-angled, the longest side (14 cm) would be the hypotenuse, so {{8^2 + 11^2}} would equal {{14^2}}.\n\n{{8^2 + 11^2 = 64 + 121 = 185}} and {{14^2 = 196}}.\n\nSince 185 ≠ 196, the triangle is **not** right-angled. (In fact {{14^2 > 8^2 + 11^2}}, so the angle opposite the 14 cm side is more than 90° — it is obtuse.)",
           markScheme: [
-            { point: "Tests the longest side as the hypotenuse: compares 6² + 9² with 11²", keywords: ["11^2", "11²", "longest", "hypotenuse", "6^2 + 9^2", "6² + 9²"] },
-            { point: "Correct values 117 and 121", keywords: ["117", "121"] },
+            { point: "Tests the longest side as the hypotenuse: compares 8² + 11² with 14²", keywords: ["14^2", "14²", "longest", "hypotenuse", "8^2 + 11^2", "8² + 11²"] },
+            { point: "Correct values 185 and 196", keywords: ["185", "196"] },
             { point: "Concludes not right-angled because they are not equal", keywords: ["not right", "not equal", "≠", "not a right", "obtuse"] },
           ],
-          commonError: "Checking {{6^2 + 11^2}} against {{9^2}} — the hypotenuse must be the longest side.",
+          commonError: "Checking {{8^2 + 14^2}} against {{11^2}} — the hypotenuse must be the longest side.",
           difficulty: "core",
           guideRef: "pythagoras",
-          hints: ["Which side would have to be the hypotenuse?", "If it is right-angled, {{a^2 + b^2 = c^2}} must hold exactly.", "Compare {{6^2 + 9^2}} with {{11^2}}."],
+          hints: ["Which side would have to be the hypotenuse?", "If it is right-angled, {{a^2 + b^2 = c^2}} must hold exactly.", "Compare {{8^2 + 11^2}} with {{14^2}}."],
           strategy: "Use the converse",
         },
         {
@@ -255,7 +255,7 @@ export const practice: TopicPractice = {
           question:
             "In the diagram, ABC is a right-angled triangle with the right angle at B. D is a point on CB. AB = 8 cm, angle ADB = 52° and angle ACB = 31°.\n\nWork out the length of CD. Give your answer correct to 3 significant figures.",
           diagram: SHARED_SIDE,
-          answer: { type: "number", value: 7.06, tolerance: 0.01, display: "7.06 cm" },
+          answer: { type: "number", value: 7.06, tolerance: 0.005, display: "7.06 cm" },
           solution: [
             "Triangle ABD: {{tan 52° = 8/(BD)}}, so {{BD = 8/(tan 52°) = 6.2503...}} cm.",
             "Triangle ABC: {{tan 31° = 8/(BC)}}, so {{BC = 8/(tan 31°) = 13.3142...}} cm.",
@@ -277,7 +277,7 @@ export const practice: TopicPractice = {
           id: "pythagoras-trigonometry-p1-q07",
           question:
             "A ferry leaves harbour H and sails 15 km on a bearing of 040°. How far east of H is the ferry now? Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 9.64, tolerance: 0.01, display: "9.64 km" },
+          answer: { type: "number", value: 9.64, tolerance: 0.005, display: "9.64 km" },
           solution: [
             "The bearing 040° is measured from north, so the 40° angle is between the north line and the path.",
             "The eastward distance is opposite the 40° angle; the path (15 km) is the hypotenuse.",
@@ -294,11 +294,11 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "pythagoras-trigonometry-p1-q08",
           question:
-            "Without a calculator: a right-angled triangle has hypotenuse 10 cm and one angle of 60°. Find the exact length of the side opposite the 60° angle. Give your answer as a surd in its simplest form.",
-          answer: { type: "expression", expr: "5sqrt(3)", form: "surd", display: "{{5sqrt(3)}} cm" },
-          solution: ["Opposite = hypotenuse × sin 60°.", "{{sin 60° = sqrt(3)/2}}", "{{10 * sqrt(3)/2 = 5sqrt(3)}} cm."],
-          commonError: "Using {{cos 60° = 1/2}} and getting 5 cm — that is the side adjacent to 60°.",
-          traps: [{ spec: { type: "number", value: 5 }, feedback: "5 cm is adjacent to the 60° angle. You need the opposite side: use sin 60°." }],
+            "Without a calculator: a right-angled triangle has hypotenuse 14 cm and one angle of 60°. Find the exact length of the side opposite the 60° angle. Give your answer as a surd in its simplest form.",
+          answer: { type: "expression", expr: "7sqrt(3)", form: "surd", display: "{{7sqrt(3)}} cm" },
+          solution: ["Opposite = hypotenuse × sin 60°.", "{{sin 60° = sqrt(3)/2}}", "{{14 * sqrt(3)/2 = 7sqrt(3)}} cm."],
+          commonError: "Using {{cos 60° = 1/2}} and getting 7 cm — that is the side adjacent to 60°.",
+          traps: [{ spec: { type: "number", value: 7 }, feedback: "7 cm is adjacent to the 60° angle. You need the opposite side: use sin 60°." }],
           difficulty: "core",
           guideRef: "exact-values",
           hints: ["O and H → sin.", "Recall {{sin 60°}} from the half-equilateral triangle with sides 1, {{sqrt(3)}}, 2.", "{{sin 60° = sqrt(3)/2}}."],
@@ -308,23 +308,23 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "pythagoras-trigonometry-p1-q09",
           question:
-            "The diagram shows a cuboid ABCDEFGH with AB = 8 cm, BC = 6 cm and CG = 5 cm.\n\nWork out the angle between the diagonal AG and the base ABCD. Give your answer correct to 1 decimal place.",
+            "The diagram shows a cuboid ABCDEFGH with AB = 12 cm, BC = 5 cm and CG = 4 cm.\n\nWork out the angle between the diagonal AG and the base ABCD. Give your answer correct to 1 decimal place.",
           diagram: CUBOID,
-          answer: { type: "number", value: 26.6, display: "26.6°" },
+          answer: { type: "number", value: 17.1, tolerance: 0.05, display: "17.1°" },
           solution: [
             "The angle is GAC, because C is directly below G.",
-            "{{AC = sqrt(8^2 + 6^2) = 10}} cm.",
-            "Triangle ACG has a right angle at C: {{tan(GAC) = 5/10}}.",
-            "{{GAC = tan^(-1)(0.5) = 26.565...°}} = 26.6°.",
+            "{{AC = sqrt(12^2 + 5^2) = sqrt(169) = 13}} cm.",
+            "Triangle ACG has a right angle at C: {{tan(GAC) = 4/13}}.",
+            "{{GAC = tan^(-1)(4/13) = 17.102...°}} = 17.1°.",
           ],
-          commonError: "Using the edge AB instead of the base diagonal AC: {{tan^(-1)(5/8) = 32.0°}}.",
-          traps: [{ spec: { type: "number", value: 32 }, feedback: "G is not above B — it is above C. The triangle you need is ACG, with AC = 10 cm." }],
+          commonError: "Using the edge AB instead of the base diagonal AC: {{tan^(-1)(4/12) = 18.4°}}.",
+          traps: [{ spec: { type: "number", value: 18.4, tolerance: 0.05 }, feedback: "G is not above B — it is above C. The triangle you need is ACG, with AC = 13 cm." }],
           difficulty: "core",
           guideRef: "three-d",
           hints: [
             "Which point on the base is directly below G?",
             "The angle you want is between AG and AC. Find AC first.",
-            "Triangle ACG is right-angled at C, with AC = 10 and CG = 5.",
+            "Triangle ACG is right-angled at C, with AC = 13 and CG = 4.",
           ],
           strategy: "Find the right right-angled triangle",
         },
@@ -351,21 +351,21 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "pythagoras-trigonometry-p1-q11",
           question:
-            "Marcus stands at the top of a vertical cliff, 60 m above sea level. He sees a boat at an angle of depression of 18°. How far is the boat from the foot of the cliff? Give your answer correct to 3 significant figures.",
-          answer: { type: "number", value: 185, display: "185 m" },
+            "Marcus stands at the top of a lighthouse, 32 m above sea level. He sees a boat at an angle of depression of 12°. How far is the boat from the foot of the lighthouse? Give your answer correct to 3 significant figures.",
+          answer: { type: "number", value: 151, tolerance: 0.5, display: "151 m" },
           solution: [
-            "The angle of depression (18°) equals the angle of elevation from the boat to Marcus (alternate angles).",
-            "From the boat: opposite = 60 m, adjacent = d. {{tan 18° = 60/d}}.",
-            "{{d = 60/(tan 18°) = 184.66...}} = 185 m.",
+            "The angle of depression (12°) equals the angle of elevation from the boat to Marcus (alternate angles).",
+            "From the boat: opposite = 32 m, adjacent = d. {{tan 12° = 32/d}}.",
+            "{{d = 32/(tan 12°) = 150.548...}} = 151 m.",
           ],
-          commonError: "Putting the 18° at the top of the cliff and calculating 60 tan 18° = 19.5 m.",
-          traps: [{ spec: { type: "number", value: 19.5, tolerance: 0.05 }, feedback: "The angle of depression is measured *down from the horizontal*, not from the cliff face. Move the 18° to the boat (alternate angles)." }],
+          commonError: "Putting the 12° at the top of the lighthouse and calculating 32 tan 12° = 6.80 m.",
+          traps: [{ spec: { type: "number", value: 6.8, tolerance: 0.005 }, feedback: "The angle of depression is measured *down from the horizontal*, not from the lighthouse wall. Move the 12° to the boat (alternate angles)." }],
           difficulty: "core",
           guideRef: "bearings-elevation",
           hints: [
-            "Draw the horizontal at Marcus's eye. The 18° is between that and the line of sight.",
-            "Alternate angles: the angle at the boat is also 18°.",
-            "From the boat, 60 m is opposite and d is adjacent.",
+            "Draw the horizontal at Marcus's eye. The 12° is between that and the line of sight.",
+            "Alternate angles: the angle at the boat is also 12°.",
+            "From the boat, 32 m is opposite and d is adjacent.",
           ],
           strategy: "Use alternate angles",
         },
@@ -385,7 +385,7 @@ export const practice: TopicPractice = {
             { label: "Difference of two squares", steps: ["{{65^2 - 33^2 = (65 - 33)(65 + 33) = 32 * 98}}.", "{{32 * 98 = 64 * 49}}, so {{b = 8 * 7 = 56}}. Quicker without a calculator."] },
           ],
           commonError: "Adding the squares instead of subtracting.",
-          traps: [{ spec: { type: "number", value: 73 }, feedback: "73 would be the hypotenuse if 33 and 65 were the shorter sides. Here 65 *is* the hypotenuse — subtract." }],
+          traps: [{ spec: { type: "number", value: 72.9, tolerance: 0.05 }, feedback: "{{sqrt(65^2 + 33^2) = 72.9}} would be the hypotenuse if 33 and 65 were the shorter sides. Here 65 *is* the hypotenuse — subtract." }],
           difficulty: "core",
           guideRef: "pythagorean-triples",
           hints: ["Hypotenuse² − side² = other side².", "Try writing {{65^2 - 33^2}} as a difference of two squares.", "{{(65 - 33)(65 + 33) = 32 * 98}}."],
