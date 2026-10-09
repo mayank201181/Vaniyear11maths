@@ -7,7 +7,7 @@
 // degenerate or ambiguous cases.
 import type { Drill } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
-import { clean, frac, gcd, num, poly, roundTo } from "./helpers.ts";
+import { clean, gcd, num, poly, roundTo } from "./helpers.ts";
 
 const TOPIC = "further-trigonometry";
 
@@ -78,7 +78,9 @@ const VERTS: [string, string, string][] = [["A", "B", "C"], ["P", "Q", "R"], ["X
 /* Diagrams                                                                   */
 /* ------------------------------------------------------------------------ */
 
-const TXT = 'font-size="13" font-family="sans-serif" fill="#1f2937" text-anchor="middle"';
+const TXT = 'font-family="sans-serif" fill="#1f2937" text-anchor="middle"';
+const T13 = `font-size="13" ${TXT}`;
+const T12 = `font-size="12" ${TXT}`;
 
 /**
  * A triangle drawn to scale from its three angles (degrees, at vertices 0, 1, 2).
@@ -107,7 +109,7 @@ function triSvg(names: [string, string, string], ang: [number, number, number], 
   for (let i = 0; i < 3; i++) {
     // vertex name, pushed away from the centroid
     const [ux, uy] = unit(P[i][0] - G[0], P[i][1] - G[1]);
-    out.push(`<text x="${r1(P[i][0] + ux * 16)}" y="${r1(P[i][1] + uy * 16 + 5)}" ${TXT} font-weight="700">${names[i]}</text>`);
+    out.push(`<text x="${r1(P[i][0] + ux * 16)}" y="${r1(P[i][1] + uy * 16 + 5)}" ${T13} font-weight="700">${names[i]}</text>`);
     // angle label along the internal bisector
     const al = angleLabels[i];
     if (al) {
@@ -116,7 +118,7 @@ function triSvg(names: [string, string, string], ang: [number, number, number], 
       const [bx, by] = unit(P[k][0] - P[i][0], P[k][1] - P[i][1]);
       const [mx, my] = unit(ax + bx, ay + by);
       const d = ang[i] < 35 ? 46 : ang[i] < 60 ? 34 : 26;
-      out.push(`<text x="${r1(P[i][0] + mx * d)}" y="${r1(P[i][1] + my * d + 4)}" ${TXT} font-size="12">${al}</text>`);
+      out.push(`<text x="${r1(P[i][0] + mx * d)}" y="${r1(P[i][1] + my * d + 4)}" ${T12}>${al}</text>`);
     }
     // side label opposite vertex i, outside the triangle
     const sl = sideLabels[i];
@@ -125,7 +127,8 @@ function triSvg(names: [string, string, string], ang: [number, number, number], 
       const M = [(P[j][0] + P[k][0]) / 2, (P[j][1] + P[k][1]) / 2];
       let [nx, ny] = unit(-(P[k][1] - P[j][1]), P[k][0] - P[j][0]);
       if (nx * (M[0] - P[i][0]) + ny * (M[1] - P[i][1]) < 0) [nx, ny] = [-nx, -ny];
-      out.push(`<text x="${r1(M[0] + nx * 15)}" y="${r1(M[1] + ny * 15 + 5)}" ${TXT}>${sl}</text>`);
+      const off = 13 + Math.abs(nx) * sl.length * 3.6;
+      out.push(`<text x="${r1(M[0] + nx * off)}" y="${r1(M[1] + ny * 13 + 5)}" ${T13}>${sl}</text>`);
     }
   }
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${aria}">${out.join("")}</svg>`;
@@ -145,12 +148,12 @@ function segmentSvg(r: string, theta: number, major: boolean): string {
   out.push(`<line x1="${cx}" y1="${cy}" x2="${A[0]}" y2="${A[1]}" stroke="#334155" stroke-width="1.5"/>`);
   out.push(`<line x1="${cx}" y1="${cy}" x2="${B[0]}" y2="${B[1]}" stroke="#334155" stroke-width="1.5"/>`);
   out.push(`<circle cx="${cx}" cy="${cy}" r="3" fill="#1f2937"/>`);
-  out.push(`<text x="${cx}" y="${cy - 9}" ${TXT} font-weight="700">O</text>`);
-  out.push(`<text x="${A[0] - 12}" y="${A[1] + 14}" ${TXT} font-weight="700">A</text>`);
-  out.push(`<text x="${B[0] + 12}" y="${B[1] + 14}" ${TXT} font-weight="700">B</text>`);
-  out.push(`<text x="${cx}" y="${cy + 30}" ${TXT} font-size="12">${theta}°</text>`);
+  out.push(`<text x="${cx}" y="${cy - 9}" ${T13} font-weight="700">O</text>`);
+  out.push(`<text x="${A[0] - 12}" y="${A[1] + 14}" ${T13} font-weight="700">A</text>`);
+  out.push(`<text x="${B[0] + 12}" y="${B[1] + 14}" ${T13} font-weight="700">B</text>`);
+  out.push(`<text x="${cx}" y="${cy + (theta < 70 ? 50 : 30)}" ${T12}>${theta}°</text>`);
   const mid = [(cx + A[0]) / 2, (cy + A[1]) / 2];
-  out.push(`<text x="${Math.round(mid[0] - 16)}" y="${Math.round(mid[1])}" ${TXT} font-size="12">${r}</text>`);
+  out.push(`<text x="${Math.round(mid[0] - 10)}" y="${Math.round(mid[1])}" ${T12} text-anchor="end">${r}</text>`);
   const aria = `Circle with centre O and radius ${r}. Radii OA and OB make an angle of ${theta} degrees at O. The ${major ? "major" : "minor"} segment cut off by the chord AB is shaded.`;
   return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${aria}">${out.join("")}</svg>`;
 }

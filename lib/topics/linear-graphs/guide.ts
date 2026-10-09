@@ -37,7 +37,7 @@ export const guide: TopicGuide = {
           answer: "{{y = -3x + 4}}",
           yourTurn: {
             question: "Your turn: find the equation of the line through {{(2, 1)}} and {{(6, 9)}}. Give your answer in the form {{y = mx + c}}.",
-            answer: { type: "expression", expr: "2x-3", display: "{{y = 2x - 3}}" },
+            answer: { type: "equation", eq: "y=2x-3", display: "{{y = 2x - 3}}" },
             solution:
               "{{m = (9 - 1)/(6 - 2) = 8/4 = 2}}. Then {{1 = 2(2) + c}}, so {{c = -3}} and {{y = 2x - 3}}. Check {{(6, 9)}}: {{12 - 3 = 9}} ✓.",
           },
@@ -123,7 +123,7 @@ export const guide: TopicGuide = {
           answer: "(i) {{y = -1/2 x + 5/2}}   (ii) {{x + 2y - 5 = 0}}",
           yourTurn: {
             question: "Your turn: find the equation of the line through {{(1, -2)}} and {{(4, 7)}}. Give your answer in the form {{y = mx + c}}.",
-            answer: { type: "expression", expr: "3x-5", display: "{{y = 3x - 5}}" },
+            answer: { type: "equation", eq: "y=3x-5", display: "{{y = 3x - 5}}" },
             solution:
               "{{m = (7 - (-2))/(4 - 1) = 9/3 = 3}}. Then {{y + 2 = 3(x - 1)}}, so {{y = 3x - 3 - 2 = 3x - 5}}. Check {{(4, 7)}}: {{12 - 5 = 7}} ✓.",
           },
@@ -242,7 +242,7 @@ export const guide: TopicGuide = {
           yourTurn: {
             question:
               "Your turn: find the equation of the line that is parallel to {{3x + y = 7}} and passes through {{(-1, 4)}}. Give your answer in the form {{y = mx + c}}.",
-            answer: { type: "expression", expr: "-3x+1", display: "{{y = -3x + 1}}" },
+            answer: { type: "equation", eq: "y=-3x+1", display: "{{y = -3x + 1}}" },
             solution:
               "{{3x + y = 7}} is {{y = -3x + 7}}, gradient −3. Parallel line: {{y - 4 = -3(x + 1)}}, so {{y = -3x - 3 + 4 = -3x + 1}}.",
           },
@@ -262,7 +262,7 @@ export const guide: TopicGuide = {
           yourTurn: {
             question:
               "Your turn: the point {{(1, 3)}} lies on the line {{x + 2y = 7}}. Find the equation of the normal to this line at {{(1, 3)}}. Give your answer in the form {{y = mx + c}}.",
-            answer: { type: "expression", expr: "2x+1", display: "{{y = 2x + 1}}" },
+            answer: { type: "equation", eq: "y=2x+1", display: "{{y = 2x + 1}}" },
             solution:
               "{{x + 2y = 7}} gives {{y = -1/2 x + 7/2}}, gradient {{-1/2}}. Normal gradient 2. {{y - 3 = 2(x - 1)}}, so {{y = 2x + 1}}.",
           },
@@ -329,10 +329,10 @@ export const guide: TopicGuide = {
           answer: "18.75 square units",
           yourTurn: {
             question:
-              "Your turn: find the area of the triangle bounded by {{y = x + 2}}, {{y = -2x + 8}} and the x-axis. Give your answer in square units.",
-            answer: { type: "number", value: 12 },
+              "Your turn: find the area of the triangle bounded by {{y = x + 3}}, {{y = -x + 5}} and the x-axis. Give your answer in square units.",
+            answer: { type: "number", value: 16 },
             solution:
-              "x-intercepts: {{(-2, 0)}} and {{(4, 0)}}, so the base is 6. The lines meet where {{x + 2 = -2x + 8}}: {{x = 2}}, {{y = 4}}, so the height is 4. Area {{= 1/2 * 6 * 4 = 12}} square units.",
+              "x-intercepts: {{(-3, 0)}} and {{(5, 0)}}, so the base is 8. The lines meet where {{x + 3 = -x + 5}}: {{x = 1}}, {{y = 4}}, so the height is 4. Area {{= 1/2 * 8 * 4 = 16}} square units.",
           },
         },
       ],

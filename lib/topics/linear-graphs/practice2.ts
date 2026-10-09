@@ -106,15 +106,15 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p3-q04",
         question: "A straight line has gradient 4 and passes through the point (3, −1).\n\nFind the equation of the line. Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "4x-13", display: "y = 4x − 13" },
+        answer: { type: "equation", eq: "y=4x-13", display: "y = 4x − 13" },
         traps: [
           {
-            spec: { type: "expression", expr: "4x-11" },
+            spec: { type: "equation", eq: "y=4x-11" },
             feedback:
               "Sign slip with y₁. The point has y₁ = −1, so y − y₁ = y − (−1) = y + 1. Then y + 1 = 4(x − 3) gives y = 4x − 13.",
           },
           {
-            spec: { type: "expression", expr: "4x+11" },
+            spec: { type: "equation", eq: "y=4x+11" },
             feedback: "Check by substituting x = 3: 4(3) + 11 = 23, not −1. In y − y₁ = m(x − x₁), use x − 3, not x + 3.",
           },
         ],
@@ -209,14 +209,14 @@ export const morePapers: Paper[] = [
         id: "linear-graphs-p3-q07",
         question:
           "The line L has equation 2x − 3y = 6.\n\nFind the equation of the line that is perpendicular to L and passes through the point (4, 1). Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "-1.5x+7", display: "{{y = -3/2 x + 7}}" },
+        answer: { type: "equation", eq: "y=-1.5x+7", display: "{{y = -3/2 x + 7}}" },
         traps: [
           {
-            spec: { type: "expression", expr: "2x/3-5/3" },
+            spec: { type: "equation", eq: "y=2x/3-5/3" },
             feedback: "That line has gradient {{2/3}} — it is *parallel* to L. A perpendicular gradient is the negative reciprocal: {{-3/2}}.",
           },
           {
-            spec: { type: "expression", expr: "-2x/3+11/3" },
+            spec: { type: "equation", eq: "y=-2x/3+11/3" },
             feedback: "You changed the sign but didn't flip the fraction. The negative reciprocal of {{2/3}} is {{-3/2}}.",
           },
         ],
@@ -507,18 +507,18 @@ export const morePapers: Paper[] = [
         id: "linear-graphs-p4-q01",
         question: "The graph shows the straight line L.\n\nFind an equation of L. Give your answer in the form y = mx + c.",
         diagram: `<svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid from x = -1 to 7 and y = -1 to 5 with a straight line L passing through (0, 3), (2, 2), (4, 1) and (6, 0)"><rect x="0" y="0" width="360" height="280" fill="#ffffff"/><path d="M20 20V260M60 20V260M100 20V260M140 20V260M180 20V260M220 20V260M260 20V260M300 20V260M340 20V260M20 20H340M20 60H340M20 100H340M20 140H340M20 180H340M20 220H340M20 260H340" stroke="#e2e8f0" stroke-width="1"/><line x1="20" y1="220" x2="345" y2="220" stroke="#334155" stroke-width="1.5"/><line x1="60" y1="265" x2="60" y2="15" stroke="#334155" stroke-width="1.5"/><text x="350" y="224" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="56" y="12" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="middle"><text x="20" y="234">−1</text><text x="100" y="234">1</text><text x="140" y="234">2</text><text x="180" y="234">3</text><text x="220" y="234">4</text><text x="260" y="234">5</text><text x="300" y="234">6</text><text x="340" y="234">7</text></g><g font-size="11" font-family="sans-serif" fill="#334155" text-anchor="end"><text x="54" y="264">−1</text><text x="54" y="184">1</text><text x="54" y="144">2</text><text x="54" y="104">3</text><text x="54" y="64">4</text><text x="54" y="24">5</text><text x="54" y="234">O</text></g><line x1="20" y1="80" x2="340" y2="240" stroke="#1d4ed8" stroke-width="2.5"/><circle cx="60" cy="100" r="3.5" fill="#1d4ed8"/><circle cx="300" cy="220" r="3.5" fill="#1d4ed8"/><text x="318" y="252" font-size="13" font-family="sans-serif" fill="#1d4ed8">L</text></svg>`,
-        answer: { type: "expression", expr: "-0.5x+3", display: "{{y = -1/2 x + 3}}" },
+        answer: { type: "equation", eq: "y=-0.5x+3", display: "{{y = -1/2 x + 3}}" },
         traps: [
           {
-            spec: { type: "expression", expr: "-2x+3" },
+            spec: { type: "equation", eq: "y=-2x+3" },
             feedback: "That's run ÷ rise. From (0, 3) to (6, 0), y drops 3 while x goes up 6, so the gradient is {{(-3)/6 = -1/2}}.",
           },
           {
-            spec: { type: "expression", expr: "0.5x+3" },
+            spec: { type: "equation", eq: "y=0.5x+3" },
             feedback: "The line goes *down* from left to right, so its gradient is negative.",
           },
           {
-            spec: { type: "expression", expr: "-0.5x+6" },
+            spec: { type: "equation", eq: "y=-0.5x+6" },
             feedback: "c is where the line crosses the **y**-axis (at 3), not the x-axis (at 6).",
           },
         ],
@@ -645,14 +645,14 @@ export const morePapers: Paper[] = [
         id: "linear-graphs-p4-q06",
         question:
           "A is the point (2, 3) and B is the point (8, −5).\n\nFind an equation of the perpendicular bisector of AB. Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "3x/4-19/4", display: "{{y = 3/4 x - 19/4}}" },
+        answer: { type: "equation", eq: "y=3x/4-19/4", display: "{{y = 3/4 x - 19/4}}" },
         traps: [
           {
-            spec: { type: "expression", expr: "-4x/3+17/3" },
+            spec: { type: "equation", eq: "y=-4x/3+17/3" },
             feedback: "That line has the same gradient as AB. The perpendicular bisector needs the negative reciprocal of {{-4/3}}, which is {{3/4}}.",
           },
           {
-            spec: { type: "expression", expr: "3x/4+3/2" },
+            spec: { type: "equation", eq: "y=3x/4+3/2" },
             feedback: "Right gradient, but your line goes through A. A *bisector* passes through the midpoint of AB, (5, −1).",
           },
         ],
@@ -679,14 +679,14 @@ export const morePapers: Paper[] = [
         id: "linear-graphs-p4-q07",
         question:
           "The line L has equation y = 4 − 2x. The point P(3, −2) lies on L.\n\nFind an equation of the normal to L at P. Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "0.5x-3.5", display: "{{y = 1/2 x - 7/2}}" },
+        answer: { type: "equation", eq: "y=0.5x-3.5", display: "{{y = 1/2 x - 7/2}}" },
         traps: [
           {
-            spec: { type: "expression", expr: "2x-8" },
+            spec: { type: "equation", eq: "y=2x-8" },
             feedback: "A normal is perpendicular to L. The gradient of L is −2, so the normal's gradient is the negative reciprocal, {{1/2}}, not 2.",
           },
           {
-            spec: { type: "expression", expr: "-0.5x-0.5" },
+            spec: { type: "equation", eq: "y=-0.5x-0.5" },
             feedback: "You flipped −2 to {{-1/2}} but kept the negative sign. Negative reciprocal: flip *and* change sign, giving {{+1/2}}.",
           },
         ],
@@ -879,18 +879,18 @@ export const morePapers: Paper[] = [
         id: "linear-graphs-p4-q13",
         question:
           "A is the point (−3, −2) and B is the point (9, 7). The point P lies on AB such that AP : PB = 2 : 1.\n\nThe line N passes through P and is perpendicular to AB. Find an equation of N. Give your answer in the form y = mx + c.",
-        answer: { type: "expression", expr: "-4x/3+32/3", display: "{{y = -4/3 x + 32/3}} (or 4x + 3y = 32)" },
+        answer: { type: "equation", eq: "y=-4x/3+32/3", display: "{{y = -4/3 x + 32/3}} (or 4x + 3y = 32)" },
         traps: [
           {
-            spec: { type: "expression", expr: "-4x/3+7/3" },
+            spec: { type: "equation", eq: "y=-4x/3+7/3" },
             feedback: "Your line goes through (1, 1), which is the point with AP : PB = 1 : 2. P is {{2/3}} of the way from A to B: (5, 4).",
           },
           {
-            spec: { type: "expression", expr: "-4x/3+6.5" },
+            spec: { type: "equation", eq: "y=-4x/3+6.5" },
             feedback: "Your line goes through the midpoint of AB, (3, 2.5). P divides AB in the ratio 2 : 1, so P is {{2/3}} of the way from A: (5, 4).",
           },
           {
-            spec: { type: "expression", expr: "3x/4+1/4" },
+            spec: { type: "equation", eq: "y=3x/4+1/4" },
             feedback: "That line has the same gradient as AB. N is *perpendicular* to AB, so its gradient is {{-4/3}}.",
           },
         ],

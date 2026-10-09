@@ -494,7 +494,7 @@ export const drills: Drill[] = [
         if (ask === "both") {
           q = `How many of them ${both2(ctx.p, ctx.q).replace(" and ", " **and** ")}?`;
           ans = both;
-          extra = `So ${both} ${ctx.p} and ${ctx.q}.`;
+          extra = `So ${both} ${both2(ctx.p, ctx.q)}.`;
           cands = [[nP + nQ - N, "You forgot the people who do neither — take them out of the total first."]];
         } else if (ask === "pOnly") {
           q = `How many of them ${ctx.p} only?`;
