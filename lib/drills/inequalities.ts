@@ -19,8 +19,6 @@ const isLess = (op: Op): boolean => op[0] === "<";
 const mkOp = (less: boolean, incl: boolean): Op => (less ? (incl ? "<=" : "<") : incl ? ">=" : ">");
 /** Same direction, inclusive-ness toggled. */
 const toggleIncl = (op: Op): Op => mkOp(isLess(op), !isIncl(op));
-/** Plain-text symbol. */
-const SYM: Record<Op, string> = { "<": "<", "<=": "≤", ">": ">", ">=": "≥" };
 const pickOp = (rng: Rng): Op => rng.pick(["<", "<=", ">", ">="] as const);
 
 // ---------- rationals ----------

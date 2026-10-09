@@ -278,10 +278,10 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "number-bounds-p3-q11",
         question:
-          "A water tank holds 85 litres of water, correct to the nearest litre. Jun pours out 23.6 litres, correct to 1 decimal place.\n\nMarcus works out the greatest possible amount of water left in the tank:\n\n    Greatest amount left = 85.5 − 23.65 = 61.85 litres\n\nMarcus is wrong. Explain the mistake he has made and work out the correct greatest amount.",
+          "A water tank holds 85 litres of water, correct to the nearest litre. Jun pours out 23.6 litres, correct to 1 decimal place.\n\nEthan works out the greatest possible amount of water left in the tank:\n\n    Greatest amount left = 85.5 − 23.65 = 61.85 litres\n\nEthan is wrong. Explain the mistake he has made and work out the correct greatest amount.",
         marks: 3,
         modelAnswer:
-          "Marcus has subtracted the **upper** bound of the amount poured out. To make a difference as large as possible you take the largest first value and subtract the **smallest** second value.\n\nThe bounds of the amount poured out are 23.55 and 23.65 litres, so\n\n    Greatest amount left = 85.5 − 23.55 = 61.95 litres.",
+          "Ethan has subtracted the **upper** bound of the amount poured out. To make a difference as large as possible you take the largest first value and subtract the **smallest** second value.\n\nThe bounds of the amount poured out are 23.55 and 23.65 litres, so\n\n    Greatest amount left = 85.5 − 23.55 = 61.95 litres.",
         markScheme: [
           { point: "Identifies that he used the upper bound (23.65) of the amount poured out", keywords: ["23.65", "upper bound", "largest amount poured"] },
           { point: "Explains that a difference is greatest with upper − lower (subtract the smallest possible amount)", keywords: ["lower bound", "smallest", "23.55", "upper − lower", "upper - lower"] },

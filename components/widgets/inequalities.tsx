@@ -363,12 +363,6 @@ function QuadraticInequality() {
 
   const le = incl ? "<=" : "<";
   const ge = incl ? ">=" : ">";
-  // inequality holds at x?
-  const holds = (x: number): boolean => {
-    const v = cl(a * x * x + b * x + c);
-    return op === "<" ? v < 0 : op === "<=" ? v <= 0 : op === ">" ? v > 0 : v >= 0;
-  };
-
   const W = 360;
   const H = 300;
   const XM = 8;
@@ -398,8 +392,6 @@ function QuadraticInequality() {
   if (kind === "outside") segs.push([-XM - 1, r1], [r2, XM + 1]);
   if (kind === "all" || kind === "allBut") segs.push([-XM - 1, XM + 1]);
   const crit = D > 0 ? [r1, r2] : D === 0 ? [r1] : [];
-  // Critical values are included exactly when the sign is ≤ or ≥.
-  const critFilled = (_x: number): boolean => incl;
 
   const eq = `${quadMk(a, b, c)} ${op} 0`;
 
@@ -524,7 +516,7 @@ function QuadraticInequality() {
             ))}
             {crit.map((x, i) =>
               x >= -XM && x <= XM ? (
-                <circle key={i} cx={px(x)} cy={py(0)} r={5.5} className={`${critFilled(x) ? "fill-brand" : "fill-surface"} stroke-brand`} strokeWidth={2} />
+                <circle key={i} cx={px(x)} cy={py(0)} r={5.5} className={`${incl ? "fill-brand" : "fill-surface"} stroke-brand`} strokeWidth={2} />
               ) : null,
             )}
           </g>
@@ -549,7 +541,7 @@ function QuadraticInequality() {
           {kind === "point" ? <circle cx={px(r1)} cy={nlY - 12} r={5.5} className="fill-brand stroke-brand" strokeWidth={2} /> : null}
           {kind !== "point" && kind !== "none" && kind !== "all"
             ? crit.map((x, i) =>
-                x >= -XM && x <= XM ? <circle key={i} cx={px(x)} cy={nlY - 12} r={5.5} className={`${critFilled(x) && kind !== "allBut" ? "fill-brand" : "fill-surface"} stroke-brand`} strokeWidth={2} /> : null,
+                x >= -XM && x <= XM ? <circle key={i} cx={px(x)} cy={nlY - 12} r={5.5} className={`${incl && kind !== "allBut" ? "fill-brand" : "fill-surface"} stroke-brand`} strokeWidth={2} /> : null,
               )
             : null}
         </svg>
