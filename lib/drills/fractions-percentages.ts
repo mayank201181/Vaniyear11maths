@@ -427,7 +427,7 @@ export const drills: Drill[] = [
       let O = 5000, t = 200, up = false;
       const ctx = rng.pick([
         { up: false, make: (n: string, p: string) => `In a sale, all prices are reduced by ${p}. A jacket costs ${n} in the sale. Work out the price before the sale.` },
-        { up: true, make: (n: string, p: string) => `The price of a phone including 9% GST is ${n}. Work out the price before GST was added.`, fixed: 90 },
+        { up: true, make: (n: string, p: string) => `The price of a phone including ${p} GST is ${n}. Work out the price before GST was added.`, fixed: 90 },
         { up: true, make: (n: string, p: string) => `After a ${p} pay rise, ${rng.pick(NAMES)}'s weekly wage is ${n}. Work out the weekly wage before the rise.` },
         { up: false, make: (n: string, p: string) => `A car loses ${p} of its value in its first year. After one year it is worth ${n}. Work out its value when new.` },
         { up: true, make: (n: string, p: string) => `A school's CCA budget was increased by ${p} to ${n}. Work out the budget before the increase.` },

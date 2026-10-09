@@ -466,6 +466,19 @@ export function isFactorised(e: Expr): boolean {
   return factors.some((f) => (f.t === "group" && isSumLike(f.a)) || (f.t === "pow" && isSumLike(f.a)));
 }
 
+/** Number of bracketed sum factors in a product: 2(x−5)(x+5) → 2, (x+1)²(x−3) → 3, 2(x²−25) → 1. */
+export function countSumFactors(e: Expr): number {
+  let x = e;
+  while (x.t === "neg" || (x.t === "group" && !isSumLike(x.a))) x = x.a;
+  if (isSumLike(x)) return 1;
+  if (x.t === "pow") {
+    const n = x.b.t === "num" && Number.isInteger(x.b.v) && x.b.v > 0 ? x.b.v : 1;
+    return isSumLike(x.a) ? n : 0;
+  }
+  if (x.t === "mul") return countSumFactors(x.a) + countSumFactors(x.b);
+  return 0;
+}
+
 type Mono = { c: number; vars: Record<string, number> };
 
 /** A single term like −6x²y as {c: −6, vars: {x: 2, y: 1}}; null if it isn't a simple monomial. */

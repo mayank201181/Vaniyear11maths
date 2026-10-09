@@ -13,6 +13,7 @@ import type { AnswerSpec } from "./types.ts";
 import {
   countTerms,
   countSumOps,
+  countSumFactors,
   surdFormIssue,
   evalExpr,
   exprEquivalent,
@@ -351,6 +352,9 @@ function checkExpression(spec: Extract<AnswerSpec, { type: "expression" }>, inpu
   }
   if (form === "factorised" && hasCommonFactorInBracket(got) && !hasCommonFactorInBracket(expected)) {
     return { status: "close", feedback: "Equivalent and factorised — but not fully. There's still a common factor inside the bracket." };
+  }
+  if (form === "factorised" && countSumFactors(got) < countSumFactors(expected)) {
+    return { status: "close", feedback: "Equivalent and factorised — but not fully. One of your brackets can be factorised further (look for a difference of two squares or a quadratic)." };
   }
   if (form === "expanded" && hasGroup(got)) {
     return { status: "close", feedback: "That's equivalent — now multiply out the brackets." };
