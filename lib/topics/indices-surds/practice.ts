@@ -124,7 +124,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "indices-surds-quiz-q07",
       question: "Simplify {{sqrt(50) + sqrt(18)}}. Give your answer in the form {{k sqrt(2)}}.",
-      answer: { type: "expression", expr: "8sqrt(2)", display: "{{8sqrt(2)}}" },
+      answer: { type: "expression", expr: "8sqrt(2)", form: "surd", display: "{{8sqrt(2)}}" },
       solution: [
         "{{sqrt(50) = sqrt(25 * 2) = 5sqrt(2)}}.",
         "{{sqrt(18) = sqrt(9 * 2) = 3sqrt(2)}}.",
@@ -144,7 +144,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "indices-surds-quiz-q08",
       question: "Expand and simplify {{(3 + sqrt(2))(4 - sqrt(2))}}. Give your answer in the form {{a + b sqrt(2)}}.",
-      answer: { type: "expression", expr: "10+sqrt(2)", form: "simplified", display: "{{10 + sqrt(2)}}" },
+      answer: { type: "expression", expr: "10+sqrt(2)", form: "surd", display: "{{10 + sqrt(2)}}" },
       solution: [
         "Multiply every term by every term: {{3 * 4 = 12}}, {{3 * (-sqrt(2)) = -3sqrt(2)}}, {{sqrt(2) * 4 = 4sqrt(2)}}, {{sqrt(2) * (-sqrt(2)) = -2}}.",
         "Total: {{12 - 3sqrt(2) + 4sqrt(2) - 2}}.",
@@ -177,7 +177,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "indices-surds-quiz-q10",
       question: "Rationalise the denominator of {{4/(3 - sqrt(5))}}. Give your answer in the form {{a + b sqrt(5)}}, where a and b are integers.",
-      answer: { type: "expression", expr: "3+sqrt(5)", form: "simplified", display: "{{3 + sqrt(5)}}" },
+      answer: { type: "expression", expr: "3+sqrt(5)", form: "surd", display: "{{3 + sqrt(5)}}" },
       solution: [
         "Multiply top and bottom by the conjugate {{3 + sqrt(5)}}.",
         "Denominator: {{(3 - sqrt(5))(3 + sqrt(5)) = 9 - 5 = 4}}.",
@@ -212,7 +212,7 @@ export const practice: TopicPractice = {
           solution: ["Multiply: add the indices, {{x^5 * x^3 = x^8}}.", "Divide: subtract the indices, {{x^8 / x^2 = x^6}}."],
           commonError: "Multiplying the indices ({{x^15}}) instead of adding them.",
           traps: [
-            { spec: { type: "expression", expr: "x^(15/2)" }, feedback: "When you multiply powers of the same base, *add* the indices: 5 + 3 = 8." },
+            { spec: { type: "expression", expr: "x^13" }, feedback: "When you multiply powers of the same base, *add* the indices: 5 + 3 = 8, not 5 × 3 = 15." },
             { spec: { type: "expression", expr: "x^4" }, feedback: "When you divide, subtract the indices: 8 − 2 = 6, not 8 ÷ 2." },
           ],
           difficulty: "warmup",
@@ -755,7 +755,7 @@ export const practice: TopicPractice = {
           commonError: "Raising to the power {{-3/2}} instead of the inverse power {{-2/3}}, or forgetting to divide by 4 first.",
           traps: [
             { spec: { type: "fraction", n: 1, d: 4 }, feedback: "Check the sign: {{x^(3/2) = 8}}, so x is bigger than 1. Did you lose the reciprocal?" },
-            { spec: { type: "number", value: 16 }, feedback: "Divide by 4 first: {{x^(-3/2) = 1/8}}, not {{1/2}}." },
+            { spec: { type: "number", value: 64 }, feedback: "{{x^(3/2) = 8}} is undone by the power {{2/3}} (cube root, then square): {{8^(2/3) = 4}}. Squaring 8 is not the inverse." },
           ],
           difficulty: "challenge",
           guideRef: "harder-index-equations",
@@ -770,7 +770,7 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "indices-surds-p2-q12",
           question: "Expand and simplify {{(2sqrt(3) - 1)^2}}. Give your answer in the form {{a + b sqrt(3)}}.",
-          answer: { type: "expression", expr: "13-4sqrt(3)", form: "simplified", display: "{{13 - 4sqrt(3)}}" },
+          answer: { type: "expression", expr: "13-4sqrt(3)", form: "surd", display: "{{13 - 4sqrt(3)}}" },
           solution: [
             "{{(2sqrt(3) - 1)(2sqrt(3) - 1)}}.",
             "{{(2sqrt(3))^2 = 4 * 3 = 12}}; middle terms {{-2sqrt(3) - 2sqrt(3) = -4sqrt(3)}}; last term +1.",
@@ -818,7 +818,7 @@ export const practice: TopicPractice = {
           id: "indices-surds-p2-q14",
           question:
             "Rationalise the denominator of {{(sqrt(5) + 1)/(sqrt(5) - 1)}}. Give your answer in the form {{(a + sqrt(b))/c}}, where a, b and c are integers.",
-          answer: { type: "expression", expr: "(3+sqrt(5))/2", display: "{{(3 + sqrt(5))/2}}" },
+          answer: { type: "expression", expr: "(3+sqrt(5))/2", form: "surd", display: "{{(3 + sqrt(5))/2}}" },
           solution: [
             "Multiply top and bottom by the conjugate {{sqrt(5) + 1}}.",
             "Denominator: {{(sqrt(5) - 1)(sqrt(5) + 1) = 5 - 1 = 4}}.",
@@ -1054,7 +1054,7 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "indices-surds-ch-q08",
       question: "Expand and simplify {{(sqrt(3) + sqrt(2))^4}}. Give your answer in the form {{a + b sqrt(6)}}.",
-      answer: { type: "expression", expr: "49+20sqrt(6)", form: "simplified", display: "{{49 + 20sqrt(6)}}" },
+      answer: { type: "expression", expr: "49+20sqrt(6)", form: "surd", display: "{{49 + 20sqrt(6)}}" },
       solution: [
         "Square first: {{(sqrt(3) + sqrt(2))^2 = 3 + 2sqrt(6) + 2 = 5 + 2sqrt(6)}}.",
         "Square again: {{(5 + 2sqrt(6))^2 = 25 + 20sqrt(6) + 4 * 6}}.",
@@ -1083,7 +1083,7 @@ export const practice: TopicPractice = {
       id: "indices-surds-ch-q09",
       question:
         "Rationalise the denominator of {{1/(1 + sqrt(2) + sqrt(3))}}. Give your answer in the form {{(a + sqrt(b) - sqrt(c))/d}}, where a, b, c and d are integers.",
-      answer: { type: "expression", expr: "(2+sqrt(2)-sqrt(6))/4", display: "{{(2 + sqrt(2) - sqrt(6))/4}}" },
+      answer: { type: "expression", expr: "(2+sqrt(2)-sqrt(6))/4", form: "surd", display: "{{(2 + sqrt(2) - sqrt(6))/4}}" },
       solution: [
         "Group the denominator as {{(1 + sqrt(2)) + sqrt(3)}} and multiply top and bottom by {{(1 + sqrt(2)) - sqrt(3)}}.",
         "Denominator: {{(1 + sqrt(2))^2 - 3 = 3 + 2sqrt(2) - 3 = 2sqrt(2)}}.",

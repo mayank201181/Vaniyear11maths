@@ -944,7 +944,7 @@ export const drills: Drill[] = [
           const traps: Trap[] = [{ spec: { type: "expression", expr: `${k}/(${denCoef}sqrt(${a}))` }, feedback: "That has the right value, but the denominator still contains a surd — multiply top and bottom by the surd." }];
           traps.push({ spec: ratAns(N, D), feedback: `You've lost the surd on top: {{${k} * sqrt(${a})}} stays as a surd.` });
           return {
-            prompt: `Rationalise the denominator of {{${k}/${denM}}}. Give your answer in its simplest form.`,
+            prompt: `Rationalise the denominator of {{${k}/(${denM})}}. Give your answer in its simplest form.`,
             answer: fracSurdAns(N, D, a),
             solution: [
               ...(kk > 1 ? [`First simplify: {{sqrt(${kk * kk * a}) = ${kk}sqrt(${a})}}.`] : []),

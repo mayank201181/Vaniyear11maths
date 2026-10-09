@@ -24,6 +24,13 @@ function localPath(key: string): string {
   return path.join(LOCAL_DIR as string, safe);
 }
 
+// A Blob store connected with a custom env-var prefix (e.g. STORE_READ_WRITE_TOKEN) still works:
+// adopt the first Vercel Blob read-write token we find under the default name the SDK reads.
+if (!process.env.BLOB_READ_WRITE_TOKEN) {
+  const found = Object.entries(process.env).find(([k, v]) => k.endsWith("_READ_WRITE_TOKEN") && typeof v === "string" && v.startsWith("vercel_blob_rw_"));
+  if (found) process.env.BLOB_READ_WRITE_TOKEN = found[1];
+}
+
 export function blobConfigured(): boolean {
   return !!process.env.BLOB_READ_WRITE_TOKEN || !!LOCAL_DIR;
 }

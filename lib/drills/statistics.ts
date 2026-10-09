@@ -1250,14 +1250,16 @@ const raw: Drill[] = [
   },
 ];
 
-/** Simplified fraction markup for positive n/d (whole numbers stay whole). */
+/** Positive n/d: a whole number, a terminating decimal (≤ 3 d.p.) or a simplified {{fraction}}. */
 function frac2(n: number, d: number): string {
   let a = n;
   let b = d;
   while (b) [a, b] = [b, a % b];
   const nn = n / a;
   const dd = d / a;
-  return dd === 1 ? String(nn) : `{{${nn}/${dd}}}`;
+  if (dd === 1) return String(nn);
+  if ((nn * 1000) % dd === 0) return num(clean(nn / dd));
+  return `{{${nn}/${dd}}}`;
 }
 
 // The two discrete-table skills share one drill: mean (incl. a missing frequency at tier 3),

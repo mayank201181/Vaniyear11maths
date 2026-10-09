@@ -139,6 +139,16 @@ function QuadraticExplorer() {
   const sqForm = `${a === 1 ? "" : a === -1 ? "-" : a}${bracket}${kMk === "0" ? "" : kMk.startsWith("-") ? ` - ${kMk.slice(1)}` : ` + ${kMk}`}`;
 
   const nRoots = D > 0 ? 2 : D === 0 ? 1 : 0;
+  const exactNode = (
+    <>
+      {exact.map((r, i) => (
+        <span key={r}>
+          {i ? " or " : ""}
+          <M>{`x = ${r}`}</M>
+        </span>
+      ))}
+    </>
+  );
   const aria = `Graph of y = ${eq.replace(" = 0", "")}. Discriminant ${D}. ${nRoots === 0 ? "No real roots: the curve does not meet the x-axis." : nRoots === 1 ? `One repeated root at x = ${fmt(h)}: the curve touches the x-axis.` : `Two roots at x = ${fmt(roots[0])} and x = ${fmt(roots[1])}.`} Vertex at (${fmt(h)}, ${fmt(k)}).`;
 
   let caption: ReactNode;
@@ -251,7 +261,7 @@ function QuadraticExplorer() {
                   <>√ of a negative number — no real solutions.</>
                 ) : (
                   <>
-                    Exact: <M>{`x = ${exact.join(" or x = ")}`}</M>
+                    Exact: {exactNode}
                     {D > 0 && !Number.isInteger(Math.sqrt(D)) ? (
                       <>
                         {" "}
@@ -277,7 +287,7 @@ function QuadraticExplorer() {
                   </>
                 ) : (
                   <>
-                    <M>{`${bracket} = ${fracMk(b * b - 4 * a * c, 4 * a * a)}`}</M>, so <M>{`x = ${exact.join(" or x = ")}`}</M>
+                    <M>{`${bracket} = ${fracMk(b * b - 4 * a * c, 4 * a * a)}`}</M>, so {exactNode}
                   </>
                 )}
               </li>

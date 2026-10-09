@@ -90,7 +90,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: -4, display: "n = −4" },
         traps: [
           { spec: { type: "number", value: 4 }, feedback: "{{3^4 = 81}}, but you want {{1/81}} — the reciprocal. Reciprocals come from **negative** indices." },
-          { spec: { type: "number", value: -27 }, feedback: "81 is {{3^4}}, not 3 × 27 as a power. Write 81 as a power of 3 first." },
+          { spec: { type: "number", value: -3 }, feedback: "{{3^3 = 27}}, not 81. Since {{3^4 = 81}}, {{1/81 = 3^(-4)}}." },
         ],
         solution: ["{{81 = 3^4}}.", "{{1/81 = 1/3^4 = 3^(-4)}}.", "So n = −4."],
         commonError: "Writing n = 4 and forgetting that one over means a negative power.",
@@ -157,7 +157,7 @@ export const morePapers: Paper[] = [
         question: "Without using a calculator, show that {{16^(3/4) - 8^(-2/3) = 31/4}}.\n\nShow your working clearly.",
         marks: 3,
         modelAnswer:
-          "{{16^(3/4) = (root4(16))^3}}: the fourth root of 16 is 2, and {{2^3 = 8}}.\n\n{{8^(-2/3) = 1/8^(2/3)}}. The cube root of 8 is 2, and {{2^2 = 4}}, so {{8^(-2/3) = 1/4}}.\n\n{{8 - 1/4 = 32/4 - 1/4 = 31/4}}, as required.",
+          "{{16^(3/4) = (16^(1/4))^3}}: the fourth root of 16 is 2, and {{2^3 = 8}}.\n\n{{8^(-2/3) = 1/8^(2/3)}}. The cube root of 8 is 2, and {{2^2 = 4}}, so {{8^(-2/3) = 1/4}}.\n\n{{8 - 1/4 = 32/4 - 1/4 = 31/4}}, as required.",
         markScheme: [
           { point: "16^(3/4) = 8 (fourth root of 16 is 2, then cubed)", keywords: ["8", "2^3", "fourth root", "2 cubed"] },
           { point: "8^(−2/3) = 1/4 (cube root 2, squared 4, reciprocal)", keywords: ["1/4", "0.25", "reciprocal", "cube root", "one over"] },
@@ -322,7 +322,7 @@ export const morePapers: Paper[] = [
         solution: [
           "Divide by 2: {{x^(5/2) = 243}}.",
           "Raise both sides to the power {{2/5}}: {{x = 243^(2/5)}}.",
-          "Fifth root first: {{root5(243) = 3}} (since {{3^5 = 243}}). Then square: {{3^2 = 9}}.",
+          "Fifth root first: {{243^(1/5) = 3}} (since {{3^5 = 243}}). Then square: {{3^2 = 9}}.",
           "Check: {{9^(5/2) = (sqrt(9))^5 = 3^5 = 243}}, and 2 × 243 = 486 ✓.",
         ],
         solutions: [
@@ -434,9 +434,9 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 27 },
         traps: [
           { spec: { type: "number", value: 60.75 }, feedback: "A fractional index isn't a multiplier. {{81^(3/4)}} means the fourth root of 81, cubed." },
-          { spec: { type: "number", value: 729 }, feedback: "That is {{81^(3/2)}}. The denominator 4 means the **fourth** root: {{root4(81) = 3}}." },
+          { spec: { type: "number", value: 729 }, feedback: "That is {{81^(3/2)}}. The denominator 4 means the **fourth** root: {{81^(1/4) = 3}}." },
         ],
-        solution: ["The denominator 4 means fourth root: {{root4(81) = 3}} (since {{3^4 = 81}}).", "The numerator 3 means cube: {{3^3 = 27}}."],
+        solution: ["The denominator 4 means fourth root: {{81^(1/4) = 3}} (since {{3^4 = 81}}).", "The numerator 3 means cube: {{3^3 = 27}}."],
         commonError: "Multiplying 81 by {{3/4}}.",
         difficulty: "warmup",
         guideRef: "negative-fractional-indices",
@@ -725,7 +725,6 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 3, display: "x = 3" },
         traps: [
           { spec: { type: "number", value: 125 }, feedback: "125 is the value of {{5^x}}. Now solve {{5^x = 125}} for x." },
-          { spec: { type: "number", value: 3.5 }, feedback: "{{5^(x+1) + 5^x}} is not {{5^(2x+1)}} — you can't add powers by adding indices. Factorise out {{5^x}} instead." },
         ],
         solution: [
           "{{5^(x+1) = 5 * 5^x}}, so the left side is {{5 * 5^x + 5^x = 6 * 5^x}}.",
