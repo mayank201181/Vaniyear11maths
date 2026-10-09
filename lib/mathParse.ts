@@ -552,7 +552,8 @@ export function hasCommonFactorInBracket(e: Expr): boolean {
   return false;
 }
 
-const SAMPLE_POINTS = [1.37, -0.73, 2.21, 0.46, -1.93, 3.17, 0.89, -2.41];
+// Small values first; larger ones keep restricted domains (√(x − 5), 1/(x − 9) …) checkable.
+const SAMPLE_POINTS = [1.37, -0.73, 2.21, 0.46, -1.93, 3.17, 0.89, -2.41, 7.43, -6.37, 11.29, 15.71, 19.7, 23.9, 31.3, 41.9];
 
 /** Numeric equivalence by evaluation at several pseudo-random points. */
 export function exprEquivalent(a: Expr, b: Expr): boolean {

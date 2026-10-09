@@ -340,11 +340,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "further-trigonometry-m2-q08",
-        question: "Solve cos x = −0.3 for 0° ≤ x ≤ 360°. Give your answers correct to 1 decimal place.",
-        options: ["107.5° and 72.5°", "107.5° and 252.5°", "107.5° and 287.5°", "72.5° and 287.5°"],
+        question: "Solve cos x = −0.6 for 0° ≤ x ≤ 360°. Give your answers correct to 1 decimal place.",
+        options: ["126.9° and 53.1°", "126.9° and 233.1°", "126.9° and 306.9°", "53.1° and 306.9°"],
         answerIndex: 1,
         explanation:
-          "{{cos^(-1)(-0.3)}} = 107.5°. The cos graph is symmetrical about x = 180°, so the other solution is 360° − 107.5° = 252.5°. Both are between 90° and 270°, where cos x is negative ✓. 72.5° (180° − 107.5°) uses the **sine** symmetry and has cos 72.5° = +0.3. 287.5° (180° + 107.5°) is not symmetric for cos. 72.5° and 287.5° solve cos x = +0.3 — the minus sign was dropped.",
+          "{{cos^(-1)(-0.6)}} = 126.9°. The cos graph is symmetrical about x = 180°, so the other solution is 360° − 126.9° = 233.1°. Both are between 90° and 270°, where cos x is negative ✓. 53.1° (180° − 126.9°) uses the **sine** symmetry and has cos 53.1° = +0.6. 306.9° (180° + 126.9°) is not symmetric for cos. 53.1° and 306.9° solve cos x = +0.6 — the minus sign was dropped.",
         difficulty: "core",
         guideRef: "trig-graphs",
         hints: ["Use the calculator for the first value, then sketch y = cos x.", "cos x is symmetrical about x = 180°: the second value is 360° − (first)."],

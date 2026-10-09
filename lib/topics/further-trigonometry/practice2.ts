@@ -751,28 +751,28 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "further-trigonometry-p4-q13",
         question:
-          "Prove that {{tan x + 1/(tan x) = 1/(sin x cos x)}} for all values of x where both sides are defined.",
+          "Prove that {{sin^4 x - cos^4 x = 1 - 2cos^2 x}} for all values of x.",
         marks: 3,
         modelAnswer:
-          "Start with the left-hand side and write tan x as {{(sin x)/(cos x)}}:\n\nLHS = {{(sin x)/(cos x) + (cos x)/(sin x)}}\n\nCommon denominator sin x cos x:\n\nLHS = {{(sin^2 x + cos^2 x)/(sin x cos x)}}\n\nSince {{sin^2 x + cos^2 x = 1}}, LHS = {{1/(sin x cos x)}} = RHS, as required.",
+          "Start with the left-hand side. It is a difference of two squares:\n\nLHS = {{(sin^2 x)^2 - (cos^2 x)^2 = (sin^2 x - cos^2 x)(sin^2 x + cos^2 x)}}\n\nSince {{sin^2 x + cos^2 x = 1}}, LHS = {{sin^2 x - cos^2 x}}.\n\nReplace {{sin^2 x}} by {{1 - cos^2 x}}: LHS = {{1 - cos^2 x - cos^2 x = 1 - 2cos^2 x}} = RHS, as required.",
         markScheme: [
-          { point: "Replaces tan x by sin x / cos x (and 1/tan x by cos x / sin x)", keywords: ["sin x / cos x", "sinx/cosx", "cos x / sin x", "cosx/sinx", "sin x/cos x"] },
-          { point: "Combines over the common denominator sin x cos x to get (sin²x + cos²x) / (sin x cos x)", keywords: ["common denominator", "sin x cos x", "sin^2 x + cos^2 x", "sin²x + cos²x"] },
-          { point: "Uses sin²x + cos²x = 1 to reach the RHS", keywords: ["= 1", "=1", "identity", "rhs", "as required"] },
+          { point: "Factorises sin⁴x − cos⁴x as a difference of two squares: (sin²x − cos²x)(sin²x + cos²x)", keywords: ["difference of two squares", "(sin^2 x - cos^2 x)(sin^2 x + cos^2 x)", "(sin²x − cos²x)(sin²x + cos²x)", "factorise"] },
+          { point: "Uses sin²x + cos²x = 1 to get sin²x − cos²x", keywords: ["= 1", "sin^2 x - cos^2 x", "sin²x − cos²x", "identity"] },
+          { point: "Replaces sin²x by 1 − cos²x to reach 1 − 2cos²x", keywords: ["1 - cos^2 x", "1 − cos²x", "1 - 2cos^2 x", "1 − 2cos²x", "as required", "rhs"] },
         ],
-        commonError: "Writing {{1/(tan x) = tan x}} or adding the fractions by adding numerators and denominators.",
+        commonError: "Writing {{sin^4 x - cos^4 x = (sin x - cos x)^4}}, or expanding instead of spotting the difference of two squares.",
         solutions: [
-          { label: "Work from the LHS (sin/cos)", steps: ["Convert to sin and cos, combine the fractions, use {{sin^2 x + cos^2 x = 1}}. The standard route."] },
-          { label: "Multiply out the LHS with t = tan x", steps: ["{{t + 1/t = (t^2 + 1)/t}}. With {{t = (sin x)/(cos x)}}: {{t^2 + 1 = (sin^2 x + cos^2 x)/(cos^2 x) = 1/(cos^2 x)}}, so {{(t^2 + 1)/t = 1/(cos^2 x) * (cos x)/(sin x) = 1/(sin x cos x)}}."] },
+          { label: "Difference of two squares (quickest)", steps: ["Treat {{sin^2 x}} as a and {{cos^2 x}} as b: {{a^2 - b^2 = (a - b)(a + b)}}, and a + b = 1. Two lines of algebra."] },
+          { label: "Substitute first", steps: ["{{sin^4 x = (1 - cos^2 x)^2 = 1 - 2cos^2 x + cos^4 x}}.", "So {{sin^4 x - cos^4 x = 1 - 2cos^2 x + cos^4 x - cos^4 x = 1 - 2cos^2 x}} = RHS. Longer, but needs no factorising insight."] },
         ],
         difficulty: "challenge",
         guideRef: "trig-identities",
         hints: [
-          "When you are stuck with tan, rewrite everything in sin and cos.",
-          "Add {{(sin x)/(cos x) + (cos x)/(sin x)}} using a common denominator.",
-          "Look at the numerator you get. Which identity simplifies it?",
+          "{{sin^4 x = (sin^2 x)^2}}. What kind of expression is {{(sin^2 x)^2 - (cos^2 x)^2}}?",
+          "Factorise it as a difference of two squares. One of the brackets is very familiar.",
+          "Finish by writing {{sin^2 x}} in terms of {{cos^2 x}}.",
         ],
-        strategy: "Rewrite in sin and cos",
+        strategy: "Look for a difference of two squares",
       },
       // ---------------------------------------------------------------- q14
       {
