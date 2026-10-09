@@ -364,7 +364,7 @@ export const practice: TopicPractice = {
           traps: [
             { spec: { type: "expression", expr: "4/(3x+2)" }, feedback: "f⁻¹ is the inverse (undo), not the reciprocal. Rearrange y = {{(3x + 2)/4}} for x." },
             { spec: { type: "expression", expr: "(4x+2)/3" }, feedback: "To undo + 2 you **subtract** 2: 4y = 3x + 2 gives 3x = 4y − 2." },
-            { spec: { type: "expression", expr: "4x/3-2" }, feedback: "Undo the steps in **reverse** order: subtract 2 before dividing by 3, giving {{(4x - 2)/3}}." },
+            { spec: { type: "expression", expr: "(4x)/3-2" }, feedback: "Undo the steps in **reverse** order: subtract 2 before dividing by 3, giving {{(4x - 2)/3}}." },
           ],
           commonError: "Undoing the steps in the original order instead of the reverse order.",
           difficulty: "core",
@@ -541,7 +541,7 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "functions-p2-q04",
-          question: "{{f(x) = 6x + 1}}\n\nFind f⁻¹(x). Write just the expression in x.",
+          question: "{{f(x) = 6x + 1}}\n\nFind f⁻¹(x).",
           answer: { type: "expression", expr: "(x-1)/6", display: "f⁻¹(x) = {{(x - 1)/6}}" },
           solution: ["y = 6x + 1.", "y − 1 = 6x, so x = {{(y - 1)/6}}.", "f⁻¹(x) = {{(x - 1)/6}}."],
           traps: [{ spec: { type: "expression", expr: "x/6-1" }, feedback: "Undo the steps in **reverse** order: f does × 6 then + 1, so f⁻¹ does − 1 first, then ÷ 6: {{(x - 1)/6}}." }],
@@ -590,11 +590,14 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "functions-p2-q07",
-          question: "{{f(x) = sqrt(10 - 2x)}}, where f(x) must be a real number.\n\nFind the largest value of x in the domain of f.",
-          answer: { type: "number", value: 5 },
-          solution: ["The expression under the root must not be negative: 10 − 2x ≥ 0.", "10 ≥ 2x, so x ≤ 5.", "Largest x = 5 (f(5) = √0 = 0)."],
-          traps: [{ spec: { type: "number", value: -5 }, feedback: "Try x = −5: √(10 + 10) = √20 is fine — and so are bigger x up to 5. Solve 10 − 2x ≥ 0." }],
-          commonError: "Flipping the inequality wrongly when dividing — or thinking the smallest x is asked for.",
+          question: "{{f(x) = sqrt(10 - 2x)}}, where f(x) must be a real number.\n\nState the domain of f. Give your answer as an inequality in x.",
+          answer: { type: "inequality", ineq: "x<=5", display: "x ≤ 5" },
+          solution: ["The expression under the root must not be negative: 10 − 2x ≥ 0.", "10 ≥ 2x, so x ≤ 5.", "x = 5 is allowed (f(5) = √0 = 0), so the domain is x ≤ 5."],
+          traps: [
+            { spec: { type: "inequality", ineq: "x>=5" }, feedback: "Test x = 6: √(10 − 12) = √(−2) is not real. Solve 10 − 2x ≥ 0 by adding 2x to both sides: 10 ≥ 2x, so x ≤ 5." },
+            { spec: { type: "inequality", ineq: "x>=-5" }, feedback: "Test x = 6: √(10 − 12) = √(−2) is not real, so large x must be excluded. Solve 10 − 2x ≥ 0." },
+          ],
+          commonError: "Forgetting to reverse the inequality when dividing by −2, giving x ≥ 5.",
           difficulty: "core",
           guideRef: "domain-range",
           hints: ["What must be true of the number under the square root?", "Solve 10 − 2x ≥ 0. Add 2x to both sides first to avoid dividing by a negative."],
@@ -604,18 +607,21 @@ export const practice: TopicPractice = {
           kind: "short",
           id: "functions-p2-q08",
           question:
-            "{{f(x) = 7 - 2x}}, with domain −1 ≤ x ≤ 3.\n\nThe range of f is a ≤ f(x) ≤ b. Find a and b. Give a first, then b.",
-          answer: { type: "list", values: [1, 9], ordered: true, display: "1 ≤ f(x) ≤ 9" },
+            "{{f(x) = 7 - 2x}}, with domain −1 ≤ x ≤ 3.\n\nFind the range of f. Give your answer as an inequality, using y for the output.",
+          answer: { type: "inequality", ineq: "1<=y<=9", display: "1 ≤ f(x) ≤ 9" },
           solution: [
             "f is a straight line with negative gradient, so it is decreasing: the ends of the domain give the extremes.",
             "f(−1) = 7 + 2 = 9 and f(3) = 7 − 6 = 1.",
             "The smallest output is 1 and the largest is 9: 1 ≤ f(x) ≤ 9.",
           ],
-          traps: [{ spec: { type: "list", values: [9, 1], ordered: true }, feedback: "Right values, but f is **decreasing**, so f(−1) = 9 is the largest output, not the smallest. a is the lower bound: a = 1, b = 9." }],
-          commonError: "Assuming f(left end) is always the minimum — not for a decreasing function.",
+          traps: [
+            { spec: { type: "inequality", ineq: "-1<=y<=3" }, feedback: "−1 ≤ x ≤ 3 is the domain (inputs). The range is the set of outputs: work out f(−1) and f(3)." },
+            { spec: { type: "inequality", ineq: "1<=x<=9" }, feedback: "Right numbers, but a range describes **outputs** — write it with y (or f(x)), not x." },
+          ],
+          commonError: "Copying the domain across, or assuming f(left end) is always the minimum — not for a decreasing function.",
           difficulty: "core",
           guideRef: "domain-range",
-          hints: ["Work out f at each end of the domain.", "Which of those is smaller? That's a."],
+          hints: ["Work out f at each end of the domain.", "f is decreasing, so which end gives the smaller output?"],
           strategy: "Consider extremes",
         },
         {
@@ -669,7 +675,7 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "functions-p2-q12",
-          question: "{{f(x) = x^2 - 3}}, with domain x ≥ 0.\n\nFind f⁻¹(x). Write just the expression in x.",
+          question: "{{f(x) = x^2 - 3}}, with domain x ≥ 0.\n\nFind f⁻¹(x).",
           answer: { type: "expression", expr: "sqrt(x+3)", display: "f⁻¹(x) = {{sqrt(x + 3)}}" },
           solution: [
             "y = {{x^2 - 3}}, so {{x^2 = y + 3}}.",
@@ -835,7 +841,7 @@ export const practice: TopicPractice = {
     {
       kind: "short",
       id: "functions-ch-q03",
-      question: "{{f(x) = (3x - 2)/(x + 4)}}, x ≠ −4.\n\nFind f⁻¹(x). Write just the expression in x, as a single fraction.",
+      question: "{{f(x) = (3x - 2)/(x + 4)}}, x ≠ −4.\n\nFind f⁻¹(x), giving your answer as a single fraction.",
       answer: { type: "expression", expr: "(4x+2)/(3-x)", display: "f⁻¹(x) = {{(4x + 2)/(3 - x)}}" },
       solution: [
         "y = {{(3x - 2)/(x + 4)}}, so y(x + 4) = 3x − 2.",

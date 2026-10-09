@@ -164,8 +164,7 @@ export const drills: Drill[] = [
         `The points A and B lie on the curve {{y = ${eq}}}.`,
       ]);
       const traps: Trap[] = [];
-      const inv = clean(h / rise);
-      if (inv !== grad) traps.push({ spec: { type: "number", value: inv }, feedback: "You worked out run ÷ rise. Gradient = change in y ÷ change in x." });
+      if (Number.isInteger(h) && Number.isInteger(rise) && h !== rise && h !== -rise) traps.push({ spec: { type: "fraction", n: h, d: rise }, feedback: "You worked out run ÷ rise. Gradient = change in y ÷ change in x." });
       if (rise !== grad) traps.push({ spec: { type: "number", value: rise }, feedback: "That's the change in y. Now divide by the change in x." });
       const dTerms = diff(terms);
       return {
