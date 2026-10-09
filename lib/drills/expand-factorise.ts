@@ -1042,7 +1042,7 @@ function proofSimplify(rng: Rng, tier: Tier): DrillItem {
   if (kind === "consec") {
     const expr = "1";
     return {
-      prompt: rng.pick([`Expand and simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)}.`, `For consecutive integers ${M(n)}, ${M(`${n} + 1`)}, ${M(`${n} + 2`)}: expand and simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)}.`, `Simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)} and say what you notice.`]) + ` (Use the letter ${M(n)}.)`,
+      prompt: rng.pick([`Expand and simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)}.`, `For consecutive integers ${M(n)}, ${M(`${n} + 1`)}, ${M(`${n} + 2`)}: expand and simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)}.`, `Simplify ${M(`(${n} + 1)^2 - ${n}(${n} + 2)`)} and say what you notice.`]),
       answer: { type: "number", value: 1 },
       solution: [`${M(`(${n} + 1)^2 = ${n}^2 + 2${n} + 1`)} and ${M(`${n}(${n} + 2) = ${n}^2 + 2${n}`)}.`, `Subtract: ${M(`${n}^2 + 2${n} + 1 - ${n}^2 - 2${n} = 1`)}.`, "The square of the middle number is always 1 more than the product of its neighbours."],
       hint: "Expand both parts, then subtract.",

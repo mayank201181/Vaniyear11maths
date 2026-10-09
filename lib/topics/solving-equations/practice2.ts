@@ -258,22 +258,22 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "solving-equations-p3-q08",
         question:
-          "Siti solves the equation {{(x + 3)/2 - (x - 1)/5 = 2}}. Here is her working.\n\n    Line 1:  5(x + 3) − 2(x − 1) = 20\n    Line 2:  5x + 15 − 2x − 2 = 20\n    Line 3:  3x + 13 = 20\n    Line 4:  x = 7/3\n\nSiti has made one mistake. Identify the line with the mistake, explain what she did wrong, and solve the equation correctly.",
+          "Siti solves the equation {{(2x + 1)/3 - (x - 4)/6 = 3}}. Here is her working.\n\n    Line 1:  2(2x + 1) − (x − 4) = 18\n    Line 2:  4x + 2 − x − 4 = 18\n    Line 3:  3x − 2 = 18\n    Line 4:  x = {{20/3}}\n\nSiti has made one mistake. Identify the line with the mistake, explain what she did wrong, and solve the equation correctly.",
         marks: 3,
         modelAnswer:
-          "The mistake is in Line 2. Siti expanded −2(x − 1) as −2x − 2, but −2 × −1 = +2, so it should be −2x + 2. Line 1 is correct (each term multiplied by 10). Correct working: 5x + 15 − 2x + 2 = 20, so 3x + 17 = 20, so 3x = 3 and x = 1. Check: {{4/2 - 0/5 = 2}}. ✓",
+          "The mistake is in Line 2. Siti expanded −(x − 4) as −x − 4, but the minus sign multiplies both terms in the bracket: −1 × −4 = +4, so it should be −x + 4. Line 1 is correct (every term multiplied by 6). Correct working: 4x + 2 − x + 4 = 18, so 3x + 6 = 18, so 3x = 12 and x = 4. Check: {{9/3 - 0/6 = 3}}. ✓",
         markScheme: [
           { point: "Identifies Line 2 as the line with the mistake", keywords: ["line 2", "second line", "line two"] },
-          { point: "Explains the sign error: −2 × −1 = +2, so −2(x − 1) = −2x + 2", keywords: ["+2", "+ 2", "-2x + 2", "−2x + 2", "negative times negative", "sign"] },
-          { point: "Correct solution x = 1 (via 3x + 17 = 20)", keywords: ["x = 1", "x=1", "3x + 17", "3x = 3"] },
+          { point: "Explains the sign error: −(x − 4) = −x + 4 (minus times minus is plus)", keywords: ["+4", "+ 4", "-x + 4", "−x + 4", "negative times negative", "sign"] },
+          { point: "Correct solution x = 4 (via 3x + 6 = 18)", keywords: ["x = 4", "x=4", "3x + 6", "3x = 12"] },
         ],
-        commonError: "Blaming Line 1 — multiplying by 10 is correct; 10 ÷ 2 = 5 and 10 ÷ 5 = 2.",
+        commonError: "Blaming Line 1 — multiplying by 6 is correct: 6 ÷ 3 = 2 and 6 ÷ 6 = 1, and the right-hand side becomes 18.",
         difficulty: "core",
         guideRef: "linear-equations",
         hints: [
-          "Check each line separately. Is Line 1 what you get when you multiply every term by 10?",
-          "Look closely at how −2(x − 1) was expanded.",
-          "What is −2 × −1?",
+          "Check each line separately. Is Line 1 what you get when you multiply every term by 6?",
+          "Look closely at how −(x − 4) was expanded.",
+          "What is −1 × −4?",
         ],
         strategy: "Spot the error",
       },
@@ -359,10 +359,10 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "solving-equations-p3-q11",
         question:
-          "At a hawker centre, 3 vegetarian popiah and 2 cups of kopi cost $13.10.\n\n2 vegetarian popiah and 5 cups of kopi cost $13.50.\n\nWork out the cost of one popiah and the cost of one kopi. Give your answer as: popiah, kopi (in dollars).",
-        answer: { type: "list", values: [3.5, 1.3], ordered: true, display: "popiah $3.50, kopi $1.30" },
+          "At a florist, 3 orchid stems and 2 sunflower stems cost $13.10.\n\n2 orchid stems and 5 sunflower stems cost $13.50.\n\nWork out the cost of one orchid stem and the cost of one sunflower stem. Give your answer as: orchid, sunflower (in dollars).",
+        answer: { type: "list", values: [3.5, 1.3], ordered: true, display: "orchid $3.50, sunflower $1.30" },
         solution: [
-          "Let p = cost of a popiah and k = cost of a kopi (in $).",
+          "Let p = cost of an orchid stem and k = cost of a sunflower stem (in $).",
           "3p + 2k = 13.10 … (1)",
           "2p + 5k = 13.50 … (2)",
           "(1) × 2: 6p + 4k = 26.20. (2) × 3: 6p + 15k = 40.50.",
@@ -976,12 +976,12 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "solving-equations-p4-q14",
         question:
-          "At a kopitiam, Kenji, Mei and Zara each buy breakfast. A kaya toast costs $t, a kopi costs $k and a potato curry puff costs $p.\n\n| | Kaya toast | Kopi | Curry puff | Total |\n|---|---|---|---|---|\n| Kenji | 1 | 2 | 1 | $6.10 |\n| Mei | 2 | 1 | 2 | $8.60 |\n| Zara | 1 | 1 | 3 | $8.70 |\n\nWork out the price of each item. Give your answer as t, k, p (in that order, in dollars).",
-        answer: { type: "list", values: [1.8, 1.2, 1.9], ordered: true, display: "toast $1.80, kopi $1.20, curry puff $1.90" },
+          "Before their IGCSE mocks, Kenji, Mei and Zara buy stationery at the school shop. A pen costs $t, a highlighter costs $k and a notebook costs $p.\n\n| | Pens | Highlighters | Notebooks | Total |\n|---|---|---|---|---|\n| Kenji | 1 | 2 | 1 | $6.10 |\n| Mei | 2 | 1 | 2 | $8.60 |\n| Zara | 1 | 1 | 3 | $8.70 |\n\nWork out the price of each item. Give your answer as t, k, p (in that order, in dollars).",
+        answer: { type: "list", values: [1.8, 1.2, 1.9], ordered: true, display: "pen $1.80, highlighter $1.20, notebook $1.90" },
         traps: [
           {
             spec: { type: "list", values: [1.2, 1.8, 1.9], ordered: true },
-            feedback: "Right prices, wrong order — the question asks for t (toast) first, then k (kopi), then p (curry puff).",
+            feedback: "Right prices, wrong order — the question asks for t (pen) first, then k (highlighter), then p (notebook).",
           },
         ],
         solution: [

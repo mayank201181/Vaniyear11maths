@@ -300,7 +300,10 @@ test("expressions: simplified and expanded answers have each term finished", () 
   assert.equal(st(sim("3x/5"), "3/x*x^2/5"), "close");
   // A number fraction that still cancels is not simplified, with or without brackets.
   for (const i of ["12x/4", "12x ÷ 4", "(12x)/4", "6x/2"]) assert.equal(st(sim("3x"), i), "close", i);
-  for (const i of ["6x/10", "(6x)/10", "6/10x", "1.2x/2"]) assert.equal(st(sim("3x/5"), i), "close", i);
+  for (const i of ["6x/10", "(6x)/10", "(6/10)x", "1.2x/2"]) assert.equal(st(sim("3x/5"), i), "close", i);
+  // After "/", an implicit product is the denominator (as the maths markup displays it).
+  assert.equal(st({ type: "expression", expr: "y^2/(4x^4)" }, "y^2/4x^4"), "correct");
+  assert.equal(st({ type: "expression", expr: "3x/5" }, "3/5x"), "incorrect");
   assert.equal(st(sim("x/2"), "2x/4"), "close");
   assert.match(checkAnswer(sim("12x^7"), "4x^6 × 3x").feedback ?? "", /multiply or cancel the numbers/);
   const exp: AnswerSpec = { type: "expression", expr: "12x-8", form: "expanded" };

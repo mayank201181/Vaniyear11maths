@@ -260,8 +260,17 @@ export function parseExpr(input: string): Expr | null {
       const t = peek();
       if (t && t.k === "op" && (t.v === "*" || t.v === "/")) {
         pos++;
-        const right = parseUnary();
+        let right = parseUnary();
         if (!right) return null;
+        // After "/", an implicit product belongs to the denominator: y^2/4x^4 = y²/(4x⁴),
+        // matching how {{ }} maths markup displays it.
+        if (t.v === "/") {
+          while (startsAtom(peek())) {
+            const more = parsePower();
+            if (!more) return null;
+            right = { t: "mul", a: right, b: more };
+          }
+        }
         left = t.v === "*" ? { t: "mul", a: left, b: right } : { t: "div", a: left, b: right };
       } else if (startsAtom(t)) {
         // implicit multiplication: 2x, x(x+1), (x+1)(x+2)

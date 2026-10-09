@@ -295,6 +295,7 @@ export const drills: Drill[] = [
         const wantFrac = tier === 3 && rng.bool(0.4);
         const shape = rng.pick(tier === 1 ? ["sum", "sum", "equal"] : ["sum", "diff", "equal"]);
         if (shape === "equal") {
+          if (al * b === be * a) continue; // proportional numerators make the answer trivial
           // (αx + a)/p = (βx + b)/q  →  q(αx + a) = p(βx + b)
           const A = q * al, B = q * a, C = p * be, D = p * b;
           const k = A - C, R = D - B;
@@ -402,7 +403,7 @@ export const drills: Drill[] = [
           if (askArea) add(x, 1, "That's x — now work out the length and width, then multiply.");
           else add(P - b - d, a + c, "The perimeter goes all the way round: there are *two* lengths and *two* widths.");
           return {
-            prompt: `A rectangle has length ${M(`(${lin(a, b)})`)} cm and width ${M(`(${lin(c, d)})`)} cm. Its perimeter is ${P} cm. ${askArea ? "Work out the area of the rectangle, in {{cm^2}}." : "Work out the value of x."}`,
+            prompt: `A rectangle has length ${M(`(${lin(a, b)})`)} cm and width ${M(d === 0 ? lin(c, d) : `(${lin(c, d)})`)} cm. Its perimeter is ${P} cm. ${askArea ? "Work out the area of the rectangle, in {{cm^2}}." : "Work out the value of x."}`,
             answer: { type: "number", value: askArea ? len * wid : x },
             solution: [
               `Perimeter = 2 × (length + width): ${M(`2(${lin(a, b)} + ${lin(c, d)}) = ${P}`)}.`,
@@ -446,7 +447,7 @@ export const drills: Drill[] = [
         const P = person(rng);
         const dPhrase = d > 0 ? `adds ${d}` : `subtracts ${-d}`;
         const { traps, add } = trapper(x);
-        add(d + b, a + c, "Collect the x-terms by subtracting, not adding.");
+        add(d - b, a - c, `Check the sign when you move the ${b} across: subtracting ${b} on one side means adding ${b} on the other.`);
         return {
           prompt: `${P.name} thinks of a number. ${P.Sub} multiplies it by ${a} and then subtracts ${b}. ${P.Sub} gets the same answer when ${P.sub} multiplies the number by ${c} and then ${dPhrase}. What is ${P.pos} number?`,
           answer: { type: "number", value: x },
@@ -782,7 +783,7 @@ export const drills: Drill[] = [
         if (kind === "prod") {
           // a(s + o) = b s o  →  s(b o − a) = a o  →  s = a o/(b o − a)
           const a = rng.int(2, 9), b = rng.int(2, 9);
-          if (a === b) continue;
+          if (a === b || gcd(a, b) !== 1) continue;
           const ans = `${a}${o}/(${b}${o} - ${a})`;
           return {
             prompt: `Make ${s} the subject of ${M(`${a}(${s} + ${o}) = ${b}${s}${o}`)}.`,
@@ -862,7 +863,10 @@ export const drills: Drill[] = [
         if (a * e - b * d === 0) continue;
         if (a < 0 && b < 0) continue;
         if (d < 0 && e < 0) continue;
+        if (tier < 3 && (a < 0 || d < 0)) continue;
         const c = a * x + b * y, f = d * x + e * y;
+        const g3 = (p: number, q: number, r: number) => gcd(gcd(Math.abs(p), Math.abs(q)), Math.abs(r));
+        if (g3(a, b, c) !== 1 || g3(d, e, f) !== 1) continue;
         const rearr = tier === 3 && rng.bool(0.4);
         const shown1 = M(eq2(a, b, c, "x", "y"));
         // Show (2) rearranged as dx = f − ey on tier 3 sometimes.
@@ -909,7 +913,7 @@ export const drills: Drill[] = [
     guideRef: "simultaneous-linear",
     generate(rng, tier) {
       for (let i = 0; i < 400; i++) {
-        const x = tier === 1 ? rng.int(-3, 8) : rng.nonZero(-8, 9);
+        const x = tier === 1 ? rng.nonZero(-3, 8) : rng.nonZero(-8, 9);
         const kind = rng.pick(tier === 1 ? ["yfirst"] : tier === 2 ? ["yfirst", "xfirst", "meet"] : ["xfirst", "meet", "yfirst"]);
         const m = rng.pick(tier === 1 ? [2, 3, 4, -2, -3] : [-5, -4, -3, -2, 2, 3, 4, 5]);
         const k = rng.nonZero(-9, 9);
@@ -933,11 +937,12 @@ export const drills: Drill[] = [
         }
         if (kind === "yfirst") {
           // y = m x + k ; a x + b y = c
-          const a = rng.nonZero(-6, 7), b = rng.nonZero(-5, 6);
+          const a = rng.int(1, 7), b = rng.nonZero(-5, 6);
           if (a + b * m === 0) continue;
           const y = m * x + k;
           if (Math.abs(y) > 30) continue;
           const c = a * x + b * y;
+          if (gcd(gcd(a, Math.abs(b)), Math.abs(c)) !== 1) continue;
           const K = a + b * m, B = b * k;
           const traps: Trap[] = [];
           if ((c - k) % K === 0 && (c - k) / K !== x) {
@@ -964,6 +969,7 @@ export const drills: Drill[] = [
         const a = rng.nonZero(-5, 6), b = rng.nonZero(-6, 7);
         if (a * m + b === 0) continue;
         const c = a * xv + b * yv;
+        if (gcd(gcd(Math.abs(a), Math.abs(b)), Math.abs(c)) !== 1) continue;
         const K = a * m + b, B = a * k;
         return {
           prompt: `Solve the simultaneous equations\n\n${M(`x = ${lin(m, k, "y")}`)}\n\n${M(eq2(a, b, c, "x", "y"))}\n\nGive your answer as x, y.`,
