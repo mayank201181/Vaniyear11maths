@@ -235,7 +235,7 @@ function SurdSimplify() {
   }, [n]);
 
   // To-scale picture: √n on top, k copies of √s underneath.
-  const W = 340, unit = 300 / Math.sqrt(200);
+  const W = 340, X0 = 12, unit = 316 / Math.sqrt(200);
   const L = Math.sqrt(n) * unit, seg = Math.sqrt(s) * unit;
   const result = s === 1 ? String(k) : sm(k, s);
 
@@ -261,15 +261,15 @@ function SurdSimplify() {
           ))}
         </div>
       </div>
-      <svg viewBox={`0 0 ${W} 96`} className="h-auto w-full" role="img" aria-label={`To-scale bars: the top bar has length square root of ${n}; the bottom bar is made of ${k} equal ${k === 1 ? "piece" : "pieces"} each of length ${s === 1 ? "1" : `square root of ${s}`}, and both bars are the same length.`}>
-        <text x={8} y={20} fontSize={12} className="fill-ink-2">√{n}</text>
-        <rect x={30} y={10} width={L} height={16} rx={3} className="fill-brand-soft stroke-brand" strokeWidth={1.5} />
-        <text x={2} y={88} fontSize={0} className="fill-ink-2">{s === 1 ? `${k} × 1` : `${k} × √${s}`}</text>
+      <svg viewBox={`0 0 ${W} 112`} className="h-auto w-full" role="img" aria-label={`To-scale bars: the top bar has length square root of ${n}; the bottom bar is made of ${k} equal ${k === 1 ? "piece" : "pieces"} each of length ${s === 1 ? "1" : `square root of ${s}`}, and both bars are the same length.`}>
+        <text x={X0} y={13} fontSize={12} className="fill-ink-2">√{n}</text>
+        <rect x={X0} y={18} width={L} height={16} rx={3} className="fill-brand-soft stroke-brand" strokeWidth={1.5} />
+        <text x={X0} y={57} fontSize={12} className="fill-ink-2">{s === 1 ? `${k} × 1` : `${k} × √${s}`}</text>
         {Array.from({ length: k }, (_, i) => (
-          <rect key={i} x={30 + i * seg} y={52} width={seg} height={16} rx={2} className={i % 2 ? "fill-accent stroke-ink" : "fill-good-soft stroke-ink"} strokeWidth={1} />
+          <rect key={i} x={X0 + i * seg} y={62} width={seg} height={16} rx={2} className={i % 2 ? "fill-accent stroke-ink" : "fill-good-soft stroke-ink"} strokeWidth={1} />
         ))}
-        <line x1={30 + L} x2={30 + L} y1={6} y2={74} className="stroke-ink-2" strokeWidth={1} strokeDasharray="3 3" />
-        <text x={30} y={90} fontSize={11} className="fill-ink-2">≈ {sig4(Math.sqrt(n))} = {k} × {sig4(Math.sqrt(s))}</text>
+        <line x1={X0 + L} x2={X0 + L} y1={14} y2={84} className="stroke-ink-2" strokeWidth={1} strokeDasharray="3 3" />
+        <text x={X0} y={104} fontSize={11} className="fill-ink-2">√{n} ≈ {sig4(Math.sqrt(n))} and {k} × {s === 1 ? "1" : `√${s}`} ≈ {k} × {sig4(Math.sqrt(s))} = {sig4(k * Math.sqrt(s))}</text>
       </svg>
       <div className="rounded-xl bg-surface-2 p-3 text-sm leading-relaxed text-ink">{renderCaption(caption)}</div>
     </div>

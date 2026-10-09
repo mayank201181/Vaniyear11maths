@@ -71,7 +71,7 @@ interface Sys {
 const PRESETS: { name: string; s: Sys }[] = [
   { name: "Whole-number answer", s: { a: 2, b: 1, c: 7, d: 1, e: -1, f: -1 } },
   { name: "Scale both", s: { a: 3, b: 2, c: 4, d: 5, e: -3, f: 13 } },
-  { name: "Fraction answer", s: { a: 2, b: 3, c: 5, d: 4, e: -1, f: 3 } },
+  { name: "Fraction answer", s: { a: 2, b: 3, c: 4, d: 4, e: -1, f: 3 } },
   { name: "Parallel?", s: { a: 2, b: -1, c: 3, d: 4, e: -2, f: 2 } },
 ];
 
