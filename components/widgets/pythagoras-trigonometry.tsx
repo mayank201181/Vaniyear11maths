@@ -10,7 +10,7 @@
 //  2. Cuboid diagonal in 3D — a rotatable cuboid. Step through "base diagonal",
 //     "space diagonal" and "angle with the base", each with its right-angled
 //     triangle highlighted and the live Pythagoras / tan working.
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactElement } from "react";
 import { WidgetFrame, Slider, Stepper, Segmented, Readout, M, type WidgetDef } from "./kit";
 import { renderInline } from "../Rich";
 
@@ -43,6 +43,13 @@ function surdMarkup(n: number): string {
   const [k, s] = splitSquare(n);
   if (s === 1) return String(k);
   return k === 1 ? `sqrt(${s})` : `${k}sqrt(${s})`;
+}
+
+/** √n simplified, as plain text for SVG labels: 2√13, 5, √7. */
+function plainSurd(n: number): string {
+  const [k, s] = splitSquare(n);
+  if (s === 1) return String(k);
+  return (k === 1 ? "" : String(k)) + "√" + s;
 }
 
 type P2 = [number, number];
@@ -79,9 +86,9 @@ function SquaresView() {
   const sqA = [P(0, 0), P(a, 0), P(a, -a), P(0, -a)];
   const sqB = [P(0, 0), P(0, b), P(-b, b), P(-b, 0)];
   const sqC = [P(a, 0), P(a + b, a), P(b, a + b), P(0, b)];
-  const cC = P((a + b) / 2 + a / 2 - a / 2, (a + b) / 2); // centre of the square on AB: midpoint of A and B' = ((a + b)/2, (a + b)/2)
-  const gridA: JSX.Element[] = [];
-  const gridB: JSX.Element[] = [];
+  const cC = P((a + b) / 2, (a + b) / 2); // centre of the square on the hypotenuse
+  const gridA: ReactElement[] = [];
+  const gridB: ReactElement[] = [];
   for (let i = 1; i < a; i++) {
     const [x1, y1] = P(i, 0), [x2, y2] = P(i, -a);
     gridA.push(<line key={`av${i}`} x1={x1} y1={y1} x2={x2} y2={y2} className="stroke-brand" strokeOpacity={0.35} strokeWidth={1} />);
@@ -100,7 +107,7 @@ function SquaresView() {
   const cMarkup = surdMarkup(c2);
 
   let caption: string;
-  if (isTriple) caption = `${a}, ${b}, ${c} is a **Pythagorean triple**: {{${a}^2 + ${b}^2 = ${a * a} + ${b * b} = ${c2} = ${c}^2}}, so the hypotenuse is exactly ${c}. ${splitSquare(a)[0] && a % (a / gcdN(a, b)) === 0 && gcdN(a, b) > 1 ? `It's ${gcdN(a, b)} × the triple ${a / gcdN(a, b)}, ${b / gcdN(a, b)}, ${c / gcdN(a, b)}.` : ""}`;
+  if (isTriple) caption = `${a}, ${b}, ${c} is a **Pythagorean triple**: {{${a}^2 + ${b}^2 = ${a * a} + ${b * b} = ${c2} = ${c}^2}}, so the hypotenuse is exactly ${c}. ${gcdN(a, b) > 1 ? `It's ${gcdN(a, b)} × the triple ${a / gcdN(a, b)}, ${b / gcdN(a, b)}, ${c / gcdN(a, b)}.` : ""}`;
   else if (k > 1) caption = `The two small squares have total area ${a * a} + ${b * b} = ${c2}, so the big square has area ${c2} and its side is {{c = sqrt(${c2}) = sqrt(${k * k} * ${s}) = ${cMarkup}}} ≈ ${sig(c, 4)}. Not a whole number, so leave it as a surd if the question asks for an exact answer.`;
   else caption = `The two small squares have total area ${a * a} + ${b * b} = ${c2}, so the big square has area ${c2} and its side is {{c = sqrt(${c2})}} ≈ ${sig(c, 4)}. ${c2} has no square factor, so {{sqrt(${c2})}} is already in simplest form.`;
 
@@ -158,8 +165,8 @@ function TrigView() {
   const A = from === "P" ? adjP : oppP;
 
   // Fixed scale so changing the hypotenuse visibly scales the triangle.
-  const W = 360, H = 260, sc = 30;
-  const x0 = 40, yb = 228;
+  const W = 380, H = 290, sc = 24;
+  const x0 = 64, yb = 262;
   const P: P2 = [x0, yb], Q: P2 = [x0 + adjP * sc, yb], R: P2 = [x0 + adjP * sc, yb - oppP * sc];
   const legH = { from: "QR", len: oppP }, legB = { from: "PQ", len: adjP };
   const roleOf = (side: "PQ" | "QR" | "PR") => (side === "PR" ? "H" : (side === "QR") === (from === "P") ? "O" : "A");
@@ -202,7 +209,7 @@ function TrigView() {
         <text x={arc.lx} y={arc.ly} fontSize={12} fontWeight={700} textAnchor="middle" className="fill-ink">{ang}°</text>
         <text x={(P[0] + Q[0]) / 2} y={yb + 20} fontSize={13} fontWeight={800} textAnchor="middle" className={colour(roleOf("PQ"))}>{roleOf("PQ")} = {sig(legB.len)}</text>
         <text x={Q[0] + 8} y={yb - (legH.len * sc) / 2 + 4} fontSize={13} fontWeight={800} textAnchor="start" className={colour(roleOf("QR"))}>{roleOf("QR")} = {sig(legH.len)}</text>
-        <text x={(P[0] + R[0]) / 2 - 10} y={(P[1] + R[1]) / 2 - 8} fontSize={13} fontWeight={800} textAnchor="end" className={colour("H")}>H = {sig(hyp)}</text>
+        <text x={(P[0] + R[0]) / 2 - 20 * Math.sin(th * RAD)} y={(P[1] + R[1]) / 2 - 20 * Math.cos(th * RAD) + 4} fontSize={13} fontWeight={800} textAnchor="middle" className={colour("H")}>H = {sig(hyp)}</text>
         <text x={P[0] - 6} y={yb + 16} fontSize={12} textAnchor="end" className="fill-ink-2">P</text>
         <text x={Q[0] + 6} y={yb + 16} fontSize={12} className="fill-ink-2">Q</text>
         <text x={R[0] + 6} y={R[1] - 4} fontSize={12} className="fill-ink-2">R</text>
@@ -238,9 +245,9 @@ function TriangleLab() {
       }
       caption={
         mode === "squares" ? (
-          <span>Pythagoras is a statement about <b>areas</b>: the two squares on the shorter sides exactly fill the square on the hypotenuse. That's why you square, add, then square root.</span>
+          <span>Pythagoras is a statement about <b>areas</b>: the two squares on the shorter sides exactly fill the square on the hypotenuse. That&rsquo;s why you square, add, then square root.</span>
         ) : (
-          <span><b>O</b> is opposite the angle, <b>A</b> is next to it (not the hypotenuse), <b>H</b> is opposite the right angle. Always label from the angle you're using — the labels move when the angle does.</span>
+          <span><b>O</b> is opposite the angle, <b>A</b> is next to it (not the hypotenuse), <b>H</b> is opposite the right angle. Always label from the angle you&rsquo;re using — the labels move when the angle does.</span>
         )
       }
     >
@@ -338,7 +345,7 @@ function CuboidDiagonal() {
         : [
             `The angle between AG and the base is the angle between AG and its "shadow" on the base, AC.`,
             `In triangle ACG: CG = ${h} is opposite, AC = {{${baseM}}} is adjacent.`,
-            `{{theta = tan^(-1)(${h}/${baseM.startsWith("sqrt") || baseM.includes("sqrt") ? `(${baseM})` : baseM})}} = ${sig(angle, 4)}° ≈ ${(Math.round(angle * 10) / 10).toFixed(1)}°`,
+            `{{theta = tan^(-1)(${h}/${baseM.includes("sqrt") ? `(${baseM})` : baseM})}} = ${sig(angle, 4)}° ≈ ${(Math.round(angle * 10) / 10).toFixed(1)}°`,
           ];
 
   return (
@@ -385,7 +392,7 @@ function CuboidDiagonal() {
               <polyline points={mark(B, [-1, 0, 0], [0, 1, 0])} fill="none" className="stroke-ink" strokeWidth={1.5} />
               {tag(mid(pA, pB), `${l}`, "fill-ink", 0, 16)}
               {tag(mid(pB, pC), `${w}`, "fill-ink", 10, 14)}
-              {tag(mid(pA, pC), `√${base2}`, "fill-good", 0, -8)}
+              {tag(mid(pA, pC), plainSurd(base2), "fill-good", 0, -8)}
             </>
           ) : (
             <>
@@ -393,9 +400,9 @@ function CuboidDiagonal() {
               <line x1={pA[0]} y1={pA[1]} x2={pC[0]} y2={pC[1]} className="stroke-good" strokeWidth={3} />
               <line x1={pA[0]} y1={pA[1]} x2={pG[0]} y2={pG[1]} className="stroke-brand" strokeWidth={3} />
               <polyline points={mark(C, [-l / baseD, -w / baseD, 0], [0, 0, 1])} fill="none" className="stroke-ink" strokeWidth={1.5} />
-              {tag(mid(pA, pC), `√${base2}`, "fill-good", 0, 16)}
+              {tag(mid(pA, pC), plainSurd(base2), "fill-good", 0, 16)}
               {tag(mid(pC, pG), `${h}`, "fill-ink", 10, 0)}
-              {tag(mid(pA, pG), step === "space" ? `√${d2}` : "", "fill-brand", -12, -8)}
+              {tag(mid(pA, pG), step === "space" ? plainSurd(d2) : "", "fill-brand", -12, -8)}
               {step === "angle" ? (
                 <>
                   <path d={arcPath.d} fill="none" className="stroke-ink" strokeWidth={2} />

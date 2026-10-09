@@ -5,7 +5,7 @@
 // Diagrams are drawn to scale from the actual side lengths and angles.
 import type { Drill, Rng } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
-import { clean, frac, gcd, num, roundTo } from "./helpers.ts";
+import { clean, gcd, num, roundTo } from "./helpers.ts";
 
 const T = "pythagoras-trigonometry";
 
