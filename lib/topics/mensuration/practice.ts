@@ -215,7 +215,7 @@ export const practice: TopicPractice = {
         {
           kind: "short",
           id: "mensuration-p1-q01",
-          question: "A circular hawker-centre table top has radius 7.5 cm … no — radius 75 cm is too big for this question. A circular coaster has radius 7.5 cm. Work out its area. Give your answer correct to 3 significant figures.",
+          question: "A circular coaster has radius 7.5 cm. Work out its area. Give your answer correct to 3 significant figures.",
           answer: { type: "number", value: 177, display: "177 cm²" },
           solution: ["{{A = pi r^2 = pi * 7.5^2 = pi * 56.25 = 176.71...}} cm².", "A = 177 cm² (3 s.f.)."],
           commonError: "Using {{2 pi r}} (47.1) — that is the circumference.",
@@ -377,7 +377,7 @@ export const practice: TopicPractice = {
           commonError: "Using 12 as the radius of the semicircle instead of the diameter.",
           traps: [
             { spec: { type: "number", value: 127 }, feedback: "You used a whole circle of radius 6. Only a semicircle is cut out." },
-            { spec: { type: "number", value: 14.0, tolerance: 0.1 }, feedback: "12 cm is the diameter, so the radius is 6 cm." },
+            { spec: { type: "number", value: 13.8, tolerance: 0.1 }, feedback: "12 cm is the diameter, so the radius is 6 cm." },
           ],
           difficulty: "core",
           guideRef: "areas-2d",
@@ -491,7 +491,7 @@ export const practice: TopicPractice = {
           commonError: "Rounding r early (e.g. to 5.2) — the final answer then drifts to 275.",
           traps: [
             { spec: { type: "number", value: 192 }, feedback: "That's only the curved surface. A solid cone also has its circular base." },
-            { spec: { type: "number", value: 254, tolerance: 1 }, feedback: "Check the curved area uses the slant height {{l = r sqrt(5)}}, not the vertical height 2r." },
+            { spec: { type: "number", value: 258, tolerance: 0.6 }, feedback: "Check the curved area uses the slant height {{l = r sqrt(5)}}, not the vertical height 2r." },
           ],
           difficulty: "challenge",
           guideRef: "frustums-composite",
@@ -713,7 +713,6 @@ export const practice: TopicPractice = {
             "Number = {{360 pi / (4.5 pi) = 80}}.",
           ],
           commonError: "Dividing the radii or the heights instead of the volumes.",
-          traps: [{ spec: { type: "number", value: 240 }, feedback: "Check the sphere volume: {{4/3 pi r^3}} — did you drop the {{4/3}}?" }],
           difficulty: "core",
           guideRef: "frustums-composite",
           hints: ["What is conserved when the lead is melted?", "Number of spheres = total volume ÷ volume of one sphere.", "Keep π as a symbol — it cancels."],
@@ -762,7 +761,6 @@ export const practice: TopicPractice = {
           commonError: "Keeping the radius as 6 cm for the water (377 cm³).",
           traps: [
             { spec: { type: "number", value: 377 }, feedback: "The water surface is narrower than the rim. Its radius shrinks in proportion to the depth." },
-            { spec: { type: "number", value: 377, tolerance: 0.6 }, feedback: "The water surface is narrower than the rim. Its radius shrinks in proportion to the depth." },
           ],
           difficulty: "challenge",
           guideRef: "frustums-composite",
@@ -786,7 +784,7 @@ export const practice: TopicPractice = {
           commonError: "Including the flat circle where the two parts join (adds 9π ≈ 28.3).",
           traps: [
             { spec: { type: "number", value: 157, tolerance: 0.5 }, feedback: "The circular faces are hidden inside where the hemisphere meets the cone — leave them out." },
-            { spec: { type: "number", value: 134, tolerance: 0.6 }, feedback: "The cone is only 7 cm tall (10 − 3). Use that to find the slant height." },
+            { spec: { type: "number", value: 155, tolerance: 0.5 }, feedback: "The cone is only 7 cm tall (10 − 3). Use that to find the slant height." },
           ],
           difficulty: "challenge",
           guideRef: "frustums-composite",
