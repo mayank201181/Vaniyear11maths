@@ -706,51 +706,49 @@ const findN: Drill = {
 // 8a. nth term of a sequence of fractions (H+) — a variant inside drill 8
 // ---------------------------------------------------------------------------
 function fractionNth(rng: Rng, tier: 1 | 2 | 3): DrillItem {
-  {
-    const quadDen = tier === 3 && rng.bool(0.5);
-    let p = 2, qn = 1, r = 3, s = 2;
-    const top = (n: number) => p * n + qn;
-    const bot = (n: number) => (quadDen ? n * n + s : r * n + s);
-    for (let i = 0; i < 300; i++) {
-      p = rng.int(1, tier === 1 ? 4 : 6);
-      qn = rng.int(tier === 1 ? 0 : -3, 6);
-      r = rng.int(1, tier === 1 ? 5 : 7);
-      s = quadDen ? rng.int(1, 6) : rng.int(tier === 1 ? 0 : -2, 7);
-      if (qn === 0 && p === 1) continue;
-      if (!quadDen && p === r && qn === s) continue;
-      if (!quadDen && p * s === qn * r) continue; // constant sequence
-      let ok = true;
-      for (let n = 1; n <= 4; n++) {
-        const t = top(n), b = bot(n);
-        if (t <= 0 || b <= 1 || t === b || gcd(t, b) !== 1) ok = false;
-      }
-      if (ok) break;
+  const quadDen = tier === 3 && rng.bool(0.5);
+  let p = 2, qn = 1, r = 3, s = 2;
+  const top = (n: number) => p * n + qn;
+  const bot = (n: number) => (quadDen ? n * n + s : r * n + s);
+  for (let i = 0; i < 300; i++) {
+    p = rng.int(1, tier === 1 ? 4 : 6);
+    qn = rng.int(tier === 1 ? 0 : -3, 6);
+    r = rng.int(1, tier === 1 ? 5 : 7);
+    s = quadDen ? rng.int(1, 6) : rng.int(tier === 1 ? 0 : -2, 7);
+    if (qn === 0 && p === 1) continue;
+    if (!quadDen && p === r && qn === s) continue;
+    if (!quadDen && p * s === qn * r) continue; // constant sequence
+    let ok = true;
+    for (let n = 1; n <= 4; n++) {
+      const t = top(n), b = bot(n);
+      if (t <= 0 || b <= 1 || t === b || gcd(t, b) !== 1) ok = false;
     }
-    const topS = lin(p, qn);
-    const botS = quadDen ? poly([[1, "n^2"], [s, ""]]) : lin(r, s);
-    const ans = `${bk(topS)}/${bk(botS)}`;
-    const shown = [1, 2, 3, 4].map((n) => frac(top(n), bot(n), { simplify: false })).join(", ") + ", …";
-    const vals = N6.map((n) => top(n) / bot(n));
-    const wrongTop = lin(p, p + qn);
-    const wrongBot = quadDen ? botS : lin(r, r + s);
-    return {
-      prompt: `Here are the first four terms of a sequence:\n\n${shown}\n\nFind an expression, in terms of n, for the nth term of the sequence.`,
-      answer: { type: "expression", expr: ans, display: `{{${ans}}}` },
-      solution: [
-        `Treat the numerators and denominators as two separate sequences.`,
-        `Numerators ${[1, 2, 3, 4].map(top).join(", ")}: ${p === 1 ? "up by 1" : `up by ${p}`} each time, nth term {{${topS}}}.`,
-        quadDen
-          ? `Denominators ${[1, 2, 3, 4].map(bot).join(", ")}: second difference 2, so they are {{n^2}} plus ${s}: nth term {{${botS}}}.`
-          : `Denominators ${[1, 2, 3, 4].map(bot).join(", ")}: up by ${r} each time, nth term {{${botS}}}.`,
-        `So the nth term is {{${ans}}}.`,
-      ],
-      hint: "Find the nth term of the numerators and of the denominators separately.",
-      traps: exprTraps(vals, [
-        [`${bk(wrongTop)}/${bk(wrongBot)}`, N6.map((n) => (p * n + p + qn) / (quadDen ? n * n + s : r * n + r + s)), "Check n = 1 in your expression — the constant in each linear nth term is (first term − difference)."],
-        [`${bk(botS)}/${bk(topS)}`, N6.map((n) => bot(n) / top(n)), "Upside down: the numerators' nth term goes on top."],
-      ]),
-    };
+    if (ok) break;
   }
+  const topS = lin(p, qn);
+  const botS = quadDen ? poly([[1, "n^2"], [s, ""]]) : lin(r, s);
+  const ans = `${bk(topS)}/${bk(botS)}`;
+  const shown = [1, 2, 3, 4].map((n) => frac(top(n), bot(n), { simplify: false })).join(", ") + ", …";
+  const vals = N6.map((n) => top(n) / bot(n));
+  const wrongTop = lin(p, p + qn);
+  const wrongBot = quadDen ? botS : lin(r, r + s);
+  return {
+    prompt: `Here are the first four terms of a sequence:\n\n${shown}\n\nFind an expression, in terms of n, for the nth term of the sequence.`,
+    answer: { type: "expression", expr: ans, display: `{{${ans}}}` },
+    solution: [
+      `Treat the numerators and denominators as two separate sequences.`,
+      `Numerators ${[1, 2, 3, 4].map(top).join(", ")}: ${p === 1 ? "up by 1" : `up by ${p}`} each time, nth term {{${topS}}}.`,
+      quadDen
+        ? `Denominators ${[1, 2, 3, 4].map(bot).join(", ")}: second difference 2, so they are {{n^2}} plus ${s}: nth term {{${botS}}}.`
+        : `Denominators ${[1, 2, 3, 4].map(bot).join(", ")}: up by ${r} each time, nth term {{${botS}}}.`,
+      `So the nth term is {{${ans}}}.`,
+    ],
+    hint: "Find the nth term of the numerators and of the denominators separately.",
+    traps: exprTraps(vals, [
+      [`${bk(wrongTop)}/${bk(wrongBot)}`, N6.map((n) => (p * n + p + qn) / (quadDen ? n * n + s : r * n + r + s)), "Check n = 1 in your expression — the constant in each linear nth term is (first term − difference)."],
+      [`${bk(botS)}/${bk(topS)}`, N6.map((n) => bot(n) / top(n)), "Upside down: the numerators' nth term goes on top."],
+    ]),
+  };
 }
 
 // ---------------------------------------------------------------------------
