@@ -3,7 +3,7 @@
 // multiples of the scale-factor denominator), so images and answers are exact. Vector-geometry
 // answers are linear expressions in a and b with exact fraction coefficients. Grid and
 // vector diagrams are drawn to scale from the actual numbers.
-// Column vectors are written (top, bottom) in this app, e.g. (3, −2) = 3 right, 2 down.
+// Column vectors use the {{col(x, y)}} markup (stacked in brackets); typed answers are "x, y".
 import type { Drill } from "./types.ts";
 import type { AnswerSpec, Trap } from "../types.ts";
 import { clean, gcd, num, br } from "./helpers.ts";
@@ -19,7 +19,8 @@ const NAMES = ["Aisha", "Wei Ling", "Arjun", "Priya", "Marcus", "Siti", "Ethan",
 
 const z = (n: number): number => (n === 0 ? 0 : clean(n));
 const pt = (p: P2): string => `(${num(p[0])}, ${num(p[1])})`;
-const cv = (p: P2): string => `(${num(p[0])}, ${num(p[1])})`;
+const cv = (p: P2): string => `{{col(${z(p[0])}, ${z(p[1])})}}`;
+const VTYPE = " Type your answer as top, bottom (for example 3, −2).";
 const add = (p: P2, q: P2): P2 => [z(p[0] + q[0]), z(p[1] + q[1])];
 const sub = (p: P2, q: P2): P2 => [z(p[0] - q[0]), z(p[1] - q[1])];
 const mul = (k: number, p: P2): P2 => [z(k * p[0]), z(k * p[1])];
@@ -29,7 +30,7 @@ function coordSpec(p: P2): AnswerSpec {
   return { type: "list", values: [z(p[0]), z(p[1])], ordered: true, display: pt(p) };
 }
 function vecSpec(p: P2): AnswerSpec {
-  return { type: "list", values: [z(p[0]), z(p[1])], ordered: true, display: `column vector ${cv(p)}` };
+  return { type: "list", values: [z(p[0]), z(p[1])], ordered: true, display: cv(p) };
 }
 
 /** Traps for pair answers: drops any candidate equal to the answer or to an earlier trap. */
@@ -660,7 +661,7 @@ export const drills: Drill[] = [
         const half: P2 = mode === "xx" ? [b - a, 0] : [0, b - a];
         const co = mode === "xx" ? "x" : "y";
         return {
-          prompt: `Shape A is reflected in the line ${L1} to give shape B. Shape B is then reflected in the line ${L2} to give shape C. The single transformation that maps A onto C is a translation. Write down its column vector.`,
+          prompt: `Shape A is reflected in the line ${L1} to give shape B. Shape B is then reflected in the line ${L2} to give shape C. The single transformation that maps A onto C is a translation. Write down its column vector.${VTYPE}`,
           answer: vecSpec(v),
           solution: [
             `Take a point with ${co}-coordinate ${co === "x" ? "x" : "y"}. Reflecting in ${L1} gives ${num(2 * a)} − ${co}.`,
@@ -707,7 +708,7 @@ export const drills: Drill[] = [
         if (same(Pc, Qc)) Qc = add(Pc, [2, 1]);
         const v = mul(2, sub(Qc, Pc));
         return {
-          prompt: `Shape A is rotated 180° about ${pt(Pc)} to give shape B. Shape B is rotated 180° about ${pt(Qc)} to give shape C. Describe fully the single transformation that maps A onto C: it is a translation — give its column vector.`,
+          prompt: `Shape A is rotated 180° about ${pt(Pc)} to give shape B. Shape B is rotated 180° about ${pt(Qc)} to give shape C. Describe fully the single transformation that maps A onto C: it is a translation — give its column vector.${VTYPE}`,
           answer: vecSpec(v),
           solution: [
             `A half-turn about (p, q) sends (x, y) → (${"2p − x"}, ${"2q − y"}).`,
@@ -768,7 +769,7 @@ export const drills: Drill[] = [
         const R = add(mul(m, a), mul(n, b));
         const show = `{{${m}a ${n < 0 ? "-" : "+"} ${Math.abs(n) === 1 ? "" : Math.abs(n)}b}}`;
         return {
-          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)} are column vectors (written top, bottom). Work out ${show} as a column vector.`,
+          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)} . Work out ${show} as a column vector.${VTYPE}`,
           answer: vecSpec(R),
           solution: [
             `${m}**a** = ${cv(mul(m, a))} and ${num(n)}**b** = ${cv(mul(n, b))}.`,
@@ -796,7 +797,7 @@ export const drills: Drill[] = [
           };
         }
         return {
-          prompt: `A is the point ${pt(A)} and B is the point ${pt(B)}. Write the vector from A to B (written with an arrow over AB) as a column vector.`,
+          prompt: `A is the point ${pt(A)} and B is the point ${pt(B)}. Write →AB as a column vector.${VTYPE}`,
           answer: vecSpec(v),
           solution: [`AB = OB − OA ("end minus start").`, `= ${cv(B)} − ${cv(A)} = ${cv(v)}.`],
           hint: "Vector from A to B = (position of B) − (position of A): end minus start.",
@@ -809,7 +810,7 @@ export const drills: Drill[] = [
         const a = rv(-6, 6);
         const b = add(mul(k, x), a);
         return {
-          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)}. The vector **x** satisfies {{${k}x + a = b}}. Find **x** as a column vector.`,
+          prompt: `**a** = ${cv(a)} and **b** = ${cv(b)}. The vector **x** satisfies {{${k}x + a = b}}. Find **x** as a column vector.${VTYPE}`,
           answer: vecSpec(x),
           solution: [`Rearrange like an equation: ${num(k)}**x** = **b** − **a** = ${cv(sub(b, a))}.`, `Divide each component by ${num(k)}: **x** = ${cv(x)}.`],
           hint: "Solve it like ordinary algebra: subtract a, then divide by the number in front of x.",
@@ -857,7 +858,7 @@ export const drills: Drill[] = [
         if (rng.bool()) v = [v[1], v[0]];
         const L = Math.hypot(v[0], v[1]);
         return {
-          prompt: rng.pick([`Find the magnitude of the vector ${cv(v)} (written top, bottom).`, `A drone flies along the displacement vector ${cv(v)} metres (east, north). How far is it from where it started, in metres?`]),
+          prompt: rng.pick([`Find the magnitude of the vector ${cv(v)}.`, `A drone flies along the displacement vector ${cv(v)} metres (east, north). How far is it from where it started, in metres?`]),
           answer: { type: "number", value: L },
           solution: [`|v| = {{sqrt(${br(v[0])}^2 + ${br(v[1])}^2)}} = {{sqrt(${v[0] ** 2} + ${v[1] ** 2})}} = {{sqrt(${L * L})}} = ${L}.`],
           hint: "The vector is the hypotenuse of a right-angled triangle with sides equal to its components.",
@@ -879,7 +880,7 @@ export const drills: Drill[] = [
         }
         const N = v[0] ** 2 + v[1] ** 2;
         const exact = mode === "surd" || rng.bool(0.5);
-        const stem = mode === "surd" ? `Find the magnitude of the vector ${cv(v)}.` : `A is the point ${pt(A)} and B is the point ${pt(B)}. Find the length of the vector AB, |AB|.`;
+        const stem = mode === "surd" ? `Find the magnitude of the vector ${cv(v)}.` : `A is the point ${pt(A)} and B is the point ${pt(B)}. Find |→AB|, the magnitude of →AB.`;
         const steps = [
           ...(mode === "AB" ? [`AB = ${cv(B)} − ${cv(A)} = ${cv(v)}.`] : []),
           `|AB| = {{sqrt(${br(v[0])}^2 + ${br(v[1])}^2)}} = {{sqrt(${N})}}.`.replace("|AB|", mode === "surd" ? "|v|" : "|AB|"),
@@ -912,7 +913,7 @@ export const drills: Drill[] = [
         const L = Math.hypot(p, q);
         const otherS = rng.bool() ? other : -other;
         const top = rng.bool();
-        const vecS = top ? `(k, ${num(otherS)})` : `(${num(otherS)}, k)`;
+        const vecS = top ? `{{col(k, ${otherS})}}` : `{{col(${otherS}, k)}}`;
         return {
           prompt: `The vector ${vecS} has magnitude ${L}. Find the positive value of k.`,
           answer: { type: "number", value: k },
@@ -982,7 +983,7 @@ export const drills: Drill[] = [
         steps.push(`${lab} = ${linShow(ans)}.`);
         const where = m === n ? `${PN} is the midpoint of AB` : rng.bool() ? `${PN} is the point on AB such that A${PN} : ${PN}B = ${m} : ${n}` : `${PN} lies on AB with A${PN} = ${frShow(t)} AB`;
         return {
-          prompt: `OAB is a triangle with OA = **a** and OB = **b** (vectors). ${where}. Find the vector ${lab} in terms of **a** and **b**. Simplify your answer.`,
+          prompt: `OAB is a triangle with →OA = **a** and →OB = **b**. ${where}. Find →${lab} in terms of **a** and **b**. Simplify your answer.`,
           diagram,
           answer: linSpec(ans),
           solution: steps,
@@ -1016,7 +1017,7 @@ export const drills: Drill[] = [
           svgOpen(450, 260, `Parallelogram OABC with OA = a along the bottom and OC = b up the left side. M is the midpoint of AB and N is on CB with CN to NB in the ratio ${m} to ${n}.`) +
           arrow(O, Ap, "a", -1) + arrow(O, Cp, "b", 1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 10, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + dot(Np, "N", 0, -10) + "</svg>";
         return {
-          prompt: `OABC is a parallelogram with OA = **a** and OC = **b**. M is the midpoint of AB. N is the point on CB such that CN : NB = ${m} : ${n}. Find the vector ${lab} in terms of **a** and **b**. Simplify your answer.`,
+          prompt: `OABC is a parallelogram with →OA = **a** and →OC = **b**. M is the midpoint of AB. N is the point on CB such that CN : NB = ${m} : ${n}. Find →${lab} in terms of **a** and **b**. Simplify your answer.`,
           diagram,
           answer: linSpec(ans),
           solution: [...steps, `${lab} = ${linShow(ans)}.`],
@@ -1045,7 +1046,7 @@ export const drills: Drill[] = [
         svgOpen(460, 255, `Trapezium OABC with OA = a along the bottom, OC = b, and CB parallel to OA and ${k} times as long. M is the midpoint of AB.`) +
         arrow(O, Ap, "a", -1) + arrow(O, Cp, "b", 1) + seg(Ap, Bp) + seg(Cp, Bp) + dot(O, "O", -10, 14) + dot(Ap, "A", 6, 16) + dot(Bp, "B", 12, -6) + dot(Cp, "C", -8, -8) + dot(Mp, "M", 14, 4) + "</svg>";
       return {
-        prompt: `OABC is a trapezium. OA = **a**, OC = **b** and CB = {{${k}a}}. M is the midpoint of AB. Find the vector ${lab} in terms of **a** and **b**. Simplify your answer.`,
+        prompt: `OABC is a trapezium. →OA = **a**, →OC = **b** and →CB = ${k}**a**. M is the midpoint of AB. Find →${lab} in terms of **a** and **b**. Simplify your answer.`,
         diagram,
         answer: linSpec(ans),
         solution: [...steps, `${lab} = ${linShow(ans)}.`],
@@ -1079,11 +1080,11 @@ export const drills: Drill[] = [
           break;
         }
         const top = rng.bool();
-        const v1 = `(${num(p)}, ${num(q)})`;
-        const v2 = top ? `(${num(r)}, k)` : `(k, ${num(k)})`;
+        const v1 = `{{col(${p}, ${q})}}`;
+        const v2 = top ? `{{col(${r}, k)}}` : `{{col(k, ${k})}}`;
         const ans = top ? k : r;
         return {
-          prompt: `The column vectors ${v1} and ${v2} are parallel. Find the value of k.`,
+          prompt: `The vectors ${v1} and ${v2} are parallel. Find the value of k.`,
           answer: { type: "number", value: ans },
           solution: [
             `Parallel vectors are multiples of each other: ${v2} = λ${v1}.`,
@@ -1131,7 +1132,7 @@ export const drills: Drill[] = [
           arrow(O, Ap, "a", 1) + arrow(O, Bp, "b", -1) + seg(Ap, Bp) + seg(O, Pp, true) + dot(O, "O", -10, 14) + dot(Ap, "A", 0, -10) + dot(Bp, "B", 12, 4) + dot(Pp, "P", 6, -12) + "</svg>";
         const OP = L(fr(n, m + n), fr(m, m + n));
         return {
-          prompt: `OAB is a triangle with OA = **a** and OB = **b**. P is on AB with AP : PB = ${m} : ${n}. The point Q has OQ = {{k a + ${c === 1 ? "" : c}b}}. Given that O, P and Q lie on a straight line, find the value of k.`,
+          prompt: `OAB is a triangle with →OA = **a** and →OB = **b**. P is on AB with AP : PB = ${m} : ${n}. The point Q has →OQ = k**a** + ${c === 1 ? "" : c}**b**. Given that O, P and Q lie on a straight line, find the value of k.`,
           diagram,
           answer: { type: "number", value: k },
           solution: [
@@ -1155,7 +1156,7 @@ export const drills: Drill[] = [
       }
       const AB = L(fr(p * u), fr(p * v)), BC = L(fr(q * u), fr(q * v));
       return {
-        prompt: `AB = ${linShow(AB)} and BC = ${linShow(BC)} (vectors). These show that A, B and C lie on a straight line. Find the ratio AB : BC in its simplest form.`,
+        prompt: `→AB = ${linShow(AB)} and →BC = ${linShow(BC)}. These show that A, B and C lie on a straight line. Find the ratio AB : BC in its simplest form.`,
         answer: { type: "ratio", parts: [p, q], simplest: true, display: `${p} : ${q}` },
         solution: [
           `Take out common factors: AB = ${p === 1 ? "" : p}(${linShow(L(fr(u), fr(v))).slice(2, -2)}) and BC = ${q === 1 ? "" : q}(${linShow(L(fr(u), fr(v))).slice(2, -2)}).`,

@@ -367,4 +367,6 @@ test("inequalities: compared as solution sets", () => {
   const surd: AnswerSpec = { type: "inequality", ineq: "-sqrt(3)<=x<=sqrt(3)" };
   assert.equal(st(surd, "-√3 ≤ x ≤ √3"), "correct");
   assert.equal(st(one, "banana"), "invalid");
+  const range: AnswerSpec = { type: "inequality", ineq: "y>=3" };
+  for (const i of ["y >= 3", "f(x) ≥ 3", "g(x)>=3", "3 <= f(x)"]) assert.equal(st(range, i), "correct", i);
 });

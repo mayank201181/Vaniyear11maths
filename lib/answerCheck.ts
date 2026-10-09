@@ -451,7 +451,9 @@ function parseSolutionSet(src: string): { variable: string; set: Interval[] } | 
     .replace(/≤|=</g, "<=")
     .replace(/≥|=>/g, ">=")
     .replace(/∪|\bu\b/g, " or ")
-    .replace(/,/g, " or ");
+    .replace(/,/g, " or ")
+    // A range written with function notation — f(x) ≥ 3, g(x) < 1, f⁻¹(x) — is about the output, y.
+    .replace(/\b[a-z]{1,3}(\^\(?-1\)?)?\(\s*[a-z]\s*\)/g, "y");
   let variable = "";
   const ors = s.split(/\bor\b/).map((t) => t.trim()).filter(Boolean);
   if (!ors.length) return null;
