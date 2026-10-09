@@ -218,32 +218,32 @@ export const morePapers: Paper[] = [
         kind: "written",
         id: "sets-venn-p3-q07",
         question:
-          "60 people at a hawker centre were asked whether they like teh (tea) and whether they like kopi (coffee).\n\n- 35 like teh\n- 30 like kopi\n- 8 like neither\n\nShow that 13 people like both teh and kopi.",
+          "64 students on a trip to the Botanic Gardens were asked whether they visited the Orchid Garden (O) and whether they walked the Rainforest trail (R).\n\n- 38 visited the Orchid Garden\n- 29 walked the Rainforest trail\n- 9 did neither\n\nShow that 12 students did both.",
         marks: 3,
         modelAnswer:
-          "Number who like at least one drink = 60 − 8 = 52.\n\nn(T) + n(K) = 35 + 30 = 65, but this counts the people who like both twice.\n\nSo the number who like both = 65 − 52 = **13**.\n\nCheck with a Venn diagram: teh only 22, both 13, kopi only 17, neither 8 → 22 + 13 + 17 + 8 = 60. ✓",
+          "Number who did at least one = 64 − 9 = 55.\n\nn(O) + n(R) = 38 + 29 = 67, but this counts the students who did both twice.\n\nSo the number who did both = 67 − 55 = **12**.\n\nCheck with a Venn diagram: Orchid Garden only 26, both 12, Rainforest only 17, neither 9 → 26 + 12 + 17 + 9 = 64. ✓",
         markScheme: [
-          { point: "Finds the number who like at least one drink: 60 − 8 = 52", keywords: ["52", "60 − 8", "60-8", "at least one"] },
-          { point: "Adds 35 + 30 = 65 or sets up 35 − x + x + 30 − x + 8 = 60", keywords: ["65", "35 + 30", "35+30", "35 − x", "35-x", "73 − x", "73-x"] },
-          { point: "Shows 65 − 52 = 13 (or solves to x = 13) with a check", keywords: ["13", "65 − 52", "65-52", "x = 13", "x=13"] },
+          { point: "Finds the number who did at least one: 64 − 9 = 55", keywords: ["55", "64 − 9", "64-9", "at least one"] },
+          { point: "Adds 38 + 29 = 67 or sets up 38 − x + x + 29 − x + 9 = 64", keywords: ["67", "38 + 29", "38+29", "38 − x", "38-x", "76 − x", "76-x"] },
+          { point: "Shows 67 − 55 = 12 (or solves to x = 12) with a check", keywords: ["12", "67 − 55", "67-55", "x = 12", "x=12"] },
         ],
         solutions: [
           {
             label: "Using algebra",
             steps: [
-              "Let x people like both. Teh only = 35 − x, kopi only = 30 − x.",
-              "(35 − x) + x + (30 − x) + 8 = 60.",
-              "73 − x = 60, so x = 13.",
+              "Let x students do both. Orchid Garden only = 38 − x, Rainforest only = 29 − x.",
+              "(38 − x) + x + (29 − x) + 9 = 64.",
+              "76 − x = 64, so x = 12.",
             ],
           },
         ],
-        commonError: "Writing 35 + 30 + 8 = 73 and stopping, without explaining that the extra 13 are the people counted twice.",
+        commonError: "Writing 38 + 29 + 9 = 76 and stopping, without explaining that the extra 12 are the students counted twice.",
         difficulty: "core",
         guideRef: "venn-diagrams",
         hints: [
-          "How many people like at least one of the two drinks?",
-          "If you add 35 and 30, who has been counted twice?",
-          "Compare 35 + 30 with the number who like at least one drink.",
+          "How many students did at least one of the two?",
+          "If you add 38 and 29, who has been counted twice?",
+          "Compare 38 + 29 with the number who did at least one.",
         ],
         strategy: "Introduce a variable",
       },
@@ -607,27 +607,27 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "sets-venn-p4-q05",
         question:
-          "60 people at a food festival were asked whether they had tried durian and whether they had tried mango sticky rice.\n\n25 people had tried durian. 30 people had tried mango sticky rice. 12 people had tried neither.\n\nHow many people had tried both durian and mango sticky rice?",
-        answer: { type: "number", value: 7 },
+          "72 people at a food festival were asked whether they had tried chendol and whether they had tried kueh lapis.\n\n31 people had tried chendol. 36 people had tried kueh lapis. 14 people had tried neither.\n\nHow many people had tried both chendol and kueh lapis?",
+        answer: { type: "number", value: 9 },
         traps: [
           {
             spec: { type: "number", value: 5 },
-            feedback: "60 − 25 − 30 = 5 ignores the 12 people who had neither. Only 60 − 12 = 48 people had at least one.",
+            feedback: "72 − 31 − 36 = 5 ignores the 14 people who had neither. Only 72 − 14 = 58 people had at least one.",
           },
           {
-            spec: { type: "number", value: 48 },
-            feedback: "48 is the number who had at least one of the two. 25 + 30 = 55 is 7 more than 48 — those 7 were counted twice.",
+            spec: { type: "number", value: 58 },
+            feedback: "58 is the number who had at least one of the two. 31 + 36 = 67 is 9 more than 58 — those 9 were counted twice.",
           },
         ],
         solution: [
-          "At least one: 60 − 12 = 48.",
-          "25 + 30 = 55, which counts the 'both' people twice.",
-          "Both = 55 − 48 = 7.",
+          "At least one: 72 − 14 = 58.",
+          "31 + 36 = 67, which counts the 'both' people twice.",
+          "Both = 67 − 58 = 9.",
         ],
         solutions: [
           {
             label: "Algebra in the Venn diagram",
-            steps: ["Let x have both: (25 − x) + x + (30 − x) + 12 = 60.", "67 − x = 60, so x = 7."],
+            steps: ["Let x have both: (31 − x) + x + (36 − x) + 14 = 72.", "81 − x = 72, so x = 9."],
           },
         ],
         commonError: "Forgetting the people outside both circles.",
@@ -635,8 +635,8 @@ export const morePapers: Paper[] = [
         guideRef: "venn-diagrams",
         hints: [
           "Let x be the number who had both. What goes in each region?",
-          "Durian only = 25 − x, mango sticky rice only = 30 − x.",
-          "All four regions add up to 60.",
+          "Chendol only = 31 − x, kueh lapis only = 36 − x.",
+          "All four regions add up to 72.",
         ],
         strategy: "Introduce a variable",
       },
