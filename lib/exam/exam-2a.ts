@@ -113,7 +113,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 21.5, display: "21.5 minutes" },
       traps: [
         { spec: { type: "number", value: 8 }, feedback: "You divided by 5 (the number of groups). The mean is the total time divided by the number of *students*, 40." },
-        { spec: { type: "number", value: 25 }, feedback: "Check you multiplied each frequency by the class *midpoint* (5, 15, 25, 35, 50) — the last class is 40–60, so its midpoint is 50." },
+        { spec: { type: "number", value: 26.75 }, feedback: "You used the upper end of each class (10, 20, 30, 40, 60). Use the class *midpoints* (5, 15, 25, 35, 50) — they are the best single estimate for each group." },
       ],
       solution: [
         "Midpoints: 5, 15, 25, 35, 50.",
@@ -260,7 +260,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 187, tolerance: 0.5, display: "187 cm³" },
       traps: [
         { spec: { type: "number", value: 255, tolerance: 1 }, feedback: "You used a full sphere on top. A hemisphere is half a sphere: {{2/3 pi r^3}}." },
-        { spec: { type: "number", value: 432, tolerance: 1 }, feedback: "For the cone you need {{1/3 pi r^2 h}} — you seem to have used the cylinder formula {{pi r^2 h}}." },
+        { spec: { type: "number", value: 422, tolerance: 1 }, feedback: "For the cone you need {{1/3 pi r^2 h}} — you seem to have used the cylinder formula {{pi r^2 h}}." },
       ],
       solution: [
         "Cone: {{1/3 * pi * 3.2^2 * 11}} = 117.96… cm³.",
@@ -367,7 +367,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 27, display: "27 weeks" },
       traps: [
         { spec: { type: "number", value: 26 }, feedback: "After 26 weeks he has saved {{26/2 (80 + 25 * 6)}} = $2990 — just short of $3000. Round *up*." },
-        { spec: { type: "number", value: 494 }, feedback: "That is when a *single week's* saving reaches $3000. The question is about the *total* saved, so use the sum formula." },
+        { spec: { type: "number", value: 495 }, feedback: "That is when a *single week's* saving reaches $3000. The question is about the *total* saved, so use the sum formula." },
       ],
       solution: [
         "Arithmetic series with a = 40, d = 6: {{S_n = n/2 (2 * 40 + (n - 1) * 6) = n(3n + 37)}}.",
@@ -491,7 +491,7 @@ export const paper: ExamPaper = {
         "f(x) = 3x − 1 and g(x) = {{x^2 + 2}}.\n\nSolve fg(x) = gf(x). Give your solutions correct to 3 significant figures.",
       answer: { type: "list", values: [1.26, -0.264], tolerance: 0.005, display: "x = 1.26 or x = −0.264" },
       traps: [
-        { spec: { type: "list", values: [0, 0.667], tolerance: 0.005 }, feedback: "Check gf(x): it is g(3x − 1) = {{(3x - 1)^2 + 2}}, which expands to {{9x^2 - 6x + 3}} — don't forget the middle term." },
+        { spec: { type: "list", values: [0.577, -0.577], tolerance: 0.005 }, feedback: "Check gf(x): it is g(3x − 1) = {{(3x - 1)^2 + 2}}, which expands to {{9x^2 - 6x + 3}} — don't forget the middle term." },
       ],
       solution: [
         "fg(x) = f({{x^2 + 2}}) = {{3(x^2 + 2) - 1 = 3x^2 + 5}}.",
@@ -652,7 +652,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 4800, display: "4800 cm²" },
       traps: [
         { spec: { type: "number", value: 40 }, feedback: "40 cm is the side of the base that gives the minimum. Substitute it back to find the area of metal." },
-        { spec: { type: "number", value: 6400, tolerance: 1 }, feedback: "You seem to have included a lid (two square faces). The tank is open-topped, so there is only one {{x^2}} face." },
+        { spec: { type: "number", value: 6048, tolerance: 1 }, feedback: "You seem to have included a lid (two square faces). The tank is open-topped, so there is only one {{x^2}} face." },
       ],
       solution: [
         "Let the height be h: {{x^2 h = 32000}}, so {{h = 32000/x^2}}.",
@@ -732,7 +732,6 @@ export const paper: ExamPaper = {
       traps: [
         { spec: { type: "number", value: 7.22, tolerance: 0.005 }, feedback: "That is the *lower* bound: you divided the smallest mass by the largest volume. For the upper bound of a quotient, divide the upper bound of the mass by the lower bound of the volume." },
         { spec: { type: "number", value: 7.70, tolerance: 0.005 }, feedback: "That uses the measured values. For the upper bound you need the biggest possible mass and the smallest possible volume." },
-        { spec: { type: "number", value: 8.86, tolerance: 0.005 }, feedback: "Check the mass: the upper bound of 6.4 kg (to the nearest 0.1 kg) is 6.45 kg, not 6.5 kg or more. And don't forget kg → g." },
       ],
       solution: [
         "Density = mass ÷ volume, so the upper bound = UB(mass) ÷ LB(volume).",

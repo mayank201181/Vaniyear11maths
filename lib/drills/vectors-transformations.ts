@@ -118,7 +118,7 @@ function linKey(v: Lin): string {
     else t = `(${n}/${d})${s}`;
     parts.push(t);
   }
-  return parts.length ? parts.join("+").replace(/\+-/g, "-") : "0";
+  return parts.length ? parts.join("+").replace(/\+-/g, "-").replace(/\+\(-/g, "-(") : "0";
 }
 function linShow(v: Lin): string {
   let out = "";
@@ -285,10 +285,10 @@ export const drills: Drill[] = [
       const sol: string[] = [];
       if (kind === "x=a") {
         const d = P[0] - c;
-        sol.push(`The mirror is the vertical line x = ${num(c)}. P is ${num(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} to the ${d > 0 ? "right" : "left"} of it.`, `The image is the same distance on the other side: x = ${num(c)} ${d > 0 ? "−" : "+"} ${num(Math.abs(d))} = ${num(I[0])}. The y-coordinate doesn't change.`);
+        sol.push(`The mirror is the vertical line x = ${num(c)}. The point is ${num(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} to the ${d > 0 ? "right" : "left"} of it.`, `The image is the same distance on the other side: x = ${num(c)} ${d > 0 ? "−" : "+"} ${num(Math.abs(d))} = ${num(I[0])}. The y-coordinate doesn't change.`);
       } else if (kind === "y=b") {
         const d = P[1] - c;
-        sol.push(`The mirror is the horizontal line y = ${num(c)}. P is ${num(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} ${d > 0 ? "above" : "below"} it.`, `The image is the same distance on the other side: y = ${num(c)} ${d > 0 ? "−" : "+"} ${num(Math.abs(d))} = ${num(I[1])}. The x-coordinate doesn't change.`);
+        sol.push(`The mirror is the horizontal line y = ${num(c)}. The point is ${num(Math.abs(d))} unit${Math.abs(d) === 1 ? "" : "s"} ${d > 0 ? "above" : "below"} it.`, `The image is the same distance on the other side: y = ${num(c)} ${d > 0 ? "−" : "+"} ${num(Math.abs(d))} = ${num(I[1])}. The x-coordinate doesn't change.`);
       } else {
         sol.push(`For a reflection in ${m.name}: ${m.rule}.`, `Check: the midpoint of P and P′ is ${pt([clean((P[0] + I[0]) / 2), clean((P[1] + I[1]) / 2)])}, which lies on the mirror line.`);
       }
@@ -617,7 +617,7 @@ export const drills: Drill[] = [
       const name = rng.pick(NAMES);
       const prompt = rng.pick([
         `The point P ${pt(P)} is transformed by ${t1.name}, followed by ${t2.name}. Find the coordinates of the final image.`,
-        `${name} takes a shape with a vertex at ${pt(P)}. She first applies ${t1.name}, then ${t2.name}. Where does the vertex end up?`.replace("She first", rng.pick(["She first", "He first", "They first"])),
+        `${name} takes a shape with a vertex at ${pt(P)} and applies ${t1.name}, then ${t2.name}. Where does the vertex end up?`,
       ]);
       return {
         prompt,
@@ -691,7 +691,7 @@ export const drills: Drill[] = [
             : `Shape A is reflected in the line ${L1}, then the result is reflected in the line ${L2}. This is equivalent to a rotation of 180°. Find the coordinates of the centre of this rotation.`,
           answer: coordSpec(C),
           solution: [
-            `Reflect a general point (x, y): in x = ${num(a)} it becomes (${num(2 * a)} − x, y); in y = ${num(b)} it becomes (x, ${num(2 * b)} − y). Together: (x, y) → (${num(2 * a)} − x, ${num(2 * b)} − y).`,
+            `Reflect a general point (x, y) (perpendicular mirrors, so the order doesn't matter): in x = ${num(a)} it becomes (${num(2 * a)} − x, y); in y = ${num(b)} it becomes (x, ${num(2 * b)} − y). Together: (x, y) → (${num(2 * a)} − x, ${num(2 * b)} − y).`,
             `That is a rotation of 180° about the midpoint of (x, y) and its image, which is always (${num(a)}, ${num(b)}) — where the two mirrors cross.`,
             `The centre ${pt(C)} is the only invariant point.`,
           ],
@@ -713,7 +713,7 @@ export const drills: Drill[] = [
           answer: vecSpec(v),
           solution: [
             `A half-turn about (p, q) sends (x, y) → (${"2p − x"}, ${"2q − y"}).`,
-            `About ${pt(Pc)}: (x, y) → (${num(2 * Pc[0])} − x, ${num(2 * Pc[1])} − y). Then about ${pt(Qc)}: → (${num(2 * Qc[0])} − ${num(2 * Pc[0])} + x, ${num(2 * Qc[1])} − ${num(2 * Pc[1])} + y).`,
+            `About ${pt(Pc)}: (x, y) → (${num(2 * Pc[0])} − x, ${num(2 * Pc[1])} − y). Then about ${pt(Qc)}: → (${num(2 * Qc[0])} − (${num(2 * Pc[0])} − x), ${num(2 * Qc[1])} − (${num(2 * Pc[1])} − y)) = (x + ${br(v[0])}, y + ${br(v[1])}).`,
             `So every point moves by ${cv(v)}: twice the vector from the first centre to the second.`,
           ],
           hint: "Track the point (0, 0) through both half-turns and see how far it moved.",
@@ -1160,9 +1160,9 @@ export const drills: Drill[] = [
         prompt: `→AB = ${linShow(AB)} and →BC = ${linShow(BC)}. These show that A, B and C lie on a straight line. Find the ratio AB : BC in its simplest form.`,
         answer: { type: "ratio", parts: [p, q], simplest: true, display: `${p} : ${q}` },
         solution: [
-          `Take out common factors: AB = ${p === 1 ? "" : p}(${linShow(L(fr(u), fr(v))).slice(2, -2)}) and BC = ${q === 1 ? "" : q}(${linShow(L(fr(u), fr(v))).slice(2, -2)}).`,
+          `Take out common factors: →AB = {{${p === 1 ? "" : p}(${linShow(L(fr(u), fr(v))).slice(2, -2)})}} and →BC = {{${q === 1 ? "" : q}(${linShow(L(fr(u), fr(v))).slice(2, -2)})}}.`,
           `They are multiples of the same vector, so AB ∥ BC; they share the point B, so A, B, C lie on one straight line.`,
-          `AB = {{${p}/${q}}} BC, so AB : BC = ${p} : ${q}.`,
+          `→AB = ${q === 1 ? p : `{{${p}/${q}}}`} →BC, so AB : BC = ${p} : ${q}.`,
         ],
         hint: "Factorise each vector to find the common vector inside the bracket. The numbers outside give the ratio.",
         traps: [{ spec: { type: "ratio", parts: [q, p] }, feedback: "Ratio the wrong way round — AB comes first." }],
