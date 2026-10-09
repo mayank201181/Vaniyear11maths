@@ -161,7 +161,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 4.95, tolerance: 0.005, display: "4.95 cm" },
         traps: [
           { spec: { type: "number", value: 10.1, tolerance: 0.05 }, feedback: "You multiplied BD by tan 55°. In triangle BDC, BD is *opposite* 55° and DC is *adjacent*, so {{DC = BD/tan 55°}}." },
-          { spec: { type: "number", value: 6.03, tolerance: 0.01 }, feedback: "You used BD = 11 cos 40°. BD is opposite the 40° angle, so BD = 11 sin 40° = 7.07 cm." },
+          { spec: { type: "number", value: 5.90, tolerance: 0.005 }, feedback: "You used BD = 11 cos 40°. BD is opposite the 40° angle, so BD = 11 sin 40° = 7.07 cm." },
         ],
         solution: [
           "Triangle ABD: AB = 11 is the hypotenuse, BD is opposite 40°.",
@@ -258,7 +258,7 @@ export const morePapers: Paper[] = [
         traps: [
           { spec: { type: "number", value: 36 }, feedback: "9 cm is the sloping side, not the height. Find the perpendicular height with Pythagoras first." },
           { spec: { type: "number", value: 64.5, tolerance: 0.05 }, feedback: "You forgot the ½ in ½ × base × height." },
-          { spec: { type: "number", value: 39.4, tolerance: 0.05 }, feedback: "Split the base in half: each right-angled triangle has base 4 cm, not 8 cm. Height = {{sqrt(9^2 - 4^2)}}." },
+          { spec: { type: "number", value: 16.5, tolerance: 0.05 }, feedback: "You used the whole base (8 cm) in Pythagoras. The line of symmetry halves the base: each right-angled triangle has base 4 cm, so height = {{sqrt(9^2 - 4^2)}}." },
         ],
         solution: [
           "The perpendicular from the apex bisects the base, making two right-angled triangles with hypotenuse 9 cm and base 4 cm.",
@@ -384,7 +384,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 46.7, tolerance: 0.05, display: "46.7°" },
         traps: [
           { spec: { type: "number", value: 43.3, tolerance: 0.05 }, feedback: "That is angle ACB. From A, AB is the **adjacent** side, so use {{cos(BAC) = 8.5/12.4}}." },
-          { spec: { type: "number", value: 55.6, tolerance: 0.05 }, feedback: "Tan needs opposite and adjacent. AC is the hypotenuse (opposite the right angle at B), so use cos." },
+          { spec: { type: "number", value: 34.4, tolerance: 0.05 }, feedback: "You used tan. Tan needs opposite and adjacent, but AC is the hypotenuse (opposite the right angle at B), so use cos." },
         ],
         solution: [
           "From angle A: AB = 8.5 is adjacent, AC = 12.4 is the hypotenuse.",
@@ -407,7 +407,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 35.4, tolerance: 0.05, display: "35.4 m" },
         traps: [
           { spec: { type: "number", value: 97.6, tolerance: 0.05 }, feedback: "97.6 m is the length of the diagonal. The question asks how much *shorter* it is than going round: 133 − 97.6." },
-          { spec: { type: "number", value: 70.2, tolerance: 0.05 }, feedback: "You subtracted the squares. The diagonal is the hypotenuse, so add: {{sqrt(85^2 + 48^2)}}." },
+          { spec: { type: "number", value: 70.1, tolerance: 0.05 }, feedback: "You subtracted the squares. The diagonal is the hypotenuse, so add: {{sqrt(85^2 + 48^2)}}." },
         ],
         solution: [
           "Along the edges: 85 + 48 = 133 m.",
@@ -450,7 +450,7 @@ export const morePapers: Paper[] = [
         answer: { type: "number", value: 10, display: "10 units" },
         traps: [
           { spec: { type: "number", value: 14 }, feedback: "You added the horizontal and vertical distances (8 + 6). Use Pythagoras: {{sqrt(8^2 + 6^2)}}." },
-          { spec: { type: "number", value: 2.83, tolerance: 0.01 }, feedback: "Careful with the negatives: the horizontal change is 5 − (−3) = 8, and the vertical change is −2 − 4 = −6." },
+          { spec: { type: "number", value: 6.32, tolerance: 0.01 }, feedback: "Careful with the negatives: the horizontal change is 5 − (−3) = 8, not 2. Then {{sqrt(8^2 + 6^2) = 10}}." },
         ],
         solution: [
           "Horizontal change: 5 − (−3) = 8. Vertical change: −2 − 4 = −6.",
@@ -471,8 +471,7 @@ export const morePapers: Paper[] = [
           "Ethan stands at the top of a vertical cliff on Sentosa, 38 m above sea level. He sees a boat out at sea. The angle of depression of the boat from the top of the cliff is 24°.\n\nCalculate the horizontal distance from the foot of the cliff to the boat.\n\nGive your answer in metres correct to 3 significant figures.",
         answer: { type: "number", value: 85.3, tolerance: 0.05, display: "85.3 m" },
         traps: [
-          { spec: { type: "number", value: 16.9, tolerance: 0.05 }, feedback: "You multiplied by tan 24°. The angle of elevation of the cliff top from the boat is 24°, with 38 m opposite and the distance adjacent, so {{d = 38/tan 24°}}." },
-          { spec: { type: "number", value: 17.1, tolerance: 0.05 }, feedback: "The angle of depression is measured *down from the horizontal*, not from the cliff face. It equals the angle of elevation at the boat (alternate angles)." },
+          { spec: { type: "number", value: 16.9, tolerance: 0.05 }, feedback: "You found 38 tan 24°, which puts the 24° against the cliff face. The angle of depression is measured *down from the horizontal*; it equals the angle of elevation at the boat (alternate angles), so {{d = 38/tan 24°}}." },
         ],
         solution: [
           "The angle of depression from the cliff top equals the angle of elevation from the boat (alternate angles): 24°.",
