@@ -35,7 +35,7 @@ export const paper: ExamPaper = {
       answer: { type: "number", value: 14, display: "14 minutes" },
       traps: [
         { spec: { type: "number", value: 840 }, feedback: "840 is right — but that's in seconds. The question asks for minutes." },
-        { spec: { type: "number", value: 168 }, feedback: "84 × 120 is a common multiple, but not the *lowest* one. Use prime factors to find the LCM." },
+        { spec: { type: "number", value: 168 }, feedback: "168 minutes = 84 × 120 seconds. That is a common multiple, but not the *lowest* one. Use prime factors to find the LCM." },
         { spec: { type: "number", value: 12 }, feedback: "12 is the HCF of 84 and 120. 'Next time together' needs the LCM." },
       ],
       solution: [

@@ -10,7 +10,7 @@ const GRID_ROT_CENTRE = `<svg viewBox="0 0 308 230" xmlns="http://www.w3.org/200
 
 const GRID_ENLARGE_HALF = `<svg viewBox="0 0 288 288" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid. Triangle A has vertices (2, 5), (6, 5) and (6, 7). Triangle B has vertices (0, 2), (2, 2) and (2, 3)."><rect x="0" y="0" width="288" height="288" fill="#ffffff"/><line x1="24" y1="264" x2="24" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="48" y1="264" x2="48" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="72" y1="264" x2="72" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="96" y1="264" x2="96" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="120" y1="264" x2="120" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="144" y1="264" x2="144" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="168" y1="264" x2="168" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="192" y1="264" x2="192" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="216" y1="264" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="240" y1="264" x2="240" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="264" y1="264" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="264" x2="264" y2="264" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="240" x2="264" y2="240" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="216" x2="264" y2="216" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="192" x2="264" y2="192" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="264" y2="168" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="264" y2="144" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="120" x2="264" y2="120" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="96" x2="264" y2="96" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="72" x2="264" y2="72" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="48" x2="264" y2="48" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="24" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="216" x2="264" y2="216" stroke="#334155" stroke-width="1.5"/><line x1="96" y1="264" x2="96" y2="24" stroke="#334155" stroke-width="1.5"/><text x="274" y="220" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="92" y="16" font-size="12" font-family="sans-serif" fill="#1f2937" text-anchor="middle">y</text><text x="24" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−3</text><text x="48" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−2</text><text x="72" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−1</text><text x="120" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">1</text><text x="144" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">2</text><text x="168" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">3</text><text x="192" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">4</text><text x="216" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">5</text><text x="240" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">6</text><text x="264" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">7</text><text x="91" y="268" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−2</text><text x="91" y="244" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−1</text><text x="91" y="196" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">1</text><text x="91" y="172" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">2</text><text x="91" y="148" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">3</text><text x="91" y="124" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">4</text><text x="91" y="100" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">5</text><text x="91" y="76" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">6</text><text x="91" y="52" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">7</text><text x="91" y="28" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">8</text><text x="91" y="229" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">0</text><polygon points="144,96 240,96 240,48" fill="#c7d2fe" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="208.8" y="86.6" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">A</text><polygon points="96,168 144,168 144,144" fill="#fde68a" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="128.4" y="165.8" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">B</text></svg>`;
 
-const GRID_REFLECT = `<svg viewBox="0 0 240 312" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid. Triangle A has vertices (1, 1), (3, 1) and (1, 3). Triangle B has vertices (1, −3), (3, −3) and (1, −5)."><rect x="0" y="0" width="240" height="312" fill="#ffffff"/><line x1="24" y1="288" x2="24" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="48" y1="288" x2="48" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="72" y1="288" x2="72" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="96" y1="288" x2="96" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="120" y1="288" x2="120" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="144" y1="288" x2="144" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="168" y1="288" x2="168" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="192" y1="288" x2="192" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="216" y1="288" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="288" x2="216" y2="288" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="264" x2="216" y2="264" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="240" x2="216" y2="240" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="216" x2="216" y2="216" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="192" x2="216" y2="192" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="216" y2="168" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="216" y2="144" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="120" x2="216" y2="120" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="96" x2="216" y2="96" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="72" x2="216" y2="72" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="48" x2="216" y2="48" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="24" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="216" y2="144" stroke="#334155" stroke-width="1.5"/><line x1="72" y1="288" x2="72" y2="24" stroke="#334155" stroke-width="1.5"/><text x="226" y="148" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="68" y="16" font-size="12" font-family="sans-serif" fill="#1f2937" text-anchor="middle">y</text><text x="24" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−2</text><text x="48" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−1</text><text x="96" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">1</text><text x="120" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">2</text><text x="144" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">3</text><text x="168" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">4</text><text x="192" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">5</text><text x="216" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">6</text><text x="67" y="292" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−6</text><text x="67" y="268" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−5</text><text x="67" y="244" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−4</text><text x="67" y="220" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−3</text><text x="67" y="196" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−2</text><text x="67" y="172" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−1</text><text x="67" y="124" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">1</text><text x="67" y="100" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">2</text><text x="67" y="76" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">3</text><text x="67" y="52" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">4</text><text x="67" y="28" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">5</text><text x="67" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">0</text><polygon points="96,120 144,120 96,72" fill="#c7d2fe" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="110.4" y="110.6" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">A</text><polygon points="96,216 144,216 96,264" fill="#fde68a" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="110.4" y="240.2" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">B</text></svg>`;
+const GRID_REFLECT = `<svg viewBox="0 0 288 192" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid. Triangle A has vertices (1, 1), (3, 1) and (1, 4). Triangle B has vertices (7, 1), (5, 1) and (7, 4)."><rect x="0" y="0" width="288" height="192" fill="#ffffff"/><line x1="24" y1="168" x2="24" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="48" y1="168" x2="48" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="72" y1="168" x2="72" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="96" y1="168" x2="96" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="120" y1="168" x2="120" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="144" y1="168" x2="144" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="168" y1="168" x2="168" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="192" y1="168" x2="192" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="216" y1="168" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="240" y1="168" x2="240" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="240" y2="168" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="240" y2="144" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="120" x2="240" y2="120" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="96" x2="240" y2="96" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="72" x2="240" y2="72" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="48" x2="240" y2="48" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="24" x2="240" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="240" y2="144" stroke="#334155" stroke-width="1.5"/><line x1="48" y1="168" x2="48" y2="24" stroke="#334155" stroke-width="1.5"/><text x="250" y="148" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="44" y="16" font-size="12" font-family="sans-serif" fill="#1f2937" text-anchor="middle">y</text><text x="24" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−1</text><text x="72" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">1</text><text x="96" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">2</text><text x="120" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">3</text><text x="144" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">4</text><text x="168" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">5</text><text x="192" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">6</text><text x="216" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">7</text><text x="240" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">8</text><text x="43" y="172" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−1</text><text x="43" y="124" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">1</text><text x="43" y="100" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">2</text><text x="43" y="76" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">3</text><text x="43" y="52" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">4</text><text x="43" y="28" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">5</text><text x="43" y="157" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">0</text><polygon points="72,120 120,120 72,48" fill="#c7d2fe" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="88.0" y="101.0" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">A</text><polygon points="216,120 168,120 216,48" fill="#fde68a" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="200.0" y="101.0" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">B</text></svg>`;
 
 const GRID_ROT_DESCRIBE = `<svg viewBox="0 0 288 288" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Coordinate grid. Triangle A has vertices (1, 2), (1, 5) and (3, 2). Triangle B has vertices (4, −1), (7, −1) and (4, −3)."><rect x="0" y="0" width="288" height="288" fill="#ffffff"/><line x1="24" y1="264" x2="24" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="48" y1="264" x2="48" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="72" y1="264" x2="72" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="96" y1="264" x2="96" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="120" y1="264" x2="120" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="144" y1="264" x2="144" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="168" y1="264" x2="168" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="192" y1="264" x2="192" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="216" y1="264" x2="216" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="240" y1="264" x2="240" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="264" y1="264" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="264" x2="264" y2="264" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="240" x2="264" y2="240" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="216" x2="264" y2="216" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="192" x2="264" y2="192" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="264" y2="168" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="144" x2="264" y2="144" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="120" x2="264" y2="120" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="96" x2="264" y2="96" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="72" x2="264" y2="72" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="48" x2="264" y2="48" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="24" x2="264" y2="24" stroke="#e2e8f0" stroke-width="1"/><line x1="24" y1="168" x2="264" y2="168" stroke="#334155" stroke-width="1.5"/><line x1="72" y1="264" x2="72" y2="24" stroke="#334155" stroke-width="1.5"/><text x="274" y="172" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="68" y="16" font-size="12" font-family="sans-serif" fill="#1f2937" text-anchor="middle">y</text><text x="24" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−2</text><text x="48" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">−1</text><text x="96" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">1</text><text x="120" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">2</text><text x="144" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">3</text><text x="168" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">4</text><text x="192" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">5</text><text x="216" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">6</text><text x="240" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">7</text><text x="264" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="middle">8</text><text x="67" y="268" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−4</text><text x="67" y="244" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−3</text><text x="67" y="220" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−2</text><text x="67" y="196" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">−1</text><text x="67" y="148" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">1</text><text x="67" y="124" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">2</text><text x="67" y="100" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">3</text><text x="67" y="76" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">4</text><text x="67" y="52" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">5</text><text x="67" y="28" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">6</text><text x="67" y="181" font-size="10" font-family="sans-serif" fill="#475569" text-anchor="end">0</text><polygon points="96,120 96,48 144,120" fill="#c7d2fe" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="110.4" y="103.4" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">A</text><polygon points="168,192 240,192 168,240" fill="#fde68a" fill-opacity="0.85" stroke="#1f2937" stroke-width="2"/><text x="189.6" y="213.8" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937" text-anchor="middle">B</text></svg>`;
 
@@ -56,17 +56,17 @@ export const practice: TopicPractice = {
     {
       kind: "short",
       id: "vectors-transformations-quiz-q02",
-      question: "Find the magnitude of the vector {{col(5, -12)}}.",
-      answer: { type: "number", value: 13 },
-      solution: ["Magnitude = {{sqrt(5^2 + (-12)^2)}}.", "= {{sqrt(25 + 144)}} = {{sqrt(169)}} = 13."],
+      question: "Find the magnitude of the vector {{col(8, -15)}}.",
+      answer: { type: "number", value: 17 },
+      solution: ["Magnitude = {{sqrt(8^2 + (-15)^2)}}.", "= {{sqrt(64 + 225)}} = {{sqrt(289)}} = 17."],
       traps: [
         { spec: { type: "number", value: -7 }, feedback: "You added the entries. The magnitude is a *length*: use Pythagoras on the two components." },
-        { spec: { type: "number", value: 17 }, feedback: "Lengths don't add like that — square, add, then square root: {{sqrt(25 + 144)}}." },
+        { spec: { type: "number", value: 23 }, feedback: "Lengths don't add like that — square, add, then square root: {{sqrt(64 + 225)}}." },
       ],
-      commonError: "Squaring −12 as −144 and getting {{sqrt(-119)}}.",
+      commonError: "Squaring −15 as −225 and getting the square root of a negative number.",
       difficulty: "warmup",
       guideRef: "vector-basics",
-      hints: ["The vector is the hypotenuse of a right-angled triangle with sides 5 and 12 — use Pythagoras."],
+      hints: ["The vector is the hypotenuse of a right-angled triangle with sides 8 and 15 — use Pythagoras."],
       strategy: "Draw a diagram",
     },
     {
@@ -111,24 +111,24 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "vectors-transformations-quiz-q05",
       question:
-        "The point Q(3, 2) is enlarged with scale factor −2 and centre of enlargement (1, 1). Find the coordinates of the image of Q.",
-      answer: { type: "list", values: [-3, -1], ordered: true, display: "(−3, −1)" },
+        "The point Q(4, 3) is enlarged with scale factor −2 and centre of enlargement (2, 1). Find the coordinates of the image of Q.",
+      answer: { type: "list", values: [-2, -3], ordered: true, display: "(−2, −3)" },
       solution: [
-        "Vector from the centre C(1, 1) to Q: {{col(3 - 1, 2 - 1) = col(2, 1)}}.",
-        "Multiply by the scale factor: {{-2 col(2, 1) = col(-4, -2)}}.",
-        "Image = (1 − 4, 1 − 2) = (−3, −1).",
+        "Vector from the centre C(2, 1) to Q: {{col(4 - 2, 3 - 1) = col(2, 2)}}.",
+        "Multiply by the scale factor: {{-2 col(2, 2) = col(-4, -4)}}.",
+        "Image = (2 − 4, 1 − 4) = (−2, −3).",
       ],
       traps: [
-        { spec: { type: "list", values: [5, 3], ordered: true }, feedback: "That's scale factor +2. A negative scale factor sends the image to the **other side** of the centre." },
-        { spec: { type: "list", values: [-6, -4], ordered: true }, feedback: "You multiplied Q's coordinates by −2, which uses the origin as the centre. Work with the vector from (1, 1) instead." },
+        { spec: { type: "list", values: [6, 5], ordered: true }, feedback: "That's scale factor +2. A negative scale factor sends the image to the **other side** of the centre." },
+        { spec: { type: "list", values: [-8, -6], ordered: true }, feedback: "You multiplied Q's coordinates by −2, which uses the origin as the centre. Work with the vector from (2, 1) instead." },
       ],
-      commonError: "Using the origin as the centre instead of (1, 1).",
+      commonError: "Using the origin as the centre instead of (2, 1).",
       difficulty: "core",
       guideRef: "transformations",
       hints: [
-        "Every enlargement is measured *from the centre*. What is the vector from (1, 1) to Q?",
+        "Every enlargement is measured *from the centre*. What is the vector from (2, 1) to Q?",
         "Multiply that vector by −2 — the minus sign reverses its direction.",
-        "Add the new vector to the centre (1, 1).",
+        "Add the new vector to the centre (2, 1).",
       ],
       strategy: "Use vectors",
     },
@@ -136,21 +136,21 @@ export const practice: TopicPractice = {
       kind: "mcq",
       id: "vectors-transformations-quiz-q06",
       question:
-        "A shape is reflected in the x-axis and then the image is reflected in the y-axis. Which single transformation has the same effect?",
+        "A shape is reflected in the y-axis and then the image is rotated 180° about the origin. Which single transformation has the same effect?",
       options: [
+        "Reflection in the x-axis",
+        "Reflection in the line y = −x",
         "Rotation 180° about the origin",
-        "Reflection in the line y = x",
         "Rotation 90° clockwise about the origin",
-        "Translation by the vector {{col(-2, 0)}}",
       ],
       answerIndex: 0,
       explanation:
-        "Track a general point: (x, y) → (x, −y) → (−x, −y). Changing both signs is a half-turn about the origin. Reflection in y = x would *swap* the coordinates, and a 90° turn also swaps them. A translation moves every point by the same amount, but here (2, 1) moves by {{col(-4, -2)}} and (1, 0) by {{col(-2, 0)}}. Two reflections in perpendicular lines always make a 180° rotation about the point where they cross.",
+        "Track a general point: reflect in the y-axis, (x, y) → (−x, y); rotate 180° about O, (−x, y) → (x, −y). Keeping x and changing the sign of y is a reflection in the x-axis. Test: (2, 1) → (−2, 1) → (2, −1) ✓. Reflection in y = −x would also swap the coordinates. 'Rotation 180°' forgets the first step. No rotation can be right: one reflection plus a rotation leaves the shape flipped over, so the answer must be a reflection.",
       difficulty: "core",
       guideRef: "combined-transformations",
       hints: [
-        "Pick a test point such as (2, 1) and apply both reflections.",
-        "Compare where (2, 1) starts and where it ends. What single move does that?",
+        "Pick a test point such as (2, 1) and apply both transformations in order.",
+        "Compare where (2, 1) starts and where it ends. Is the shape flipped over, or just turned?",
       ],
       strategy: "Try small cases",
     },
@@ -197,24 +197,24 @@ export const practice: TopicPractice = {
       kind: "short",
       id: "vectors-transformations-quiz-q09",
       question:
-        "→OA = **a** and →OB = **b**. The point P lies on AB with AP : PB = 2 : 1.\n\nFind →OP in terms of **a** and **b**. Simplify your answer.",
-      answer: { type: "expression", expr: "(1/3)a+(2/3)b", display: "{{1/3}}**a** + {{2/3}}**b**" },
+        "→OA = **a** and →OB = **b**. The point P lies on AB with AP : PB = 1 : 4.\n\nFind →OP in terms of **a** and **b**. Simplify your answer.",
+      answer: { type: "expression", expr: "(4/5)a+(1/5)b", display: "{{4/5}}**a** + {{1/5}}**b**" },
       solution: [
         "→AB = **b** − **a**.",
-        "AP is {{2/3}} of AB, so →AP = {{2/3}}(**b** − **a**).",
-        "→OP = →OA + →AP = **a** + {{2/3}}**b** − {{2/3}}**a** = {{1/3}}**a** + {{2/3}}**b**.",
+        "AP is {{1/5}} of AB (1 part out of 1 + 4 = 5), so →AP = {{1/5}}(**b** − **a**).",
+        "→OP = →OA + →AP = **a** + {{1/5}}**b** − {{1/5}}**a** = {{4/5}}**a** + {{1/5}}**b**.",
       ],
       traps: [
-        { spec: { type: "expression", expr: "(2/3)a+(1/3)b" }, feedback: "Close — but that point is nearer A. P is {{2/3}} of the way from A to B, so it's closer to B and **b** gets the bigger share." },
-        { spec: { type: "expression", expr: "(1/2)a+(1/2)b" }, feedback: "That's the midpoint. The ratio 2 : 1 splits AB into 3 equal parts, not 2." },
+        { spec: { type: "expression", expr: "(1/5)a+(4/5)b" }, feedback: "Swapped — that point is nearer B. P is only {{1/5}} of the way from A to B, so it's close to A and **a** gets the bigger share." },
+        { spec: { type: "expression", expr: "(3/4)a+(1/4)b" }, feedback: "You used {{1/4}} of AB. The ratio 1 : 4 splits AB into 1 + 4 = 5 equal parts, so →AP = {{1/5}}→AB." },
       ],
-      commonError: "Using {{2/1}} or {{1/2}} instead of {{2/3}} — the ratio 2 : 1 means thirds.",
+      commonError: "Using {{1/4}} instead of {{1/5}} — the ratio 1 : 4 means fifths.",
       difficulty: "core",
       guideRef: "vector-geometry",
       hints: [
         "What fraction of the way from A to B is P?",
-        "AP : PB = 2 : 1 means P is {{2/3}} of the way along. First find →AB.",
-        "→OP = →OA + {{2/3}}→AB.",
+        "AP : PB = 1 : 4 means 5 equal parts, and P is 1 part along. First find →AB.",
+        "→OP = →OA + {{1/5}}→AB.",
       ],
       strategy: "Find a route",
     },
@@ -395,21 +395,21 @@ export const practice: TopicPractice = {
           kind: "written",
           id: "vectors-transformations-p1-q08",
           question:
-            "A shape is reflected in the line x = 1, and the image is then reflected in the line x = 4.\n\nShow that the combined transformation is a single translation, and give its column vector.",
+            "A shape is reflected in the line y = 2, and the image is then reflected in the line y = −1.\n\nShow that the combined transformation is a single translation, and give its column vector.",
           marks: 3,
           modelAnswer:
-            "Take a general point (x, y). Reflecting in x = 1: the distance from the line is x − 1, so the image is (1 − (x − 1), y) = (2 − x, y). Reflecting (2 − x, y) in x = 4 gives (8 − (2 − x), y) = (x + 6, y). Every point moves 6 to the right and 0 up, so the combined transformation is the translation by the column vector {{col(6, 0)}}.",
+            "Take a general point (x, y). Reflecting in y = 2: the point is y − 2 above the line, so the image is (x, 2 − (y − 2)) = (x, 4 − y). Reflecting (x, 4 − y) in y = −1 gives (x, −2 − (4 − y)) = (x, y − 6). Every point moves 0 across and 6 down, so the combined transformation is the translation by the column vector {{col(0, -6)}}.",
           markScheme: [
-            { point: "First reflection: (x, y) → (2 − x, y) (or a correct numerical example)", keywords: ["2 - x", "2 − x", "2-x"] },
-            { point: "Second reflection: → (8 − (2 − x), y) = (x + 6, y)", keywords: ["x + 6", "x+6", "8 -", "8 −"] },
-            { point: "Conclusion: translation by {{col(6, 0)}} — every point moves the same", keywords: ["translation", "(6, 0)", "6, 0", "6 right"] },
+            { point: "First reflection: (x, y) → (x, 4 − y) (or a correct numerical example)", keywords: ["4 - y", "4 − y", "4-y"] },
+            { point: "Second reflection: → (x, −2 − (4 − y)) = (x, y − 6)", keywords: ["y - 6", "y − 6", "y-6", "-2 -", "−2 −"] },
+            { point: "Conclusion: translation by {{col(0, -6)}} — every point moves the same", keywords: ["translation", "(0, -6)", "(0, −6)", "0, -6", "0, −6", "6 down"] },
           ],
-          commonError: "Testing one point only and then claiming it is a translation — check a general point (x, y) or at least two points.",
+          commonError: "Testing one point only and then claiming it is a translation — check a general point (x, y) or at least two points. Also watch the direction: the move is from the first mirror towards the second, so it is down.",
           difficulty: "core",
           guideRef: "combined-transformations",
           hints: [
-            "Start with a general point (x, y). Where does a reflection in x = 1 send it?",
-            "A reflection in x = a sends (x, y) to (2a − x, y).",
+            "Start with a general point (x, y). Where does a reflection in y = 2 send it?",
+            "A reflection in y = b sends (x, y) to (x, 2b − y).",
             "Apply the rule twice and simplify. Does every point move by the same amount?",
           ],
           strategy: "Introduce a variable",
@@ -622,17 +622,17 @@ export const practice: TopicPractice = {
           id: "vectors-transformations-p2-q04",
           question: "Triangle A is reflected to give triangle B.\n\nFind the equation of the mirror line.",
           diagram: GRID_REFLECT,
-          answer: { type: "equation", eq: "y+1=0", display: "y = −1" },
+          answer: { type: "equation", eq: "x-4=0", display: "x = 4" },
           solution: [
-            "Matching vertices: (1, 1) ↔ (1, −3), (3, 1) ↔ (3, −3), (1, 3) ↔ (1, −5).",
-            "The mirror line is halfway between each pair: y = {{(1 + (-3))/2}} = −1.",
-            "Check with (1, 3) ↔ (1, −5): halfway is −1 ✓. Mirror line y = −1.",
+            "Matching vertices: (1, 1) ↔ (7, 1), (3, 1) ↔ (5, 1), (1, 4) ↔ (7, 4). B is flipped left–right, so the mirror line is vertical.",
+            "The mirror line is halfway between each pair: x = {{(1 + 7)/2}} = 4.",
+            "Check with (3, 1) ↔ (5, 1): halfway is x = 4 ✓. Mirror line x = 4.",
           ],
           traps: [
-            { spec: { type: "equation", eq: "y=0" }, feedback: "Reflecting in the x-axis would send (1, 1) to (1, −1), but B's vertex is at (1, −3). Find the line halfway between matching vertices." },
-            { spec: { type: "equation", eq: "y+2=0" }, feedback: "That's halfway between the *nearest* edges of the two triangles, not between matching vertices. (1, 1) matches (1, −3)." },
+            { spec: { type: "equation", eq: "y=4" }, feedback: "y = 4 is a horizontal line. The mirror here is vertical, and vertical lines have equations x = …." },
+            { spec: { type: "equation", eq: "x=5" }, feedback: "That's halfway between (3, 1) and (7, 1), which are not matching vertices. The right-angle corner (1, 1) matches (7, 1), and (3, 1) matches (5, 1)." },
           ],
-          commonError: "Taking the x-axis as the mirror line by default.",
+          commonError: "Writing y = 4 for a vertical mirror line (mixing up x = … and y = …).",
           difficulty: "warmup",
           guideRef: "transformations",
           hints: ["Match each vertex of A with its image in B, then find the line exactly halfway between them."],
@@ -669,7 +669,7 @@ export const practice: TopicPractice = {
           diagram: GRID_ROT_DESCRIBE,
           marks: 3,
           modelAnswer:
-            "Rotation, 90° clockwise, about the centre (1, −1).\n\nCheck: from (1, −1), vertex (1, 2) is 3 up; after a quarter-turn clockwise it is 3 right, at (4, −1) ✓. Vertex (1, 5) is 6 up → 6 right, (7, −1) ✓. Vertex (3, 2) is (2, 3) away → (3, −2) away, at (4, −3) ✓.",
+            "Rotation, 90° clockwise, about the centre (1, −1).\n\nCheck: from (1, −1), vertex (1, 2) is 3 up; after a quarter-turn clockwise it is 3 right, at (4, −1) ✓. Vertex (1, 5) is 6 up → 6 right, (7, −1) ✓. Vertex (3, 2) is {{col(2, 3)}} from the centre → {{col(3, -2)}}, at (4, −3) ✓.",
           markScheme: [
             { point: "Rotation (one transformation only)", keywords: ["rotation", "rotate"] },
             { point: "90° clockwise (or 270° anticlockwise)", keywords: ["90", "clockwise", "270"] },
@@ -962,7 +962,7 @@ export const practice: TopicPractice = {
         "Collinear ⇒ →PR is a multiple of **a** − **b**, so the **b** coefficient is minus the **a** coefficient: k + 5 = −(k − 1).",
         "2k = −4, so k = −2. Check: →OR = −2**a** + 4**b**, →PR = −3**a** + 3**b** = −{{3/2}}→PQ ✓.",
       ],
-      traps: [{ spec: { type: "number", value: -3 }, feedback: "Check →PR carefully: (k + 6) − 1 = k + 5, not k + 6." }],
+      traps: [{ spec: { type: "number", value: -3 }, feedback: "Check the **b** part of →PR carefully: (k + 6) − 1 = k + 5 (subtract the 1, don't add it — k + 7 leads to −3)." }],
       commonError: "Setting the coefficients equal (k − 1 = k + 5) instead of opposite — that has no solution, which is the clue.",
       difficulty: "challenge",
       guideRef: "vector-geometry",
@@ -1092,7 +1092,7 @@ export const practice: TopicPractice = {
       guideRef: "transformations",
       hints: [
         "Can you move everything so that the mirror becomes the familiar line y = x?",
-        "Translate by (0, −3), reflect in y = x, then translate back by (0, 3).",
+        "Translate by {{col(0, -3)}}, reflect in y = x, then translate back by {{col(0, 3)}}.",
         "Or: drop a perpendicular from (5, 0) to the mirror; the foot is the midpoint of the point and its image.",
       ],
       strategy: "Make it simpler",
@@ -1113,12 +1113,12 @@ export const practice: TopicPractice = {
         {
           label: "Geometric",
           steps: [
-            "The centre C must satisfy R(C) = C − (2, 0): the rotation must move C exactly (−2, 0) so that T brings it back.",
+            "The centre C must satisfy R(C) = C + {{col(-2, 0)}}: the rotation must move C by exactly {{col(-2, 0)}} so that T brings it back.",
             "A 90° rotation about O moves a point at distance d through a chord of length d{{sqrt(2)}}. Need d{{sqrt(2)}} = 2, so d = {{sqrt(2)}}; trying (1, 1) works: R(1, 1) = (−1, 1).",
           ],
         },
       ],
-      traps: [{ spec: { type: "list", values: [1, -1], ordered: true }, feedback: "That's the centre for T *then* R. Order matters: here R comes first, then T." }],
+      traps: [{ spec: { type: "list", values: [-1, 1], ordered: true }, feedback: "That's the centre for T *then* R. Order matters: here R comes first, then T." }],
       commonError: "Doing the translation first.",
       difficulty: "challenge",
       guideRef: "combined-transformations",

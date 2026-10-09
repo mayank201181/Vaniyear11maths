@@ -12,7 +12,7 @@ export const mcqPapers: Paper[] = [
         id: "calculus-m1-q01",
         question:
           "The diagram shows the curve {{y = x^2}} and the straight line that touches it at P(1, 1). For this curve, what does the value of {{dy/dx}} at P tell you?",
-        diagram: `<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The parabola y equals x squared with a tangent line touching it at the point P(1, 1)"><rect x="0" y="0" width="300" height="240" fill="#ffffff"/><line x1="10" y1="200" x2="290" y2="200" stroke="#334155" stroke-width="1.2"/><line x1="100" y1="235" x2="100" y2="8" stroke="#334155" stroke-width="1.2"/><text x="284" y="215" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="106" y="16" font-size="12" font-family="sans-serif" fill="#1f2937">y</text><text x="88" y="214" font-size="11" font-family="sans-serif" fill="#1f2937">O</text><line x1="170" y1="197" x2="170" y2="203" stroke="#334155"/><text x="166" y="216" font-size="11" font-family="sans-serif" fill="#1f2937">1</text><line x1="240" y1="197" x2="240" y2="203" stroke="#334155"/><text x="236" y="216" font-size="11" font-family="sans-serif" fill="#1f2937">2</text><path d="M16.0 149.6 L25.2 160.0 L34.4 169.2 L43.6 177.2 L52.8 184.1 L61.9 189.7 L71.1 194.0 L80.3 197.2 L89.5 199.2 L98.7 200.0 L107.9 199.6 L117.1 197.9 L126.3 195.1 L135.4 191.0 L144.6 185.8 L153.8 179.3 L163.0 171.6 L172.2 162.8 L181.4 152.7 L190.6 141.4 L199.8 128.9 L208.9 115.2 L218.1 100.3 L227.3 84.2 L236.5 66.9 L245.7 48.4 L254.9 28.7 L261.0 14.9" fill="none" stroke="#1f2937" stroke-width="2"/><line x1="107" y1="228" x2="268" y2="67" stroke="#2563eb" stroke-width="1.6"/><circle cx="170" cy="165" r="4" fill="#dc2626"/><text x="176" y="182" font-size="12" font-family="sans-serif" fill="#1f2937">P(1, 1)</text><text x="230" y="40" font-size="12" font-family="sans-serif" fill="#1f2937">y = x²</text></svg>`,
+        diagram: `<svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The parabola y equals x squared with a tangent line touching it at the point P(1, 1)"><rect x="0" y="0" width="300" height="240" fill="#ffffff"/><line x1="10" y1="200" x2="290" y2="200" stroke="#334155" stroke-width="1.2"/><line x1="100" y1="235" x2="100" y2="8" stroke="#334155" stroke-width="1.2"/><text x="284" y="215" font-size="12" font-family="sans-serif" fill="#1f2937">x</text><text x="106" y="16" font-size="12" font-family="sans-serif" fill="#1f2937">y</text><text x="88" y="214" font-size="11" font-family="sans-serif" fill="#1f2937">O</text><line x1="170" y1="197" x2="170" y2="203" stroke="#334155"/><text x="166" y="216" font-size="11" font-family="sans-serif" fill="#1f2937">1</text><line x1="240" y1="197" x2="240" y2="203" stroke="#334155"/><text x="236" y="216" font-size="11" font-family="sans-serif" fill="#1f2937">2</text><path d="M16.0 149.6 L25.2 160.0 L34.4 169.2 L43.6 177.2 L52.8 184.1 L61.9 189.7 L71.1 194.0 L80.3 197.2 L89.5 199.2 L98.7 200.0 L107.9 199.6 L117.1 197.9 L126.3 195.1 L135.4 191.0 L144.6 185.8 L153.8 179.3 L163.0 171.6 L172.2 162.8 L181.4 152.7 L190.6 141.4 L199.8 128.9 L208.9 115.2 L218.1 100.3 L227.3 84.2 L236.5 66.9 L245.7 48.4 L254.9 28.7 L261.0 14.9" fill="none" stroke="#1f2937" stroke-width="2"/><line x1="107" y1="228" x2="268" y2="67" stroke="#2563eb" stroke-width="1.6"/><circle cx="170" cy="165" r="4" fill="#dc2626"/><text x="176" y="182" font-size="12" font-family="sans-serif" fill="#1f2937">P(1, 1)</text><text x="180" y="40" font-size="12" font-family="sans-serif" fill="#1f2937">y = x²</text></svg>`,
         options: [
           "The y-intercept of the tangent at P",
           "The gradient of the chord from O to P",
@@ -86,17 +86,17 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "calculus-m1-q06",
-        question: "Given {{y = 6sqrt(x)}}, find {{dy/dx}}.",
-        options: ["{{3sqrt(x)}}", "{{6/sqrt(x)}}", "{{4x^(3/2)}}", "{{3/sqrt(x)}}"],
+        question: "Given {{y = 6/x^3}}, find {{dy/dx}}.",
+        options: ["{{-18/x^2}}", "{{2/x^2}}", "{{18/x^4}}", "{{-18/x^4}}"],
         answerIndex: 3,
         explanation:
-          "{{6sqrt(x) = 6x^(1/2)}}, so {{dy/dx = 1/2 * 6x^(-1/2) = 3x^(-1/2) = 3/sqrt(x)}}. {{3sqrt(x)}} multiplies by {{1/2}} but leaves the power at {{1/2}}. {{6/sqrt(x)}} lowers the power but forgets to multiply by {{1/2}}. {{4x^(3/2)}} raises the power — that's integrating.",
+          "{{6/x^3 = 6x^(-3)}}, so {{dy/dx = -3 * 6x^(-4) = -18x^(-4) = -18/x^4}}. {{-18/x^2}} adds 1 to the power (−3 → −2) instead of subtracting 1. {{18/x^4}} loses the minus sign from bringing down −3. {{2/x^2}} differentiates only the denominator ({{6/(3x^2)}}) — you must rewrite as a power of x first.",
         difficulty: "core",
         guideRef: "differentiating-powers",
         hints: [
-          "Write the square root as a power of x.",
-          "{{sqrt(x) = x^(1/2)}}. Bring the {{1/2}} down and subtract 1 from the power.",
-          "{{1/2 - 1 = -1/2}}, and a negative power means 'one over'.",
+          "Write {{6/x^3}} as {{6x^n}}. What is n?",
+          "{{6/x^3 = 6x^(-3)}}. Bring the −3 down and subtract 1 from the power.",
+          "−3 − 1 = −4, and a negative power means 'one over'.",
         ],
         strategy: "Rewrite in index form first",
       },
@@ -121,11 +121,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "calculus-m1-q08",
         question:
-          "P is the point (3, 9) on the curve {{y = x^2}}. Q is a nearby point on the curve with x-coordinate 3 + h. The table shows the gradient of the chord PQ.\n\n| h | 1 | 0.1 | 0.01 | 0.001 |\n|---|---|---|---|---|\n| gradient of PQ | 7 | 6.1 | 6.01 | 6.001 |\n\nWhat is the gradient of the curve at P?",
-        options: ["7", "6.001", "6", "9"],
+          "P is the point (1, 4) on the curve {{y = x^2 + 3x}}. Q is a nearby point on the curve with x-coordinate 1 + h. The table shows the gradient of the chord PQ.\n\n| h | 1 | 0.1 | 0.01 | 0.001 |\n|---|---|---|---|---|\n| gradient of PQ | 6 | 5.1 | 5.01 | 5.001 |\n\nWhat is the gradient of the curve at P?",
+        options: ["6", "5.001", "5", "4"],
         answerIndex: 2,
         explanation:
-          "As Q slides towards P (h → 0), the chord turns into the tangent. The chord gradients are {{6 + h}}, which approach **6** — matching {{dy/dx = 2x = 6}} at x = 3. 6.001 is still a chord (h is not yet 0). 7 is a chord with h = 1, and 9 is the y-coordinate of P.",
+          "As Q slides towards P (h → 0), the chord turns into the tangent. The chord gradients are {{5 + h}}, which approach **5** — matching {{dy/dx = 2x + 3 = 5}} at x = 1. 5.001 is still a chord (h is not yet 0). 6 is a chord with h = 1, and 4 is the y-coordinate of P.",
         difficulty: "core",
         guideRef: "gradient-of-a-curve",
         hints: [
@@ -212,11 +212,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "calculus-m1-q13",
         question:
-          "A particle moves in a straight line. Its displacement from O after t seconds is s metres, where {{s = t^3 - 6t^2 + 9t}}. Find the acceleration of the particle when it is **first** at rest.",
-        options: ["−6 m/s²", "6 m/s²", "0 m/s²", "4 m/s²"],
+          "A particle moves in a straight line. Its displacement from O after t seconds is s metres, where {{s = t^3 - 15t^2 + 63t}}. Find the acceleration of the particle when it is **first** at rest.",
+        options: ["−12 m/s²", "12 m/s²", "0 m/s²", "81 m/s²"],
         answerIndex: 0,
         explanation:
-          "{{v = (ds)/(dt) = 3t^2 - 12t + 9 = 3(t - 1)(t - 3)}}, so it is at rest at t = 1 and t = 3. First at rest means t = 1. {{a = (dv)/(dt) = 6t - 12 = -6}}. 6 is the acceleration at t = 3 (the *second* time at rest). 0 assumes 'at rest' means zero acceleration — it means zero *velocity*. 4 is the displacement at t = 1.",
+          "{{v = (ds)/(dt) = 3t^2 - 30t + 63 = 3(t - 3)(t - 7)}}, so it is at rest at t = 3 and t = 7. First at rest means t = 3. {{a = (dv)/(dt) = 6t - 30 = -12}} m/s² (negative: the velocity is decreasing). 12 is the acceleration at t = 7 (the *second* time at rest). 0 assumes 'at rest' means zero acceleration — it means zero *velocity*. 81 is the displacement at t = 3, in metres.",
         difficulty: "challenge",
         guideRef: "kinematics",
         hints: [
@@ -437,17 +437,17 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "calculus-m2-q11",
-        question: "The tangent to the curve {{y = 2x^2 - 5x + 1}} at the point where x = 2 crosses the y-axis at (0, c). Find c.",
-        options: ["−5", "5", "1", "−7"],
+        question: "The tangent to the curve {{y = 2x^2 - 3x + 4}} at the point where x = 2 crosses the y-axis at (0, c). Find c.",
+        options: ["−6", "16", "4", "−4"],
         answerIndex: 3,
         explanation:
-          "At x = 2: y = 8 − 10 + 1 = −1 and {{dy/dx = 4x - 5 = 3}}. Tangent: {{y + 1 = 3(x - 2)}}, so {{y = 3x - 7}} and c = −7. −5 uses {{y - 1}} instead of {{y + 1}} (sign slip with {{y_1 = -1}}). 5 uses {{(x + 2)}} instead of {{(x - 2)}}. 1 is where the *curve* crosses the y-axis, not the tangent.",
+          "At x = 2: y = 8 − 6 + 4 = 6 and {{dy/dx = 4x - 3 = 5}}. Tangent: {{y - 6 = 5(x - 2)}}, so {{y = 5x - 4}} and c = −4. 16 uses {{(x + 2)}} instead of {{(x - 2)}}. −6 uses the y-coordinate 6 as the gradient. 4 is where the *curve* crosses the y-axis, not the tangent.",
         difficulty: "core",
         guideRef: "tangents",
         hints: [
           "Find the point of contact and the gradient there.",
-          "The point is (2, −1) and the gradient is 3.",
-          "Write {{y - (-1) = 3(x - 2)}} and put x = 0.",
+          "The point is (2, 6) and the gradient is 5.",
+          "Write {{y - 6 = 5(x - 2)}} and put x = 0.",
         ],
         strategy: "Point + gradient → line",
       },
@@ -455,11 +455,11 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "calculus-m2-q12",
         question:
-          "A gardener has 40 m of fencing to make a rectangular vegetable plot against a long wall. The wall forms one side, so the fence makes the other three sides. The two sides perpendicular to the wall are each x m. Find the largest possible area of the plot.",
-        options: ["200 m²", "100 m²", "400 m²", "20 m²"],
+          "Priya has 36 m of fencing to make a rectangular herb garden against a long wall. The wall forms one side, so the fence makes the other three sides. The two sides perpendicular to the wall are each x m. Find the largest possible area of the garden.",
+        options: ["162 m²", "81 m²", "324 m²", "18 m²"],
         answerIndex: 0,
         explanation:
-          "The side parallel to the wall is {{40 - 2x}}, so {{A = x(40 - 2x) = 40x - 2x^2}}. {{(dA)/(dx) = 40 - 4x = 0}} gives x = 10, so the plot is 10 m by 20 m and A = 200 m². 100 m² is a 10 m square using fencing on all four sides — but the wall is free. 400 m² uses {{A = x(40 - x)}}, fencing only one side x. 20 is the *length* 40 − 2x, not the area.",
+          "The side parallel to the wall is {{36 - 2x}}, so {{A = x(36 - 2x) = 36x - 2x^2}}. {{(dA)/(dx) = 36 - 4x = 0}} gives x = 9, so the garden is 9 m by 18 m and A = 162 m². 81 m² is a 9 m square using fencing on all four sides — but the wall is free. 324 m² uses {{A = x(36 - x)}}, fencing only one side x. 18 is the *length* 36 − 2x, not the area.",
         difficulty: "core",
         guideRef: "turning-points",
         hints: [

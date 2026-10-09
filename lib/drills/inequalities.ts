@@ -30,23 +30,6 @@ const isInt = (r: Q): boolean => r[1] === 1;
 const qMk = (r: Q): string => (r[1] === 1 ? `${r[0]}` : `${r[0] < 0 ? "-" : ""}${Math.abs(r[0])}/${r[1]}`);
 /** Inline text: 4, −3, {{7/3}}. */
 const qTx = (r: Q): string => (r[1] === 1 ? num(r[0]) : frac(r[0], r[1]));
-/** Terminating decimal string, or null. */
-function qDec(r: Q): string | null {
-  let d = r[1];
-  while (d % 2 === 0) d /= 2;
-  while (d % 5 === 0) d /= 5;
-  if (d !== 1) return null;
-  return String(parseFloat(qv(r).toFixed(6)));
-}
-/** Every accepted way to type the number r. */
-function qStrs(r: Q): string[] {
-  if (isInt(r)) return [String(r[0])];
-  const out = [qMk(r)];
-  const dec = qDec(r);
-  if (dec) out.push(dec);
-  return out;
-}
-
 // ---------- solution sets ----------
 type Sol =
   | { kind: "single"; op: Op; k: Q }
@@ -60,48 +43,14 @@ function solMk(s: Sol, v = "x"): string {
   return `{{${v} ${mkOp(true, s.loIncl)} ${qMk(s.lo)}}} or {{${v} ${mkOp(false, s.hiIncl)} ${qMk(s.hi)}}}`;
 }
 
-/** Text answer accepting the usual ways of writing the set. */
+/** Inequality answer: compared as a solution set, so any equivalent way of writing it is accepted. */
+function solIneq(s: Sol, v = "x"): string {
+  if (s.kind === "single") return `${v}${s.op}${qMk(s.k)}`;
+  if (s.kind === "between") return `${qMk(s.lo)}${mkOp(true, s.loIncl)}${v}${mkOp(true, s.hiIncl)}${qMk(s.hi)}`;
+  return `${v}${mkOp(true, s.loIncl)}${qMk(s.lo)} or ${v}${mkOp(false, s.hiIncl)}${qMk(s.hi)}`;
+}
 function solSpec(s: Sol, v = "x"): AnswerSpec {
-  const acc = new Set<string>();
-  if (s.kind === "single") {
-    for (const k of qStrs(s.k)) {
-      acc.add(`${v}${s.op}${k}`);
-      acc.add(`${k}${flip(s.op)}${v}`);
-      acc.add(`{${v}:${v}${s.op}${k}}`);
-      acc.add(`{${v}|${v}${s.op}${k}}`);
-    }
-  } else if (s.kind === "between") {
-    const oL = mkOp(true, s.loIncl), oH = mkOp(true, s.hiIncl);
-    for (const l of qStrs(s.lo)) {
-      for (const h of qStrs(s.hi)) {
-        const main = `${l}${oL}${v}${oH}${h}`;
-        acc.add(main);
-        acc.add(`${h}${flip(oH)}${v}${flip(oL)}${l}`);
-        acc.add(`{${v}:${main}}`);
-        acc.add(`{${v}|${main}}`);
-        const pLo = [`${v}${flip(oL)}${l}`, `${l}${oL}${v}`];
-        const pHi = [`${v}${oH}${h}`, `${h}${flip(oH)}${v}`];
-        for (const a of pLo) for (const b of pHi) for (const j of ["and", ",", "&"]) {
-          acc.add(`${a}${j}${b}`);
-          acc.add(`${b}${j}${a}`);
-        }
-      }
-    }
-  } else {
-    const oL = mkOp(true, s.loIncl), oH = mkOp(false, s.hiIncl);
-    for (const l of qStrs(s.lo)) {
-      for (const h of qStrs(s.hi)) {
-        const pLo = [`${v}${oL}${l}`, `${l}${flip(oL)}${v}`];
-        const pHi = [`${v}${oH}${h}`, `${h}${flip(oH)}${v}`];
-        for (const a of pLo) for (const b of pHi) for (const j of ["or", ","]) {
-          acc.add(`${a}${j}${b}`);
-          acc.add(`${b}${j}${a}`);
-        }
-        acc.add(`{${v}:${v}${oL}${l}}∪{${v}:${v}${oH}${h}}`);
-      }
-    }
-  }
-  return { type: "text", accept: [...acc], display: solMk(s, v) };
+  return { type: "inequality", ineq: solIneq(s, v), display: solMk(s, v) };
 }
 const solTrap = (s: Sol, feedback: string): Trap => ({ spec: solSpec(s), feedback });
 const numTrap = (value: number, feedback: string): Trap => ({ spec: { type: "number", value }, feedback });
@@ -482,10 +431,13 @@ export const drills: Drill[] = [
       };
       const ascii = `${lhs[0]} ${op} ${rhs[0].replace(/([+-])/g, " $1 ").replace(/^ - /, "-").trim()}`;
       const display = `{{${ascii}}}`;
-      const answer: AnswerSpec = { type: "text", accept: variants(op), display };
+      // One-variable boundaries (x = k, y = k) are checked as solution sets; sloping lines need text.
+      const oneVar = kind === "vert" || kind === "horiz";
+      const spec = (o: Op): AnswerSpec => (oneVar ? { type: "inequality", ineq: `${lhs[0]}${o}${rhs[0]}` } : { type: "text", accept: variants(o) });
+      const answer: AnswerSpec = { ...spec(op), display };
       const traps: Trap[] = [
-        { spec: { type: "text", accept: variants(flip(op)) }, feedback: "That describes the UNshaded side. Test a point in the shaded region, e.g. one far from the line." },
-        { spec: { type: "text", accept: variants(toggleIncl(op)) }, feedback: `Right side — but look at the line: ${isIncl(op) ? "it is solid, so points on it are included (≤ or ≥)" : "it is dashed, so points on it are NOT included (< or >)"}.` },
+        { spec: spec(flip(op)), feedback: "That describes the UNshaded side. Test a point in the shaded region, e.g. one far from the line." },
+        { spec: spec(toggleIncl(op)), feedback: `Right side — but look at the line: ${isIncl(op) ? "it is solid, so points on it are included (≤ or ≥)" : "it is dashed, so points on it are NOT included (< or >)"}.` },
       ];
       // a test point well inside the region (not on the line)
       let test: Pt = [0, 0];

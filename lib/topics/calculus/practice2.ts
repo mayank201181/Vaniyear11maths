@@ -86,19 +86,19 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "calculus-p3-q04",
         question:
-          "A remote-control car moves along a straight track. Its displacement from the start, s metres, after t seconds is {{s = 2t^2 + 3t}}.\n\nWork out its velocity when t = 4. Give your answer in m/s.",
-        answer: { type: "number", value: 19, display: "19 m/s" },
+          "A remote-control car moves along a straight track. Its displacement from the start, s metres, after t seconds is {{s = 2t^2 + 5t}}.\n\nWork out its velocity when t = 4. Give your answer in m/s.",
+        answer: { type: "number", value: 21, display: "21 m/s" },
         traps: [
           {
-            spec: { type: "number", value: 44 },
-            feedback: "44 m is the **displacement** at t = 4. Velocity is the rate of change of displacement: {{v = ds/dt}}.",
+            spec: { type: "number", value: 52 },
+            feedback: "52 m is the **displacement** at t = 4. Velocity is the rate of change of displacement: {{v = ds/dt}}.",
           },
         ],
-        solution: ["{{v = ds/dt = 4t + 3}}.", "At t = 4: v = 16 + 3 = 19 m/s."],
+        solution: ["{{v = ds/dt = 4t + 5}}.", "At t = 4: v = 16 + 5 = 21 m/s."],
         commonError: "Substituting into s instead of differentiating first.",
         difficulty: "warmup",
         guideRef: "kinematics",
-        hints: ["Velocity is {{ds/dt}}.", "Differentiate {{2t^2 + 3t}}, then put t = 4."],
+        hints: ["Velocity is {{ds/dt}}.", "Differentiate {{2t^2 + 5t}}, then put t = 4."],
       },
       // ---------------------------------------------------------------- q05
       {
@@ -229,37 +229,37 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "calculus-p3-q09",
         question:
-          "The curve {{y = x^3 - 3x^2 - 9x + 7}} has two turning points.\n\nFind the coordinates of the **maximum** point. Give your answer as (x, y).",
-        answer: { type: "list", values: [-1, 12], ordered: true, display: "(−1, 12)" },
+          "The curve {{y = x^3 + 3x^2 - 24x + 5}} has two turning points.\n\nFind the coordinates of the **maximum** point. Give your answer as (x, y).",
+        answer: { type: "list", values: [-4, 85], ordered: true, display: "(−4, 85)" },
         traps: [
           {
-            spec: { type: "list", values: [3, -20], ordered: true },
-            feedback: "(3, −20) is a turning point, but it's the **minimum**: {{d^2y/dx^2 = 6x - 6 = 12 > 0}} there. Check the other one.",
+            spec: { type: "list", values: [2, -23], ordered: true },
+            feedback: "(2, −23) is a turning point, but it's the **minimum**: {{(d^2y)/(dx^2) = 6x + 6 = 18 > 0}} there. Check the other one.",
           },
         ],
         solution: [
-          "{{dy/dx = 3x^2 - 6x - 9 = 3(x^2 - 2x - 3) = 3(x - 3)(x + 1)}}.",
-          "{{dy/dx = 0}} when x = 3 or x = −1.",
-          "{{d^2y/dx^2 = 6x - 6}}. At x = −1 it is −12 < 0, so a maximum. (At x = 3 it is 12 > 0: minimum.)",
-          "At x = −1: {{y = (-1)^3 - 3(-1)^2 - 9(-1) + 7 = -1 - 3 + 9 + 7 = 12}}.",
-          "Maximum point: (−1, 12).",
+          "{{dy/dx = 3x^2 + 6x - 24 = 3(x^2 + 2x - 8) = 3(x + 4)(x - 2)}}.",
+          "{{dy/dx = 0}} when x = −4 or x = 2.",
+          "{{(d^2y)/(dx^2) = 6x + 6}}. At x = −4 it is −18 < 0, so a maximum. (At x = 2 it is 18 > 0: minimum.)",
+          "At x = −4: {{y = (-4)^3 + 3(-4)^2 - 24(-4) + 5 = -64 + 48 + 96 + 5 = 85}}.",
+          "Maximum point: (−4, 85).",
         ],
         solutions: [
           {
             label: "Shape of a positive cubic",
             steps: [
               "The {{x^3}} coefficient is positive, so the curve goes up–down–up.",
-              "So the left-hand turning point (smaller x) is the maximum: x = −1, giving (−1, 12).",
+              "So the left-hand turning point (smaller x) is the maximum: x = −4, giving (−4, 85).",
             ],
           },
         ],
-        commonError: "Sign errors when cubing or squaring −1: {{(-1)^3 = -1}} but {{(-1)^2 = +1}}.",
+        commonError: "Sign errors when cubing or squaring −4: {{(-4)^3 = -64}} but {{(-4)^2 = +16}}.",
         difficulty: "core",
         guideRef: "turning-points",
         hints: [
           "At a turning point, what is the gradient?",
-          "Solve {{3x^2 - 6x - 9 = 0}} — take out the common factor 3 first.",
-          "Decide which x gives the maximum using {{d^2y/dx^2}} or the shape of the cubic.",
+          "Solve {{3x^2 + 6x - 24 = 0}} — take out the common factor 3 first.",
+          "Decide which x gives the maximum using {{(d^2y)/(dx^2)}} or the shape of the cubic.",
         ],
         strategy: "Use symmetry / shape",
       },
@@ -271,7 +271,7 @@ export const morePapers: Paper[] = [
           "The curve C has equation {{y = x^4 - 8x^2 + 3}}.\n\nShow that (2, −13) is a turning point on C, and determine whether it is a maximum or a minimum.",
         marks: 3,
         modelAnswer:
-          "At x = 2, {{y = 16 - 32 + 3 = -13}}, so (2, −13) lies on C.\n\n{{dy/dx = 4x^3 - 16x}}. At x = 2: {{4(8) - 16(2) = 32 - 32 = 0}}, so (2, −13) is a turning point.\n\n{{d^2y/dx^2 = 12x^2 - 16}}. At x = 2: 48 − 16 = 32 > 0, so it is a **minimum**.",
+          "At x = 2, {{y = 16 - 32 + 3 = -13}}, so (2, −13) lies on C.\n\n{{dy/dx = 4x^3 - 16x}}. At x = 2: {{4(8) - 16(2) = 32 - 32 = 0}}, so (2, −13) is a turning point.\n\n{{(d^2y)/(dx^2) = 12x^2 - 16}}. At x = 2: 48 − 16 = 32 > 0, so it is a **minimum**.",
         markScheme: [
           { point: "Differentiates correctly: dy/dx = 4x³ − 16x", keywords: ["4x^3", "4x³", "16x", "dy/dx"] },
           { point: "Substitutes x = 2 to show dy/dx = 0 (and y = −13)", keywords: ["= 0", "32 - 32", "32 − 32", "-13", "−13"] },
@@ -283,7 +283,7 @@ export const morePapers: Paper[] = [
         hints: [
           "What must be true about {{dy/dx}} at a turning point?",
           "Find {{dy/dx}} and substitute x = 2.",
-          "For the nature: find {{d^2y/dx^2}} at x = 2. Positive means a minimum (a 'smile').",
+          "For the nature: find {{(d^2y)/(dx^2)}} at x = 2. Positive means a minimum (a 'smile').",
         ],
         solutions: [
           {
@@ -385,7 +385,7 @@ export const morePapers: Paper[] = [
           "Jun is designing a closed cardboard gift box for a set of lotus-paste mooncakes. The box is a cuboid whose base measures x cm by 2x cm, and its height is h cm. The volume of the box must be 72 cm³.\n\n(a) Show that the total surface area, A cm², of the box is {{A = 4x^2 + 216/x}}.\n\n(b) Find the value of x that makes A as small as possible, and show that this gives a minimum.",
         marks: 4,
         modelAnswer:
-          "(a) Volume: {{x * 2x * h = 2x^2 h = 72}}, so {{h = 36/x^2}}.\nSurface area = top and bottom + two x by h faces + two 2x by h faces = {{2(2x^2) + 2xh + 4xh = 4x^2 + 6xh}}.\nSubstitute: {{A = 4x^2 + 6x * 36/x^2 = 4x^2 + 216/x}}.\n\n(b) {{A = 4x^2 + 216x^(-1)}}, so {{dA/dx = 8x - 216/x^2}}.\nSet {{dA/dx = 0}}: {{8x^3 = 216}}, {{x^3 = 27}}, x = 3.\n{{d^2A/dx^2 = 8 + 432/x^3}} = 8 + 16 = 24 > 0 at x = 3, so this is a minimum. (The box is 3 cm by 6 cm by 4 cm, with A = 36 + 72 = 108 cm².)",
+          "(a) Volume: {{x * 2x * h = 2x^2 h = 72}}, so {{h = 36/x^2}}.\nSurface area = top and bottom + two x by h faces + two 2x by h faces = {{2(2x^2) + 2xh + 4xh = 4x^2 + 6xh}}.\nSubstitute: {{A = 4x^2 + 6x * 36/x^2 = 4x^2 + 216/x}}.\n\n(b) {{A = 4x^2 + 216x^(-1)}}, so {{dA/dx = 8x - 216/x^2}}.\nSet {{dA/dx = 0}}: {{8x^3 = 216}}, {{x^3 = 27}}, x = 3.\n{{(d^2A)/(dx^2) = 8 + 432/x^3}} = 8 + 16 = 24 > 0 at x = 3, so this is a minimum. (The box is 3 cm by 6 cm by 4 cm, with A = 36 + 72 = 108 cm².)",
         markScheme: [
           { point: "Uses volume to write h = 36/x² and forms A = 4x² + 6xh", keywords: ["36/x^2", "h =", "6xh", "2x^2h", "2x²h", "72"] },
           { point: "Differentiates: dA/dx = 8x − 216/x²", keywords: ["8x", "216/x^2", "-216", "x^-2", "da/dx"] },
@@ -399,7 +399,7 @@ export const morePapers: Paper[] = [
           "There are two unknowns, x and h. Which fact lets you get rid of h?",
           "List the six faces in pairs: x by 2x, x by h and 2x by h.",
           "Write {{216/x}} as {{216x^(-1)}} before differentiating, then solve dA/dx = 0.",
-          "Check the nature: {{d^2A/dx^2}} at x = 3.",
+          "Check the nature: {{(d^2A)/(dx^2)}} at x = 3.",
         ],
         solutions: [
           {
@@ -492,19 +492,19 @@ export const morePapers: Paper[] = [
       {
         kind: "short",
         id: "calculus-p4-q02",
-        question: "The curve C has equation {{y = x^3 - 2x^2 + 5}}.\n\nWork out the gradient of C at the point (2, 5).",
-        answer: { type: "number", value: 4 },
+        question: "The curve C has equation {{y = x^3 - 4x^2 + 7}}.\n\nWork out the gradient of C at the point (3, −2).",
+        answer: { type: "number", value: 3 },
         traps: [
           {
-            spec: { type: "number", value: 5 },
-            feedback: "5 is the y-coordinate of the point. The gradient is the value of {{dy/dx}} at x = 2.",
+            spec: { type: "number", value: -2 },
+            feedback: "−2 is the y-coordinate of the point. The gradient is the value of {{dy/dx}} at x = 3.",
           },
         ],
-        solution: ["{{dy/dx = 3x^2 - 4x}}.", "At x = 2: {{3(4) - 4(2) = 12 - 8 = 4}}."],
+        solution: ["{{dy/dx = 3x^2 - 8x}}.", "At x = 3: {{3(9) - 8(3) = 27 - 24 = 3}}."],
         commonError: "Substituting into y instead of dy/dx.",
         difficulty: "warmup",
         guideRef: "tangents",
-        hints: ["Find {{dy/dx}} and substitute the x-coordinate.", "{{dy/dx = 3x^2 - 4x}}."],
+        hints: ["Find {{dy/dx}} and substitute the x-coordinate.", "{{dy/dx = 3x^2 - 8x}}."],
       },
       // ---------------------------------------------------------------- q03
       {
@@ -633,7 +633,7 @@ export const morePapers: Paper[] = [
         solution: [
           "{{C = 1/4 v + 900v^(-1)}}, so {{dC/dv = 1/4 - 900/v^2}}.",
           "Minimum when {{dC/dv = 0}}: {{v^2 = 3600}}, so v = 60 (speed is positive).",
-          "{{d^2C/dv^2 = 1800/v^3 > 0}} for v > 0, so this is a minimum.",
+          "{{(d^2C)/(dv^2) = 1800/v^3 > 0}} for v > 0, so this is a minimum.",
           "C = {{60/4 + 900/60 = 15 + 15 = 30}}.",
         ],
         commonError: "Differentiating {{900/v}} as 900 or as {{900/v^2}} with the wrong sign.",
@@ -689,7 +689,7 @@ export const morePapers: Paper[] = [
         solution: [
           "{{dV/dx = 150 - 3/2 x^2}}.",
           "{{dV/dx = 0}}: {{3/2 x^2 = 150}}, {{x^2 = 100}}, x = 10 (length is positive).",
-          "{{d^2V/dx^2 = -3x = -30 < 0}}, so a maximum.",
+          "{{(d^2V)/(dx^2) = -3x = -30 < 0}}, so a maximum.",
           "V = {{150(10) - 1/2 (1000) = 1500 - 500 = 1000}} cm³.",
           "(Check: h = {{(300 - 100)/20 = 10}}, so the best cuboid is a 10 cm cube.)",
         ],
@@ -741,7 +741,7 @@ export const morePapers: Paper[] = [
           "A cyclist rides along a straight MRT-side path. Her velocity, v m/s, at time t seconds is\n\n    {{v = 3t^2 - 12t + 15}}\n\nFind her minimum velocity, and hence explain why she never comes to rest.",
         marks: 3,
         modelAnswer:
-          "Acceleration {{a = dv/dt = 6t - 12}}. The minimum velocity is when a = 0, i.e. t = 2 (and {{d^2v/dt^2 = 6 > 0}}, so it is a minimum).\n\nAt t = 2: {{v = 3(4) - 12(2) + 15 = 12 - 24 + 15 = 3}} m/s.\n\nThe smallest velocity is 3 m/s, which is greater than 0, so v is never zero — she never comes to rest.",
+          "Acceleration {{a = dv/dt = 6t - 12}}. The minimum velocity is when a = 0, i.e. t = 2 (and {{(d^2v)/(dt^2) = 6 > 0}}, so it is a minimum).\n\nAt t = 2: {{v = 3(4) - 12(2) + 15 = 12 - 24 + 15 = 3}} m/s.\n\nThe smallest velocity is 3 m/s, which is greater than 0, so v is never zero — she never comes to rest.",
         markScheme: [
           { point: "Differentiates to get a = 6t − 12 and sets it to 0", keywords: ["6t - 12", "6t−12", "dv/dt", "= 0", "a ="] },
           { point: "Finds t = 2 and minimum velocity 3 m/s", keywords: ["t = 2", "3 m/s", "v = 3", "minimum"] },
@@ -853,7 +853,7 @@ export const morePapers: Paper[] = [
         solution: [
           "{{dA/dx = 20 - 2(1/2 + pi/8)x = 20 - (1 + pi/4)x}}.",
           "Set {{dA/dx = 0}}: {{x = 20/(1 + pi/4) = 80/(4 + pi) = 11.201...}} m.",
-          "{{d^2A/dx^2 = -(1 + pi/4) < 0}}, so this is a maximum.",
+          "{{(d^2A)/(dx^2) = -(1 + pi/4) < 0}}, so this is a maximum.",
           "A = {{20(11.201...) - (1/2 + pi/8)(11.201...)^2 = 224.04... - 112.02... = 112.01...}}",
           "Maximum area = 112 m² (3 s.f.).",
         ],
@@ -882,7 +882,7 @@ export const morePapers: Paper[] = [
         id: "calculus-p4-q15",
         question:
           "The diagram shows part of the curve {{y = x^2 + 3}} and the point P(1, 4) on the curve. The tangent to the curve at P meets the x-axis at A. The normal to the curve at P meets the x-axis at B.\n\nWork out the area of triangle PAB.",
-        diagram: `<svg viewBox="0 0 450 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axes with the curve y = x squared plus 3, the point P at (1, 4), the tangent at P meeting the x-axis at A to the left of the origin, and the normal at P meeting the x-axis at B far to the right"><rect x="0" y="0" width="450" height="300" fill="#ffffff"/><line x1="5" y1="255" x2="438" y2="255" stroke="#334155" stroke-width="1.5"/><line x1="70" y1="295" x2="70" y2="12" stroke="#334155" stroke-width="1.5"/><text x="440" y="259" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="75" y="16" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><text x="66" y="270" font-size="11" font-family="sans-serif" fill="#1f2937" text-anchor="end">O</text><path d="M14.0 60.4 L17.5 71.3 L21.0 81.4 L24.5 90.8 L28.0 99.6 L31.5 107.7 L35.0 115.0 L38.5 121.7 L42.0 127.6 L45.5 132.8 L49.0 137.4 L52.5 141.3 L56.0 144.4 L59.5 146.9 L63.0 148.6 L66.5 149.6 L70.0 150.0 L73.5 149.6 L77.0 148.6 L80.5 146.9 L84.0 144.4 L87.5 141.3 L91.0 137.4 L94.5 132.8 L98.0 127.6 L101.5 121.7 L105.0 115.0 L108.5 107.7 L112.0 99.6 L115.5 90.8 L119.0 81.4 L122.5 71.3 L126.0 60.4 L129.5 48.8 L133.0 36.6" stroke="#1d4ed8" stroke-width="2" fill="none"/><line x1="17.5" y1="290" x2="126" y2="73" stroke="#b45309" stroke-width="1.5"/><line x1="28" y1="76.5" x2="420" y2="272.5" stroke="#047857" stroke-width="1.5"/><circle cx="105" cy="115" r="3.5" fill="#1f2937"/><circle cx="35" cy="255" r="3" fill="#1f2937"/><circle cx="385" cy="255" r="3" fill="#1f2937"/><text x="113" y="122" font-size="13" font-family="sans-serif" fill="#1f2937">P(1, 4)</text><text x="22" y="272" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="381" y="273" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="130" y="72" font-size="12" font-family="sans-serif" fill="#b45309">tangent</text><text x="300" y="200" font-size="12" font-family="sans-serif" fill="#047857">normal</text><text x="138" y="40" font-size="12" font-family="sans-serif" fill="#1d4ed8">y = x² + 3</text></svg>`,
+        diagram: `<svg viewBox="0 0 450 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Axes with the curve y = x squared plus 3, the point P at (1, 4), the tangent at P meeting the x-axis at A to the left of the origin, and the normal at P meeting the x-axis at B far to the right"><rect x="0" y="0" width="450" height="300" fill="#ffffff"/><line x1="5" y1="255" x2="438" y2="255" stroke="#334155" stroke-width="1.5"/><line x1="70" y1="295" x2="70" y2="12" stroke="#334155" stroke-width="1.5"/><text x="440" y="259" font-size="13" font-family="sans-serif" fill="#1f2937">x</text><text x="75" y="16" font-size="13" font-family="sans-serif" fill="#1f2937">y</text><text x="66" y="270" font-size="11" font-family="sans-serif" fill="#1f2937" text-anchor="end">O</text><path d="M14.0 60.4 L17.5 71.3 L21.0 81.4 L24.5 90.8 L28.0 99.6 L31.5 107.7 L35.0 115.0 L38.5 121.7 L42.0 127.6 L45.5 132.8 L49.0 137.4 L52.5 141.3 L56.0 144.4 L59.5 146.9 L63.0 148.6 L66.5 149.6 L70.0 150.0 L73.5 149.6 L77.0 148.6 L80.5 146.9 L84.0 144.4 L87.5 141.3 L91.0 137.4 L94.5 132.8 L98.0 127.6 L101.5 121.7 L105.0 115.0 L108.5 107.7 L112.0 99.6 L115.5 90.8 L119.0 81.4 L122.5 71.3 L126.0 60.4 L129.5 48.8 L133.0 36.6" stroke="#1d4ed8" stroke-width="2" fill="none"/><line x1="17.5" y1="290" x2="126" y2="73" stroke="#b45309" stroke-width="1.5"/><line x1="28" y1="76.5" x2="420" y2="272.5" stroke="#047857" stroke-width="1.5"/><circle cx="105" cy="115" r="3.5" fill="#1f2937"/><circle cx="35" cy="255" r="3" fill="#1f2937"/><circle cx="385" cy="255" r="3" fill="#1f2937"/><text x="124" y="108" font-size="13" font-family="sans-serif" fill="#1f2937">P(1, 4)</text><text x="22" y="272" font-size="13" font-family="sans-serif" fill="#1f2937">A</text><text x="381" y="273" font-size="13" font-family="sans-serif" fill="#1f2937">B</text><text x="130" y="72" font-size="12" font-family="sans-serif" fill="#b45309">tangent</text><text x="300" y="200" font-size="12" font-family="sans-serif" fill="#047857">normal</text><text x="138" y="40" font-size="12" font-family="sans-serif" fill="#1d4ed8">y = x² + 3</text></svg>`,
         answer: { type: "number", value: 20, display: "20 square units" },
         traps: [
           {

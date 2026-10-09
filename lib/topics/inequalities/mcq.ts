@@ -309,14 +309,14 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "inequalities-m2-q04",
-        question: "Solve {{x^2 - 5x + 4 < 0}}.",
-        options: ["{{x < 1}} or {{x > 4}}", "{{1 < x < 4}}", "{{-4 < x < -1}}", "{{x < 4}}"],
+        question: "Solve {{x^2 - 6x + 5 < 0}}.",
+        options: ["{{x < 1}} or {{x > 5}}", "{{1 < x < 5}}", "{{-5 < x < -1}}", "{{x < 5}}"],
         answerIndex: 1,
         explanation:
-          "{{x^2 - 5x + 4 = (x - 1)(x - 4)}}, critical values 1 and 4. A ∪-shaped graph is negative *between* its roots: {{1 < x < 4}}. {{x < 1}} or {{x > 4}} is where it is positive; {{-4 < x < -1}} uses the numbers in the brackets with the wrong signs.",
+          "{{x^2 - 6x + 5 = (x - 1)(x - 5)}}, critical values 1 and 5. A ∪-shaped graph is negative *between* its roots: {{1 < x < 5}}. {{x < 1}} or {{x > 5}} is where it is positive; {{-5 < x < -1}} uses the numbers in the brackets with the wrong signs; {{x < 5}} forgets the lower critical value (try {{x = 0}}: {{5 < 0}} is false).",
         difficulty: "warmup",
         guideRef: "quadratic-inequalities",
-        hints: ["Factorise, find where it equals zero, then sketch a ∪ through those points.", "Test {{x = 2}}: {{4 - 10 + 4 = -2 < 0}} ✓."],
+        hints: ["Factorise, find where it equals zero, then sketch a ∪ through those points.", "Test {{x = 2}}: {{4 - 12 + 5 = -3 < 0}} ✓."],
         strategy: "Draw a diagram",
       },
       {
@@ -477,17 +477,17 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "inequalities-m2-q14",
-        question: "For which values of k does {{x^2 + kx + 9 = 0}} have **no** real roots?",
-        options: ["{{-6 < k < 6}}", "{{k < 6}}", "{{k < -6}} or {{k > 6}}", "{{-3 < k < 3}}"],
+        question: "For which values of k does {{x^2 + kx + 16 = 0}} have **no** real roots?",
+        options: ["{{-8 < k < 8}}", "{{k < 8}}", "{{k < -8}} or {{k > 8}}", "{{-4 < k < 4}}"],
         answerIndex: 0,
         explanation:
-          "No real roots means the discriminant is negative: {{k^2 - 4 * 1 * 9 < 0}}, so {{k^2 < 36}}, giving {{-6 < k < 6}}. {{k < 6}} forgets that large negative k (say −10) gives {{k^2 > 36}}; {{k < -6}} or {{k > 6}} is the condition for two distinct roots; {{-3 < k < 3}} drops the 4 in {{4ac}}.",
+          "No real roots means the discriminant is negative: {{k^2 - 4 * 1 * 16 < 0}}, so {{k^2 < 64}}, giving {{-8 < k < 8}}. {{k < 8}} forgets that large negative k (say −10) gives {{k^2 > 64}}; {{k < -8}} or {{k > 8}} is the condition for two distinct roots; {{-4 < k < 4}} drops the 4 in {{4ac}}.",
         difficulty: "challenge",
         guideRef: "quadratic-inequalities",
         hints: [
           "Which expression decides how many roots a quadratic has?",
           "No real roots ⇔ {{b^2 - 4ac < 0}}.",
-          "Solve {{k^2 < 36}} — it is a quadratic inequality in k.",
+          "Solve {{k^2 < 64}} — it is a quadratic inequality in k.",
         ],
         strategy: "Use a known result",
       },

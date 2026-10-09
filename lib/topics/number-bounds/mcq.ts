@@ -9,11 +9,11 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "number-bounds-m1-q01",
-        question: "Write 360 as a product of its prime factors in index form.",
-        options: ["{{2^3 * 3^2 * 5}}", "{{2^2 * 3^2 * 10}}", "{{8 * 9 * 5}}", "{{2^2 * 3^3 * 5}}"],
+        question: "Write 504 as a product of its prime factors in index form.",
+        options: ["{{2^3 * 3^2 * 7}}", "{{2^2 * 3^2 * 14}}", "{{8 * 9 * 7}}", "{{2^2 * 3^3 * 7}}"],
         answerIndex: 0,
         explanation:
-          "Split 360 down a factor tree: 360 = 2 × 180 = 2 × 2 × 90 = 2 × 2 × 2 × 45 = 2 × 2 × 2 × 3 × 3 × 5, so {{360 = 2^3 * 3^2 * 5}}. {{2^2 * 3^2 * 10}} and {{8 * 9 * 5}} both multiply to 360, but 10, 8 and 9 are not prime — the factor tree was stopped too early. {{2^2 * 3^3 * 5}} swaps the powers and equals 540.",
+          "Split 504 down a factor tree: 504 = 2 × 252 = 2 × 2 × 126 = 2 × 2 × 2 × 63 = 2 × 2 × 2 × 3 × 3 × 7, so {{504 = 2^3 * 3^2 * 7}}. {{2^2 * 3^2 * 14}} and {{8 * 9 * 7}} both multiply to 504, but 14, 8 and 9 are not prime — the factor tree was stopped too early. {{2^2 * 3^3 * 7}} swaps the powers and equals 756.",
         difficulty: "warmup",
         guideRef: "prime-factors-hcf-lcm",
         hints: ["Keep dividing by the smallest prime that works (2, then 3, then 5 …) until every branch ends in a prime."],
@@ -79,16 +79,16 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "number-bounds-m1-q06",
         question:
-          "At an MRT interchange, a Circle Line train leaves every 12 minutes and a Downtown Line train leaves every 18 minutes. Both leave together at 08:00. When is the next time they both leave together?",
-        options: ["08:36", "08:06", "11:36", "08:30"],
+          "At an MRT interchange, a Circle Line train leaves every 8 minutes and a Downtown Line train leaves every 14 minutes. Both leave together at 08:00. When is the next time they both leave together?",
+        options: ["08:56", "08:02", "09:52", "08:22"],
         answerIndex: 0,
         explanation:
-          "You need the first time that is a multiple of both 12 and 18: the LCM. {{12 = 2^2 * 3}}, {{18 = 2 * 3^2}}, so LCM = {{2^2 * 3^2 = 36}} minutes → **08:36**. 08:06 uses the HCF (6), 11:36 uses the product 12 × 18 = 216 minutes (a common multiple, but not the lowest), and 08:30 adds 12 + 18.",
+          "You need the first time that is a multiple of both 8 and 14: the LCM. {{8 = 2^3}}, {{14 = 2 * 7}}, so LCM = {{2^3 * 7 = 56}} minutes → **08:56**. 08:02 uses the HCF (2), 09:52 uses the product 8 × 14 = 112 minutes (a common multiple, but not the lowest), and 08:22 adds 8 + 14.",
         difficulty: "core",
         guideRef: "prime-factors-hcf-lcm",
         hints: [
           "Is this asking for something that divides both numbers, or something both numbers divide into?",
-          "List multiples of 18 and stop at the first one that is also a multiple of 12.",
+          "List multiples of 14 and stop at the first one that is also a multiple of 8.",
         ],
         strategy: "Use prime factors",
       },
@@ -212,15 +212,15 @@ export const mcqPapers: Paper[] = [
       {
         kind: "mcq",
         id: "number-bounds-m1-q14",
-        question: "What is the smallest positive integer {{k}} such that {{360k}} is a cube number?",
-        options: ["75", "15", "10", "25"],
+        question: "What is the smallest positive integer {{k}} such that {{600k}} is a cube number?",
+        options: ["45", "15", "6", "9"],
         answerIndex: 0,
         explanation:
-          "{{360 = 2^3 * 3^2 * 5}}. In a cube every prime power must be a multiple of 3. {{2^3}} is fine; {{3^2}} needs one more 3; {{5^1}} needs two more 5s. So {{k = 3 * 5^2 = 75}}, giving {{2^3 * 3^3 * 5^3 = 30^3 = 27 000}}. 15 only adds one of each missing prime; 10 is the answer for a **square** (it makes every power even); 25 forgets the extra 3.",
+          "{{600 = 2^3 * 3 * 5^2}}. In a cube every prime power must be a multiple of 3. {{2^3}} is fine; {{3^1}} needs two more 3s; {{5^2}} needs one more 5. So {{k = 3^2 * 5 = 45}}, giving {{600k = 2^3 * 3^3 * 5^3 = 30^3 = 27 000}}. 15 only adds one of each missing prime; 6 is the answer for a **square** (it makes every power even); 9 forgets the extra 5.",
         difficulty: "challenge",
         guideRef: "prime-factors-hcf-lcm",
         hints: [
-          "Write 360 as a product of prime factors.",
+          "Write 600 as a product of prime factors.",
           "In a cube number, what must be true about every power in its prime factorisation?",
           "Top up each power to the next multiple of 3.",
         ],
@@ -305,12 +305,12 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "number-bounds-m2-q05",
         question:
-          "The Venn diagram shows the prime factors of 84 and 90. What is the lowest common multiple (LCM) of 84 and 90?",
-        diagram: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram of prime factors. Circle 84 only contains 2 and 7. The overlap contains 2 and 3. Circle 90 only contains 3 and 5."><rect x="0" y="0" width="320" height="190" fill="#ffffff"/><circle cx="125" cy="100" r="72" fill="#c7d2fe" fill-opacity="0.6" stroke="#334155" stroke-width="2"/><circle cx="195" cy="100" r="72" fill="#fde68a" fill-opacity="0.6" stroke="#334155" stroke-width="2"/><text x="80" y="20" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937">84</text><text x="222" y="20" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937">90</text><text x="95" y="92" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">2</text><text x="95" y="122" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">7</text><text x="160" y="92" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">2</text><text x="160" y="122" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">3</text><text x="225" y="92" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">3</text><text x="225" y="122" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">5</text></svg>`,
-        options: ["6", "7560", "210", "1260"],
+          "The Venn diagram shows the prime factors of 66 and 90. What is the lowest common multiple (LCM) of 66 and 90?",
+        diagram: `<svg viewBox="0 0 320 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Venn diagram of prime factors. Circle 66 only contains 11. The overlap contains 2 and 3. Circle 90 only contains 3 and 5."><rect x="0" y="0" width="320" height="190" fill="#ffffff"/><circle cx="125" cy="100" r="72" fill="#c7d2fe" fill-opacity="0.6" stroke="#334155" stroke-width="2"/><circle cx="195" cy="100" r="72" fill="#fde68a" fill-opacity="0.6" stroke="#334155" stroke-width="2"/><text x="80" y="20" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937">66</text><text x="222" y="20" font-size="14" font-weight="bold" font-family="sans-serif" fill="#1f2937">90</text><text x="95" y="106" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">11</text><text x="160" y="92" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">2</text><text x="160" y="122" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">3</text><text x="225" y="92" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">3</text><text x="225" y="122" font-size="14" text-anchor="middle" font-family="sans-serif" fill="#1f2937">5</text></svg>`,
+        options: ["6", "5940", "330", "990"],
         answerIndex: 3,
         explanation:
-          "The LCM is the product of **everything** in the diagram: 2 × 7 × 2 × 3 × 3 × 5 = **1260**. 6 is the product of the overlap only — that's the HCF. 7560 = 84 × 90, a common multiple but not the lowest (the shared 2 × 3 is counted twice). 210 = 2 × 3 × 5 × 7 uses each prime only once.",
+          "The LCM is the product of **everything** in the diagram: 11 × 2 × 3 × 3 × 5 = **990**. 6 is the product of the overlap only — that's the HCF. 5940 = 66 × 90, a common multiple but not the lowest (the shared 2 × 3 is counted twice). 330 = 2 × 3 × 5 × 11 uses each prime only once, losing the second 3.",
         difficulty: "core",
         guideRef: "prime-factors-hcf-lcm",
         hints: [
@@ -413,10 +413,10 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "number-bounds-m2-q11",
         question: "Which of these numbers is divisible by both 4 and 9?",
-        options: ["2034", "1442", "1836", "1236"],
+        options: ["2034", "1448", "1836", "1236"],
         answerIndex: 2,
         explanation:
-          "Test for 9: the digit sum is a multiple of 9. Test for 4: the last two digits make a multiple of 4. 1836: 1 + 8 + 3 + 6 = 18 ✓ and 36 ✓, so **1836** works (1836 = 36 × 51). 2034 passes for 9 but 34 is not a multiple of 4. 1442 passes for 4 but its digit sum is 11. 1236 has digit sum 12 — divisible by 3, not 9: the 3-test is not the 9-test.",
+          "Test for 9: the digit sum is a multiple of 9. Test for 4: the last two digits make a multiple of 4. 1836: 1 + 8 + 3 + 6 = 18 ✓ and 36 ✓, so **1836** works (1836 = 36 × 51). 2034 passes for 9 but 34 is not a multiple of 4. 1448 passes for 4 (48 ✓) but its digit sum is 17. 1236 has digit sum 12 — divisible by 3, not 9: the 3-test is not the 9-test.",
         difficulty: "core",
         guideRef: "number-problems",
         hints: [

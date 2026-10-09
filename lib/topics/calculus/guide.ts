@@ -248,9 +248,9 @@ export const guide: TopicGuide = {
           answer: "x = 4 cm; maximum volume 1024 cm³",
           yourTurn: {
             question:
-              "Your turn: Ravi uses 40 m of fencing for three sides of a rectangular plot against a wall. With width x m, the area is {{A = x(40 - 2x)}} m². Work out the maximum area, in m².",
-            answer: { type: "number", value: 200 },
-            solution: "{{A = 40x - 2x^2}}, {{(dA)/(dx) = 40 - 4x = 0}} ⇒ x = 10. {{(d^2 A)/(dx^2) = -4 < 0}}, so a maximum. A = 10 × 20 = 200 m².",
+              "Your turn: Ravi now has 48 m of fencing for three sides of a rectangular plot against a wall. With width x m, the area is {{A = x(48 - 2x)}} m². Work out the maximum area, in m².",
+            answer: { type: "number", value: 288 },
+            solution: "{{A = 48x - 2x^2}}, {{(dA)/(dx) = 48 - 4x = 0}} ⇒ x = 12. {{(d^2 A)/(dx^2) = -4 < 0}}, so a maximum. A = 12 × 24 = 288 m².",
           },
         },
       ],
@@ -381,9 +381,9 @@ export const guide: TopicGuide = {
           ],
           answer: "1 square unit",
           yourTurn: {
-            question: "Your turn: the normal to {{y = x^2}} at the point (2, 4) crosses the y-axis at (0, k). Find k.",
-            answer: { type: "number", value: 4.5 },
-            solution: "{{dy/dx = 2x = 4}}, so the normal gradient is {{-1/4}}. {{y - 4 = -1/4 (x - 2)}}; put x = 0: {{y = 4 + 1/2 = 4.5}}. So k = 4.5.",
+            question: "Your turn: the normal to {{y = x^2}} at the point (3, 9) crosses the y-axis at (0, k). Find k.",
+            answer: { type: "number", value: 9.5 },
+            solution: "{{dy/dx = 2x = 6}}, so the normal gradient is {{-1/6}}. {{y - 9 = -1/6 (x - 3)}}; put x = 0: {{y = 9 + 1/2 = 9.5}}. So k = 9.5.",
           },
         },
       ],

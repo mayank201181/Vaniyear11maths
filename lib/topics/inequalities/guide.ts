@@ -52,9 +52,9 @@ export const guide: TopicGuide = {
           ],
           answer: "n = −2, −1, 0, 1, 2",
           yourTurn: {
-            question: "Your turn: n is an integer such that {{-5 < 3n + 1 <= 10}}. List all the possible values of n.",
-            answer: { type: "list", values: [-1, 0, 1, 2, 3], ordered: false, display: "−1, 0, 1, 2, 3" },
-            solution: "Subtract 1: {{-6 < 3n <= 9}}. Divide by 3: {{-2 < n <= 3}}. So −2 is excluded and 3 is included: n = −1, 0, 1, 2, 3.",
+            question: "Your turn: n is an integer such that {{-7 < 2n + 3 <= 9}}. List all the possible values of n.",
+            answer: { type: "list", values: [-4, -3, -2, -1, 0, 1, 2, 3], ordered: false, display: "−4, −3, −2, −1, 0, 1, 2, 3" },
+            solution: "Subtract 3: {{-10 < 2n <= 6}}. Divide by 2: {{-5 < n <= 3}}. So −5 is excluded and 3 is included: n = −4, −3, −2, −1, 0, 1, 2, 3.",
           },
         },
       ],
