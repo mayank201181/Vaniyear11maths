@@ -971,7 +971,7 @@ export const practice: TopicPractice = {
         { label: "Angles and exact 15° values", steps: ["BE = BC = 6 and angle EBC = 90° − 60° = 30°, so triangle EBC is isosceles with apex angle 30°.", "Drop the perpendicular from B: {{CE = 2 * 6 sin 15°}}. With {{sin 15° = (sqrt(6) - sqrt(2))/4}}, {{CE = 3(sqrt(6) - sqrt(2))}}."] },
       ],
       commonError: "Taking the height of E as 3 (half the side) instead of {{3sqrt(3)}}.",
-      traps: [{ spec: { type: "expression", expr: "sqrt(72-36sqrt(3))" }, feedback: "That value is right — now write it in the form {{p sqrt(6) - q sqrt(2)}}. Square that form and match terms." }],
+      traps: [{ spec: { type: "expression", expr: "3sqrt(2)" }, feedback: "That puts E at height 3 — half the side. E is the apex of an *equilateral* triangle, so its height is {{6 sin 60° = 3sqrt(3)}}." }],
       difficulty: "challenge",
       guideRef: "exact-values",
       hints: [
