@@ -33,6 +33,24 @@ function ratStr(n: number, d: number): string {
   return q === 1 ? `${p}` : `${p}/${q}`;
 }
 
+/** Plain-text substitution sum: [[3, 2], [-5, -1]] → "3 × 2 − 5 × (−1)". */
+function plainSum(pairs: Array<[number, number]>): string {
+  return pairs
+    .filter(([c]) => c !== 0)
+    .map(([c, v], i) => {
+      const mag = Math.abs(c) === 1 ? br(v) : `${num(Math.abs(c))} × ${br(v)}`;
+      if (i === 0) return c < 0 ? `−${mag}` : mag;
+      return `${c < 0 ? "−" : "+"} ${mag}`;
+    })
+    .join(" ");
+}
+
+/** Same as plainSum but as ASCII for {{ }}. */
+const mathSum = (pairs: Array<[number, number]>): string => plainSum(pairs).replace(/−/g, "-").replace(/×/g, "*");
+
+const numTrap = (value: number, feedback: string): Trap => ({ spec: { type: "number", value }, feedback });
+const listTrap = (values: number[], feedback: string): Trap => ({ spec: { type: "list", values, ordered: true }, feedback });
+
 /** Round to 3 significant figures. */
 const sig3 = (v: number): number => Number(v.toPrecision(3));
 
@@ -83,11 +101,11 @@ function solveSteps(A: number, B: number, C: number, D: number, v = "x"): string
   if (k > 0) {
     if (C !== 0) out.push(`${moveX(C, v)}: ${M(`${lin(k, B, v)} = ${D}`)}.`);
     if (B !== 0) out.push(`${undo(B)}: ${M(`${term(k, v)} = ${D - B}`)}.`);
-    out.push(divideStep(k, D - B, v));
+    if (k !== 1 || out.length === 0) out.push(divideStep(k, D - B, v));
   } else {
     if (A !== 0) out.push(`${moveX(A, v)} (the right side has more ${v}'s): ${M(`${B} = ${lin(-k, D, v)}`)}.`);
     if (D !== 0) out.push(`${undo(D)}: ${M(`${B - D} = ${term(-k, v)}`)}.`);
-    out.push(divideStep(-k, B - D, v));
+    if (k !== -1 || out.length === 0) out.push(divideStep(-k, B - D, v));
   }
   return out;
 }
@@ -154,7 +172,7 @@ function solve2(
     const p = own ? a : d, q = own ? d : a, r = own ? e : b, lab = own ? l1 : l2;
     const cOwn = own ? c : f, cOther = own ? f : c, other = own ? l2 : l1;
     steps.push(`${lab} has no ${vy}-term: ${M(`${term(p, vx)} = ${csm(cOwn)}`)}, so ${vx} = ${cs(x)}.`);
-    steps.push(`Substitute into ${other}: ${M(`${q === 0 ? "" : `${q} * ${br(x).replace(/−/g, "-")} + `}${term(r, vy)} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
+    steps.push(`Substitute into ${other}: ${M(`${q === 0 ? "" : `${mathSum([[q, x]])} + `}${term(r, vy)} = ${csm(cOther)}`)}, so ${vy} = ${cs(y)}.`);
     return { steps, x, y };
   }
   const L = lcm(Math.abs(b), Math.abs(e));
@@ -172,7 +190,9 @@ function solve2(
   steps.push(
     `The ${vy}-terms have ${same ? "the same sign, so subtract" : "opposite signs, so add"}: ${M(`${term(K, vx)} = ${csm(R)}`)}, so ${vx} = ${cs(R)} ÷ ${br(K)} = ${cs(x)}.`,
   );
-  steps.push(`Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${a} * ${br(x).replace(/−/g, "-")} + ${term(b, vy)} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)} and ${vy} = ${cs(y)}.`);
+  steps.push(
+    `Substitute ${vx} = ${cs(x)} into ${l1}: ${M(`${mathSum([[a, x]])} ${b < 0 ? "-" : "+"} ${term(Math.abs(b), vy)} = ${csm(c)}`)}, so ${M(`${term(b, vy)} = ${csm(c - a * x)}`)}${b === 1 ? "" : ` and ${vy} = ${cs(y)}`}.`,
+  );
   return { steps, x, y };
 }
 
@@ -591,7 +611,7 @@ export const drills: Drill[] = [
           answer: { type: "expression", expr: ans, display: M(`${s} = ${ans}`) },
           solution: [`${undo(b)}: ${M(`${o} ${b > 0 ? "-" : "+"} ${Math.abs(b)} = ${a}${s}^3`)}.`, `Divide by ${a}: ${M(`(${o} ${b > 0 ? "-" : "+"} ${Math.abs(b)})/${a} = ${s}^3`)}.`, `Cube root (no ± needed — a cube root has only one real value): ${M(`${s} = ${ans}`)}.`],
           hint: `Get ${M(`${s}^3`)} alone, then take the cube root.`,
-          traps: exprTraps(ans, [[`sqrt((${o} ${b > 0 ? "-" : "+"} ${Math.abs(b)})/${a})`, "Undo a cube with a *cube* root, not a square root."]]),
+          traps: exprTraps(ans, [[`cbrt(${o}/${a}) ${b > 0 ? "-" : "+"} ${Math.abs(b)}`, `Undo in reverse order: the ${b > 0 ? "+" : "−"} ${Math.abs(b)} was done last, so undo it first.`], [`(${o} ${b > 0 ? "-" : "+"} ${Math.abs(b)})/${a}`, `That's ${M(`${s}^3`)} — take the cube root to finish.`]]),
         };
       }
       if (kind === "brsq") {
@@ -627,7 +647,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: r },
           solution: ["Multiply by 3: {{3V = 4 pi r^3}}.", "Divide by 4π: {{r^3 = (3V)/(4 pi)}}.", "Cube root: {{r = cbrt((3V)/(4 pi))}}.", `r = ${M(`cbrt((3 * ${V})/(4 pi))`)} = ${r} cm (3 s.f.).`],
           hint: "Rearrange first: get r³ on its own, then take the cube root.",
-          traps: [{ spec: { type: "number", value: sig3(Math.sqrt((3 * V) / (4 * Math.PI))) }, feedback: "r is *cubed*, so undo it with a cube root." }].filter((t) => t.spec.value !== r),
+          traps: [numTrap(sig3(Math.sqrt((3 * V) / (4 * Math.PI))), "r is *cubed*, so undo it with a cube root.")].filter((t) => t.spec.type === "number" && t.spec.value !== r),
         };
       }
       if (f === "circle") {
@@ -638,7 +658,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: r },
           solution: ["Divide by π: {{r^2 = A/pi}}.", "Square root (r > 0): {{r = sqrt(A/pi)}}.", `r = ${M(`sqrt(${A}/pi)`)} = ${r} cm (3 s.f.).`],
           hint: "Divide by π, then square root.",
-          traps: [{ spec: { type: "number", value: sig3(A / Math.PI) }, feedback: "That's r² — take the square root." }].filter((t) => t.spec.value !== r),
+          traps: [numTrap(sig3(A / Math.PI), "That's r² — take the square root.")].filter((t) => t.spec.type === "number" && t.spec.value !== r),
         };
       }
       if (f === "ke") {
@@ -649,7 +669,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: v },
           solution: ["Multiply by 2: {{2E = m v^2}}.", "Divide by m: {{v^2 = (2E)/m}}.", "Square root: {{v = sqrt((2E)/m)}}.", `v = ${M(`sqrt((2 * ${E})/${m})`)} = ${v} (3 s.f.).`],
           hint: "Undo the ½ by doubling, then divide by m, then square root.",
-          traps: [{ spec: { type: "number", value: sig3(Math.sqrt(E / (2 * m))) }, feedback: "To undo × ½ you multiply by 2, not divide by 2." }].filter((t) => t.spec.value !== v),
+          traps: [numTrap(sig3(Math.sqrt(E / (2 * m))), "To undo × ½ you multiply by 2, not divide by 2.")].filter((t) => t.spec.type === "number" && t.spec.value !== v),
         };
       }
       if (f === "pendulum") {
@@ -660,7 +680,7 @@ export const drills: Drill[] = [
           answer: { type: "number", value: l },
           solution: ["Divide by 2π: {{T/(2 pi) = sqrt(l/g)}}.", "Square both sides: {{T^2/(4 pi^2) = l/g}}.", "Multiply by g: {{l = (g T^2)/(4 pi^2)}}.", `l = ${M(`(9.8 * ${T}^2)/(4 pi^2)`)} = ${l} m (3 s.f.).`],
           hint: "Get the square root on its own, then square both sides.",
-          traps: [{ spec: { type: "number", value: sig3((9.8 * T) / (2 * Math.PI)) }, feedback: "Square *both* sides to remove the square root — including the T." }].filter((t) => t.spec.value !== l),
+          traps: [numTrap(sig3((9.8 * T) / (2 * Math.PI)), "Square *both* sides to remove the square root — including the T.")].filter((t) => t.spec.type === "number" && t.spec.value !== l),
         };
       }
       const h = rng.int(3, 30), V = rng.int(20, 900) * 5;
@@ -675,7 +695,7 @@ export const drills: Drill[] = [
           ? ["Multiply by 3: {{3V = pi r^2 h}}.", "Divide by πh: {{r^2 = (3V)/(pi h)}}.", "Square root: {{r = sqrt((3V)/(pi h))}}.", `r = ${M(`sqrt((3 * ${V})/(pi * ${h}))`)} = ${r} cm (3 s.f.).`]
           : ["Divide by πh: {{r^2 = V/(pi h)}}.", "Square root: {{r = sqrt(V/(pi h))}}.", `r = ${M(`sqrt(${V}/(pi * ${h}))`)} = ${r} cm (3 s.f.).`],
         hint: "Get r² on its own, then take the square root.",
-        traps: [{ spec: { type: "number", value: sig3(((cone ? 3 : 1) * V) / (Math.PI * h)) }, feedback: "That's r² — take the square root." }].filter((t) => t.spec.value !== r),
+        traps: [numTrap(sig3(((cone ? 3 : 1) * V) / (Math.PI * h)), "That's r² — take the square root.")].filter((t) => t.spec.type === "number" && t.spec.value !== r),
       };
     },
   },
@@ -735,7 +755,7 @@ export const drills: Drill[] = [
             answer: { type: "expression", expr: ans, display: M(`${s} = ${ans}`) },
             solution: [
               `Multiply by the denominator: ${M(`${o}(${lin(c, d, s)}) = ${lin(a, b, s)}`)}.`,
-              `Expand: ${M(`${c}${s}${o} ${d > 0 ? "+" : "-"} ${Math.abs(d)}${o} = ${lin(a, b, s)}`)}.`,
+              `Expand: ${M(`${c}${s}${o} ${d > 0 ? "+" : "-"} ${term(Math.abs(d), o)} = ${lin(a, b, s)}`)}.`,
               `Collect ${s}-terms on the left, the rest on the right: ${M(`${c}${s}${o} - ${term(a, s)} = ${linC(-d, b, o)}`)}.`,
               `Factorise: ${M(`${s}(${lin(c, -a, o)}) = ${linC(-d, b, o)}`)}, so ${M(`${s} = ${ans}`)}.`,
             ],
@@ -849,7 +869,7 @@ export const drills: Drill[] = [
         const shown2 = rearr ? M(`${term(d, "x")} = ${linC(-e, f, "y")}`) : M(eq2(d, e, f, "x", "y"));
         const { steps } = solve2([a, b, c], [d, e, f], "x", "y", "(1)", "(2)");
         if (rearr) steps.unshift(`First write (2) in the same form as (1): ${M(eq2(d, e, f, "x", "y"))}.`);
-        steps.push(`Check in (2): ${d} × ${br(x)} + ${e} × ${br(y)} = ${f} ✓`);
+        steps.push(`Check in (2): ${plainSum([[d, x], [e, y]])} = ${num(f)} ✓`);
         // Trap: added instead of subtracted (or vice versa).
         const traps: Trap[] = [];
         if (b !== 0 && e !== 0) {
@@ -860,7 +880,7 @@ export const drills: Drill[] = [
           if (K !== 0 && R % K === 0) {
             const xw = R / K;
             if ((c - a * xw) % b === 0 && xw !== x) {
-              traps.push({ spec: { type: "list", values: [xw, (c - a * xw) / b], ordered: true }, feedback: "Same signs → subtract; different signs → add (SSS: Same Sign Subtract). Check your answer in both equations." });
+              traps.push(listTrap([xw, (c - a * xw) / b], "Same signs → subtract; different signs → add (SSS: Same Sign Subtract). Check your answer in both equations."));
             }
           }
         }
@@ -922,7 +942,7 @@ export const drills: Drill[] = [
           const traps: Trap[] = [];
           if ((c - k) % K === 0 && (c - k) / K !== x) {
             const xw = (c - k) / K;
-            traps.push({ spec: { type: "list", values: [xw, m * xw + k], ordered: true }, feedback: `Multiply *both* terms of ${M(`(${lin(m, k)})`)} by ${b}.` });
+            traps.push(listTrap([xw, m * xw + k], `Multiply *both* terms of ${M(`(${lin(m, k)})`)} by ${b}.`));
           }
           return {
             prompt: `Solve the simultaneous equations\n\n${M(`y = ${lin(m, k)}`)}\n\n${M(eq2(a, b, c, "x", "y"))}\n\nGive your answer as x, y.`,
@@ -949,13 +969,13 @@ export const drills: Drill[] = [
           prompt: `Solve the simultaneous equations\n\n${M(`x = ${lin(m, k, "y")}`)}\n\n${M(eq2(a, b, c, "x", "y"))}\n\nGive your answer as x, y.`,
           answer: { type: "list", values: [xv, yv], ordered: true, display: `x = ${num(xv)}, y = ${num(yv)}` },
           solution: [
-            `Substitute for x: ${M(`${a}(${lin(m, k, "y")}) ${b > 0 ? "+" : "-"} ${term(Math.abs(b), "y")} = ${c}`)}.`,
+            `Substitute for x: ${M(`${a === 1 ? "" : a === -1 ? "-" : a}(${lin(m, k, "y")}) ${b > 0 ? "+" : "-"} ${term(Math.abs(b), "y")} = ${c}`)}.`,
             `Expand and collect: ${M(`${lin(K, B, "y")} = ${c}`)}.`,
             ...solveSteps(K, B, 0, c, "y"),
             `Then x = ${num(m)} × ${br(yv)} ${k > 0 ? "+" : "−"} ${Math.abs(k)} = ${num(xv)}.`,
           ],
           hint: "Replace x in the second equation by the expression it equals; you get an equation in y only.",
-          traps: [{ spec: { type: "list", values: [yv, xv], ordered: true }, feedback: "You found both values — but give x first, then y." }].filter(() => xv !== yv),
+          traps: xv !== yv ? [listTrap([yv, xv], "You found both values — but give x first, then y.")] : [],
         };
       }
       return {
@@ -1003,7 +1023,7 @@ export const drills: Drill[] = [
               ...steps,
             ],
             hint: "Use two letters for the two unknown prices, write one equation per person, then eliminate.",
-            traps: [{ spec: { type: "list", values: [Yc / 100, Xc / 100], ordered: true }, feedback: `Right values, wrong order — give the ${ctx[0]} price first.` }],
+            traps: [listTrap([Yc / 100, Xc / 100], `Right values, wrong order — give the ${ctx[0]} price first.`)],
           };
         }
         if (kind === "coins") {
@@ -1023,7 +1043,7 @@ export const drills: Drill[] = [
               ...steps,
             ],
             hint: "One equation counts the coins; the other counts their value. Work in cents so everything is a whole number.",
-            traps: [{ spec: { type: "list", values: [q, p], ordered: true }, feedback: `Right values, wrong order — ${nm(lo)} coins first.` }],
+            traps: [listTrap([q, p], `Right values, wrong order — ${nm(lo)} coins first.`)],
           };
         }
         if (kind === "plan") {
@@ -1042,7 +1062,7 @@ export const drills: Drill[] = [
               ...steps,
             ],
             hint: "Subtracting the two bills removes the fixed fee — the difference is all data.",
-            traps: [{ spec: { type: "list", values: [rateC / 100, fee], ordered: true }, feedback: "Right values, wrong order — fixed fee first." }],
+            traps: [listTrap([rateC / 100, fee], "Right values, wrong order — fixed fee first.")],
           };
         }
         // line through two points: y = m x + c
@@ -1060,7 +1080,7 @@ export const drills: Drill[] = [
             ...steps,
           ],
           hint: "Each point gives you one equation in m and c.",
-          traps: [{ spec: { type: "list", values: [cc, mm], ordered: true }, feedback: "Give m first, then c." }].filter(() => mm !== cc),
+          traps: mm !== cc ? [listTrap([cc, mm], "Give m first, then c.")] : [],
         };
       }
       return {
@@ -1116,7 +1136,8 @@ export const drills: Drill[] = [
           const k1 = r / g, k2 = c1 / g;
           const lab = ri === 1 ? "(4)" : "(5)";
           const e = ri === 1 ? e4 : e5;
-          const desc = Math.abs(k1) === Math.abs(k2) && Math.abs(k1) === 1 ? (k1 === k2 ? `(1) − (${ri + 1})` : `(1) + (${ri + 1})`) : `${br(k1)} × (1) − ${br(k2)} × (${ri + 1})`;
+          const s1 = k1 < 0 ? -k1 : k1, s2 = k1 < 0 ? -k2 : k2; // s1·(1) − s2·(row), s1 > 0
+          const desc = `${s1 === 1 ? "" : `${s1} × `}(1) ${s2 > 0 ? "−" : "+"} ${Math.abs(s2) === 1 ? "" : `${Math.abs(s2)} × `}(${ri + 1})`;
           return `Eliminate z using ${desc}, then simplify: ${lab} ${M(eq2(e[0], e[1], e[2], "x", "y"))}.`;
         };
         const two = solve2(e4, e5, "x", "y", "(4)", "(5)");
@@ -1130,10 +1151,10 @@ export const drills: Drill[] = [
             how(2),
             ...two.steps,
             `Substitute x = ${num(x)} and y = ${num(y)} into (1): ${M(`${term(c1, "z")} = ${d[0]} - (${a1 * x + b1 * y})`)}, so z = ${num(z)}.`,
-            `Check in (3): ${a3} × ${br(x)} + ${b3} × ${br(y)} + ${c3} × ${br(z)} = ${d[2]} ✓`,
+            `Check in (3): ${plainSum([[a3, x], [b3, y], [c3, z]])} = ${num(d[2])} ✓`,
           ],
           hint: "Use one equation to knock z out of each of the other two. That leaves two equations in x and y.",
-          traps: [{ spec: { type: "list", values: [z, y, x], ordered: true }, feedback: "Give the values in the order x, y, z." }].filter(() => x !== z),
+          traps: x !== z ? [listTrap([z, y, x], "Give the values in the order x, y, z.")] : [],
         };
       }
       return {

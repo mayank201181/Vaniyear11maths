@@ -756,7 +756,7 @@ function functionNotation(rng: Rng, tier: Tier): DrillItem {
   const F = rng.pick(["f", "g", "h"]);
   const kind = tier === 1 ? rng.pick(["linval", "sqval", "solvelin"]) : tier === 2 ? rng.pick(["quadval", "solvefrac", "sqsolve", "fracval"]) : rng.pick(["shift", "quadsolve"]);
   if (kind === "linval") {
-    const a = rng.nonZero(-9, 9), b = rng.nonZero(-12, 12), k = rng.int(-9, -1);
+    const a = rng.pick([-9, -7, -5, -4, -3, -2, 2, 3, 4, 5, 6, 7, 8, 9]), b = rng.nonZero(-12, 12), k = rng.int(-9, -1);
     const fx = lin(a, b);
     const ans = a * k + b;
     return {
