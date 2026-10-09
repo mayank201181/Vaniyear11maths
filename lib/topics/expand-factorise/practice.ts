@@ -508,7 +508,7 @@ export const practice: TopicPractice = {
           commonError: "Treating {{(-2)^3}} as +8: an odd power of a negative is negative.",
           traps: [
             { spec: { type: "number", value: 11 }, feedback: "{{(-2)^3 = (-2)(-2)(-2) = -8}}. An odd power keeps the minus sign." },
-            { spec: { type: "number", value: -517 }, feedback: "Only x is cubed, not 2x: cube −2 first, then double." },
+            { spec: { type: "number", value: -69 }, feedback: "Only x is cubed, not 2x: cube −2 first, then double." },
           ],
           difficulty: "warmup",
           guideRef: "function-notation-basics",
@@ -651,7 +651,7 @@ export const practice: TopicPractice = {
           question: "Marcus works out the value of {{4 - 2x^2}} when x = −3. He writes:\n\n    4 − 2x² = 4 − (−6)² = 4 − 36 = −32\n\nExplain his mistake and work out the correct value.",
           marks: 3,
           modelAnswer:
-            "Marcus multiplied 2 by −3 first and then squared, so he squared −2x instead of just x.\n\nIndices come before multiplication: {{x^2 = (-3)^2 = 9}}, then 2 × 9 = 18.\n\nCorrect value: 4 − 18 = −14.",
+            "Marcus multiplied 2 by −3 first and then squared, so he squared 2x (= −6) instead of just x.\n\nIndices come before multiplication: {{x^2 = (-3)^2 = 9}}, then 2 × 9 = 18.\n\nCorrect value: 4 − 18 = −14.",
           markScheme: [
             { point: "Identifies that he squared 2x (or −6) instead of x", keywords: ["squared 2x", "squared -6", "squared −6", "(-6)", "2 × -3", "multiplied first"] },
             { point: "States the correct order: square x first (indices before multiplication)", keywords: ["indices", "powers", "bidmas", "square first", "x^2 = 9", "9"] },

@@ -68,16 +68,6 @@ function lineExpr(m: Q, c: Q): string {
 
 const lineSpec = (m: Q, c: Q): AnswerSpec => ({ type: "expression", expr: lineExpr(m, c), display: lineMk(m, c) });
 
-/**
- * The answer parser reads "2/3x" as 2 ÷ (3x), although it displays as ⅔x. When the
- * gradient is a fraction, catch that typing and tell the learner to bracket it.
- */
-function slashTrap(m: Q, c: Q): Trap[] {
-  if (m[1] === 1) return [];
-  const cs = c[0] === 0 ? "" : `${c[0] < 0 ? "-" : "+"}${Math.abs(c[0])}${c[1] === 1 ? "" : `/${c[1]}`}`;
-  return [{ spec: { type: "expression", expr: `y=${m[0]}/${m[1]}x${cs}` }, feedback: `Type a fractional gradient in brackets, e.g. y = (${m[0]}/${m[1]})x … — "${m[0]}/${m[1]}x" is read as ${m[0]} ÷ ${m[1]}x.` }];
-}
-
 /** Answer spec for a single rational value (gradient, intercept …). */
 function qSpec(a: Q): AnswerSpec {
   if (a[1] === 1) return { type: "number", value: a[0] };
@@ -374,7 +364,7 @@ export const drills: Drill[] = [
           `Equation: ${lineMk(m, c)}. (Check with ${pt(x2, y2)}: it fits.)`,
         ],
         hint: "First the gradient, then substitute one point into y = mx + c to find c.",
-        traps: [...slashTrap(m, c), ...traps],
+        traps,
       };
     },
   },
@@ -676,14 +666,14 @@ export const drills: Drill[] = [
         if (!qEq(m, mp)) traps.push({ spec: lineSpec(m, cm), feedback: "That line has the same gradient as the original, so it is parallel, not perpendicular. Use the negative reciprocal of the gradient." });
         const recip = q(m[1], m[0]);
         const cr = interceptThrough(recip, x1, y1);
-        if (!qEq(recip, mp)) traps.push({ spec: lineSpec(recip, cr), feedback: "Reciprocal is right, but the sign must change too: m₁ × m₂ = −1." });
+        if (!qEq(recip, mp) && !qEq(recip, m)) traps.push({ spec: lineSpec(recip, cr), feedback: "Reciprocal is right, but the sign must change too: m₁ × m₂ = −1." });
       }
       return {
         prompt,
         answer: lineSpec(mp, c),
         solution: sol,
         hint: kind === "par" ? "Parallel means the same gradient — only c changes." : "Perpendicular gradient: flip the fraction and change the sign. Then substitute the point to find c.",
-        traps: [...slashTrap(mp, c), ...traps],
+        traps,
       };
     },
   },
@@ -712,7 +702,7 @@ export const drills: Drill[] = [
         const c1 = qq - m1 * p, c2 = qq - m2 * p;
         l1 = lineMk(q(m1), q(c1)); l2 = lineMk(q(m2), q(c2));
         sol.push(`At the intersection both y-values are equal: {{${poly([[m1, "x"], [c1, ""]])} = ${poly([[m2, "x"], [c2, ""]])}}}.`);
-        sol.push(`{{${poly([[m1 - m2, "x"]])} = ${c2 - c1}}}, so x = ${num(p)}.`);
+        sol.push(`{{${poly([[m1 - m2, "x"]])} = ${c2 - c1}}}${m1 - m2 === 1 ? "" : `, so x = ${num(p)}`}.`);
         sol.push(`y = ${num(m1)} × ${p < 0 ? `(${num(p)})` : num(p)} ${c1 < 0 ? "−" : "+"} ${num(Math.abs(c1))} = ${num(qq)}.`);
       } else if (tier === 2) {
         let m1 = 2, a = 3, b = 2;
@@ -724,12 +714,12 @@ export const drills: Drill[] = [
         const c1 = qq - m1 * p, c = a * p + b * qq;
         l1 = lineMk(q(m1), q(c1)); l2 = impl(a, b, c);
         sol.push(`Substitute {{y = ${poly([[m1, "x"], [c1, ""]])}}} into the second equation: {{${poly([[a, "x"]])} ${b < 0 ? "-" : "+"} ${Math.abs(b)}(${poly([[m1, "x"], [c1, ""]])}) = ${c}}}.`);
-        sol.push(`{{${poly([[a + b * m1, "x"], [b * c1, ""]])} = ${c}}}, so {{${poly([[a + b * m1, "x"]])} = ${c - b * c1}}} and x = ${num(p)}.`);
+        sol.push(`{{${poly([[a + b * m1, "x"], [b * c1, ""]])} = ${c}}}, so {{${poly([[a + b * m1, "x"]])} = ${c - b * c1}}}${a + b * m1 === 1 ? "" : ` and x = ${num(p)}`}.`);
         sol.push(`Then y = ${num(qq)} (from the first equation).`);
       } else {
         let a1 = 2, b1 = 3, a2 = 5, b2 = -2;
         for (let i = 0; i < 300; i++) {
-          a1 = rng.nonZero(-7, 7); b1 = rng.nonZero(-7, 7); a2 = rng.nonZero(-7, 7); b2 = rng.nonZero(-7, 7);
+          a1 = rng.int(1, 7); b1 = rng.nonZero(-7, 7); a2 = rng.nonZero(-7, 7); b2 = rng.nonZero(-7, 7);
           if (gcd(a1, b1) !== 1 || gcd(a2, b2) !== 1) continue;
           if (a1 * b2 - a2 * b1 === 0 || Math.abs(b1) === 1 || Math.abs(b2) === 1 || Math.abs(b1) === Math.abs(b2)) continue;
           break;

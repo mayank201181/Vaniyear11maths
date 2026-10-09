@@ -402,7 +402,7 @@ export const morePapers: Paper[] = [
           "The formula to change a temperature in degrees Fahrenheit, F, to degrees Celsius, C, is\n\n    {{C = (5(F - 32))/9}}\n\nOn a winter night in Toronto the temperature is −4 °F. Work out the temperature in °C.",
         answer: { type: "number", value: -20, display: "−20 °C" },
         traps: [
-          { spec: { type: "number", value: -15.55555555555556, tolerance: 0.01 }, feedback: "You've worked out −4 + 32 = 28. It's F − 32, so −4 − 32 = −36." },
+          { spec: { type: "number", value: 15.55555555555556, tolerance: 0.01 }, feedback: "You've worked out −4 + 32 = 28. It's F − 32, so −4 − 32 = −36." },
           { spec: { type: "fraction", n: -52, d: 9 }, feedback: "The 5 multiplies the whole bracket (F − 32): 5 × (−36) = −180, then ÷ 9." },
         ],
         solution: ["F − 32 = −4 − 32 = −36.", "5 × (−36) = −180.", "−180 ÷ 9 = −20, so C = −20 °C."],
@@ -476,7 +476,7 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "expand-factorise-p4-q07",
         question: "Simplify fully {{(x^2 - 9)/(2x^2 + 5x - 3)}}.",
-        answer: { type: "expression", expr: "(x-3)/(2x-1)", display: "{{(x - 3)/(2x - 1)}}" },
+        answer: { type: "expression", expr: "(x-3)/(2x-1)", form: "simplified", display: "{{(x - 3)/(2x - 1)}}" },
         traps: [
           { spec: { type: "expression", expr: "(x+3)/(2x-1)" }, feedback: "Factorise the top properly: {{x^2 - 9 = (x - 3)(x + 3)}}. The (x + 3) cancels, leaving (x − 3) on top." },
           { spec: { type: "expression", expr: "(x-3)/(2x+1)" }, feedback: "Check the bottom: {{(2x + 1)(x + 3) = 2x^2 + 7x + 3}}. You need (2x − 1)(x + 3)." },
@@ -500,7 +500,7 @@ export const morePapers: Paper[] = [
           "{{v = sqrt(u^2 + 2as)}}\n\nu = 6.4, a = −2.5 and s = 3.2\n\nWork out the value of v. Give your answer correct to 3 significant figures.",
         answer: { type: "number", value: 5, tolerance: 0.005, allowFraction: false, display: "5.00" },
         traps: [
-          { spec: { type: "number", value: 7.53, tolerance: 0.005 }, feedback: "You've used +2.5 for a. 2as = 2 × (−2.5) × 3.2 = −16." },
+          { spec: { type: "number", value: 7.55, tolerance: 0.005 }, feedback: "You've used +2.5 for a. 2as = 2 × (−2.5) × 3.2 = −16." },
           { spec: { type: "number", value: 24.96 }, feedback: "24.96 is the value under the square root. Take the square root to find v." },
         ],
         solution: [
@@ -509,7 +509,7 @@ export const morePapers: Paper[] = [
           "{{u^2 + 2as = 40.96 - 16 = 24.96}}.",
           "{{v = sqrt(24.96) = 4.99599...}} = 5.00 (3 s.f.).",
         ],
-        commonError: "Writing 5 or 4.99 — to 3 s.f. 4.99599… rounds to 5.00.",
+        commonError: "Truncating to 4.99 — to 3 s.f. 4.99599… rounds up to 5.00.",
         difficulty: "core",
         guideRef: "substitution-formulae",
         hints: ["Work out {{u^2}} and 2as separately, keeping the sign of a.", "Square root the total. Then round to 3 significant figures — the zeros count."],
