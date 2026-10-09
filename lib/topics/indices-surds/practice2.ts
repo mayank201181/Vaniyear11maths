@@ -616,7 +616,7 @@ export const morePapers: Paper[] = [
       {
         kind: "short",
         id: "indices-surds-p4-q10",
-        question: "Simplify fully {{((16x^8)/(y^4))^(-1/2)}}.",
+        question: "Simplify fully {{((16x^8)/(y^4))^(-1/2)}}.\n\nWhen you type a fraction, put brackets round the whole denominator, e.g. 3/(2a^2).",
         answer: { type: "expression", expr: "y^2/(4x^4)", form: "simplified", display: "{{y^2/(4x^4)}}" },
         traps: [
           { spec: { type: "expression", expr: "4x^4/y^2" }, feedback: "The minus sign in the index means **flip** the fraction. Your answer is upside down." },
