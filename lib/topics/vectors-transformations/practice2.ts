@@ -261,7 +261,7 @@ export const morePapers: Paper[] = [
         difficulty: "core",
         guideRef: "vector-basics",
         hints: ["Draw the route A → B → C. You know where it ends.", "Find →AC by adding the two vectors.", "To get from C back to A, use −→AC."],
-        strategy: "Split into components",
+        strategy: "Work backwards",
       },
       // ---------------------------------------------------------------- q12
       {
@@ -390,7 +390,7 @@ export const morePapers: Paper[] = [
         difficulty: "warmup",
         guideRef: "transformations",
         hints: ["A′ is where A ends up. Which way do you need to go to get back?", "Reverse the vector: add 6 to x and subtract 5 from y."],
-        strategy: "Image minus object",
+        strategy: "Use the inverse",
       },
       // ---------------------------------------------------------------- q02
       {
@@ -458,7 +458,7 @@ export const morePapers: Paper[] = [
         difficulty: "warmup",
         guideRef: "vector-basics",
         hints: ["Make **c** the subject, just as you would in an ordinary equation.", "**c** = **b** − 2**a**; then work component by component."],
-        strategy: "Use parallel vectors",
+        strategy: "Use the inverse",
       },
       // ---------------------------------------------------------------- q05
       {
@@ -625,10 +625,10 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "vectors-transformations-p4-q12",
         question:
-          "On an orienteering course in Bukit Timah Nature Reserve, Jun starts at a checkpoint O. He walks three straight legs with displacement vectors\n\n    {{col(3, 4)}}, {{col(5, -1)}} and {{col(-2, 6)}}\n\nwhere the units are kilometres east and north.\n\nWork out the straight-line distance of Jun from O at the end of the third leg. Give your answer in km, correct to 3 significant figures.",
+          "A small ferry leaves Marina South Pier, O, on a tour of the Southern Islands. It sails three straight legs with displacement vectors\n\n    {{col(3, 4)}}, {{col(5, -1)}} and {{col(-2, 6)}}\n\nwhere the units are kilometres east and north.\n\nWork out the straight-line distance of the ferry from O at the end of the third leg. Give your answer in km, correct to 3 significant figures.",
         answer: { type: "number", value: 10.8, display: "10.8 km" },
         traps: [
-          { spec: { type: "number", value: 16.4 }, feedback: "That's the total distance walked along all three legs. The question asks for the straight-line distance from O — add the vectors first, then find one magnitude." },
+          { spec: { type: "number", value: 16.4 }, feedback: "That's the total distance sailed along all three legs. The question asks for the straight-line distance from O — add the vectors first, then find one magnitude." },
           { spec: { type: "number", value: 15 }, feedback: "You added the components 6 + 9. Use Pythagoras on {{col(6, 9)}}." },
         ],
         solution: [
@@ -639,7 +639,7 @@ export const morePapers: Paper[] = [
         commonError: "Finding the length of each leg and adding — that's the distance travelled, not the distance from O.",
         difficulty: "core",
         guideRef: "vector-basics",
-        hints: ["Where does Jun end up? Add the three vectors.", "Then find the magnitude of the resultant with Pythagoras."],
+        hints: ["Where does the ferry end up? Add the three vectors.", "Then find the magnitude of the resultant with Pythagoras."],
         strategy: "Add the journey",
       },
       // ---------------------------------------------------------------- q13

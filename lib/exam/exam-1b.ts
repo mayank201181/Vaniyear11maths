@@ -678,8 +678,8 @@ export const paper: ExamPaper = {
       ],
       solution: [
         "Volume: x²h = 32 000, so h = {{32000/x^2}}.",
-        "Area = base + four sides: A = x² + 4xh = {{x^2 + 4x * 32000/x^2 = x^2 + 128000/x}} = {{x^2 + 128000x^(-1)}}.",
-        "{{(dA)/(dx) = 2x - 128000x^(-2)}}. Set = 0: 2x = {{128000/x^2}}, so x³ = 64 000 and x = 40.",
+        "Area = base + four sides: A = x² + 4xh = {{x^2 + 4x * 32000/x^2 = x^2 + 128000/x}} = {{x^2 + 128000 x^(-1)}}.",
+        "{{(dA)/(dx) = 2x - 128000 x^(-2)}}. Set = 0: 2x = {{128000/x^2}}, so x³ = 64 000 and x = 40.",
         "{{(d^2A)/(dx^2) = 2 + 256000/x^3}} > 0 at x = 40, so this is a minimum.",
         "A = 40² + {{128000/40}} = 1600 + 3200 = **4800 cm²** (with h = 20 cm).",
       ],
