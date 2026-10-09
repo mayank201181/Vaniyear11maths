@@ -169,36 +169,36 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p3-q06",
         question:
-          "The point M(4, −1) is the midpoint of the line segment AB. A is the point (−2, 5).\n\nFind the coordinates of B. Give your answer as (x, y).",
-        answer: { type: "list", values: [10, -7], ordered: true, display: "(10, −7)" },
+          "The point M(1, −2) is the midpoint of the line segment AB. A is the point (−5, 3).\n\nFind the coordinates of B. Give your answer as (x, y).",
+        answer: { type: "list", values: [7, -7], ordered: true, display: "(7, −7)" },
         traps: [
           {
-            spec: { type: "list", values: [1, 2], ordered: true },
+            spec: { type: "list", values: [-2, 0.5], ordered: true },
             feedback: "That's the midpoint of A and M. M is the *middle*, so B is as far beyond M as A is before it.",
           },
           {
-            spec: { type: "list", values: [6, -6], ordered: true },
-            feedback: "(6, −6) is the step from A to M. Add that step on again, starting from M: (4 + 6, −1 − 6).",
+            spec: { type: "list", values: [6, -5], ordered: true },
+            feedback: "(6, −5) is the step from A to M. Add that step on again, starting from M: (1 + 6, −2 − 5).",
           },
         ],
         solution: [
-          "Step from A to M: x goes from −2 to 4 (+6); y goes from 5 to −1 (−6).",
-          "Repeat the same step from M: B = (4 + 6, −1 − 6) = (10, −7).",
-          "Check: midpoint of (−2, 5) and (10, −7) is {{((-2 + 10)/2, (5 - 7)/2) = (4, -1)}}. ✓",
+          "Step from A to M: x goes from −5 to 1 (+6); y goes from 3 to −2 (−5).",
+          "Repeat the same step from M: B = (1 + 6, −2 − 5) = (7, −7).",
+          "Check: midpoint of (−5, 3) and (7, −7) is {{((-5 + 7)/2, (3 - 7)/2) = (1, -2)}}. ✓",
         ],
         solutions: [
           {
             label: "Equations",
-            steps: ["{{(-2 + x)/2 = 4}} gives x = 10.", "{{(5 + y)/2 = -1}} gives y = −7."],
+            steps: ["{{(-5 + x)/2 = 1}} gives x = 7.", "{{(3 + y)/2 = -2}} gives y = −7."],
           },
-          { label: "Shortcut", steps: ["B = 2M − A = (8 − (−2), −2 − 5) = (10, −7)."] },
+          { label: "Shortcut", steps: ["B = 2M − A = (2 − (−5), −4 − 3) = (7, −7)."] },
         ],
         commonError: "Averaging A and M instead of extending past M.",
         difficulty: "core",
         guideRef: "midpoint-distance",
         hints: [
           "Draw it: A, then M in the middle, then B. How do you get from A to M?",
-          "From A to M, x increases by 6 and y decreases by 6.",
+          "From A to M, x increases by 6 and y decreases by 5.",
           "Do the same step again starting from M.",
         ],
         strategy: "Work backwards",
@@ -309,16 +309,16 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p3-q11",
         question:
-          "A straight line passes through the points (−2, 3) and (4, −1).\n\nFind the equation of the line in the form ax + by + c = 0, where a, b and c are integers with no common factor and a > 0.\n\nGive the values of a, b and c, in that order.",
-        answer: { type: "list", values: [2, 3, -5], ordered: true, display: "2x + 3y − 5 = 0, so a = 2, b = 3, c = −5" },
+          "A straight line passes through the points (−2, 3) and (4, −1).\n\nFind an equation of the line in the form ax + by + c = 0, where a, b and c are integers.",
+        answer: { type: "equation", eq: "2x+3y-5=0", form: "general", display: "2x + 3y − 5 = 0" },
         traps: [
           {
-            spec: { type: "list", values: [2, 3, 5], ordered: true },
+            spec: { type: "equation", eq: "2x+3y+5=0" },
             feedback: "Check by substituting (−2, 3): 2(−2) + 3(3) + 5 = 10, not 0. Look again at the sign of c.",
           },
           {
-            spec: { type: "list", values: [3, 2, -5], ordered: true },
-            feedback: "Check (−2, 3): 3(−2) + 2(3) − 5 = −5 ≠ 0. It looks like the gradient was inverted — gradient = change in y ÷ change in x.",
+            spec: { type: "equation", eq: "3x+2y=0" },
+            feedback: "Check (4, −1): 3(4) + 2(−1) = 10 ≠ 0. It looks like the gradient was inverted — gradient = change in y ÷ change in x, {{-4/6 = -2/3}}.",
           },
         ],
         solution: [
@@ -409,35 +409,35 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p3-q14",
         question:
-          "A is the point (−4, 7). The point P(5, 1) lies on the line segment AB such that AP : PB = 3 : 1.\n\nFind the coordinates of B. Give your answer as (x, y).",
-        answer: { type: "list", values: [8, -1], ordered: true, display: "(8, −1)" },
+          "A is the point (−6, 8). The point P(3, 2) lies on the line segment AB such that AP : PB = 3 : 1.\n\nFind the coordinates of B. Give your answer as (x, y).",
+        answer: { type: "list", values: [6, 0], ordered: true, display: "(6, 0)" },
         traps: [
           {
-            spec: { type: "list", values: [14, -5], ordered: true },
+            spec: { type: "list", values: [12, -4], ordered: true },
             feedback: "That would make P the *midpoint* of AB (ratio 1 : 1). Here AP is 3 parts and PB is only 1 part, so B is a third of the A-to-P step beyond P.",
           },
           {
-            spec: { type: "list", values: [32, -17], ordered: true },
+            spec: { type: "list", values: [30, -16], ordered: true },
             feedback: "You treated AP as {{1/4}} of AB. With AP : PB = 3 : 1, AP is {{3/4}} of AB.",
           },
         ],
         solution: [
           "AP : PB = 3 : 1, so AP is {{3/4}} of AB and PB is {{1/3}} of AP.",
-          "Step from A to P: (5 − (−4), 1 − 7) = (9, −6). That is 3 parts.",
+          "Step from A to P: (3 − (−6), 2 − 8) = (9, −6). That is 3 parts.",
           "One part = (3, −2).",
-          "B = P + one part = (5 + 3, 1 − 2) = (8, −1).",
-          "Check: A + {{3/4}}(B − A) = (−4, 7) + {{3/4}}(12, −8) = (−4 + 9, 7 − 6) = (5, 1). ✓",
+          "B = P + one part = (3 + 3, 2 − 2) = (6, 0).",
+          "Check: A + {{3/4}}(B − A) = (−6, 8) + {{3/4}}(12, −8) = (−6 + 9, 8 − 6) = (3, 2). ✓",
         ],
         solutions: [
           {
             label: "Count the parts",
-            steps: ["A → P is 3 parts = (9, −6), so 1 part = (3, −2).", "B = P + 1 part = (8, −1)."],
+            steps: ["A → P is 3 parts = (9, −6), so 1 part = (3, −2).", "B = P + 1 part = (6, 0)."],
           },
           {
             label: "Section formula in reverse",
             steps: [
               "P = A + {{3/4}}(B − A), so B − A = {{4/3}}(P − A) = {{4/3}}(9, −6) = (12, −8).",
-              "B = (−4 + 12, 7 − 8) = (8, −1).",
+              "B = (−6 + 12, 8 − 8) = (6, 0).",
             ],
           },
         ],
@@ -610,24 +610,24 @@ export const morePapers: Paper[] = [
         kind: "short",
         id: "linear-graphs-p4-q05",
         question:
-          "The line L passes through the points (−1, −4) and (5, 4).\n\nFind an equation for L in the form ax + by = c, where a, b and c are integers with no common factor and a > 0.\n\nGive the values of a, b and c, in that order.",
-        answer: { type: "list", values: [4, -3, 8], ordered: true, display: "4x − 3y = 8, so a = 4, b = −3, c = 8" },
+          "The line L passes through the points (−1, −4) and (5, 4).\n\nFind an equation for L in the form ax + by + c = 0, where a, b and c are integers.",
+        answer: { type: "equation", eq: "4x-3y-8=0", form: "general", display: "4x − 3y − 8 = 0" },
         traps: [
           {
-            spec: { type: "list", values: [3, -4, 8], ordered: true },
-            feedback: "Check (5, 4): 3(5) − 4(4) = −1, not 8. The gradient is {{8/6 = 4/3}} (change in y over change in x), not {{3/4}}.",
+            spec: { type: "equation", eq: "3x-4y-13=0" },
+            feedback: "Check (−1, −4): your line misses it. The gradient is {{8/6 = 4/3}} (change in y over change in x), not {{3/4}}.",
           },
           {
-            spec: { type: "list", values: [4, 3, 8], ordered: true },
-            feedback: "Check (5, 4): 4(5) + 3(4) = 32, not 8. The line has a positive gradient, so the x and y terms must have opposite signs in ax + by = c.",
+            spec: { type: "equation", eq: "4x+3y-32=0" },
+            feedback: "Check (−1, −4): your line misses it. The line has a positive gradient, so the x and y terms must have opposite signs in ax + by + c = 0.",
           },
         ],
         solution: [
           "Gradient = {{(4 - (-4))/(5 - (-1)) = 8/6 = 4/3}}.",
           "{{y - 4 = 4/3 (x - 5)}}.",
           "Multiply by 3: 3y − 12 = 4x − 20.",
-          "Rearrange: 4x − 3y = 8.",
-          "Check (−1, −4): −4 + 12 = 8. ✓",
+          "Rearrange: 4x − 3y − 8 = 0.",
+          "Check (−1, −4): −4 + 12 − 8 = 0. ✓",
         ],
         commonError: "Rearranging with a sign error when moving the y-term across.",
         difficulty: "core",

@@ -203,7 +203,7 @@ export const mcqPapers: Paper[] = [
         options: ["216", "72", "36", "6"],
         answerIndex: 0,
         explanation:
-          "The {{x^2}} term is {{4C2 * 2^2 * (3x)^2 = 6 * 4 * 9x^2 = 216x^2}} (the 6 is from row 4 of Pascal's triangle: 1, 4, 6, 4, 1). 72 forgets to square the 3 — the whole of 3x is squared. 36 leaves out the Pascal coefficient 6. 6 is only the Pascal coefficient, ignoring the 2 and the 3.",
+          "Row 4 of Pascal's triangle is 1, 4, 6, 4, 1, and the {{x^2}} term uses the 6: {{6 * 2^2 * (3x)^2 = 6 * 4 * 9x^2 = 216x^2}}. 72 forgets to square the 3 — the whole of 3x is squared. 36 leaves out the Pascal coefficient 6. 6 is only the Pascal coefficient, ignoring the 2 and the 3.",
         difficulty: "challenge",
         guideRef: "binomial-expansion",
         hints: ["Which row of Pascal's triangle do you need, and which entry goes with {{x^2}}?", "The term is (coefficient) × {{2^2}} × {{(3x)^2}}.", "Be careful: {{(3x)^2 = 9x^2}}."],
@@ -391,7 +391,7 @@ export const mcqPapers: Paper[] = [
         options: ["−24", "12", "24", "6"],
         answerIndex: 2,
         explanation:
-          "Row 4 of Pascal's triangle is 1, 4, 6, 4, 1. The {{x^2}} term is {{6 * x^2 * (-2)^2 = 6 * 4 * x^2 = 24x^2}}. −24 treats {{(-2)^2}} as −4 — an even power of a negative is positive. 12 uses −2 squared as 2 × 2… no: it doubles instead of squaring (6 × 2). 6 is just the Pascal coefficient, ignoring the −2.",
+          "Row 4 of Pascal's triangle is 1, 4, 6, 4, 1. The {{x^2}} term is {{6 * x^2 * (-2)^2 = 6 * 4 * x^2 = 24x^2}}. −24 treats {{(-2)^2}} as −4 — an even power of a negative is positive. 12 multiplies by 2 instead of by {{(-2)^2 = 4}} (6 × 2). 6 is just the Pascal coefficient, ignoring the −2.",
         difficulty: "core",
         guideRef: "binomial-expansion",
         hints: ["Which entry of row 4 of Pascal's triangle goes with {{x^2}}?", "The other factor is {{(-2)^2}}. What sign is that?"],
@@ -449,7 +449,7 @@ export const mcqPapers: Paper[] = [
         kind: "mcq",
         id: "probability-m3-q01",
         question:
-          "The table shows the probabilities that a biased spinner lands on each colour.\n\n| Colour | Red | Blue | Green | White |\n|---|---|---|---|---|\n| Probability | 0.2 | 0.35 | | 0.15 |\n\nPriya spins the spinner 300 times. Work out an estimate for the number of times it lands on green.",
+          "The table shows the probabilities that a biased spinner lands on each colour.\n\n| Colour | Red | Blue | Green | White |\n|---|---|---|---|---|\n| Probability | 0.2 | 0.35 | ? | 0.15 |\n\nPriya spins the spinner 300 times. Work out an estimate for the number of times it lands on green.",
         options: ["75", "90", "210", "0.3"],
         answerIndex: 1,
         explanation:
@@ -659,7 +659,7 @@ export const mcqPapers: Paper[] = [
         options: ["20", "8", "160", "240"],
         answerIndex: 2,
         explanation:
-          "A general term is {{6Cr * x^(6-r) * (2/x)^r = 6Cr * 2^r * x^(6-2r)}}. The power of x is 0 when r = 3, so the term is {{20 * 2^3 = 160}} (20 is the middle of row 6 of Pascal's triangle: 1, 6, 15, 20, 15, 6, 1). 20 forgets the {{2^3}}. 8 forgets the Pascal coefficient. 240 = 15 × 16 is the {{x^(-2)}} term (r = 4) — the wrong term.",
+          "Row 6 of Pascal's triangle is 1, 6, 15, 20, 15, 6, 1. The term with r factors of {{2/x}} is (coefficient) × {{x^(6-r) * (2/x)^r}} = (coefficient) × {{2^r * x^(6-2r)}}. The power of x is 0 when r = 3, which uses the middle coefficient 20: {{20 * 2^3 = 160}}. 20 forgets the {{2^3}}. 8 forgets the Pascal coefficient. 240 = 15 × 16 is the {{x^(-2)}} term (r = 4) — the wrong term.",
         difficulty: "challenge",
         guideRef: "binomial-expansion",
         hints: ["Write the power of x in a general term: x from the first part, {{1/x}} from the second.", "For which r does the power of x become 0?", "Use the r = 3 entry of row 6 of Pascal's triangle, and remember {{2^3}}."],
